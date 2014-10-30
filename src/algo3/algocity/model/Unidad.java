@@ -1,13 +1,15 @@
 package algo3.algocity.model;
 
 public abstract class Unidad {
-	static int area;
+	
+	// TODO Revisar de que forma conviene que esten estos atrivutos
+	// si constantes o de clase
+	static final int AREA = 1;
 	static int costo;
 	static int consumo;
 	int danios;
 	
 	public Unidad(){
-		area = 1;
 		danios = 0;
 	}
 
@@ -16,7 +18,7 @@ public abstract class Unidad {
 	}
 
 	public Object getArea() {
-		return area;
+		return AREA;
 	}
 
 	public Object getConsumo() {
