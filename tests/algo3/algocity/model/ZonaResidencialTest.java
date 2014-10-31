@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ResidenciaTest {
+public class ZonaResidencialTest {
 
 	@Test
 	public void testLaResidenciaCreadaEsValida() {
 		
-		Residencia r = new Residencia();
+		ZonaResidencial r = new ZonaResidencial();
 		
 		assertEquals(5, r.getCosto());
 		assertEquals(1, r.getArea());
@@ -21,7 +21,7 @@ public class ResidenciaTest {
 
 	@Test
 	public void testLaResidenciaPuedeRecibirDanios(){
-		Residencia r = new Residencia();
+		ZonaResidencial r = new ZonaResidencial();
 		
 		r.aplicarDanio(50);
 		
@@ -30,12 +30,30 @@ public class ResidenciaTest {
 	
 	@Test
 	public void testLaResidenciaPuedeRecibirMasDeUnDanio(){
-		Residencia r = new Residencia();
+		ZonaResidencial r = new ZonaResidencial();
 		
 		r.aplicarDanio(25);
 		r.aplicarDanio(50);
 		
 		assertEquals(75, r.getDanios());
+	}
+	
+	@Test
+	public void testLaResidenciaNoPuedeRecibirMasDe100DeDanio(){
+		ZonaResidencial r = new ZonaResidencial();
+		
+		r.aplicarDanio(50);
+		r.aplicarDanio(60);
+		
+		assertNotEquals(110, r.getDanios());
+		assertEquals(100, r.getDanios());
+	}
+	
+	@Test
+	public void testSePuedeConsultarDisponibilidadAResidencia(){
+		ZonaResidencial r = new ZonaResidencial();
+		
+		assertFalse(r.estaOcupada());
 	}
 
 }

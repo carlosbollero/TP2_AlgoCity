@@ -1,31 +1,31 @@
 package algo3.algocity.model;
 
-public abstract class Unidad {
+public abstract class UnidadZonal {
 	
-	// TODO Revisar de que forma conviene que esten estos atrivutos
+	// TODO Revisar de que forma conviene que esten estos atributos,
 	// si constantes o de clase
 	static final int AREA = 1;
 	static int costo;
 	static int consumo;
 	int danios;
 	
-	public Unidad(){
+	public UnidadZonal(){
 		danios = 0;
 	}
 
-	public int getCosto() {
+	public int getCosto(){
 		return costo;
 	}
 
-	public Object getArea() {
+	public int getArea() {
 		return AREA;
 	}
 
-	public Object getConsumo() {
+	public int getConsumo() {
 		return consumo;
 	}
 
-	public Object getDanios() {
+	public int getDanios() {
 		return danios;
 	}
 	
