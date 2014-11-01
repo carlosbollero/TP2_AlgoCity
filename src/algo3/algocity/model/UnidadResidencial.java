@@ -1,11 +1,11 @@
 package algo3.algocity.model;
 
-public class ZonaResidencial extends UnidadZonal {
+public class UnidadResidencial extends UnidadZonal {
 	
 	static final int CAPACIDAD = 100;
 	int ocupacion;
 	
-	public ZonaResidencial(){
+	public UnidadResidencial(){
 		costo = 5;
 		consumo = 1;
 		ocupacion = 0;

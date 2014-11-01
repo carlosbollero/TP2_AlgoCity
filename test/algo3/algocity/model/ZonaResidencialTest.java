@@ -9,7 +9,7 @@ public class ZonaResidencialTest {
 	@Test
 	public void testLaResidenciaCreadaEsValida() {
 		
-		ZonaResidencial r = new ZonaResidencial();
+		UnidadResidencial r = new UnidadResidencial();
 		
 		assertEquals(5, r.getCosto());
 		assertEquals(1, r.getArea());
@@ -21,7 +21,7 @@ public class ZonaResidencialTest {
 
 	@Test
 	public void testLaResidenciaPuedeRecibirDanios(){
-		ZonaResidencial r = new ZonaResidencial();
+		UnidadResidencial r = new UnidadResidencial();
 		
 		r.aplicarDanio(50);
 		
@@ -30,7 +30,7 @@ public class ZonaResidencialTest {
 	
 	@Test
 	public void testLaResidenciaPuedeRecibirMasDeUnDanio(){
-		ZonaResidencial r = new ZonaResidencial();
+		UnidadResidencial r = new UnidadResidencial();
 		
 		r.aplicarDanio(25);
 		r.aplicarDanio(50);
@@ -40,7 +40,7 @@ public class ZonaResidencialTest {
 	
 	@Test
 	public void testLaResidenciaNoPuedeRecibirMasDe100DeDanio(){
-		ZonaResidencial r = new ZonaResidencial();
+		UnidadResidencial r = new UnidadResidencial();
 		
 		r.aplicarDanio(50);
 		r.aplicarDanio(60);
@@ -51,7 +51,7 @@ public class ZonaResidencialTest {
 	
 	@Test
 	public void testSePuedeConsultarDisponibilidadAResidencia(){
-		ZonaResidencial r = new ZonaResidencial();
+		UnidadResidencial r = new UnidadResidencial();
 		
 		assertFalse(r.estaOcupada());
 	}
