@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class ZonaResidencialTest {
 
+	
+/**Prueba modificacion test**/
+	
 	@Test
 	public void testLaResidenciaCreadaEsValida() {
 		
