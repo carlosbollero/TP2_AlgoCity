@@ -27,4 +27,12 @@ public class UnidadResidencial extends UnidadZonal {
 		return (CAPACIDAD - ocupacion);
 	}
 
+	public void recibirHabitantes(int cantidad) {
+		if (ocupacion + cantidad > 100){
+			ocupacion = 100;
+		}else{
+			ocupacion += cantidad;
+		}		
+	}
+
 }
