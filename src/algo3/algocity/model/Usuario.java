@@ -1,8 +1,6 @@
-package algo3.algocity.controlUsuarios;
+package algo3.algocity.model;
 
 import java.util.ArrayList;
-
-import algo3.algocity.ciudad.Personaje;
 
 public class Usuario {
 	

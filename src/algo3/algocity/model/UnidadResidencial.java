@@ -2,13 +2,18 @@ package algo3.algocity.model;
 
 public class UnidadResidencial extends UnidadZonal {
 	
-	static final int CAPACIDAD = 100;
+	static final int COSTO = 5;
+	static final int CAPACIDAD = 100;	
 	int ocupacion;
 	
+	
 	public UnidadResidencial(){
-		costo = 5;
 		consumo = 1;
 		ocupacion = 0;
+	}
+	
+	public int getCosto(){
+		return COSTO;
 	}
 	
 	public int getCapacidad(){

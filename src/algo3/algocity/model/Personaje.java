@@ -1,4 +1,4 @@
-package algo3.algocity.ciudad;
+package algo3.algocity.model;
 
 public class Personaje {
 

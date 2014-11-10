@@ -1,4 +1,4 @@
-package algo3.algocity.controlUsuarios;
+package algo3.algocity.model;
 
 public class ExcepcionAgregarUsuarioYaExistente extends Exception {
 

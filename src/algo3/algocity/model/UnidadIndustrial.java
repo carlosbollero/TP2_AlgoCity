@@ -2,11 +2,11 @@ package algo3.algocity.model;
 
 public class UnidadIndustrial extends UnidadZonal {
 	
+	static final int COSTO = 10;
 	static final int EMPLEO = 25;
 	int ocupacion;
 	
 	public UnidadIndustrial(){
-		costo = 10;
 		consumo = 5;
 		ocupacion = 0;
 	}
