@@ -10,14 +10,6 @@ public class CentralEolica extends UnidadEnergetica {
 		
 	}
 	
-	public int getRadioDeInfluencia(){
-		return radioDeInfluencia;
-	}
-	
-	public int getCapacidad(){
-		return capacidad;
-	}
-	
 	public int getCosto(){
 		return COSTO;
 	}
