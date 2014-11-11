@@ -83,4 +83,14 @@ public class EdificadorTest {
 		
 		assertTrue(e.construirEstacionDeBomberos() instanceof EstacionDeBomberos);
 	}
+	
+	@Test
+	public void testSePuedeConstruirMasDeUnaInstanciaDeUnidad() {
+		Edificador e = new Edificador();
+		
+		UnidadResidencial unaResidencia = e.construirUnidadResidencial();
+		UnidadResidencial otraRensidencia = e.construirUnidadResidencial();
+		
+		assertNotEquals(unaResidencia, otraRensidencia);
+	}
 }
