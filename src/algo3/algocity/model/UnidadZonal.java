@@ -27,10 +27,18 @@ public abstract class UnidadZonal extends Unidad {
 	public void aplicarDanio(int porcentaje){
 		if (danios + porcentaje >= 100){
 			danios = 100;
-		}
-		else{
+		}else{
 			danios += porcentaje;
 		}
 	}
+	
+	public void repararDanio(int porcentaje){
+		if (danios - porcentaje < 0){
+			danios = 0;
+		}else{
+			danios -= porcentaje;
+		}
+	}
+
 
 }

@@ -5,5 +5,5 @@ import java.util.ArrayList;
 public interface Conectable {
 	
 	//TODO VEEEEERRRRRRRRRR!!!!!!!
-	 public ArrayList getRequisitosConexion();
+	 public ArrayList<boolean[]> getRequisitosConexion();
 }

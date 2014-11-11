@@ -1,9 +1,9 @@
 package algo3.algocity.model;
 
-public class UnidadIndustrial extends UnidadZonal {
+public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	
 	static final int COSTO = 10;
-	static final int EMPLEO = 25;
+	static final int CAPACIDAD = 25;
 	int ocupacion;
 	
 	public UnidadIndustrial(){
@@ -16,7 +16,37 @@ public class UnidadIndustrial extends UnidadZonal {
 	}
 	
 	public int consultarDisponibilidad(){
-		return (EMPLEO - ocupacion);
+		return (CAPACIDAD - ocupacion);
+	}
+	
+	private void recibirEmpleados(int cantidad){
+		// TODO corresponderia una excepcion?
+		if (ocupacion + cantidad > CAPACIDAD){
+			ocupacion = CAPACIDAD;
+		}else{
+			ocupacion += cantidad;
+		}
+	}
+	
+	private void despedirEmpleados(int cantidad){
+		// TODO corresponderia una excepcion?
+		if (ocupacion - cantidad < 0){
+			ocupacion = 0;
+		}else{
+			ocupacion -=cantidad;
+		}
+	}
+
+	@Override
+	public void agregar(int cantidad) {
+		recibirEmpleados(cantidad);
+		
+	}
+
+	@Override
+	public void despedir(int cantidad) {
+		despedirEmpleados(cantidad);
+		
 	}
 
 }

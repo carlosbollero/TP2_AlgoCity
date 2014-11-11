@@ -1,5 +1,5 @@
 package algo3.algocity.model;
 
-public abstract class UnidadDeServicio extends Unidad {
+public abstract class UnidadDeServicio extends Unidad  implements Conectable{
 	
 }
