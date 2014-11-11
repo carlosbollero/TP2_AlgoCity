@@ -1,4 +1,4 @@
-package algo3.algocity.controlUsuarios;
+package algo3.algocity.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;

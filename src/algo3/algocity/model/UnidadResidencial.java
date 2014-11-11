@@ -1,14 +1,19 @@
 package algo3.algocity.model;
 
-public class UnidadResidencial extends UnidadZonal {
+public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	
-	static final int CAPACIDAD = 100;
+	static final int COSTO = 5;
+	static final int CAPACIDAD = 100;	
 	int ocupacion;
 	
+	
 	public UnidadResidencial(){
-		costo = 5;
 		consumo = 1;
 		ocupacion = 0;
+	}
+	
+	public int getCosto(){
+		return COSTO;
 	}
 	
 	public int getCapacidad(){
@@ -27,12 +32,24 @@ public class UnidadResidencial extends UnidadZonal {
 		return (CAPACIDAD - ocupacion);
 	}
 
-	public void recibirHabitantes(int cantidad) {
-		if (ocupacion + cantidad > 100){
-			ocupacion = 100;
-		}else{
-			ocupacion += cantidad;
-		}		
+	private void recibirHabitantes(int cantidad) {
+		ocupacion += cantidad;	
+	}
+	
+	private void despedirHabitantes(int cantidad){
+		ocupacion -=cantidad;
+	}
+
+	@Override
+	public void agregar(int cantidad) {
+		recibirHabitantes(cantidad);
+		
+	}
+
+	@Override
+	public void despedir(int cantidad) {
+		despedirHabitantes(cantidad);
+		
 	}
 
 }

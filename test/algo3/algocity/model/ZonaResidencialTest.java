@@ -55,10 +55,12 @@ public class ZonaResidencialTest {
 	@Test
 	public void testSePuedeSaberSiUnaResidenciaEstaOcupada(){
 		UnidadResidencial r = new UnidadResidencial();
+		Ocupable o = r;
+		
 		
 		assertFalse(r.estaOcupada());
 		
-		r.recibirHabitantes(100);
+		o.agregar(100);
 		
 		assertTrue(r.estaOcupada());
 	}
@@ -66,8 +68,9 @@ public class ZonaResidencialTest {
 	@Test
 	public void testSePuedeConsultarDisponibilidadAResidencia(){
 		UnidadResidencial r = new UnidadResidencial();
+		Ocupable o = r;
 		
-		r.recibirHabitantes(48);
+		o.agregar(48);
 		
 		assertEquals(52, r.consultarDisponibilidad());
 	}
