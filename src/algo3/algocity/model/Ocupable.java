@@ -2,9 +2,9 @@ package algo3.algocity.model;
 
 public interface Ocupable {
 	
-	void agregar(int cantidad);
+	void agregar();
 	
-	void despedir(int cantidad);
+	void despedir();
 	
 	boolean hayDisponibilidad();
 

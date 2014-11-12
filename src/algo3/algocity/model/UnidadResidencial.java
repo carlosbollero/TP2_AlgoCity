@@ -3,7 +3,8 @@ package algo3.algocity.model;
 public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	
 	static final int COSTO = 5;
-	static final int CAPACIDAD = 100;	
+	static final int CAPACIDAD = 100;
+	final int familia = 4;
 	int ocupacion;
 	
 	
@@ -25,41 +26,46 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	}
 
 	public int getOcupacion() {
-		return ocupacion;
+		return this.ocupacion;
 	}
 	
 	public boolean estaOcupada(){
 		return (this.consultarDisponibilidad() == 0);
 	}
 
+	//revisar uso
 	public int consultarDisponibilidad() {
-		return (CAPACIDAD - ocupacion);
+		return (UnidadResidencial.CAPACIDAD - this.ocupacion);
 	}
 	
 	@Override
 	public boolean hayDisponibilidad() {
-		return (UnidadResidencial.CAPACIDAD - this.ocupacion > 0);
+		return (this.consultarDisponibilidad() >= 4);
 	}
 
+	//hace falta? o con agregar alcanza?
 	private void recibirHabitantes(int cantidad) {
-		ocupacion += cantidad;	
+		this.ocupacion += cantidad;	
 	}
 	
+	//TODO revisar
 	private void despedirHabitantes(int cantidad){
-		ocupacion -=cantidad;
+		this.ocupacion -= cantidad;
 	}
 
+	//suponemos que la población crece por familias de cuatro personas
 	@Override
-	public void agregar(int cantidad) {
+	public void agregar() {
 		if (this.hayDisponibilidad()){
-			recibirHabitantes(cantidad);
+			//revisar
+			recibirHabitantes(familia);
 		}
 		
 	}
 
 	@Override
-	public void despedir(int cantidad) {
-		despedirHabitantes(cantidad);
+	public void despedir() {
+		despedirHabitantes(4);
 		
 	}
 	

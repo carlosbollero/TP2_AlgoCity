@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public interface Edificable {
 	
-	public void construir();
+	//public void construir();
 	
 	//TODO corroborar que sea correcto esto
 	public ArrayList<boolean[]> getRequisitosTerreno();

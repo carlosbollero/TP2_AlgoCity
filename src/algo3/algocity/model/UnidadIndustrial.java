@@ -4,6 +4,7 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	
 	static final int COSTO = 10;
 	static final int EMPLEO = 25;
+	final int trabajador = 1;
 	int ocupacion;
 	
 	public UnidadIndustrial(){
@@ -32,23 +33,19 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	}
 	
 	public int consultarDisponibilidad(){
-		return (EMPLEO - ocupacion);
+		return (UnidadIndustrial.EMPLEO - ocupacion);
 	}
 	
 	@Override
 	public boolean hayDisponibilidad() {
-		return (UnidadIndustrial.EMPLEO - this.ocupacion > 0);
+		return (consultarDisponibilidad() >= 1);
 	}
 	
 	private void recibirEmpleados(int cantidad){
-		// TODO corresponderia una excepcion?
-		if (ocupacion + cantidad > EMPLEO){
-			ocupacion = EMPLEO;
-		}else{
-			ocupacion += cantidad;
-		}
+		this.ocupacion += cantidad;
 	}
 	
+	// TODO Revisar
 	private void despedirEmpleados(int cantidad){
 		// TODO corresponderia una excepcion?
 		if (ocupacion - cantidad < 0){
@@ -59,14 +56,15 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	}
 
 	@Override
-	public void agregar(int cantidad) {
-		recibirEmpleados(cantidad);
-		
+	public void agregar() {
+		if (this.hayDisponibilidad()){
+			recibirEmpleados(this.trabajador);
+		}		
 	}
 
 	@Override
-	public void despedir(int cantidad) {
-		despedirEmpleados(cantidad);		
+	public void despedir() {
+		despedirEmpleados(this.trabajador);		
 	}
 
 	@Override
