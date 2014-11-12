@@ -10,6 +10,4 @@ public interface Edificable {
 	//TODO corroborar que sea correcto esto
 	public ArrayList<boolean[]> getRequisitosTerreno();
 	
-	public void repararse(int cantidad);
-
 }

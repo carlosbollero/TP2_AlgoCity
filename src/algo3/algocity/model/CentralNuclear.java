@@ -15,7 +15,7 @@ public class CentralNuclear extends UnidadEnergetica {
 
 	@Override
 	protected int porcentajeReparacion() {
-		return (CentralMinera.ESTADOINICIAL * 3) /100;
+		return (CentralNuclear.ESTADOINICIAL * 3) /100;
 	}
 	
 }
