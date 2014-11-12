@@ -19,6 +19,10 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	public int getCapacidad(){
 		return CAPACIDAD;
 	}
+	
+	public int getConsumo() {
+		return consumo;
+	}
 
 	public int getOcupacion() {
 		return ocupacion;
