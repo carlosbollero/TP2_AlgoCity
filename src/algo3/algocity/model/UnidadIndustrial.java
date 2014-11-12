@@ -3,7 +3,7 @@ package algo3.algocity.model;
 public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	
 	static final int COSTO = 10;
-	static final int CAPACIDAD = 25;
+	static final int EMPLEO = 25;
 	int ocupacion;
 	
 	public UnidadIndustrial(){
@@ -20,7 +20,7 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	}
 	
 	public int getCapacidad(){
-		return CAPACIDAD;
+		return EMPLEO;
 	}
 	
 	public int getConsumo() {
@@ -32,13 +32,18 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 	}
 	
 	public int consultarDisponibilidad(){
-		return (CAPACIDAD - ocupacion);
+		return (EMPLEO - ocupacion);
+	}
+	
+	@Override
+	public boolean hayDisponibilidad() {
+		return (UnidadIndustrial.EMPLEO - this.ocupacion > 0);
 	}
 	
 	private void recibirEmpleados(int cantidad){
 		// TODO corresponderia una excepcion?
-		if (ocupacion + cantidad > CAPACIDAD){
-			ocupacion = CAPACIDAD;
+		if (ocupacion + cantidad > EMPLEO){
+			ocupacion = EMPLEO;
 		}else{
 			ocupacion += cantidad;
 		}

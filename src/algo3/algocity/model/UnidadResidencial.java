@@ -35,6 +35,11 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	public int consultarDisponibilidad() {
 		return (CAPACIDAD - ocupacion);
 	}
+	
+	@Override
+	public boolean hayDisponibilidad() {
+		return (UnidadResidencial.CAPACIDAD - this.ocupacion > 0);
+	}
 
 	private void recibirHabitantes(int cantidad) {
 		ocupacion += cantidad;	
@@ -46,7 +51,9 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 
 	@Override
 	public void agregar(int cantidad) {
-		recibirHabitantes(cantidad);
+		if (this.hayDisponibilidad()){
+			recibirHabitantes(cantidad);
+		}
 		
 	}
 
