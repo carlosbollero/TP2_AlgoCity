@@ -13,5 +13,10 @@ public class CentralMinera extends UnidadEnergetica {
 		return COSTO;
 	}
 
+	@Override
+	protected int porcentajeReparacion() {
+		return (CentralMinera.ESTADOINICIAL * 10) /100;
+	}
+
 
 }

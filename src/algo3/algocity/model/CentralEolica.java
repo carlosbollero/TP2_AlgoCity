@@ -13,6 +13,11 @@ public class CentralEolica extends UnidadEnergetica {
 	public int getCosto(){
 		return COSTO;
 	}
+
+	@Override
+	protected int porcentajeReparacion() {
+		return (CentralEolica.ESTADOINICIAL * 15) / 100;
+	}
 	
 	
 

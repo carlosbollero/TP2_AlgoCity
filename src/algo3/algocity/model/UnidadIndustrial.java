@@ -61,8 +61,12 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 
 	@Override
 	public void despedir(int cantidad) {
-		despedirEmpleados(cantidad);
-		
+		despedirEmpleados(cantidad);		
+	}
+
+	@Override
+	protected int porcentajeReparacion() {
+		return (UnidadIndustrial.ESTADOINICIAL * 3) / 100;
 	}
 
 }

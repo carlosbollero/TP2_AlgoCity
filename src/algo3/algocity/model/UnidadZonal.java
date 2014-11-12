@@ -1,18 +1,19 @@
 package algo3.algocity.model;
 
-public abstract class UnidadZonal extends Unidad {
+public abstract class UnidadZonal extends Unidad implements Reparable {
 	
 	// TODO Revisar de que forma conviene que esten estos atributos,
 	// si constantes o de clase
 	static final int AREA = 1;
+	static final int ESTADOINICIAL = 100;
 	static int consumo;
-	int danios;
+	int porcentajeDanios;
 	
 	
 	public abstract int getCosto();
 	
 	public UnidadZonal(){
-		danios = 0;
+		porcentajeDanios = 0;
 	}
 	
 	public int getArea() {
@@ -24,24 +25,20 @@ public abstract class UnidadZonal extends Unidad {
 	}
 
 	public int getDanios() {
-		return danios;
+		return porcentajeDanios;
 	}
 	
-	public void aplicarDanio(int porcentaje){
-		if (danios + porcentaje >= 100){
-			danios = 100;
-		}else{
-			danios += porcentaje;
+	@Override
+	public void repararse() {
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0){
+			this.porcentajeDanios = 0;
 		}
 	}
 	
-	public void repararDanio(int porcentaje){
-		if (danios - porcentaje < 0){
-			danios = 0;
-		}else{
-			danios -= porcentaje;
-		}
-	}
+	//public abstract void aplicarDanio();
+	
+	protected abstract int porcentajeReparacion();
 
 
 }

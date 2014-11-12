@@ -15,4 +15,10 @@ public class UnidadComercial extends UnidadZonal {
 	public int getConsumo() {
 		return consumo;
 	}
+
+	@Override
+	protected int porcentajeReparacion() {
+		return (UnidadComercial.ESTADOINICIAL * 7) / 100;
+	}
+
 }

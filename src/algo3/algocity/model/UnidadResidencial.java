@@ -55,5 +55,9 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 		despedirHabitantes(cantidad);
 		
 	}
+	
+	protected int porcentajeReparacion(){
+		return (UnidadResidencial.ESTADOINICIAL * 100) / 10;
+	}
 
 }
