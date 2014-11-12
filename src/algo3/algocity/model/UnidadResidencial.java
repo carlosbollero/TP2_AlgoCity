@@ -58,14 +58,14 @@ public class UnidadResidencial extends UnidadZonal implements Ocupable {
 	public void agregar() {
 		if (this.hayDisponibilidad()){
 			//revisar
-			recibirHabitantes(familia);
+			recibirHabitantes(this.familia);
 		}
 		
 	}
 
 	@Override
 	public void despedir() {
-		despedirHabitantes(4);
+		despedirHabitantes(this.familia);
 		
 	}
 	
