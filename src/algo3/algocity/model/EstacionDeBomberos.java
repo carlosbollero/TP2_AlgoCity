@@ -11,6 +11,11 @@ public class EstacionDeBomberos extends UnidadDeServicio {
 		conexion = null;
 	}
 	
+	public int getCosto() {
+		
+		return COSTO;
+	}
+	
 	public void conectarTuberia(Tuberia unaTuberia){
 		conexion = unaTuberia;
 	}

@@ -8,10 +8,13 @@ public abstract class UnidadZonal extends Unidad {
 	static int consumo;
 	int danios;
 	
+	
+	public abstract int getCosto();
+	
 	public UnidadZonal(){
 		danios = 0;
 	}
-
+	
 	public int getArea() {
 		return AREA;
 	}

@@ -11,6 +11,22 @@ public class UnidadIndustrial extends UnidadZonal implements Ocupable {
 		ocupacion = 0;
 	}
 	
+	public int getCosto() {
+		return COSTO;
+	}
+	
+	public int getOcupacion() {
+		return ocupacion;
+	}
+	
+	public int getCapacidad(){
+		return CAPACIDAD;
+	}
+	
+	public int getConsumo() {
+		return consumo;
+	}
+	
 	public boolean estaOcupada(){
 		return (this.consultarDisponibilidad() == 0);
 	}

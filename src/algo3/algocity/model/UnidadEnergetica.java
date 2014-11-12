@@ -19,5 +19,6 @@ public abstract class UnidadEnergetica extends Unidad {
 	public int getCapacidad(){
 		return capacidad;
 	}
+	
 
 }

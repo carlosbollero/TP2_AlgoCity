@@ -4,10 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ZonaResidencialTest {
+public class UnidadResidencialTest {
 
 	
-/**Prueba modificacion test**/
 	
 	@Test
 	public void testLaResidenciaCreadaEsValida() {

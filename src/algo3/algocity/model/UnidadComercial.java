@@ -7,4 +7,12 @@ public class UnidadComercial extends UnidadZonal {
 	public UnidadComercial(){
 		consumo = 2;
 	}
+	
+	public int getCosto() {
+		return COSTO;
+	}
+	
+	public int getConsumo() {
+		return consumo;
+	}
 }

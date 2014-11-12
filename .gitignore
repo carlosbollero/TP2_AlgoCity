@@ -1,2 +1,7 @@
 /bin/
 .*
+/build/
+/libs/
+/build.xml
+/commit.txt
+/ivy.xml

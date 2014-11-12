@@ -12,5 +12,10 @@ public class PozoDeAgua extends UnidadDeServicio{
 		return null;
 	}
 	
+	public int getCosto() {
+		
+		return COSTO;
+	}
+	
 
 }
