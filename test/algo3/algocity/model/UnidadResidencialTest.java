@@ -59,7 +59,9 @@ public class UnidadResidencialTest {
 		
 		assertFalse(r.estaOcupada());
 		
-		o.agregar(100);
+		for (int i = 0; i < 25; i++){
+			o.agregar();
+		}		
 		
 		assertTrue(r.estaOcupada());
 	}
@@ -69,7 +71,10 @@ public class UnidadResidencialTest {
 		UnidadResidencial r = new UnidadResidencial();
 		Ocupable o = r;
 		
-		o.agregar(48);
+		//numero arbitrario
+		for (int i = 0; i < 12; i++){
+			o.agregar();
+		}		
 		
 		assertEquals(52, r.consultarDisponibilidad());
 	}
