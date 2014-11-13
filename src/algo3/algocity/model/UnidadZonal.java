@@ -36,10 +36,16 @@ public abstract class UnidadZonal extends Unidad implements Reparable {
 		}
 	}
 	
-	//TODO esta comentado porque debemos saber antes si cada unidad se
-	// sabe destruir a si misma o el "daño" lo recibe de manera externa
+	//TODO VER si debemos saber antes si cada unidad se
+	// sabe destruir a si misma o el "danio" lo recibe de manera externa
 	// y como destruye un terremoto en un principio
-	//public abstract void aplicarDanio();
+	public void aplicarDanio(int cantidad){
+		if (this.porcentajeDanios > 100){
+			this.porcentajeDanios = 100;
+		}else{
+		this.porcentajeDanios += cantidad;
+		}
+	}
 	
 	protected abstract int porcentajeReparacion();
 
