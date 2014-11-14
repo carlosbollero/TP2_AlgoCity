@@ -11,7 +11,7 @@ public class EdificadorTest {
 		Edificador e = new Edificador();
 		
 		
-		assertTrue(e.construirUnidadResidencial() instanceof UnidadResidencial);
+		assertTrue(e.construirUnidadResidencial() instanceof UnidadOcupable);
 	}
 	
 	@Test
@@ -25,49 +25,7 @@ public class EdificadorTest {
 	public void testConstruirZonaIndustrial() {
 		Edificador e = new Edificador();
 		
-		assertTrue(e.construirUnidadIndustrial() instanceof UnidadIndustrial);
-	}
-	
-	@Test
-	public void testConstruirCentralEolica() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirCentralEolica() instanceof CentralEolica);
-	}
-	
-	@Test
-	public void testConstruirCentralMinera() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirCentralMinera() instanceof CentralMinera);
-	}
-	
-	@Test
-	public void testConstruirCentralNuclear() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirCentralNuclear() instanceof CentralNuclear);
-	}
-	
-	@Test
-	public void testConstruirTuberia() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirTuberia() instanceof Tuberia);
-	}
-	
-	@Test
-	public void testConstruirRuta() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirRuta() instanceof Ruta);
-	}
-	
-	@Test
-	public void testConstruirLineaDeTension() {
-		Edificador e = new Edificador();
-		
-		assertTrue(e.construirLineaDeTension() instanceof LineaDeTension);
+		assertTrue(e.construirUnidadIndustrial() instanceof UnidadOcupable);
 	}
 	
 	@Test
@@ -88,8 +46,8 @@ public class EdificadorTest {
 	public void testSePuedeConstruirMasDeUnaInstanciaDeUnidad() {
 		Edificador e = new Edificador();
 		
-		Ocupable unaResidencia = e.construirUnidadResidencial();
-		Ocupable otraRensidencia = e.construirUnidadResidencial();
+		UnidadOcupable unaResidencia = e.construirUnidadResidencial();
+		UnidadOcupable otraRensidencia = e.construirUnidadResidencial();
 		
 		assertNotEquals(unaResidencia, otraRensidencia);
 	}
