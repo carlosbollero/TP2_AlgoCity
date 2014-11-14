@@ -2,47 +2,43 @@ package algo3.algocity.model;
 
 public class Edificador {
 	
-	public UnidadResidencial construirUnidadResidencial(){
-		return new UnidadResidencial();
+	int costoUnidadResidencial;
+	int costoUnidadIndustrial;
+	int costoUnidadComercial;
+	int costoCentralEolica;
+	int costoCentralMinera;
+	int costoCentralNuclear;
+	int costoEstacionDebomberos;
+	int costoPozoDeAgua;
+	
+	public Edificador(){
+		this.costoUnidadResidencial = 5;
+		this.costoUnidadIndustrial = 10;
+		this.costoUnidadComercial = 5;
+		this.costoCentralEolica = 1000;
+		this.costoCentralMinera = 3000;
+		this.costoCentralNuclear = 10000;
+		this.costoEstacionDebomberos = 1500;
+		this.costoPozoDeAgua = 250;
 	}
 	
 	public UnidadComercial construirUnidadComercial(){
-		return new UnidadComercial();
+		return new UnidadComercial(this.costoUnidadComercial,2);
 	}
 	
-	public UnidadIndustrial construirUnidadIndustrial(){
-		return new UnidadIndustrial();
+	public UnidadOcupable construirUnidadIndustrial(){
+		return new UnidadOcupable(this.costoUnidadIndustrial, 5, 25);
 	}
 	
-	public CentralEolica construirCentralEolica(){
-		return new CentralEolica();
-	}
-	
-	public CentralMinera construirCentralMinera(){
-		return new CentralMinera();
-	}
-	
-	public CentralNuclear construirCentralNuclear(){
-		return new CentralNuclear();
-	}
-
-	public Tuberia construirTuberia(){
-		return new Tuberia();
-	}
-	
-	public Ruta construirRuta(){
-		return new Ruta();
-	}
-	
-	public LineaDeTension construirLineaDeTension(){
-		return new LineaDeTension();
+	public UnidadOcupable construirUnidadResidencial(){
+		return new UnidadOcupable(this.costoUnidadResidencial, 1, 100);
 	}
 	
 	public PozoDeAgua construirPozoDeAgua(){
-		return new PozoDeAgua();
+		return new PozoDeAgua(this.costoPozoDeAgua);
 	}
 	
 	public EstacionDeBomberos construirEstacionDeBomberos(){
-		return new EstacionDeBomberos();
+		return new EstacionDeBomberos(this.costoEstacionDebomberos);
 	}
 }

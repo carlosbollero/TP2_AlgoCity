@@ -27,9 +27,9 @@ public class UnidadZonalTest {
 	@Test
 	public void testUnidadResidenciallTieneCostoValido() {
 		
-		assertEquals(5,UnidadResidencial.COSTO);
+		assertEquals(5,Ocupable.COSTO);
 		
-		UnidadResidencial unaUnidadResidencial = new UnidadResidencial();
+		Ocupable unaUnidadResidencial = new UnidadResidencial();
 		assertEquals(5,unaUnidadResidencial.getCosto());
 	}
 	
@@ -52,7 +52,7 @@ public class UnidadZonalTest {
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
 		
-		UnidadResidencial unaUnidadResidencial = new UnidadResidencial();
+		Ocupable unaUnidadResidencial = new UnidadResidencial();
 		assertEquals(1,unaUnidadResidencial.getConsumo());
 		
 	}
@@ -60,7 +60,7 @@ public class UnidadZonalTest {
 	@Test
 	public void testUnidadResidencialTieneCapacidadValida() {
 		
-		UnidadResidencial unaUnidadResidencial = new UnidadResidencial();
+		Ocupable unaUnidadResidencial = new UnidadResidencial();
 		assertEquals(100,unaUnidadResidencial.getCapacidad());
 		
 	}

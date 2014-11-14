@@ -1,21 +1,9 @@
 package algo3.algocity.model;
 
-import java.util.ArrayList;
-
-public class PozoDeAgua extends UnidadDeServicio{
+public class PozoDeAgua extends Unidad {
 	
-	static final int COSTO = 250;
-
-	@Override
-	public ArrayList<boolean[]> getRequisitosConexion() {
-		// TODO Auto-generated method stub
-		return null;
+	public PozoDeAgua(int costo){
+		this.costo = costo;
 	}
-	
-	public int getCosto() {
-		
-		return COSTO;
-	}
-	
 
 }

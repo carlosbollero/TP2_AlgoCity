@@ -1,31 +1,21 @@
 package algo3.algocity.model;
 
-import java.util.ArrayList;
-
-public class EstacionDeBomberos extends UnidadDeServicio {
+public class EstacionDeBomberos extends Unidad {
 	
-	static final int COSTO = 1500;
-	Tuberia conexion;
+	Conector conexion;
 	
-	public EstacionDeBomberos(){
+	public EstacionDeBomberos(int costo){
+		this.costo = costo;
 		conexion = null;
 	}
 	
 	public int getCosto() {
 		
-		return COSTO;
+		return this.costo;
 	}
 	
-	public void conectarTuberia(Tuberia unaTuberia){
-		conexion = unaTuberia;
+	public void conectarTuberia(Conector unaTuberia){
+		this.conexion = unaTuberia;
 	}
-
-	@Override
-	public ArrayList<boolean[]> getRequisitosConexion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 
 }

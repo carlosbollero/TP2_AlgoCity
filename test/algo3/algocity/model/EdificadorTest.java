@@ -88,8 +88,8 @@ public class EdificadorTest {
 	public void testSePuedeConstruirMasDeUnaInstanciaDeUnidad() {
 		Edificador e = new Edificador();
 		
-		UnidadResidencial unaResidencia = e.construirUnidadResidencial();
-		UnidadResidencial otraRensidencia = e.construirUnidadResidencial();
+		Ocupable unaResidencia = e.construirUnidadResidencial();
+		Ocupable otraRensidencia = e.construirUnidadResidencial();
 		
 		assertNotEquals(unaResidencia, otraRensidencia);
 	}

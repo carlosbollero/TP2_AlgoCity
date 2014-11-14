@@ -23,7 +23,7 @@ public class UnidadEnergeticaTest {
 	@Test
 	public void testCentralNuclearTieneRadioInfluenciaValido() {
 		
-		CentralNuclear unaCentralNuclear = new CentralNuclear();
+		UnidadEnergetica unaCentralNuclear = new CentralNuclear();
 		assertEquals(25,unaCentralNuclear.getRadioDeInfluencia());
 	}
 	
@@ -44,7 +44,7 @@ public class UnidadEnergeticaTest {
 	@Test
 	public void testCentralNuclearTieneCapacidadValida() {
 
-		CentralNuclear unaCentralNuclear = new CentralNuclear();
+		UnidadEnergetica unaCentralNuclear = new CentralNuclear();
 		assertEquals(1000,unaCentralNuclear.getCapacidad());
 	}
 	

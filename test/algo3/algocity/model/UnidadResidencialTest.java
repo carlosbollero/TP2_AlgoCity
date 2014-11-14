@@ -11,7 +11,7 @@ public class UnidadResidencialTest {
 	@Test
 	public void testLaResidenciaCreadaEsValida() {
 		
-		UnidadResidencial r = new UnidadResidencial();
+		UnidadOcupable r = new UnidadResidencial();
 		
 		assertEquals(5, r.getCosto());
 		assertEquals(1, r.getArea());
@@ -23,7 +23,7 @@ public class UnidadResidencialTest {
 
 	@Test
 	public void testLaResidenciaPuedeRecibirDanios(){
-		UnidadResidencial r = new UnidadResidencial();
+		UnidadOcupable r = new UnidadResidencial();
 		
 		r.aplicarDanio(50);
 		
@@ -32,7 +32,7 @@ public class UnidadResidencialTest {
 	
 	@Test
 	public void testLaResidenciaPuedeRecibirMasDeUnDanio(){
-		UnidadResidencial r = new UnidadResidencial();
+		UnidadOcupable r = new UnidadResidencial();
 		
 		r.aplicarDanio(25);
 		r.aplicarDanio(50);
@@ -42,7 +42,7 @@ public class UnidadResidencialTest {
 	
 	@Test
 	public void testLaResidenciaNoPuedeRecibirMasDe100DeDanio(){
-		UnidadResidencial r = new UnidadResidencial();
+		UnidadOcupable r = new UnidadResidencial();
 		
 		r.aplicarDanio(50);
 		r.aplicarDanio(60);
@@ -53,7 +53,7 @@ public class UnidadResidencialTest {
 	
 	@Test
 	public void testSePuedeSaberSiUnaResidenciaEstaOcupada(){
-		UnidadResidencial r = new UnidadResidencial();
+		Ocupable r = new UnidadResidencial();
 		Ocupable o = r;
 		
 		
@@ -68,7 +68,7 @@ public class UnidadResidencialTest {
 	
 	@Test
 	public void testSePuedeConsultarDisponibilidadAResidencia(){
-		UnidadResidencial r = new UnidadResidencial();
+		Ocupable r = new UnidadResidencial();
 		Ocupable o = r;
 		
 		//numero arbitrario

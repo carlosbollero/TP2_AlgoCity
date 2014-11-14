@@ -1,24 +1,16 @@
 package algo3.algocity.model;
 
-public class UnidadComercial extends UnidadZonal {
+public class UnidadComercial extends Unidad {
 	
-	static final int COSTO = 5;
+	int consumo;
 	
-	public UnidadComercial(){
-		consumo = 2;
+	public UnidadComercial(int costo, int consumo){
+		this.costo = costo;
+		this.consumo = consumo;
 	}
 	
-	public int getCosto() {
-		return COSTO;
-	}
-	
-	public int getConsumo() {
-		return consumo;
-	}
-
-	@Override
-	protected int porcentajeReparacion() {
-		return (UnidadComercial.ESTADOINICIAL * 7) / 100;
+	public int getConsumo(){
+		return this.consumo;
 	}
 
 }

@@ -1,16 +1,13 @@
 package algo3.algocity.model;
 
-import java.util.ArrayList;
-
-public class Conector implements Edificable {
+public class Conector {
 	
-
-	@Override
-	public ArrayList<boolean[]> getRequisitosTerreno() {
-		// TODO Auto-generated method stub
-		return null;
+	int costo;
+	int danios;
+	
+	public Conector(int costo){
+		this.costo = costo;
+		this.danios = 0;
 	}
-	
-	
 
 }
