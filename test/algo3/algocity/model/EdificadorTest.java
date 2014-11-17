@@ -51,4 +51,6 @@ public class EdificadorTest {
 		
 		assertNotEquals(unaResidencia, otraResidencia);
 	}
+	
+	
 }
