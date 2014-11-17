@@ -47,8 +47,8 @@ public class EdificadorTest {
 		Edificador e = new Edificador();
 		
 		UnidadOcupable unaResidencia = e.construirUnidadResidencial();
-		UnidadOcupable otraRensidencia = e.construirUnidadResidencial();
+		UnidadOcupable otraResidencia = e.construirUnidadResidencial();
 		
-		assertNotEquals(unaResidencia, otraRensidencia);
+		assertNotEquals(unaResidencia, otraResidencia);
 	}
 }

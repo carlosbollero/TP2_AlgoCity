@@ -10,6 +10,8 @@ public class Edificador {
 	int costoCentralNuclear;
 	int costoEstacionDebomberos;
 	int costoPozoDeAgua;
+	//Porque el consumo no es un atributo tambien?
+	
 	
 	public Edificador(){
 		this.costoUnidadResidencial = 5;
