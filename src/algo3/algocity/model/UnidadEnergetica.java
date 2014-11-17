@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public abstract class UnidadEnergetica extends Unidad implements Reparable{
+public class UnidadEnergetica extends Unidad implements Reparable{
 	
 	final int ESTADOINICIAL = 100;
 	int capacidad;
@@ -12,6 +12,12 @@ public abstract class UnidadEnergetica extends Unidad implements Reparable{
 		this.capacidad = capacidad;
 		this.radioDeInfluencia = radioDeInfluencia;
 		this.porcentajeDanios = 0;		
+	}
+
+	public UnidadEnergetica(int costoCentral,int capacidadElectrica,int radioInfluencia) {
+		this.costo = costoCentral;
+		this.capacidad = capacidadElectrica;
+		this.radioDeInfluencia = radioInfluencia;
 	}
 
 	public int getCosto() {
@@ -39,6 +45,18 @@ public abstract class UnidadEnergetica extends Unidad implements Reparable{
 		this.porcentajeDanios -= this.porcentajeReparacion();
 		if (this.getDanios() < 0){
 			this.porcentajeDanios = 0;
+		}
+	}
+	
+	public int getSalud() {
+		return (this.ESTADOINICIAL - this.porcentajeDanios);
+	}
+	
+	public void aplicarDanio(int cantidad){
+		if (this.porcentajeDanios > 100){
+			this.porcentajeDanios = 100;
+		}else{
+		this.porcentajeDanios += cantidad;
 		}
 	}
 }
