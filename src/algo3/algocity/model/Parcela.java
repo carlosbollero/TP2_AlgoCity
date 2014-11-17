@@ -4,7 +4,7 @@ public class Parcela {
 	
 	private int coordX;
 	private int coordY;
-	private Conector dato;
+	private Conector dato; //No deberia ser un conjunto de conectores??
 	private Unidad unaUnidad;
 	
 	public Parcela(Unidad unaUnidad, int coordX, int coordY){

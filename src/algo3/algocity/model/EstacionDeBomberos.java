@@ -17,5 +17,6 @@ public class EstacionDeBomberos extends Unidad {
 	public void conectarTuberia(Conector unaTuberia){
 		this.conexion = unaTuberia;
 	}
-
+	
+	
 }
