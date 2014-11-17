@@ -19,7 +19,6 @@ public class Mapa {
 			return true;
 		}
 		return false;
-		
 	}
 
 	private boolean validarCoordenadas(int i, int j) {
