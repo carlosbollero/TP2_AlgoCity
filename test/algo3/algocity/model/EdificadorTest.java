@@ -42,13 +42,37 @@ public class EdificadorTest {
 		assertTrue(e.construirEstacionDeBomberos() instanceof EstacionDeBomberos);
 	}
 	
+	
+	@Test
+	public void testConstruirCentralEolica() {
+		Edificador e = new Edificador();
+		
+		assertTrue(e.construirCentralEolica() instanceof UnidadEnergetica);
+	}
+	
+	@Test
+	public void testConstruirCentralMinera() {
+		Edificador e = new Edificador();
+		
+		assertTrue(e.construirCentralMinera() instanceof UnidadEnergetica);
+	}
+	
+	@Test
+	public void testConstruirCentralNuclear() {
+		Edificador e = new Edificador();
+		
+		assertTrue(e.construirCentralNuclear() instanceof UnidadEnergetica);
+	}
+	
 	@Test
 	public void testSePuedeConstruirMasDeUnaInstanciaDeUnidad() {
 		Edificador e = new Edificador();
 		
 		UnidadOcupable unaResidencia = e.construirUnidadResidencial();
-		UnidadOcupable otraRensidencia = e.construirUnidadResidencial();
+		UnidadOcupable otraResidencia = e.construirUnidadResidencial();
 		
-		assertNotEquals(unaResidencia, otraRensidencia);
+		assertNotEquals(unaResidencia, otraResidencia);
 	}
+	
+	
 }

@@ -89,4 +89,8 @@ public class UnidadOcupable extends Unidad implements Reparable {
 	protected int porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
+	
+	public int getSalud() {
+		return (this.ESTADOINICIAL - this.porcentajeDanios);
+	}
 }
