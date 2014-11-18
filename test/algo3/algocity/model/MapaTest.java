@@ -78,9 +78,7 @@ public class MapaTest {
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
-<<<<<<< HEAD
-	
-=======
+
 	@Test
 	public void testNoSePuedeAgregarEnUnaParcelaOcupada(){
 		Mapa m = new Mapa(alto, ancho);
@@ -90,6 +88,5 @@ public class MapaTest {
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));		
 		assertFalse(m.agregar((new Edificador()).construirUnidadIndustrial(), 1, 1));		
 	}	
->>>>>>> b1bf6db82b43854cea7d8b224bbe09e6ade3681d
 
 }
