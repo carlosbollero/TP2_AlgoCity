@@ -71,6 +71,6 @@ public class EdificadorTest {
 		UnidadOcupable unaResidencia = e.construirUnidadResidencial();
 		UnidadOcupable otraResidencia = e.construirUnidadResidencial();
 		
-		assertNotEquals(unaResidencia, otraResidencia);
+		assertFalse(unaResidencia.equals(otraResidencia) );
 	}
 }
