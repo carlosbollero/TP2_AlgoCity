@@ -4,13 +4,12 @@ public class Parcela {
 	
 	private int coordX;
 	private int coordY;
-	private Conector dato;
-	private Unidad unaUnidad;
+	private Ubicable contenido;
 	
-	public Parcela(Unidad unaUnidad, int coordX, int coordY){
+	public Parcela(Ubicable contenido, int coordX, int coordY){
 		this.coordX = coordX;
 		this.coordY = coordY;
-		this.unaUnidad = unaUnidad;
+		this.contenido = contenido;
 	}
 	
 	public int getCoordX(){
@@ -20,13 +19,10 @@ public class Parcela {
 	public int getCoordY(){
 		return this.coordY;
 	}
+
 	
-	public Conector getDato(){
-		return this.dato;
-	}
-	
-	public Unidad getUnidad(){
-		return this.unaUnidad;
+	public Ubicable getContenido(){
+		return this.contenido;
 	}
 	
 	public boolean tieneCoordenadas(int x, int y){
@@ -34,7 +30,7 @@ public class Parcela {
 	}
 
 	public boolean tieneUnidad() {
-		return (this.unaUnidad != null);
+		return (this.contenido != null);
 	}
 
 }

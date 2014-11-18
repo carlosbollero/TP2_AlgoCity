@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public class Conector {
+public class Conector implements Ubicable {
 	
 	int costo;
 	int danios;

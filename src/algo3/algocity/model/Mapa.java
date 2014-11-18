@@ -5,15 +5,20 @@ import java.util.Iterator;
 
 public class Mapa {
 	
-	ArrayList<Parcela> lista;
-	Iterator<Parcela> e;
+	final int ALTO;
+	final int ANCHO;
 	
-	public Mapa(){
+	ArrayList<Parcela> lista;
+	Iterator<Parcela> i;
+	
+	public Mapa(int alto, int ancho){
+		this.ALTO = alto;
+		this.ANCHO = ancho;
 		this.lista = new ArrayList<>();
 	}
 
 	public boolean agregarUnidadEn(Unidad unaUnidad, int i, int j) {
-		if (this.validarCoordenadas(i, j)){
+		if (!this.contiene(unaUnidad) && this.validarCoordenadas(i, j)){
 			Parcela nuevaParcela = new Parcela(unaUnidad, i, j);
 			this.lista.add(nuevaParcela);
 			return true;
@@ -23,22 +28,38 @@ public class Mapa {
 
 	private boolean validarCoordenadas(int i, int j) {
 		boolean resultado = true;
+		if (!this.estaDentroDeLimites(i, j)){
+			return false;
+		}
 		for (Parcela p : this.lista){
 			if (p.tieneCoordenadas(i, j)){
 				resultado = false;
 			}
-		}
+		}		
 		return resultado;
 	}
 
-	public boolean tieneUnidadEn(int i, int j) {
-		this.e = this.lista.iterator();
+	private boolean estaDentroDeLimites(int i, int j) {
+		return (i >= 0 && i <= this.ALTO && j >= 0 && j <= this.ANCHO);
+	}
+
+	public boolean tieneCoordenadaOcupada(int i, int j) {
+		this.i = this.lista.iterator();
 		boolean resultado = false;
-		while (!resultado && e.hasNext()){
-			Parcela parcelaActual = e.next();
+		while (!resultado && this.i.hasNext()){
+			Parcela parcelaActual = this.i.next();
 			resultado = ((parcelaActual.tieneCoordenadas(i, j)) && (parcelaActual.tieneUnidad()));
 		}
 		
+		return resultado;
+	}
+	
+	public boolean contiene(Ubicable unaUnidad){
+		this.i = this.lista.iterator();
+		boolean resultado = false;
+		while(i.hasNext()){
+			resultado = unaUnidad.equals(i.next().getContenido());
+		}		
 		return resultado;
 	}
 
