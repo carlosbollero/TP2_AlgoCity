@@ -14,8 +14,8 @@ public class SuperficieTest {
 		Superficie st = new Superficie(tierra);
 		Superficie sa = new Superficie(agua);
 		
-		assertNotEquals(st,sa);
-		assertNotEquals(st.tipo(), sa.tipo());
+		assertFalse(st.equals(sa));
+		assertFalse((st.tipo()) == sa.tipo());
 	}
 	
 	@Test

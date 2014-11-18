@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public class Superficie {
+public class Superficie implements Ubicable {
 	
 	//TODO revisar esto
 	//true == tierra;

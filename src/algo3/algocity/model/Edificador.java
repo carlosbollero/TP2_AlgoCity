@@ -2,6 +2,11 @@ package algo3.algocity.model;
 
 public class Edificador {
 	
+<<<<<<< HEAD
+=======
+	//TODO HORRIBLEEE!!!!
+	
+>>>>>>> b1bf6db82b43854cea7d8b224bbe09e6ade3681d
 	int costoUnidadResidencial;
 	int costoUnidadIndustrial;
 	int costoUnidadComercial;
