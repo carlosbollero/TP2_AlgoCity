@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public abstract class Unidad implements Ubicable {
+public abstract class Unidad {
 	
 	int costo;
 	

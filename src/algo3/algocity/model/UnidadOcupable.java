@@ -94,3 +94,4 @@ public class UnidadOcupable extends Unidad implements Reparable {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 }
+
