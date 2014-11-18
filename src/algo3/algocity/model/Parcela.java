@@ -29,7 +29,7 @@ public class Parcela {
 		return (x == this.coordX && y == coordY);
 	}
 
-	public boolean tieneUnidad() {
+	public boolean tieneContenido() {
 		return (this.contenido != null);
 	}
 
