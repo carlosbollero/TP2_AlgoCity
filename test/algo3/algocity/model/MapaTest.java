@@ -13,7 +13,7 @@ public class MapaTest {
 		Mapa m = new Mapa(alto, ancho);
 		
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));		
-		assertTrue(m.agregarUnidadEn((new Edificador()).construirPozoDeAgua(), 1, 1));		
+		assertTrue(m.agregar((new Edificador()).construirPozoDeAgua(), 1, 1));		
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
@@ -23,7 +23,7 @@ public class MapaTest {
 		Edificador e = new Edificador();
 		Unidad u = e.construirPozoDeAgua();
 		
-		assertTrue(m.agregarUnidadEn(u, 4, 4));
+		assertTrue(m.agregar(u, 4, 4));
 		assertTrue(m.contiene(u));
 	}
 	
@@ -34,7 +34,7 @@ public class MapaTest {
 		
 		Unidad eb = e.construirEstacionDeBomberos();
 		
-		assertFalse(m.agregarUnidadEn(eb, alto + 1, ancho + 1));
+		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
 		assertFalse(m.contiene(eb));		
 	}
 	
@@ -44,9 +44,9 @@ public class MapaTest {
 		Mapa m = new Mapa(alto, ancho);
 		Unidad u = e.construirPozoDeAgua();
 		
-		assertTrue(m.agregarUnidadEn(u, 3, 4));
+		assertTrue(m.agregar(u, 3, 4));
 		assertTrue(m.contiene(u));
-		assertFalse(m.agregarUnidadEn(u, 5, 5));
+		assertFalse(m.agregar(u, 5, 5));
 	}
 	
 	@Test
@@ -61,12 +61,12 @@ public class MapaTest {
 		Unidad c = e.construirUnidadComercial();
 		UnidadOcupable i = e.construirUnidadIndustrial();
 		
-		assertTrue(m.agregarUnidadEn(ce, 1, 1));
-		assertTrue(m.agregarUnidadEn(cm, 1, 2));
-		assertTrue(m.agregarUnidadEn(cn, 2, 1));
-		assertTrue(m.agregarUnidadEn(r, 2, 2));
-		assertTrue(m.agregarUnidadEn(c, 2, 3));
-		assertTrue(m.agregarUnidadEn(i, 3, 2));
+		assertTrue(m.agregar(ce, 1, 1));
+		assertTrue(m.agregar(cm, 1, 2));
+		assertTrue(m.agregar(cn, 2, 1));
+		assertTrue(m.agregar(r, 2, 2));
+		assertTrue(m.agregar(c, 2, 3));
+		assertTrue(m.agregar(i, 3, 2));
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class MapaTest {
 		Edificador e = new Edificador();
 		Mapa m = new Mapa(alto, ancho);
 		
-		assertTrue(m.agregarUnidadEn(e.construirUnidadResidencial(), 1, 1));		
+		assertTrue(m.agregar(e.construirUnidadResidencial(), 1, 1));		
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
@@ -83,9 +83,9 @@ public class MapaTest {
 		Mapa m = new Mapa(alto, ancho);
 		
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));		
-		assertTrue(m.agregarUnidadEn((new Edificador()).construirUnidadResidencial(), 1, 1));		
+		assertTrue(m.agregar((new Edificador()).construirUnidadResidencial(), 1, 1));		
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));		
-		assertFalse(m.agregarUnidadEn((new Edificador()).construirUnidadIndustrial(), 1, 1));		
+		assertFalse(m.agregar((new Edificador()).construirUnidadIndustrial(), 1, 1));		
 	}	
 
 }

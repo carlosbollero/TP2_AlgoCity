@@ -22,7 +22,7 @@ public class Mapa {
 		//this.grafo = new ListenableUndirectedGraph<Parcela, DefaultEdge>(DefaultEdge.class);
 	}
 
-	public boolean agregarUnidadEn(Unidad unaUnidad, int i, int j) {
+	public boolean agregar(Unidad unaUnidad, int i, int j) {
 		if (!this.contiene(unaUnidad) && this.validarCoordenadas(i, j)){
 			//return this.grafo.addVertex(new Parcela(unaUnidad, i, j));
 			return this.lista.add(new Parcela(unaUnidad, i, j));
