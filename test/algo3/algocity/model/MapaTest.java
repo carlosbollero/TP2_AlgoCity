@@ -89,6 +89,11 @@ public class MapaTest {
 		assertTrue(m.agregar((new Edificador()).construirUnidadResidencial(), 1, 1));		
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));		
 		assertFalse(m.agregar((new Edificador()).construirUnidadIndustrial(), 1, 1));		
-	}	
+	}
+	
+//	@Test
+//	public void testSePuedeGenerarUnaRedDeRuta(){
+//		Mapa m = new Mapa(alto, ancho);
+//	}
 
 }
