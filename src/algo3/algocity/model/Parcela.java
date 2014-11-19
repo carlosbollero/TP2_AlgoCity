@@ -5,6 +5,7 @@ public class Parcela {
 	private int coordX;
 	private int coordY;
 	private Ubicable contenido;
+
 	
 	public Parcela(Ubicable contenido, int coordX, int coordY){
 		this.coordX = coordX;

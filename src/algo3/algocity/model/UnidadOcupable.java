@@ -4,10 +4,11 @@ public class UnidadOcupable extends Unidad implements Reparable {
 	
 	final int ESTADOINICIAL = 100;
 	final int FAMILIA = 4;
-	int capacidad;	
+	int capacidad; //capacidad de habitantes	
 	int ocupacion;
 	int consumo;
 	int porcentajeDanios;	
+	
 	
 	public UnidadOcupable(int costo, int consumo, int capacidad){
 		this.costo = costo;
@@ -16,36 +17,48 @@ public class UnidadOcupable extends Unidad implements Reparable {
 		this.porcentajeDanios = 0;
 		this.ocupacion = 0;
 	}
+	
 
 	public int getCapacidad() {
 		return this.capacidad;
 	}
+	
 
 	public int getConsumo() {
 		return consumo;
 	}
+	
 
 	public int getOcupacion() {
 		return this.ocupacion;
 	}
 	
+	
 	public int getDanios() {
 		return porcentajeDanios;
 	}	
+	
 
 	public boolean estaOcupada() {
 		return (this.consultarDisponibilidad() == 0);
 	}
+	
 
 	public int consultarDisponibilidad() {
 		return (this.capacidad - this.ocupacion);
 	}	
 	
+	
 	public boolean hayDisponibilidad() {
-		return (this.consultarDisponibilidad() >= 4);
+		return (this.consultarDisponibilidad() >= this.FAMILIA);
 	}
 	
-
+	
+	public int getSalud() {
+		return (this.ESTADOINICIAL - this.porcentajeDanios);
+	}
+	
+	
 	@Override
 	public void repararse() {
 		this.porcentajeDanios -= this.porcentajeReparacion();
@@ -67,30 +80,41 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 
 	
-	protected void recibirHabitantes(int cantidad) {
+	//**ESTOS DOS METODOS PUESTOS COMO PRIVATE EN VEZ DE PROTECTED**
+	//Porque si no fueran private se podria agregar habitantes arbitrariamente
+	//TODO
+	private void recibirHabitantes(int cantidad) {
 		this.ocupacion += cantidad;	
 	}
 	
-	protected void despedirHabitantes(int cantidad) {
+	//
+	private void despedirHabitantes(int cantidad) {
 		this.ocupacion -= cantidad;
+		if(this.ocupacion < 0) {
+			this.ocupacion = 0;
+		}
 	}	
 	
-	public void agregar() {
+	
+	public void agregarFamilias(int cantidadFamiliasAAgregar) {
+		
 		if (this.hayDisponibilidad()){
-			//revisar
-			recibirHabitantes(this.FAMILIA);
+			recibirHabitantes(cantidadFamiliasAAgregar * this.FAMILIA);
 		}		
 	}
 	
-	public void despedir() {
-		despedirHabitantes(this.FAMILIA);		
+	public void quitarFamilias(int cantidadFamiliasAQuitar) {
+		
+		despedirHabitantes(cantidadFamiliasAQuitar * this.FAMILIA);		
 	}
 	
+	
+	//TODO
+	//No deberia ser public??
 	protected int porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
 	
-	public int getSalud() {
-		return (this.ESTADOINICIAL - this.porcentajeDanios);
-	}
+
 }
+
