@@ -4,10 +4,13 @@ public class Parcela {
 	
 	private int coordX;
 	private int coordY;
+<<<<<<< HEAD
 
 	private Conector dato; //
 	private Unidad unaUnidad;//Estos dos datos unificados en uno, porque va a haber mapas para c/cosa
 
+=======
+>>>>>>> 18797e2c0548d036388d373d0be623ae1d5117f5
 	private Ubicable contenido;
 
 	
