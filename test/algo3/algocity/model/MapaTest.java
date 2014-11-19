@@ -21,6 +21,7 @@ public class MapaTest {
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa(){
 		Mapa m = new Mapa(alto, ancho);
 		Edificador e = new Edificador();
+		
 		Unidad u = e.construirPozoDeAgua();
 		
 		assertTrue(m.agregar(u, 4, 4));
@@ -42,6 +43,7 @@ public class MapaTest {
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia(){
 		Edificador e = new Edificador();
 		Mapa m = new Mapa(alto, ancho);
+		
 		Unidad u = e.construirPozoDeAgua();
 		
 		assertTrue(m.agregar(u, 3, 4));
