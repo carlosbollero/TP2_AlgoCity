@@ -78,6 +78,7 @@ public class MapaTest {
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
+
 	@Test
 	public void testNoSePuedeAgregarEnUnaParcelaOcupada(){
 		Mapa m = new Mapa(alto, ancho);
