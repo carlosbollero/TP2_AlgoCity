@@ -4,10 +4,6 @@ public class Parcela {
 	
 	private int coordX;
 	private int coordY;
-
-	private Conector dato; //No deberia ser un conjunto de conectores??
-	private Unidad unaUnidad;
-
 	private Ubicable contenido;
 
 	
