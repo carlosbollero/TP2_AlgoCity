@@ -8,6 +8,11 @@ public class Usuario {
 	ArrayList<Personaje> personajes;
 
 
+	public Usuario(String unNombre){
+		this.nombre = unNombre;
+	}
+	
+	
 	public void setNombre(String nuevoNombre) {
 		
 		nombre = nuevoNombre;		
