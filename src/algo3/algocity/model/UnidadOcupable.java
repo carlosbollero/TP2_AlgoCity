@@ -3,8 +3,7 @@ package algo3.algocity.model;
 public class UnidadOcupable extends Unidad implements Reparable {
 	
 	final int ESTADOINICIAL = 100;
-	final int FAMILIA = 4;
-	int capacidad; //capacidad de habitantes	
+	int capacidad; //capacidad habitacional	
 	int ocupacion;
 	int consumo;
 	int porcentajeDanios;	
@@ -18,7 +17,7 @@ public class UnidadOcupable extends Unidad implements Reparable {
 		this.ocupacion = 0;
 	}
 	
-
+	
 	public int getCapacidad() {
 		return this.capacidad;
 	}
@@ -49,8 +48,13 @@ public class UnidadOcupable extends Unidad implements Reparable {
 	}	
 	
 	
-	public boolean hayDisponibilidad() {
-		return (this.consultarDisponibilidad() >= this.FAMILIA);
+	public boolean hayDisponibilidad(){
+		return ( (this.capacidad - this.ocupacion) > 0 );
+	}
+	
+	
+	public boolean hayDisponibilidad(int cantidad) {
+		return (this.consultarDisponibilidad() >= cantidad);
 	}
 	
 	
@@ -67,6 +71,7 @@ public class UnidadOcupable extends Unidad implements Reparable {
 		}
 	}
 	
+	
 	//TODO VER si debemos saber antes si cada unidad se
 	// sabe destruir a si misma o el "danio" lo recibe de manera externa
 	// y como destruye un terremoto en un principio
@@ -80,34 +85,22 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 
 	
-	//**ESTOS DOS METODOS PUESTOS COMO PRIVATE EN VEZ DE PROTECTED**
-	//Porque si no fueran private se podria agregar habitantes arbitrariamente
+
 	//TODO
-	private void recibirHabitantes(int cantidad) {
-		this.ocupacion += cantidad;	
+	public void agregarHabitantes(int cantidad) {
+		if (this.hayDisponibilidad(cantidad)){
+			this.ocupacion += cantidad;	
+		}	
 	}
 	
 	//
-	private void despedirHabitantes(int cantidad) {
+	public void quitarHabitantes(int cantidad) {
 		this.ocupacion -= cantidad;
 		if(this.ocupacion < 0) {
 			this.ocupacion = 0;
 		}
 	}	
-	
-	
-	public void agregarFamilias(int cantidadFamiliasAAgregar) {
 		
-		if (this.hayDisponibilidad()){
-			recibirHabitantes(cantidadFamiliasAAgregar * this.FAMILIA);
-		}		
-	}
-	
-	public void quitarFamilias(int cantidadFamiliasAQuitar) {
-		
-		despedirHabitantes(cantidadFamiliasAQuitar * this.FAMILIA);		
-	}
-	
 	
 	//TODO
 	//No deberia ser public??

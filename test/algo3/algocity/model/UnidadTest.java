@@ -265,13 +265,13 @@ public class UnidadTest {
 	/**/
 	
 	@Test
-	public void testOcupacionDeUnidadResidencialAumentaAlAgregarFamilias(){
+	public void testOcupacionDeUnidadResidencialAumentaAlAgregarHabitantes(){
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadResidencial = unEdificador.construirUnidadResidencial();
-		unaUnidadResidencial.agregarFamilias(3);
+		unaUnidadResidencial.agregarHabitantes(3);
 		
-		assertEquals(unaUnidadResidencial.getOcupacion(),12);
+		assertEquals(unaUnidadResidencial.getOcupacion(),3);
 	}
 	
 	
@@ -280,9 +280,9 @@ public class UnidadTest {
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadIndustrial = unEdificador.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarFamilias(1);
+		unaUnidadIndustrial.agregarHabitantes(1);
 		
-		assertEquals(unaUnidadIndustrial.getOcupacion(),4);
+		assertEquals(unaUnidadIndustrial.getOcupacion(),1);
 	}
 	
 	
@@ -291,13 +291,13 @@ public class UnidadTest {
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadResidencial = unEdificador.construirUnidadResidencial();
-		unaUnidadResidencial.agregarFamilias(5);
+		unaUnidadResidencial.agregarHabitantes(5);
 		
-		assertEquals(unaUnidadResidencial.getOcupacion(),20);
+		assertEquals(unaUnidadResidencial.getOcupacion(),5);
 		
-		unaUnidadResidencial.quitarFamilias(2);
+		unaUnidadResidencial.quitarHabitantes(2);
 		
-		assertEquals(unaUnidadResidencial.getOcupacion(),12);
+		assertEquals(unaUnidadResidencial.getOcupacion(),3);
 	}
 	
 	
@@ -306,13 +306,13 @@ public class UnidadTest {
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadIndustrial = unEdificador.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarFamilias(4);
+		unaUnidadIndustrial.agregarHabitantes(11);
 		
-		assertEquals(unaUnidadIndustrial.getOcupacion(),16);
+		assertEquals(unaUnidadIndustrial.getOcupacion(),11);
 		
-		unaUnidadIndustrial.quitarFamilias(1);
+		unaUnidadIndustrial.quitarHabitantes(1);
 		
-		assertEquals(unaUnidadIndustrial.getOcupacion(),12);
+		assertEquals(unaUnidadIndustrial.getOcupacion(),10);
 	}
 	
 	
@@ -321,13 +321,13 @@ public class UnidadTest {
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadResidencial = unEdificador.construirUnidadResidencial();
-		unaUnidadResidencial.agregarFamilias(25); //25*4=100 --> Esta al limite la capacidad de la unidadResidencial
+		unaUnidadResidencial.agregarHabitantes(100); //--> Esta al limite la capacidad de la unidadResidencial
 		
 		assertEquals(unaUnidadResidencial.getOcupacion(),100);
 		
-		unaUnidadResidencial.agregarFamilias(2);
+		unaUnidadResidencial.agregarHabitantes(1);
 		
-		assertFalse(unaUnidadResidencial.getOcupacion() == 108);
+		assertFalse(unaUnidadResidencial.getOcupacion() == 101);
 		
 		//La ocupacion sigue siendo la misma luego de haber intentado agregar mas habitantes
 		assertEquals(unaUnidadResidencial.getOcupacion(),100); 	
@@ -339,16 +339,16 @@ public class UnidadTest {
 		
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadIndustrial = unEdificador.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarFamilias(6); //6*4=24 --> Esta al limite la capacidad de la unidadResidencial
+		unaUnidadIndustrial.agregarHabitantes(25); //--> Esta al limite la capacidad de la unidadResidencial
 		
-		assertEquals(unaUnidadIndustrial.getOcupacion(),24);
+		assertEquals(unaUnidadIndustrial.getOcupacion(),25);
 		
-		unaUnidadIndustrial.agregarFamilias(2);
+		unaUnidadIndustrial.agregarHabitantes(1);
 		
-		assertFalse(unaUnidadIndustrial.getOcupacion() == 32);
+		assertFalse(unaUnidadIndustrial.getOcupacion() == 26);
 		
 		//La ocupacion sigue siendo la misma luego de haber intentado agregar mas habitantes
-		assertEquals(unaUnidadIndustrial.getOcupacion(),24); 	
+		assertEquals(unaUnidadIndustrial.getOcupacion(),25); 	
 	}
 	
 		

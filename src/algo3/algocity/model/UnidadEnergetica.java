@@ -8,6 +8,8 @@ public class UnidadEnergetica extends Unidad implements Reparable{
 	int porcentajeDanios;
 
 		
+	//TODO
+	/*Este constructor no vuela??--No es el que usa edificador*/
 	public UnidadEnergetica(int capacidad, int radioDeInfluencia){
 		this.capacidad = capacidad;
 		this.radioDeInfluencia = radioDeInfluencia;
