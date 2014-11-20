@@ -1,40 +1,22 @@
 package algo3.algocity.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 //import org.jgrapht.graph.DefaultEdge;
 //import org.jgrapht.graph.ListenableUndirectedGraph;
 
-public class Mapa {
+public abstract class Mapa {
 
-	final int ALTO;
-	final int ANCHO;
-
-	ArrayList<Parcela> lista;
-	Iterator<Parcela> i;
-//	ListenableUndirectedGraph<Parcela, DefaultEdge> grafo;
+	int alto;
+	int ancho;
 
 	public Mapa(int alto, int ancho) {
-		this.ALTO = alto;
-		this.ANCHO = ancho;
-		this.lista = null;
-		this.i = null;
-//		this.grafo = new ListenableUndirectedGraph<Parcela, DefaultEdge>(
-//				DefaultEdge.class);
+		this.alto = alto;
+		this.ancho = ancho;
+
 	}
 
-	public boolean agregar(Ubicable elemento, int i, int j) {
-
-		if (this.estaVacio()) {
-			this.lista = new ArrayList<>();
-		}
-		if (!this.contiene(elemento) && this.validarCoordenadas(i, j)) {
-			// return this.grafo.addVertex(new Parcela(unaUnidad, i, j));
-			return this.lista.add(new Parcela(elemento, i, j));
-		}
-		return false;
-	}
+	public abstract boolean agregar(Ubicable elemento, int i, int j);
 
 	private boolean validarCoordenadas(int i, int j) {
 		if (this.estaVacio() || !this.estaDentroDeLimites(i, j)
@@ -51,7 +33,7 @@ public class Mapa {
 	}
 
 	private boolean estaDentroDeLimites(int i, int j) {
-		return ((i >= 0) && (i <= this.ALTO) && (j >= 0) && (j <= this.ANCHO));
+		return ((i >= 0) && (i <= this.alto) && (j >= 0) && (j <= this.ancho));
 	}
 
 	public boolean tieneCoordenadaOcupada(int i, int j) {
