@@ -23,7 +23,6 @@ public abstract class Mapa {
 
 	public abstract boolean tieneCoordenadaOcupada(int i, int j);
 
-	public abstract boolean contiene(Ubicable unaUnidad);
 
 	protected abstract boolean estaVacio();
 

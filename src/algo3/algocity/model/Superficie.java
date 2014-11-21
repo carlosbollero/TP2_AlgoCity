@@ -5,22 +5,22 @@ public class Superficie implements Ubicable {
 	// TODO revisar esto
 	// true == tierra;
 	// false == agua;
-	boolean estado;
+	boolean tipo;
 
-	public Superficie(boolean estado) {
-		this.estado = estado;
+	public Superficie(boolean tipoSuperficie) {
+		this.tipo = tipoSuperficie;
 	}
 
 	public boolean tipo() {
-		return this.estado;
+		return this.tipo;
 	}
 
 	public boolean esTierra() {
-		return (this.estado == true);
+		return (this.tipo == true);
 	}
 
 	public boolean esAgua() {
-		return (this.estado == false);
+		return (this.tipo == false);
 	}
 
 }

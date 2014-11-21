@@ -13,12 +13,13 @@ public class Parcela {
 	private int coordX;
 	private int coordY;
 
-	private Ubicable contenido;
+	private Conector contenido;
 
-	public Parcela(Ubicable contenido, int coordX, int coordY) {
+	public Parcela(Conector contenido, int coordX, int coordY) {
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.contenido = contenido;
+		this.contenido.setContenedor(this);
 	}
 
 	public int getCoordX() {

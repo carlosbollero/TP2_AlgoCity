@@ -33,4 +33,8 @@ public class MapaTerritorio {
 	public boolean consultarCoordenada(int x, int y) {
 		return this.posiciones.get(new Point(x, y)).tipo();
 	}
+	
+	public Superficie getContenido(int x, int y){
+		return (this.posiciones.get(new Point(x, y)));
+	}
 }
