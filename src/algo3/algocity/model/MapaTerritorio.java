@@ -34,7 +34,50 @@ public class MapaTerritorio {
 		return this.posiciones.get(new Point(x, y)).tipo();
 	}
 	
+	
 	public Superficie getContenido(int x, int y){
 		return (this.posiciones.get(new Point(x, y)));
 	}
+	
+	
+	//TODO
+	//FEOFEO
+	public int[] getPosicionDeUnaSuperficieDeAgua(){
+		boolean encontrado = false;
+		int xADevolver = 0;
+		int yADevolver = 0;
+		for (int x = 0; (x < alto) && !encontrado; x++) {
+			for (int y = 0; (y < ancho) && !encontrado; y++) {
+				Point coord = new Point(x, y);
+				Superficie unaSuperficie = this.posiciones.get(coord);
+				encontrado = unaSuperficie.esAgua();
+				yADevolver = y;
+			}
+			xADevolver = x;	
+		}
+		int[] coordenadasADevolver = new int[]{xADevolver,yADevolver};
+		return coordenadasADevolver;
+	}
+	
+	
+	//TODO
+	//FEOFEO
+	public int[] getPosicionDeUnaSuperficieDeTierra(){
+		boolean encontrado = false;
+		int xADevolver = 0;
+		int yADevolver = 0;
+		for (int x = 0; (x < alto) && !encontrado; x++) {
+			for (int y = 0; (y < ancho) && !encontrado; y++) {
+				Point coord = new Point(x, y);
+				Superficie unaSuperficie = this.posiciones.get(coord);
+				encontrado = unaSuperficie.esTierra();
+				yADevolver = y;
+			}
+			xADevolver = x;	
+		}
+		int[] coordenadasADevolver = new int[]{xADevolver,yADevolver};
+		return coordenadasADevolver;
+	}
+	
+
 }
