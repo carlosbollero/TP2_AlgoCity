@@ -25,8 +25,8 @@ public class MapaConexionesTest {
 		Conector c3 = new Conector(0);
 		
 		assertTrue(mc.agregar(c1, 1, 1));
-		assertTrue(mc.agregar(c2, 1, 1));
-		assertTrue(mc.agregar(c3, 1, 1));		
+		assertTrue(mc.agregar(c2, 2, 1));
+		assertTrue(mc.agregar(c3, 1, 2));		
 	}
 	
 	@Test

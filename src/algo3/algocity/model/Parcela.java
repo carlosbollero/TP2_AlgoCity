@@ -19,7 +19,7 @@ public class Parcela {
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.contenido = contenido;
-		this.contenido.setContenedor(this);
+//		this.contenido.setContenedor(this);
 	}
 
 	public int getCoordX() {
