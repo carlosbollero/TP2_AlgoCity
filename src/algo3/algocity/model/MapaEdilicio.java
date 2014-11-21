@@ -3,6 +3,7 @@ package algo3.algocity.model;
 import java.awt.Point;
 import java.util.HashMap;
 
+
 public class MapaEdilicio extends Mapa {
 
 	HashMap<Point, Ubicable> posiciones;
@@ -23,8 +24,8 @@ public class MapaEdilicio extends Mapa {
 		}
 		return false;
 	}
-	
-	public void remover(int x, int y){
+
+	public void remover(int x, int y) {
 		this.posiciones.remove(new Point(x, y));
 	}
 
