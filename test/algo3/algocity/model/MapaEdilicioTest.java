@@ -10,7 +10,7 @@ public class MapaEdilicioTest {
 	
 	@Test
 	public void testSePuedeAgregarUnaUnidadAlMapa(){
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 		
 		Ubicable ur = e.construirUnidadResidencial();		
@@ -21,7 +21,7 @@ public class MapaEdilicioTest {
 	
 	@Test
 	public void testSePuedeRemoverDeUnaCoordenada(){
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 		
 		Ubicable ur = e.construirUnidadResidencial();		
@@ -36,7 +36,7 @@ public class MapaEdilicioTest {
 	
 	@Test
 	public void testSePuedeAgregarVariasUnidadesAlMapa(){
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 		
 		Ubicable ur = e.construirUnidadResidencial();
@@ -51,7 +51,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
 		assertTrue(m.agregar((new Edificador()).construirPozoDeAgua(), 1, 1));
@@ -60,7 +60,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 
 		Unidad u = e.construirPozoDeAgua();
@@ -72,7 +72,7 @@ public class MapaEdilicioTest {
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
 		Edificador e = new Edificador();
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		Unidad eb = e.construirEstacionDeBomberos();
 
@@ -83,7 +83,7 @@ public class MapaEdilicioTest {
 	@Test
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
 		Edificador e = new Edificador();
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		Unidad u = e.construirPozoDeAgua();
 
@@ -94,7 +94,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeAgregarVariasUnidades() {
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 
 		UnidadEnergetica ce = e.construirCentralEolica();
@@ -115,7 +115,7 @@ public class MapaEdilicioTest {
 	@Test
 	public void testSePuedeConstruirUnaUnidadEnCoordenadaDelMapa() {
 		Edificador e = new Edificador();
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertTrue(m.agregar(e.construirUnidadResidencial(), 1, 1));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
@@ -123,7 +123,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testNoSePuedeAgregarEnUnaParcelaOcupada() {
-		Mapa m = new MapaEdilicio(alto, ancho);
+		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
 		assertTrue(m.agregar((new Edificador()).construirUnidadResidencial(),

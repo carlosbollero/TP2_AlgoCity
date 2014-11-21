@@ -1,7 +1,10 @@
 package algo3.algocity.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MapaTerritorio {
@@ -38,6 +41,8 @@ public class MapaTerritorio {
 	public Superficie getContenido(int x, int y){
 		return (this.posiciones.get(new Point(x, y)));
 	}
+	
+	
 	
 	
 	//TODO
@@ -78,6 +83,9 @@ public class MapaTerritorio {
 		int[] coordenadasADevolver = new int[]{xADevolver,yADevolver};
 		return coordenadasADevolver;
 	}
+	
+	
+	
 	
 
 }

@@ -16,6 +16,7 @@ public abstract class Mapa {
 
 	public abstract boolean agregar(Ubicable elemento, int i, int j);
 	public abstract void remover(int x, int y);
+	public abstract boolean contiene(Ubicable unaUnidad); //Agregado para que pasen los tests de MapaEdilicio
 
 	protected boolean estaDentroDeLimites(int i, int j) {
 		return ((i >= 0) && (i <= this.alto) && (j >= 0) && (j <= this.ancho));
