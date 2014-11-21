@@ -1,3 +1,11 @@
+/******************************************************************
+ * 
+ * Por la implementación de Point dentro de Mapa, Parcela empieza a 
+ * carecer de sentido, por lo que hay que evaluar si realmente
+ * se necesita.
+ * 
+ ******************************************************************/
+
 package algo3.algocity.model;
 
 public class Parcela {
@@ -5,16 +13,13 @@ public class Parcela {
 	private int coordX;
 	private int coordY;
 
-	private Conector dato; //
-	private Unidad unaUnidad;//Estos dos datos unificados en uno, porque va a haber mapas para c/cosa
+	private Conector contenido;
 
-
-	private Ubicable contenido;
-
-	public Parcela(Ubicable contenido, int coordX, int coordY) {
+	public Parcela(Conector contenido, int coordX, int coordY) {
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.contenido = contenido;
+		this.contenido.setContenedor(this);
 	}
 
 	public int getCoordX() {

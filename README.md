@@ -7,8 +7,11 @@ TP2_AlgoCity
 
 Consultar:
 ==========
+- Es correcto trabajar las unidades como Singleton y que la población se maneje de manera externa?
 
-- Si es correcto nuestro enfoque de manejo por controladores.
+
+
+
 - Como reacciona una población a una catastrofe:
 	cuanto decrece la poblacion de una unidad residencial/industrial.
 	como reacciona una central electrica ante una catástrofe.

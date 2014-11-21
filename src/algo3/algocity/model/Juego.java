@@ -1,5 +1,6 @@
 package algo3.algocity.model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 public class Juego {
@@ -55,6 +56,16 @@ public class Juego {
 	
 	
 	
+=======
+public class Juego {
+
+	Usuario usuario;
+	
+	MapaEdilicio mapaEdilicio;
+	MapaConexiones mapaTuberias;
+	MapaConexiones mapaRutas;
+	MapaConexiones mapaLineasDeTension;
+>>>>>>> 3f4e54114ceaf5ad055c2d51f22099618fed01ff
 	
 	
 }
