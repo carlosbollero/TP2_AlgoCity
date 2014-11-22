@@ -29,7 +29,6 @@ public class MapaTerritorio {
 				this.mapa.put(coord, posicion);
 			}
 		}
-
 	}
 
 	public boolean consultarCoordenada(int x, int y) {
