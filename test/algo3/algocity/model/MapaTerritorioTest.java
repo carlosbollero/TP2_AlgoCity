@@ -21,9 +21,8 @@ public class MapaTerritorioTest {
 		}
 	}
 
-	// TODO REVISAR porq estoy probando random¿?
 	@Test
-	public void testSepuedeConsultarTipoDeSuperficieDeunaCoordenada() {
+	public void testElMapaSeInicializaConTierraOAgua() {
 		MapaTerritorio mt = new MapaTerritorio(alto, ancho);
 
 		boolean agua = false;

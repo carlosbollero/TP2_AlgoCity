@@ -2,9 +2,8 @@ package algo3.algocity.model;
 
 public class Superficie implements Ubicable {
 
-	// TODO revisar esto
-	// true == tierra;
-	// false == agua;
+	final boolean tierra = true;
+	final boolean agua = false;
 	boolean tipo;
 
 	public Superficie(boolean tipoSuperficie) {
@@ -16,11 +15,11 @@ public class Superficie implements Ubicable {
 	}
 
 	public boolean esTierra() {
-		return (this.tipo == true);
+		return (this.tipo == tierra);
 	}
 
 	public boolean esAgua() {
-		return (this.tipo == false);
+		return (this.tipo == agua);
 	}
 
 }

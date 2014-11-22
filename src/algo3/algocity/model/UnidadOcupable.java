@@ -4,7 +4,7 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 	final int ESTADOINICIAL = 100;
 
-	int capacidad; //capacidad habitacional	
+	int capacidad; // capacidad habitacional
 	int ocupacion;
 	int consumo;
 	int porcentajeDanios;
@@ -39,14 +39,12 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 	public int consultarDisponibilidad() {
 		return (this.capacidad - this.ocupacion);
-	}	
-	
-	
-	public boolean hayDisponibilidad(){
-		return ( (this.capacidad - this.ocupacion) > 0 );
 	}
-	
-	
+
+	public boolean hayDisponibilidad() {
+		return ((this.capacidad - this.ocupacion) > 0);
+	}
+
 	public boolean hayDisponibilidad(int cantidad) {
 		return (this.consultarDisponibilidad() >= cantidad);
 	}
@@ -62,9 +60,8 @@ public class UnidadOcupable extends Unidad implements Reparable {
 			this.porcentajeDanios = 0;
 		}
 	}
-	
-	
-	//TODO VER si debemos saber antes si cada unidad se
+
+	// TODO VER si debemos saber antes si cada unidad se
 	// sabe destruir a si misma o el "danio" lo recibe de manera externa
 	// y como destruye un terremoto en un principio
 	public void aplicarDanio(int cantidad) {
@@ -75,28 +72,19 @@ public class UnidadOcupable extends Unidad implements Reparable {
 		}
 	}
 
-
-
-	
-
-	//TODO
 	public void agregarHabitantes(int cantidad) {
-		if (this.hayDisponibilidad(cantidad)){
-			this.ocupacion += cantidad;	
+		if (this.hayDisponibilidad(cantidad)) {
+			this.ocupacion += cantidad;
 		}
 	}
 
-	//
 	public void quitarHabitantes(int cantidad) {
 		this.ocupacion -= cantidad;
 		if (this.ocupacion < 0) {
 			this.ocupacion = 0;
 		}
 	}
-		
-	
-	//TODO
-	//No deberia ser public??
+
 	protected int porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}

@@ -8,14 +8,16 @@ public class MapaTerritorio {
 
 	int alto;
 	int ancho;
-	HashMap<Point, Superficie> posiciones;
+	final boolean tierra = true;
+	final boolean agua = false;
+	HashMap<Point, Superficie> mapa;
 	Random aleatorio;
 
 	public MapaTerritorio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
 		this.aleatorio = new Random();
-		this.posiciones = new HashMap<Point, Superficie>();
+		this.mapa = new HashMap<Point, Superficie>();
 		this.inicializar();
 	}
 
@@ -24,17 +26,17 @@ public class MapaTerritorio {
 			for (int y = 0; y < ancho; y++) {
 				Point coord = new Point(x, y);
 				Superficie posicion = new Superficie(aleatorio.nextBoolean());
-				this.posiciones.put(coord, posicion);
+				this.mapa.put(coord, posicion);
 			}
 		}
 
 	}
 
 	public boolean consultarCoordenada(int x, int y) {
-		return this.posiciones.get(new Point(x, y)).tipo();
+		return this.mapa.get(new Point(x, y)).tipo();
 	}
-	
-	public Superficie getContenido(int x, int y){
-		return (this.posiciones.get(new Point(x, y)));
+
+	public Superficie getContenido(int x, int y) {
+		return (this.mapa.get(new Point(x, y)));
 	}
 }

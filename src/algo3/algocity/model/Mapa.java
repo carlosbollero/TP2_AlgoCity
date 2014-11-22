@@ -1,6 +1,5 @@
 package algo3.algocity.model;
 
-
 //import org.jgrapht.graph.DefaultEdge;
 //import org.jgrapht.graph.ListenableUndirectedGraph;
 
@@ -15,6 +14,7 @@ public abstract class Mapa {
 	}
 
 	public abstract boolean agregar(Ubicable elemento, int i, int j);
+
 	public abstract void remover(int x, int y);
 
 	protected boolean estaDentroDeLimites(int i, int j) {
@@ -22,7 +22,6 @@ public abstract class Mapa {
 	}
 
 	public abstract boolean tieneCoordenadaOcupada(int i, int j);
-
 
 	protected abstract boolean estaVacio();
 
