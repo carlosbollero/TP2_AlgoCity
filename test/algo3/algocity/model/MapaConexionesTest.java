@@ -42,7 +42,7 @@ public class MapaConexionesTest {
 	}
 
 	@Test
-	public void testSePuedeConsultarSiDosConectoresEstanConectados() {
+	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
 		Conector c1 = new Conector(0);
 		Conector c2 = new Conector(0);
@@ -50,7 +50,7 @@ public class MapaConexionesTest {
 		mc.agregar(c1, 1, 1);
 		mc.agregar(c2, 2, 2);
 
-		assertTrue(mc.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c2)));
+		assertFalse(mc.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c2)));
 
 		Conector c3 = new Conector(0);
 		Conector c4 = new Conector(0);
