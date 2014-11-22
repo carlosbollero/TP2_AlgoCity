@@ -2,6 +2,7 @@ package algo3.algocity.model;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 
 public class MapaEdilicio extends Mapa {
@@ -45,6 +46,15 @@ public class MapaEdilicio extends Mapa {
 	@Override
 	protected boolean estaVacio() {
 		return (this.posiciones.isEmpty());
+	}
+	
+	public Point getCoordenadas(Ubicable elemento){
+		for (Entry<Point, Ubicable> entry : posiciones.entrySet()){
+			if (entry.getValue().equals(elemento)){
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 
 }
