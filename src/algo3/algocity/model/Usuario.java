@@ -6,7 +6,8 @@ import java.util.Iterator;
 public class Usuario {
 	
 	private String nombre;
-	ArrayList<Personaje> personajes;
+	//ArrayList<Personaje> personajes;
+	private String rutaJuegoAsociado;
 
 
 	public Usuario(String unNombre){
