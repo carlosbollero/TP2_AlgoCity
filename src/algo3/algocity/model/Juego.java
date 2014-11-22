@@ -1,7 +1,5 @@
 package algo3.algocity.model;
 
-import java.util.ArrayList;
-
 public class Juego {
 	
 	final int anchoMapaJuego = 100;
@@ -13,12 +11,10 @@ public class Juego {
 	private MapaConexiones mapaRutas;
 	private MapaConexiones mapaLineasDeTension;	
 	
+	Usuario usuario;
+
 	private Edificador edificador;
-	//Usuario usuario;
-	//private int poblacion;
-	
-	
-	
+		
 	public Juego(){
 		this.generarMapas();
 		this.edificador = this.generarEdificador();
@@ -60,7 +56,6 @@ public class Juego {
 	}
 	
 
-<<<<<<< HEAD
 	private Edificador generarEdificador(){
 		return new Edificador();
 	}
@@ -118,37 +113,4 @@ public class Juego {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
-	Usuario usuario;
-
-	MapaEdilicio mapaEdilicio;
-	MapaConexiones mapaTuberias;
-	MapaConexiones mapaRutas;
-	MapaConexiones mapaLineasDeTension;
-
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 }
-	
-	
-	
-
-	
-
-	
-
-	
-	
-	
-	
-	
-	
-

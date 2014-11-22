@@ -9,11 +9,7 @@ public class MapaEdilicioTest {
 	int ancho = 10;
 
 	@Test
-<<<<<<< HEAD
-	public void testSePuedeAgregarUnaUnidadAlMapa(){
-=======
 	public void testSePuedeAgregarUnaUnidadAlMapa() {
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 
@@ -24,11 +20,7 @@ public class MapaEdilicioTest {
 	}
 
 	@Test
-<<<<<<< HEAD
-	public void testSePuedeRemoverDeUnaCoordenada(){
-=======
 	public void testSePuedeRemoverDeUnaCoordenada() {
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 
@@ -43,11 +35,7 @@ public class MapaEdilicioTest {
 	}
 
 	@Test
-<<<<<<< HEAD
-	public void testSePuedeAgregarVariasUnidadesAlMapa(){
-=======
 	public void testSePuedeAgregarVariasUnidadesAlMapa() {
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
 

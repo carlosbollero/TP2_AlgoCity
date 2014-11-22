@@ -1,11 +1,9 @@
 package algo3.algocity.model;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
+import java.util.Map.Entry;
 
 public class MapaTerritorio {
 
@@ -38,31 +36,31 @@ public class MapaTerritorio {
 	public boolean consultarCoordenada(int x, int y) {
 		return this.mapa.get(new Point(x, y)).tipo();
 	}
-<<<<<<< HEAD
 	
 	
-	public Superficie getContenido(int x, int y){
-		return (this.posiciones.get(new Point(x, y)));
-=======
-
 	public Superficie getContenido(int x, int y) {
 		return (this.mapa.get(new Point(x, y)));
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 	}
-	
-	
 	
 	
 	//TODO
 	//FEOFEO
-	public int[] getPosicionDeUnaSuperficieDeAgua(){
+	public Point getPosicionDeUnaSuperficieDeAgua(){
+		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+			if (entry.getValue().esAgua()) {
+				return entry.getKey();
+			}
+		}
+		return null;
+		
+		/*
 		boolean encontrado = false;
 		int xADevolver = 0;
 		int yADevolver = 0;
 		for (int x = 0; (x < alto) && !encontrado; x++) {
 			for (int y = 0; (y < ancho) && !encontrado; y++) {
 				Point coord = new Point(x, y);
-				Superficie unaSuperficie = this.posiciones.get(coord);
+				Superficie unaSuperficie = this.mapa.get(coord);
 				encontrado = unaSuperficie.esAgua();
 				yADevolver = y;
 			}
@@ -70,19 +68,30 @@ public class MapaTerritorio {
 		}
 		int[] coordenadasADevolver = new int[]{xADevolver,yADevolver};
 		return coordenadasADevolver;
+		*/
 	}
 	
 	
 	//TODO
 	//FEOFEO
-	public int[] getPosicionDeUnaSuperficieDeTierra(){
+	public Point getPosicionDeUnaSuperficieDeTierra(){
+		
+		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+			if (entry.getValue().esTierra()) {
+				return entry.getKey();
+			}
+		}
+		return null;
+		
+		
+		/*
 		boolean encontrado = false;
 		int xADevolver = 0;
 		int yADevolver = 0;
 		for (int x = 0; (x < alto) && !encontrado; x++) {
 			for (int y = 0; (y < ancho) && !encontrado; y++) {
 				Point coord = new Point(x, y);
-				Superficie unaSuperficie = this.posiciones.get(coord);
+				Superficie unaSuperficie = this.mapa.get(coord);
 				encontrado = unaSuperficie.esTierra();
 				yADevolver = y;
 			}
@@ -90,10 +99,6 @@ public class MapaTerritorio {
 		}
 		int[] coordenadasADevolver = new int[]{xADevolver,yADevolver};
 		return coordenadasADevolver;
+		*/
 	}
-	
-	
-	
-	
-
 }

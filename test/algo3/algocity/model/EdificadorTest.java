@@ -71,12 +71,5 @@ public class EdificadorTest {
 
 		assertFalse(unaResidencia.equals(otraResidencia));
 	}
-<<<<<<< HEAD
-	
-	
-	
-	
-=======
 
->>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 }

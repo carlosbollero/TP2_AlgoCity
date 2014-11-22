@@ -5,9 +5,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class JuegoTest {
-	
-			
+import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class JuegoTest {			
 	
 	@Test
 	public void testSePuedeCrearUnJuegoValido(){
@@ -27,13 +29,14 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar el pozo de agua
-		int[] coordenadaDeUnAgua = mapaTerritorio.getPosicionDeUnaSuperficieDeAgua();	
 		
-		unJuego.agregarPozoDeAguaEn(coordenadaDeUnAgua[0], coordenadaDeUnAgua[1]);
+		Point puntoDeUnAgua = mapaTerritorio.getPosicionDeUnaSuperficieDeAgua();	
+		
+		unJuego.agregarPozoDeAguaEn((int)puntoDeUnAgua.getX(), (int)puntoDeUnAgua.getY());
 		
 		MapaEdilicio mapaEdilicio = unJuego.getMapaEdilicio();		
 		assertFalse(mapaEdilicio.estaVacio());
-		assertTrue(mapaEdilicio.tieneCoordenadaOcupada(coordenadaDeUnAgua[0], coordenadaDeUnAgua[1]));
+		assertTrue(mapaEdilicio.tieneCoordenadaOcupada((int)puntoDeUnAgua.getX(), (int)puntoDeUnAgua.getY()));
 	}
 	
 	
@@ -43,13 +46,13 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la estacion de bomberos
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarEstacionDeBomberosEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarEstacionDeBomberosEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaEdilicio mapaEdilicio = unJuego.getMapaEdilicio();		
 		assertFalse(mapaEdilicio.estaVacio());
-		assertTrue(mapaEdilicio.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
+		assertTrue(mapaEdilicio.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
 	
@@ -59,13 +62,13 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la unidad residencial
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarUnidadResidencialEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarUnidadResidencialEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaEdilicio mapaEdilicio = unJuego.getMapaEdilicio();		
 		assertFalse(mapaEdilicio.estaVacio());
-		assertTrue(mapaEdilicio.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
+		assertTrue(mapaEdilicio.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
 	
@@ -75,13 +78,13 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la unidad industrial
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarUnidadIndustrialEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarUnidadIndustrialEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaEdilicio mapaEdilicio = unJuego.getMapaEdilicio();		
 		assertFalse(mapaEdilicio.estaVacio());
-		assertTrue(mapaEdilicio.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
+		assertTrue(mapaEdilicio.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
 	
@@ -91,30 +94,29 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la unidad comercial
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarUnidadComercialEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarUnidadComercialEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaEdilicio mapaEdilicio = unJuego.getMapaEdilicio();		
 		assertFalse(mapaEdilicio.estaVacio());
-		assertTrue(mapaEdilicio.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
+		assertTrue(mapaEdilicio.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
-	
-	/*Pendiente hasta que se termine de implementar MapaConexiones
+/*	
 	@Test
 	public void testAgregarLineaDeTensionEnMapaCorrespondiente(){
 		
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la linea de tension
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarLineaDeTensionEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarLineaDeTensionEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaConexiones mapaLineasDeTension = unJuego.getMapaLineasDeTension();
 		assertFalse(mapaLineasDeTension.estaVacio());
-		assertTrue(mapaLineasDeTension.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
+		assertTrue(mapaLineasDeTension.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
 	
@@ -124,14 +126,13 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la ruta
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarRutaEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
+		unJuego.agregarRutaEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
 		
 		MapaConexiones mapaRutas = unJuego.getMapaRutas();
 		assertFalse(mapaRutas.estaVacio());
-		assertTrue(mapaRutas.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));
-		
+		assertTrue(mapaRutas.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));
 	}
 	
 	
@@ -141,13 +142,13 @@ public class JuegoTest {
 		Juego unJuego = new Juego();
 		MapaTerritorio mapaTerritorio = unJuego.getMapaTerritorio();
 		//Busca una coordenada con terreno valido para agregar la tuberia
-		int[] coordenadaDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeAgua();	
+		Point puntoDeUnaTierra = mapaTerritorio.getPosicionDeUnaSuperficieDeTierra();	
 		
-		unJuego.agregarTuberiaEn(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]);
-		
+		unJuego.agregarTuberiaEn((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY());
+			
 		MapaConexiones mapaTuberias = unJuego.getMapaTuberias();
 		assertFalse(mapaTuberias.estaVacio());
-		assertTrue(mapaTuberias.tieneCoordenadaOcupada(coordenadaDeUnaTierra[0], coordenadaDeUnaTierra[1]));	
+		assertTrue(mapaTuberias.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));	
 	}
 	*/
 	
