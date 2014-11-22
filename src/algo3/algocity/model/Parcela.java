@@ -19,7 +19,6 @@ public class Parcela {
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.contenido = contenido;
-		this.contenido.setContenedor(this);
 	}
 
 	public int getCoordX() {
@@ -38,8 +37,8 @@ public class Parcela {
 		return (x == this.coordX && y == coordY);
 	}
 
-	public boolean tieneContenido() {
-		return (this.contenido != null);
+	public boolean estaVacia() {
+		return (this.contenido == null);
 	}
 
 }

@@ -1,32 +1,32 @@
 package algo3.algocity.model;
 
 public class UnidadComercial extends Unidad implements Reparable {
-	
+
 	int consumo;
 	final int ESTADOINICIAL = 100;
 	int porcentajeDanios;
-	
-	public UnidadComercial(int costo, int consumo){
+
+	public UnidadComercial(int costo, int consumo) {
 		this.costo = costo;
 		this.consumo = consumo;
 	}
-	
-	public int getConsumo(){
+
+	public int getConsumo() {
 		return this.consumo;
 	}
 
 	@Override
 	public void repararse() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void aplicarDanio(int cantidad){
-		if (this.porcentajeDanios > 100){
+	public void aplicarDanio(int cantidad) {
+		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		}else{
-		this.porcentajeDanios += cantidad;
+		} else {
+			this.porcentajeDanios += cantidad;
 		}
 	}
 

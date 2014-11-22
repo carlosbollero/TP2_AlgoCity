@@ -60,6 +60,7 @@ public class Juego {
 	}
 	
 
+<<<<<<< HEAD
 	private Edificador generarEdificador(){
 		return new Edificador();
 	}
@@ -126,6 +127,15 @@ public class Juego {
 	
 	
 	
+=======
+	Usuario usuario;
+
+	MapaEdilicio mapaEdilicio;
+	MapaConexiones mapaTuberias;
+	MapaConexiones mapaRutas;
+	MapaConexiones mapaLineasDeTension;
+
+>>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 }
 	
 	

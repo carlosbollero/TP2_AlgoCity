@@ -4,23 +4,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Usuario {
-	
+
 	private String nombre;
 	//ArrayList<Personaje> personajes;
 	private String rutaJuegoAsociado;
 
-
-	public Usuario(String unNombre){
+	public Usuario(String unNombre) {
 		this.nombre = unNombre;
 	}
-	
-	
+
 	public void setNombre(String nuevoNombre) {
+<<<<<<< HEAD
 		nombre = nuevoNombre;		
+=======
+
+		nombre = nuevoNombre;
+>>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 	}
 
 	
 	public String getNombre() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> c7ba9ea2755935aefb2f15ed70c6ab7201030da7
 		return nombre;
 	}
 	

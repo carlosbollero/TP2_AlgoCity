@@ -2,15 +2,15 @@ package algo3.algocity.model;
 
 import java.awt.Point;
 import java.util.HashMap;
-
+import java.util.Map.Entry;
 
 public class MapaEdilicio extends Mapa {
 
-	HashMap<Point, Ubicable> posiciones;
+	HashMap<Point, Ubicable> mapa;
 
 	public MapaEdilicio(int alto, int ancho) {
 		super(alto, ancho);
-		this.posiciones = new HashMap<Point, Ubicable>();
+		this.mapa = new HashMap<Point, Ubicable>();
 	}
 
 	public boolean agregar(Ubicable elemento, int x, int y) {
@@ -18,15 +18,15 @@ public class MapaEdilicio extends Mapa {
 			return false;
 		}
 		Point clave = new Point(x, y);
-		if (!this.posiciones.containsKey(clave)) {
-			this.posiciones.put(clave, elemento);
+		if (!this.mapa.containsKey(clave)) {
+			this.mapa.put(clave, elemento);
 			return true;
 		}
 		return false;
 	}
 
 	public void remover(int x, int y) {
-		this.posiciones.remove(new Point(x, y));
+		this.mapa.remove(new Point(x, y));
 	}
 
 	private boolean validarCoordenadas(int x, int y) {
@@ -34,17 +34,26 @@ public class MapaEdilicio extends Mapa {
 	}
 
 	public boolean contiene(Ubicable unaUnidad) {
-		return (this.posiciones.containsValue(unaUnidad));
+		return (this.mapa.containsValue(unaUnidad));
 	}
 
 	@Override
 	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.posiciones.containsKey(new Point(x, y)));
+		return (this.mapa.containsKey(new Point(x, y)));
 	}
 
 	@Override
 	protected boolean estaVacio() {
-		return (this.posiciones.isEmpty());
+		return (this.mapa.isEmpty());
+	}
+
+	public Point getCoordenadas(Ubicable elemento) {
+		for (Entry<Point, Ubicable> entry : mapa.entrySet()) {
+			if (entry.getValue().equals(elemento)) {
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 
 }
