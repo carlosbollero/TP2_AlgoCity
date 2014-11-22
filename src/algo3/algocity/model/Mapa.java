@@ -1,8 +1,5 @@
 package algo3.algocity.model;
 
-//import org.jgrapht.graph.DefaultEdge;
-//import org.jgrapht.graph.ListenableUndirectedGraph;
-
 public abstract class Mapa {
 
 	int alto;

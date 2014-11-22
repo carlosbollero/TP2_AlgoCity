@@ -1,14 +1,9 @@
 package algo3.algocity.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class Usuario {
 
 	private String nombre;
-	//ArrayList<Personaje> personajes;
 	private String rutaJuegoAsociado;
-
 	
 	public Usuario(String unNombre) {
 		this.nombre = unNombre;
