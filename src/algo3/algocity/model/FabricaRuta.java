@@ -5,7 +5,7 @@ public class FabricaRuta implements FabricaEdificables{
 	
 	public Ruta construir (){
 		
-		return new Ruta(10); 
+		return new Ruta(); 
 	}
 	
 }

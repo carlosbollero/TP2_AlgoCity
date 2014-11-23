@@ -5,7 +5,7 @@ public class FabricaLineaTension implements FabricaEdificables{
 	
 	public LineaTension construir (){
 		
-		return new LineaTension(5) ; 
+		return new LineaTension() ; 
 	}
 	
 }

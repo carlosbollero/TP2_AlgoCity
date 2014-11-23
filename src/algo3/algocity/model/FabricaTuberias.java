@@ -5,7 +5,7 @@ public class FabricaTuberias implements FabricaEdificables{
 	
 	public Tuberia construir (){
 		
-		return new Tuberia(5); 
+		return new Tuberia(); 
 	}
 	
 }

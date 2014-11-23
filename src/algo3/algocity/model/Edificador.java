@@ -73,11 +73,11 @@ public class Edificador {
 	}
 
 	public PozoDeAgua construirPozoDeAgua() {
-		return new PozoDeAgua(this.costoPozoDeAgua);
+		return new PozoDeAgua();
 	}
 
 	public EstacionDeBomberos construirEstacionDeBomberos() {
-		return new EstacionDeBomberos(this.costoEstacionDebomberos);
+		return new EstacionDeBomberos();
 	}
 
 	public UnidadEnergetica construirCentralEolica() {

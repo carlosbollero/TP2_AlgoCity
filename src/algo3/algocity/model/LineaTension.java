@@ -1,14 +1,9 @@
 package algo3.algocity.model;
 
 public class LineaTension extends Conector {
-
-	public LineaTension(){
-		
-		
-	}
 	
-	public LineaTension (int costo){
+	public LineaTension (){
 		
-		this.costo=costo; 
+		this.costo = 5; 
 	}
 }

@@ -5,7 +5,7 @@ public class FabricaPozoAgua implements FabricaEdificables{
 	
 	public PozoDeAgua construir (){
 		
-		return new PozoDeAgua(250); 
+		return new PozoDeAgua(); 
 	}
 	
 }

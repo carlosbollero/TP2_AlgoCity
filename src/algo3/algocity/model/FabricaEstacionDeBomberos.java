@@ -5,7 +5,7 @@ public class FabricaEstacionDeBomberos implements FabricaEdificables{
 	
 	public EstacionDeBomberos construir (){
 		
-		return new EstacionDeBomberos(1500); 
+		return new EstacionDeBomberos(); 
 	}
 	
 }
