@@ -6,9 +6,9 @@ public class UnidadEnergetica extends Unidad implements Reparable {
 	int capacidad;
 	int radioDeInfluencia;
 	int porcentajeDanios;
-	
-	public UnidadEnergetica(){
-		
+
+	public UnidadEnergetica() {
+
 	}
 
 	// TODO

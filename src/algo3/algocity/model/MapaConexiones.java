@@ -66,9 +66,9 @@ public class MapaConexiones {
 		if ((x1 == x2) && (Math.abs(y1 - y2) == 1)) {
 			resultado = true;
 		}
-//		if ((Math.abs(x1 - x2) == 1) && (Math.abs(y1 - y2) == 1)) {
-//			return true;
-//		}
+		// if ((Math.abs(x1 - x2) == 1) && (Math.abs(y1 - y2) == 1)) {
+		// return true;
+		// }
 		return resultado;
 	}
 

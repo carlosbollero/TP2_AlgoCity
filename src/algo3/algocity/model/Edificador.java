@@ -27,9 +27,9 @@ public class Edificador {
 	int radioInfluenciaCentralEolica;
 	int radioInfluenciaCentralMinera;
 	int radioInfluenciaCentralNuclear;
-	
-	//Los requisitos de conexiones y de terreno de cada unidad deberian estar aca tambien
-	
+
+	// Los requisitos de conexiones y de terreno de cada unidad deberian estar
+	// aca tambien
 
 	public Edificador() {
 		this.costoUnidadResidencial = 5;

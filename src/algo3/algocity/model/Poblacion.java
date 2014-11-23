@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Poblacion implements Observer {
-	
+
 	int cantidad;
 
 	public int getCantidad() {
@@ -12,14 +12,24 @@ public class Poblacion implements Observer {
 	}
 
 	public void aumentar() {
-		cantidad++;		
+		cantidad++;
+	}
+
+	public void aumentar(int cantidad) {
+		this.cantidad += cantidad;
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		aumentar();		
+		aumentar();
 	}
-	
-	
+
+	public void disminuir() {
+		cantidad--;
+	}
+
+	public void disminuir(int cantidad) {
+		this.cantidad -= cantidad;
+	}
 
 }
