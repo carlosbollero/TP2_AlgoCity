@@ -352,6 +352,14 @@ public class UnidadTest {
 	}
 	
 		
-	
-	
+	//Probando los tests con el abstract factory aplicado
+	@Test
+	public void testUnidadResidencialTieneCostoValido2() {
+		
+		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
+		UnidadOcupable unidadResidencial = fabrica.construir();
+		
+		assertEquals(unidadResidencial.getCosto(),5);
+		
+	}
 }

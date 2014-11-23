@@ -8,39 +8,53 @@ import java.util.Iterator;
  **/
 
 public class ControladorUsuarios {
-
+		
 	private ArrayList<Usuario> usuarios;
 
 	public ControladorUsuarios() {
 
-		usuarios = new ArrayList<Usuario>();
+		this.usuarios = new ArrayList<Usuario>();
 	}
 
-	public void addUsuario(Usuario unUsuario) {
+	public boolean addUsuario(String nombreUsuario) {
 
-		if (usuarios.isEmpty()) {
-
-			usuarios.add(unUsuario);
-
-		} else if (!existeNombreUsuario(unUsuario.getNombre())) {
-
-			usuarios.add(unUsuario);
-
+		Usuario unUsuario = new Usuario(nombreUsuario);
+		if (!existeNombreUsuario(unUsuario.getNombre())) {
+			this.usuarios.add(unUsuario);
+			return true;
 		}
-		/**
-		 * else{
-		 * 
-		 * throw new ExcepcionAgregarUsuarioYaExistente("El usuario ya existe");
-		 * 
-		 * }
-		 **/
-		// Ver de tratar esto con una excepcion
+		
+		return false;
 	}
 
-	public boolean existeNombreUsuario(String nombreUsuarioAChequear) {
+	
+	public Usuario buscarUsuario(String nombreUsuario) {
+		
 		boolean encontrado = false;
-		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
-		while (iteradorUsuarios.hasNext() && (!encontrado)) {
+		Iterator<Usuario> it = this.usuarios.iterator();
+		while(it.hasNext() && !encontrado){
+			Usuario unUsuario = it.next();
+			if(unUsuario.getNombre() == nombreUsuario) {
+				encontrado = true;
+				return unUsuario;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Usuario getUsuario(String nombreUsuario) {
+		
+		Usuario usuarioSolicitado = buscarUsuario(nombreUsuario);
+		return usuarioSolicitado;
+	}
+	
+	
+	public boolean existeNombreUsuario(String nombreUsuarioAChequear) {
+		
+		boolean encontrado = false;
+		Iterator<Usuario> iteradorUsuarios = this.usuarios.iterator();
+		while (iteradorUsuarios.hasNext() && !encontrado) {
 			Usuario unUsuario = iteradorUsuarios.next();
 
 			if (unUsuario.getNombre() == nombreUsuarioAChequear) {
@@ -51,10 +65,11 @@ public class ControladorUsuarios {
 		return encontrado;
 	}
 
+	
 	public boolean existeUsuario(Usuario usuarioAChequear) {
 
 		boolean encontrado = false;
-		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
+		Iterator<Usuario> iteradorUsuarios = this.usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
 
@@ -66,4 +81,6 @@ public class ControladorUsuarios {
 		return encontrado;
 	}
 
+	
+	
 }
