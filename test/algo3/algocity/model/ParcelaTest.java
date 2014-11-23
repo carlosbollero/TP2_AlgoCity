@@ -26,7 +26,7 @@ Conector con = new Conector (10);
 
 Parcela par = new Parcela (con , 1, 1); 
 
-assertTrue (par.tieneContenido ());  
+assertTrue (par.estaVacia ());  
 
 
 }
