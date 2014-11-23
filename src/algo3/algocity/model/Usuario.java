@@ -6,11 +6,12 @@ import java.util.Iterator;
 public class Usuario {
 	
 	private String nombre;
-	ArrayList<Personaje> personajes;
+	private String rutaJuegoAsociado;
 
-
+	
 	public Usuario(String unNombre){
 		this.nombre = unNombre;
+		this.rutaJuegoAsociado = "JuegoDe"+this.nombre;
 	}
 	
 	
@@ -24,9 +25,11 @@ public class Usuario {
 	}
 	
 	
-	public void crearPersonaje(String nombrePersonaje){
-		personajes.add(new Personaje(nombrePersonaje));
+	public String getRutaJuegoAsociado(){
+		return rutaJuegoAsociado;
 	}
+	
+	
 	
 	
 	public void jugar(String nombrePersonaje){
