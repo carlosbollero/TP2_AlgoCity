@@ -1,6 +1,12 @@
 package algo3.algocity.model;
 
 public class Turno implements Runnable{
+
+/* La idea es que turno se ejecute en un thread distinto
+ * para poder hacer que avance cada cierto tiempo de
+ * manera automatica
+ */
+	
 	
 	int turnoNumero;
 	
@@ -24,7 +30,6 @@ public class Turno implements Runnable{
 	}
 	
 	public void run(){
-		Thread.sleep(2000);
 		avanzarTurno();
 	}
 	
