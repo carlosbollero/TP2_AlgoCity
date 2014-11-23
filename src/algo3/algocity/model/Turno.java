@@ -1,6 +1,8 @@
 package algo3.algocity.model;
 
-public class Turno implements Runnable{
+import java.util.Observable;
+
+public class Turno extends Observable implements Runnable {
 
 /* La idea es que turno se ejecute en un thread distinto
  * para poder hacer que avance cada cierto tiempo de
