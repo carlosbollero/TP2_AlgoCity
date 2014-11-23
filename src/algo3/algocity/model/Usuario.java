@@ -1,12 +1,22 @@
 package algo3.algocity.model;
 
 public class Usuario {
+<<<<<<< HEAD
 
 	private String nombre;
 	private String rutaJuegoAsociado;
 	
 	public Usuario(String unNombre) {
+=======
+	
+	private String nombre;
+	private String rutaJuegoAsociado;
+
+	
+	public Usuario(String unNombre){
+>>>>>>> dev-tomas
 		this.nombre = unNombre;
+		this.rutaJuegoAsociado = "JuegoDe"+this.nombre;
 	}
 
 	public void setNombre(String nuevoNombre) {
@@ -18,10 +28,18 @@ public class Usuario {
 		return nombre;
 	}
 	
+<<<<<<< HEAD
 	/*
 	public void crearPersonaje(String nombrePersonaje){
 		personajes.add(new Personaje(nombrePersonaje));
+=======
+	
+	public String getRutaJuegoAsociado(){
+		return rutaJuegoAsociado;
+>>>>>>> dev-tomas
 	}
+	
+	
 	
 	
 	public void jugar(String nombrePersonaje){
