@@ -4,11 +4,12 @@ public class EstacionDeBomberos extends Unidad {
 
 	private Conector conexion;
 
-	public EstacionDeBomberos(int costo) {
-		this.costo = costo;
+	public EstacionDeBomberos() {
+		this.costo = 1500;
 		this.conexion = null;
 	}
-
+	
+	//TODO Revisar si sirve el metodo
 	public void conectarTuberia(Conector unaTuberia) {
 		this.conexion = unaTuberia;
 	}
