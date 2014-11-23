@@ -31,7 +31,7 @@ public class TurnoTest {
 		
 		assertEquals(t.getTurno(), 1);
 		
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		assertEquals(t.getTurno(), 2);
 		
