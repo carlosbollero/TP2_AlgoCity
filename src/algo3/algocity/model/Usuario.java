@@ -4,49 +4,46 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Usuario {
-<<<<<<< HEAD
 
-	private String nombre;
-	//ArrayList<Personaje> personajes;
-	private String rutaJuegoAsociado;
-
-	
-	public Usuario(String unNombre) {
-=======
-	
 	private String nombre;
 	private String rutaJuegoAsociado;
 
 	
 	public Usuario(String unNombre){
->>>>>>> dev-tomas
 		this.nombre = unNombre;
 		this.rutaJuegoAsociado = "JuegoDe"+this.nombre;
 	}
 
+	
 	public void setNombre(String nuevoNombre) {
 		nombre = nuevoNombre;		
-		}
+	}
 
 	
 	public String getNombre() {
 		return nombre;
 	}
 	
-<<<<<<< HEAD
-	/*
-	public void crearPersonaje(String nombrePersonaje){
-		personajes.add(new Personaje(nombrePersonaje));
-=======
 	
 	public String getRutaJuegoAsociado(){
-		return rutaJuegoAsociado;
->>>>>>> dev-tomas
+		return this.rutaJuegoAsociado;
+	}
+
+	
+	//TODO
+	//Metodo encargado de persistir a disco la partida del usuario
+	public void persistir(){
+
 	}
 	
 	
 	
 	
+	
+
+	
+	
+	/*
 	public void jugar(String nombrePersonaje){
 		Iterator<Personaje> it = personajes.iterator();
 		boolean encontrado = false;
