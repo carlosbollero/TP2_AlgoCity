@@ -6,6 +6,10 @@ public class UnidadEnergetica extends Unidad implements Reparable {
 	int capacidad;
 	int radioDeInfluencia;
 	int porcentajeDanios;
+	
+	public UnidadEnergetica(){
+		
+	}
 
 	// TODO
 	/* Este constructor no vuela??--No es el que usa edificador */

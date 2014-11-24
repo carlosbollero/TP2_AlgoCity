@@ -7,44 +7,44 @@ import org.junit.Test;
 public class MapaEdilicioTest {
 	int alto = 10;
 	int ancho = 10;
-
+	
 	@Test
-	public void testSePuedeAgregarUnaUnidadAlMapa() {
+	public void testSePuedeAgregarUnaUnidadAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
-
-		Ubicable ur = e.construirUnidadResidencial();
+		
+		Ubicable ur = e.construirUnidadResidencial();		
 		m.agregar(ur, 1, 1);
-
+		
 		assertTrue(m.contiene(ur));
 	}
-
+	
 	@Test
-	public void testSePuedeRemoverDeUnaCoordenada() {
+	public void testSePuedeRemoverDeUnaCoordenada(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
-
-		Ubicable ur = e.construirUnidadResidencial();
+		
+		Ubicable ur = e.construirUnidadResidencial();		
 		m.agregar(ur, 1, 1);
-
+		
 		assertTrue(m.contiene(ur));
-
+		
 		m.remover(1, 1);
-
+		
 		assertFalse(m.contiene(ur));
 	}
-
+	
 	@Test
-	public void testSePuedeAgregarVariasUnidadesAlMapa() {
+	public void testSePuedeAgregarVariasUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		Edificador e = new Edificador();
-
+		
 		Ubicable ur = e.construirUnidadResidencial();
 		Ubicable uc = e.construirUnidadComercial();
-
+		
 		m.agregar(ur, 1, 1);
 		m.agregar(uc, 2, 2);
-
+		
 		assertTrue(m.contiene(ur));
 		assertTrue(m.contiene(uc));
 	}

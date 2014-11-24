@@ -49,10 +49,9 @@ public class Juego {
 	private void generarMapas(){
 		this.mapaTerritorio = new MapaTerritorio(this.altoMapaJuego,this.anchoMapaJuego);
 		this.mapaEdilicio = new MapaEdilicio(this.altoMapaJuego,this.anchoMapaJuego);
-		//Comentado hasta que se implemente bien el grafo
-		//this.mapaTuberias = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
-		//this.mapaRutas = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
-		//this.mapaLineasDeTension = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+		this.mapaTuberias = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+		this.mapaRutas = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+		this.mapaLineasDeTension = new MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
 	}
 	
 

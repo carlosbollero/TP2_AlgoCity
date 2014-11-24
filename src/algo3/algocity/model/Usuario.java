@@ -1,15 +1,24 @@
 package algo3.algocity.model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Usuario {
+=======
+public class Usuario {
+
+>>>>>>> 9432c356ba6835857d9b000e809fe2334fc692f3
 
 	private String nombre;
 	private String rutaJuegoAsociado;
-
 	
+<<<<<<< HEAD
 	public Usuario(String unNombre){
+=======
+	public Usuario(String unNombre) {
+
+>>>>>>> 9432c356ba6835857d9b000e809fe2334fc692f3
 		this.nombre = unNombre;
 		this.rutaJuegoAsociado = "JuegoDe"+this.nombre;
 	}
@@ -21,11 +30,12 @@ public class Usuario {
 
 	
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	
 	
 	public String getRutaJuegoAsociado(){
+<<<<<<< HEAD
 		return this.rutaJuegoAsociado;
 	}
 
@@ -60,4 +70,9 @@ public class Usuario {
 	}
 	*/
 
+=======
+		return rutaJuegoAsociado;
+	}
+	
+>>>>>>> 9432c356ba6835857d9b000e809fe2334fc692f3
 }

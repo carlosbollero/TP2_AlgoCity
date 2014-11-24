@@ -6,8 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.awt.Point;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class JuegoTest {			
 	
@@ -18,9 +16,9 @@ public class JuegoTest {
 		
 		assertTrue(unJuego.getMapaEdilicio() instanceof MapaEdilicio);
 		assertTrue(unJuego.getMapaTerritorio() instanceof MapaTerritorio);
-		//assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
-		//assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
-		//assertTrue(unJuego.getMapaLineasDeTension() instanceof MapaConexiones);
+		assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
+		assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
+		assertTrue(unJuego.getMapaLineasDeTension() instanceof MapaConexiones);
 	}
 	
 	@Test
@@ -150,7 +148,7 @@ public class JuegoTest {
 		assertFalse(mapaTuberias.estaVacio());
 		assertTrue(mapaTuberias.tieneCoordenadaOcupada((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY()));	
 	}
-	*/
+*/
 	
 	
 }
