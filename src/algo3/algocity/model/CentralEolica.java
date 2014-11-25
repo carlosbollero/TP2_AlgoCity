@@ -3,14 +3,9 @@ package algo3.algocity.model;
 public class CentralEolica extends UnidadEnergetica {
 
 	public CentralEolica() {
-
-	}
-
-	public CentralEolica(int costoCentral, int capacidadElectrica,
-			int radioInfluencia) {
-		this.costo = costoCentral;
-		this.capacidad = capacidadElectrica;
-		this.radioDeInfluencia = radioInfluencia;
+		this.costo = 1000;
+		this.capacidad = 100;
+		this.radioDeInfluencia = 4;
 	}
 
 }

@@ -4,7 +4,7 @@ public class FabricaUnidadResidencial implements FabricaEdificables {
 
 	public UnidadResidencial construir() {
 
-		return new UnidadResidencial(5, 1, 100); // parametros
+		return new UnidadResidencial();
 	}
 
 }

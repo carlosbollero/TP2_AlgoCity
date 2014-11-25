@@ -4,7 +4,7 @@ public class FabricaUnidadComercial implements FabricaEdificables {
 
 	public UnidadComercial construir() {
 
-		return new UnidadComercial(5, 2);
+		return new UnidadComercial();
 	}
 
 }
