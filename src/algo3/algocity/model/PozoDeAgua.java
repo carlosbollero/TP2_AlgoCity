@@ -6,4 +6,8 @@ public class PozoDeAgua extends Unidad {
 		this.costo = 250;
 	}
 
+	public PozoDeAgua(int costo) {
+		this.costo = costo;
+	}
+
 }

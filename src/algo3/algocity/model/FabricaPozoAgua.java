@@ -1,11 +1,12 @@
 package algo3.algocity.model;
 
-public class FabricaPozoAgua implements FabricaEdificables{
+public class FabricaPozoAgua implements FabricaEdificables {
 
-	
-	public PozoDeAgua construir (){
-		
-		return new PozoDeAgua(); 
+	private int costo = 250;
+
+	public PozoDeAgua construir() {
+
+		return new PozoDeAgua(this.costo);
 	}
-	
+
 }

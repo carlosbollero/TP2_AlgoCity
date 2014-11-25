@@ -8,11 +8,9 @@ public class UnidadOcupable extends Unidad implements Reparable {
 	int ocupacion;
 	int consumo;
 	int porcentajeDanios;
-	
-	
-	public UnidadOcupable(){
-		
-		
+
+	public UnidadOcupable() {
+
 	}
 
 	public UnidadOcupable(int costo, int consumo, int capacidad) {

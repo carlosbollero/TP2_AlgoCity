@@ -17,7 +17,7 @@ public class ControladorUsuarios {
 	}
 
 	public boolean addUsuario(String nombreUsuario) {
-
+	
 		Usuario unUsuario = new Usuario(nombreUsuario);
 		if (!existeNombreUsuario(unUsuario.getNombre())) {
 			this.usuarios.add(unUsuario);
