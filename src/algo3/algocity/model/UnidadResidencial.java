@@ -3,6 +3,7 @@ package algo3.algocity.model;
 public class UnidadResidencial extends UnidadOcupable {
 
 	public UnidadResidencial() {
+<<<<<<< HEAD
 
 	}
 
@@ -10,6 +11,11 @@ public class UnidadResidencial extends UnidadOcupable {
 		this.costo = costo;
 		this.consumo = consumo;
 		this.capacidad = capacidad;
+=======
+		this.costo = 5;
+		this.consumo = 1;
+		this.capacidad = 100;
+>>>>>>> dev-tomas
 	}
 
 }

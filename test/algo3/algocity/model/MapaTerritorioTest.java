@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class MapaTerritorioTest {
-	
+
 	int alto = 10;
 	int ancho = 10;
 	boolean agua = false;
@@ -13,12 +13,17 @@ public class MapaTerritorioTest {
 	@Test
 	public void testTerritorioSeCreaConEstadoValido() {
 		MapaTerritorio mt = new MapaTerritorio(alto, ancho);
-		
-		for (int i = 0; i < alto; i++){
-			for (int j = 0; j< ancho; j++){
+
+		for (int i = 0; i < alto; i++) {
+			for (int j = 0; j < ancho; j++) {
 				boolean posActual = mt.consultarCoordenada(i, j);
 				assertTrue(posActual == agua || posActual == tierra);
-				System.out.print(posActual);
+				if (posActual == tierra){
+					System.out.print(0);
+				}else{
+					System.out.print(4);
+				}
+				
 				System.out.print(" ");
 			}
 			System.out.println(" ");

@@ -6,9 +6,9 @@ public class UnidadComercial extends Unidad implements Reparable {
 	final int ESTADOINICIAL = 100;
 	int porcentajeDanios;
 
-	public UnidadComercial(int costo, int consumo) {
-		this.costo = costo;
-		this.consumo = consumo;
+	public UnidadComercial() {
+		this.costo = 5;
+		this.consumo = 2;
 	}
 
 	public int getConsumo() {

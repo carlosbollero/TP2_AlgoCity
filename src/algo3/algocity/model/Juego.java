@@ -13,8 +13,12 @@ public class Juego {
 
 	Usuario usuario;
 
+<<<<<<< HEAD
 	private Edificador edificador; //esto volaria
 	private FabricaEdificables fabrica;
+=======
+	private Edificador edificador;
+>>>>>>> dev-tomas
 
 	public Juego() {
 		this.generarMapas();
@@ -46,12 +50,22 @@ public class Juego {
 				this.anchoMapaJuego);
 		this.mapaEdilicio = new MapaEdilicio(this.altoMapaJuego,
 				this.anchoMapaJuego);
+<<<<<<< HEAD
 		this.mapaTuberias = new MapaConexiones(this.altoMapaJuego,
 				this.anchoMapaJuego);
 		this.mapaRutas = new MapaConexiones(this.altoMapaJuego,
 				this.anchoMapaJuego);
 		this.mapaLineasDeTension = new MapaConexiones(this.altoMapaJuego,
 				this.anchoMapaJuego);
+=======
+		// Comentado hasta que se implemente bien el grafo
+		// this.mapaTuberias = new
+		// MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+		// this.mapaRutas = new
+		// MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+		// this.mapaLineasDeTension = new
+		// MapaConexiones(this.altoMapaJuego,this.anchoMapaJuego);
+>>>>>>> dev-tomas
 	}
 
 	private Edificador generarEdificador() {
@@ -59,11 +73,18 @@ public class Juego {
 	}
 
 	// TODO
+<<<<<<< HEAD
 	/* 
 	 * TODOS LOS AGREGAR DE Unidad,EstacionDeBomberos,y PozoDeAgua SON IGUALES
 	 * ver de solucionar esto generalizando el comportamiento comun en otro lado
 	 */ 
 /*
+=======
+	/*
+	 * TODOS LOS AGREGAR DE Unidad,EstacionDeBomberos,y PozoDeAgua SON IGUALES
+	 * ver de solucionar esto generalizando el comportamiento comun en otro lado
+	 */
+>>>>>>> dev-tomas
 	public void agregarPozoDeAguaEn(int coordX, int coordY) {
 
 		Superficie superficieAEdificar = this.mapaTerritorio.getContenido(
@@ -71,9 +92,13 @@ public class Juego {
 		if (superficieAEdificar.esAgua()) { // Decidir bien quien va a guardar
 											// la informacion del requisito del
 											// terreno
+<<<<<<< HEAD
 			//PozoDeAgua pozo = this.edificador.construirPozoDeAgua();
 			this.fabrica = new FabricaPozoAgua();
 			PozoDeAgua pozo = (PozoDeAgua)this.fabrica.construir();
+=======
+			PozoDeAgua pozo = this.edificador.construirPozoDeAgua();
+>>>>>>> dev-tomas
 			this.mapaEdilicio.agregar(pozo, coordX, coordY);
 		}
 	}

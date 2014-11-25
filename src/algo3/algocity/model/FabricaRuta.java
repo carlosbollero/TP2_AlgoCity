@@ -1,11 +1,10 @@
 package algo3.algocity.model;
 
-public class FabricaRuta implements FabricaEdificables{
+public class FabricaRuta implements FabricaEdificables {
 
-	
-	public Ruta construir (){
-		
-		return new Ruta(); 
+	public Ruta construir() {
+
+		return new Ruta();
 	}
-	
+
 }

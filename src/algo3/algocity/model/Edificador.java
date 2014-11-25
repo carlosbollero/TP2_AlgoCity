@@ -4,6 +4,7 @@ public class Edificador {
 
 	// TODO HORRIBLEEE!!!!
 
+<<<<<<< HEAD
 	//int costoUnidadResidencial;
 	//int costoUnidadIndustrial;
 	//int costoUnidadComercial;
@@ -27,11 +28,37 @@ public class Edificador {
 	//int radioInfluenciaCentralEolica;
 	//int radioInfluenciaCentralMinera;
 	//int radioInfluenciaCentralNuclear;
+=======
+	int costoUnidadResidencial;
+	int costoUnidadIndustrial;
+	int costoUnidadComercial;
+	int costoCentralEolica;
+	int costoCentralMinera;
+	int costoCentralNuclear;
+	int costoEstacionDebomberos;
+	int costoPozoDeAgua;
+
+	int consumoUnidadResidencial;
+	int consumoUnidadIndustrial;
+	int consumoUnidadComercial;
+
+	int capacidadUnidadResidencial;
+	int capacidadUnidadIndustrial;
+
+	int capacidadElectricaCentralEolica;
+	int capacidadElectricaCentralMinera;
+	int capacidadElectricaCentralNuclear;
+
+	int radioInfluenciaCentralEolica;
+	int radioInfluenciaCentralMinera;
+	int radioInfluenciaCentralNuclear;
+>>>>>>> dev-tomas
 
 	// Los requisitos de conexiones y de terreno de cada unidad deberian estar
 	// aca tambien
 
 	public Edificador() {
+<<<<<<< HEAD
 		//this.costoUnidadResidencial = 5;
 		//this.costoUnidadIndustrial = 10;
 		//this.costoUnidadComercial = 5;
@@ -55,11 +82,35 @@ public class Edificador {
 		//this.radioInfluenciaCentralEolica = 4;
 		//this.radioInfluenciaCentralMinera = 10;
 		//this.radioInfluenciaCentralNuclear = 25;
+=======
+		this.costoUnidadResidencial = 5;
+		this.costoUnidadIndustrial = 10;
+		this.costoUnidadComercial = 5;
+		this.costoCentralEolica = 1000;
+		this.costoCentralMinera = 3000;
+		this.costoCentralNuclear = 10000;
+		this.costoEstacionDebomberos = 1500;
+		this.costoPozoDeAgua = 250;
+
+		this.consumoUnidadResidencial = 1;
+		this.consumoUnidadComercial = 2;
+		this.consumoUnidadIndustrial = 5;
+
+		this.capacidadUnidadResidencial = 100;
+		this.capacidadUnidadIndustrial = 25;
+
+		this.capacidadElectricaCentralEolica = 100;
+		this.capacidadElectricaCentralMinera = 400;
+		this.capacidadElectricaCentralNuclear = 1000;
+
+		this.radioInfluenciaCentralEolica = 4;
+		this.radioInfluenciaCentralMinera = 10;
+		this.radioInfluenciaCentralNuclear = 25;
+>>>>>>> dev-tomas
 	}
 /*
 	public UnidadComercial construirUnidadComercial() {
-		return new UnidadComercial(this.costoUnidadComercial,
-				this.consumoUnidadComercial);
+		return new UnidadComercial();
 	}
 
 	public UnidadOcupable construirUnidadIndustrial() {
