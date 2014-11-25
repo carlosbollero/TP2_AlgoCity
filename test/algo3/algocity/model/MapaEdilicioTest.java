@@ -133,9 +133,5 @@ public class MapaEdilicioTest {
 				1, 1));
 	}
 
-	// @Test
-	// public void testSePuedeGenerarUnaRedDeRuta(){
-	// Mapa m = new Mapa(alto, ancho);
-	// }
 
 }

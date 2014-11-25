@@ -18,7 +18,12 @@ public class MapaTerritorioTest {
 			for (int j = 0; j < ancho; j++) {
 				boolean posActual = mt.consultarCoordenada(i, j);
 				assertTrue(posActual == agua || posActual == tierra);
-				System.out.print(posActual);
+				if (posActual == tierra){
+					System.out.print(0);
+				}else{
+					System.out.print(4);
+				}
+				
 				System.out.print(" ");
 			}
 			System.out.println(" ");
