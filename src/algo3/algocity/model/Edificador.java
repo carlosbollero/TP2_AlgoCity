@@ -58,8 +58,7 @@ public class Edificador {
 	}
 
 	public UnidadComercial construirUnidadComercial() {
-		return new UnidadComercial(this.costoUnidadComercial,
-				this.consumoUnidadComercial);
+		return new UnidadComercial();
 	}
 
 	public UnidadOcupable construirUnidadIndustrial() {
