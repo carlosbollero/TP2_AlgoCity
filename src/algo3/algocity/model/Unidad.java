@@ -6,14 +6,15 @@ import java.util.Iterator;
 public abstract class Unidad implements Ubicable {
 
 	int costo;
-	ArrayList<Requisito> requisitos; // una instancia de Requisito
-										// para cada requisito
+	ArrayList<RequisitoConexion> requisitos; // una instancia de Requisito
+
+	// para cada requisito
 
 	public int getCosto() {
 		return this.costo;
 	}
 
-	public ArrayList<Requisito> getRequisitos() {
+	public ArrayList<RequisitoConexion> getRequisitos() {
 		return this.requisitos;
 	}
 
@@ -24,9 +25,9 @@ public abstract class Unidad implements Ubicable {
 	}
 
 	// Verifica si la unidad esta conectada al requisito
-	public boolean estaConectadaA(Requisito unRequisito) {
+	public boolean estaConectadaA(RequisitoConexion unRequisito) {
 
-		for (Requisito requisito : requisitos) {
+		for (RequisitoConexion requisito : requisitos) {
 			if (unRequisito.getNombre() == requisito.getNombre()) {
 				return requisito.estaConectado();
 			}
@@ -35,24 +36,34 @@ public abstract class Unidad implements Ubicable {
 	}
 
 	private boolean verificarConexiones() {
-		Iterator<Requisito> it = requisitos.iterator();
+		Iterator<RequisitoConexion> it = requisitos.iterator();
 		boolean conectada = true;
 
 		while (it.hasNext() && conectada) {
-			Requisito unRequisito = it.next();
+			RequisitoConexion unRequisito = it.next();
 			conectada = unRequisito.estaConectado();
 		}
 		return conectada;
 	}
 
 	// Indica a la unidad que esta conectada al requisito pasado como parametro
-	public void conectar(Requisito unRequisito) {
+	public void conectar(RequisitoConexion unRequisito) {
 
-		for (Requisito requisito : requisitos) {
+		for (RequisitoConexion requisito : requisitos) {
 			if (unRequisito.getNombre() == requisito.getNombre()) {
 				requisito.conectar();
 			}
 		}
+	}
+
+	public ArrayList<RequisitoConexion> getConexionesFaltantes() {
+		ArrayList<RequisitoConexion> requisitosFaltantes = new ArrayList<RequisitoConexion>();
+		for (RequisitoConexion requisito : requisitos) {
+			if (!requisito.estaConectado()) {
+				requisitosFaltantes.add(requisito);
+			}
+		}
+		return requisitosFaltantes;
 	}
 
 	// la idea es desde mapa ir consultando a todas las unidades del mapa
