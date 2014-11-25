@@ -50,15 +50,6 @@ public class MapaTerritorio {
 		}
 		return null;
 
-		/*
-		 * boolean encontrado = false; int xADevolver = 0; int yADevolver = 0;
-		 * for (int x = 0; (x < alto) && !encontrado; x++) { for (int y = 0; (y
-		 * < ancho) && !encontrado; y++) { Point coord = new Point(x, y);
-		 * Superficie unaSuperficie = this.mapa.get(coord); encontrado =
-		 * unaSuperficie.esAgua(); yADevolver = y; } xADevolver = x; } int[]
-		 * coordenadasADevolver = new int[]{xADevolver,yADevolver}; return
-		 * coordenadasADevolver;
-		 */
 	}
 
 	// TODO
@@ -71,15 +62,5 @@ public class MapaTerritorio {
 			}
 		}
 		return null;
-
-		/*
-		 * boolean encontrado = false; int xADevolver = 0; int yADevolver = 0;
-		 * for (int x = 0; (x < alto) && !encontrado; x++) { for (int y = 0; (y
-		 * < ancho) && !encontrado; y++) { Point coord = new Point(x, y);
-		 * Superficie unaSuperficie = this.mapa.get(coord); encontrado =
-		 * unaSuperficie.esTierra(); yADevolver = y; } xADevolver = x; } int[]
-		 * coordenadasADevolver = new int[]{xADevolver,yADevolver}; return
-		 * coordenadasADevolver;
-		 */
 	}
 }

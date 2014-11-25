@@ -3,8 +3,6 @@ package algo3.algocity.model;
 public class Edificador {
 
 	// TODO HORRIBLEEE!!!!
-
-<<<<<<< HEAD
 	//int costoUnidadResidencial;
 	//int costoUnidadIndustrial;
 	//int costoUnidadComercial;
@@ -28,7 +26,6 @@ public class Edificador {
 	//int radioInfluenciaCentralEolica;
 	//int radioInfluenciaCentralMinera;
 	//int radioInfluenciaCentralNuclear;
-=======
 	int costoUnidadResidencial;
 	int costoUnidadIndustrial;
 	int costoUnidadComercial;
@@ -52,13 +49,11 @@ public class Edificador {
 	int radioInfluenciaCentralEolica;
 	int radioInfluenciaCentralMinera;
 	int radioInfluenciaCentralNuclear;
->>>>>>> dev-tomas
 
 	// Los requisitos de conexiones y de terreno de cada unidad deberian estar
 	// aca tambien
 
 	public Edificador() {
-<<<<<<< HEAD
 		//this.costoUnidadResidencial = 5;
 		//this.costoUnidadIndustrial = 10;
 		//this.costoUnidadComercial = 5;
@@ -82,7 +77,6 @@ public class Edificador {
 		//this.radioInfluenciaCentralEolica = 4;
 		//this.radioInfluenciaCentralMinera = 10;
 		//this.radioInfluenciaCentralNuclear = 25;
-=======
 		this.costoUnidadResidencial = 5;
 		this.costoUnidadIndustrial = 10;
 		this.costoUnidadComercial = 5;
@@ -106,7 +100,6 @@ public class Edificador {
 		this.radioInfluenciaCentralEolica = 4;
 		this.radioInfluenciaCentralMinera = 10;
 		this.radioInfluenciaCentralNuclear = 25;
->>>>>>> dev-tomas
 	}
 /*
 	public UnidadComercial construirUnidadComercial() {

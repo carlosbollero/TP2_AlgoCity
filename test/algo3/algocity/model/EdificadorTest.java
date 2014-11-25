@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class EdificadorTest {
 
+	/*
 	@Test
 	public void testConstruirZonaResidencial() {
 		Edificador e = new Edificador();
@@ -71,5 +72,6 @@ public class EdificadorTest {
 
 		assertFalse(unaResidencia.equals(otraResidencia));
 	}
+	*/
 
 }

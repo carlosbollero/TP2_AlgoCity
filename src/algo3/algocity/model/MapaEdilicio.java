@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 public class MapaEdilicio extends Mapa {
 
 	HashMap<Point, Ubicable> mapa;
-	//boolean existeEstacionDeBomberos;
-	//para saber si los ubicables del mapa se pueden reparar
-	
+
+	// boolean existeEstacionDeBomberos;
+	// para saber si los ubicables del mapa se pueden reparar
 
 	public MapaEdilicio(int alto, int ancho) {
 		super(alto, ancho);
@@ -57,6 +57,12 @@ public class MapaEdilicio extends Mapa {
 			}
 		}
 		return null;
+	}
+
+	// devuelve si esta conectada a todos los requisitos que correspondan a la
+	// unidad
+	public boolean estaConectada(Unidad unaUnidad) {
+		return unaUnidad.estaConectada();
 	}
 
 }

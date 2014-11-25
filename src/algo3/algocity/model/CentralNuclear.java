@@ -8,4 +8,10 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.radioDeInfluencia = 25;
 	}
 
+	public CentralNuclear(int costo, int capacidadElectrica, int radioInfluencia) {
+		this.costo = costo;
+		this.capacidad = capacidadElectrica;
+		this.radioDeInfluencia = radioInfluencia;
+	}
+
 }

@@ -19,7 +19,6 @@ public class Usuario {
 		return this.nombre;
 	}
 
-<<<<<<< HEAD
 	public String getRutaJuegoAsociado() {
 		return this.rutaJuegoAsociado;
 	}
@@ -31,18 +30,16 @@ public class Usuario {
 	}
 
 	/*
-=======
-	/*
+	 * ======= /*
 	 * 
 	 * public String getRutaJuegoAsociado(){ return rutaJuegoAsociado; }
 	 * 
 	 * 
 	 * 
 	 * 
->>>>>>> dev-tomas
-	 * public void jugar(String nombrePersonaje){ Iterator<Personaje> it =
-	 * personajes.iterator(); boolean encontrado = false; Personaje
-	 * personajeEnJuego = null;
+	 * >>>>>>> dev-tomas public void jugar(String nombrePersonaje){
+	 * Iterator<Personaje> it = personajes.iterator(); boolean encontrado =
+	 * false; Personaje personajeEnJuego = null;
 	 * 
 	 * while(it.hasNext() && !encontrado){ Personaje unPersonaje = it.next();
 	 * if(unPersonaje.getNombrePersonaje() == nombrePersonaje){ encontrado =

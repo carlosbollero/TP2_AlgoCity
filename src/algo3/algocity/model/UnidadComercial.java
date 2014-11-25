@@ -11,6 +11,11 @@ public class UnidadComercial extends Unidad implements Reparable {
 		this.consumo = 2;
 	}
 
+	public UnidadComercial(int costo, int consumo) {
+		this.costo = costo;
+		this.consumo = consumo;
+	}
+
 	public int getConsumo() {
 		return this.consumo;
 	}

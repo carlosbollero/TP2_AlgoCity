@@ -8,7 +8,7 @@ import java.util.Iterator;
  **/
 
 public class ControladorUsuarios {
-		
+
 	private ArrayList<Usuario> usuarios;
 
 	public ControladorUsuarios() {
@@ -17,41 +17,38 @@ public class ControladorUsuarios {
 	}
 
 	public boolean addUsuario(String nombreUsuario) {
-	
+
 		Usuario unUsuario = new Usuario(nombreUsuario);
 		if (!existeNombreUsuario(unUsuario.getNombre())) {
 			this.usuarios.add(unUsuario);
 			return true;
 		}
-		
+
 		return false;
 	}
 
-	
 	public Usuario buscarUsuario(String nombreUsuario) {
-		
+
 		boolean encontrado = false;
 		Iterator<Usuario> it = this.usuarios.iterator();
-		while(it.hasNext() && !encontrado){
+		while (it.hasNext() && !encontrado) {
 			Usuario unUsuario = it.next();
-			if(unUsuario.getNombre() == nombreUsuario) {
+			if (unUsuario.getNombre() == nombreUsuario) {
 				encontrado = true;
 				return unUsuario;
 			}
 		}
 		return null;
 	}
-	
-	
+
 	public Usuario getUsuario(String nombreUsuario) {
-		
+
 		Usuario usuarioSolicitado = buscarUsuario(nombreUsuario);
 		return usuarioSolicitado;
 	}
-	
-	
+
 	public boolean existeNombreUsuario(String nombreUsuarioAChequear) {
-		
+
 		boolean encontrado = false;
 		Iterator<Usuario> iteradorUsuarios = this.usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && !encontrado) {
@@ -65,7 +62,6 @@ public class ControladorUsuarios {
 		return encontrado;
 	}
 
-	
 	public boolean existeUsuario(Usuario usuarioAChequear) {
 
 		boolean encontrado = false;
@@ -81,6 +77,4 @@ public class ControladorUsuarios {
 		return encontrado;
 	}
 
-	
-	
 }
