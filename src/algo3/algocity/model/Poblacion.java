@@ -6,6 +6,8 @@ import java.util.Observer;
 public class Poblacion implements Observer {
 
 	int cantidad;
+	int ocupacionEmpleo;
+	int indiceCrecimiento;
 
 	public int getCantidad() {
 		return cantidad;
