@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public class UnidadEnergetica extends Unidad implements Reparable {
+public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 
 	final int ESTADOINICIAL = 100;
 	int capacidad;
@@ -64,5 +64,16 @@ public class UnidadEnergetica extends Unidad implements Reparable {
 		} else {
 			this.porcentajeDanios += cantidad;
 		}
+	}
+
+	public void aplicarDanioGodzilla() {
+		porcentajeDanios = 35;
+		
+	}
+
+	@Override
+	public void aceptar(Visitante unVisitante) {
+		unVisitante.visitar(this);
+		
 	}
 }
