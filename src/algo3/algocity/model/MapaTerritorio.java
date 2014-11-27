@@ -25,11 +25,16 @@ public class MapaTerritorio {
 	private void inicializar() {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
-				Point coord = new Point(x, y);
 				Superficie posicion = new Superficie(aleatorio.nextBoolean());
-				this.mapa.put(coord, posicion);
+				agregar(posicion, x, y);
 			}
 		}
+	}
+	
+	public boolean agregar(Superficie superficie, int x, int y){
+		Point coord = new Point(x, y);
+		mapa.put(coord, superficie);
+		return (mapa.containsKey(coord) && mapa.containsValue(superficie));
 	}
 
 	public boolean consultarCoordenada(int x, int y) {
