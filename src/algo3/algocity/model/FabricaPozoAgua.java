@@ -1,8 +1,8 @@
 package algo3.algocity.model;
 
-public class FabricaPozoAgua implements FabricaEdificables {
+public class FabricaPozoAgua implements FabricaUnidades {
 
-	public PozoDeAgua construir() {
+	public Unidad construir() {
 
 		return new PozoDeAgua();
 	}

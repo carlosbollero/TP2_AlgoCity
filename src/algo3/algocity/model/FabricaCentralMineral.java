@@ -1,9 +1,8 @@
 package algo3.algocity.model;
 
-public class FabricaCentralMineral implements FabricaEdificables {
+public class FabricaCentralMineral implements FabricaUnidades {
 
-	public CentralMinera construir() {
-
+	public Unidad construir() {
 		return new CentralMinera();
 
 	}
