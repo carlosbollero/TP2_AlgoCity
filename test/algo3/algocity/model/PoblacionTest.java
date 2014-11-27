@@ -78,7 +78,7 @@ public class PoblacionTest {
 
 		p.setIndice(1); 	//positivo crece
 							//negativo decrece
-		t.avanzarTurno();
+		t.avanzar();
 
 		assertTrue(p.getCantidad() > referencia);
 	}
@@ -94,7 +94,7 @@ public class PoblacionTest {
 		assertTrue(referencia == 0);
 		
 		p.setIndice(1);
-		t.avanzarTurno();
+		t.avanzar();
 		
 		System.out.println(p.getCantidad());
 		assertTrue(p.getCantidad() > referencia);
@@ -111,7 +111,7 @@ public class PoblacionTest {
 		assertTrue(referencia == 0);
 		
 		p.setIndice(-1);
-		t.avanzarTurno();
+		t.avanzar();
 		
 		System.out.println(p.getCantidad());
 		assertTrue(p.getCantidad() < referencia);
@@ -128,7 +128,7 @@ public class PoblacionTest {
 		assertTrue(referencia == 0);
 		
 		p.setIndice(0);
-		t.avanzarTurno();
+		t.avanzar();
 		
 		System.out.println(p.getCantidad());
 		assertTrue(p.getCantidad() == referencia);
@@ -146,14 +146,14 @@ public class PoblacionTest {
 		assertTrue(referencia == 0);
 		
 		p.setIndice(1);
-		t.avanzarTurno();
+		t.avanzar();
 		
 		System.out.println(p.getCantidad());
 		assertTrue(p.getCantidad() > referencia);
 		
 		referencia = p.getCantidad();
 		p.setIndice(-1);
-		t.avanzarTurno();
+		t.avanzar();
 		
 		System.out.println(p.getCantidad());
 		assertTrue(p.getCantidad() < referencia);

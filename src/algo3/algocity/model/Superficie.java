@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public class Superficie implements Ubicable {
+public class Superficie {
 
 	final boolean tierra = true;
 	final boolean agua = false;

@@ -291,32 +291,47 @@ public class UnidadTest {
 	/**/
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
+<<<<<<< HEAD
 		// Consumo unidadResidencial = 1
 		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
 		UnidadResidencial unaUnidadResidencial = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaUnidadResidencial();
+		Unidad unaUnidadResidencial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadResidencial.getConsumo(), 1);
+		assertEquals(unaUnidadResidencial.consumo(), 1);
 	}
 
 
 	@Test
 	public void testUnidadComercialTieneConsumoValido() {
+<<<<<<< HEAD
 		// Consumo unidadComercial = 2
 		FabricaUnidadComercial fabrica = new FabricaUnidadComercial();
 		UnidadComercial unaUnidadComercial = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaUnidadComercial();
+		Unidad unaUnidadComercial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadComercial.getConsumo(), 2);
+		assertEquals(unaUnidadComercial.consumo(), 2);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneConsumoValido() {
+<<<<<<< HEAD
 		// Consumo unidadIndustrial = 5
 
 		FabricaUnidadIndustrial fabrica = new FabricaUnidadIndustrial();
 		UnidadIndustrial unaUnidadIndustrial = fabrica.construir();
 
+=======
+		FabricaUnidades fabrica = new FabricaUnidadIndustrial();
+		Unidad unaUnidadIndustrial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadIndustrial.getConsumo(), 5);
+		assertEquals(unaUnidadIndustrial.consumo(), 5);
 	}
 
 
@@ -328,78 +343,121 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo unidadResidencial = 5
 		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
 		UnidadResidencial unaUnidadResidencial = fabrica.construir();
 
+=======
+		FabricaUnidades fabrica = new FabricaUnidadResidencial();
+		Unidad unaUnidadResidencial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadResidencial.getCosto(), 5);
+		assertEquals(unaUnidadResidencial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadComercialTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo unidadComercial = 5
 
 		FabricaUnidadComercial fabrica = new FabricaUnidadComercial();
 		UnidadComercial unaUnidadComercial = fabrica.construir();
 
+=======
+		FabricaUnidades fabrica = new FabricaUnidadComercial();
+		Unidad unaUnidadComercial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadComercial.getCosto(), 5);
+		assertEquals(unaUnidadComercial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo unidadIndsutrial = 10
 
 		FabricaUnidadIndustrial fabrica = new FabricaUnidadIndustrial();
 		UnidadIndustrial unaUnidadIndustrial = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaUnidadIndustrial();
+		Unidad unaUnidadIndustrial = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaUnidadIndustrial.getCosto(), 10);
+		assertEquals(unaUnidadIndustrial.costo(), 10);
 	}
 
 	@Test
 	public void testPozoDeAguaTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo pozoDeAgua = 250
 
 		FabricaPozoAgua fabrica = new FabricaPozoAgua();
 		PozoDeAgua unPozoDeAgua = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaPozoAgua();
+		Unidad unPozoDeAgua = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unPozoDeAgua.getCosto(), 250);
+		assertEquals(unPozoDeAgua.costo(), 250);
 	}
 
 	@Test
+<<<<<<< HEAD
 	public void testEstacionDeBomberosTieneCostoValido() {
 		// Costo estacionDeBomberos = 1500
 		FabricaEstacionDeBomberos fabrica = new FabricaEstacionDeBomberos();
 		EstacionDeBomberos unaEstacionDeBomberos = fabrica.construir();
+=======
+	public void testEstacionDeBomberosTieneCostoValido() {
+		FabricaUnidades fabrica = new FabricaEstacionDeBomberos();
+		Unidad unaEstacionDeBomberos = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaEstacionDeBomberos.getCosto(), 1500);
+		assertEquals(unaEstacionDeBomberos.costo(), 1500);
 	}
 
 	@Test
 	public void testCentralEolicaTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo centralEolica = 1000
 		FabricaCentralEolica fabrica = new FabricaCentralEolica();
 		CentralEolica unaCentralEolica = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaCentralEolica();
+		Unidad unaCentralEolica = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaCentralEolica.getCosto(), 1000);
+		assertEquals(unaCentralEolica.costo(), 1000);
 	}
 
 	@Test
 	public void testCentralMineraTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo centralMinera = 3000
 		FabricaCentralMineral fabrica = new FabricaCentralMineral();
 		CentralMinera unaCentralMinera = fabrica.construir();
+=======
+		FabricaUnidades fabrica = new FabricaCentralMineral();
+		Unidad unaCentralMinera = fabrica.construir();
+>>>>>>> dev-tomas
 
-		assertEquals(unaCentralMinera.getCosto(), 3000);
+		assertEquals(unaCentralMinera.costo(), 3000);
 	}
 
 	@Test
 	public void testCentralNuclearTieneCostoValido() {
+<<<<<<< HEAD
 		// Costo centralNuclear = 10000
 		FabricaCentralNuclear fabrica = new FabricaCentralNuclear();
 		CentralNuclear unaCentralNuclear = fabrica.construir();
 		assertEquals(unaCentralNuclear.getCosto(), 10000);
+=======
+		FabricaUnidades fabrica = new FabricaCentralNuclear();
+		Unidad unaCentralNuclear = fabrica.construir();
+
+		assertEquals(unaCentralNuclear.costo(), 10000);
+>>>>>>> dev-tomas
 	}
 
 	/**/
@@ -408,19 +466,31 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneCapacidadValida() {
+<<<<<<< HEAD
 		// Capacidad unidadResidencial = 100
 
 		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
 		UnidadResidencial unaUnidadResidencial = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadOcupable unaUnidadResidencial = unEdificador
+				.construirUnidadResidencial();
+>>>>>>> dev-tomas
 
 		assertEquals(unaUnidadResidencial.getCapacidad(), 100);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneCapacidadValida() {
+<<<<<<< HEAD
 		// Capacidad unidadIndustrial = 25
 		FabricaUnidadIndustrial fabrica = new FabricaUnidadIndustrial();
 		UnidadIndustrial unaUnidadIndustrial = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadOcupable unaUnidadIndustrial = unEdificador
+				.construirUnidadIndustrial();
+>>>>>>> dev-tomas
 
 		assertEquals(unaUnidadIndustrial.getCapacidad(), 25);
 	}
@@ -431,27 +501,46 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralEolicaTieneCapacidadAbastecimientoValida() {
+<<<<<<< HEAD
 		// Capacidad de abastecimiento centralEolica = 100
 		FabricaCentralEolica fabrica = new FabricaCentralEolica();
 		CentralEolica unaCentralEolica = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralEolica = unEdificador
+				.construirCentralEolica();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralEolica.getCapacidad(), 100);
 	}
 
 	@Test
+<<<<<<< HEAD
 	public void testCentralMineraTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralMinera = 400 Edificador
 		FabricaCentralMineral fabrica = new FabricaCentralMineral();
 		CentralMinera unaCentralMinera = fabrica.construir();
+=======
+	public void testCentralMineraTieneCapacidadAbastecimientoValida() {
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralMinera = unEdificador
+				.construirCentralMinera();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralMinera.getCapacidad(), 400);
 	}
 
 	@Test
 	public void testCentralNuclearTieneCapacidadAbastecimientoValida() {
+<<<<<<< HEAD
 		// Capacidad de abastecimiento centralNuclear = 1000
 		FabricaCentralNuclear fabrica = new FabricaCentralNuclear();
 		CentralNuclear unaCentralNuclear = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralNuclear = unEdificador
+				.construirCentralNuclear();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralNuclear.getCapacidad(), 1000);
 	}
@@ -463,27 +552,45 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
+<<<<<<< HEAD
 		// Radio de influencia centralEolica = 4
 		FabricaCentralEolica fabrica = new FabricaCentralEolica();
 		CentralEolica unaCentralEolica = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralEolica = unEdificador
+				.construirCentralEolica();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralEolica.getRadioDeInfluencia(), 4);
 	}
 
 	@Test
 	public void testCentralMineraTieneRadioDeInfluenciaValido() {
+<<<<<<< HEAD
 		// Radio de influencia centralMinera = 10
 		FabricaCentralMineral fabrica = new FabricaCentralMineral();
 		CentralMinera unaCentralMinera = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralMinera = unEdificador
+				.construirCentralMinera();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralMinera.getRadioDeInfluencia(), 10);
 	}
 
 	@Test
 	public void testCentralNuclearTieneRadioDeInfluenciaValido() {
+<<<<<<< HEAD
 		// Radio de influencia centralNuclear = 25
 		FabricaCentralNuclear fabrica = new FabricaCentralNuclear();
 		CentralNuclear unaCentralNuclear = fabrica.construir();
+=======
+		Edificador unEdificador = new Edificador();
+		UnidadEnergetica unaCentralNuclear = unEdificador
+				.construirCentralNuclear();
+>>>>>>> dev-tomas
 
 		assertEquals(unaCentralNuclear.getRadioDeInfluencia(), 25);
 	}
@@ -621,5 +728,25 @@ public class UnidadTest {
 		// La ocupacion sigue siendo la misma luego de haber intentado agregar
 		// mas habitantes
 		assertEquals(unaUnidadIndustrial.getOcupacion(), 25);
+<<<<<<< HEAD
 	}
+=======
+	}
+<<<<<<< HEAD
+	
+		
+	//Probando los tests con el abstract factory aplicado
+	@Test
+	public void testUnidadResidencialTieneCostoValido2() {
+		
+		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
+		UnidadOcupable unidadResidencial = fabrica.construir();
+		
+		assertEquals(unidadResidencial.getCosto(),5);
+		
+	}
+=======
+
+>>>>>>> 917b3213c37505003cd54fea865827e02bc80497
+>>>>>>> dev-tomas
 }

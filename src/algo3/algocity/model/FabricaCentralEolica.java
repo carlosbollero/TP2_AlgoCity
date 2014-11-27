@@ -1,10 +1,14 @@
 package algo3.algocity.model;
 
-public class FabricaCentralEolica implements FabricaEdificables {
+public class FabricaCentralEolica implements FabricaUnidades {
 
+<<<<<<< HEAD
 	private int costo = 1000;
 	private int capacidadElectrica = 100;
 	private int radioInfluencia = 4;
+=======
+	public Unidad construir() {
+>>>>>>> dev-tomas
 
 	public CentralEolica construir() {
 
