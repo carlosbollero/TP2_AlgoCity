@@ -26,7 +26,7 @@ public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 		this.radioDeInfluencia = radioInfluencia;
 	}
 
-	public int getCosto() {
+	public int costo() {
 		return this.costo;
 	}
 

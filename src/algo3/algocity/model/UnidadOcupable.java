@@ -6,7 +6,6 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 	int capacidad; // capacidad habitacional
 	int ocupacion;
-	int consumo;
 	int porcentajeDanios;
 
 	public UnidadOcupable() {
@@ -23,10 +22,6 @@ public class UnidadOcupable extends Unidad implements Reparable {
 
 	public int getCapacidad() {
 		return this.capacidad;
-	}
-
-	public int getConsumo() {
-		return consumo;
 	}
 
 	public int getOcupacion() {

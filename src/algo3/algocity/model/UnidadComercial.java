@@ -11,7 +11,7 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 		this.consumo = 2;
 	}
 
-	public int getConsumo() {
+	public int consumo() {
 		return this.consumo;
 	}
 
