@@ -19,7 +19,7 @@ public class TurnoTest {
 
 		assertEquals(t.getTurno(), 1);
 
-		t.avanzarTurno();
+		t.avanzar();
 
 		assertEquals(t.getTurno(), 2);
 

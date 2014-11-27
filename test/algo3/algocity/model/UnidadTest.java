@@ -12,32 +12,26 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
-		// Consumo unidadResidencial = 1
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
+		FabricaUnidades fabrica = new FabricaUnidadResidencial();
+		Unidad unaUnidadResidencial = fabrica.construir();
 
-		assertEquals(unaUnidadResidencial.getConsumo(), 1);
+		assertEquals(unaUnidadResidencial.consumo(), 1);
 	}
 
 	@Test
 	public void testUnidadComercialTieneConsumoValido() {
-		// Consumo unidadComercial = 2
-		Edificador unEdificador = new Edificador();
-		UnidadComercial unaUnidadComercial = unEdificador
-				.construirUnidadComercial();
+		FabricaUnidades fabrica = new FabricaUnidadComercial();
+		Unidad unaUnidadComercial = fabrica.construir();
 
-		assertEquals(unaUnidadComercial.getConsumo(), 2);
+		assertEquals(unaUnidadComercial.consumo(), 2);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneConsumoValido() {
-		// Consumo unidadIndustrial = 5
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
+		FabricaUnidades fabrica = new FabricaUnidadIndustrial();
+		Unidad unaUnidadIndustrial = fabrica.construir();
 
-		assertEquals(unaUnidadIndustrial.getConsumo(), 5);
+		assertEquals(unaUnidadIndustrial.consumo(), 5);
 	}
 
 	/**/
@@ -46,78 +40,66 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneCostoValido() {
-		// Costo unidadResidencial = 5
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadResidencial = unEdificador.construirUnidadResidencial();
+		FabricaUnidades fabrica = new FabricaUnidadResidencial();
+		Unidad unaUnidadResidencial = fabrica.construir();
 
-		assertEquals(unaUnidadResidencial.getCosto(), 5);
+		assertEquals(unaUnidadResidencial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadComercialTieneCostoValido() {
-		// Costo unidadComercial = 5
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadComercial = unEdificador.construirUnidadComercial();
+		FabricaUnidades fabrica = new FabricaUnidadComercial();
+		Unidad unaUnidadComercial = fabrica.construir();
 
-		assertEquals(unaUnidadComercial.getCosto(), 5);
+		assertEquals(unaUnidadComercial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneCostoValido() {
-		// Costo unidadIndsutrial = 10
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadIndustrial = unEdificador.construirUnidadIndustrial();
+		FabricaUnidades fabrica = new FabricaUnidadIndustrial();
+		Unidad unaUnidadIndustrial = fabrica.construir();
 
-		assertEquals(unaUnidadIndustrial.getCosto(), 10);
+		assertEquals(unaUnidadIndustrial.costo(), 10);
 	}
 
 	@Test
 	public void testPozoDeAguaTieneCostoValido() {
-		// Costo pozoDeAgua = 250
-		Edificador unEdificador = new Edificador();
-		Unidad unPozoDeAgua = unEdificador.construirPozoDeAgua();
+		FabricaUnidades fabrica = new FabricaPozoAgua();
+		Unidad unPozoDeAgua = fabrica.construir();
 
-		assertEquals(unPozoDeAgua.getCosto(), 250);
+		assertEquals(unPozoDeAgua.costo(), 250);
 	}
 
 	@Test
 	public void testEstacionDeBomberosTieneCostoValido() {
-		// Costo estacionDeBomberos = 1500
-		Edificador unEdificador = new Edificador();
-		Unidad unaEstacionDeBomberos = unEdificador
-				.construirEstacionDeBomberos();
+		FabricaUnidades fabrica = new FabricaEstacionDeBomberos();
+		Unidad unaEstacionDeBomberos = fabrica.construir();
 
-		assertEquals(unaEstacionDeBomberos.getCosto(), 1500);
+		assertEquals(unaEstacionDeBomberos.costo(), 1500);
 	}
 
 	@Test
 	public void testCentralEolicaTieneCostoValido() {
-		// Costo centralEolica = 1000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralEolica = unEdificador
-				.construirCentralEolica();
+		FabricaUnidades fabrica = new FabricaCentralEolica();
+		Unidad unaCentralEolica = fabrica.construir();
 
-		assertEquals(unaCentralEolica.getCosto(), 1000);
+		assertEquals(unaCentralEolica.costo(), 1000);
 	}
 
 	@Test
 	public void testCentralMineraTieneCostoValido() {
-		// Costo centralMinera = 3000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralMinera = unEdificador
-				.construirCentralMinera();
+		FabricaUnidades fabrica = new FabricaCentralMineral();
+		Unidad unaCentralMinera = fabrica.construir();
 
-		assertEquals(unaCentralMinera.getCosto(), 3000);
+		assertEquals(unaCentralMinera.costo(), 3000);
 	}
 
 	@Test
 	public void testCentralNuclearTieneCostoValido() {
-		// Costo centralNuclear = 10000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralNuclear = unEdificador
-				.construirCentralNuclear();
+		FabricaUnidades fabrica = new FabricaCentralNuclear();
+		Unidad unaCentralNuclear = fabrica.construir();
 
-		assertEquals(unaCentralNuclear.getCosto(), 10000);
+		assertEquals(unaCentralNuclear.costo(), 10000);
 	}
 
 	/**/
@@ -126,7 +108,6 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneCapacidadValida() {
-		// Capacidad unidadResidencial = 100
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadResidencial = unEdificador
 				.construirUnidadResidencial();
@@ -136,7 +117,6 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadIndustrialTieneCapacidadValida() {
-		// Capacidad unidadIndustrial = 25
 		Edificador unEdificador = new Edificador();
 		UnidadOcupable unaUnidadIndustrial = unEdificador
 				.construirUnidadIndustrial();
@@ -150,7 +130,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralEolicaTieneCapacidadAbastecimientoValida() {
-		// Capacidad de abastecimiento centralEolica = 100
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralEolica = unEdificador
 				.construirCentralEolica();
@@ -160,7 +139,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralMineraTieneCapacidadAbastecimientoValida() {
-		// Capacidad de abastecimiento centralMinera = 400
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralMinera = unEdificador
 				.construirCentralMinera();
@@ -170,7 +148,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralNuclearTieneCapacidadAbastecimientoValida() {
-		// Capacidad de abastecimiento centralNuclear = 1000
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralNuclear = unEdificador
 				.construirCentralNuclear();
@@ -184,7 +161,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
-		// Radio de influencia centralEolica = 4
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralEolica = unEdificador
 				.construirCentralEolica();
@@ -194,7 +170,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralMineraTieneRadioDeInfluenciaValido() {
-		// Radio de influencia centralMinera = 10
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralMinera = unEdificador
 				.construirCentralMinera();
@@ -204,7 +179,6 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralNuclearTieneRadioDeInfluenciaValido() {
-		// Radio de influencia centralNuclear = 25
 		Edificador unEdificador = new Edificador();
 		UnidadEnergetica unaCentralNuclear = unEdificador
 				.construirCentralNuclear();
