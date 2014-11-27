@@ -2,28 +2,58 @@ package algo3.algocity.model;
 
 public class Usuario {
 
-
 	private String nombre;
-	private String rutaJuegoAsociado;
-	
+	private String rutaDeJuego;
+
 	public Usuario(String unNombre) {
 
 		this.nombre = unNombre;
-		this.rutaJuegoAsociado = "JuegoDe"+this.nombre;
+		this.rutaDeJuego = "JuegoDe" + this.nombre;
 	}
 
+<<<<<<< HEAD
 	public void setNombre(String nuevoNombre) {
 		nombre = nuevoNombre;		
+=======
+	public void setNombre(String nuevoNombre) {
+		nombre = nuevoNombre;
+>>>>>>> 917b3213c37505003cd54fea865827e02bc80497
 	}
 
-	
 	public String getNombre() {
 		return this.nombre;
 	}
 	
+<<<<<<< HEAD
 	
 	public String getRutaJuegoAsociado(){
 		return rutaJuegoAsociado;
 	}
 	
+=======
+	public void ruta(String ruta){
+		this.rutaDeJuego = ruta;
+	}
+	
+	public String ruta(){
+		return rutaDeJuego;
+	}
+
+	/*
+	 * 
+	 * public String getRutaJuegoAsociado(){ return rutaJuegoAsociado; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * public void jugar(String nombrePersonaje){ Iterator<Personaje> it =
+	 * personajes.iterator(); boolean encontrado = false; Personaje
+	 * personajeEnJuego = null;
+	 * 
+	 * while(it.hasNext() && !encontrado){ Personaje unPersonaje = it.next();
+	 * if(unPersonaje.getNombrePersonaje() == nombrePersonaje){ encontrado =
+	 * true; personajeEnJuego = unPersonaje; } } personajeEnJuego.jugar(); }
+	 */
+
+>>>>>>> 917b3213c37505003cd54fea865827e02bc80497
 }

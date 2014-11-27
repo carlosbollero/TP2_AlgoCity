@@ -1,17 +1,17 @@
 package algo3.algocity.model;
 
-public class UnidadComercial extends Unidad implements Reparable {
+public class UnidadComercial extends Unidad implements Reparable, Visitable{
 
 	int consumo;
 	final int ESTADOINICIAL = 100;
 	int porcentajeDanios;
 
-	public UnidadComercial(int costo, int consumo) {
-		this.costo = costo;
-		this.consumo = consumo;
+	public UnidadComercial() {
+		this.costo = 5;
+		this.consumo = 2;
 	}
 
-	public int getConsumo() {
+	public int consumo() {
 		return this.consumo;
 	}
 
@@ -33,6 +33,17 @@ public class UnidadComercial extends Unidad implements Reparable {
 	@Override
 	public int getSalud() {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
+	}
+	
+	@Override
+	public void aceptar(Visitante unVisitante) {
+		unVisitante.visitar(this); 
+		
+	}
+
+	public void aplicarDanioGodzilla() {
+		porcentajeDanios = 75;
+		
 	}
 
 }

@@ -1,11 +1,10 @@
 package algo3.algocity.model;
 
-public class FabricaUnidadComercial implements FabricaEdificables{
+public class FabricaUnidadComercial implements FabricaUnidades {
 
-	
-	public UnidadComercial construir (){
-		
-		return new UnidadComercial(5,2); 
+	public Unidad construir() {
+
+		return new UnidadComercial();
 	}
-	
+
 }

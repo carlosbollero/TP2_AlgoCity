@@ -1,11 +1,9 @@
 package algo3.algocity.model;
 
-public class FabricaTuberias implements FabricaEdificables{
+public class FabricaTuberias implements FabricaConectores{
 
-	
-	public Tuberia construir (){
-		
-		return new Tuberia(); 
+	public Conector construir() {
+		return new Tuberia();
 	}
-	
+
 }

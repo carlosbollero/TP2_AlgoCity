@@ -1,11 +1,10 @@
 package algo3.algocity.model;
 
-public class FabricaEstacionDeBomberos implements FabricaEdificables{
+public class FabricaEstacionDeBomberos implements FabricaUnidades {
 
-	
-	public EstacionDeBomberos construir (){
-		
-		return new EstacionDeBomberos(); 
+	public Unidad construir() {
+
+		return new EstacionDeBomberos();
 	}
-	
+
 }

@@ -1,11 +1,9 @@
 package algo3.algocity.model;
 
-public class FabricaLineaTension implements FabricaEdificables{
+public class FabricaLineaTension implements FabricaConectores{
 
-	
-	public LineaTension construir (){
-		
-		return new LineaTension() ; 
+	public Conector construir() {
+		return new LineaTension();
 	}
-	
+
 }
