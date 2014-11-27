@@ -9,17 +9,17 @@ public class Turno extends Observable implements Runnable {
  * manera automatica
  */
 	
-	int turnoNumero;
+	int numero;
 	
 	public Turno(){
-		turnoNumero = 1;
+		numero = 1;
 	}
 
 	public int getTurno() {
-		return turnoNumero;
+		return numero;
 	}
 
-	public void avanzarTurno() {
+	public void avanzar() {
 //		long referencia = System.currentTimeMillis();
 //		long actual;
 //		
@@ -27,7 +27,7 @@ public class Turno extends Observable implements Runnable {
 //			actual = System.currentTimeMillis();
 //		}while(Math.abs(referencia - actual) > 1999);
 		
-		turnoNumero ++;
+		numero ++;
 		setChanged();
 		notifyObservers();
 		
@@ -39,6 +39,11 @@ public class Turno extends Observable implements Runnable {
 	
 	public static void main(String args[]) {
 //        (new Thread(new Turno())).start();
+	}
+
+	public void iniciar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

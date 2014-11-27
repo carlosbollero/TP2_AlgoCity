@@ -2,6 +2,9 @@ package algo3.algocity.model;
 
 public class Ruta extends Conector implements Visitable {
 	
+	final boolean intacto = true;
+	final boolean destruido = false;
+	
 	boolean estado;
 
 	public Ruta() {
@@ -19,7 +22,12 @@ public class Ruta extends Conector implements Visitable {
 	}
 	
 	public void aplicarDanioGodzilla() {
-		estado = false;
+		estado = destruido;
+		
+	}
+
+	public void repararse() {
+		estado = intacto;
 		
 	}
 
