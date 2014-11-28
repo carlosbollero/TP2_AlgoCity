@@ -22,7 +22,7 @@ public class ControladorUsuarios {
 
 			usuarios.add(unUsuario);
 
-		} else if (!existeNombreUsuario(unUsuario.getNombre())) {
+		} else if (!existeNombreUsuario(unUsuario.nombre())) {
 
 			usuarios.add(unUsuario);
 
@@ -43,7 +43,7 @@ public class ControladorUsuarios {
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
 
-			if (unUsuario.getNombre() == nombreUsuarioAChequear) {
+			if (unUsuario.nombre() == nombreUsuarioAChequear) {
 
 				encontrado = true;
 			}

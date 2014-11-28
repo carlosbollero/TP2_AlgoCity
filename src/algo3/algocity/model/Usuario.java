@@ -3,28 +3,28 @@ package algo3.algocity.model;
 public class Usuario {
 
 	private String nombre;
-	private String rutaDeJuego;
+	private String ruta;
 
 	public Usuario(String unNombre) {
 
 		this.nombre = unNombre;
-		this.rutaDeJuego = "JuegoDe" + this.nombre;
+		this.ruta = "";
 	}
 
-	public void setNombre(String nuevoNombre) {
+	public void nombre(String nuevoNombre) {
 		nombre = nuevoNombre;
 	}
 
-	public String getNombre() {
+	public String nombre() {
 		return nombre;
 	}
 	
 	public void ruta(String ruta){
-		this.rutaDeJuego = ruta;
+		this.ruta = ruta;
 	}
 	
 	public String ruta(){
-		return rutaDeJuego;
+		return ruta;
 	}
 
 	/*
