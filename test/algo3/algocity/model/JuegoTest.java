@@ -3,9 +3,9 @@ package algo3.algocity.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
 import java.awt.Point;
+
+import org.junit.Test;
 
 public class JuegoTest {
 
@@ -16,10 +16,10 @@ public class JuegoTest {
 
 		assertTrue(unJuego.getMapaEdilicio() instanceof MapaEdilicio);
 		assertTrue(unJuego.getMapaTerritorio() instanceof MapaTerritorio);
-		assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaLineasDeTension() instanceof MapaConexiones);
-
+		// assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
+		// assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
+		// assertTrue(unJuego.getMapaLineasDeTension() instanceof
+		// MapaConexiones);
 	}
 
 	@Test

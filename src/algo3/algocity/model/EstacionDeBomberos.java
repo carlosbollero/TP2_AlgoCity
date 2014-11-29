@@ -11,12 +11,6 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 		consumo = 0;
 		conexion = null;
 	}
-	
-	public EstacionDeBomberos(int costo) {
-		this.costo = costo;
-		this.conexion = null;
-	}
-
 
 	public void actuar(ArrayList<Visitable> objetivos){
 		for (Visitable v : objetivos){

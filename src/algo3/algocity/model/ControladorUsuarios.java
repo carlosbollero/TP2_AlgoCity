@@ -13,49 +13,34 @@ public class ControladorUsuarios {
 
 	public ControladorUsuarios() {
 
-		this.usuarios = new ArrayList<Usuario>();
+		usuarios = new ArrayList<Usuario>();
 	}
 
-	public boolean addUsuario(String nombreUsuario) {
+	public void addUsuario(Usuario unUsuario) {
 
-		Usuario unUsuario = new Usuario(nombreUsuario);
-		if (!existeNombreUsuario(unUsuario.getNombre())) {
-			this.usuarios.add(unUsuario);
-			return true;
-		}
+		if (usuarios.isEmpty()) {
 
-<<<<<<< HEAD
-		return false;
-	}
-=======
+			usuarios.add(unUsuario);
+
 		} else if (!existeNombreUsuario(unUsuario.nombre())) {
->>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 
-	public Usuario buscarUsuario(String nombreUsuario) {
+			usuarios.add(unUsuario);
 
-		boolean encontrado = false;
-		Iterator<Usuario> it = this.usuarios.iterator();
-		while (it.hasNext() && !encontrado) {
-			Usuario unUsuario = it.next();
-			if (unUsuario.getNombre() == nombreUsuario) {
-				encontrado = true;
-				return unUsuario;
-			}
 		}
-		return null;
-	}
-
-	public Usuario getUsuario(String nombreUsuario) {
-
-		Usuario usuarioSolicitado = buscarUsuario(nombreUsuario);
-		return usuarioSolicitado;
+		/**
+		 * else{
+		 * 
+		 * throw new ExcepcionAgregarUsuarioYaExistente("El usuario ya existe");
+		 * 
+		 * }
+		 **/
+		// Ver de tratar esto con una excepcion
 	}
 
 	public boolean existeNombreUsuario(String nombreUsuarioAChequear) {
-
 		boolean encontrado = false;
-		Iterator<Usuario> iteradorUsuarios = this.usuarios.iterator();
-		while (iteradorUsuarios.hasNext() && !encontrado) {
+		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
+		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
 
 			if (unUsuario.nombre() == nombreUsuarioAChequear) {
@@ -69,7 +54,7 @@ public class ControladorUsuarios {
 	public boolean existeUsuario(Usuario usuarioAChequear) {
 
 		boolean encontrado = false;
-		Iterator<Usuario> iteradorUsuarios = this.usuarios.iterator();
+		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
 

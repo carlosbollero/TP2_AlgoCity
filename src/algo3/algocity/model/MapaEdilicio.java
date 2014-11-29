@@ -11,9 +11,6 @@ public class MapaEdilicio  {
 
 	HashMap<Point, Unidad> mapa;
 
-	// boolean existeEstacionDeBomberos;
-	// para saber si los ubicables del mapa se pueden reparar
-
 	public MapaEdilicio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
@@ -24,6 +21,10 @@ public class MapaEdilicio  {
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
+		//TODO
+		//la unidad tendria que saber sus requisitos, y aca 
+		//desde mapaEdilicio tener acceso a todos los otros mapas de
+		//conexiones y verificar que estos requisitos se cumplan
 		Point clave = new Point(x, y);
 		if (!this.mapa.containsKey(clave)) {
 			this.mapa.put(clave, elemento);
@@ -63,12 +64,6 @@ public class MapaEdilicio  {
 			}
 		}
 		return null;
-	}
-
-	// devuelve si esta conectada a todos los requisitos que correspondan a la
-	// unidad
-	public boolean estaConectada(Unidad unaUnidad) {
-		return unaUnidad.estaConectada();
 	}
 
 }

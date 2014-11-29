@@ -11,16 +11,7 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 		this.consumo = 2;
 	}
 
-<<<<<<< HEAD
-	public UnidadComercial(int costo, int consumo) {
-		this.costo = costo;
-		this.consumo = consumo;
-	}
-
-	public int getConsumo() {
-=======
 	public int consumo() {
->>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 		return this.consumo;
 	}
 

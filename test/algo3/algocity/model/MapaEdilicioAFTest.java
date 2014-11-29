@@ -10,49 +10,35 @@ public class MapaEdilicioAFTest {
 	int ancho = 10;
 
 	@Test
-	public void testSePuedeAgregarUnidadesAlMapa() {
+	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-<<<<<<< HEAD
-		FabricaEdificables f = new FabricaUnidadResidencial();
-
-		Ubicable u = f.construir();
-
-=======
 		FabricaUnidades f = new FabricaUnidadResidencial();
 		
 		Unidad u = f.construir();
 		
->>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 		assertTrue(m.agregar(u, 1, 1));
 		assertTrue(m.contiene(u));
-
+		
 		f = new FabricaUnidadComercial();
 		u = f.construir();
-
+		
 		assertTrue(m.agregar(u, 1, 2));
 		assertTrue(m.contiene(u));
-
+		
 		f = new FabricaUnidadIndustrial();
 		u = f.construir();
-
+		
 		assertTrue(m.agregar(u, 2, 2));
-		assertTrue(m.contiene(u));
+		assertTrue(m.contiene(u));		
 	}
-
+	
 	@Test
-	public void testSePuedeRemoverUnaUnidad() {
+	public void testSePuedeRemoverUnaUnidad(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-<<<<<<< HEAD
-		FabricaEdificables f = new FabricaEstacionDeBomberos();
-
-		Ubicable eb = f.construir();
-
-=======
 		FabricaUnidades f = new FabricaEstacionDeBomberos();
 		
 		Unidad eb = f.construir();
 				
->>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 		m.agregar(eb, 1, 1);
 
 		assertTrue(m.contiene(eb));
@@ -61,7 +47,7 @@ public class MapaEdilicioAFTest {
 
 		assertFalse(m.contiene(eb));
 	}
-
+	
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
@@ -71,7 +57,7 @@ public class MapaEdilicioAFTest {
 		assertTrue(m.agregar(f.construir(), 1, 1));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
-
+	
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
@@ -82,7 +68,7 @@ public class MapaEdilicioAFTest {
 		assertTrue(m.agregar(u, 4, 4));
 		assertTrue(m.contiene(u));
 	}
-
+	
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
 		FabricaUnidades f = new FabricaEstacionDeBomberos();
@@ -93,7 +79,7 @@ public class MapaEdilicioAFTest {
 		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
 		assertFalse(m.contiene(eb));
 	}
-
+	
 	@Test
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
 		FabricaUnidades f = new FabricaCentralEolica();
@@ -105,35 +91,5 @@ public class MapaEdilicioAFTest {
 		assertTrue(m.contiene(ce));
 		assertFalse(m.agregar(ce, 5, 5));
 	}
-
-	@Test
-	public void testNoSePuedeAgregarUnaUnidadHastaQueNoCumplaRequisitosDeConexion() {
-		VerificadorConexiones verificador = new VerificadorConexiones();
-		FabricaUnidadIndustrial fabricaIndustrial = new FabricaUnidadIndustrial();
-		FabricaRuta fabricaRuta = new FabricaRuta();
-		FabricaLineaTension fabricaElectricidad = new FabricaLineaTension();
-		
-		
-		MapaEdilicio mapaEdilicio = new MapaEdilicio(15,15);
-		MapaConexiones mapaConexiones = new MapaConexiones(15,15);
-		
-		Conector unaRuta = fabricaRuta.construir(); //nose porque me obliga a castear
-		Conector unaLineaTension = fabricaElectricidad.construir();
-		UnidadIndustrial unaUnidadIndustrial = fabricaIndustrial.construir(); 
-		
-		
-		assertFalse(mapaEdilicio.agregar(unaUnidadIndustrial, 5, 5));
-		//pues no se puede agregar la unidad hasta que no se cumplan los requisitos de conexion
-				
-		mapaConexiones.agregar(unaRuta,5,5);
-		mapaConexiones.agregar(unaLineaTension,5,5);
-		
-		assertTrue(mapaEdilicio.agregar(unaUnidadIndustrial, 5, 5));
-		
-		
-		
-		
-		
-	}
-
+	
 }
