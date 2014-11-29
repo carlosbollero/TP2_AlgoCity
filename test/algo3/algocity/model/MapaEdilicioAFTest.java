@@ -92,5 +92,4 @@ public class MapaEdilicioAFTest {
 		assertFalse(m.agregar(ce, 5, 5));
 	}
 	
-
 }

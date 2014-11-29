@@ -1,5 +1,7 @@
 /********************************************************** 
  * 
+ /********************************************************** 
+ * 
  * Para que funcione esta clase se debe agregar al proyecto
  * la librería JGraphT descargable de http://jgrapht.org/ 
  * Archivos fuentes en https://github.com/jgrapht/jgrapht 

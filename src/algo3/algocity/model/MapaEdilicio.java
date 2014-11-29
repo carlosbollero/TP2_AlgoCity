@@ -21,6 +21,10 @@ public class MapaEdilicio  {
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
+		//TODO
+		//la unidad tendria que saber sus requisitos, y aca 
+		//desde mapaEdilicio tener acceso a todos los otros mapas de
+		//conexiones y verificar que estos requisitos se cumplan
 		Point clave = new Point(x, y);
 		if (!this.mapa.containsKey(clave)) {
 			this.mapa.put(clave, elemento);
