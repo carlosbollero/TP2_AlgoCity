@@ -1,6 +1,6 @@
 package algo3.algocity.model;
 
-public class FabricaUnidadResidencial implements FabricaEdificables {
+public class FabricaUnidadResidencial implements FabricaUnidades {
 
 	private int costo = 5;
 	private int consumo = 1;

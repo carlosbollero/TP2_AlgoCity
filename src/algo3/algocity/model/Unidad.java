@@ -1,5 +1,6 @@
 package algo3.algocity.model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,11 +10,18 @@ public abstract class Unidad implements Ubicable {
 	ArrayList<RequisitoConexion> requisitos; // una instancia de Requisito
 
 	// para cada requisito
+=======
+public abstract class Unidad{
 
-	public int getCosto() {
+	int costo;
+	int consumo;
+>>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
+
+	public int costo() {
 		return this.costo;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<RequisitoConexion> getRequisitos() {
 		return this.requisitos;
 	}
@@ -71,4 +79,9 @@ public abstract class Unidad implements Ubicable {
 	// requisitos de conexion
 	// y devuelva si esta conectada o no
 
+=======
+	public int consumo() {
+		return consumo;
+	}
+>>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 }

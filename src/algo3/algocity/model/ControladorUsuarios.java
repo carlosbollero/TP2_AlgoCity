@@ -24,8 +24,12 @@ public class ControladorUsuarios {
 			return true;
 		}
 
+<<<<<<< HEAD
 		return false;
 	}
+=======
+		} else if (!existeNombreUsuario(unUsuario.nombre())) {
+>>>>>>> 275e25272bfc21a3f80890c7ce3add1a02b67ca1
 
 	public Usuario buscarUsuario(String nombreUsuario) {
 
@@ -54,7 +58,7 @@ public class ControladorUsuarios {
 		while (iteradorUsuarios.hasNext() && !encontrado) {
 			Usuario unUsuario = iteradorUsuarios.next();
 
-			if (unUsuario.getNombre() == nombreUsuarioAChequear) {
+			if (unUsuario.nombre() == nombreUsuarioAChequear) {
 
 				encontrado = true;
 			}
