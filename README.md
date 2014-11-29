@@ -5,7 +5,16 @@ TP2_AlgoCity
 
 
 
-Consultar:
+Supuestos:
+==========
+- Para agregar una Unidad se deben cumplir previamente todos los requisitos.
+- Las rutas las repara completamente EstacionDeBomberos.
+
+
+
+
+
+Consultas:
 ==========
 - Es correcto trabajar las unidades como Singleton y que la población se maneje de manera externa?
 
