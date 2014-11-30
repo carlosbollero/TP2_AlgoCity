@@ -1,10 +1,12 @@
 package algo3.algocity.model;
 
+import java.util.ArrayList;
+
 public class FabricaUnidadIndustrial implements FabricaUnidades {
 
-	public Unidad construir() {
+	public Unidad construir(ArrayList<Mapa> mapas, int x, int y) {
 
-		return new UnidadIndustrial();
+		return new UnidadIndustrial(mapas,x,y);
 	}
 
 }

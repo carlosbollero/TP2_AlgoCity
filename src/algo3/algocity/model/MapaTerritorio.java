@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
-public class MapaTerritorio {
+public class MapaTerritorio implements Mapa{
 
 	int alto;
 	int ancho;
@@ -86,5 +86,11 @@ public class MapaTerritorio {
 		 * coordenadasADevolver = new int[]{xADevolver,yADevolver}; return
 		 * coordenadasADevolver;
 		 */
+	}
+
+	@Override
+	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

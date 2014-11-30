@@ -1,5 +1,7 @@
 package algo3.algocity.model;
 
+import java.util.ArrayList;
+
 public class UnidadComercial extends Unidad implements Reparable, Visitable{
 
 	int consumo;
@@ -9,6 +11,13 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 	public UnidadComercial() {
 		this.costo = 5;
 		this.consumo = 2;
+	}
+
+	public UnidadComercial(ArrayList<Mapa> mapas, int x, int y) {
+		this.costo = 5;
+		this.consumo = 2;
+		this.coordX = x;
+		this.coordY = y;
 	}
 
 	public int consumo() {

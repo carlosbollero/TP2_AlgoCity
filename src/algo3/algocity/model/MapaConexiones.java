@@ -18,7 +18,7 @@ import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-public class MapaConexiones {
+public class MapaConexiones implements Mapa{
 
 	int alto;
 	int ancho;
@@ -103,6 +103,12 @@ public class MapaConexiones {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

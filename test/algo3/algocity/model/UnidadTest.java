@@ -12,16 +12,14 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
-		FabricaUnidades fabrica = new FabricaUnidadResidencial();
-		Unidad unaUnidadResidencial = fabrica.construir();
+		Unidad unaUnidadResidencial = new UnidadResidencial();
 
 		assertEquals(unaUnidadResidencial.consumo(), 1);
 	}
 
 	@Test
 	public void testUnidadComercialTieneConsumoValido() {
-		FabricaUnidades fabrica = new FabricaUnidadComercial();
-		Unidad unaUnidadComercial = fabrica.construir();
+		Unidad unaUnidadComercial = new UnidadComercial();
 
 		assertEquals(unaUnidadComercial.consumo(), 2);
 	}

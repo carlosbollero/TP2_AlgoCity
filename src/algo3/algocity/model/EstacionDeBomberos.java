@@ -11,6 +11,15 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 		consumo = 0;
 		conexion = null;
 	}
+	
+	public EstacionDeBomberos(ArrayList<Mapa> mapas,int x, int y) {
+		costo = 1500;
+		consumo = 0;
+		conexion = null;
+		this.coordX = x;
+		this.coordY = y;
+	}
+	
 
 	public void actuar(ArrayList<Visitable> objetivos){
 		for (Visitable v : objetivos){
@@ -55,6 +64,12 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	@Override
 	public void visitar(Ruta unaRuta) {
 		unaRuta.repararse();
+	}
+
+	@Override
+	public void visitar(Unidad unaUnidad) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

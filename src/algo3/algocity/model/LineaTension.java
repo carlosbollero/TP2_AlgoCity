@@ -1,5 +1,7 @@
 package algo3.algocity.model;
 
+import java.util.ArrayList;
+
 public class LineaTension extends Conector implements Reparable, Visitable {
 	
 	final boolean intacto = true;
@@ -13,6 +15,12 @@ public class LineaTension extends Conector implements Reparable, Visitable {
 		this.costo = 5;
 	}
 	
+	public LineaTension(ArrayList<Mapa> mapas, int x, int y) {
+		this.costo = 5;
+		this.coordX = x;
+		this.coordY = y;
+	}
+
 	public boolean estado(){
 		return estado;
 	}

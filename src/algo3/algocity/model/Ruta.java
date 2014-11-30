@@ -1,5 +1,7 @@
 package algo3.algocity.model;
 
+import java.util.ArrayList;
+
 public class Ruta extends Conector implements Visitable {
 	
 	final boolean intacto = true;
@@ -11,6 +13,12 @@ public class Ruta extends Conector implements Visitable {
 		this.costo = 10;
 	}
 	
+	public Ruta(ArrayList<Mapa> mapas, int x, int y) {
+		this.costo = 10;
+		this.coordX = x;
+		this.coordY = y;
+	}
+
 	public boolean estado(){
 		return estado;
 	}

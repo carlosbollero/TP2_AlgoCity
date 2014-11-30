@@ -4,7 +4,9 @@ public class Conector{
 
 	int costo;
 	int danios;
-
+	int coordX;
+	int coordY;
+	
 	public Conector() {
 
 	}

@@ -45,6 +45,12 @@ public class CatastrofeGodzilla implements Visitante {
 		
 	}
 
+	@Override
+	public void visitar(Unidad unaUnidad) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 

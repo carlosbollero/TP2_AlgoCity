@@ -8,5 +8,6 @@ public interface Visitante {
 	public void visitar(UnidadEnergetica unaUnidadEnergetica);
 	public void visitar(LineaTension unaLineaTension);
 	public void visitar(Ruta unaRuta);
+	public void visitar(Unidad unaUnidad); //usado por CatastrofeTerremoto
 
 }
