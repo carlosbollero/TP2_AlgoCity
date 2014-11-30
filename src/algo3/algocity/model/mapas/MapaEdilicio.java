@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import algo3.algocity.model.Unidad;
 
-public class MapaEdilicio  {
+public class MapaEdilicio implements Mapa {
 	
 	private int alto;
 	private int ancho;
@@ -74,6 +74,12 @@ public class MapaEdilicio  {
 
 	public int getAncho() {
 		return ancho;
+	}
+
+	@Override
+	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
