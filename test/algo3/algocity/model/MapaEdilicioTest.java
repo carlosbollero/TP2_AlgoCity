@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MapaEdilicioAFTest {
+import algo3.algocity.model.mapas.MapaEdilicio;
+
+public class MapaEdilicioTest {
 
 	int alto = 10;
 	int ancho = 10;
@@ -12,32 +14,29 @@ public class MapaEdilicioAFTest {
 	@Test
 	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		FabricaUnidades f = new FabricaUnidadResidencial();
 		
-		Unidad u = f.construir();
+		Unidad u = new UnidadResidencial();
 		
 		assertTrue(m.agregar(u, 1, 1));
 		assertTrue(m.contiene(u));
 		
-		f = new FabricaUnidadComercial();
-		u = f.construir();
+		u = new UnidadComercial();
 		
 		assertTrue(m.agregar(u, 1, 2));
 		assertTrue(m.contiene(u));
 		
-		f = new FabricaUnidadIndustrial();
-		u = f.construir();
+		u = new UnidadIndustrial();
 		
 		assertTrue(m.agregar(u, 2, 2));
-		assertTrue(m.contiene(u));		
+		assertTrue(m.contiene(u));
+		
 	}
 	
 	@Test
 	public void testSePuedeRemoverUnaUnidad(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		FabricaUnidades f = new FabricaEstacionDeBomberos();
 		
-		Unidad eb = f.construir();
+		Unidad eb = new EstacionDeBomberos();
 				
 		m.agregar(eb, 1, 1);
 
@@ -51,19 +50,17 @@ public class MapaEdilicioAFTest {
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		FabricaUnidades f = new FabricaPozoAgua();
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar(f.construir(), 1, 1));
+		assertTrue(m.agregar(new PozoDeAgua(), 1, 1));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		FabricaUnidades f = new FabricaUnidadResidencial();
 
-		Unidad u = f.construir();
+		Unidad u = new UnidadResidencial();
 
 		assertTrue(m.agregar(u, 4, 4));
 		assertTrue(m.contiene(u));
@@ -71,10 +68,9 @@ public class MapaEdilicioAFTest {
 	
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
-		FabricaUnidades f = new FabricaEstacionDeBomberos();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad eb = f.construir();
+		Unidad eb = new EstacionDeBomberos();
 
 		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
 		assertFalse(m.contiene(eb));
@@ -82,10 +78,9 @@ public class MapaEdilicioAFTest {
 	
 	@Test
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
-		FabricaUnidades f = new FabricaCentralEolica();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad ce = f.construir();
+		Unidad ce = new CentralEolica();
 
 		assertTrue(m.agregar(ce, 3, 4));
 		assertTrue(m.contiene(ce));

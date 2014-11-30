@@ -1,11 +1,15 @@
-package algo3.algocity.model;
+package algo3.algocity.model.mapas;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
-public class MapaTerritorio implements Mapa{
+import algo3.algocity.model.Superficie;
+
+
+public class MapaTerritorio implements Mapa {
 
 	int alto;
 	int ancho;
@@ -45,8 +49,7 @@ public class MapaTerritorio implements Mapa{
 		return (this.mapa.get(new Point(x, y)));
 	}
 
-	// TODO
-	// FEOFEO
+	//Este método se implementó para poder realizar test sobre Random
 	public Point getPosicionDeUnaSuperficieDeAgua() {
 		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
 			if (entry.getValue().esAgua()) {
@@ -54,16 +57,6 @@ public class MapaTerritorio implements Mapa{
 			}
 		}
 		return null;
-
-		/*
-		 * boolean encontrado = false; int xADevolver = 0; int yADevolver = 0;
-		 * for (int x = 0; (x < alto) && !encontrado; x++) { for (int y = 0; (y
-		 * < ancho) && !encontrado; y++) { Point coord = new Point(x, y);
-		 * Superficie unaSuperficie = this.mapa.get(coord); encontrado =
-		 * unaSuperficie.esAgua(); yADevolver = y; } xADevolver = x; } int[]
-		 * coordenadasADevolver = new int[]{xADevolver,yADevolver}; return
-		 * coordenadasADevolver;
-		 */
 	}
 
 	// TODO
@@ -76,21 +69,26 @@ public class MapaTerritorio implements Mapa{
 			}
 		}
 		return null;
-
-		/*
-		 * boolean encontrado = false; int xADevolver = 0; int yADevolver = 0;
-		 * for (int x = 0; (x < alto) && !encontrado; x++) { for (int y = 0; (y
-		 * < ancho) && !encontrado; y++) { Point coord = new Point(x, y);
-		 * Superficie unaSuperficie = this.mapa.get(coord); encontrado =
-		 * unaSuperficie.esTierra(); yADevolver = y; } xADevolver = x; } int[]
-		 * coordenadasADevolver = new int[]{xADevolver,yADevolver}; return
-		 * coordenadasADevolver;
-		 */
+	}
+	
+	public ArrayList<Point> posicionesConTierra(){
+		ArrayList<Point> lista = new ArrayList<Point>();
+		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+			if (entry.getValue().esTierra()) {
+				lista.add(entry.getKey());
+			}
+		}
+		return lista;
 	}
 
 	@Override
-	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
-		// TODO Auto-generated method stub
+	public boolean sePuedeConstruir(boolean resultadoEsperado,int x, int y) {
+		if (resultadoEsperado == tierra){
+			return (consultarCoordenada(x, y) == resultadoEsperado);
+		}else if (resultadoEsperado == agua) {
+			return (consultarCoordenada(x, y) == resultadoEsperado);
+		}
 		return false;
 	}
+
 }

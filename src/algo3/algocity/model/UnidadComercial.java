@@ -2,7 +2,9 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 
-public class UnidadComercial extends Unidad implements Reparable, Visitable{
+import algo3.algocity.model.mapas.Mapa;
+
+public class UnidadComercial extends Unidad implements Reparable, Visitable {
 
 	int consumo;
 	final double ESTADOINICIAL = 100;
@@ -11,6 +13,13 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 	public UnidadComercial() {
 		this.costo = 5;
 		this.consumo = 2;
+	}
+
+	public UnidadComercial(int x, int y) {
+		this.costo = 5;
+		this.consumo = 2;
+		this.coordX = x;
+		this.coordY = y;
 	}
 
 	public UnidadComercial(ArrayList<Mapa> mapas, int x, int y) {
@@ -43,16 +52,16 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 	public double getSalud() {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
-	
+
 	@Override
 	public void aceptar(Visitante unVisitante) {
-		unVisitante.visitar(this); 
-		
+		unVisitante.visitar(this);
+
 	}
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 75;
-		
+
 	}
 
 }

@@ -2,15 +2,24 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 
-public class UnidadIndustrial extends UnidadOcupable implements Visitable{
+import algo3.algocity.model.mapas.Mapa;
 
+public class UnidadIndustrial extends UnidadOcupable implements Visitable {
 
 	public UnidadIndustrial() {
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
 	}
-	
+
+	public UnidadIndustrial(int x, int y) {
+		this.costo = 10;
+		this.consumo = 5;
+		this.capacidad = 25;
+		this.coordX = x;
+		this.coordY = y;
+	}
+
 	public UnidadIndustrial(ArrayList<Mapa> mapas, int x, int y) {
 		this.costo = 10;
 		this.consumo = 5;
@@ -21,13 +30,13 @@ public class UnidadIndustrial extends UnidadOcupable implements Visitable{
 
 	@Override
 	public void aceptar(Visitante unVisitante) {
-		unVisitante.visitar(this); 
-		
+		unVisitante.visitar(this);
+
 	}
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 40;
-		
+
 	}
 
 }

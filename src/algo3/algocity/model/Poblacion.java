@@ -3,6 +3,11 @@ package algo3.algocity.model;
 import java.util.Observable;
 import java.util.Observer;
 
+import algo3.algocity.model.estadosPoblacion.EstadoPoblacion;
+import algo3.algocity.model.estadosPoblacion.EstadoPoblacionCreciendo;
+import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
+import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
+
 public class Poblacion implements Observer {
 
 	int cantidad;
