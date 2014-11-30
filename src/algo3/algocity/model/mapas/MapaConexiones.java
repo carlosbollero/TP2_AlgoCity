@@ -8,7 +8,7 @@
  * 
  **********************************************************/
 
-package algo3.algocity.model;
+package algo3.algocity.model.mapas;
 
 import java.awt.Point;
 import java.util.LinkedHashMap;
@@ -17,6 +17,8 @@ import java.util.Map.Entry;
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+
+import algo3.algocity.model.Conector;
 
 public class MapaConexiones {
 

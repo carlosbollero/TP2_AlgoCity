@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algo3.algocity.model.mapas.MapaEdilicio;
+
 public class MapaEdilicioTest {
 
 	int alto = 10;
@@ -26,7 +28,8 @@ public class MapaEdilicioTest {
 		u = new UnidadIndustrial();
 		
 		assertTrue(m.agregar(u, 2, 2));
-		assertTrue(m.contiene(u));		
+		assertTrue(m.contiene(u));
+		
 	}
 	
 	@Test

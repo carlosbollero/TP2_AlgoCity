@@ -1,4 +1,4 @@
-package algo3.algocity.model;
+package algo3.algocity.model.catastrofes;
 
 public class CatastrofeTerremoto extends Catastrofe {
 	

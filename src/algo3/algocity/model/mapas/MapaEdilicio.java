@@ -1,8 +1,10 @@
-package algo3.algocity.model;
+package algo3.algocity.model.mapas;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import algo3.algocity.model.Unidad;
 
 public class MapaEdilicio  {
 	

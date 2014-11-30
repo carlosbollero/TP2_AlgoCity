@@ -9,6 +9,9 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
+import algo3.algocity.model.mapas.MapaEdilicio;
+
 public class GodzillaTest {
 	
 	int alto = 20;
