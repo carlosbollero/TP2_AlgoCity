@@ -1,4 +1,4 @@
-package algo3.algocity.model.mapas;
+package algo3.algocity.model;
 
 public interface Mapa {
 

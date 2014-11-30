@@ -1,6 +1,5 @@
 package algo3.algocity.model;
 
-import algo3.algocity.model.requisitos.Requisito;
 
 public abstract class Unidad{
 

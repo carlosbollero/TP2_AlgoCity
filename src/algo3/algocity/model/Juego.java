@@ -1,8 +1,5 @@
 package algo3.algocity.model;
 
-import algo3.algocity.model.mapas.MapaConexiones;
-import algo3.algocity.model.mapas.MapaEdilicio;
-import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class Juego {
 	

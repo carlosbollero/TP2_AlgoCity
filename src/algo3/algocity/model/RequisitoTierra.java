@@ -1,8 +1,6 @@
-package algo3.algocity.model.requisitos;
+package algo3.algocity.model;
 
 import java.util.ArrayList;
-
-import algo3.algocity.model.mapas.Mapa;
 
 public class RequisitoTierra implements Requisito {
 	

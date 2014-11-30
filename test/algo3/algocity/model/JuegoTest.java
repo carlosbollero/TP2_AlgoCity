@@ -7,10 +7,6 @@ import java.awt.Point;
 
 import org.junit.Test;
 
-import algo3.algocity.model.mapas.MapaConexiones;
-import algo3.algocity.model.mapas.MapaEdilicio;
-import algo3.algocity.model.mapas.MapaTerritorio;
-
 public class JuegoTest {
 
 	@Test

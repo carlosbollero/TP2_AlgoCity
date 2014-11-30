@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.mapas.MapaTerritorio;
-
 public class MapaTerritorioTest {
 
 	int alto = 10;

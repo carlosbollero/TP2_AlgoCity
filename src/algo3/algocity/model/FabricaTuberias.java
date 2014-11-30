@@ -1,7 +1,5 @@
-package algo3.algocity.model.fabricas;
+package algo3.algocity.model;
 
-import algo3.algocity.model.Conector;
-import algo3.algocity.model.Tuberia;
 
 public class FabricaTuberias implements FabricaConectores{
 

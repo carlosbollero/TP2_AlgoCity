@@ -8,14 +8,6 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.fabricas.FabricaCentralEolica;
-import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
-import algo3.algocity.model.fabricas.FabricaPozoAgua;
-import algo3.algocity.model.fabricas.FabricaUnidades;
-import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaConexiones;
-import algo3.algocity.model.mapas.MapaEdilicio;
-import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class MapasIntegralTest {
 	

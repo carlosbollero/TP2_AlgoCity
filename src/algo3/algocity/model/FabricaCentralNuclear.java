@@ -1,10 +1,6 @@
-package algo3.algocity.model.fabricas;
+package algo3.algocity.model;
 
 import java.util.ArrayList;
-
-import algo3.algocity.model.CentralNuclear;
-import algo3.algocity.model.Unidad;
-import algo3.algocity.model.mapas.Mapa;
 
 public class FabricaCentralNuclear implements FabricaUnidades {
 

@@ -1,12 +1,10 @@
-package algo3.algocity.model.mapas;
+package algo3.algocity.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
-
-import algo3.algocity.model.Superficie;
 
 public class MapaTerritorio implements Mapa {
 

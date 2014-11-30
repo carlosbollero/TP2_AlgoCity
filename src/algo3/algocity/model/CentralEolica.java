@@ -3,8 +3,6 @@ package algo3.algocity.model;
 import java.util.ArrayList;
 
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.requisitos.RequisitoTierra;
 
 public class CentralEolica extends UnidadEnergetica {
 	

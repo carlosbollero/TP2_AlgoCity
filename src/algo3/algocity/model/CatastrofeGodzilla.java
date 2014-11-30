@@ -1,19 +1,9 @@
-package algo3.algocity.model.catastrofes;
+package algo3.algocity.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
-
-import algo3.algocity.model.LineaTension;
-import algo3.algocity.model.Ruta;
-import algo3.algocity.model.UnidadComercial;
-import algo3.algocity.model.UnidadEnergetica;
-import algo3.algocity.model.UnidadIndustrial;
-import algo3.algocity.model.UnidadResidencial;
-import algo3.algocity.model.Visitable;
-import algo3.algocity.model.Visitante;
-import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class CatastrofeGodzilla implements Visitante {
 	

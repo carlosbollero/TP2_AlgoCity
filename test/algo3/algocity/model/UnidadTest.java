@@ -4,16 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.fabricas.FabricaCentralEolica;
-import algo3.algocity.model.fabricas.FabricaCentralMineral;
-import algo3.algocity.model.fabricas.FabricaCentralNuclear;
-import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
-import algo3.algocity.model.fabricas.FabricaPozoAgua;
-import algo3.algocity.model.fabricas.FabricaUnidadComercial;
-import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
-import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
-import algo3.algocity.model.fabricas.FabricaUnidades;
-
 public class UnidadTest {
 
 	/**/
