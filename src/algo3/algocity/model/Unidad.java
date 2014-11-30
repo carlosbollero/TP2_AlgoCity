@@ -4,6 +4,7 @@ public abstract class Unidad{
 
 	int costo;
 	int consumo;
+	protected Requisito requisitos;
 
 	public int costo() {
 		return this.costo;
