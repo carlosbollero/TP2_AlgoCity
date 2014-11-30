@@ -7,6 +7,11 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 public class EstacionDeBomberos extends Unidad implements Visitante {
 
 	private Conector conexion;
+	
+	public EstacionDeBomberos(){
+		costo = 1500;
+		consumo = 0;
+	}
 
 	public EstacionDeBomberos(ArrayList<Mapa> mapas, int x, int y) throws NoSeCumplenLosRequisitosException {
 		

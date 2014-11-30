@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 
 public class CentralEolica extends UnidadEnergetica {
+	
+	public CentralEolica(){
+		this.costo = 1000;
+		this.capacidad = 100;
+		this.radioDeInfluencia = 4;
+	}
 
 	public CentralEolica(ArrayList<Mapa> mapas, int x, int y) throws NoSeCumplenLosRequisitosException {
 		

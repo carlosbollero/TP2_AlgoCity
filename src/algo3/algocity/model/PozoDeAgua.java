@@ -6,6 +6,11 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 
 public class PozoDeAgua extends Unidad {
 	
+	public PozoDeAgua(){
+		costo = 250;
+		consumo = 0;
+	}
+	
 	public PozoDeAgua(ArrayList<Mapa> mapas, int x, int y) throws NoSeCumplenLosRequisitosException {
 		
 		requisitos = new RequisitoAgua();
