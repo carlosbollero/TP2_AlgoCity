@@ -4,8 +4,8 @@ public interface Reparable {
 
 	public void repararse();
 
-	public void aplicarDanio(int unDanio);
+	public void aplicarDanio(double unDanio);
 
-	public int getSalud();
+	public double getSalud();
 
 }

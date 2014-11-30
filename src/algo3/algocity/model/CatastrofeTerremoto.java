@@ -51,56 +51,67 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(Unidad unaUnidad) {
-//		Point posicion = unaUnidad.getCoordenadas();
-//		int danioAAplicar = this.calcularDanio(posicion);
+		Point posicion = unaUnidad.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
 		
-		//unaUnidad.aplicarDanio(danioAAplicar);
-		unaUnidad.aplicarDanio(100);
+		unaUnidad.aplicarDanio(danioAAplicar);
 	}
 
-	public int calcularDanio(Point punto) {
+	public double calcularDanio(Point punto) {
 		double distancia = epicentro.distance(punto);
 		double danio = 100 - (distancia * this.tasa);
 		if (danio < 0) {
 			danio = 0;
 		}
-		return (int) danio;
+		return danio;
 	}
 
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaUnidadResidencial.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaUnidadResidencial.aplicarDanio(danioAAplicar);
 	}
 
 	@Override
 	public void visitar(UnidadComercial unaUnidadComercial) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaUnidadComercial.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaUnidadComercial.aplicarDanio(danioAAplicar);
 	}
 
 	@Override
 	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaUnidadIndustrial.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaUnidadIndustrial.aplicarDanio(danioAAplicar);
 	}
 
 	@Override
 	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaUnidadEnergetica.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaUnidadEnergetica.aplicarDanio(danioAAplicar);
 	}
 
 	@Override
 	public void visitar(LineaTension unaLineaTension) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaLineaTension.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaLineaTension.aplicarDanio(danioAAplicar);
 	}
 
 	@Override
 	public void visitar(Ruta unaRuta) {
-		// TODO Auto-generated method stub
-
+		Point posicion = unaRuta.getCoordenadas();
+		double danioAAplicar = this.calcularDanio(posicion);
+		
+		unaRuta.aplicarDanio(danioAAplicar);
 	}
 
 }

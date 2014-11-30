@@ -1,5 +1,6 @@
 package algo3.algocity.model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class LineaTension extends Conector implements Reparable, Visitable {
@@ -43,14 +44,18 @@ public class LineaTension extends Conector implements Reparable, Visitable {
 	}
 
 	@Override
-	public void aplicarDanio(int unDanio) {
+	public void aplicarDanio(double unDanio) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public int getSalud() {
+	public double getSalud() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public Point getCoordenadas() {
+		return new Point(this.coordX,this.coordY);
 	}
 }

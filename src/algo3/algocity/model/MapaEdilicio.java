@@ -88,22 +88,22 @@ public class MapaEdilicio implements Mapa {
 	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro,
 			int radio) {
 		ArrayList<Visitable> unidadesADevolver = new ArrayList<Visitable>();
-		unidadesADevolver.add((Visitable) this.getUnidadEn(
-				(int) epicentro.getX(), (int) epicentro.getY()));
+//		unidadesADevolver.add((Visitable) this.getUnidadEn(
+//				(int) epicentro.getX(), (int) epicentro.getY()));
 
-//		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
-//		Point fin = calcularCoordenadaDeFin(epicentro, radio);
-//
-//		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
-//			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
-//				if (validarCoordenadas(x, y)) {
-//					if (this.getUnidadEn(x, y) != null) {
-//						unidadesADevolver.add((Visitable) this
-//								.getUnidadEn(x, y));
-//					}
-//				}
-//			}
-//		}
+		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
+		Point fin = calcularCoordenadaDeFin(epicentro, radio);
+
+		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
+			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
+				if (validarCoordenadas(x, y)) {
+					if (this.getUnidadEn(x, y) != null) {
+						unidadesADevolver.add((Visitable) this
+								.getUnidadEn(x, y));
+					}
+				}
+			}
+		}
 
 		/*
 		 * for (int i = -radio; i < radio; i++) { for (int j = -radio; j < radio

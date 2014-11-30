@@ -1,8 +1,9 @@
 package algo3.algocity.model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
-public class Ruta extends Conector implements Visitable {
+public class Ruta extends Conector implements Reparable,Visitable {
 	
 	final boolean intacto = true;
 	final boolean destruido = false;
@@ -37,6 +38,22 @@ public class Ruta extends Conector implements Visitable {
 	public void repararse() {
 		estado = intacto;
 		
+	}
+
+	public Point getCoordenadas() {
+		return new Point(this.coordX,this.coordY);
+	}
+
+	@Override
+	public void aplicarDanio(double unDanio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getSalud() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

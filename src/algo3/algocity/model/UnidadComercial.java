@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class UnidadComercial extends Unidad implements Reparable, Visitable{
 
 	int consumo;
-	final int ESTADOINICIAL = 100;
-	int porcentajeDanios;
+	final double ESTADOINICIAL = 100;
+	double porcentajeDanios;
 
 	public UnidadComercial() {
 		this.costo = 5;
@@ -31,7 +31,7 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 	}
 
 	@Override
-	public void aplicarDanio(int cantidad) {
+	public void aplicarDanio(double cantidad) {
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
 		} else {
@@ -40,7 +40,7 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable{
 	}
 
 	@Override
-	public int getSalud() {
+	public double getSalud() {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 	

@@ -2,10 +2,10 @@ package algo3.algocity.model;
 
 public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 
-	final int ESTADOINICIAL = 100;
+	final double ESTADOINICIAL = 100;
 	int capacidad;
 	int radioDeInfluencia;
-	int porcentajeDanios;
+	double porcentajeDanios;
 
 	public UnidadEnergetica() {
 
@@ -38,11 +38,11 @@ public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 		return capacidad;
 	}
 
-	private int getDanios() {
+	private double getDanios() {
 		return this.porcentajeDanios;
 	}
 
-	protected int porcentajeReparacion() {
+	protected double porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
@@ -54,11 +54,11 @@ public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 		}
 	}
 
-	public int getSalud() {
+	public double getSalud() {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 
-	public void aplicarDanio(int cantidad) {
+	public void aplicarDanio(double cantidad) {
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
 		} else {

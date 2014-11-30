@@ -17,12 +17,14 @@ public abstract class Unidad {
 		return consumo;
 	}
 
-	public void aplicarDanio(int danioAAplicar) {
-		// TODO Auto-generated method stub
-	}
 
 	public Point getCoordenadas() {
 		return (new Point(this.coordX, this.coordY));
+	}
+
+	public void aplicarDanio(double i) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

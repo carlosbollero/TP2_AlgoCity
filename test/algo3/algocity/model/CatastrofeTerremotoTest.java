@@ -15,20 +15,20 @@ public class CatastrofeTerremotoTest {
 		mapas.add(me);
 		
 		FabricaUnidadResidencial fabrica = new FabricaUnidadResidencial();
-		Unidad u1 = fabrica.construir(mapas, 3, 3);
-		Unidad u2 = fabrica.construir(mapas, 4, 3);
+		UnidadResidencial u1 = (UnidadResidencial)fabrica.construir(mapas, 3, 3);
+		UnidadResidencial u2 = (UnidadResidencial)fabrica.construir(mapas, 4, 3);
 
 		me.agregar(u1, 3, 3);
 		me.agregar(u2, 4, 3);
 		
 		
-		assertEquals(100,u1.getSalud());
-		assertEquals(100,u2.getSalud());
+		assertEquals(100,u1.getSalud(),0);
+		assertEquals(100,u2.getSalud(),0);
 		
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(me,3,3);
 		
-		assertEquals(0,u1.getSalud());
-		assertEquals(0,u2.getSalud());
+		assertEquals(0,u1.getSalud(),0);
+		assertEquals(1.5,u2.getSalud(),0);
 		
 		
 
