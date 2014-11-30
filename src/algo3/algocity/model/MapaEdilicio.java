@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 public class MapaEdilicio  {
 	
-	int alto;
-	int ancho;
+	private int alto;
+	private int ancho;
 
 	HashMap<Point, Unidad> mapa;
 
@@ -64,6 +64,14 @@ public class MapaEdilicio  {
 			}
 		}
 		return null;
+	}
+
+	public int getAlto() {
+		return alto;
+	}
+
+	public int getAncho() {
+		return ancho;
 	}
 
 }
