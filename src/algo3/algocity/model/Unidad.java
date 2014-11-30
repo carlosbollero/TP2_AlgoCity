@@ -2,12 +2,17 @@ package algo3.algocity.model;
 
 import java.awt.Point;
 
-public abstract class Unidad {
+import algo3.algocity.model.requisitos.Requisito;
+
+
+
+public abstract class Unidad{
 
 	int costo;
 	int consumo;
 	int coordX;
 	int coordY;
+	protected Requisito requisitos;
 
 	public int costo() {
 		return this.costo;

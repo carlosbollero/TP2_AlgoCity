@@ -3,6 +3,8 @@ package algo3.algocity.model;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import algo3.algocity.model.mapas.Mapa;
+
 public class Ruta extends Conector implements Reparable,Visitable {
 	
 	final boolean intacto = true;

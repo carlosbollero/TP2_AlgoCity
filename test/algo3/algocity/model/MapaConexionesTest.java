@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algo3.algocity.model.fabricas.FabricaConectores;
+import algo3.algocity.model.fabricas.FabricaLineaTension;
+import algo3.algocity.model.fabricas.FabricaRuta;
+import algo3.algocity.model.fabricas.FabricaTuberias;
+import algo3.algocity.model.mapas.MapaConexiones;
+
 public class MapaConexionesTest {
 
 	int alto = 10;

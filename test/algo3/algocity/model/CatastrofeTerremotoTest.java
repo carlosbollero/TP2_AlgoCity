@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
+import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
+import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.mapas.MapaEdilicio;
+
 public class CatastrofeTerremotoTest {
 
 	@Test

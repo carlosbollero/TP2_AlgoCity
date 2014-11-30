@@ -2,6 +2,8 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 
+import algo3.algocity.model.mapas.Mapa;
+
 public class CentralNuclear extends UnidadEnergetica {
 
 	public CentralNuclear() {

@@ -2,17 +2,34 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.requisitos.RequisitoTierra;
+
 public class EstacionDeBomberos extends Unidad implements Visitante {
 
 	private Conector conexion;
-
-	public EstacionDeBomberos() {
+	
+	public EstacionDeBomberos(){
 		costo = 1500;
 		consumo = 0;
+	}
+
+	public EstacionDeBomberos(ArrayList<Mapa> mapas, int x, int y) throws NoSeCumplenLosRequisitosException {
+		
+		requisitos = new RequisitoTierra();
+		
+		if (requisitos.evaluar(mapas, x, y)){
+			costo = 1500;
+			consumo = 0;
+		}else{
+			throw new NoSeCumplenLosRequisitosException();
+		}
+		
 		conexion = null;
 	}
 	
-	public EstacionDeBomberos(ArrayList<Mapa> mapas,int x, int y) {
+	public EstacionDeBomberos(int x, int y) {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;

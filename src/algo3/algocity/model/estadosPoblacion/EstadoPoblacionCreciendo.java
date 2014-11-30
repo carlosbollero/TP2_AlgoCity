@@ -1,4 +1,7 @@
-package algo3.algocity.model;
+package algo3.algocity.model.estadosPoblacion;
+
+import algo3.algocity.model.Poblacion;
+
 
 public class EstadoPoblacionCreciendo implements EstadoPoblacion {
 
