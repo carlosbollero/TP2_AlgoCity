@@ -12,21 +12,18 @@ public class MapaEdilicioAFTest {
 	@Test
 	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		FabricaUnidades f = new FabricaUnidadResidencial();
 		
-		Unidad u = f.construir();
+		Unidad u = new UnidadResidencial();
 		
 		assertTrue(m.agregar(u, 1, 1));
 		assertTrue(m.contiene(u));
 		
-		f = new FabricaUnidadComercial();
-		u = f.construir();
+		u = new UnidadComercial();
 		
 		assertTrue(m.agregar(u, 1, 2));
 		assertTrue(m.contiene(u));
 		
-		f = new FabricaUnidadIndustrial();
-		u = f.construir();
+		u = new UnidadIndustrial();
 		
 		assertTrue(m.agregar(u, 2, 2));
 		assertTrue(m.contiene(u));		
@@ -37,7 +34,7 @@ public class MapaEdilicioAFTest {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		FabricaUnidades f = new FabricaEstacionDeBomberos();
 		
-		Unidad eb = f.construir();
+		Unidad eb = f.construir(null, null, null);
 				
 		m.agregar(eb, 1, 1);
 
@@ -54,7 +51,7 @@ public class MapaEdilicioAFTest {
 		FabricaUnidades f = new FabricaPozoAgua();
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar(f.construir(), 1, 1));
+		assertTrue(m.agregar(f.construir(null, null, null), 1, 1));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
@@ -63,7 +60,7 @@ public class MapaEdilicioAFTest {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		FabricaUnidades f = new FabricaUnidadResidencial();
 
-		Unidad u = f.construir();
+		Unidad u = f.construir(null, null, null);
 
 		assertTrue(m.agregar(u, 4, 4));
 		assertTrue(m.contiene(u));
@@ -74,7 +71,7 @@ public class MapaEdilicioAFTest {
 		FabricaUnidades f = new FabricaEstacionDeBomberos();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad eb = f.construir();
+		Unidad eb = f.construir(null, null, null);
 
 		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
 		assertFalse(m.contiene(eb));
@@ -85,7 +82,7 @@ public class MapaEdilicioAFTest {
 		FabricaUnidades f = new FabricaCentralEolica();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad ce = f.construir();
+		Unidad ce = f.construir(null, null, null);
 
 		assertTrue(m.agregar(ce, 3, 4));
 		assertTrue(m.contiene(ce));
