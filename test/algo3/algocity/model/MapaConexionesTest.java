@@ -18,8 +18,7 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeAgregarUnConectorAlMapa() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaLineaTension();
-		Conector c = f.construir();
+		Conector c = new LineaTension();
 
 		assertTrue(mc.agregar(c, 3, 3));
 	}
@@ -27,10 +26,9 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeAgregarMasDeUnConectorAlMapa() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaTuberias();
-		Conector c1 = f.construir();
-		Conector c2 = f.construir();
-		Conector c3 = f.construir();
+		Conector c1 = new Tuberia();
+		Conector c2 = new Tuberia();
+		Conector c3 = new Tuberia();
 
 		assertTrue(mc.agregar(c1, 1, 1));
 		assertTrue(mc.agregar(c2, 2, 1));
@@ -41,8 +39,8 @@ public class MapaConexionesTest {
 	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
 		FabricaConectores f = new FabricaRuta();
-		Conector c1 = f.construir();
-		Conector c2 = f.construir();
+		Conector c1 = new Ruta();
+		Conector c2 = new Ruta();
 
 		assertTrue(mc.agregar(c1, 1, 1));
 		assertTrue(mc.contiene(c1));
@@ -54,8 +52,8 @@ public class MapaConexionesTest {
 	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
 		FabricaConectores f = new FabricaRuta();
-		Conector c1 = f.construir();
-		Conector c2 = f.construir();
+		Conector c1 = new Ruta();
+		Conector c2 = new Ruta();
 
 		mc.agregar(c1, 1, 1);
 		mc.agregar(c2, 2, 2);
@@ -63,8 +61,8 @@ public class MapaConexionesTest {
 		assertFalse(mc
 				.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c2)));
 
-		Conector c3 = f.construir();
-		Conector c4 = f.construir();
+		Conector c3 = new Ruta();
+		Conector c4 = new Ruta();
 
 		mc.agregar(c3, 4, 4);
 		mc.agregar(c4, 3, 4);
