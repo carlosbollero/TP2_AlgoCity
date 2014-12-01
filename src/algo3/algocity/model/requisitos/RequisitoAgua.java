@@ -1,17 +1,21 @@
 package algo3.algocity.model.requisitos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.mapas.MapaGral;
 
 public class RequisitoAgua implements Requisito {
 	
-	final boolean agua = false;
-	
-	public boolean evaluar(ArrayList<Mapa> mapas, int x, int y) {
+	public boolean evaluar(ArrayList<MapaGral> mapas, Unidad unidad) {
+		Iterator<MapaGral> it = mapas.iterator();
+		boolean resultado = true;
 		
-		return mapas.get(0).sePuedeConstruir(agua, x, y);
-		
+		while (resultado && it.hasNext()){
+			resultado = it.next().sePuedeConstruir(unidad);
+		}		
+		return resultado;
 	}
 
 }

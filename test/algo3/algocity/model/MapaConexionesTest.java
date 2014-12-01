@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.fabricas.FabricaConectores;
-import algo3.algocity.model.fabricas.FabricaLineaTension;
-import algo3.algocity.model.fabricas.FabricaRuta;
-import algo3.algocity.model.fabricas.FabricaTuberias;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.mapas.MapaConexiones;
 
 public class MapaConexionesTest {
@@ -38,7 +38,6 @@ public class MapaConexionesTest {
 	@Test
 	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaRuta();
 		Conector c1 = new Ruta();
 		Conector c2 = new Ruta();
 
@@ -51,7 +50,6 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaRuta();
 		Conector c1 = new Ruta();
 		Conector c2 = new Ruta();
 

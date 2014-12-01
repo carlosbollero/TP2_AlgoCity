@@ -1,16 +1,16 @@
 package algo3.algocity.model.fabricas;
 
-import java.util.ArrayList;
-
-import algo3.algocity.model.CentralMinera;
-import algo3.algocity.model.Unidad;
+import algo3.algocity.model.construcciones.CentralMinera;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 
-public class FabricaCentralMineral implements FabricaUnidades {
+public class FabricaCentralMineral implements FabricaEnergetica {
 
-	public Unidad construir(ArrayList<Mapa> mapas, int x, int y) {
+	public UnidadEnergetica construir(Mapa mapa, int x, int y)
+			throws NoSeCumplenLosRequisitosException {
 
-		return new CentralMinera(mapas, x, y);
+		return new CentralMinera(mapa, x, y);
 	}
 
 }

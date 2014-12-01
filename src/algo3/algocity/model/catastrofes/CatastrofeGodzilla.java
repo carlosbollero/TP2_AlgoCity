@@ -4,15 +4,15 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import algo3.algocity.model.LineaTension;
-import algo3.algocity.model.Ruta;
-import algo3.algocity.model.Unidad;
-import algo3.algocity.model.UnidadComercial;
-import algo3.algocity.model.UnidadEnergetica;
-import algo3.algocity.model.UnidadIndustrial;
-import algo3.algocity.model.UnidadResidencial;
-import algo3.algocity.model.Visitable;
-import algo3.algocity.model.Visitante;
+import algo3.algocity.model.caracteristicas.Visitable;
+import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
+import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class CatastrofeGodzilla implements Visitante {

@@ -11,6 +11,7 @@
 package algo3.algocity.model.mapas;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
@@ -18,14 +19,15 @@ import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-import algo3.algocity.model.Conector;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.construcciones.Unidad;
 
-
-public class MapaConexiones implements Mapa {
+public class MapaConexiones {
 
 	int alto;
 	int ancho;
 	LinkedHashMap<Point, Conector> mapa;
+	ArrayList<Point> posicionesRelevantes;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 
@@ -34,6 +36,7 @@ public class MapaConexiones implements Mapa {
 		this.ancho = ancho;
 		this.mapa = new LinkedHashMap<Point, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
+		posicionesRelevantes = new ArrayList<Point>();
 	}
 
 	public boolean agregar(Conector elemento, int x, int y) {
@@ -98,6 +101,15 @@ public class MapaConexiones implements Mapa {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
 		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
 	}
+	
+	public boolean hayConexion(Point unPunto){
+		for (Point coord : posicionesRelevantes){
+			if (hayConexion(unPunto, coord)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public Point getCoordenadas(Conector elemento) {
 		for (Entry<Point, Conector> entry : mapa.entrySet()) {
@@ -107,11 +119,28 @@ public class MapaConexiones implements Mapa {
 		}
 		return null;
 	}
-
-	@Override
-	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
-		// TODO Auto-generated method stub
+	
+	public void agregarPosicionRelevante(int x, int y) {
+		if (posicionesRelevantes == null){
+			posicionesRelevantes = new ArrayList<Point>();
+		}
+		posicionesRelevantes.add(new Point(x, y));
+		
+	}
+	
+	public boolean sePuedeConstruir(Unidad unidad) {
+		for (Point coord : posicionesRelevantes){
+			if (hayConexion(unidad.getCoordenadas(), coord)){
+				return true;
+			}
+		}
 		return false;
 	}
+
+	public boolean sePuedeConstruir(Conector conector) {
+		return tieneCoordenadaOcupada(conector.getCoordenadas().x,
+				conector.getCoordenadas().y);
+	}
+
 
 }

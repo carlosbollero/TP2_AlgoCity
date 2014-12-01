@@ -1,17 +1,21 @@
 package algo3.algocity.model.requisitos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.mapas.MapaGral;
 
 public class RequisitoTierra implements Requisito {
 	
-	final boolean tierra = true;
-
-	@Override
-	public boolean evaluar(ArrayList<Mapa> mapas, int x, int y) {
-		// TODO Auto-generated method stub
-		return mapas.get(0).sePuedeConstruir(tierra, x, y);
+	public boolean evaluar(ArrayList<MapaGral> mapas, Unidad unidad) {
+		Iterator<MapaGral> it = mapas.iterator();
+		boolean resultado = true;
+		
+		while (resultado && it.hasNext()){
+			resultado = it.next().sePuedeConstruir(unidad);
+		}		
+		return resultado;
 	}
 
 }

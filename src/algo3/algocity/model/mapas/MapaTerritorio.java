@@ -3,13 +3,16 @@ package algo3.algocity.model.mapas;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
-import algo3.algocity.model.Superficie;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.terreno.Superficie;
+import algo3.algocity.model.terreno.SuperficieAgua;
+import algo3.algocity.model.terreno.SuperficieTierra;
 
-
-public class MapaTerritorio implements Mapa {
+public class MapaTerritorio {
 
 	int alto;
 	int ancho;
@@ -25,31 +28,58 @@ public class MapaTerritorio implements Mapa {
 		this.mapa = new HashMap<Point, Superficie>();
 		this.inicializar();
 	}
+	
+	public MapaTerritorio(int alto, int ancho, int test) {
+		this.alto = alto;
+		this.ancho = ancho;
+		this.mapa = new HashMap<Point, Superficie>();
+		inicializarConTierraParaTest();
+	}
+	
+	
 
 	private void inicializar() {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
-				Superficie posicion = new Superficie(aleatorio.nextBoolean());
+				Superficie posicion;
+				if (aleatorio.nextBoolean()) {
+					posicion = new SuperficieAgua();
+				} else {
+					posicion = new SuperficieTierra();
+				}
 				agregar(posicion, x, y);
 			}
 		}
 	}
 	
-	public boolean agregar(Superficie superficie, int x, int y){
+	private void inicializarConTierraParaTest(){
+		for (int x = 0; x < alto; x++) {
+			for (int y = 0; y < ancho; y++) {
+				Superficie posicion = new SuperficieTierra();
+				agregar(posicion, x, y);
+			}
+		}
+	}
+
+	public boolean agregar(Superficie superficie, int x, int y) {
 		Point coord = new Point(x, y);
 		mapa.put(coord, superficie);
 		return (mapa.containsKey(coord) && mapa.containsValue(superficie));
 	}
 
-	public boolean consultarCoordenada(int x, int y) {
-		return this.mapa.get(new Point(x, y)).tipo();
+	public boolean posicionConAgua(Point punto) {
+		return (getSuperficie(punto).esAgua());
 	}
 
-	public Superficie getContenido(int x, int y) {
-		return (this.mapa.get(new Point(x, y)));
+	public boolean posicionConTierra(Point punto) {
+		return (getSuperficie(punto).esTierra());
 	}
 
-	//Este método se implementó para poder realizar test sobre Random
+	public Superficie getSuperficie(Point punto) {
+		return (this.mapa.get(punto));
+	}
+
+	// Este método se implementó para poder realizar test sobre Random
 	public Point getPosicionDeUnaSuperficieDeAgua() {
 		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
 			if (entry.getValue().esAgua()) {
@@ -70,8 +100,8 @@ public class MapaTerritorio implements Mapa {
 		}
 		return null;
 	}
-	
-	public ArrayList<Point> posicionesConTierra(){
+
+	public ArrayList<Point> posicionesConTierra() {
 		ArrayList<Point> lista = new ArrayList<Point>();
 		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
 			if (entry.getValue().esTierra()) {
@@ -81,14 +111,21 @@ public class MapaTerritorio implements Mapa {
 		return lista;
 	}
 
-	@Override
-	public boolean sePuedeConstruir(boolean resultadoEsperado,int x, int y) {
-		if (resultadoEsperado == tierra){
-			return (consultarCoordenada(x, y) == resultadoEsperado);
-		}else if (resultadoEsperado == agua) {
-			return (consultarCoordenada(x, y) == resultadoEsperado);
-		}
-		return false;
+	public boolean sePuedeConstruir(Unidad unidad) {
+		return unidad.esConstruibleEn(getSuperficie(unidad.getCoordenadas())
+				.getSuperficie());
+	}
+
+	// public boolean sePuedeConstruir(Servicio servicio) {
+	// return servicio.esConstruibleEn(getSuperficie(
+	// servicio.getCoordenadas().x, servicio.getCoordenadas().y)
+	// .getSuperficie());
+	// }
+
+	public boolean sePuedeConstruir(Conector conector) {
+		return conector
+				.esConstruibleEn(getSuperficie(conector.getCoordenadas())
+						.getSuperficie());
 	}
 
 }

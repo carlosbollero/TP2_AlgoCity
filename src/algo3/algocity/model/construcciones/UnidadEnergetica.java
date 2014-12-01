@@ -1,30 +1,16 @@
-package algo3.algocity.model;
+package algo3.algocity.model.construcciones;
 
-public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
+import algo3.algocity.model.caracteristicas.Reparable;
+import algo3.algocity.model.caracteristicas.Visitable;
+import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.terreno.Superficie;
+
+public abstract class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 
 	final double ESTADOINICIAL = 100;
 	int capacidad;
 	int radioDeInfluencia;
 	double porcentajeDanios;
-
-	public UnidadEnergetica() {
-
-	}
-
-	// TODO
-	/* Este constructor no vuela??--No es el que usa edificador */
-	public UnidadEnergetica(int capacidad, int radioDeInfluencia) {
-		this.capacidad = capacidad;
-		this.radioDeInfluencia = radioDeInfluencia;
-		this.porcentajeDanios = 0;
-	}
-
-	public UnidadEnergetica(int costoCentral, int capacidadElectrica,
-			int radioInfluencia) {
-		this.costo = costoCentral;
-		this.capacidad = capacidadElectrica;
-		this.radioDeInfluencia = radioInfluencia;
-	}
 
 	public int costo() {
 		return this.costo;
@@ -75,5 +61,10 @@ public class UnidadEnergetica extends Unidad implements Reparable, Visitable {
 	public void aceptar(Visitante unVisitante) {
 		unVisitante.visitar(this);
 		
+	}
+
+	@Override
+	public boolean esConstruibleEn(Superficie superficie) {
+		return superficie.esTierra();
 	}
 }
