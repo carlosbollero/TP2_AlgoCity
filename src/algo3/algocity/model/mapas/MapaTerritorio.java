@@ -29,11 +29,15 @@ public class MapaTerritorio {
 		this.inicializar();
 	}
 	
-	public MapaTerritorio(int alto, int ancho, int test) {
+	public MapaTerritorio(int alto, int ancho, boolean test) {
 		this.alto = alto;
 		this.ancho = ancho;
 		this.mapa = new HashMap<Point, Superficie>();
-		inicializarConTierraParaTest();
+		if (test){
+			inicializarConTierraParaTest();
+		}else{
+			inicializarConAguaParaTest();
+		}
 	}
 	
 	
@@ -56,6 +60,15 @@ public class MapaTerritorio {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
 				Superficie posicion = new SuperficieTierra();
+				agregar(posicion, x, y);
+			}
+		}
+	}
+	
+	private void inicializarConAguaParaTest(){
+		for (int x = 0; x < alto; x++) {
+			for (int y = 0; y < ancho; y++) {
+				Superficie posicion = new SuperficieAgua();
 				agregar(posicion, x, y);
 			}
 		}

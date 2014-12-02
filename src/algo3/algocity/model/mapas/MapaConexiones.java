@@ -64,10 +64,10 @@ public class MapaConexiones {
 
 	private boolean hayDistanciaMinima(Point point, Point key) {
 		boolean resultado = false;
-		int x1 = (int) point.getX();
-		int y1 = (int) point.getY();
-		int x2 = (int) key.getX();
-		int y2 = (int) key.getY();
+		int x1 = point.x;
+		int y1 = point.y;
+		int x2 = key.x;
+		int y2 = key.y;
 		if ((Math.abs(x1 - x2) == 1) && (y1 == y2)) {
 			resultado = true;
 		}
@@ -118,6 +118,15 @@ public class MapaConexiones {
 			}
 		}
 		return null;
+	}
+	
+	public boolean hayConectorAdyacente(Point coord){
+		for (Entry<Point, Conector> entry : mapa.entrySet()){
+			if (hayDistanciaMinima(coord, entry.getKey())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void agregarPosicionRelevante(int x, int y) {
