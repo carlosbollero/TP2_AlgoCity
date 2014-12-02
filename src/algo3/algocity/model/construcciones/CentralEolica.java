@@ -26,7 +26,7 @@ public class CentralEolica extends UnidadEnergetica {
 		coordenadas = new Point(x, y);
 		this.costo = 1000;
 		this.capacidad = 100;
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
 			throw new NoSeCumplenLosRequisitosException();
 		}
 

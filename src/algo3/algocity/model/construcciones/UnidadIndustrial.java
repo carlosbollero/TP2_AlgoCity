@@ -137,7 +137,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Reparable, Vis
 	}
 	
 	private boolean hayConexionesEn(Mapa mapa) {
-		return mapa.hayConexionParcial(coordenadas);
+		return (mapa.hayConexionConRedElectrica(coordenadas)
+				&& mapa.hayConexionConRedElectrica(coordenadas));
 	}
 
 }

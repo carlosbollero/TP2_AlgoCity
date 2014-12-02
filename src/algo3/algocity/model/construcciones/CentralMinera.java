@@ -27,7 +27,7 @@ public class CentralMinera extends UnidadEnergetica {
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
 		this.coordenadas = new Point(x, y);
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}

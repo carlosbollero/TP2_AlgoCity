@@ -27,7 +27,7 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
 		this.coordenadas = new Point(x, y);
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
