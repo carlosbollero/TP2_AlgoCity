@@ -9,6 +9,11 @@ Supuestos:
 ==========
 - Para agregar una Unidad se deben cumplir previamente todos los requisitos.
 - Las rutas las repara completamente EstacionDeBomberos.
+- La poblacion va a variar segun un cálculo entre la CAPACIDAD_TOTAL de poblacion
+  y la CAPACIDAD_DE_EMPLEO. Ese cálculo va a dar una taza de crecimiento que va a
+  actualizar la poblacion turno a turno.
+- La catastrofe va a producir que la CAPACIDAD_TOTAL (segun el porcetaje de daño que tenga cada unidad)
+  disminuya y actualizar el indice.
 
 
 
