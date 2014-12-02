@@ -29,6 +29,8 @@ public class MapaTerritorio {
 		this.inicializar();
 	}
 	
+	// CONSTRUCTOR PARA TESTS
+	/*************************************************************/
 	public MapaTerritorio(int alto, int ancho, boolean test) {
 		this.alto = alto;
 		this.ancho = ancho;
@@ -39,8 +41,7 @@ public class MapaTerritorio {
 			inicializarConAguaParaTest();
 		}
 	}
-	
-	
+	/*************************************************************/	
 
 	private void inicializar() {
 		for (int x = 0; x < alto; x++) {
@@ -55,24 +56,7 @@ public class MapaTerritorio {
 			}
 		}
 	}
-	
-	private void inicializarConTierraParaTest(){
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
-				Superficie posicion = new SuperficieTierra();
-				agregar(posicion, x, y);
-			}
-		}
-	}
-	
-	private void inicializarConAguaParaTest(){
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
-				Superficie posicion = new SuperficieAgua();
-				agregar(posicion, x, y);
-			}
-		}
-	}
+
 
 	public boolean agregar(Superficie superficie, int x, int y) {
 		Point coord = new Point(x, y);
@@ -80,38 +64,16 @@ public class MapaTerritorio {
 		return (mapa.containsKey(coord) && mapa.containsValue(superficie));
 	}
 
-	public boolean posicionConAgua(Point punto) {
+	public boolean esAgua(Point punto) {
 		return (getSuperficie(punto).esAgua());
 	}
 
-	public boolean posicionConTierra(Point punto) {
+	public boolean esTierra(Point punto) {
 		return (getSuperficie(punto).esTierra());
 	}
 
 	public Superficie getSuperficie(Point punto) {
 		return (this.mapa.get(punto));
-	}
-
-	// Este método se implementó para poder realizar test sobre Random
-	public Point getPosicionDeUnaSuperficieDeAgua() {
-		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
-			if (entry.getValue().esAgua()) {
-				return entry.getKey();
-			}
-		}
-		return null;
-	}
-
-	// TODO
-	// FEOFEO
-	public Point getPosicionDeUnaSuperficieDeTierra() {
-
-		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
-			if (entry.getValue().esTierra()) {
-				return entry.getKey();
-			}
-		}
-		return null;
 	}
 
 	public ArrayList<Point> posicionesConTierra() {
@@ -140,5 +102,48 @@ public class MapaTerritorio {
 				.esConstruibleEn(getSuperficie(conector.getCoordenadas())
 						.getSuperficie());
 	}
+
+
+
+
+	// METODOS UTILIZADOS POR TESTS PARA NO TRABAJAR SOBRE RANDOM
+	/****************************************************************/	
+	private void inicializarConTierraParaTest(){
+		for (int x = 0; x < alto; x++) {
+			for (int y = 0; y < ancho; y++) {
+				Superficie posicion = new SuperficieTierra();
+				agregar(posicion, x, y);
+			}
+		}
+	}
+	
+	private void inicializarConAguaParaTest(){
+		for (int x = 0; x < alto; x++) {
+			for (int y = 0; y < ancho; y++) {
+				Superficie posicion = new SuperficieAgua();
+				agregar(posicion, x, y);
+			}
+		}
+	}
+	
+	public Point posicionConAgua() {
+		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+			if (entry.getValue().esAgua()) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+	
+	public Point posicionConTierra() {
+		
+		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+			if (entry.getValue().esTierra()) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+	/****************************************************************/
 
 }

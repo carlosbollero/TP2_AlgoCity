@@ -7,6 +7,8 @@ import algo3.algocity.model.caracteristicas.Reparable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Agregador;
+import algo3.algocity.model.mapas.AgregadorResidencial;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -134,6 +136,10 @@ public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
 		return superficie.esTierra();
+	}
+	
+	public Agregador agregador(){
+		return new AgregadorResidencial();
 	}
 
 }

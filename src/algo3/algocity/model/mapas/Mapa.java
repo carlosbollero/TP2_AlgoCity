@@ -20,6 +20,7 @@ public class Mapa {
 	MapaConexiones tuberias;
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
+	Agregador agregador;
 
 	public Mapa(int alto, int ancho) {
 		this.alto = alto;
@@ -36,31 +37,29 @@ public class Mapa {
 		boolean tierra = true;
 		territorio = new MapaTerritorio(alto, ancho, tierra);
 	}
-	
+
 	public void setTerritorioAguaParaTest() {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
 	}
 
-	public int getAlto() {
+	public int alto() {
 		return alto;
 	}
 
-	public int getAncho() {
+	public int ancho() {
 		return ancho;
 	}
 
 	public void agregar(Unidad unidad, int x, int y) {
 		ciudad.agregar(unidad, x, y);
 	}
-	
-	public void agregar(PozoDeAgua pozo, int x, int y){
+
+	public void agregar(PozoDeAgua pozo, int x, int y) {
 		ciudad.agregar(pozo, x, y);
 		tuberias.agregarPosicionRelevante(x, y);
 	}
 
-	// Supongo que para que una residencia este conectada tmb tiene
-	// que tener una ruta a una central
 	public void agregar(UnidadEnergetica unidad, int x, int y) {
 		ciudad.agregar(unidad, x, y);
 		redElectrica.agregarPosicionRelevante(x, y);
@@ -78,12 +77,12 @@ public class Mapa {
 		tuberias.agregar(tuberia, x, y);
 	}
 
-	public Point getPosicionConAgua() {
-		return territorio.getPosicionDeUnaSuperficieDeAgua();
+	public Point posicionConAgua() {
+		return territorio.posicionConAgua();
 	}
 
-	public Point getPosicionConTierra() {
-		return territorio.getPosicionDeUnaSuperficieDeTierra();
+	public Point posicionConTierra() {
+		return territorio.posicionConTierra();
 	}
 
 	public boolean contiene(Unidad u) {
@@ -111,7 +110,5 @@ public class Mapa {
 	public boolean hayConexionConRutas(Point coordenadas) {
 		return rutas.hayConectorAdyacente(coordenadas);
 	}
-
-	// Agregar requisitos solo agua
 
 }

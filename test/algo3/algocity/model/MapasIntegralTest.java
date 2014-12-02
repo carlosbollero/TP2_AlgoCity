@@ -42,11 +42,11 @@ public class MapasIntegralTest {
 		m.setTerritorioTierraParaTest();
 		
 		try{
-//			CONSTRUYO UN POZO DE AGUA
+			//CONSTRUYO UN POZO DE AGUA
 			PozoDeAgua p = new PozoDeAgua(4, 2);
 			m.agregar(p, 4, 2);
 			
-//			construyo red de tuberias			
+			//construyo red de tuberias			
 			fc = new FabricaTuberias();
 			Conector t = fc.construir(m, 4, 2);
 			m.agregarTuberia((Tuberia)t, 4, 2);
@@ -55,12 +55,12 @@ public class MapasIntegralTest {
 			t = fc.construir(m, 2, 2);
 			m.agregarTuberia((Tuberia)t, 2, 2);
 
-//			CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA			
+			//CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA			
 			fe = new FabricaCentralEolica();
 			UnidadEnergetica ue = fe.construir(m, 2, 2);
 			m.agregar(ue, 2, 2);
 			
-//			CONSTRUYO LINEAS DE TENSION
+			//CONSTRUYO LINEAS DE TENSION
 			fc = new FabricaLineaTension();
 			for (int i = 2; i <= 4; i++){
 				fc = new FabricaLineaTension();
@@ -71,7 +71,7 @@ public class MapasIntegralTest {
 				m.agregarRuta((Ruta)r, 2, i);
 			}
 			
-//			CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL ENERGETICA
+			//CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL ENERGETICA
 			fu = new FabricaUnidadResidencial();
 			Unidad ur = fu.construir(m, 2, 4);
 			m.agregar(ur, 2, 4);
@@ -87,7 +87,7 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
 		Mapa m = new Mapa(alto, ancho);
 		fu = new FabricaUnidadIndustrial();
-		Point p = m.getPosicionConTierra();
+		Point p = m.posicionConTierra();
 
 		try {
 			Unidad u = fu.construir(m, p.x, p.y);
@@ -102,7 +102,7 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos() {
 		Mapa m = new Mapa(alto, ancho);
 		fu = new FabricaUnidadResidencial();
-		Point p = m.getPosicionConTierra();
+		Point p = m.posicionConTierra();
 
 		try {
 			Unidad u = fu.construir(m, p.x, p.y);
@@ -122,7 +122,7 @@ public class MapasIntegralTest {
 
 		fu = new FabricaPozoAgua();
 
-		Point p = m.getPosicionConAgua();
+		Point p = m.posicionConAgua();
 
 		try {
 			PozoDeAgua u = (PozoDeAgua) fu.construir(m, p.x, p.y);
@@ -141,7 +141,7 @@ public class MapasIntegralTest {
 
 		fu = new FabricaEstacionDeBomberos();
 
-		Point p = m.getPosicionConTierra();
+		Point p = m.posicionConTierra();
 
 		try {
 			Unidad u = fu.construir(m, p.x, p.y);

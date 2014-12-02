@@ -27,8 +27,8 @@ public class CatastrofeTerremoto implements Visitante {
 	Random aleatorio;
 
 	public CatastrofeTerremoto(Mapa mapa) {
-		this.alto = mapa.getAlto();
-		this.ancho = mapa.getAncho();
+		this.alto = mapa.alto();
+		this.ancho = mapa.ancho();
 		this.radio = 25;
 		this.tasa = 1.5;
 		this.epicentro = new Point(aleatorio.nextInt(this.ancho + 1),
@@ -39,8 +39,8 @@ public class CatastrofeTerremoto implements Visitante {
 
 	// Usado para probar los tests, fija una posicion de epicentro
 	public CatastrofeTerremoto(Mapa mapa, int x, int y) {
-		this.alto = mapa.getAlto();
-		this.ancho = mapa.getAncho();
+		this.alto = mapa.alto();
+		this.ancho = mapa.ancho();
 		this.radio = 25;
 		this.tasa = 1.5;
 		this.epicentro = new Point(x, y);
