@@ -10,40 +10,52 @@ public class Turno extends Observable implements Runnable {
 	 */
 
 	int numero;
+	volatile boolean jugando;
+	Thread hilo;
 
 	public Turno() {
 		numero = 1;
+		jugando = true;
+
 	}
 
 	public int getTurno() {
 		return numero;
 	}
 
-	public void avanzar() {
-		// long referencia = System.currentTimeMillis();
-		// long actual;
-		//
-		// do{
-		// actual = System.currentTimeMillis();
-		// }while(Math.abs(referencia - actual) > 1999);
-
+	public void avanzar() {		
 		numero++;
-		setChanged();
-		notifyObservers();
-
+	}
+	
+	public void iniciarHilo(){
+		hilo = new Thread(this);
+		hilo.start();
+	}
+	
+	public boolean estaVivo(){
+		return hilo.isAlive();
 	}
 
+	@Override
 	public void run() {
-		// avanzarTurno();
+		System.out.println("STARTING");
+		while (jugando){
+			System.out.println("Start at " + (int)((System.currentTimeMillis())/1000.0));
+//			Thread.sleep(20000);
+			avanzar();
+			setChanged();
+			notifyObservers();
+			if (numero == 2){
+				jugando = false;
+			}
+			
+		}
+		System.out.println("SALIENDO");		
 	}
 
-	public static void main(String args[]) {
-		// (new Thread(new Turno())).start();
+	public void finalizar(){
+		jugando = false;
 	}
-
-	public void iniciar() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 }

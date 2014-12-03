@@ -10,18 +10,6 @@ import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class JuegoTest {
 
-	@Test
-	public void testSePuedeCrearUnJuegoValido() {
-
-		Juego unJuego = new Juego();
-
-		assertTrue(unJuego.getMapaEdilicio() instanceof MapaEdilicio);
-		assertTrue(unJuego.getMapaTerritorio() instanceof MapaTerritorio);
-		assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaLineasDeTension() instanceof MapaConexiones);
-	}
-
 	/*
 	 * @Test public void testAgregarPozoDeAguaEnMapaCorrespondiente() {
 	 * 
