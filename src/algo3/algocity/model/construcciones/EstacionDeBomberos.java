@@ -1,10 +1,16 @@
-package algo3.algocity.model;
+package algo3.algocity.model.construcciones;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
+import algo3.algocity.model.caracteristicas.Visitable;
+import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.requisitos.RequisitoTierra;
+import algo3.algocity.model.terreno.Superficie;
 
 public class EstacionDeBomberos extends Unidad implements Visitante {
 
@@ -15,27 +21,22 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 		consumo = 0;
 	}
 
+	public EstacionDeBomberos(Mapa mapa, int x, int y)
+			throws NoSeCumplenLosRequisitosException {
+
+		coordenadas = new Point(x, y);
+		costo = 1500;
+		consumo = 0;
+		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
+			throw new NoSeCumplenLosRequisitosException();
+		}
+	}
+
 	public EstacionDeBomberos(int x, int y) {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;
-		this.coordX = x;
-		this.coordY = y;
-	}
-
-	public EstacionDeBomberos(ArrayList<Mapa> mapas, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
-
-		requisitos = new RequisitoTierra();
-
-		if (requisitos.evaluar(mapas, x, y)) {
-			costo = 1500;
-			consumo = 0;
-		} else {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-
-		conexion = null;
+		this.coordenadas = new Point(x, y);
 	}
 
 	public void actuar(ArrayList<Visitable> objetivos) {
@@ -87,6 +88,27 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	public void visitar(Unidad unaUnidad) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean esConstruibleEn(Superficie superficie) {
+		return (superficie.esTierra());
+	}
+
+	@Override
+	public void aplicarDanio(double i) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public double getSalud() {
+		return 0;
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
 	}
 
 }

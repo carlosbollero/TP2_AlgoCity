@@ -4,12 +4,15 @@ import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 
 import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
+import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class GodzillaTest {
@@ -22,36 +25,40 @@ public class GodzillaTest {
 
 	@Test
 	public void testSePuedeDaniarUnaUnidadResidencial() {
+		me = new MapaEdilicio(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadResidencial ur = new UnidadResidencial();
+		UnidadResidencial ur = new UnidadResidencial(1,1);
 		
 		ur.aceptar(g);
 		
-		assertEquals(ur.getSalud(), 0);
+		assertEquals(ur.getSalud(), 0, 0);
 	}
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadComercial() {
+		me = new MapaEdilicio(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadComercial uc = new UnidadComercial();
+		UnidadComercial uc = new UnidadComercial(1,1);
 		
 		uc.aceptar(g);
 		
-		assertEquals(uc.getSalud(), 25);
+		assertEquals(uc.getSalud(), 25, 0);
 	}
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadIndustrial() {
+		me = new MapaEdilicio(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadIndustrial ui = new UnidadIndustrial();
+		UnidadIndustrial ui = new UnidadIndustrial(1,1);
 		
 		ui.aceptar(g);
 		
-		assertEquals(ui.getSalud(), 60);
+		assertEquals(ui.getSalud(), 60, 0);
 	}
 	
 	@Test
 	public void testSePuedeDaniarUnaLineaDeTension() {
+		me = new MapaEdilicio(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		LineaTension l = new LineaTension();
 		
@@ -62,6 +69,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaRuta() {
+		me = new MapaEdilicio(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		Ruta r = new Ruta();
 		

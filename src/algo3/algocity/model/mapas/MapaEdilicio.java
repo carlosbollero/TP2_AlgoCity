@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import algo3.algocity.model.Unidad;
-import algo3.algocity.model.Visitable;
+import algo3.algocity.model.caracteristicas.Visitable;
+import algo3.algocity.model.construcciones.Unidad;
 
-public class MapaEdilicio implements Mapa {
+public class MapaEdilicio {
 
 	private int alto;
 	private int ancho;
@@ -21,28 +21,18 @@ public class MapaEdilicio implements Mapa {
 		this.mapa = new HashMap<Point, Unidad>();
 	}
 
-	public boolean agregar(Unidad elemento, int x, int y) {
+	public boolean agregar(Unidad elemento) {
+		int x = elemento.getCoordenadas().x;
+		int y = elemento.getCoordenadas().y;
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
-		// TODO
-		// la unidad tendria que saber sus requisitos, y aca
-		// desde mapaEdilicio tener acceso a todos los otros mapas de
-		// conexiones y verificar que estos requisitos se cumplan
-		Point clave = new Point(x, y);
-		if (!this.mapa.containsKey(clave)) {
-			this.mapa.put(clave, elemento);
+
+		if (!this.mapa.containsKey(elemento.getCoordenadas())) {
+			this.mapa.put(elemento.getCoordenadas(), elemento);
 			return true;
 		}
 		return false;
-	}
-
-	public int getAlto() {
-		return this.alto;
-	}
-
-	public int getAncho() {
-		return this.ancho;
 	}
 
 	public void remover(int x, int y) {
@@ -53,7 +43,7 @@ public class MapaEdilicio implements Mapa {
 		return (this.estaDentroDeLimites(x, y));
 	}
 
-	protected boolean estaDentroDeLimites(int i, int j) {
+	private boolean estaDentroDeLimites(int i, int j) {
 		return ((i >= 0) && (i <= this.alto) && (j >= 0) && (j <= this.ancho));
 	}
 
@@ -65,7 +55,7 @@ public class MapaEdilicio implements Mapa {
 		return (this.mapa.containsKey(new Point(x, y)));
 	}
 
-	protected boolean estaVacio() {
+	public boolean vacia() {
 		return (this.mapa.isEmpty());
 	}
 
@@ -91,8 +81,8 @@ public class MapaEdilicio implements Mapa {
 	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro,
 			int radio) {
 		ArrayList<Visitable> unidadesADevolver = new ArrayList<Visitable>();
-//		unidadesADevolver.add((Visitable) this.getUnidadEn(
-//				(int) epicentro.getX(), (int) epicentro.getY()));
+		// unidadesADevolver.add((Visitable) this.getUnidadEn(
+		// (int) epicentro.getX(), (int) epicentro.getY()));
 
 		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
 		Point fin = calcularCoordenadaDeFin(epicentro, radio);
@@ -107,6 +97,7 @@ public class MapaEdilicio implements Mapa {
 				}
 			}
 		}
+		return unidadesADevolver;
 
 		/*
 		 * for (int i = -radio; i < radio; i++) { for (int j = -radio; j < radio
@@ -115,8 +106,6 @@ public class MapaEdilicio implements Mapa {
 		 * this.getUnidadEn( (int) (epicentro.getX() + j), (int)
 		 * (epicentro.getY() + i))); } } }
 		 */
-
-		return unidadesADevolver;
 	}
 
 	private Point calcularCoordenadaDeInicio(Point epicentro, int radio) {
@@ -151,9 +140,25 @@ public class MapaEdilicio implements Mapa {
 		return new Point(xf, yf);
 	}
 
-	@Override
-	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+	/*********************************************************************/
+	/*********************************************************************/
+	// 					REVISAR PORQUE ES REALMENTE FEO
+	/*********************************************************************/
+	public int getCapacidadHabitacional() {
+		int capacidad = 0;
+		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
+			capacidad += entry.getValue().getCapacidadHabitacional();
+		}
+		return capacidad;
 	}
+
+	public int getCapacidadEmpleo() {
+		int capacidad = 0;
+		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
+			capacidad += entry.getValue().getCapacidadEmpleo();
+		}
+		return capacidad;
+	}
+	/*********************************************************************/
+	/*********************************************************************/
 }

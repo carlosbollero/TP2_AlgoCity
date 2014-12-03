@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.fabricas.FabricaConectores;
-import algo3.algocity.model.fabricas.FabricaLineaTension;
-import algo3.algocity.model.fabricas.FabricaRuta;
-import algo3.algocity.model.fabricas.FabricaTuberias;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.mapas.MapaConexiones;
 
 public class MapaConexionesTest {
@@ -20,7 +20,7 @@ public class MapaConexionesTest {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
 		Conector c = new LineaTension();
 
-		assertTrue(mc.agregar(c, 3, 3));
+		assertTrue(mc.agregar(c));
 	}
 
 	@Test
@@ -30,52 +30,50 @@ public class MapaConexionesTest {
 		Conector c2 = new Tuberia();
 		Conector c3 = new Tuberia();
 
-		assertTrue(mc.agregar(c1, 1, 1));
-		assertTrue(mc.agregar(c2, 2, 1));
-		assertTrue(mc.agregar(c3, 3, 3));
+		assertTrue(mc.agregar(c1));
+		assertTrue(mc.agregar(c2));
+		assertTrue(mc.agregar(c3));
 	}
 
 	@Test
 	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaRuta();
 		Conector c1 = new Ruta();
 		Conector c2 = new Ruta();
 
-		assertTrue(mc.agregar(c1, 1, 1));
+		assertTrue(mc.agregar(c1));
 		assertTrue(mc.contiene(c1));
-		assertFalse(mc.agregar(c2, 1, 1));
+		assertFalse(mc.agregar(c2));
 		assertFalse(mc.contiene(c2));
 	}
 
 	@Test
 	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		FabricaConectores f = new FabricaRuta();
 		Conector c1 = new Ruta();
 		Conector c2 = new Ruta();
 
-		mc.agregar(c1, 1, 1);
-		mc.agregar(c2, 2, 2);
+		mc.agregar(c1);
+		mc.agregar(c2);
 
 		assertFalse(mc
-				.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c2)));
+				.hayConexion(mc.coordenadas(c1), mc.coordenadas(c2)));
 
 		Conector c3 = new Ruta();
 		Conector c4 = new Ruta();
 
-		mc.agregar(c3, 4, 4);
-		mc.agregar(c4, 3, 4);
+		mc.agregar(c3);
+		mc.agregar(c4);
 
 		assertFalse(mc
-				.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c3)));
+				.hayConexion(mc.coordenadas(c1), mc.coordenadas(c3)));
 		assertFalse(mc
-				.hayConexion(mc.getCoordenadas(c1), mc.getCoordenadas(c4)));
+				.hayConexion(mc.coordenadas(c1), mc.coordenadas(c4)));
 		assertFalse(mc
-				.hayConexion(mc.getCoordenadas(c2), mc.getCoordenadas(c3)));
+				.hayConexion(mc.coordenadas(c2), mc.coordenadas(c3)));
 		assertFalse(mc
-				.hayConexion(mc.getCoordenadas(c2), mc.getCoordenadas(c4)));
-		assertTrue(mc.hayConexion(mc.getCoordenadas(c3), mc.getCoordenadas(c4)));
+				.hayConexion(mc.coordenadas(c2), mc.coordenadas(c4)));
+		assertTrue(mc.hayConexion(mc.coordenadas(c3), mc.coordenadas(c4)));
 
 	}
 

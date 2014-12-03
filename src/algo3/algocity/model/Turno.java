@@ -4,46 +4,58 @@ import java.util.Observable;
 
 public class Turno extends Observable implements Runnable {
 
-/* La idea es que turno se ejecute en un thread distinto
- * para poder hacer que avance cada cierto tiempo de
- * manera automatica
- */
-	
+	/*
+	 * La idea es que turno se ejecute en un thread distinto para poder hacer
+	 * que avance cada cierto tiempo de manera automatica
+	 */
+
 	int numero;
-	
-	public Turno(){
+	volatile boolean jugando;
+	Thread hilo;
+
+	public Turno() {
 		numero = 1;
+		jugando = true;
+
 	}
 
 	public int getTurno() {
 		return numero;
 	}
 
-	public void avanzar() {
-//		long referencia = System.currentTimeMillis();
-//		long actual;
-//		
-//		do{
-//			actual = System.currentTimeMillis();
-//		}while(Math.abs(referencia - actual) > 1999);
-		
-		numero ++;
-		setChanged();
-		notifyObservers();
-		
+	public void avanzar() {		
+		numero++;
 	}
 	
-	public void run(){
-//		avanzarTurno();
+	public void iniciarHilo(){
+		hilo = new Thread(this);
+		hilo.start();
 	}
 	
-	public static void main(String args[]) {
-//        (new Thread(new Turno())).start();
+	public boolean estaVivo(){
+		return hilo.isAlive();
 	}
 
-	public void iniciar() {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void run() {
+		System.out.println("STARTING");
+		while (jugando){
+			System.out.println("Start at " + (int)((System.currentTimeMillis())/1000.0));
+//			Thread.sleep(20000);
+			avanzar();
+			setChanged();
+			notifyObservers();
+			if (numero == 2){
+				jugando = false;
+			}
+			
+		}
+		System.out.println("SALIENDO");		
 	}
+
+	public void finalizar(){
+		jugando = false;
+	}
+	
 
 }

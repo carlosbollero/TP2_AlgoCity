@@ -1,10 +1,9 @@
-package algo3.algocity.model;
+package algo3.algocity.model.construcciones;
 
-import java.util.ArrayList;
+import java.awt.Point;
 
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.requisitos.RequisitoTierra;
 
 public class CentralEolica extends UnidadEnergetica {
 
@@ -15,26 +14,27 @@ public class CentralEolica extends UnidadEnergetica {
 	}
 
 	public CentralEolica(int x, int y) {
+		coordenadas = new Point(x, y);
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
-		this.coordX = x;
-		this.coordY = y;
 	}
 
-	public CentralEolica(ArrayList<Mapa> mapas, int x, int y)
+	public CentralEolica(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		requisitos = new RequisitoTierra();
-
-		if (requisitos.evaluar(mapas, x, y)) {
-			this.costo = 1000;
-			this.capacidad = 100;
-			this.radioDeInfluencia = 4;
-		} else {
+		coordenadas = new Point(x, y);
+		this.costo = 1000;
+		this.capacidad = 100;
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+	}
 
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
+		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
 
 }

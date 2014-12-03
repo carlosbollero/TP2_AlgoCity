@@ -18,12 +18,12 @@ public class Usuario {
 	public String nombre() {
 		return nombre;
 	}
-	
-	public void ruta(String ruta){
+
+	public void ruta(String ruta) {
 		this.ruta = ruta;
 	}
-	
-	public String ruta(){
+
+	public String ruta() {
 		return ruta;
 	}
 

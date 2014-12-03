@@ -1,9 +1,6 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Point;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -12,18 +9,6 @@ import algo3.algocity.model.mapas.MapaEdilicio;
 import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class JuegoTest {
-
-	@Test
-	public void testSePuedeCrearUnJuegoValido() {
-
-		Juego unJuego = new Juego();
-
-		assertTrue(unJuego.getMapaEdilicio() instanceof MapaEdilicio);
-		assertTrue(unJuego.getMapaTerritorio() instanceof MapaTerritorio);
-		assertTrue(unJuego.getMapaTuberias() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaRutas() instanceof MapaConexiones);
-		assertTrue(unJuego.getMapaLineasDeTension() instanceof MapaConexiones);
-	}
 
 	/*
 	 * @Test public void testAgregarPozoDeAguaEnMapaCorrespondiente() {

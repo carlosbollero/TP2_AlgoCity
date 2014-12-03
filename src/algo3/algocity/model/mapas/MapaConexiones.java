@@ -1,5 +1,4 @@
-/********************************************************** 
- * 
+/**********************************************************  
  /********************************************************** 
  * 
  * Para que funcione esta clase se debe agregar al proyecto
@@ -11,6 +10,7 @@
 package algo3.algocity.model.mapas;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
@@ -18,14 +18,15 @@ import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-import algo3.algocity.model.Conector;
+import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.construcciones.Unidad;
 
-
-public class MapaConexiones implements Mapa {
+public class MapaConexiones {
 
 	int alto;
 	int ancho;
 	LinkedHashMap<Point, Conector> mapa;
+	ArrayList<Point> posicionesRelevantes;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 
@@ -34,9 +35,12 @@ public class MapaConexiones implements Mapa {
 		this.ancho = ancho;
 		this.mapa = new LinkedHashMap<Point, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
+		posicionesRelevantes = new ArrayList<Point>();
 	}
 
-	public boolean agregar(Conector elemento, int x, int y) {
+	public boolean agregar(Conector elemento) {
+		int x = elemento.getCoordenadas().x;
+		int y = elemento.getCoordenadas().y;
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
 			this.mapa.put(new Point(x, y), elemento);
@@ -47,7 +51,7 @@ public class MapaConexiones implements Mapa {
 		return false;
 	}
 
-	public int getCantidadElementos() {
+	public int cantidadElementos() {
 		return (grafo.vertexSet().size());
 	}
 
@@ -61,10 +65,10 @@ public class MapaConexiones implements Mapa {
 
 	private boolean hayDistanciaMinima(Point point, Point key) {
 		boolean resultado = false;
-		int x1 = (int) point.getX();
-		int y1 = (int) point.getY();
-		int x2 = (int) key.getX();
-		int y2 = (int) key.getY();
+		int x1 = point.x;
+		int y1 = point.y;
+		int x2 = key.x;
+		int y2 = key.y;
 		if ((Math.abs(x1 - x2) == 1) && (y1 == y2)) {
 			resultado = true;
 		}
@@ -99,7 +103,16 @@ public class MapaConexiones implements Mapa {
 		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
 	}
 
-	public Point getCoordenadas(Conector elemento) {
+	public boolean hayConexion(Point unPunto) {
+		for (Point coord : posicionesRelevantes) {
+			if (hayConexion(unPunto, coord)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Point coordenadas(Conector elemento) {
 		for (Entry<Point, Conector> entry : mapa.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
@@ -108,10 +121,35 @@ public class MapaConexiones implements Mapa {
 		return null;
 	}
 
-	@Override
-	public boolean sePuedeConstruir(boolean resultadoEsperado, int x, int y) {
-		// TODO Auto-generated method stub
+	public boolean hayConectorAdyacente(Point coord) {
+		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+			if (hayDistanciaMinima(coord, entry.getKey())) {
+				return true;
+			}
+		}
 		return false;
+	}
+
+	public boolean agregarPosicionRelevante(Point punto) {
+		if (posicionesRelevantes == null) {
+			posicionesRelevantes = new ArrayList<Point>();
+		}
+		return posicionesRelevantes.add(punto);
+
+	}
+
+	public boolean sePuedeConstruir(Unidad unidad) {
+		for (Point coord : posicionesRelevantes) {
+			if (hayConexion(unidad.getCoordenadas(), coord)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean sePuedeConstruir(Conector conector) {
+		return tieneCoordenadaOcupada(conector.getCoordenadas().x,
+				conector.getCoordenadas().y);
 	}
 
 }
