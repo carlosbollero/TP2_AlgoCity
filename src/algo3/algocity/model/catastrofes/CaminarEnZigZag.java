@@ -12,7 +12,7 @@ public class CaminarEnZigZag implements Movimiento {
 	private int alto;
 	private int ancho;
 
-	public CaminarEnZigZag(int ancho,int alto) {
+	public CaminarEnZigZag(int ancho, int alto) {
 
 		this.caminoRetorno = new LinkedList<Point>();
 		this.caminoCentrico = new LinkedList<Point>();
@@ -24,15 +24,20 @@ public class CaminarEnZigZag implements Movimiento {
 	@Override
 	public LinkedList<Point> devolverCamino(Point puntoInicio, Point puntoFinal) {
 		CaminarEnLineaRecta caminoEnLineaRecta = new CaminarEnLineaRecta();
-		this.caminoCentrico = caminoEnLineaRecta.devolverCamino(puntoInicio, puntoFinal);
-		this.caminoAlternativo = caminoEnLineaRecta.devolverCamino(this.validarPunto(puntoInicio),this.validarPunto(puntoFinal));
-		
+		this.caminoCentrico = caminoEnLineaRecta.devolverCamino(puntoInicio,
+				puntoFinal);
+		this.caminoAlternativo = caminoEnLineaRecta.devolverCamino(
+				this.validarPunto(puntoInicio), this.validarPunto(puntoFinal));
+
 		Iterator<Point> iteradorCaminoCentrico = caminoCentrico.iterator();
-		Iterator<Point> iteradorCaminoAlternativo = caminoAlternativo.iterator();
+		Iterator<Point> iteradorCaminoAlternativo = caminoAlternativo
+				.iterator();
 		boolean alternar = false;
 		while (iteradorCaminoCentrico.hasNext()
 				&& iteradorCaminoAlternativo.hasNext()) {
-
+			//
+			// REVISAR 
+			//
 			if (alternar = false) {
 				this.caminoRetorno.add(iteradorCaminoCentrico.next());
 				iteradorCaminoAlternativo.next();
@@ -44,21 +49,24 @@ public class CaminarEnZigZag implements Movimiento {
 			}
 		}
 
-		return this.caminoRetorno; 
+		return this.caminoRetorno;
 	}
 
-	
-	public Point validarPunto (Point punto){
-		
-		int puntoX= (int)punto.getX()+1; 
-		int puntoY = (int) punto.getY()+1;
-		
-		if (puntoX> this.ancho){ 	 puntoX -= 2; }
-		if (puntoY> this.alto){     puntoY -= 2; }
-		
-		Point puntoRetorno = new Point (puntoX, puntoY); 
-		
-		return puntoRetorno; 
+	public Point validarPunto(Point punto) {
+
+		int puntoX = (int) punto.getX() + 1;
+		int puntoY = (int) punto.getY() + 1;
+
+		if (puntoX > this.ancho) {
+			puntoX -= 2;
+		}
+		if (puntoY > this.alto) {
+			puntoY -= 2;
+		}
+
+		Point puntoRetorno = new Point(puntoX, puntoY);
+
+		return puntoRetorno;
 	}
-	
+
 }
