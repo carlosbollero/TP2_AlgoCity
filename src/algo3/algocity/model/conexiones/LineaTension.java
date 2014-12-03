@@ -10,12 +10,12 @@ import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
 public class LineaTension implements Conector, Reparable, Visitable {
-	
+
 	final boolean intacto = true;
 	final boolean destruido = false;
-	
-	boolean estado; 	//true para intacto
-						//false para destruido
+
+	boolean estado; // true para intacto
+					// false para destruido
 	int costo;
 	int danios;
 	Point coordenadas;
@@ -24,43 +24,44 @@ public class LineaTension implements Conector, Reparable, Visitable {
 
 		this.costo = 5;
 	}
-	
-	public LineaTension(Mapa mapa, int x, int y) throws NoSeCumplenLosRequisitosException {
+
+	public LineaTension(Mapa mapa, int x, int y)
+			throws NoSeCumplenLosRequisitosException {
 
 		coordenadas = new Point(x, y);
-		
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+
+		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		}else{
-			mapa.agregarLineaTension(this, x, y);;
+		} else {
+			mapa.agregar(this);
 		}
 	}
 
-	public boolean estado(){
+	public boolean estado() {
 		return estado;
 	}
-	
+
 	@Override
 	public void aceptar(Visitante unVisitante) {
-		unVisitante.visitar(this); 
-		
+		unVisitante.visitar(this);
+
 	}
 
 	public void aplicarDanioGodzilla() {
 		estado = destruido;
-		
+
 	}
 
 	@Override
 	public void repararse() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aplicarDanio(double unDanio) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -76,5 +77,11 @@ public class LineaTension implements Conector, Reparable, Visitable {
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
 		return superficie.esTierra();
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarARedElectrica(this);
+
 	}
 }

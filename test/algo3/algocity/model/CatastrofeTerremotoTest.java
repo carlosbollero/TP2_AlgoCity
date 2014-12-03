@@ -22,7 +22,7 @@ public class CatastrofeTerremotoTest {
 
 		UnidadResidencial u1 = new UnidadResidencial(3, 3);
 
-		m.agregar(u1, 3, 3);
+		m.agregar(u1);
 
 		assertEquals(100, u1.getSalud(), 0);
 
@@ -44,13 +44,13 @@ public class CatastrofeTerremotoTest {
 		UnidadResidencial ur2 = new UnidadResidencial(10, 10);
 		UnidadResidencial ur3 = new UnidadResidencial(1, 4);
 
-		m.agregar(ur1, 1, 1);
-		m.agregar(uc1, 1, 2);
-		m.agregar(ur3, 1, 4);
-		m.agregar(ce1, 2, 3);
-		m.agregar(cm1, 3, 2);
-		m.agregar(cn1, 4, 2);
-		m.agregar(ur2, 10, 10);
+		m.agregar(ur1);
+		m.agregar(uc1);
+		m.agregar(ur3);
+		m.agregar(ce1);
+		m.agregar(cm1);
+		m.agregar(cn1);
+		m.agregar(ur2);
 
 		assertEquals(100, ur1.getSalud(), 0);
 		assertEquals(100, uc1.getSalud(), 0);

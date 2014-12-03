@@ -4,9 +4,7 @@ import algo3.algocity.model.mapas.MapaConexiones;
 import algo3.algocity.model.mapas.MapaEdilicio;
 import algo3.algocity.model.mapas.MapaTerritorio;
 
-
 public class Juego {
-	
 
 	final int anchoMapaJuego = 100;
 	final int altoMapaJuego = 100;
@@ -16,7 +14,7 @@ public class Juego {
 	private MapaConexiones mapaTuberias;
 	private MapaConexiones mapaRutas;
 	private MapaConexiones mapaLineasDeTension;
-	
+
 	private Turno turnos;
 
 	Usuario usuario;

@@ -10,7 +10,7 @@ public class FabricaUnidadComercial implements FabricaUnidades {
 	public Unidad construir(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		return new UnidadComercial(mapa,x,y);
+		return new UnidadComercial(mapa, x, y);
 	}
 
 }

@@ -24,17 +24,17 @@ public class MapaEdilicioTest {
 		
 		Unidad u = new UnidadResidencial();
 		
-		assertTrue(m.agregar(u, 1, 1));
+		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 		
 		u = new UnidadComercial();
 		
-		assertTrue(m.agregar(u, 1, 2));
+		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 		
 		u = new UnidadIndustrial();
 		
-		assertTrue(m.agregar(u, 2, 2));
+		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 		
 	}
@@ -45,7 +45,7 @@ public class MapaEdilicioTest {
 		
 		Unidad eb = new EstacionDeBomberos();
 				
-		m.agregar(eb, 1, 1);
+		m.agregar(eb);
 
 		assertTrue(m.contiene(eb));
 
@@ -59,7 +59,7 @@ public class MapaEdilicioTest {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar(new PozoDeAgua(), 1, 1));
+		assertTrue(m.agregar(new PozoDeAgua()));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
@@ -69,7 +69,7 @@ public class MapaEdilicioTest {
 
 		Unidad u = new UnidadResidencial();
 
-		assertTrue(m.agregar(u, 4, 4));
+		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 	}
 	
@@ -79,7 +79,7 @@ public class MapaEdilicioTest {
 
 		Unidad eb = new EstacionDeBomberos();
 
-		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
+		assertFalse(m.agregar(eb));
 		assertFalse(m.contiene(eb));
 	}
 	
@@ -89,9 +89,9 @@ public class MapaEdilicioTest {
 
 		Unidad ce = new CentralEolica();
 
-		assertTrue(m.agregar(ce, 3, 4));
+		assertTrue(m.agregar(ce));
 		assertTrue(m.contiene(ce));
-		assertFalse(m.agregar(ce, 5, 5));
+		assertFalse(m.agregar(ce));
 	}
 	
 }

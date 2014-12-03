@@ -7,12 +7,12 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class CentralEolica extends UnidadEnergetica {
 
-	public CentralEolica(){
+	public CentralEolica() {
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
 	}
-	
+
 	public CentralEolica(int x, int y) {
 		coordenadas = new Point(x, y);
 		this.costo = 1000;
@@ -26,10 +26,15 @@ public class CentralEolica extends UnidadEnergetica {
 		coordenadas = new Point(x, y);
 		this.costo = 1000;
 		this.capacidad = 100;
-		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+	}
 
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
+		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
 
 }

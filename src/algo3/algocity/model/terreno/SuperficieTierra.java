@@ -11,7 +11,7 @@ public class SuperficieTierra implements Superficie {
 	public boolean esAgua() {
 		return false;
 	}
-	
+
 	public SuperficieTierra getSuperficie() {
 		return this;
 	}

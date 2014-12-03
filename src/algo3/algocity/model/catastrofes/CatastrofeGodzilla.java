@@ -2,6 +2,8 @@ package algo3.algocity.model.catastrofes;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -13,24 +15,32 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
-import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class CatastrofeGodzilla implements Visitante {
-	
-	int alto;
-	int ancho;
+
+	private int ancho; 
+	private int alto; 
 	private Random aleatorio;
-    private ArrayList<Point> camino; 
-	
-	public CatastrofeGodzilla(MapaEdilicio mapa){
-		alto = mapa.getAlto();
-		ancho = mapa.getAncho();
-		camino = new ArrayList<Point>();
-		
-		
+    private LinkedList<Point> caminoGodzilla; 
+    
+    
+	//TODO mover algunas cosas a una clase abstracta.
+    
+    
+	public CatastrofeGodzilla() {
+		this.caminoGodzilla = new LinkedList<Point>();			
 	}
 	
-	public void comenzar(){
+	//deberia haber un constructor de Godzilla que reciba un mapa
+	public CatastrofeGodzilla (int x , int y){		
+		ancho = x; 
+		alto = y; 
+		caminoGodzilla = new LinkedList<Point>(); 		
+	}
+
+
+	//Comienzo aleatorio de Godzilla , que puede ser tanto el linea recta como en zigzag
+	public void comenzar() {		
 		Point puntoInicio; 
 		Point puntoFinal; 
 		if (this.girarMoneda() == 0) {
@@ -39,31 +49,24 @@ public class CatastrofeGodzilla implements Visitante {
 		}else{
 			puntoInicio = new Point (0,this.aleatorio.nextInt(alto+1));
 			puntoFinal = new Point (this.ancho,this.aleatorio.nextInt(alto+1));
-		}
-		this.caminarEnLineaRecta(puntoInicio, puntoFinal);
-//		if (this.girarMoneda()== 0){
-//			this.caminarEnLineaRecta(puntoInicio, puntoFinal);
-//		}
-//		}else{
-//			this.caminarEnZigZag(puntoInicio, puntoFinal); 
-//		}
-	}
+		}				
+		if (this.girarMoneda()== 0){
+			 this.caminoGodzilla = this.caminarEnLineaRecta(puntoInicio, puntoFinal);
+		}else{
+			this.caminoGodzilla = this.caminarEnZigZag(puntoInicio, puntoFinal); 
+		}		
+	}	
 	
 	//50/50 chances, esta para dejar el codigo mas limpio en comenzar.
 	public int girarMoneda (){
-		aleatorio = new Random();
 		int resultado = this.aleatorio.nextInt(2); 
 		return resultado; 
-	}
-	
-	public ArrayList<Point> camino(){
-		return camino;
-	}
+	}	
 	
 	//Funcion obtenida de internet, utiliza el algoritmo de Berensham para el dibujo de lineas rectas,
 	//lo cambie para que en cambio de dibujar, guarde estos valores.
-	public void caminarEnLineaRecta(Point puntoInicio,Point puntoFinal) {
-		
+	public LinkedList<Point> caminarEnLineaRecta(Point puntoInicio,Point puntoFinal) {		
+		LinkedList<Point> caminoRecorrido = new LinkedList<Point>(); 
 		int x = (int)puntoInicio.getX(); 
 		int y = (int)puntoInicio.getY(); 
 	    int w = (int)puntoFinal.getX() - (int)puntoInicio.getX() ;
@@ -78,12 +81,12 @@ public class CatastrofeGodzilla implements Visitante {
 	        longest = Math.abs(h) ;
 	        shortest = Math.abs(w) ;
 	        if (h<0) dy2 = -1 ; else if (h>0) dy2 = 1 ;
-	        dx2 = 0 ;
+	        dx2 = 0 ;            
 	    }
 	    int numerator = longest >> 1 ;
 	    for (int i=0;i<=longest;i++) {
 	    	Point punto = new Point (x,y); 
-	        camino.add (punto); 
+	        caminoRecorrido.add (punto); 
 	        numerator += shortest ;
 	        if (!(numerator<longest)) {
 	            numerator -= longest ;
@@ -94,10 +97,56 @@ public class CatastrofeGodzilla implements Visitante {
 	            y += dy2 ;
 	        }
 	    }
+	return caminoRecorrido; 
+	}	
+
+	//TODO No se muy bien como hacer que Godzilla de pasos en zig zag, verificar un poco mas adelante. 
+	//La idea en general es hacer que Godzilla camine en linea recta, luego recorrer la lista de caminoGodzilla y tomar un punto 
+	//proximo, a ese punto sumarle un salto en las coordenadas y reemplazar ese punto en la lista, luego para que no queden espacios 
+	//entre puntos volver a correr caminar en linea recta entre cada punto de la lista y con eso armar la lista final. 
+	public LinkedList<Point> caminarEnZigZag (Point puntoInicio, Point puntoFinal){		
+		int puntoXInicio= (int)puntoInicio.getX()+1; 
+		int puntoXFinal= (int)puntoFinal.getX()+1;
+		int puntoYInicio = (int) puntoInicio.getY()+1;
+		int puntoYFinal = (int) puntoFinal.getY()+1;
+		 
+		if (puntoXInicio> this.ancho){ 	 puntoXInicio -= 2; }
+		if (puntoXFinal>this.ancho){		puntoXFinal -= 2;  }
+		if (puntoYInicio> this.alto){     puntoYInicio -= 2; }
+		if (puntoYFinal> this.alto){       puntoYFinal -= 2; }
+		
+		LinkedList<Point> caminoRetorno = new LinkedList<Point>() ; 
+		LinkedList<Point> caminoCentrico = new LinkedList<Point> (); 
+		LinkedList<Point> caminoAlternativo = new LinkedList <Point>(); 
+		Point puntoInicioAlternativo = new Point (puntoXInicio, puntoYInicio); 
+		Point puntoFinalAlternativo = new Point (puntoXFinal, puntoYFinal); 
+		
+		
+		caminoCentrico = this.caminarEnLineaRecta(puntoInicio, puntoFinal);
+		caminoAlternativo = this.caminarEnLineaRecta(puntoInicioAlternativo, puntoFinalAlternativo);
+		
+		Iterator<Point> iteradorCaminoCentrico = caminoCentrico.iterator (); 
+	    Iterator <Point>  iteradorCaminoAlternativo = caminoAlternativo.iterator (); 
+		
+		while (iteradorCaminoCentrico.hasNext() && iteradorCaminoAlternativo.hasNext()){
+			
+			 boolean alternar = false; 
+			
+			if (alternar = false){
+			caminoRetorno.add(iteradorCaminoCentrico.next());
+			iteradorCaminoAlternativo.next();
+			alternar = true; 
+			}else{
+				iteradorCaminoCentrico.next(); 
+			    caminoRetorno.add(iteradorCaminoAlternativo.next()); 		
+			    alternar = false; 
+			}
+		}		
+		return caminoRetorno; 
 	}
-	
-	public void actuar(ArrayList<Visitable> objetivos){
-		for (Visitable u : objetivos){
+
+	public void actuar(ArrayList<Visitable> objetivos) {
+		for (Visitable u : objetivos) {
 			u.aceptar(this);
 		}
 	}
@@ -105,7 +154,6 @@ public class CatastrofeGodzilla implements Visitante {
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {
 		unaUnidadResidencial.aplicarDanioGodzilla();
-		
 	}
 
 	@Override
@@ -116,41 +164,30 @@ public class CatastrofeGodzilla implements Visitante {
 	@Override
 	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
 		unaUnidadIndustrial.aplicarDanioGodzilla();
-		
 	}
 
 	@Override
 	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
 		unaUnidadEnergetica.aplicarDanioGodzilla();
-		
 	}
 
 	@Override
 	public void visitar(LineaTension unaLineaTension) {
 		unaLineaTension.aplicarDanioGodzilla();
-		
 	}
 
 	@Override
 	public void visitar(Ruta unaRuta) {
 		unaRuta.aplicarDanioGodzilla();
-		
 	}
-
 
 	@Override
 	public void visitar(Unidad unaUnidad) {
-		
 	}
-		
 
-	public ArrayList<Point> genCaminoRecto() {
+	public LinkedList<Point> genCaminoRecto() {
 		comenzar();
-		return camino;
+		return caminoGodzilla;
 	}
-
-
-
-
 
 }

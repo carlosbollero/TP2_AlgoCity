@@ -2,12 +2,11 @@ package algo3.algocity.model.mapas;
 
 import java.awt.Point;
 
+import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa {
@@ -31,17 +30,6 @@ public class Mapa {
 		redElectrica = new MapaConexiones(alto, ancho);
 	}
 
-	// Método implementado solo para tests
-	public void setTerritorioTierraParaTest() {
-		boolean tierra = true;
-		territorio = new MapaTerritorio(alto, ancho, tierra);
-	}
-	
-	public void setTerritorioAguaParaTest() {
-		boolean agua = false;
-		territorio = new MapaTerritorio(alto, ancho, agua);
-	}
-
 	public int getAlto() {
 		return alto;
 	}
@@ -50,32 +38,36 @@ public class Mapa {
 		return ancho;
 	}
 
-	public void agregar(Unidad unidad, int x, int y) {
-		ciudad.agregar(unidad, x, y);
-	}
-	
-	public void agregar(PozoDeAgua pozo, int x, int y){
-		ciudad.agregar(pozo, x, y);
-		tuberias.agregarPosicionRelevante(x, y);
+	public void agregar(Unidad unidad) {
+		unidad.agregarseA(this);
 	}
 
-	// Supongo que para que una residencia este conectada tmb tiene
-	// que tener una ruta a una central
-	public void agregar(UnidadEnergetica unidad, int x, int y) {
-		ciudad.agregar(unidad, x, y);
-		redElectrica.agregarPosicionRelevante(x, y);
+	public void agregar(Conector conector) {
+		conector.agregarseA(this);
 	}
 
-	public void agregarLineaTension(LineaTension linea, int x, int y) {
-		redElectrica.agregar(linea, x, y);
+	public boolean agregarACiudad(Unidad unidad) {
+		return ciudad.agregar(unidad);
 	}
 
-	public void agregarRuta(Ruta ruta, int x, int y) {
-		rutas.agregar(ruta, x, y);
+	public boolean agregarARedElectrica(LineaTension linea) {
+		return redElectrica.agregar(linea);
 	}
 
-	public void agregarTuberia(Tuberia tuberia, int x, int y) {
-		tuberias.agregar(tuberia, x, y);
+	public boolean agregarARutas(Ruta ruta) {
+		return rutas.agregar(ruta);
+	}
+
+	public boolean agregarATuberias(Tuberia tuberia) {
+		return tuberias.agregar(tuberia);
+	}
+
+	public boolean agregarPuntoRelevanteEnTuberias(Point punto) {
+		return tuberias.agregarPosicionRelevante(punto);
+	}
+
+	public boolean agregarPuntoRelevanteEnRedElectrica(Point punto) {
+		return redElectrica.agregarPosicionRelevante(punto);
 	}
 
 	public Point getPosicionConAgua() {
@@ -91,8 +83,8 @@ public class Mapa {
 	}
 
 	// METODOS PARA VALIDAR REQUISITOS
-	public Superficie getSuperficie(Point punto) {
-		return territorio.getSuperficie(punto);
+	public Superficie superficie(Point punto) {
+		return territorio.superficie(punto);
 	}
 
 	public boolean hayConexionCompleta(Point coordenadas) {
@@ -112,6 +104,26 @@ public class Mapa {
 		return rutas.hayConectorAdyacente(coordenadas);
 	}
 
-	// Agregar requisitos solo agua
+	// Método implementado solo para tests
+	/*********************************************************/
+	public void setTerritorioTierraParaTest() {
+		boolean tierra = true;
+		territorio = new MapaTerritorio(alto, ancho, tierra);
+	}
+
+	public void setTerritorioAguaParaTest() {
+		boolean agua = false;
+		territorio = new MapaTerritorio(alto, ancho, agua);
+	}
+	/*********************************************************/
+
+	// CONSULTA PARA ACTUALIZACION DE POBLACION
+	public int capacidadHabitacional() {
+		return this.ciudad.getCapacidadHabitacional();
+	}
+
+	public int capacidadEmpleo() {
+		return this.ciudad.getCapacidadEmpleo();
+	}
 
 }

@@ -15,11 +15,11 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable {
 	final double ESTADOINICIAL = 100;
 	double porcentajeDanios;
 
-	public UnidadComercial(){
+	public UnidadComercial() {
 		this.costo = 5;
 		this.consumo = 2;
 	}
-	
+
 	public UnidadComercial(int x, int y) {
 		coordenadas = new Point(x, y);
 		this.costo = 5;
@@ -31,11 +31,10 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable {
 		this.costo = 5;
 		this.consumo = 2;
 		coordenadas = new Point(x, y);
-		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
-
 
 	public int consumo() {
 		return this.consumo;
@@ -72,7 +71,7 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable {
 
 	}
 
-	private boolean hayConexionesEn(Mapa mapa){
+	private boolean hayConexionesEn(Mapa mapa) {
 		return (mapa.hayConexionCompleta(coordenadas));
 	}
 
@@ -80,6 +79,12 @@ public class UnidadComercial extends Unidad implements Reparable, Visitable {
 	public boolean esConstruibleEn(Superficie superficie) {
 
 		return superficie.esTierra();
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
+		;
 	}
 
 }

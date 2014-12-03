@@ -8,7 +8,8 @@ import algo3.algocity.model.mapas.Mapa;
 public class FabricaEstacionDeBomberos implements FabricaUnidades {
 
 	@Override
-	public Unidad construir(Mapa mapa, int x, int y) throws NoSeCumplenLosRequisitosException {
+	public Unidad construir(Mapa mapa, int x, int y)
+			throws NoSeCumplenLosRequisitosException {
 
 		return new EstacionDeBomberos(mapa, x, y);
 

@@ -16,14 +16,15 @@ public class Tuberia implements Conector {
 		costo = 5;
 	}
 
-	public Tuberia(Mapa mapa, int x, int y) throws NoSeCumplenLosRequisitosException {
+	public Tuberia(Mapa mapa, int x, int y)
+			throws NoSeCumplenLosRequisitosException {
 		costo = 5;
 		coordenadas = new Point(x, y);
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
-	
+
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
 		return superficie.esTierra();
@@ -32,6 +33,11 @@ public class Tuberia implements Conector {
 	@Override
 	public Point getCoordenadas() {
 		return coordenadas;
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarATuberias(this);
 	}
 
 }

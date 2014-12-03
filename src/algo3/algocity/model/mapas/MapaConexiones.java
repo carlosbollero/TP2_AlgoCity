@@ -1,5 +1,4 @@
-/********************************************************** 
- * 
+/**********************************************************  
  /********************************************************** 
  * 
  * Para que funcione esta clase se debe agregar al proyecto
@@ -39,7 +38,9 @@ public class MapaConexiones {
 		posicionesRelevantes = new ArrayList<Point>();
 	}
 
-	public boolean agregar(Conector elemento, int x, int y) {
+	public boolean agregar(Conector elemento) {
+		int x = elemento.getCoordenadas().x;
+		int y = elemento.getCoordenadas().y;
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
 			this.mapa.put(new Point(x, y), elemento);
@@ -50,7 +51,7 @@ public class MapaConexiones {
 		return false;
 	}
 
-	public int getCantidadElementos() {
+	public int cantidadElementos() {
 		return (grafo.vertexSet().size());
 	}
 
@@ -101,17 +102,17 @@ public class MapaConexiones {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
 		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
 	}
-	
-	public boolean hayConexion(Point unPunto){
-		for (Point coord : posicionesRelevantes){
-			if (hayConexion(unPunto, coord)){
+
+	public boolean hayConexion(Point unPunto) {
+		for (Point coord : posicionesRelevantes) {
+			if (hayConexion(unPunto, coord)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Point getCoordenadas(Conector elemento) {
+	public Point coordenadas(Conector elemento) {
 		for (Entry<Point, Conector> entry : mapa.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
@@ -119,27 +120,27 @@ public class MapaConexiones {
 		}
 		return null;
 	}
-	
-	public boolean hayConectorAdyacente(Point coord){
-		for (Entry<Point, Conector> entry : mapa.entrySet()){
-			if (hayDistanciaMinima(coord, entry.getKey())){
+
+	public boolean hayConectorAdyacente(Point coord) {
+		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+			if (hayDistanciaMinima(coord, entry.getKey())) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public void agregarPosicionRelevante(int x, int y) {
-		if (posicionesRelevantes == null){
+
+	public boolean agregarPosicionRelevante(Point punto) {
+		if (posicionesRelevantes == null) {
 			posicionesRelevantes = new ArrayList<Point>();
 		}
-		posicionesRelevantes.add(new Point(x, y));
-		
+		return posicionesRelevantes.add(punto);
+
 	}
-	
+
 	public boolean sePuedeConstruir(Unidad unidad) {
-		for (Point coord : posicionesRelevantes){
-			if (hayConexion(unidad.getCoordenadas(), coord)){
+		for (Point coord : posicionesRelevantes) {
+			if (hayConexion(unidad.getCoordenadas(), coord)) {
 				return true;
 			}
 		}
@@ -150,6 +151,5 @@ public class MapaConexiones {
 		return tieneCoordenadaOcupada(conector.getCoordenadas().x,
 				conector.getCoordenadas().y);
 	}
-
 
 }
