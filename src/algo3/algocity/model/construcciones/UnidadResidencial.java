@@ -2,26 +2,21 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
-import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Reparable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.mapas.Agregador;
-import algo3.algocity.model.mapas.AgregadorResidencial;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
-		Visitable {
+public class UnidadResidencial extends Unidad implements Reparable, Visitable {
 
 	final double ESTADOINICIAL = 100;
 
 	int capacidad; // capacidad habitacional
-	int ocupacion;
 	double porcentajeDanios;
-	
-	public UnidadResidencial(){
+
+	public UnidadResidencial() {
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -40,7 +35,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
 		this.consumo = 1;
 		this.capacidad = 100;
 		coordenadas = new Point(x, y);
-		if (!(esConstruibleEn(mapa.getSuperficie(coordenadas)) && hayConexionesEn(mapa))){
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
@@ -56,41 +51,8 @@ public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
 
 	}
 
-	public int getCapacidad() {
+	public int capacidad() {
 		return this.capacidad;
-	}
-
-	public int getOcupacion() {
-		return this.ocupacion;
-	}
-
-	public int consultarDisponibilidad() {
-		return (this.capacidad - this.ocupacion);
-	}
-
-	public boolean hayDisponibilidad() {
-		return ((this.capacidad - this.ocupacion) > 0);
-	}
-
-	public void agregar(int cantidad) {
-		agregarHabitantes(cantidad);
-	}
-
-	public void agregarHabitantes(int cantidad) {
-		if (this.hayDisponibilidad(cantidad)) {
-			this.ocupacion += cantidad;
-		}
-	}
-
-	public void quitar(int cantidad) {
-		quitarHabitantes(cantidad);
-	}
-
-	public void quitarHabitantes(int cantidad) {
-		this.ocupacion -= cantidad;
-		if (this.ocupacion < 0) {
-			this.ocupacion = 0;
-		}
 	}
 
 	public double getDanios() {
@@ -121,15 +83,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
 
-	public boolean estaOcupada() {
-		return (this.consultarDisponibilidad() == 0);
-	}
-
-	public boolean hayDisponibilidad(int cantidad) {
-		return (this.consultarDisponibilidad() >= cantidad);
-	}
-
-	private boolean hayConexionesEn(Mapa mapa){
+	private boolean hayConexionesEn(Mapa mapa) {
 		return (mapa.hayConexionCompleta(coordenadas));
 	}
 
@@ -137,9 +91,10 @@ public class UnidadResidencial extends Unidad implements Ocupable, Reparable,
 	public boolean esConstruibleEn(Superficie superficie) {
 		return superficie.esTierra();
 	}
-	
-	public Agregador agregador(){
-		return new AgregadorResidencial();
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
 	}
 
 }

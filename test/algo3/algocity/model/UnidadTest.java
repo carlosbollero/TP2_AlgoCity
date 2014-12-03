@@ -111,7 +111,7 @@ public class UnidadTest {
 		// Capacidad unidadResidencial = 100
 		UnidadResidencial unaUnidadResidencial = new UnidadResidencial();
 
-		assertEquals(unaUnidadResidencial.getCapacidad(), 100);
+		assertEquals(unaUnidadResidencial.capacidad(), 100);
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class UnidadTest {
 		// Capacidad unidadIndustrial = 25
 		UnidadIndustrial unaUnidadIndustrial = new UnidadIndustrial();
 
-		assertEquals(unaUnidadIndustrial.getCapacidad(), 25);
+		assertEquals(unaUnidadIndustrial.capacidad(), 25);
 	}
 
 	/**/

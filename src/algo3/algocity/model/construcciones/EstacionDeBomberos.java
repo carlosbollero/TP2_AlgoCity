@@ -23,15 +23,14 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 
 	public EstacionDeBomberos(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
-		
+
 		coordenadas = new Point(x, y);
 		costo = 1500;
 		consumo = 0;
-		if (!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
-
 
 	public EstacionDeBomberos(int x, int y) {
 		costo = 1500;
@@ -104,8 +103,12 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 
 	@Override
 	public double getSalud() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
 	}
 
 }

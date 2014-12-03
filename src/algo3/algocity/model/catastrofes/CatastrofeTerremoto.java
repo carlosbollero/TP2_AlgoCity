@@ -50,8 +50,8 @@ public class CatastrofeTerremoto implements Visitante {
 
 	private ArrayList<Visitable> calcularObjetivos() {
 		ArrayList<Visitable> objetivos = new ArrayList<Visitable>();
-		objetivos = this.mapa.getUnidadesAlrededorDe(this.epicentro,
-				this.radio);
+		objetivos = this.mapa
+				.getUnidadesAlrededorDe(this.epicentro, this.radio);
 		return objetivos;
 	}
 

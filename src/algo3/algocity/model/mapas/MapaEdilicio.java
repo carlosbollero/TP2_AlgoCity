@@ -21,13 +21,15 @@ public class MapaEdilicio {
 		this.mapa = new HashMap<Point, Unidad>();
 	}
 
-	public boolean agregar(Unidad elemento, int x, int y) {
+	public boolean agregar(Unidad elemento) {
+		int x = elemento.getCoordenadas().x;
+		int y = elemento.getCoordenadas().y;
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
-		Point clave = new Point(x, y);
-		if (!this.mapa.containsKey(clave)) {
-			this.mapa.put(clave, elemento);
+
+		if (!this.mapa.containsKey(elemento.getCoordenadas())) {
+			this.mapa.put(elemento.getCoordenadas(), elemento);
 			return true;
 		}
 		return false;
@@ -41,7 +43,7 @@ public class MapaEdilicio {
 		return (this.estaDentroDeLimites(x, y));
 	}
 
-	protected boolean estaDentroDeLimites(int i, int j) {
+	private boolean estaDentroDeLimites(int i, int j) {
 		return ((i >= 0) && (i <= this.alto) && (j >= 0) && (j <= this.ancho));
 	}
 
@@ -53,7 +55,7 @@ public class MapaEdilicio {
 		return (this.mapa.containsKey(new Point(x, y)));
 	}
 
-	protected boolean estaVacio() {
+	public boolean vacia() {
 		return (this.mapa.isEmpty());
 	}
 
@@ -138,4 +140,25 @@ public class MapaEdilicio {
 		return new Point(xf, yf);
 	}
 
+	/*********************************************************************/
+	/*********************************************************************/
+	// 					REVISAR PORQUE ES REALMENTE FEO
+	/*********************************************************************/
+	public int getCapacidadHabitacional() {
+		int capacidad = 0;
+		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
+			capacidad += entry.getValue().getCapacidadHabitacional();
+		}
+		return capacidad;
+	}
+
+	public int getCapacidadEmpleo() {
+		int capacidad = 0;
+		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
+			capacidad += entry.getValue().getCapacidadEmpleo();
+		}
+		return capacidad;
+	}
+	/*********************************************************************/
+	/*********************************************************************/
 }

@@ -6,7 +6,8 @@ import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public abstract class UnidadEnergetica extends Unidad implements Reparable, Visitable {
+public abstract class UnidadEnergetica extends Unidad implements Reparable,
+		Visitable {
 
 	final double ESTADOINICIAL = 100;
 	int capacidad;
@@ -55,16 +56,16 @@ public abstract class UnidadEnergetica extends Unidad implements Reparable, Visi
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 35;
-		
+
 	}
 
 	@Override
 	public void aceptar(Visitante unVisitante) {
 		unVisitante.visitar(this);
-		
+
 	}
-	
-	public boolean hayConexionesEn(Mapa mapa){
+
+	public boolean hayConexionesEn(Mapa mapa) {
 		return (mapa.hayConexionConTuberias(coordenadas));
 	}
 

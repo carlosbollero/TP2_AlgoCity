@@ -6,13 +6,13 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class PozoDeAgua extends Unidad{
+public class PozoDeAgua extends Unidad {
 
 	public PozoDeAgua() {
 		costo = 250;
 		consumo = 0;
 	}
-	
+
 	public PozoDeAgua(int x, int y) {
 		costo = 250;
 		consumo = 0;
@@ -25,8 +25,8 @@ public class PozoDeAgua extends Unidad{
 		coordenadas = new Point(x, y);
 		costo = 250;
 		consumo = 0;
-		
-		if(!esConstruibleEn(mapa.getSuperficie(coordenadas))){
+
+		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
@@ -46,6 +46,12 @@ public class PozoDeAgua extends Unidad{
 	public double getSalud() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void agregarseA(Mapa mapa) {
+		mapa.agregarACiudad(this);
+		mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
 	}
 
 }

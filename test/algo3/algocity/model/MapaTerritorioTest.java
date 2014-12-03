@@ -24,8 +24,8 @@ public class MapaTerritorioTest {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
 				Point p = new Point(x, y);
-				assertTrue(mt.getSuperficie(p).esAgua()
-						|| mt.getSuperficie(p).esTierra());
+				assertTrue(mt.superficie(p).esAgua()
+						|| mt.superficie(p).esTierra());
 			}
 
 		}
