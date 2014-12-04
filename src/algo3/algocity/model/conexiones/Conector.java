@@ -7,7 +7,7 @@ import algo3.algocity.model.terreno.Superficie;
 
 public interface Conector {
 
-	public abstract Point getCoordenadas();
+	public abstract Point coordenadas();
 
 	public abstract boolean esConstruibleEn(Superficie superficie);
 

@@ -31,7 +31,7 @@ public class Tuberia implements Conector {
 	}
 
 	@Override
-	public Point getCoordenadas() {
+	public Point coordenadas() {
 		return coordenadas;
 	}
 

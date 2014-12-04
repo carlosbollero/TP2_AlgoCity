@@ -2,14 +2,14 @@ package algo3.algocity.model.conexiones;
 
 import java.awt.Point;
 
-import algo3.algocity.model.caracteristicas.Reparable;
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class Ruta implements Conector, Reparable, Visitable {
+public class Ruta implements Conector, Daniable, Visitable {
 
 	final boolean intacto = true;
 	final boolean destruido = false;
@@ -52,7 +52,7 @@ public class Ruta implements Conector, Reparable, Visitable {
 
 	}
 
-	public Point getCoordenadas() {
+	public Point coordenadas() {
 		return coordenadas;
 	}
 
