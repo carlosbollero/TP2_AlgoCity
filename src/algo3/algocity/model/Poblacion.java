@@ -83,11 +83,11 @@ public class Poblacion implements Observer {
 	}
 
 	private void actualizarCapacidadHabitacional() {
-		this.capacidadHabitacional = mapa.capacidadHabitacional();
+		this.capacidadHabitacional = mapa.capacidadDePoblacion();
 	}
 
 	private void actualizarCapacidadEmpleo() {
-		this.capacidadEmpleo = mapa.capacidadEmpleo();
+		this.capacidadEmpleo = mapa.capacidadDeEmpleo();
 	}
 
 	public void actualizar() {
