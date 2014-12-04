@@ -3,6 +3,7 @@ package algo3.algocity.model.construcciones;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
@@ -85,9 +86,9 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	}
 
 	@Override
-	public void visitar(Unidad unaUnidad) {
+	public void visitar(Daniable unaUnidad) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -95,11 +96,11 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 		return (superficie.esTierra());
 	}
 
-	@Override
-	public void aplicarDanio(double i) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public void aplicarDanio(double i) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public double getSalud() {
@@ -110,5 +111,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 	}
+
+
 
 }

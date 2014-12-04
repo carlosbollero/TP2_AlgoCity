@@ -36,11 +36,11 @@ public class PozoDeAgua extends Unidad {
 		return (superficie.esAgua());
 	}
 
-	@Override
-	public void aplicarDanio(double i) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public void aplicarDanio(double i) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public double getSalud() {

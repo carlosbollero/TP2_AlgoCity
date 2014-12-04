@@ -1,12 +1,12 @@
 package algo3.algocity.model.construcciones;
 
-import algo3.algocity.model.caracteristicas.Reparable;
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public abstract class UnidadEnergetica extends Unidad implements Reparable,
+public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		Visitable {
 
 	final double ESTADOINICIAL = 100;
