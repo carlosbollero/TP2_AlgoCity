@@ -4,12 +4,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
-
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
@@ -123,7 +122,9 @@ public class CatastrofeGodzilla implements Visitante {
 	}
 
 	@Override
-	public void visitar(Unidad unaUnidad) {
+	public void visitar(Daniable unaUnidad) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public LinkedList<Point> genCaminoRecto() {
