@@ -1,7 +1,9 @@
 package algo3.algocity.model.mapas;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
+import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -81,6 +83,10 @@ public class Mapa {
 
 	public boolean contiene(Unidad u) {
 		return ciudad.contiene(u);
+	}
+	
+	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro, int radio){
+		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
 
 	// METODOS PARA VALIDAR REQUISITOS
