@@ -70,17 +70,26 @@ public class PoblacionTest {
 	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
 		Poblacion p = new Poblacion();
 		Turno t = new Turno();
-
+		
+		t.iniciarHilo();
 		t.addObserver(p);
 		int referencia = p.getCantidad();
 
 		assertTrue(referencia == 0);
+		assertTrue(t.estaVivo());
 
 		p.setIndice(1); 	//positivo crece
 							//negativo decrece
-		t.avanzar();
-
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		assertTrue(p.getCantidad() > referencia);
+		
 	}
 	
 	@Test
