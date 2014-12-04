@@ -3,6 +3,8 @@ package algo3.algocity.model.mapas;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
@@ -72,6 +74,30 @@ public class Mapa {
 	public boolean agregarPuntoRelevanteEnRedElectrica(Point punto) {
 		return redElectrica.agregarPosicionRelevante(punto);
 	}
+	
+	public boolean agregarUnidadConPoblacion(Ocupable unidad){
+		return ciudad.agregarUnidadConPoblacion(unidad);
+	}
+	
+	public boolean agregarUnidadConEmpleo(Ocupable unidad){
+		return ciudad.agregarUnidadConEmpleo(unidad);
+	}
+	
+	public boolean agregarUnidadDaniable(Daniable unidad){
+		return ciudad.agregarUnidadDaniable(unidad);
+	}
+	
+	public ArrayList<Ocupable> unidadesConPoblacion(){
+		return ciudad.unidadesConPoblacion();
+	}
+	
+	public ArrayList<Ocupable> unidadesConEmpleo(){
+		return ciudad.unidadesConEmpleo();
+	}
+	
+	public ArrayList<Daniable> unidadesDaniables(){
+		return ciudad.unidadesDaniables();
+	}
 
 	public Point posicionConAgua() {
 		return territorio.posicionConAgua();
@@ -125,12 +151,12 @@ public class Mapa {
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
-	public int capacidadHabitacional() {
-		return this.ciudad.getCapacidadHabitacional();
+	public int capacidadDePoblacion() {
+		return this.ciudad.capacidadDePoblacion();
 	}
 
-	public int capacidadEmpleo() {
-		return this.ciudad.getCapacidadEmpleo();
+	public int capacidadDeEmpleo() {
+		return this.ciudad.capacidadDeEmpleo();
 	}
 	
 }

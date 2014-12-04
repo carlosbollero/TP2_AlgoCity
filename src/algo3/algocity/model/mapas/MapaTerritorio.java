@@ -83,13 +83,13 @@ public class MapaTerritorio {
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad) {
-		return unidad.esConstruibleEn(superficie(unidad.getCoordenadas())
+		return unidad.esConstruibleEn(superficie(unidad.coordenadas())
 				.getSuperficie());
 	}
 
 	public boolean sePuedeConstruir(Conector conector) {
 		return conector
-				.esConstruibleEn(superficie(conector.getCoordenadas())
+				.esConstruibleEn(superficie(conector.coordenadas())
 						.getSuperficie());
 	}
 	
