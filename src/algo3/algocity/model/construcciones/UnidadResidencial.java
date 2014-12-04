@@ -2,14 +2,15 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
-import algo3.algocity.model.caracteristicas.Reparable;
+import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class UnidadResidencial extends Unidad implements Reparable, Visitable {
+public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Visitable {
 
 	final double ESTADOINICIAL = 100;
 
@@ -95,6 +96,7 @@ public class UnidadResidencial extends Unidad implements Reparable, Visitable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
+		mapa.agregarUnidadConPoblacion(this);
 	}
 
 }

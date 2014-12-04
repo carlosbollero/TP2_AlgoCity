@@ -28,34 +28,40 @@ public class Turno extends Observable implements Runnable {
 	}
 	
 	public void iniciarHilo(){
-		hilo = new Thread(this);
+		hilo = new Thread(this,"TURNO");
 		hilo.start();
+	}
+	
+	public void finalizar(){
+		jugando = false;
 	}
 	
 	public boolean estaVivo(){
 		return hilo.isAlive();
 	}
 
+	
+	public void join(){
+		try {
+			hilo.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void run() {
 		System.out.println("STARTING");
-		while (jugando){
-			System.out.println("Start at " + (int)((System.currentTimeMillis())/1000.0));
-//			Thread.sleep(20000);
+		while (jugando){		
 			avanzar();
 			setChanged();
 			notifyObservers();
-			if (numero == 2){
+			if(numero == 2){
 				jugando = false;
 			}
-			
 		}
 		System.out.println("SALIENDO");		
-	}
-
-	public void finalizar(){
-		jugando = false;
-	}
-	
+	}	
 
 }

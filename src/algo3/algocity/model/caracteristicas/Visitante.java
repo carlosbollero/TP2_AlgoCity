@@ -22,6 +22,7 @@ public interface Visitante {
 
 	public void visitar(Ruta unaRuta);
 
-	public void visitar(Unidad unaUnidad); // usado por CatastrofeTerremoto
+//	public void visitar(Unidad unaUnidad); // usado por CatastrofeTerremoto
+	public void visitar(Daniable unaUnidad);
 
 }

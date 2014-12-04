@@ -5,7 +5,7 @@ import java.awt.Point;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 
-public class CentralNuclear extends UnidadEnergetica {
+public class CentralNuclear extends UnidadEnergetica{
 
 	public CentralNuclear() {
 		this.costo = 10000;
@@ -35,6 +35,7 @@ public class CentralNuclear extends UnidadEnergetica {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
+		mapa.agregarUnidadDaniable(this);
 		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
 

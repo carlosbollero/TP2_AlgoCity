@@ -4,17 +4,16 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class CatastrofeTerremoto implements Visitante {
 
@@ -61,11 +60,17 @@ public class CatastrofeTerremoto implements Visitante {
 		}
 	}
 
-	@Override
-	public void visitar(Unidad unaUnidad) {
-		Point posicion = unaUnidad.getCoordenadas();
+//	@Override
+//	public void visitar(Unidad unaUnidad) {
+//		Point posicion = unaUnidad.getCoordenadas();
+//		double danioAAplicar = this.calcularDanio(posicion);
+//
+//		unaUnidad.aplicarDanio(danioAAplicar);
+//	}
+	
+	public void visitar(Daniable unaUnidad){
+		Point posicion = unaUnidad.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
-
 		unaUnidad.aplicarDanio(danioAAplicar);
 	}
 
@@ -80,7 +85,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		Point posicion = unaUnidadResidencial.getCoordenadas();
+		Point posicion = unaUnidadResidencial.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaUnidadResidencial.aplicarDanio(danioAAplicar);
@@ -88,7 +93,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadComercial unaUnidadComercial) {
-		Point posicion = unaUnidadComercial.getCoordenadas();
+		Point posicion = unaUnidadComercial.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaUnidadComercial.aplicarDanio(danioAAplicar);
@@ -96,7 +101,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		Point posicion = unaUnidadIndustrial.getCoordenadas();
+		Point posicion = unaUnidadIndustrial.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaUnidadIndustrial.aplicarDanio(danioAAplicar);
@@ -104,7 +109,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		Point posicion = unaUnidadEnergetica.getCoordenadas();
+		Point posicion = unaUnidadEnergetica.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaUnidadEnergetica.aplicarDanio(danioAAplicar);
@@ -112,7 +117,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(LineaTension unaLineaTension) {
-		Point posicion = unaLineaTension.getCoordenadas();
+		Point posicion = unaLineaTension.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaLineaTension.aplicarDanio(danioAAplicar);
@@ -120,7 +125,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(Ruta unaRuta) {
-		Point posicion = unaRuta.getCoordenadas();
+		Point posicion = unaRuta.coordenadas();
 		double danioAAplicar = this.calcularDanio(posicion);
 
 		unaRuta.aplicarDanio(danioAAplicar);

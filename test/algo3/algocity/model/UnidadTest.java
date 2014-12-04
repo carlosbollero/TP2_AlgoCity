@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.caracteristicas.Reparable;
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
@@ -182,7 +182,7 @@ public class UnidadTest {
 
 	@Test
 	public void testAplicarDanioAUnidadOcupable() {
-		Reparable unaUnidadResidencial = new UnidadResidencial();
+		Daniable unaUnidadResidencial = new UnidadResidencial();
 
 		unaUnidadResidencial.aplicarDanio(100);
 
@@ -192,7 +192,7 @@ public class UnidadTest {
 
 	@Test
 	public void testAplicarDanioAUnidadComercial() {
-		Reparable unaUnidadComercial = new UnidadComercial();
+		Daniable unaUnidadComercial = new UnidadComercial();
 		unaUnidadComercial.aplicarDanio(50);
 
 		assertEquals(50, unaUnidadComercial.getSalud(), 0);
@@ -200,7 +200,7 @@ public class UnidadTest {
 
 	@Test
 	public void testAplicarDanioAUnidadEnergetica() {
-		Reparable unaUnidadEnergetica = new CentralEolica();
+		Daniable unaUnidadEnergetica = new CentralEolica();
 		unaUnidadEnergetica.aplicarDanio(50);
 
 		assertEquals(50, unaUnidadEnergetica.getSalud(), 0);

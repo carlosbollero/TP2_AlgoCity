@@ -39,8 +39,8 @@ public class MapaConexiones {
 	}
 
 	public boolean agregar(Conector elemento) {
-		int x = elemento.getCoordenadas().x;
-		int y = elemento.getCoordenadas().y;
+		int x = elemento.coordenadas().x;
+		int y = elemento.coordenadas().y;
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
 			this.mapa.put(new Point(x, y), elemento);
@@ -140,7 +140,7 @@ public class MapaConexiones {
 
 	public boolean sePuedeConstruir(Unidad unidad) {
 		for (Point coord : posicionesRelevantes) {
-			if (hayConexion(unidad.getCoordenadas(), coord)) {
+			if (hayConexion(unidad.coordenadas(), coord)) {
 				return true;
 			}
 		}
@@ -148,8 +148,8 @@ public class MapaConexiones {
 	}
 
 	public boolean sePuedeConstruir(Conector conector) {
-		return tieneCoordenadaOcupada(conector.getCoordenadas().x,
-				conector.getCoordenadas().y);
+		return tieneCoordenadaOcupada(conector.coordenadas().x,
+				conector.coordenadas().y);
 	}
 
 }

@@ -19,11 +19,11 @@ public abstract class Unidad {
 		return consumo;
 	}
 
-	public Point getCoordenadas() {
+	public Point coordenadas() {
 		return coordenadas;
 	}
 
-	public abstract void aplicarDanio(double i);
+//	public abstract void aplicarDanio(double i);
 
 	public abstract boolean esConstruibleEn(Superficie superficie);
 

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.construcciones.Unidad;
 
@@ -14,25 +16,61 @@ public class MapaEdilicio {
 	private int ancho;
 
 	HashMap<Point, Unidad> mapa;
+	ArrayList<Ocupable> unidadesConPoblacion;
+	ArrayList<Ocupable> unidadesConEmpleo;
+	ArrayList<Daniable> unidadesDaniables;
 
 	public MapaEdilicio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.mapa = new HashMap<Point, Unidad>();
+		mapa = new HashMap<Point, Unidad>();
 	}
 
 	public boolean agregar(Unidad elemento) {
-		int x = elemento.getCoordenadas().x;
-		int y = elemento.getCoordenadas().y;
+		int x = elemento.coordenadas().x;
+		int y = elemento.coordenadas().y;
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
 
-		if (!this.mapa.containsKey(elemento.getCoordenadas())) {
-			this.mapa.put(elemento.getCoordenadas(), elemento);
+		if (!this.mapa.containsKey(elemento.coordenadas())) {
+			this.mapa.put(elemento.coordenadas(), elemento);
 			return true;
 		}
 		return false;
+	}
+
+	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
+		if (unidadesConPoblacion == null) {
+			unidadesConPoblacion = new ArrayList<Ocupable>();
+		}
+		return unidadesConPoblacion.add(unidad);
+	}
+
+	public boolean agregarUnidadConEmpleo(Ocupable unidad) {
+		if (unidadesConEmpleo == null) {
+			unidadesConEmpleo = new ArrayList<Ocupable>();
+		}
+		return unidadesConEmpleo.add(unidad);
+	}
+
+	public boolean agregarUnidadDaniable(Daniable unidad) {
+		if (unidadesDaniables == null) {
+			unidadesDaniables = new ArrayList<Daniable>();
+		}
+		return unidadesDaniables.add(unidad);
+	}
+
+	public ArrayList<Ocupable> unidadesConPoblacion() {
+		return unidadesConPoblacion;
+	}
+
+	public ArrayList<Ocupable> unidadesConEmpleo() {
+		return unidadesConEmpleo;
+	}
+
+	public ArrayList<Daniable> unidadesDaniables() {
+		return unidadesDaniables;
 	}
 
 	public void remover(int x, int y) {
@@ -140,25 +178,19 @@ public class MapaEdilicio {
 		return new Point(xf, yf);
 	}
 
-	/*********************************************************************/
-	/*********************************************************************/
-	// 					REVISAR PORQUE ES REALMENTE FEO
-	/*********************************************************************/
-	public int getCapacidadHabitacional() {
+	public int capacidadDePoblacion() {
 		int capacidad = 0;
-		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
-			capacidad += entry.getValue().getCapacidadHabitacional();
+		for (Ocupable unidad : unidadesConPoblacion) {
+			capacidad += unidad.capacidad();
 		}
 		return capacidad;
 	}
 
-	public int getCapacidadEmpleo() {
+	public int capacidadDeEmpleo() {
 		int capacidad = 0;
-		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
-			capacidad += entry.getValue().getCapacidadEmpleo();
+		for (Ocupable unidad : unidadesConEmpleo) {
+			capacidad += unidad.capacidad();
 		}
 		return capacidad;
 	}
-	/*********************************************************************/
-	/*********************************************************************/
 }

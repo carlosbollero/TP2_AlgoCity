@@ -35,6 +35,7 @@ public class CentralMinera extends UnidadEnergetica {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
+		mapa.agregarUnidadDaniable(this);
 		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
 
