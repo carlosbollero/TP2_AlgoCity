@@ -44,8 +44,10 @@ public class PozoDeAgua extends Unidad {
 
 	@Override
 	public double getSalud() {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO revisar de hacerlo de otra forma
+		//por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+		//entiendan este mensaje nose si es lo mejor
+		return 100;
 	}
 
 	@Override

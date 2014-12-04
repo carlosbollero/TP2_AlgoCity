@@ -3,11 +3,13 @@ package algo3.algocity.model.mapas;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
+import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.Unidad;
 
 public class MapaEdilicio {
@@ -24,6 +26,9 @@ public class MapaEdilicio {
 		this.alto = alto;
 		this.ancho = ancho;
 		mapa = new HashMap<Point, Unidad>();
+		unidadesDaniables = new ArrayList<Daniable>(); //Si o si tiene que inciializarse aca
+		unidadesConPoblacion = new ArrayList<Ocupable>();
+		unidadesConEmpleo = new ArrayList<Ocupable>();		
 	}
 
 	public boolean agregar(Unidad elemento) {
@@ -116,34 +121,47 @@ public class MapaEdilicio {
 
 	}
 
-	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro,
+	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro,
 			int radio) {
-		ArrayList<Visitable> unidadesADevolver = new ArrayList<Visitable>();
-		// unidadesADevolver.add((Visitable) this.getUnidadEn(
-		// (int) epicentro.getX(), (int) epicentro.getY()));
-
+		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
 		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
 		Point fin = calcularCoordenadaDeFin(epicentro, radio);
 
 		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
 			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
-				if (validarCoordenadas(x, y)) {
-					if (this.getUnidadEn(x, y) != null) {
-						unidadesADevolver.add((Visitable) this
-								.getUnidadEn(x, y));
-					}
+				if (validarCoordenadas(x, y) && existeDaniable(x, y)) {
+					unidadesADevolver.add(getDaniableEn(x, y));
+
 				}
 			}
 		}
 		return unidadesADevolver;
 
-		/*
-		 * for (int i = -radio; i < radio; i++) { for (int j = -radio; j < radio
-		 * && i != j; j++) { if (validarCoordenadas((int) epicentro.getX() + j,
-		 * (int) epicentro.getY() + i)) { unidadesADevolver.add((Visitable)
-		 * this.getUnidadEn( (int) (epicentro.getX() + j), (int)
-		 * (epicentro.getY() + i))); } } }
-		 */
+	}
+
+	private Daniable getDaniableEn(int x, int y) {
+		//Point ptoBuscado = new Point(x, y);
+		Iterator<Daniable> it = unidadesDaniables.iterator();
+		while (it.hasNext()) {
+			Daniable d = it.next();
+			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+				return d;
+			}
+		}
+		return null;
+	}
+
+	private boolean existeDaniable(int x, int y) {
+		//Point ptoBuscado = new Point(x, y);
+		Iterator<Daniable> it = unidadesDaniables.iterator();
+		while (it.hasNext()) {
+			Daniable d = it.next();
+			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	private Point calcularCoordenadaDeInicio(Point epicentro, int radio) {
@@ -193,4 +211,6 @@ public class MapaEdilicio {
 		}
 		return capacidad;
 	}
+
+
 }

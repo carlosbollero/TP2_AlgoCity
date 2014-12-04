@@ -111,8 +111,8 @@ public class Mapa {
 		return ciudad.contiene(u);
 	}
 	
-	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro, int radio){
-		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
+	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro, int radio){
+		return ciudad.getDaniablesAlrededorDe(epicentro, radio);
 	}
 
 	// METODOS PARA VALIDAR REQUISITOS
@@ -158,5 +158,5 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
-	
+
 }

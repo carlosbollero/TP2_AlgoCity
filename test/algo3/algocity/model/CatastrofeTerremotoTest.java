@@ -1,19 +1,29 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.Test;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
+import algo3.algocity.model.construcciones.EstacionDeBomberos;
+import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CatastrofeTerremotoTest {
-	
+
 	Mapa m;
 
 	@Test
@@ -34,7 +44,7 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoAplicaDanioCorrespondienteAUnidadesAlrededor() {
-		m  = new Mapa(10, 10);
+		m = new Mapa(10, 10);
 
 		UnidadResidencial ur1 = new UnidadResidencial(1, 1);
 		UnidadComercial uc1 = new UnidadComercial(1, 2);
@@ -63,7 +73,6 @@ public class CatastrofeTerremotoTest {
 		// Creacion de un terremoto con epicentro en (1,1)
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
 
-		// Distancias calculadas por Pitagoras
 		assertEquals(0, ur1.getSalud(), 0);
 		assertEquals(1.5, uc1.getSalud(), 0);
 		assertEquals(3.35, ce1.getSalud(), 0.1);
@@ -71,6 +80,42 @@ public class CatastrofeTerremotoTest {
 		assertEquals(4.74, cn1.getSalud(), 0.1);
 		assertEquals(19.09, ur2.getSalud(), 0.1);
 		assertEquals(4.5, ur3.getSalud(), 0.1);
+	}
+
+	@Test
+	public void testTerremotoNoAplicaDanioAUnidadesNoDaniablesAlrededor() {
+		m = new Mapa(10, 10);
+
+		EstacionDeBomberos eb = new EstacionDeBomberos(1, 1);
+		PozoDeAgua pa = new PozoDeAgua(2, 2);
+
+		m.agregar(eb);
+		m.agregar(pa);
+
+		// Creacion de un terremoto con epicentro en (1,1)
+		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
+
+		assertEquals(100, eb.getSalud(), 0);
+		assertEquals(100, pa.getSalud(), 0);
+	}
+
+	@Test
+	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
+			throws NoSeCumplenLosRequisitosException {
+		m = new Mapa(10, 10);
+		m.setTerritorioTierraParaTest();
+
+		LineaTension lt = new LineaTension(m, 3, 5);
+		Ruta rt = new Ruta(m, 4, 5);
+
+		assertEquals(100, lt.getSalud(), 0);
+		assertEquals(100, rt.getSalud(), 0);
+
+		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 5, 5);
+
+		assertEquals(3, lt.getSalud(), 0);
+		assertEquals(1.5, rt.getSalud(), 0);
+
 	}
 
 }

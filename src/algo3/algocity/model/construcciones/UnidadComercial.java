@@ -48,10 +48,9 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
 	@Override
 	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		} else {
-			this.porcentajeDanios += cantidad;
 		}
 	}
 

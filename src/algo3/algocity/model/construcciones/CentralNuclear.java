@@ -2,6 +2,7 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
+import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 

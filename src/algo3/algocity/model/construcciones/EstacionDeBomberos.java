@@ -104,7 +104,10 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 
 	@Override
 	public double getSalud() {
-		return 0;
+		// TODO revisar de hacerlo de otra forma
+		//por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+		//entiendan este mensaje nose si es lo mejor
+		return 100;
 	}
 
 	@Override

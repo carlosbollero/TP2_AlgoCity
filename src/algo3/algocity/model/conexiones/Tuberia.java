@@ -40,4 +40,10 @@ public class Tuberia implements Conector {
 		mapa.agregarATuberias(this);
 	}
 
+	@Override
+	public double getSalud() {
+		// TODO Auto-generated method stub
+		return 100;
+	}
+
 }

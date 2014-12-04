@@ -6,6 +6,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -77,10 +78,9 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		} else {
-			this.porcentajeDanios += cantidad;
 		}
 	}
 
@@ -103,6 +103,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	public void agregarseA(Mapa mapa) {
 		mapa.agregar(this);
 		mapa.agregarUnidadConEmpleo(this);
+		mapa.agregarUnidadDaniable(this);
 	}
+
 
 }
