@@ -22,7 +22,7 @@ public class Poblacion implements Observer {
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
-		estadoActual = null;
+		estadoActual = new EstadoPoblacionEstable();
 	}
 
 	public Poblacion(Mapa mapa) {

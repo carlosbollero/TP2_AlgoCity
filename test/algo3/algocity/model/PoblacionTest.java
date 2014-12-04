@@ -69,15 +69,17 @@ public class PoblacionTest {
 	@Test
 	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
 		Poblacion p = new Poblacion();
+		
 		Turno t = new Turno();
+		t.addObserver(p);
 		
 		t.iniciarHilo();
-		t.addObserver(p);
 		int referencia = p.getCantidad();
 
 		assertTrue(referencia == 0);
 		assertTrue(t.estaVivo());
 
+//		seteo el indice para que aumente la poblacion
 		p.setIndice(1); 	//positivo crece
 							//negativo decrece
 		try {
@@ -87,6 +89,7 @@ public class PoblacionTest {
 			e.printStackTrace();
 		}
 		
+		t.finalizar();
 		
 		assertTrue(p.getCantidad() > referencia);
 		
