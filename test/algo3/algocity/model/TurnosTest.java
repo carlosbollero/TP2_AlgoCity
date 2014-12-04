@@ -18,7 +18,13 @@ public class TurnosTest {
 		
 		assertTrue(t.estaVivo());
 		
-		t.finalizar();		
+		t.finalizar();
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertFalse(t.estaVivo());
 	} 
