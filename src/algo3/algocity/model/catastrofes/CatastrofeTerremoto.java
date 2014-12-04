@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;

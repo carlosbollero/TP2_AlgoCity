@@ -19,6 +19,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 	boolean estado;
 	int costo;
 	double porcentajeDanios;
+
 	Point coordenadas;
 
 	public Ruta() {
@@ -30,7 +31,6 @@ public class Ruta implements Conector, Daniable, Visitable {
 		porcentajeDanios = 0;
 		costo = 10;
 		coordenadas = new Point(x, y);
-			
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		} else {
@@ -80,12 +80,11 @@ public class Ruta implements Conector, Daniable, Visitable {
 			this.porcentajeDanios = 100;
 		}
 	}
-	
+
 	@Override
 	public double getSalud() {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
-
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
@@ -98,6 +97,5 @@ public class Ruta implements Conector, Daniable, Visitable {
 		mapa.agregarUnidadDaniable(this);
 
 	}
-
 
 }

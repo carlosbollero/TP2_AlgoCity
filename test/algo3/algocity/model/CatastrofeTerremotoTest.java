@@ -2,16 +2,11 @@ package algo3.algocity.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.junit.Test;
 
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;

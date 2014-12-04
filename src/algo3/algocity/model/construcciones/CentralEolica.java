@@ -1,8 +1,6 @@
 package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
-
-import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -38,6 +36,5 @@ public class CentralEolica extends UnidadEnergetica {
 		mapa.agregarUnidadDaniable(this);
 		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
-
 
 }

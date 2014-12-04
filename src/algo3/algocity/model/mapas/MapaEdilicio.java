@@ -8,8 +8,6 @@ import java.util.Map.Entry;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
-import algo3.algocity.model.caracteristicas.Visitable;
-import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.Unidad;
 
 public class MapaEdilicio {
@@ -28,7 +26,7 @@ public class MapaEdilicio {
 		mapa = new HashMap<Point, Unidad>();
 		unidadesDaniables = new ArrayList<Daniable>(); //Si o si tiene que inciializarse aca
 		unidadesConPoblacion = new ArrayList<Ocupable>();
-		unidadesConEmpleo = new ArrayList<Ocupable>();		
+		unidadesConEmpleo = new ArrayList<Ocupable>();	
 	}
 
 	public boolean agregar(Unidad elemento) {
@@ -126,21 +124,18 @@ public class MapaEdilicio {
 		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
 		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
 		Point fin = calcularCoordenadaDeFin(epicentro, radio);
-
 		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
 			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
 				if (validarCoordenadas(x, y) && existeDaniable(x, y)) {
 					unidadesADevolver.add(getDaniableEn(x, y));
-
 				}
 			}
 		}
 		return unidadesADevolver;
-
 	}
 
 	private Daniable getDaniableEn(int x, int y) {
-		//Point ptoBuscado = new Point(x, y);
+		// Point ptoBuscado = new Point(x, y);
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
@@ -152,7 +147,7 @@ public class MapaEdilicio {
 	}
 
 	private boolean existeDaniable(int x, int y) {
-		//Point ptoBuscado = new Point(x, y);
+		// Point ptoBuscado = new Point(x, y);
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
@@ -161,7 +156,6 @@ public class MapaEdilicio {
 			}
 		}
 		return false;
-
 	}
 
 	private Point calcularCoordenadaDeInicio(Point epicentro, int radio) {
@@ -211,6 +205,4 @@ public class MapaEdilicio {
 		}
 		return capacidad;
 	}
-
-
 }

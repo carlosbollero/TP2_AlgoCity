@@ -6,7 +6,6 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
-import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -58,6 +57,13 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 	}
 
 
+	public double getDanios() {
+		return porcentajeDanios;
+	}
+
+	public double getSalud() {
+		return (this.ESTADOINICIAL - this.porcentajeDanios);
+	}
 
 	@Override
 	public void repararse() {
@@ -66,15 +72,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 			this.porcentajeDanios = 0;
 		}
 	}
-
-	
-	public double getDanios() {
-		return porcentajeDanios;
-	}
-
-	public double getSalud() {
-		return (this.ESTADOINICIAL - this.porcentajeDanios);
-	}	
 	
 	public void aplicarDanio(double cantidad) {
 		this.porcentajeDanios += cantidad;

@@ -20,6 +20,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 					// false para destruido
 	int costo;
 	double porcentajeDanios;
+	int danios;
 	Point coordenadas;
 
 	public LineaTension() {
@@ -98,5 +99,4 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		mapa.agregarUnidadDaniable(this);
 
 	}
-
 }

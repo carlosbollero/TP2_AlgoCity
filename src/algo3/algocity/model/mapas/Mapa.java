@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -50,7 +49,6 @@ public class Mapa {
 		conector.agregarseA(this);
 	}
 
-
 	public boolean agregarACiudad(Unidad unidad) {
 		return ciudad.agregar(unidad);
 	}
@@ -74,28 +72,28 @@ public class Mapa {
 	public boolean agregarPuntoRelevanteEnRedElectrica(Point punto) {
 		return redElectrica.agregarPosicionRelevante(punto);
 	}
-	
-	public boolean agregarUnidadConPoblacion(Ocupable unidad){
+
+	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
 		return ciudad.agregarUnidadConPoblacion(unidad);
 	}
-	
-	public boolean agregarUnidadConEmpleo(Ocupable unidad){
+
+	public boolean agregarUnidadConEmpleo(Ocupable unidad) {
 		return ciudad.agregarUnidadConEmpleo(unidad);
 	}
-	
-	public boolean agregarUnidadDaniable(Daniable unidad){
+
+	public boolean agregarUnidadDaniable(Daniable unidad) {
 		return ciudad.agregarUnidadDaniable(unidad);
 	}
-	
-	public ArrayList<Ocupable> unidadesConPoblacion(){
+
+	public ArrayList<Ocupable> unidadesConPoblacion() {
 		return ciudad.unidadesConPoblacion();
 	}
-	
-	public ArrayList<Ocupable> unidadesConEmpleo(){
+
+	public ArrayList<Ocupable> unidadesConEmpleo() {
 		return ciudad.unidadesConEmpleo();
 	}
-	
-	public ArrayList<Daniable> unidadesDaniables(){
+
+	public ArrayList<Daniable> unidadesDaniables() {
 		return ciudad.unidadesDaniables();
 	}
 
@@ -110,8 +108,9 @@ public class Mapa {
 	public boolean contiene(Unidad u) {
 		return ciudad.contiene(u);
 	}
-	
-	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro, int radio){
+
+	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro,
+			int radio) {
 		return ciudad.getDaniablesAlrededorDe(epicentro, radio);
 	}
 
@@ -148,6 +147,7 @@ public class Mapa {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
 	}
+
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
@@ -158,5 +158,4 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
-
 }

@@ -88,7 +88,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	@Override
 	public void visitar(Daniable unaUnidad) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -96,17 +96,17 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 		return (superficie.esTierra());
 	}
 
-//	@Override
-//	public void aplicarDanio(double i) {
-//		// TODO Auto-generated method stub
-//
-//	}
+	// @Override
+	// public void aplicarDanio(double i) {
+	// // TODO Auto-generated method stub
+	//
+	// }
 
 	@Override
 	public double getSalud() {
 		// TODO revisar de hacerlo de otra forma
-		//por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-		//entiendan este mensaje nose si es lo mejor
+		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+		// entiendan este mensaje nose si es lo mejor
 		return 100;
 	}
 
@@ -114,7 +114,5 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 	}
-
-
 
 }

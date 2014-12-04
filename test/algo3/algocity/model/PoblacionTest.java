@@ -69,15 +69,22 @@ public class PoblacionTest {
 	@Test
 	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
 		Poblacion p = new Poblacion();
+		
 		Turno t = new Turno();
+<<<<<<< HEAD
 		
 		t.iniciarHilo();
+=======
+>>>>>>> 4c2a7608ceecd4bb683b7c631ebc9654f62ea826
 		t.addObserver(p);
+		
+		t.iniciarHilo();
 		int referencia = p.getCantidad();
 
 		assertTrue(referencia == 0);
 		assertTrue(t.estaVivo());
 
+//		seteo el indice para que aumente la poblacion
 		p.setIndice(1); 	//positivo crece
 							//negativo decrece
 		try {
@@ -87,6 +94,10 @@ public class PoblacionTest {
 			e.printStackTrace();
 		}
 		
+<<<<<<< HEAD
+=======
+		t.finalizar();
+>>>>>>> 4c2a7608ceecd4bb683b7c631ebc9654f62ea826
 		
 		assertTrue(p.getCantidad() > referencia);
 		
