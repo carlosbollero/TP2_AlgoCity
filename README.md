@@ -7,6 +7,9 @@ TP2_AlgoCity
 
 Supuestos:
 ==========
+- La capacidad de una unidad es igual a la capacidad total menos el porcentaje de daños
+  esfectuado por un terremoto.
+- La estacion de bomberos y el pozo de agua no es afectado por una catastrofe.
 - Para agregar una Unidad se deben cumplir previamente todos los requisitos.
 - Las rutas las repara completamente EstacionDeBomberos.
 - La poblacion va a variar segun un cálculo entre la CAPACIDAD_TOTAL de poblacion
