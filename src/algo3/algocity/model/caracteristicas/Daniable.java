@@ -1,11 +1,15 @@
 package algo3.algocity.model.caracteristicas;
 
-public interface Reparable {
+import java.awt.Point;
+
+public interface Daniable {
 
 	public void repararse();
 
 	public void aplicarDanio(double unDanio);
 
 	public double getSalud();
+	
+	public Point coordenadas();
 
 }
