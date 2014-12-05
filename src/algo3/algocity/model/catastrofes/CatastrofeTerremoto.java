@@ -73,8 +73,8 @@ public class CatastrofeTerremoto implements Visitante {
 	
 	public void visitar(Daniable unaUnidad){
 		Point posicion = unaUnidad.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
-		unaUnidad.aplicarDanio(danioAAplicar);
+		double danio = this.calcularDanio(posicion);
+		unaUnidad.aplicarDanio(danio);
 	}
 
 	public double calcularDanio(Point punto) {
@@ -89,49 +89,49 @@ public class CatastrofeTerremoto implements Visitante {
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {
 		Point posicion = unaUnidadResidencial.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaUnidadResidencial.aplicarDanio(danioAAplicar);
+		unaUnidadResidencial.aplicarDanio(danio);
 	}
 
 	@Override
 	public void visitar(UnidadComercial unaUnidadComercial) {
 		Point posicion = unaUnidadComercial.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaUnidadComercial.aplicarDanio(danioAAplicar);
+		unaUnidadComercial.aplicarDanio(danio);
 	}
 
 	@Override
 	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
 		Point posicion = unaUnidadIndustrial.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaUnidadIndustrial.aplicarDanio(danioAAplicar);
+		unaUnidadIndustrial.aplicarDanio(danio);
 	}
 
 	@Override
 	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
 		Point posicion = unaUnidadEnergetica.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaUnidadEnergetica.aplicarDanio(danioAAplicar);
+		unaUnidadEnergetica.aplicarDanio(danio);
 	}
 
 	@Override
 	public void visitar(LineaTension unaLineaTension) {
 		Point posicion = unaLineaTension.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaLineaTension.aplicarDanio(danioAAplicar);
+		unaLineaTension.aplicarDanio(danio);
 	}
 
 	@Override
 	public void visitar(Ruta unaRuta) {
 		Point posicion = unaRuta.coordenadas();
-		double danioAAplicar = this.calcularDanio(posicion);
+		double danio = this.calcularDanio(posicion);
 
-		unaRuta.aplicarDanio(danioAAplicar);
+		unaRuta.aplicarDanio(danio);
 	}
 
 }
