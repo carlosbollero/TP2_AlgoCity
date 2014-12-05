@@ -3,41 +3,34 @@ package algo3.algocity.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
+
 /**
  * Clase controladora del login y registro de usuarios
  **/
 
-public class ControladorUsuarios {
+public class RegistroUsuarios {
 
 	private ArrayList<Usuario> usuarios;
 
-	public ControladorUsuarios() {
+	public RegistroUsuarios() {
 
 		usuarios = new ArrayList<Usuario>();
 	}
 
-	public void addUsuario(Usuario unUsuario) {
+	public void addUsuario(Usuario unUsuario) throws NombreDeUsuarioYaExisteException {
 
 		if (usuarios.isEmpty()) {
 
 			usuarios.add(unUsuario);
 
 		} else if (!existeNombreUsuario(unUsuario.nombre())) {
-
-			usuarios.add(unUsuario);
-
+			usuarios.add(unUsuario);			
 		}
-		/**
-		 * else{
-		 * 
-		 * throw new ExcepcionAgregarUsuarioYaExistente("El usuario ya existe");
-		 * 
-		 * }
-		 **/
-		// Ver de tratar esto con una excepcion
 	}
 
-	public boolean existeNombreUsuario(String nombreUsuarioAChequear) {
+	public boolean existeNombreUsuario(String nombreUsuarioAChequear) throws NombreDeUsuarioYaExisteException {
 		boolean encontrado = false;
 		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
@@ -48,11 +41,13 @@ public class ControladorUsuarios {
 				encontrado = true;
 			}
 		}
+		if (encontrado){
+			throw new NombreDeUsuarioYaExisteException();
+		}
 		return encontrado;
 	}
 
-	public boolean existeUsuario(Usuario usuarioAChequear) {
-
+	public boolean existeUsuario(Usuario usuarioAChequear) throws ElUsuarioYaExisteException {
 		boolean encontrado = false;
 		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
@@ -62,6 +57,9 @@ public class ControladorUsuarios {
 
 				encontrado = true;
 			}
+		}
+		if (encontrado){
+			throw new ElUsuarioYaExisteException();
 		}
 		return encontrado;
 	}
