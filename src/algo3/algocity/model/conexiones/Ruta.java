@@ -25,6 +25,13 @@ public class Ruta implements Conector, Daniable, Visitable {
 		this.costo = 10;
 	}
 
+	public Ruta(int x, int y) {
+		porcentajeDanios = 0;
+		costo = 10;
+		coordenadas = new Point(x, y);
+
+	}
+
 	public Ruta(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 		porcentajeDanios = 0;

@@ -12,7 +12,7 @@ import algo3.algocity.model.terreno.Superficie;
 public class LineaTension implements Conector, Daniable, Visitable {
 
 	final boolean intacto = true;
-	final boolean destruido = false;	
+	final boolean destruido = false;
 	final double ESTADOINICIAL = 100;
 
 	boolean estado; // true para intacto
@@ -25,6 +25,11 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	public LineaTension() {
 
 		this.costo = 5;
+	}
+
+	public LineaTension(int x, int y) {
+		porcentajeDanios = 0;
+		coordenadas = new Point(x, y);
 	}
 
 	public LineaTension(Mapa mapa, int x, int y)
@@ -61,7 +66,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 			this.porcentajeDanios = 0;
 		}
 	}
-	
+
 	public double getDanios() {
 		return porcentajeDanios;
 	}
@@ -70,8 +75,6 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		return 100;
 	}
 
-
-	
 	public void aplicarDanio(double cantidad) {
 		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {

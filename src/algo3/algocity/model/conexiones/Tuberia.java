@@ -15,6 +15,11 @@ public class Tuberia implements Conector {
 	public Tuberia() {
 		costo = 5;
 	}
+	
+	public Tuberia(int x, int y) {
+		costo = 5;
+		coordenadas = new Point(x, y);
+	}
 
 	public Tuberia(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
