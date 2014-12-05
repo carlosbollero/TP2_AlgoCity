@@ -12,5 +12,6 @@ public interface Conector {
 	public abstract boolean esConstruibleEn(Superficie superficie);
 
 	public abstract void agregarseA(Mapa mapa);
-
+	
+	public abstract double getSalud();
 }

@@ -47,12 +47,12 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	}
 
 	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		} else {
-			this.porcentajeDanios += cantidad;
 		}
 	}
+	
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 35;

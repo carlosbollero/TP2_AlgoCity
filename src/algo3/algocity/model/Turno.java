@@ -3,12 +3,10 @@ package algo3.algocity.model;
 import java.util.Observable;
 
 public class Turno extends Observable implements Runnable {
-
 	/*
 	 * La idea es que turno se ejecute en un thread distinto para poder hacer
 	 * que avance cada cierto tiempo de manera automatica
 	 */
-
 	int numero;
 	volatile boolean jugando;
 	Thread hilo;
@@ -16,13 +14,12 @@ public class Turno extends Observable implements Runnable {
 	public Turno() {
 		numero = 1;
 		jugando = true;
-
 	}
 
 	public int getTurno() {
 		return numero;
 	}
-
+	
 	public void avanzar() {		
 		numero++;
 	}
@@ -62,6 +59,5 @@ public class Turno extends Observable implements Runnable {
 //			}
 		}
 		System.out.println("EXIT");		
-	}	
-
+	}
 }

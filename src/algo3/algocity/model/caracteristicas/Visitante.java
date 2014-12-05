@@ -2,7 +2,6 @@ package algo3.algocity.model.caracteristicas;
 
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
@@ -21,8 +20,8 @@ public interface Visitante {
 	public void visitar(LineaTension unaLineaTension);
 
 	public void visitar(Ruta unaRuta);
-
-//	public void visitar(Unidad unaUnidad); // usado por CatastrofeTerremoto
+	
+	// public void visitar(Unidad unaUnidad); // usado por CatastrofeTerremoto
 	public void visitar(Daniable unaUnidad);
 
 }

@@ -77,10 +77,9 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		} else {
-			this.porcentajeDanios += cantidad;
 		}
 	}
 
@@ -103,6 +102,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	public void agregarseA(Mapa mapa) {
 		mapa.agregar(this);
 		mapa.agregarUnidadConEmpleo(this);
+		mapa.agregarUnidadDaniable(this);
 	}
 
 }

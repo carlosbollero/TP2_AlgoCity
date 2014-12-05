@@ -9,7 +9,6 @@ import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Poblacion implements Observer {
-
 	int cantidad;
 	int capacidadHabitacional;
 	int capacidadEmpleo;
@@ -94,5 +93,4 @@ public class Poblacion implements Observer {
 		this.actualizarCapacidadHabitacional();
 		this.actualizarCapacidadEmpleo();
 	}
-
 }

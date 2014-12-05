@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -46,16 +45,16 @@ public class CatastrofeTerremoto implements Visitante {
 		this.mapa = mapa;
 		this.actuar(calcularObjetivos());
 	}
-
-	private ArrayList<Visitable> calcularObjetivos() {
-		ArrayList<Visitable> objetivos = new ArrayList<Visitable>();
+	
+	private ArrayList<Daniable> calcularObjetivos() {
+		ArrayList<Daniable> objetivos = new ArrayList<Daniable>();
 		objetivos = this.mapa
-				.getUnidadesAlrededorDe(this.epicentro, this.radio);
+				.getDaniablesAlrededorDe(this.epicentro, this.radio);
 		return objetivos;
 	}
 
-	public void actuar(ArrayList<Visitable> objetivos) {
-		for (Visitable u : objetivos) {
+	public void actuar(ArrayList<Daniable> objetivos) {
+		for (Daniable u : objetivos) {
 			u.aceptar(this);
 		}
 	}

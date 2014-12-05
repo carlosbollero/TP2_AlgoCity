@@ -9,7 +9,9 @@ public interface Daniable {
 	public void aplicarDanio(double unDanio);
 
 	public double getSalud();
-	
+
 	public Point coordenadas();
+	
+	public void aceptar(Visitante v);
 
 }

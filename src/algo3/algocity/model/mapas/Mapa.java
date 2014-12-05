@@ -50,7 +50,6 @@ public class Mapa {
 		conector.agregarseA(this);
 	}
 
-
 	public boolean agregarACiudad(Unidad unidad) {
 		return ciudad.agregar(unidad);
 	}
@@ -74,28 +73,28 @@ public class Mapa {
 	public boolean agregarPuntoRelevanteEnRedElectrica(Point punto) {
 		return redElectrica.agregarPosicionRelevante(punto);
 	}
-	
-	public boolean agregarUnidadConPoblacion(Ocupable unidad){
+
+	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
 		return ciudad.agregarUnidadConPoblacion(unidad);
 	}
-	
-	public boolean agregarUnidadConEmpleo(Ocupable unidad){
+
+	public boolean agregarUnidadConEmpleo(Ocupable unidad) {
 		return ciudad.agregarUnidadConEmpleo(unidad);
 	}
-	
-	public boolean agregarUnidadDaniable(Daniable unidad){
+
+	public boolean agregarUnidadDaniable(Daniable unidad) {
 		return ciudad.agregarUnidadDaniable(unidad);
 	}
-	
-	public ArrayList<Ocupable> unidadesConPoblacion(){
+
+	public ArrayList<Ocupable> unidadesConPoblacion() {
 		return ciudad.unidadesConPoblacion();
 	}
-	
-	public ArrayList<Ocupable> unidadesConEmpleo(){
+
+	public ArrayList<Ocupable> unidadesConEmpleo() {
 		return ciudad.unidadesConEmpleo();
 	}
-	
-	public ArrayList<Daniable> unidadesDaniables(){
+
+	public ArrayList<Daniable> unidadesDaniables() {
 		return ciudad.unidadesDaniables();
 	}
 
@@ -110,8 +109,10 @@ public class Mapa {
 	public boolean contiene(Unidad u) {
 		return ciudad.contiene(u);
 	}
-	
-	public ArrayList<Visitable> getUnidadesAlrededorDe(Point epicentro, int radio){
+
+
+	public ArrayList<Visitable> getDaniablesAlrededorDe(Point epicentro,
+			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
 
@@ -158,5 +159,4 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
-	
 }

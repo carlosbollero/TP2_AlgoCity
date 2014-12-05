@@ -70,7 +70,8 @@ public class PoblacionTest {
 	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
 		Poblacion p = new Poblacion();
 		
-		Turno t = new Turno();
+		Turno t = new Turno();		
+		t.iniciarHilo();
 		t.addObserver(p);
 		
 		t.iniciarHilo();

@@ -12,11 +12,13 @@ import algo3.algocity.model.terreno.Superficie;
 public class LineaTension implements Conector, Daniable, Visitable {
 
 	final boolean intacto = true;
-	final boolean destruido = false;
+	final boolean destruido = false;	
+	final double ESTADOINICIAL = 100;
 
 	boolean estado; // true para intacto
 					// false para destruido
 	int costo;
+	double porcentajeDanios;
 	int danios;
 	Point coordenadas;
 
@@ -27,7 +29,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public LineaTension(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
-
+		porcentajeDanios = 0;
 		coordenadas = new Point(x, y);
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
@@ -54,20 +56,31 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	@Override
 	public void repararse() {
-		// TODO Auto-generated method stub
-
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0) {
+			this.porcentajeDanios = 0;
+		}
+	}
+	
+	public double getDanios() {
+		return porcentajeDanios;
 	}
 
-	@Override
-	public void aplicarDanio(double unDanio) {
-		// TODO Auto-generated method stub
-
+	protected double porcentajeReparacion() {
+		return 100;
 	}
 
-	@Override
+
+	
+	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
+		if (this.porcentajeDanios > 100) {
+			this.porcentajeDanios = 100;
+		}
+	}
+
 	public double getSalud() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 
 	public Point coordenadas() {
@@ -82,6 +95,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarARedElectrica(this);
+		mapa.agregarUnidadDaniable(this);
 
 	}
 }

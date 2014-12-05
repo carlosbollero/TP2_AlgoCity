@@ -71,12 +71,11 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 			this.porcentajeDanios = 0;
 		}
 	}
-
+	
 	public void aplicarDanio(double cantidad) {
+		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
-		} else {
-			this.porcentajeDanios += cantidad;
 		}
 	}
 
@@ -97,6 +96,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadConPoblacion(this);
+		mapa.agregarUnidadDaniable(this);
 	}
 
 }

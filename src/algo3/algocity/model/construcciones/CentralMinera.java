@@ -38,5 +38,4 @@ public class CentralMinera extends UnidadEnergetica {
 		mapa.agregarUnidadDaniable(this);
 		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 	}
-
 }
