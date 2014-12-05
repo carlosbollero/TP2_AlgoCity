@@ -38,7 +38,7 @@ public class CaminarEnZigZag implements Movimiento {
 			//
 			// REVISAR 
 			//
-			if (alternar = false) {
+			if (alternar == false) {
 				this.caminoRetorno.add(iteradorCaminoCentrico.next());
 				iteradorCaminoAlternativo.next();
 				alternar = true;
