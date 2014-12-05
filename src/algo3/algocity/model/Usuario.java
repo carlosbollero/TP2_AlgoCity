@@ -3,12 +3,12 @@ package algo3.algocity.model;
 public class Usuario {
 
 	private String nombre;
-	private String ruta;
+	private final String ruta;
 
 	public Usuario(String unNombre) {
 
 		this.nombre = unNombre;
-		this.ruta = "";
+		this.ruta = "./saved/" + unNombre;
 	}
 
 	public void nombre(String nuevoNombre) {
@@ -19,9 +19,9 @@ public class Usuario {
 		return nombre;
 	}
 
-	public void ruta(String ruta) {
-		this.ruta = ruta;
-	}
+//	public void ruta(String ruta) {
+//		this.ruta = ruta;
+//	}
 
 	public String ruta() {
 		return ruta;
