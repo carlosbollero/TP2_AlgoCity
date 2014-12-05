@@ -48,8 +48,12 @@ public class CatastrofeTerremoto implements Visitante {
 	
 	private ArrayList<Daniable> calcularObjetivos() {
 		ArrayList<Daniable> objetivos = new ArrayList<Daniable>();
+
+		//Daniable o Visitable devuelve?
+		//Revisar		
 		objetivos = this.mapa
 				.getDaniablesAlrededorDe(this.epicentro, this.radio);
+		//		
 		return objetivos;
 	}
 
