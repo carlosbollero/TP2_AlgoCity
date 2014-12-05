@@ -18,7 +18,7 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeAgregarUnConectorAlMapa() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		Conector c = new LineaTension();
+		Conector c = new LineaTension(1, 1);
 
 		assertTrue(mc.agregar(c));
 	}
@@ -26,9 +26,9 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeAgregarMasDeUnConectorAlMapa() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		Conector c1 = new Tuberia();
-		Conector c2 = new Tuberia();
-		Conector c3 = new Tuberia();
+		Conector c1 = new Tuberia(1, 1);
+		Conector c2 = new Tuberia(2, 1);
+		Conector c3 = new Tuberia(3, 1);
 
 		assertTrue(mc.agregar(c1));
 		assertTrue(mc.agregar(c2));
@@ -38,8 +38,8 @@ public class MapaConexionesTest {
 	@Test
 	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		Conector c1 = new Ruta();
-		Conector c2 = new Ruta();
+		Conector c1 = new Ruta(1, 1);
+		Conector c2 = new Ruta(1, 1);
 
 		assertTrue(mc.agregar(c1));
 		assertTrue(mc.contiene(c1));
@@ -50,8 +50,8 @@ public class MapaConexionesTest {
 	@Test
 	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
 		MapaConexiones mc = new MapaConexiones(alto, ancho);
-		Conector c1 = new Ruta();
-		Conector c2 = new Ruta();
+		Conector c1 = new Ruta(1, 1);
+		Conector c2 = new Ruta(2, 2);
 
 		mc.agregar(c1);
 		mc.agregar(c2);
@@ -59,8 +59,8 @@ public class MapaConexionesTest {
 		assertFalse(mc
 				.hayConexion(mc.coordenadas(c1), mc.coordenadas(c2)));
 
-		Conector c3 = new Ruta();
-		Conector c4 = new Ruta();
+		Conector c3 = new Ruta(3, 3);
+		Conector c4 = new Ruta(3, 4);
 
 		mc.agregar(c3);
 		mc.agregar(c4);
