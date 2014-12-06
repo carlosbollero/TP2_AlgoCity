@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
