@@ -45,15 +45,12 @@ public class CatastrofeTerremoto implements Visitante {
 		this.mapa = mapa;
 		this.actuar(calcularObjetivos());
 	}
-	
+
 	private ArrayList<Daniable> calcularObjetivos() {
 		ArrayList<Daniable> objetivos = new ArrayList<Daniable>();
-
-		//Daniable o Visitable devuelve?
-		//Revisar		
-		objetivos = this.mapa
-				.getDaniablesAlrededorDe(this.epicentro, this.radio);
-		//		
+		objetivos = this.mapa.getDaniablesAlrededorDe(this.epicentro,
+				this.radio);
+		//
 		return objetivos;
 	}
 
@@ -63,15 +60,15 @@ public class CatastrofeTerremoto implements Visitante {
 		}
 	}
 
-//	@Override
-//	public void visitar(Unidad unaUnidad) {
-//		Point posicion = unaUnidad.getCoordenadas();
-//		double danioAAplicar = this.calcularDanio(posicion);
-//
-//		unaUnidad.aplicarDanio(danioAAplicar);
-//	}
-	
-	public void visitar(Daniable unaUnidad){
+	// @Override
+	// public void visitar(Unidad unaUnidad) {
+	// Point posicion = unaUnidad.getCoordenadas();
+	// double danioAAplicar = this.calcularDanio(posicion);
+	//
+	// unaUnidad.aplicarDanio(danioAAplicar);
+	// }
+
+	public void visitar(Daniable unaUnidad) {
 		Point posicion = unaUnidad.coordenadas();
 		double danio = this.calcularDanio(posicion);
 		unaUnidad.aplicarDanio(danio);

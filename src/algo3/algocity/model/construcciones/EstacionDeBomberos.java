@@ -13,7 +13,7 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class EstacionDeBomberos extends Unidad implements Visitante {
+public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 
 	private Conector conexion;
 
@@ -112,6 +112,24 @@ public class EstacionDeBomberos extends Unidad implements Visitante {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
+	}
+
+	@Override
+	public void repararse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aplicarDanio(double unDanio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aceptar(Visitante v) {
+		v.visitar(this);
+		
 	}
 
 }
