@@ -2,11 +2,13 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
+import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class PozoDeAgua extends Unidad {
+public class PozoDeAgua extends Unidad implements Daniable {
 
 	public PozoDeAgua() {
 		costo = 250;
@@ -54,6 +56,24 @@ public class PozoDeAgua extends Unidad {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
+	}
+
+	@Override
+	public void repararse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aplicarDanio(double unDanio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aceptar(Visitante v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

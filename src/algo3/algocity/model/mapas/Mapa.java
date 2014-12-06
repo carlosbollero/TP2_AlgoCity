@@ -110,7 +110,7 @@ public class Mapa {
 		return ciudad.contiene(u);
 	}
 
-	public ArrayList<Visitable> getDaniablesAlrededorDe(Point epicentro,
+	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro,
 			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
