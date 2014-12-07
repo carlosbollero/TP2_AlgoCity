@@ -47,9 +47,9 @@ public class GeneradorTerritorioTest {
 		for (int i = 0; i < alto; i++){
 			for (int j = 0; j < ancho; j++){
 				if (mapa.get(new Coordenada(i,j)).getSuperficie().esAgua()){
-					System.out.print("\u2591");
+					System.out.print("\u2593");
 				}else{
-					System.out.print("\u2593");					
+					System.out.print("\u2591");					
 				}
 			}
 			System.out.println();

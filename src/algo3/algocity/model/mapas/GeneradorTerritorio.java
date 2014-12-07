@@ -32,19 +32,6 @@ public class GeneradorTerritorio {
 		aleatorio = new Random();
 	}
 	
-	private void rellenarCoordenadasNoOcupadas() {
-		for (int x = 0; x < alto; x++){
-			for (int y = 0; y < ancho; y++){
-				coordNoOcupadas.add(new Coordenada(x,y));
-			}
-		}
-		for (Coordenada c : coordNoOcupadas){
-			System.out.print("[" + c.getX() + c.getY() + "]");
-		}
-		System.out.println();
-		
-	}
-
 	public Map<Coordenada, Superficie> generarTerritorio(){
 		definirPuntosCentrales();
 		definirRestoDelMapa();
@@ -53,21 +40,22 @@ public class GeneradorTerritorio {
 	
 	public void definirPuntosCentrales() {
 		int cantidad = ((tamanio * 10) / 100);
-		System.out.println(coordNoOcupadas.size());
 		for(int i = 0; i < cantidad; i++){
 			Coordenada c = coordenadaAleatoria();
 			Superficie s = superficieAleatoria();
 			mapa.put(c, s);
 			puntosCentrales.add(c);			
 			coordNoOcupadas.remove(c);
-			System.out.print("[" + c.getX() + c.getY() + "]");
 		}
-		System.out.println();
-		for (Coordenada c : coordNoOcupadas){
-			System.out.print("[" + c.getX() + c.getY() + "]");
-		}
-		System.out.println();
-		System.out.println(coordNoOcupadas.size());
+
+	}
+	
+	private void rellenarCoordenadasNoOcupadas() {
+		for (int x = 0; x < alto; x++){
+			for (int y = 0; y < ancho; y++){
+				coordNoOcupadas.add(new Coordenada(x,y));
+			}
+		}		
 	}
 	
 	private void definirRestoDelMapa() {
@@ -108,16 +96,11 @@ public class GeneradorTerritorio {
 		return mapa.get(ref);
 	}
 
-//	private boolean coordenadaNoRepetida(Coordenada c) {
-//		boolean resultado = true; 
-//		for( Entry<Coordenada, Superficie> entry : mapa.entrySet()){
-//			if (c.equals(entry.getKey())){
-//				resultado = false;
-//			}
-//		}
-//		return resultado;
-//	}
-
+	/*
+	 * Genera una Coordenada aleatoria dentro de los limites
+	 * del mapa y asegurandose que no repita una generada 
+	 * anteriormente como punto central.
+	 */
 	private Coordenada coordenadaAleatoria(){
 		boolean repetido = true;
 		Coordenada coord = null;
@@ -128,12 +111,17 @@ public class GeneradorTerritorio {
 		return coord;
 	}
 	
+	/*
+	 * Genera una supeficie aleatoria, con mayor 
+	 * probabilidad de que sea Tierra.
+	 */
 	private Superficie superficieAleatoria(){
 		Superficie s;
-		if (aleatorio.nextBoolean()){
-			s = new SuperficieTierra();
-		}else{
+		int numero = aleatorio.nextInt(10);
+		if( numero > 6){
 			s = new SuperficieAgua();
+		}else{
+			s = new SuperficieTierra();
 		}
 		return s;
 	}
@@ -145,9 +133,4 @@ public class GeneradorTerritorio {
 		}
 		return lista;
 	}
-	
-
-	
-	
-
 }
