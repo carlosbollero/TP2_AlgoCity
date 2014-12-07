@@ -25,7 +25,7 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class MapasIntegralTest {
 
-	int alto = 20;
+	int alto = 10;
 	int ancho = 20;
 
 	FabricaUnidades fu;

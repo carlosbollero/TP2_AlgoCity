@@ -39,8 +39,8 @@ public class MapaConexiones {
 	}
 
 	public boolean agregar(Conector elemento) {
-		int x = elemento.coordenadas().x;
-		int y = elemento.coordenadas().y;
+		int x = elemento.coordenadas().getX();
+		int y = elemento.coordenadas().getY();
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
 			this.mapa.put(new Coordenada(x, y), elemento);
@@ -65,10 +65,10 @@ public class MapaConexiones {
 
 	private boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
 		boolean resultado = false;
-		int x1 = point.x;
-		int y1 = point.y;
-		int x2 = key.x;
-		int y2 = key.y;
+		int x1 = point.getX();
+		int y1 = point.getY();
+		int x2 = key.getX();
+		int y2 = key.getY();
 		if ((Math.abs(x1 - x2) == 1) && (y1 == y2)) {
 			resultado = true;
 		}
@@ -95,7 +95,7 @@ public class MapaConexiones {
 	}
 
 	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapa.containsKey(new Point(x, y)));
+		return (this.mapa.containsKey(new Coordenada(x, y)));
 	}
 
 	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {

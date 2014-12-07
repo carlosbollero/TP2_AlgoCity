@@ -29,12 +29,11 @@ public class MapaEdilicio {
 	}
 
 	public boolean agregar(Unidad elemento) {
-		int x = elemento.coordenadas().x;
-		int y = elemento.coordenadas().y;
+		int x = elemento.coordenadas().getX();
+		int y = elemento.coordenadas().getY();
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
-
 		if (!this.mapa.containsKey(elemento.coordenadas())) {
 			this.mapa.put(elemento.coordenadas(), elemento);
 			return true;
@@ -137,7 +136,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
 				return true;
 			}
 		}
@@ -148,7 +147,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
 				return d;
 			}
 		}
