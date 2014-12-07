@@ -21,10 +21,10 @@ Supuestos:
 
 # Requisitos
 
-* Librería de grafos [JGraphT](http://jgrapht.org/)<http://jgrapht.org/>.
+* Librería de grafos [JGraphT](http://jgrapht.org/).
 * Descarga [Windows](http://prdownloads.sourceforge.net/jgrapht/jgrapht-0.9.0.zip?download).
 * Descarga [Linux](http://prdownloads.sourceforge.net/jgrapht/jgrapht-0.9.0.tar.gz?download).
-* Código fuente <https://github.com/jgrapht/jgrapht>.
+* Código fuente  <https://github.com/jgrapht/jgrapht>.
 
 
 Consultas:
