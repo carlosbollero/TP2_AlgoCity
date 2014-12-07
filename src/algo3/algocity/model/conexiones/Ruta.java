@@ -1,11 +1,10 @@
 package algo3.algocity.model.conexiones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -19,7 +18,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 	int costo;
 	double porcentajeDanios;
 
-	Point coordenadas;
+	Coordenada coordenadas;
 
 	public Ruta() {
 		this.costo = 10;
@@ -28,7 +27,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public Ruta(int x, int y) {
 		porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 
 	}
 
@@ -36,7 +35,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 			throws NoSeCumplenLosRequisitosException {
 		porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		} else {
@@ -59,7 +58,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	}
 
-	public Point coordenadas() {
+	public Coordenada coordenadas() {
 		return coordenadas;
 	}
 

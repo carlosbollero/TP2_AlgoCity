@@ -1,10 +1,9 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -18,13 +17,13 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	public PozoDeAgua(int x, int y) {
 		costo = 250;
 		consumo = 0;
-		this.coordenadas = new Point(x, y);
+		this.coordenadas = new Coordenada(x, y);
 	}
 
 	public PozoDeAgua(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		costo = 250;
 		consumo = 0;
 

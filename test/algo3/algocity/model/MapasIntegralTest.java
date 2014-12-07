@@ -1,7 +1,7 @@
 package algo3.algocity.model;
 
 import static org.junit.Assert.*;
-import java.awt.Point;
+
 import org.junit.Test;
 
 import algo3.algocity.model.conexiones.Conector;
@@ -20,6 +20,7 @@ import algo3.algocity.model.fabricas.FabricaTuberias;
 import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
 import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.fabricas.FabricaUnidades;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class MapasIntegralTest {
@@ -82,10 +83,10 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
 		Mapa m = new Mapa(alto, ancho);
 		fu = new FabricaUnidadIndustrial();
-		Point p = m.posicionConTierra();
+		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, p.x, p.y);
+			Unidad u = fu.construir(m, p.getX(), p.getY());
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 
@@ -97,10 +98,10 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos() {
 		Mapa m = new Mapa(alto, ancho);
 		fu = new FabricaUnidadResidencial();
-		Point p = m.posicionConTierra();
+		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, p.x, p.y);
+			Unidad u = fu.construir(m, p.getX(), p.getY());
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 
@@ -117,10 +118,10 @@ public class MapasIntegralTest {
 
 		fu = new FabricaPozoAgua();
 
-		Point p = m.posicionConAgua();
+		Coordenada p = m.posicionConAgua();
 
 		try {
-			PozoDeAgua u = (PozoDeAgua) fu.construir(m, p.x, p.y);
+			PozoDeAgua u = (PozoDeAgua) fu.construir(m, p.getX(), p.getY());
 			m.agregar(u);
 
 			assertTrue(m.contiene(u));
@@ -136,10 +137,10 @@ public class MapasIntegralTest {
 
 		fu = new FabricaEstacionDeBomberos();
 
-		Point p = m.posicionConTierra();
+		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, p.x, p.y);
+			Unidad u = fu.construir(m, p.getX(), p.getY());
 			m.agregar(u);
 
 			assertTrue(m.contiene(u));

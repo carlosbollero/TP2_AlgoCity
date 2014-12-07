@@ -18,7 +18,7 @@ public class Coordenada implements Comparable<Coordenada> {
 		return y;
 	}
 
-	public int distacia(Coordenada c) {
+	public int distancia(Coordenada c) {
 		return ((int) Math.sqrt((x - c.getX()) * (x - c.getX())
 				+ (y - c.getY()) * (y - c.getY())));
 	}

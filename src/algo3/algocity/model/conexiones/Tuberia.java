@@ -1,8 +1,7 @@
 package algo3.algocity.model.conexiones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -10,7 +9,7 @@ public class Tuberia implements Conector {
 
 	int costo;
 	int danios;
-	Point coordenadas;
+	Coordenada coordenadas;
 
 	public Tuberia() {
 		costo = 5;
@@ -18,13 +17,13 @@ public class Tuberia implements Conector {
 	
 	public Tuberia(int x, int y) {
 		costo = 5;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 	}
 
 	public Tuberia(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 		costo = 5;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		} else {
@@ -38,7 +37,7 @@ public class Tuberia implements Conector {
 	}
 
 	@Override
-	public Point coordenadas() {
+	public Coordenada coordenadas() {
 		return coordenadas;
 	}
 

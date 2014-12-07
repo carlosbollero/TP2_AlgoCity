@@ -1,6 +1,6 @@
 package algo3.algocity.model.caracteristicas;
 
-import java.awt.Point;
+import algo3.algocity.model.mapas.Coordenada;
 
 public interface Daniable {
 
@@ -10,7 +10,7 @@ public interface Daniable {
 
 	public double getSalud();
 
-	public Point coordenadas();
+	public Coordenada coordenadas();
 	
 	public void aceptar(Visitante v);
 

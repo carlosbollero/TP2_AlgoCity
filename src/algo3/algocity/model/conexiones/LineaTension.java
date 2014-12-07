@@ -1,11 +1,10 @@
 package algo3.algocity.model.conexiones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -20,7 +19,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	int costo;
 	double porcentajeDanios;
 	int danios;
-	Point coordenadas;
+	Coordenada coordenadas;
 
 	public LineaTension() {
 
@@ -29,13 +28,13 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public LineaTension(int x, int y) {
 		porcentajeDanios = 0;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 	}
 
 	public LineaTension(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 		porcentajeDanios = 0;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
@@ -86,7 +85,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 
-	public Point coordenadas() {
+	public Coordenada coordenadas() {
 		return coordenadas;
 	}
 

@@ -25,17 +25,17 @@ public class MapaConexiones {
 
 	int alto;
 	int ancho;
-	LinkedHashMap<Point, Conector> mapa;
-	ArrayList<Point> posicionesRelevantes;
+	LinkedHashMap<Coordenada, Conector> mapa;
+	ArrayList<Coordenada> posicionesRelevantes;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 
 	public MapaConexiones(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.mapa = new LinkedHashMap<Point, Conector>();
+		this.mapa = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Point>();
+		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	public boolean agregar(Conector elemento) {
@@ -43,7 +43,7 @@ public class MapaConexiones {
 		int y = elemento.coordenadas().y;
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
-			this.mapa.put(new Point(x, y), elemento);
+			this.mapa.put(new Coordenada(x, y), elemento);
 			this.grafo.addVertex(elemento);
 			this.actualizarGrafo(elemento, x, y);
 			return true;
@@ -56,14 +56,14 @@ public class MapaConexiones {
 	}
 
 	private void actualizarGrafo(Conector elemento, int x, int y) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
-			if (hayDistanciaMinima(new Point(x, y), entry.getKey())) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
+			if (hayDistanciaMinima(new Coordenada(x, y), entry.getKey())) {
 				grafo.addEdge(elemento, entry.getValue());
 			}
 		}
 	}
 
-	private boolean hayDistanciaMinima(Point point, Point key) {
+	private boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
 		boolean resultado = false;
 		int x1 = point.x;
 		int y1 = point.y;
@@ -98,13 +98,13 @@ public class MapaConexiones {
 		return (this.mapa.containsKey(new Point(x, y)));
 	}
 
-	public boolean hayConexion(Point unPunto, Point otroPunto) {
+	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
 		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
 	}
 
-	public boolean hayConexion(Point unPunto) {
-		for (Point coord : posicionesRelevantes) {
+	public boolean hayConexion(Coordenada unPunto) {
+		for (Coordenada coord : posicionesRelevantes) {
 			if (hayConexion(unPunto, coord)) {
 				return true;
 			}
@@ -112,8 +112,8 @@ public class MapaConexiones {
 		return false;
 	}
 
-	public Point coordenadas(Conector elemento) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+	public Coordenada coordenadas(Conector elemento) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
 			}
@@ -121,8 +121,8 @@ public class MapaConexiones {
 		return null;
 	}
 
-	public boolean hayConectorAdyacente(Point coord) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+	public boolean hayConectorAdyacente(Coordenada coord) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
 			if (hayDistanciaMinima(coord, entry.getKey())) {
 				return true;
 			}
@@ -130,16 +130,16 @@ public class MapaConexiones {
 		return false;
 	}
 
-	public boolean agregarPosicionRelevante(Point punto) {
+	public boolean agregarPosicionRelevante(Coordenada punto) {
 		if (posicionesRelevantes == null) {
-			posicionesRelevantes = new ArrayList<Point>();
+			posicionesRelevantes = new ArrayList<Coordenada>();
 		}
 		return posicionesRelevantes.add(punto);
 
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad) {
-		for (Point coord : posicionesRelevantes) {
+		for (Coordenada coord : posicionesRelevantes) {
 			if (hayConexion(unidad.coordenadas(), coord)) {
 				return true;
 			}

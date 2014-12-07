@@ -43,6 +43,9 @@ public class GeneradorTerritorioTest {
 		for(Entry<Coordenada, Superficie> entry : mapa.entrySet()){
 			System.out.print("[" + entry.getKey().getX() + entry.getKey().getY() + "]");
 		}
+		System.out.println();
+		System.out.println("Agua \u2593");
+		System.out.println("Tierra \u2591");
 		
 		for (int i = 0; i < alto; i++){
 			for (int j = 0; j < ancho; j++){

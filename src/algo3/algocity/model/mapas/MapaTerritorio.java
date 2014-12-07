@@ -1,7 +1,7 @@
 package algo3.algocity.model.mapas;
 
-import java.awt.Point;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
@@ -17,68 +17,54 @@ public class MapaTerritorio {
 	int ancho;
 	final boolean tierra = true;
 	final boolean agua = false;
-	HashMap<Point, Superficie> mapa;
+	Map<Coordenada, Superficie> mapa;
+	GeneradorTerritorio generador;
 	Random aleatorio;
 
 	public MapaTerritorio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.aleatorio = new Random();
-		this.mapa = new HashMap<Point, Superficie>();
-		this.inicializar();
+		aleatorio = new Random();
+		generador = new GeneradorTerritorio(alto, ancho);
+		mapa = new HashMap<Coordenada, Superficie>();
+		
+		inicializar();
 	}
-	
+
 	// CONSTRUCTOR PARA TESTS
 	/*************************************************************/
 	public MapaTerritorio(int alto, int ancho, boolean test) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.mapa = new HashMap<Point, Superficie>();
+		this.mapa = new HashMap<Coordenada, Superficie>();
 		if (test) {
 			inicializarConTierraParaTest();
 		} else {
 			inicializarConAguaParaTest();
 		}
 	}
+
 	/*************************************************************/
 
 	private void inicializar() {
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
-				Superficie posicion;
-				if (aleatorio.nextBoolean()) {
-					posicion = new SuperficieAgua();
-				} else {
-					posicion = new SuperficieTierra();
-				}
-				agregar(posicion, x, y);
-			}
-		}
+		mapa = generador.generarTerritorio();
 	}
 
 	public boolean agregar(Superficie superficie, int x, int y) {
-		Point coord = new Point(x, y);
+		Coordenada coord = new Coordenada(x, y);
 		mapa.put(coord, superficie);
 		return (mapa.containsKey(coord) && mapa.containsValue(superficie));
 	}
 
-	public boolean esAgua(Point punto) {
+	public boolean esAgua(Coordenada punto) {
 		return (superficie(punto).esAgua());
 	}
 
-	public boolean esTierra(Point punto) {
-		return (superficie(punto).esTierra());
-	}
-	
-	public boolean posicionConAgua(Point punto) {
-		return (superficie(punto).esAgua());
-	}
-
-	public boolean posicionConTierra(Point punto) {
+	public boolean esTierra(Coordenada punto) {
 		return (superficie(punto).esTierra());
 	}
 
-	public Superficie superficie(Point punto) {
+	public Superficie superficie(Coordenada punto) {
 		return (this.mapa.get(punto));
 	}
 
@@ -88,14 +74,13 @@ public class MapaTerritorio {
 	}
 
 	public boolean sePuedeConstruir(Conector conector) {
-		return conector
-				.esConstruibleEn(superficie(conector.coordenadas())
-						.getSuperficie());
+		return conector.esConstruibleEn(superficie(conector.coordenadas())
+				.getSuperficie());
 	}
-	
+
 	// METODOS UTILIZADOS POR TESTS PARA NO TRABAJAR SOBRE RANDOM
-	/****************************************************************/	
-	private void inicializarConTierraParaTest(){
+	/****************************************************************/
+	private void inicializarConTierraParaTest() {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
 				Superficie posicion = new SuperficieTierra();
@@ -103,8 +88,8 @@ public class MapaTerritorio {
 			}
 		}
 	}
-	
-	private void inicializarConAguaParaTest(){
+
+	private void inicializarConAguaParaTest() {
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
 				Superficie posicion = new SuperficieAgua();
@@ -112,19 +97,19 @@ public class MapaTerritorio {
 			}
 		}
 	}
-	
-	public Point posicionConAgua() {
-		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+
+	public Coordenada posicionConAgua() {
+		for (Entry<Coordenada, Superficie> entry : mapa.entrySet()) {
 			if (entry.getValue().esAgua()) {
 				return entry.getKey();
 			}
 		}
 		return null;
 	}
-	
-	public Point posicionConTierra() {
-		
-		for (Entry<Point, Superficie> entry : mapa.entrySet()) {
+
+	public Coordenada posicionConTierra() {
+
+		for (Entry<Coordenada, Superficie> entry : mapa.entrySet()) {
 			if (entry.getValue().esTierra()) {
 				return entry.getKey();
 			}
@@ -134,4 +119,3 @@ public class MapaTerritorio {
 	/****************************************************************/
 
 }
-
