@@ -120,7 +120,7 @@ public class GeneradorTerritorio {
 	private Superficie superficieAleatoria() {
 		Superficie s;
 		int numero = aleatorio.nextInt(10);
-		if (numero > 6) {
+		if (numero > 7) {
 			s = new SuperficieAgua();
 		} else {
 			s = new SuperficieTierra();
