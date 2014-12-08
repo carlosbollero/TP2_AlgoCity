@@ -50,7 +50,7 @@ public class MapaTerritorio {
 		mapa = generador.generarTerritorio();
 	}
 
-	public boolean agregar(Superficie superficie, int x, int y) {
+	private boolean agregar(Superficie superficie, int x, int y) {
 		Coordenada coord = new Coordenada(x, y);
 		mapa.put(coord, superficie);
 		return (mapa.containsKey(coord) && mapa.containsValue(superficie));
