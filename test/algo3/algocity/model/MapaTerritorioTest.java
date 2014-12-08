@@ -2,12 +2,11 @@ package algo3.algocity.model;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
-
 import org.junit.Test;
 
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class MapaTerritorioTest {
@@ -23,7 +22,7 @@ public class MapaTerritorioTest {
 
 		for (int x = 0; x < alto; x++) {
 			for (int y = 0; y < ancho; y++) {
-				Point p = new Point(x, y);
+				Coordenada p = new Coordenada(x, y);
 				assertTrue(mt.superficie(p).esAgua()
 						|| mt.superficie(p).esTierra());
 			}
@@ -35,8 +34,8 @@ public class MapaTerritorioTest {
 	public void testSePuedeConsultarSuSePuedeConstruirEnUnaCoordenadaDeAgua(){
 		mt = new MapaTerritorio(alto, ancho);
 		
-		Point coord = mt.posicionConAgua();
-		Unidad p = new PozoDeAgua(coord.x, coord.y);
+		Coordenada coord = mt.posicionConAgua();
+		Unidad p = new PozoDeAgua(coord.getX(), coord.getY());
 		
 		assertTrue(mt.sePuedeConstruir(p));
 		

@@ -1,12 +1,11 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -24,7 +23,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 	}
 
 	public UnidadResidencial(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -35,7 +34,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}

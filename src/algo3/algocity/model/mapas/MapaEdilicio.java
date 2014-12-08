@@ -1,6 +1,5 @@
 package algo3.algocity.model.mapas;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +14,7 @@ public class MapaEdilicio {
 	private int alto;
 	private int ancho;
 
-	HashMap<Point, Unidad> mapa;
+	HashMap<Coordenada, Unidad> mapa;
 	ArrayList<Ocupable> unidadesConPoblacion;
 	ArrayList<Ocupable> unidadesConEmpleo;
 	ArrayList<Daniable> unidadesDaniables;
@@ -23,19 +22,18 @@ public class MapaEdilicio {
 	public MapaEdilicio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		mapa = new HashMap<Point, Unidad>();
+		mapa = new HashMap<Coordenada, Unidad>();
 		unidadesConPoblacion = new ArrayList<Ocupable>();
 		unidadesConEmpleo = new ArrayList<Ocupable>();
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
 	public boolean agregar(Unidad elemento) {
-		int x = elemento.coordenadas().x;
-		int y = elemento.coordenadas().y;
+		int x = elemento.coordenadas().getX();
+		int y = elemento.coordenadas().getY();
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
-
 		if (!this.mapa.containsKey(elemento.coordenadas())) {
 			this.mapa.put(elemento.coordenadas(), elemento);
 			return true;
@@ -77,7 +75,7 @@ public class MapaEdilicio {
 	}
 
 	public void remover(int x, int y) {
-		this.mapa.remove(new Point(x, y));
+		this.mapa.remove(new Coordenada(x, y));
 	}
 
 	private boolean validarCoordenadas(int x, int y) {
@@ -93,15 +91,15 @@ public class MapaEdilicio {
 	}
 
 	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapa.containsKey(new Point(x, y)));
+		return (this.mapa.containsKey(new Coordenada(x, y)));
 	}
 
 	public boolean vacia() {
 		return (this.mapa.isEmpty());
 	}
 
-	public Point getCoordenadas(Unidad elemento) {
-		for (Entry<Point, Unidad> entry : mapa.entrySet()) {
+	public Coordenada getCoordenadas(Unidad elemento) {
+		for (Entry<Coordenada, Unidad> entry : mapa.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
 			}
@@ -111,7 +109,7 @@ public class MapaEdilicio {
 
 	public Unidad getUnidadEn(int x, int y) {
 		if (tieneCoordenadaOcupada(x, y)) {
-			Point p = new Point(x, y);
+			Coordenada p = new Coordenada(x, y);
 			return (this.mapa.get(p));
 		} else {
 			return null;
@@ -119,10 +117,10 @@ public class MapaEdilicio {
 
 	}
 
-	public ArrayList<Daniable> getUnidadesAlrededorDe(Point epicentro, int radio) {
+	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro, int radio) {
 		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
-		Point inic = calcularCoordenadaDeInicio(epicentro, radio);
-		Point fin = calcularCoordenadaDeFin(epicentro, radio);
+		Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
+		Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
 
 		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
 			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
@@ -138,7 +136,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
 				return true;
 			}
 		}
@@ -149,7 +147,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().x == x && d.coordenadas().y == y) {
+			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
 				return d;
 			}
 		}
@@ -157,7 +155,7 @@ public class MapaEdilicio {
 
 	}
 
-	private Point calcularCoordenadaDeInicio(Point epicentro, int radio) {
+	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro, int radio) {
 		int xi;
 		int yi;
 		if (epicentro.getX() - radio < 0) {
@@ -170,10 +168,10 @@ public class MapaEdilicio {
 		} else {
 			yi = (int) epicentro.getY() - radio;
 		}
-		return new Point(xi, yi);
+		return new Coordenada(xi, yi);
 	}
 
-	private Point calcularCoordenadaDeFin(Point epicentro, int radio) {
+	private Coordenada calcularCoordenadaDeFin(Coordenada epicentro, int radio) {
 		int xf;
 		int yf;
 		if (epicentro.getX() - radio < 0) {
@@ -186,7 +184,7 @@ public class MapaEdilicio {
 		} else {
 			yf = (int) epicentro.getY() + radio;
 		}
-		return new Point(xf, yf);
+		return new Coordenada(xf, yf);
 	}
 
 	public int capacidadDePoblacion() {

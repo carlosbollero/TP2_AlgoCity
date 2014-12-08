@@ -22,17 +22,17 @@ public class MapaEdilicioTest {
 	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		
-		Unidad u = new UnidadResidencial();
+		Unidad u = new UnidadResidencial(4,4);
 		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 		
-		u = new UnidadComercial();
+		u = new UnidadComercial(3,3);
 		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 		
-		u = new UnidadIndustrial();
+		u = new UnidadIndustrial(2,2);
 		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
@@ -43,7 +43,7 @@ public class MapaEdilicioTest {
 	public void testSePuedeRemoverUnaUnidad(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 		
-		Unidad eb = new EstacionDeBomberos();
+		Unidad eb = new EstacionDeBomberos(1,1);
 				
 		m.agregar(eb);
 
@@ -59,7 +59,7 @@ public class MapaEdilicioTest {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar(new PozoDeAgua()));
+		assertTrue(m.agregar(new PozoDeAgua(1,1)));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
 	
@@ -67,7 +67,7 @@ public class MapaEdilicioTest {
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad u = new UnidadResidencial();
+		Unidad u = new UnidadResidencial(1,1);
 
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
@@ -77,7 +77,7 @@ public class MapaEdilicioTest {
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad eb = new EstacionDeBomberos();
+		Unidad eb = new EstacionDeBomberos(15,4);
 
 		assertFalse(m.agregar(eb));
 		assertFalse(m.contiene(eb));
@@ -87,7 +87,7 @@ public class MapaEdilicioTest {
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad ce = new CentralEolica();
+		Unidad ce = new CentralEolica(2,2);
 
 		assertTrue(m.agregar(ce));
 		assertTrue(m.contiene(ce));

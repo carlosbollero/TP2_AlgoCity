@@ -70,10 +70,10 @@ public class CatastrofeTerremotoTest {
 
 		assertEquals(0, ur1.getSalud(), 0);
 		assertEquals(1.5, uc1.getSalud(), 0);
-		assertEquals(3.35, ce1.getSalud(), 0.1);
-		assertEquals(3.35, cm1.getSalud(), 0.1);
-		assertEquals(4.74, cn1.getSalud(), 0.1);
-		assertEquals(19.09, ur2.getSalud(), 0.1);
+		assertEquals(3.0, ce1.getSalud(), 0.1);
+		assertEquals(3.0, cm1.getSalud(), 0.1);
+		assertEquals(4.5, cn1.getSalud(), 0.1);
+		assertEquals(18.0, ur2.getSalud(), 0.1);
 		assertEquals(4.5, ur3.getSalud(), 0.1);
 	}
 

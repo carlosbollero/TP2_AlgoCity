@@ -22,6 +22,8 @@ public class Turno extends Observable implements Runnable {
 	
 	public void avanzar() {		
 		numero++;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void iniciarHilo(){
@@ -52,8 +54,6 @@ public class Turno extends Observable implements Runnable {
 		System.out.println("START");
 		while (jugando){		
 			avanzar();
-			setChanged();
-			notifyObservers();
 //			if(numero == 2){
 //				jugando = false;
 //			}

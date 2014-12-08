@@ -1,6 +1,5 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
@@ -10,6 +9,7 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -25,7 +25,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 	public EstacionDeBomberos(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		costo = 1500;
 		consumo = 0;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
@@ -37,7 +37,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;
-		this.coordenadas = new Point(x, y);
+		this.coordenadas = new Coordenada(x, y);
 	}
 
 	public void actuar(ArrayList<Visitable> objetivos) {

@@ -1,8 +1,7 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralNuclear extends UnidadEnergetica {
@@ -14,7 +13,7 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	public CentralNuclear(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
@@ -26,7 +25,7 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
-		this.coordenadas = new Point(x, y);
+		this.coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}

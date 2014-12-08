@@ -1,7 +1,6 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -9,7 +8,7 @@ public abstract class Unidad {
 
 	int costo;
 	int consumo;
-	Point coordenadas;
+	Coordenada coordenadas;
 
 	public int costo() {
 		return this.costo;
@@ -19,7 +18,7 @@ public abstract class Unidad {
 		return consumo;
 	}
 
-	public Point coordenadas() {
+	public Coordenada coordenadas() {
 		return coordenadas;
 	}
 
