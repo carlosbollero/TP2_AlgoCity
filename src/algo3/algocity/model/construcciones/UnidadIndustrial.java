@@ -2,6 +2,9 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -15,7 +18,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	final double ESTADOINICIAL = 100;
 	int capacidad; // capacidad habitacional
-	int ocupacion;
+	// int ocupacion;
 	double porcentajeDanios;
 
 	public UnidadIndustrial() {
@@ -100,9 +103,43 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregar(this);
+		// genera un bucle infinito
+		// mapa.agregar(this);
+		mapa.agregarACiudad(this);
 		mapa.agregarUnidadConEmpleo(this);
 		mapa.agregarUnidadDaniable(this);
+	}
+
+	/* Persistencia */
+	// TODO falta probarlo
+	@Override
+	public Element getElement(Document doc) {
+
+		Element unidad = doc.createElement("UnidadIndustrial");
+
+		Element costo = doc.createElement("costo");
+		unidad.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));
+
+		Element consumo = doc.createElement("consumo");
+		unidad.appendChild(consumo);
+		consumo.setTextContent(String.valueOf(this.consumo));
+
+		Element capacidad = doc.createElement("capacidad");
+		unidad.appendChild(capacidad);
+		capacidad.setTextContent(String.valueOf(this.capacidad));
+
+		Element coordenadas = doc.createElement("coordenadas");
+		unidad.appendChild(coordenadas);
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
+		Element porcentajeDanios = doc.createElement("porcentajeDanios");
+		unidad.appendChild(porcentajeDanios);
+		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
+
+		return unidad;
 	}
 
 }

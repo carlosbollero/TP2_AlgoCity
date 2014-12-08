@@ -2,6 +2,9 @@ package algo3.algocity.model.construcciones;
 
 import java.awt.Point;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -74,6 +77,28 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	public void aceptar(Visitante v) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/*Persistencia*/
+	//TODO falta probarlo
+	@Override
+	public Element getElement(Document doc) {
+		
+		Element unidad = doc.createElement("PozoDeAgua");
+		
+		Element costo = doc.createElement("costo");
+		unidad.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));		
+		
+		Element consumo = doc.createElement("consumo");
+		unidad.appendChild(consumo);
+		consumo.setTextContent(String.valueOf(this.consumo));
+		
+		Element coordenadas = doc.createElement("coordenadas");
+		unidad.appendChild(coordenadas);
+		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
+		
+		return unidad;
 	}
 
 }

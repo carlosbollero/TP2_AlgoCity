@@ -3,6 +3,9 @@ package algo3.algocity.model.construcciones;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
@@ -131,5 +134,27 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		v.visitar(this);
 		
 	}
+	
+	/*Persistencia*/
+	//TODO falta probarlo
+	@Override
+	public Element getElement(Document doc) {
+		
+		Element unidad = doc.createElement("EstacionDeBomberos");
+		
+		Element costo = doc.createElement("costo");
+		unidad.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));		
+		
+		Element consumo = doc.createElement("consumo");
+		unidad.appendChild(consumo);
+		consumo.setTextContent(String.valueOf(this.consumo));
+		
+		Element coordenadas = doc.createElement("coordenadas");
+		unidad.appendChild(coordenadas);
+		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
+		
+		return unidad;
+	}	
 
 }

@@ -2,6 +2,9 @@ package algo3.algocity.model;
 
 import java.util.Observable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Turno extends Observable implements Runnable {
 	/*
 	 * La idea es que turno se ejecute en un thread distinto para poder hacer
@@ -59,5 +62,16 @@ public class Turno extends Observable implements Runnable {
 //			}
 		}
 		System.out.println("EXIT");		
+	}
+
+	public Element getElement(Document doc) {
+		
+		Element turnos = doc.createElement("Turnos");
+		
+		Element numero = doc.createElement("numero");
+		turnos.appendChild(numero);
+		numero.setTextContent(String.valueOf(this.numero));
+		
+		return turnos;
 	}
 }

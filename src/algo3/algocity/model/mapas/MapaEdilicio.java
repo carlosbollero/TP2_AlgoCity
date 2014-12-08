@@ -4,7 +4,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
@@ -203,5 +207,67 @@ public class MapaEdilicio {
 			capacidad += unidad.capacidad();
 		}
 		return capacidad;
+	}
+
+	/* Persistencia */
+	@SuppressWarnings("rawtypes")
+	public Element getElement(Document doc, Element ciudad) {
+		Element alto = doc.createElement("alto");
+		ciudad.appendChild(alto);
+		alto.setTextContent(String.valueOf(this.alto));
+
+		Element ancho = doc.createElement("ancho");
+		ciudad.appendChild(ancho);
+		ancho.setTextContent(String.valueOf(this.ancho));
+
+		Element mapa = doc.createElement("mapa");
+		ciudad.appendChild(mapa);
+
+		/* Serializacion de unidades del mapa */
+		for (Map.Entry e : this.mapa.entrySet()) {
+			Point clave = (Point) e.getKey();
+			Unidad valor = (Unidad) e.getValue();
+
+			Element point = doc.createElement("Point");
+			mapa.appendChild(point);
+			point.setTextContent(String.valueOf((int) clave.getX()) + ","
+					+ String.valueOf((int) clave.getY()));
+
+			Element unidad = valor.getElement(doc);
+			mapa.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades con poblacion */
+		Element unidadesConPoblacion = doc
+				.createElement("unidadesConPoblacion");
+		ciudad.appendChild(unidadesConPoblacion);
+		Iterator<Ocupable> it = this.unidadesConPoblacion.iterator();
+		while (it.hasNext()) {
+			Ocupable o = it.next();
+			Element unidad = o.getElement(doc);
+			unidadesConPoblacion.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades con empleo */
+		Element unidadesConEmpleo = doc.createElement("unidadesConEmpleo");
+		ciudad.appendChild(unidadesConEmpleo);
+		Iterator<Ocupable> it2 = this.unidadesConEmpleo.iterator();
+		while (it2.hasNext()) {
+			Ocupable o = it2.next();
+			Element unidad = o.getElement(doc);
+			unidadesConEmpleo.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades daniables */
+		Element unidadesDaniables = doc.createElement("unidadesDaniables");
+		ciudad.appendChild(unidadesDaniables);
+		Iterator<Daniable> it3 = this.unidadesDaniables.iterator();
+		while (it3.hasNext()) {
+			Daniable o = it3.next();
+			Element unidad = o.getElement(doc);
+			unidadesDaniables.appendChild(unidad);
+		}
+
+		return ciudad;
 	}
 }

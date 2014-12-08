@@ -2,6 +2,9 @@ package algo3.algocity.model.conexiones;
 
 import java.awt.Point;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
@@ -19,7 +22,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 					// false para destruido
 	int costo;
 	double porcentajeDanios;
-	int danios;
+	// int danios;
 	Point coordenadas;
 
 	public LineaTension() {
@@ -100,5 +103,26 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		mapa.agregarARedElectrica(this);
 		mapa.agregarUnidadDaniable(this);
 
+	}
+
+	@Override
+	public Element getElement(Document doc) {
+		Element conector = doc.createElement("Ruta");
+
+		Element costo = doc.createElement("costo");
+		conector.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));
+
+		Element coordenadas = doc.createElement("coordenadas");
+		conector.appendChild(coordenadas);
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
+		Element porcentajeDanios = doc.createElement("porcentajeDanios");
+		conector.appendChild(porcentajeDanios);
+		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
+
+		return conector;
 	}
 }

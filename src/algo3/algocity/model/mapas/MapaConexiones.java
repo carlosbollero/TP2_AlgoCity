@@ -11,12 +11,16 @@ package algo3.algocity.model.mapas;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.Unidad;
@@ -150,6 +154,56 @@ public class MapaConexiones {
 	public boolean sePuedeConstruir(Conector conector) {
 		return tieneCoordenadaOcupada(conector.coordenadas().x,
 				conector.coordenadas().y);
+	}
+
+	
+	/*Persistencia*/
+	@SuppressWarnings("rawtypes")
+	public Element getElement(Document doc, Element red) {	
+		
+		Element alto = doc.createElement("alto");
+		red.appendChild(alto);
+		alto.setTextContent(String.valueOf(this.alto));
+
+		Element ancho = doc.createElement("ancho");
+		red.appendChild(ancho);
+		ancho.setTextContent(String.valueOf(this.ancho));
+
+		Element mapa = doc.createElement("mapa");
+		red.appendChild(mapa);		
+		
+
+		/* Serializacion de conectores del mapa */
+		for (Map.Entry e : this.mapa.entrySet()) {
+			Point clave = (Point) e.getKey();
+			Conector valor = (Conector) e.getValue();
+
+			Element point = doc.createElement("Point");
+			mapa.appendChild(point);
+			point.setTextContent(String.valueOf((int) clave.getX()) + ","
+					+ String.valueOf((int) clave.getY()));
+
+			Element conector = valor.getElement(doc);
+			mapa.appendChild(conector);
+		}
+		
+		
+		/* Serializacion de posiciones relevantes */
+		Element posicionesRelevantes = doc
+				.createElement("posicionesRelevantes");
+		red.appendChild(posicionesRelevantes);
+		Iterator<Point> it = this.posicionesRelevantes.iterator();
+		while (it.hasNext()) {
+			Point p = it.next();
+			Element punto = doc.createElement("Point");
+			posicionesRelevantes.appendChild(punto);
+			punto.setTextContent(String.valueOf((int) p.getX()) + ","
+					+ String.valueOf((int) p.getY()));
+		}		
+		
+		//TODO
+		//El grafo no es necesario serializarlo?		
+		return red;
 	}
 
 }
