@@ -4,11 +4,14 @@ import java.awt.Point;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -24,7 +27,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	}
 
 	public UnidadComercial(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 5;
 		this.consumo = 2;
 	}
@@ -33,7 +36,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			throws NoSeCumplenLosRequisitosException {
 		this.costo = 5;
 		this.consumo = 2;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -88,10 +91,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
 	}
-
 	
 	/*Persistencia*/
-	//TODO falta probarlo
 	@Override
 	public Element getElement(Document doc) {
 		
@@ -115,5 +116,31 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		
 		return unidad;
 	}
+
+	public static UnidadComercial fromElement(Node hijoDeNodo) {
+		
+		UnidadComercial uc = new UnidadComercial();
+		NodeList hijosDeUnidadComercial = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidadComercial.getLength(); i++) {		
+			Node hijoDeUnidad = hijosDeUnidadComercial.item(i);
+			if(hijoDeUnidad.getNodeName().equals("costo")){
+				uc.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if(hijoDeUnidad.getNodeName().equals("consumo")){
+				uc.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if(hijoDeUnidad.getNodeName().equals("porcentajeDanios")){
+				uc.porcentajeDanios = Double.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				uc.coordenadas = punto;
+			}
+		}	
+		return uc;		
+	}
+
 
 }

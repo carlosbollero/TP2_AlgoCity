@@ -1,6 +1,5 @@
 package algo3.algocity.model.catastrofes;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,6 +11,7 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CatastrofeTerremoto implements Visitante {
@@ -21,7 +21,7 @@ public class CatastrofeTerremoto implements Visitante {
 	int radio;
 	double tasa;
 	Mapa mapa;
-	Point epicentro;
+	Coordenada epicentro;
 	Random aleatorio;
 
 	public CatastrofeTerremoto(Mapa mapa) {
@@ -29,7 +29,7 @@ public class CatastrofeTerremoto implements Visitante {
 		this.ancho = mapa.ancho();
 		this.radio = 25;
 		this.tasa = 1.5;
-		this.epicentro = new Point(aleatorio.nextInt(this.ancho + 1),
+		this.epicentro = new Coordenada(aleatorio.nextInt(this.ancho + 1),
 				aleatorio.nextInt(this.alto + 1));
 		this.mapa = mapa;
 		actuar(calcularObjetivos());
@@ -41,7 +41,7 @@ public class CatastrofeTerremoto implements Visitante {
 		this.ancho = mapa.ancho();
 		this.radio = 25;
 		this.tasa = 1.5;
-		this.epicentro = new Point(x, y);
+		this.epicentro = new Coordenada(x, y);
 		this.mapa = mapa;
 		this.actuar(calcularObjetivos());
 	}
@@ -69,13 +69,13 @@ public class CatastrofeTerremoto implements Visitante {
 	// }
 
 	public void visitar(Daniable unaUnidad) {
-		Point posicion = unaUnidad.coordenadas();
+		Coordenada posicion = unaUnidad.coordenadas();
 		double danio = this.calcularDanio(posicion);
 		unaUnidad.aplicarDanio(danio);
 	}
 
-	public double calcularDanio(Point punto) {
-		double distancia = epicentro.distance(punto);
+	public double calcularDanio(Coordenada punto) {
+		double distancia = epicentro.distancia(punto);
 		double danio = 100 - (distancia * this.tasa);
 		if (danio < 0) {
 			danio = 0;
@@ -85,7 +85,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		Point posicion = unaUnidadResidencial.coordenadas();
+		Coordenada posicion = unaUnidadResidencial.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaUnidadResidencial.aplicarDanio(danio);
@@ -93,7 +93,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadComercial unaUnidadComercial) {
-		Point posicion = unaUnidadComercial.coordenadas();
+		Coordenada posicion = unaUnidadComercial.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaUnidadComercial.aplicarDanio(danio);
@@ -101,7 +101,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		Point posicion = unaUnidadIndustrial.coordenadas();
+		Coordenada posicion = unaUnidadIndustrial.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaUnidadIndustrial.aplicarDanio(danio);
@@ -109,7 +109,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		Point posicion = unaUnidadEnergetica.coordenadas();
+		Coordenada posicion = unaUnidadEnergetica.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaUnidadEnergetica.aplicarDanio(danio);
@@ -117,7 +117,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(LineaTension unaLineaTension) {
-		Point posicion = unaLineaTension.coordenadas();
+		Coordenada posicion = unaLineaTension.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaLineaTension.aplicarDanio(danio);
@@ -125,7 +125,7 @@ public class CatastrofeTerremoto implements Visitante {
 
 	@Override
 	public void visitar(Ruta unaRuta) {
-		Point posicion = unaRuta.coordenadas();
+		Coordenada posicion = unaRuta.coordenadas();
 		double danio = this.calcularDanio(posicion);
 
 		unaRuta.aplicarDanio(danio);

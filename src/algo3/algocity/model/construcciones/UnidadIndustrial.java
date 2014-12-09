@@ -4,12 +4,15 @@ import java.awt.Point;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -18,7 +21,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	final double ESTADOINICIAL = 100;
 	int capacidad; // capacidad habitacional
-	// int ocupacion;
+	int ocupacion;
 	double porcentajeDanios;
 
 	public UnidadIndustrial() {
@@ -28,7 +31,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public UnidadIndustrial(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
@@ -37,11 +40,11 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	public UnidadIndustrial(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			// if (!mapa.sePuedeConstruir(this)){
 			throw new NoSeCumplenLosRequisitosException();
@@ -103,15 +106,13 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		// genera un bucle infinito
-		// mapa.agregar(this);
-		mapa.agregarACiudad(this);
+		// mapa.agregar(this); hace un loop infinito este metodo
 		mapa.agregarUnidadConEmpleo(this);
 		mapa.agregarUnidadDaniable(this);
+		mapa.agregarACiudad(this); // agregado
 	}
 
 	/* Persistencia */
-	// TODO falta probarlo
 	@Override
 	public Element getElement(Document doc) {
 
@@ -140,6 +141,37 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
 
 		return unidad;
+	}
+
+	public static UnidadIndustrial fromElement(Node hijoDeNodo) {
+
+		UnidadIndustrial ui = new UnidadIndustrial();
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				ui.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				ui.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
+				ui.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				ui.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				ui.coordenadas = punto;
+			}
+		}
+		return ui;
 	}
 
 }

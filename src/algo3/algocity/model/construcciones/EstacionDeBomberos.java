@@ -1,10 +1,11 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -13,6 +14,7 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -28,7 +30,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 	public EstacionDeBomberos(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		costo = 1500;
 		consumo = 0;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
@@ -40,7 +42,7 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;
-		this.coordenadas = new Point(x, y);
+		this.coordenadas = new Coordenada(x, y);
 	}
 
 	public void actuar(ArrayList<Visitable> objetivos) {
@@ -135,26 +137,52 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		
 	}
 	
-	/*Persistencia*/
-	//TODO falta probarlo
+	
+	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {
-		
+
 		Element unidad = doc.createElement("EstacionDeBomberos");
-		
+
 		Element costo = doc.createElement("costo");
 		unidad.appendChild(costo);
-		costo.setTextContent(String.valueOf(this.costo));		
-		
+		costo.setTextContent(String.valueOf(this.costo));
+
 		Element consumo = doc.createElement("consumo");
 		unidad.appendChild(consumo);
 		consumo.setTextContent(String.valueOf(this.consumo));
-		
+
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
-		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
-		
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
 		return unidad;
-	}	
+	}
+
+	public static EstacionDeBomberos fromElement(Node hijoDeNodo) {
+
+		EstacionDeBomberos eb = new EstacionDeBomberos();
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				eb.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				eb.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				eb.coordenadas = punto;
+			}
+		}
+		return eb;
+	}
+	
 
 }

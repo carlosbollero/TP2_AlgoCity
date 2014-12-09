@@ -1,6 +1,5 @@
 package algo3.algocity.model.mapas;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
@@ -41,7 +40,7 @@ public class Mapa {
 	public Mapa() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public int alto() {
 		return alto;
 	}
@@ -74,11 +73,11 @@ public class Mapa {
 		return tuberias.agregar(tuberia);
 	}
 
-	public boolean agregarPuntoRelevanteEnTuberias(Point punto) {
+	public boolean agregarPuntoRelevanteEnTuberias(Coordenada punto) {
 		return tuberias.agregarPosicionRelevante(punto);
 	}
 
-	public boolean agregarPuntoRelevanteEnRedElectrica(Point punto) {
+	public boolean agregarPuntoRelevanteEnRedElectrica(Coordenada punto) {
 		return redElectrica.agregarPosicionRelevante(punto);
 	}
 
@@ -106,11 +105,11 @@ public class Mapa {
 		return ciudad.unidadesDaniables();
 	}
 
-	public Point posicionConAgua() {
+	public Coordenada posicionConAgua() {
 		return territorio.posicionConAgua();
 	}
 
-	public Point posicionConTierra() {
+	public Coordenada posicionConTierra() {
 		return territorio.posicionConTierra();
 	}
 
@@ -118,30 +117,30 @@ public class Mapa {
 		return ciudad.contiene(u);
 	}
 
-	public ArrayList<Daniable> getDaniablesAlrededorDe(Point epicentro,
+	public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
 			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
 
 	// METODOS PARA VALIDAR REQUISITOS
-	public Superficie superficie(Point punto) {
+	public Superficie superficie(Coordenada punto) {
 		return territorio.superficie(punto);
 	}
 
-	public boolean hayConexionCompleta(Point coordenadas) {
+	public boolean hayConexionCompleta(Coordenada coordenadas) {
 		return (hayConexionConRutas(coordenadas) && hayConexionConTuberias(coordenadas))
 				&& hayConexionConRedElectrica(coordenadas);
 	}
 
-	public boolean hayConexionConTuberias(Point coordenadas) {
+	public boolean hayConexionConTuberias(Coordenada coordenadas) {
 		return tuberias.hayConexion(coordenadas);
 	}
 
-	public boolean hayConexionConRedElectrica(Point coordenadas) {
+	public boolean hayConexionConRedElectrica(Coordenada coordenadas) {
 		return redElectrica.hayConexion(coordenadas);
 	}
 
-	public boolean hayConexionConRutas(Point coordenadas) {
+	public boolean hayConexionConRutas(Coordenada coordenadas) {
 		return rutas.hayConectorAdyacente(coordenadas);
 	}
 
@@ -156,7 +155,6 @@ public class Mapa {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
 	}
-
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
@@ -167,7 +165,8 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
-
+	
+	
 	/* Persistencia */
 	public Element getElement(Document doc) {
 		Element mapa = doc.createElement("Mapa");
@@ -207,7 +206,6 @@ public class Mapa {
 		
 		Mapa mapa = new Mapa();
 		
-
 		NodeList childs = element.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
@@ -219,19 +217,23 @@ public class Mapa {
 			} else if(child.getNodeName().equals("territorio")){
 				MapaTerritorio territorio = MapaTerritorio.fromElement(child);
 				mapa.territorio = territorio;
+			} else if(child.getNodeName().equals("ciudad")){
+				MapaEdilicio ciudad = MapaEdilicio.fromElement(child);
+				mapa.ciudad = ciudad;
+			} else if(child.getNodeName().equals("tuberias")){
+				MapaConexiones tuberias = MapaConexiones.fromElement(child);
+				mapa.tuberias = tuberias;
+			} else if(child.getNodeName().equals("rutas")){
+				MapaConexiones rutas = MapaConexiones.fromElement(child);
+				mapa.rutas = rutas;
+			} else if (child.getNodeName().equals("redElectrica")){
+				MapaConexiones redElectrica = MapaConexiones.fromElement(child);
+				mapa.redElectrica = redElectrica;
 			}
 		}
-		
-		
-		/*
-		MapaTerritorio territorio = MapaTerritorio.fromElement(element);
-		mapa.territorio = territorio;
-		*/
+		System.out.println("mapa territorio");
 		mapa.territorio.imprimirTerritorio();
-		
-		
-		
-		return mapa;
-	}
 
+		return mapa;
+	}	
 }

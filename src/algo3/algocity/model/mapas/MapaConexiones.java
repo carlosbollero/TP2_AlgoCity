@@ -21,33 +21,45 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.Unidad;
 
 public class MapaConexiones {
 
 	int alto;
 	int ancho;
-	LinkedHashMap<Point, Conector> mapa;
-	ArrayList<Point> posicionesRelevantes;
+	LinkedHashMap<Coordenada, Conector> mapa;
+	ArrayList<Coordenada> posicionesRelevantes;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 
 	public MapaConexiones(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
-		this.mapa = new LinkedHashMap<Point, Conector>();
+		this.mapa = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Point>();
+		posicionesRelevantes = new ArrayList<Coordenada>();
+	}
+	
+	/*Para tests*/
+	public MapaConexiones() {
+		this.mapa = new LinkedHashMap<Coordenada, Conector>();
+		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
+		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	public boolean agregar(Conector elemento) {
-		int x = elemento.coordenadas().x;
-		int y = elemento.coordenadas().y;
+		int x = elemento.coordenadas().getX();
+		int y = elemento.coordenadas().getY();
 		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
 				&& !this.tieneCoordenadaOcupada(x, y)) {
-			this.mapa.put(new Point(x, y), elemento);
+			this.mapa.put(new Coordenada(x, y), elemento);
 			this.grafo.addVertex(elemento);
 			this.actualizarGrafo(elemento, x, y);
 			return true;
@@ -60,19 +72,19 @@ public class MapaConexiones {
 	}
 
 	private void actualizarGrafo(Conector elemento, int x, int y) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
-			if (hayDistanciaMinima(new Point(x, y), entry.getKey())) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
+			if (hayDistanciaMinima(new Coordenada(x, y), entry.getKey())) {
 				grafo.addEdge(elemento, entry.getValue());
 			}
 		}
 	}
 
-	private boolean hayDistanciaMinima(Point point, Point key) {
+	private boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
 		boolean resultado = false;
-		int x1 = point.x;
-		int y1 = point.y;
-		int x2 = key.x;
-		int y2 = key.y;
+		int x1 = point.getX();
+		int y1 = point.getY();
+		int x2 = key.getX();
+		int y2 = key.getY();
 		if ((Math.abs(x1 - x2) == 1) && (y1 == y2)) {
 			resultado = true;
 		}
@@ -99,16 +111,16 @@ public class MapaConexiones {
 	}
 
 	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapa.containsKey(new Point(x, y)));
+		return (this.mapa.containsKey(new Coordenada(x, y)));
 	}
 
-	public boolean hayConexion(Point unPunto, Point otroPunto) {
+	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
 		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
 	}
 
-	public boolean hayConexion(Point unPunto) {
-		for (Point coord : posicionesRelevantes) {
+	public boolean hayConexion(Coordenada unPunto) {
+		for (Coordenada coord : posicionesRelevantes) {
 			if (hayConexion(unPunto, coord)) {
 				return true;
 			}
@@ -116,8 +128,8 @@ public class MapaConexiones {
 		return false;
 	}
 
-	public Point coordenadas(Conector elemento) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+	public Coordenada coordenadas(Conector elemento) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
 			}
@@ -125,8 +137,8 @@ public class MapaConexiones {
 		return null;
 	}
 
-	public boolean hayConectorAdyacente(Point coord) {
-		for (Entry<Point, Conector> entry : mapa.entrySet()) {
+	public boolean hayConectorAdyacente(Coordenada coord) {
+		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
 			if (hayDistanciaMinima(coord, entry.getKey())) {
 				return true;
 			}
@@ -134,16 +146,16 @@ public class MapaConexiones {
 		return false;
 	}
 
-	public boolean agregarPosicionRelevante(Point punto) {
+	public boolean agregarPosicionRelevante(Coordenada punto) {
 		if (posicionesRelevantes == null) {
-			posicionesRelevantes = new ArrayList<Point>();
+			posicionesRelevantes = new ArrayList<Coordenada>();
 		}
 		return posicionesRelevantes.add(punto);
 
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad) {
-		for (Point coord : posicionesRelevantes) {
+		for (Coordenada coord : posicionesRelevantes) {
 			if (hayConexion(unidad.coordenadas(), coord)) {
 				return true;
 			}
@@ -157,10 +169,10 @@ public class MapaConexiones {
 	}
 
 	
-	/*Persistencia*/
+	/* Persistencia */
 	@SuppressWarnings("rawtypes")
-	public Element getElement(Document doc, Element red) {	
-		
+	public Element getElement(Document doc, Element red) {
+
 		Element alto = doc.createElement("alto");
 		red.appendChild(alto);
 		alto.setTextContent(String.valueOf(this.alto));
@@ -170,40 +182,126 @@ public class MapaConexiones {
 		ancho.setTextContent(String.valueOf(this.ancho));
 
 		Element mapa = doc.createElement("mapa");
-		red.appendChild(mapa);		
-		
+		red.appendChild(mapa);
 
 		/* Serializacion de conectores del mapa */
 		for (Map.Entry e : this.mapa.entrySet()) {
-			Point clave = (Point) e.getKey();
+			Coordenada clave = (Coordenada) e.getKey();
 			Conector valor = (Conector) e.getValue();
 
-			Element point = doc.createElement("Point");
-			mapa.appendChild(point);
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
 			point.setTextContent(String.valueOf((int) clave.getX()) + ","
 					+ String.valueOf((int) clave.getY()));
 
 			Element conector = valor.getElement(doc);
-			mapa.appendChild(conector);
+			nodo.appendChild(conector);
 		}
-		
-		
+
 		/* Serializacion de posiciones relevantes */
 		Element posicionesRelevantes = doc
 				.createElement("posicionesRelevantes");
 		red.appendChild(posicionesRelevantes);
-		Iterator<Point> it = this.posicionesRelevantes.iterator();
+		Iterator<Coordenada> it = this.posicionesRelevantes.iterator();
 		while (it.hasNext()) {
-			Point p = it.next();
-			Element punto = doc.createElement("Point");
+			Coordenada p = it.next();
+			Element punto = doc.createElement("Coordenada");
 			posicionesRelevantes.appendChild(punto);
 			punto.setTextContent(String.valueOf((int) p.getX()) + ","
 					+ String.valueOf((int) p.getY()));
-		}		
-		
-		//TODO
-		//El grafo no es necesario serializarlo?		
+		}
+
+		// TODO
+		// El grafo no es necesario serializarlo?
 		return red;
 	}
 
+	public static MapaConexiones fromElement(Node tuberias) {
+		MapaConexiones mapaConexiones = new MapaConexiones();
+		NodeList hijosDeRed = tuberias.getChildNodes();
+
+		for (int i = 0; i < hijosDeRed.getLength(); i++) {
+			Node hijoDeRed = hijosDeRed.item(i);
+
+			if (hijoDeRed.getNodeName().equals("alto")) {
+				mapaConexiones.alto = Integer.valueOf(hijoDeRed
+						.getTextContent());
+			} else if (hijoDeRed.getNodeName().equals("ancho")) {
+				mapaConexiones.ancho = Integer.valueOf(hijoDeRed
+						.getTextContent());
+			} else if (hijoDeRed.getNodeName().equals("mapa")) {
+				NodeList hijosDeMapa = hijoDeRed.getChildNodes();
+				for (int j = 0; j < hijosDeMapa.getLength(); j++) {
+					Node hijoDeMapa = hijosDeMapa.item(j);
+					if (hijoDeMapa.getNodeName().equals("Nodo")) {
+						NodeList hijosDeNodo = hijoDeMapa.getChildNodes();
+						String stringPunto = "";
+						Coordenada puntoAAgregar = new Coordenada();
+						for (int k = 0; k < hijosDeNodo.getLength(); k++) {
+							Node hijoDeNodo = hijosDeNodo.item(k);
+							if (hijoDeNodo.getNodeName().equals("Coordenada")) {
+								stringPunto = hijoDeNodo.getTextContent();
+								String[] arrayPunto = stringPunto.split(",");
+								puntoAAgregar = new Coordenada(
+										Integer.valueOf(arrayPunto[0]),
+										Integer.valueOf(arrayPunto[1]));
+							} else if (hijoDeNodo.getNodeName().equals(
+									"Tuberia")) {
+								Tuberia tb = Tuberia.fromElement(hijoDeNodo);
+								mapaConexiones.agregar(tb);
+
+							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
+								Ruta rt = Ruta.fromElement(hijoDeNodo);
+								mapaConexiones.agregar(rt);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"LineaTension")) {
+								LineaTension lt = LineaTension
+										.fromElement(hijoDeNodo);
+								mapaConexiones.agregar(lt);
+							}
+						}
+					}
+				}
+			} else if (hijoDeRed.getNodeName().equals("posicionesRelevantes")) {
+				NodeList hijosDePosicionesRelevantes = hijoDeRed
+						.getChildNodes();
+				String stringPunto = "";
+				Coordenada puntoAAgregar = new Coordenada();
+				for (int k = 0; k < hijosDePosicionesRelevantes.getLength(); k++) {
+					Node hijoDePosicionRelevante = hijosDePosicionesRelevantes
+							.item(k);
+					if (hijoDePosicionRelevante.getNodeName().equals("Coordenada")) {
+						stringPunto = hijoDePosicionRelevante.getTextContent();
+						String[] arrayPunto = stringPunto.split(",");
+						puntoAAgregar = new Coordenada(
+								Integer.valueOf(arrayPunto[0]),
+								Integer.valueOf(arrayPunto[1]));
+						mapaConexiones.posicionesRelevantes.add(puntoAAgregar);
+					}
+				}
+			}
+		}
+
+		imprimirMapaConexiones(mapaConexiones);
+		return mapaConexiones;
+	}
+
+	/* Para probar */
+	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
+		System.out.println("imprimiendo mapa conexiones");
+		for (Map.Entry e : mapaConexiones.mapa.entrySet()) {
+			Coordenada clave = (Coordenada) e.getKey();
+			Conector valor = (Conector) e.getValue();
+
+			System.out.println(String.valueOf(clave.getX()));
+			System.out.println(String.valueOf(clave.getY()));
+			System.out.println(valor.getClass());
+
+		}
+	}
+	
+	
 }

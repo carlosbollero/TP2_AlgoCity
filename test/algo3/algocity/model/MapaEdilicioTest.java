@@ -19,32 +19,32 @@ public class MapaEdilicioTest {
 	int ancho = 10;
 
 	@Test
-	public void testSePuedeAgregarUnidadesAlMapa() {
+	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-
-		Unidad u = new UnidadResidencial(1, 1);
-
+		
+		Unidad u = new UnidadResidencial(4,4);
+		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
-
-		u = new UnidadComercial(2, 2);
-
+		
+		u = new UnidadComercial(3,3);
+		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
-
-		u = new UnidadIndustrial(3, 3);
-
+		
+		u = new UnidadIndustrial(2,2);
+		
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
-
+		
 	}
-
+	
 	@Test
-	public void testSePuedeRemoverUnaUnidad() {
+	public void testSePuedeRemoverUnaUnidad(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-
-		Unidad eb = new EstacionDeBomberos(1, 1);
-
+		
+		Unidad eb = new EstacionDeBomberos(1,1);
+				
 		m.agregar(eb);
 
 		assertTrue(m.contiene(eb));
@@ -53,45 +53,45 @@ public class MapaEdilicioTest {
 
 		assertFalse(m.contiene(eb));
 	}
-
+	
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar(new PozoDeAgua(1, 1)));
+		assertTrue(m.agregar(new PozoDeAgua(1,1)));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
-
+	
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad u = new UnidadResidencial(2, 5);
+		Unidad u = new UnidadResidencial(1,1);
 
 		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 	}
-
+	
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad eb = new EstacionDeBomberos(11, 11);
+		Unidad eb = new EstacionDeBomberos(15,4);
 
 		assertFalse(m.agregar(eb));
 		assertFalse(m.contiene(eb));
 	}
-
+	
 	@Test
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad ce = new CentralEolica(1, 1);
+		Unidad ce = new CentralEolica(2,2);
 
 		assertTrue(m.agregar(ce));
 		assertTrue(m.contiene(ce));
 		assertFalse(m.agregar(ce));
 	}
-
+	
 }

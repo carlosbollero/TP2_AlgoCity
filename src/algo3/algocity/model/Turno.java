@@ -22,26 +22,27 @@ public class Turno extends Observable implements Runnable {
 	public int getTurno() {
 		return numero;
 	}
-	
-	public void avanzar() {		
+
+	public void avanzar() {
 		numero++;
+		setChanged();
+		notifyObservers();
 	}
-	
-	public void iniciarHilo(){
-		hilo = new Thread(this,"TURNO");
+
+	public void iniciarHilo() {
+		hilo = new Thread(this, "TURNO");
 		hilo.start();
 	}
-	
-	public void finalizar(){
+
+	public void finalizar() {
 		jugando = false;
 	}
-	
-	public boolean estaVivo(){
+
+	public boolean estaVivo() {
 		return hilo.isAlive();
 	}
 
-	
-	public void join(){
+	public void join() {
 		try {
 			hilo.join();
 		} catch (InterruptedException e) {
@@ -53,25 +54,24 @@ public class Turno extends Observable implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("START");
-		while (jugando){		
+		while (jugando) {
 			avanzar();
-			setChanged();
-			notifyObservers();
-//			if(numero == 2){
-//				jugando = false;
-//			}
+			// if(numero == 2){
+			// jugando = false;
+			// }
 		}
-		System.out.println("EXIT");		
+		System.out.println("EXIT");
 	}
 
+	/* Persistencia */
 	public Element getElement(Document doc) {
-		
+
 		Element turnos = doc.createElement("Turnos");
-		
+
 		Element numero = doc.createElement("numero");
 		turnos.appendChild(numero);
 		numero.setTextContent(String.valueOf(this.numero));
-		
+
 		return turnos;
 	}
 }

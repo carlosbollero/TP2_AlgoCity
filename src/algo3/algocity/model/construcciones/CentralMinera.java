@@ -4,8 +4,11 @@ import java.awt.Point;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralMinera extends UnidadEnergetica {
@@ -17,7 +20,7 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 
 	public CentralMinera(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
@@ -29,7 +32,7 @@ public class CentralMinera extends UnidadEnergetica {
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
-		this.coordenadas = new Point(x, y);
+		this.coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -43,8 +46,8 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 	
 	
+	
 	/*Persistencia*/
-	//TODO falta probarlo
 	@Override
 	public Element getElement(Document doc) {
 		
@@ -75,5 +78,37 @@ public class CentralMinera extends UnidadEnergetica {
 		radioDeInfluencia.setTextContent(String.valueOf(this.radioDeInfluencia));
 		
 		return unidad;
+	}
+
+	public static CentralMinera fromElement(Node hijoDeNodo) {
+		CentralMinera cm = new CentralMinera();
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				cm.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				cm.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
+				cm.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				cm.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("radioDeInfluencia")) {
+				cm.radioDeInfluencia = Integer.valueOf(hijoDeUnidad
+						.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				cm.coordenadas = punto;
+			}
+		}
+		return cm;
 	}		
+	
+	
 }

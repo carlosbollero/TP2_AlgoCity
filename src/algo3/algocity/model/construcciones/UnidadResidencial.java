@@ -4,17 +4,19 @@ import java.awt.Point;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
-		Visitable {
+public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Visitable {
 
 	final double ESTADOINICIAL = 100;
 
@@ -28,7 +30,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public UnidadResidencial(int x, int y) {
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -39,7 +41,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
-		coordenadas = new Point(x, y);
+		coordenadas = new Coordenada(x, y);
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -75,7 +77,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			this.porcentajeDanios = 0;
 		}
 	}
-
+	
 	public void aplicarDanio(double cantidad) {
 		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
@@ -103,13 +105,15 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		mapa.agregarUnidadDaniable(this);
 	}
 
+	
+	
+	
 	/* Persistencia */
-	// TODO falta probarlo
 	@Override
 	public Element getElement(Document doc) {
-		
+
 		Element unidad = doc.createElement("UnidadResidencial");
-		
+
 		Element costo = doc.createElement("costo");
 		unidad.appendChild(costo);
 		costo.setTextContent(String.valueOf(this.costo));
@@ -133,6 +137,33 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
 
 		return unidad;
+	}
+
+	public static UnidadResidencial fromElement(Node hijoDeNodo) {
+		UnidadResidencial ur = new UnidadResidencial();
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				ur.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				ur.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
+				ur.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				ur.coordenadas = punto;
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				ur.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+			}
+		}
+		return ur;
 	}
 
 }
