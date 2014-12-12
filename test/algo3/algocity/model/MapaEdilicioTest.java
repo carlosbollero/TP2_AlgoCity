@@ -4,134 +4,94 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algo3.algocity.model.construcciones.CentralEolica;
+import algo3.algocity.model.construcciones.EstacionDeBomberos;
+import algo3.algocity.model.construcciones.PozoDeAgua;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
+import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.mapas.MapaEdilicio;
+
 public class MapaEdilicioTest {
+
 	int alto = 10;
 	int ancho = 10;
 
 	@Test
-	public void testSePuedeAgregarUnaUnidadAlMapa() {
+	public void testSePuedeAgregarUnidadesAlMapa(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		Edificador e = new Edificador();
-
-		Ubicable ur = e.construirUnidadResidencial();
-		m.agregar(ur, 1, 1);
-
-		assertTrue(m.contiene(ur));
+		
+		Unidad u = new UnidadResidencial(4,4);
+		
+		assertTrue(m.agregar(u));
+		assertTrue(m.contiene(u));
+		
+		u = new UnidadComercial(3,3);
+		
+		assertTrue(m.agregar(u));
+		assertTrue(m.contiene(u));
+		
+		u = new UnidadIndustrial(2,2);
+		
+		assertTrue(m.agregar(u));
+		assertTrue(m.contiene(u));
+		
 	}
-
+	
 	@Test
-	public void testSePuedeRemoverDeUnaCoordenada() {
+	public void testSePuedeRemoverUnaUnidad(){
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		Edificador e = new Edificador();
+		
+		Unidad eb = new EstacionDeBomberos(1,1);
+				
+		m.agregar(eb);
 
-		Ubicable ur = e.construirUnidadResidencial();
-		m.agregar(ur, 1, 1);
-
-		assertTrue(m.contiene(ur));
+		assertTrue(m.contiene(eb));
 
 		m.remover(1, 1);
 
-		assertFalse(m.contiene(ur));
+		assertFalse(m.contiene(eb));
 	}
-
-	@Test
-	public void testSePuedeAgregarVariasUnidadesAlMapa() {
-		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		Edificador e = new Edificador();
-
-		Ubicable ur = e.construirUnidadResidencial();
-		Ubicable uc = e.construirUnidadComercial();
-
-		m.agregar(ur, 1, 1);
-		m.agregar(uc, 2, 2);
-
-		assertTrue(m.contiene(ur));
-		assertTrue(m.contiene(uc));
-	}
-
+	
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
 		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar((new Edificador()).construirPozoDeAgua(), 1, 1));
+		assertTrue(m.agregar(new PozoDeAgua(1,1)));
 		assertTrue(m.tieneCoordenadaOcupada(1, 1));
 	}
-
+	
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		Edificador e = new Edificador();
 
-		Unidad u = e.construirPozoDeAgua();
+		Unidad u = new UnidadResidencial(1,1);
 
-		assertTrue(m.agregar(u, 4, 4));
+		assertTrue(m.agregar(u));
 		assertTrue(m.contiene(u));
 	}
-
+	
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
-		Edificador e = new Edificador();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad eb = e.construirEstacionDeBomberos();
+		Unidad eb = new EstacionDeBomberos(15,4);
 
-		assertFalse(m.agregar(eb, alto + 1, ancho + 1));
+		assertFalse(m.agregar(eb));
 		assertFalse(m.contiene(eb));
 	}
-
+	
 	@Test
 	public void testNoSePuedeAgregarDosVecesUnaMismaInstancia() {
-		Edificador e = new Edificador();
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		Unidad u = e.construirPozoDeAgua();
+		Unidad ce = new CentralEolica(2,2);
 
-		assertTrue(m.agregar(u, 3, 4));
-		assertTrue(m.contiene(u));
-		assertFalse(m.agregar(u, 5, 5));
+		assertTrue(m.agregar(ce));
+		assertTrue(m.contiene(ce));
+		assertFalse(m.agregar(ce));
 	}
-
-	@Test
-	public void testSePuedeAgregarVariasUnidades() {
-		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-		Edificador e = new Edificador();
-
-		UnidadEnergetica ce = e.construirCentralEolica();
-		UnidadEnergetica cm = e.construirCentralMinera();
-		UnidadEnergetica cn = e.construirCentralNuclear();
-		UnidadOcupable r = e.construirUnidadResidencial();
-		Unidad c = e.construirUnidadComercial();
-		UnidadOcupable i = e.construirUnidadIndustrial();
-
-		assertTrue(m.agregar(ce, 1, 1));
-		assertTrue(m.agregar(cm, 1, 2));
-		assertTrue(m.agregar(cn, 2, 1));
-		assertTrue(m.agregar(r, 2, 2));
-		assertTrue(m.agregar(c, 2, 3));
-		assertTrue(m.agregar(i, 3, 2));
-	}
-
-	@Test
-	public void testSePuedeConstruirUnaUnidadEnCoordenadaDelMapa() {
-		Edificador e = new Edificador();
-		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-
-		assertTrue(m.agregar(e.construirUnidadResidencial(), 1, 1));
-		assertTrue(m.tieneCoordenadaOcupada(1, 1));
-	}
-
-	@Test
-	public void testNoSePuedeAgregarEnUnaParcelaOcupada() {
-		MapaEdilicio m = new MapaEdilicio(alto, ancho);
-
-		assertFalse(m.tieneCoordenadaOcupada(1, 1));
-		assertTrue(m.agregar((new Edificador()).construirUnidadResidencial(),
-				1, 1));
-		assertTrue(m.tieneCoordenadaOcupada(1, 1));
-		assertFalse(m.agregar((new Edificador()).construirUnidadIndustrial(),
-				1, 1));
-	}
-
-
+	
 }

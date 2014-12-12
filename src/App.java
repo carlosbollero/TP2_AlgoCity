@@ -1,18 +1,12 @@
-import javax.swing.JFrame;
 
-import algo3.algocity.view.*;
-import algo3.algocity.model.*;
-import algo3.algocity.control.*;
-
+import algo3.algocity.model.Juego;
 
 public class App {
 	
-	public static void main(String[] args){
-		
-		VentanaMapa ventana = new VentanaMapa();
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(500, 500);
-		ventana.setVisible(true);
+
+	public static void main(String arg[]){
+		Juego juego = new Juego();
+        juego.iniciar();
 	}
 
 }

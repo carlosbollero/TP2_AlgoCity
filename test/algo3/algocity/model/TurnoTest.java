@@ -19,22 +19,44 @@ public class TurnoTest {
 
 		assertEquals(t.getTurno(), 1);
 
-		t.avanzarTurno();
+		t.avanzar();
 
 		assertEquals(t.getTurno(), 2);
 
 	}
-
+	
 	@Test
-	public void testElTurnoAvanzaAutomaticamente() throws InterruptedException {
+	public void testLosTurnosCorrenPorUnHiloDeEjecucionDiferente(){
 		Turno t = new Turno();
-
-		assertEquals(t.getTurno(), 1);
-
-		Thread.sleep(1000);
-
-		assertEquals(t.getTurno(), 2);
-
+		t.iniciarHilo();
+		
+		assertTrue(t.estaVivo());
+		
+		t.finalizar();
+		
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		assertFalse(t.estaVivo());
+		
+		
 	}
+
+//	@Test
+//	public void testElTurnoAvanzaAutomaticamente() throws InterruptedException {
+//		Turno t = new Turno();
+//
+//		assertEquals(t.getTurno(), 1);
+//
+//		Thread.sleep(1000);
+//
+//		assertEquals(t.getTurno(), 2);
+//
+//	}
 
 }

@@ -23,6 +23,17 @@ public class PoblacionTest {
 
 		assertTrue(p.getCantidad() > 0);
 	}
+	
+	@Test
+	public void testLaPoblacionPuedeCrecerUnaCantidadFija() {
+		Poblacion p = new Poblacion();
+
+		assertTrue(p.getCantidad() == 0);
+
+		p.aumentar(100);
+
+		assertEquals(p.getCantidad(), 100);
+	}
 
 	@Test
 	public void testLaPoblacionPuedeDecrecer() {
@@ -39,21 +50,127 @@ public class PoblacionTest {
 
 		assertTrue(p.getCantidad() < referencia);
 	}
+	
+	@Test
+	public void testLaPoblacionPuedeDecrecerUnaCantidadFija() {
+		Poblacion p = new Poblacion();
+
+		assertTrue(p.getCantidad() == 0);
+
+		p.aumentar(100);
+
+		assertEquals(p.getCantidad(), 100);
+		
+		p.disminuir(50);
+		
+		assertEquals(p.getCantidad(), 50);
+	}
 
 	@Test
-	public void testLaPoblacionCrecePorTurnos() {
+	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
 		Poblacion p = new Poblacion();
-		Turno t = new Turno();
-
+		
+		Turno t = new Turno();		
+		t.iniciarHilo();
 		t.addObserver(p);
+		
+		t.iniciarHilo();
 		int referencia = p.getCantidad();
 
 		assertTrue(referencia == 0);
+		assertTrue(t.estaVivo());
 
-		t.avanzarTurno();
-
+//		seteo el indice para que aumente la poblacion
+		p.setIndice(1); 	//positivo crece
+							//negativo decrece
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		t.finalizar();
+		
 		assertTrue(p.getCantidad() > referencia);
-
+		
+	}
+	
+	@Test
+	public void testLaPoblacionPuedeTenerEstadoCreciendo(){
+		Poblacion p = new Poblacion();
+		Turno t = new Turno();
+		
+		t.addObserver(p);
+		int referencia = p.getCantidad();
+		
+		assertTrue(referencia == 0);
+		
+		p.setIndice(1);
+		t.avanzar();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(p.getCantidad() > referencia);
+	}
+	
+	@Test
+	public void testLaPoblacionPuedeTenerEstadoDecreciendo(){
+		Poblacion p = new Poblacion();
+		Turno t = new Turno();
+		
+		t.addObserver(p);
+		int referencia = p.getCantidad();
+		
+		assertTrue(referencia == 0);
+		
+		p.setIndice(-1);
+		t.avanzar();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(p.getCantidad() < referencia);
+	}
+	
+	@Test
+	public void testLaPoblacionPuedeTenerEstadoEstable(){
+		Poblacion p = new Poblacion();
+		Turno t = new Turno();
+		
+		t.addObserver(p);
+		int referencia = p.getCantidad();
+		
+		assertTrue(referencia == 0);
+		
+		p.setIndice(0);
+		t.avanzar();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(p.getCantidad() == referencia);
+	}
+	
+	@Test
+	public void testLaPoblacionPuedeTenerTresEstados(){
+		Poblacion p = new Poblacion();
+		Turno t = new Turno();
+		
+		t.addObserver(p);
+		int referencia = p.getCantidad();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(referencia == 0);
+		
+		p.setIndice(1);
+		t.avanzar();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(p.getCantidad() > referencia);
+		
+		referencia = p.getCantidad();
+		p.setIndice(-1);
+		t.avanzar();
+		
+		System.out.println(p.getCantidad());
+		assertTrue(p.getCantidad() < referencia);
+		
 	}
 
 }

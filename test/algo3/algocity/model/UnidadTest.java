@@ -4,6 +4,17 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.construcciones.CentralEolica;
+import algo3.algocity.model.construcciones.CentralMinera;
+import algo3.algocity.model.construcciones.CentralNuclear;
+import algo3.algocity.model.construcciones.EstacionDeBomberos;
+import algo3.algocity.model.construcciones.PozoDeAgua;
+import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
+import algo3.algocity.model.construcciones.UnidadResidencial;
+
 public class UnidadTest {
 
 	/**/
@@ -12,32 +23,23 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
-		// Consumo unidadResidencial = 1
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
+		Unidad unaUnidadResidencial = new UnidadResidencial(1,1);
 
-		assertEquals(unaUnidadResidencial.getConsumo(), 1);
+		assertEquals(unaUnidadResidencial.consumo(), 1);
 	}
 
 	@Test
 	public void testUnidadComercialTieneConsumoValido() {
-		// Consumo unidadComercial = 2
-		Edificador unEdificador = new Edificador();
-		UnidadComercial unaUnidadComercial = unEdificador
-				.construirUnidadComercial();
+		Unidad unaUnidadComercial = new UnidadComercial(1,1);
 
-		assertEquals(unaUnidadComercial.getConsumo(), 2);
+		assertEquals(unaUnidadComercial.consumo(), 2);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneConsumoValido() {
-		// Consumo unidadIndustrial = 5
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
+		Unidad unaUnidadIndustrial = new UnidadIndustrial();
 
-		assertEquals(unaUnidadIndustrial.getConsumo(), 5);
+		assertEquals(unaUnidadIndustrial.consumo(), 5);
 	}
 
 	/**/
@@ -46,78 +48,58 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneCostoValido() {
-		// Costo unidadResidencial = 5
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadResidencial = unEdificador.construirUnidadResidencial();
+		Unidad unaUnidadResidencial = new UnidadResidencial();
 
-		assertEquals(unaUnidadResidencial.getCosto(), 5);
+		assertEquals(unaUnidadResidencial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadComercialTieneCostoValido() {
-		// Costo unidadComercial = 5
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadComercial = unEdificador.construirUnidadComercial();
+		Unidad unaUnidadComercial = new UnidadComercial();
 
-		assertEquals(unaUnidadComercial.getCosto(), 5);
+		assertEquals(unaUnidadComercial.costo(), 5);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneCostoValido() {
-		// Costo unidadIndsutrial = 10
-		Edificador unEdificador = new Edificador();
-		Unidad unaUnidadIndustrial = unEdificador.construirUnidadIndustrial();
+		Unidad unaUnidadIndustrial = new UnidadIndustrial();
 
-		assertEquals(unaUnidadIndustrial.getCosto(), 10);
+		assertEquals(unaUnidadIndustrial.costo(), 10);
 	}
 
 	@Test
 	public void testPozoDeAguaTieneCostoValido() {
-		// Costo pozoDeAgua = 250
-		Edificador unEdificador = new Edificador();
-		Unidad unPozoDeAgua = unEdificador.construirPozoDeAgua();
+		Unidad unPozoDeAgua = new PozoDeAgua();
 
-		assertEquals(unPozoDeAgua.getCosto(), 250);
+		assertEquals(unPozoDeAgua.costo(), 250);
 	}
 
 	@Test
 	public void testEstacionDeBomberosTieneCostoValido() {
-		// Costo estacionDeBomberos = 1500
-		Edificador unEdificador = new Edificador();
-		Unidad unaEstacionDeBomberos = unEdificador
-				.construirEstacionDeBomberos();
+		Unidad unaEstacionDeBomberos = new EstacionDeBomberos();
 
-		assertEquals(unaEstacionDeBomberos.getCosto(), 1500);
+		assertEquals(unaEstacionDeBomberos.costo(), 1500);
 	}
 
 	@Test
 	public void testCentralEolicaTieneCostoValido() {
-		// Costo centralEolica = 1000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralEolica = unEdificador
-				.construirCentralEolica();
+		Unidad unaCentralEolica = new CentralEolica();
 
-		assertEquals(unaCentralEolica.getCosto(), 1000);
+		assertEquals(unaCentralEolica.costo(), 1000);
 	}
 
 	@Test
 	public void testCentralMineraTieneCostoValido() {
-		// Costo centralMinera = 3000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralMinera = unEdificador
-				.construirCentralMinera();
+		Unidad unaCentralMinera = new CentralMinera();
 
-		assertEquals(unaCentralMinera.getCosto(), 3000);
+		assertEquals(unaCentralMinera.costo(), 3000);
 	}
 
 	@Test
 	public void testCentralNuclearTieneCostoValido() {
-		// Costo centralNuclear = 10000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralNuclear = unEdificador
-				.construirCentralNuclear();
+		Unidad unaCentralNuclear = new CentralNuclear();
 
-		assertEquals(unaCentralNuclear.getCosto(), 10000);
+		assertEquals(unaCentralNuclear.costo(), 10000);
 	}
 
 	/**/
@@ -127,21 +109,17 @@ public class UnidadTest {
 	@Test
 	public void testUnidadResidencialTieneCapacidadValida() {
 		// Capacidad unidadResidencial = 100
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
+		UnidadResidencial unaUnidadResidencial = new UnidadResidencial();
 
-		assertEquals(unaUnidadResidencial.getCapacidad(), 100);
+		assertEquals(unaUnidadResidencial.capacidad(), 100);
 	}
 
 	@Test
 	public void testUnidadIndustrialTieneCapacidadValida() {
 		// Capacidad unidadIndustrial = 25
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
+		UnidadIndustrial unaUnidadIndustrial = new UnidadIndustrial();
 
-		assertEquals(unaUnidadIndustrial.getCapacidad(), 25);
+		assertEquals(unaUnidadIndustrial.capacidad(), 25);
 	}
 
 	/**/
@@ -151,9 +129,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralEolica = 100
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralEolica = unEdificador
-				.construirCentralEolica();
+		CentralEolica unaCentralEolica = new CentralEolica();
 
 		assertEquals(unaCentralEolica.getCapacidad(), 100);
 	}
@@ -161,9 +137,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralMineraTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralMinera = 400
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralMinera = unEdificador
-				.construirCentralMinera();
+		CentralMinera unaCentralMinera = new CentralMinera();
 
 		assertEquals(unaCentralMinera.getCapacidad(), 400);
 	}
@@ -171,9 +145,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralNuclearTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralNuclear = 1000
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralNuclear = unEdificador
-				.construirCentralNuclear();
+		CentralNuclear unaCentralNuclear = new CentralNuclear();
 
 		assertEquals(unaCentralNuclear.getCapacidad(), 1000);
 	}
@@ -185,19 +157,14 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralEolica = 4
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralEolica = unEdificador
-				.construirCentralEolica();
-
+		CentralEolica unaCentralEolica = new CentralEolica();
 		assertEquals(unaCentralEolica.getRadioDeInfluencia(), 4);
 	}
 
 	@Test
 	public void testCentralMineraTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralMinera = 10
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralMinera = unEdificador
-				.construirCentralMinera();
+		CentralMinera unaCentralMinera = new CentralMinera();
 
 		assertEquals(unaCentralMinera.getRadioDeInfluencia(), 10);
 	}
@@ -205,10 +172,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralNuclearTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralNuclear = 25
-		Edificador unEdificador = new Edificador();
-		UnidadEnergetica unaCentralNuclear = unEdificador
-				.construirCentralNuclear();
-
+		CentralNuclear unaCentralNuclear = new CentralNuclear();
 		assertEquals(unaCentralNuclear.getRadioDeInfluencia(), 25);
 	}
 
@@ -218,135 +182,31 @@ public class UnidadTest {
 
 	@Test
 	public void testAplicarDanioAUnidadOcupable() {
+		Daniable unaUnidadResidencial = new UnidadResidencial();
 
-		Edificador unEdificador = new Edificador();
-		Reparable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
 		unaUnidadResidencial.aplicarDanio(100);
 
-		assertEquals(0, unaUnidadResidencial.getSalud());
+		assertEquals(0, unaUnidadResidencial.getSalud(), 0);
 
 	}
 
 	@Test
 	public void testAplicarDanioAUnidadComercial() {
-
-		Edificador unEdificador = new Edificador();
-		Reparable unaUnidadComercial = unEdificador.construirUnidadComercial();
+		Daniable unaUnidadComercial = new UnidadComercial();
 		unaUnidadComercial.aplicarDanio(50);
 
-		assertEquals(50, unaUnidadComercial.getSalud());
+		assertEquals(50, unaUnidadComercial.getSalud(), 0);
 	}
 
 	@Test
 	public void testAplicarDanioAUnidadEnergetica() {
-
-		Edificador unEdificador = new Edificador();
-		Reparable unaUnidadEnergetica = unEdificador.construirCentralEolica();
+		Daniable unaUnidadEnergetica = new CentralEolica();
 		unaUnidadEnergetica.aplicarDanio(50);
 
-		assertEquals(50, unaUnidadEnergetica.getSalud());
+		assertEquals(50, unaUnidadEnergetica.getSalud(), 0);
 	}
-
-	// TODO faltan tests de reparaciones, ver como terminamos definiendo este
-	// tema
-
-	/**/
-	/* Tests de control de habitantes de las unidades */
-	/**/
-
-	@Test
-	public void testOcupacionDeUnidadResidencialAumentaAlAgregarHabitantes() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
-		unaUnidadResidencial.agregarHabitantes(3);
-
-		assertEquals(unaUnidadResidencial.getOcupacion(), 3);
-	}
-
-	@Test
-	public void testOcupacionDeUnidadIndustrialAumentaAlRecibirHabitantes() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarHabitantes(1);
-
-		assertEquals(unaUnidadIndustrial.getOcupacion(), 1);
-	}
-
-	@Test
-	public void testOcupacionDeUnidadResidencialDisminuyeAlDespedirHabitantes() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
-		unaUnidadResidencial.agregarHabitantes(5);
-
-		assertEquals(unaUnidadResidencial.getOcupacion(), 5);
-
-		unaUnidadResidencial.quitarHabitantes(2);
-
-		assertEquals(unaUnidadResidencial.getOcupacion(), 3);
-	}
-
-	@Test
-	public void testOcupacionDeUnidadIndustrialDisminuyeAlDespedirHabitantes() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarHabitantes(11);
-
-		assertEquals(unaUnidadIndustrial.getOcupacion(), 11);
-
-		unaUnidadIndustrial.quitarHabitantes(1);
-
-		assertEquals(unaUnidadIndustrial.getOcupacion(), 10);
-	}
-
-	@Test
-	public void testNoSePuedeSobrepasarLaCapacidadDeUnidadResidencial() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadResidencial = unEdificador
-				.construirUnidadResidencial();
-		unaUnidadResidencial.agregarHabitantes(100); // --> Esta al limite la
-														// capacidad de la
-														// unidadResidencial
-
-		assertEquals(unaUnidadResidencial.getOcupacion(), 100);
-
-		unaUnidadResidencial.agregarHabitantes(1);
-
-		assertFalse(unaUnidadResidencial.getOcupacion() == 101);
-
-		// La ocupacion sigue siendo la misma luego de haber intentado agregar
-		// mas habitantes
-		assertEquals(unaUnidadResidencial.getOcupacion(), 100);
-	}
-
-	@Test
-	public void testNoSePuedeSobrepasarLaCapacidadDeUnidadIndustrial() {
-
-		Edificador unEdificador = new Edificador();
-		UnidadOcupable unaUnidadIndustrial = unEdificador
-				.construirUnidadIndustrial();
-		unaUnidadIndustrial.agregarHabitantes(25); // --> Esta al limite la
-													// capacidad de la
-													// unidadResidencial
-
-		assertEquals(unaUnidadIndustrial.getOcupacion(), 25);
-
-		unaUnidadIndustrial.agregarHabitantes(1);
-
-		assertFalse(unaUnidadIndustrial.getOcupacion() == 26);
-
-		// La ocupacion sigue siendo la misma luego de haber intentado agregar
-		// mas habitantes
-		assertEquals(unaUnidadIndustrial.getOcupacion(), 25);
-	}
-
 }
+
+	// TODO faltan tests de reparaciones
+
+	
