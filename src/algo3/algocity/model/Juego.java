@@ -1,6 +1,9 @@
 package algo3.algocity.model;
 
+import javax.swing.JFrame;
+
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.view.Ventana;
 
 public class Juego {
 
@@ -14,11 +17,24 @@ public class Juego {
 	Usuario usuario;
 
 	public Juego() {
-		generarMapas();
-		iniciarTurnos();
+		
+	}
+	
+	public void iniciar(){
+		//generarMapas();
+		crearVentana();
+		//iniciarTurnos();
 	}
 
-	public void iniciarTurnos() {
+	private void crearVentana() {
+		JFrame ventana = new Ventana(20);
+		ventana.setSize(500, 400);
+		ventana.setLocation(8, 0);
+		ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	private void iniciarTurnos() {
 		turnos = new Turno();
 	}
 
