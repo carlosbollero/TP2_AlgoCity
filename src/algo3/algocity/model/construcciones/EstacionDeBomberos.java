@@ -41,16 +41,13 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		consumo = 0;
 		conexion = null;
 		this.coordenadas = new Coordenada(x, y);
-<<<<<<< HEAD
-=======
 	}
 
-	public void actuar(ArrayList<Visitable> objetivos) {
-		for (Visitable v : objetivos) {
-			v.aceptar(this);
-		}
->>>>>>> dev-Mapa
-	}
+//	public void actuar(ArrayList<Visitable> objetivos) {
+//		for (Visitable v : objetivos) {
+//			v.aceptar(this);
+//		}
+//	}
 
 	// TODO Revisar si sirve el metodo
 	public void conectarTuberia(Conector unaTuberia) {
