@@ -1,5 +1,8 @@
 package algo3.algocity.model.caracteristicas;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import algo3.algocity.model.mapas.Coordenada;
 
 public interface Daniable {
@@ -13,5 +16,8 @@ public interface Daniable {
 	public Coordenada coordenadas();
 	
 	public void aceptar(Visitante v);
+	
+	/*Persistencia*/
+	public Element getElement(Document doc);
 
 }

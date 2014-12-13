@@ -10,6 +10,11 @@ public class Coordenada implements Comparable<Coordenada> {
 		this.y = y;
 	}
 
+	/*Para tests*/
+	public Coordenada() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getX() {
 		return x;
 	}

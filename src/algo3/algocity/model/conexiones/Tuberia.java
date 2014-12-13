@@ -1,5 +1,12 @@
 package algo3.algocity.model.conexiones;
 
+import java.awt.Point;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -52,4 +59,45 @@ public class Tuberia implements Conector {
 		return 100;
 	}
 
+	
+	
+	/*Persistencia*/
+	@Override
+	public Element getElement(Document doc) {
+				
+		Element conector = doc.createElement("Tuberia");
+		
+		Element costo = doc.createElement("costo");
+		conector.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));
+		
+		Element coordenadas = doc.createElement("coordenadas");
+		conector.appendChild(coordenadas);
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
+
+		return conector;
+	}
+
+	public static Tuberia fromElement(Node hijoDeNodo) {
+		Tuberia tb = new Tuberia();
+		NodeList hijosDeTuberia = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeTuberia.getLength(); i++) {
+			Node hijoDeTuberia = hijosDeTuberia.item(i);
+			if (hijoDeTuberia.getNodeName().equals("costo")) {
+				tb.costo = Integer.valueOf(hijoDeTuberia.getTextContent());
+			} else if (hijoDeTuberia.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeTuberia.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				tb.coordenadas = punto;
+			} 
+		}
+		return tb;
+	}
 }

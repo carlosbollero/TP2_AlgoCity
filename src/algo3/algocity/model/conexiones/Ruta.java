@@ -1,5 +1,12 @@
 package algo3.algocity.model.conexiones;
 
+import java.awt.Point;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
@@ -100,6 +107,51 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarARutas(this);
 		mapa.agregarUnidadDaniable(this);
+	}
+	
+	
+	/*Persistencia*/
+	@Override
+	public Element getElement(Document doc) {
+		Element conector = doc.createElement("Ruta");
+
+		Element costo = doc.createElement("costo");
+		conector.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));
+
+		Element coordenadas = doc.createElement("coordenadas");
+		conector.appendChild(coordenadas);
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
+		Element porcentajeDanios = doc.createElement("porcentajeDanios");
+		conector.appendChild(porcentajeDanios);
+		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
+
+		return conector;
+	}
+
+	public static Ruta fromElement(Node hijoDeUnidadDaniable) {
+		Ruta rt = new Ruta();
+		NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				rt.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				rt.coordenadas = punto;
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				rt.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+			}
+		}
+		return rt;
 	}
 
 }

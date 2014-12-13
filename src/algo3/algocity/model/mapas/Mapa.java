@@ -2,6 +2,11 @@ package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.conexiones.Conector;
@@ -32,6 +37,10 @@ public class Mapa {
 		redElectrica = new MapaConexiones(alto, ancho);
 	}
 
+	public Mapa() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int alto() {
 		return alto;
 	}
@@ -156,4 +165,75 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
+	
+	
+	/* Persistencia */
+	public Element getElement(Document doc) {
+		Element mapa = doc.createElement("Mapa");
+
+		Element alto = doc.createElement("alto");
+		mapa.appendChild(alto);
+		alto.setTextContent(String.valueOf(this.alto));
+
+		Element ancho = doc.createElement("ancho");
+		mapa.appendChild(ancho);
+		ancho.setTextContent(String.valueOf(this.ancho));
+
+		Element territorio = doc.createElement("territorio");
+		mapa.appendChild(territorio);
+		territorio = this.territorio.getElement(doc,territorio);
+
+		Element ciudad = doc.createElement("ciudad");
+		mapa.appendChild(ciudad);
+		ciudad = this.ciudad.getElement(doc,ciudad);
+				
+		Element tuberias = doc.createElement("tuberias");
+		mapa.appendChild(tuberias);
+		tuberias = this.tuberias.getElement(doc,tuberias);
+
+		Element rutas = doc.createElement("rutas");
+		mapa.appendChild(rutas);
+		rutas = this.rutas.getElement(doc,rutas);
+
+		Element redElectrica = doc.createElement("redElectrica");
+		mapa.appendChild(redElectrica);
+		redElectrica = this.redElectrica.getElement(doc,redElectrica);
+
+		return mapa;
+	}
+
+	public static Mapa fromElement(Element element) {
+		
+		Mapa mapa = new Mapa();
+		
+		NodeList childs = element.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++) {
+			Node child = childs.item(i);
+			
+			if (child.getNodeName().equals("alto")) {
+				mapa.alto = Integer.valueOf(child.getTextContent());
+			} else if (child.getNodeName().equals("ancho")) {
+				mapa.ancho = Integer.valueOf(child.getTextContent());
+			} else if(child.getNodeName().equals("territorio")){
+				MapaTerritorio territorio = MapaTerritorio.fromElement(child);
+				mapa.territorio = territorio;
+			} else if(child.getNodeName().equals("ciudad")){
+				MapaEdilicio ciudad = MapaEdilicio.fromElement(child);
+				mapa.ciudad = ciudad;
+			} else if(child.getNodeName().equals("tuberias")){
+				MapaConexiones tuberias = MapaConexiones.fromElement(child);
+				mapa.tuberias = tuberias;
+			} else if(child.getNodeName().equals("rutas")){
+				MapaConexiones rutas = MapaConexiones.fromElement(child);
+				mapa.rutas = rutas;
+			} else if (child.getNodeName().equals("redElectrica")){
+				MapaConexiones redElectrica = MapaConexiones.fromElement(child);
+				mapa.redElectrica = redElectrica;
+			}
+		}
+		System.out.println("mapa territorio");
+		mapa.territorio.imprimirTerritorio();
+
+		return mapa;
+	}	
 }

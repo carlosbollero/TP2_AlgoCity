@@ -1,5 +1,12 @@
 package algo3.algocity.model.construcciones;
 
+import java.awt.Point;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -99,9 +106,72 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregar(this);
+		// mapa.agregar(this); hace un loop infinito este metodo
 		mapa.agregarUnidadConEmpleo(this);
 		mapa.agregarUnidadDaniable(this);
+		mapa.agregarACiudad(this); // agregado
+	}
+
+	/* Persistencia */
+	@Override
+	public Element getElement(Document doc) {
+
+		Element unidad = doc.createElement("UnidadIndustrial");
+
+		Element costo = doc.createElement("costo");
+		unidad.appendChild(costo);
+		costo.setTextContent(String.valueOf(this.costo));
+
+		Element consumo = doc.createElement("consumo");
+		unidad.appendChild(consumo);
+		consumo.setTextContent(String.valueOf(this.consumo));
+
+		Element capacidad = doc.createElement("capacidad");
+		unidad.appendChild(capacidad);
+		capacidad.setTextContent(String.valueOf(this.capacidad));
+
+		Element coordenadas = doc.createElement("coordenadas");
+		unidad.appendChild(coordenadas);
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
+		Element porcentajeDanios = doc.createElement("porcentajeDanios");
+		unidad.appendChild(porcentajeDanios);
+		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
+
+		return unidad;
+	}
+
+	public static UnidadIndustrial fromElement(Node hijoDeNodo) {
+
+		UnidadIndustrial ui = new UnidadIndustrial();
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				ui.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				ui.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
+				ui.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				ui.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+				;
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				ui.coordenadas = punto;
+			}
+		}
+		return ui;
 	}
 
 }

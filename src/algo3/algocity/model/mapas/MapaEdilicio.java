@@ -1,13 +1,30 @@
 package algo3.algocity.model.mapas;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
+import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.construcciones.CentralEolica;
+import algo3.algocity.model.construcciones.CentralMinera;
+import algo3.algocity.model.construcciones.CentralNuclear;
+import algo3.algocity.model.construcciones.EstacionDeBomberos;
+import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
+import algo3.algocity.model.construcciones.UnidadResidencial;
 
 public class MapaEdilicio {
 
@@ -22,6 +39,14 @@ public class MapaEdilicio {
 	public MapaEdilicio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
+		mapa = new HashMap<Coordenada, Unidad>();
+		unidadesConPoblacion = new ArrayList<Ocupable>();
+		unidadesConEmpleo = new ArrayList<Ocupable>();
+		unidadesDaniables = new ArrayList<Daniable>();
+	}
+
+	/* Para tests */
+	public MapaEdilicio() {
 		mapa = new HashMap<Coordenada, Unidad>();
 		unidadesConPoblacion = new ArrayList<Ocupable>();
 		unidadesConEmpleo = new ArrayList<Ocupable>();
@@ -117,7 +142,8 @@ public class MapaEdilicio {
 
 	}
 
-	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro, int radio) {
+	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,
+			int radio) {
 		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
 		Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
 		Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
@@ -155,7 +181,8 @@ public class MapaEdilicio {
 
 	}
 
-	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro, int radio) {
+	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro,
+			int radio) {
 		int xi;
 		int yi;
 		if (epicentro.getX() - radio < 0) {
@@ -202,4 +229,247 @@ public class MapaEdilicio {
 		}
 		return capacidad;
 	}
+
+	/* Persistencia */
+	@SuppressWarnings("rawtypes")
+	public Element getElement(Document doc, Element ciudad) {
+		Element alto = doc.createElement("alto");
+		ciudad.appendChild(alto);
+		alto.setTextContent(String.valueOf(this.alto));
+
+		Element ancho = doc.createElement("ancho");
+		ciudad.appendChild(ancho);
+		ancho.setTextContent(String.valueOf(this.ancho));
+
+		Element mapa = doc.createElement("mapa");
+		ciudad.appendChild(mapa);
+
+		/* Serializacion de unidades del mapa */
+		for (Map.Entry e : this.mapa.entrySet()) {
+			Coordenada clave = (Coordenada) e.getKey();
+			Unidad valor = (Unidad) e.getValue();
+
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) clave.getX()) + ","
+					+ String.valueOf((int) clave.getY()));
+
+			Element unidad = valor.getElement(doc);
+			nodo.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades con poblacion */
+		Element unidadesConPoblacion = doc
+				.createElement("unidadesConPoblacion");
+		ciudad.appendChild(unidadesConPoblacion);
+		Iterator<Ocupable> it = this.unidadesConPoblacion.iterator();
+		while (it.hasNext()) {
+			Ocupable o = it.next();
+			Element unidad = o.getElement(doc);
+			unidadesConPoblacion.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades con empleo */
+		Element unidadesConEmpleo = doc.createElement("unidadesConEmpleo");
+		ciudad.appendChild(unidadesConEmpleo);
+		Iterator<Ocupable> it2 = this.unidadesConEmpleo.iterator();
+		while (it2.hasNext()) {
+			Ocupable o = it2.next();
+			Element unidad = o.getElement(doc);
+			unidadesConEmpleo.appendChild(unidad);
+		}
+
+		/* Serializacion de unidades daniables */
+		Element unidadesDaniables = doc.createElement("unidadesDaniables");
+		ciudad.appendChild(unidadesDaniables);
+		Iterator<Daniable> it3 = this.unidadesDaniables.iterator();
+		while (it3.hasNext()) {
+			Daniable o = it3.next();
+			Element unidad = o.getElement(doc);
+			unidadesDaniables.appendChild(unidad);
+		}
+
+		return ciudad;
+	}
+
+	public static MapaEdilicio fromElement(Node ciudad) {
+		MapaEdilicio mapaEdilicio = new MapaEdilicio();
+		NodeList hijosDeCiudad = ciudad.getChildNodes();
+
+		for (int i = 0; i < hijosDeCiudad.getLength(); i++) {
+			Node hijoDeCiudad = hijosDeCiudad.item(i);
+			if (hijoDeCiudad.getNodeName().equals("alto")) {
+				mapaEdilicio.alto = Integer.valueOf(hijoDeCiudad
+						.getTextContent());
+			} else if (hijoDeCiudad.getNodeName().equals("ancho")) {
+				mapaEdilicio.ancho = Integer.valueOf(hijoDeCiudad
+						.getTextContent());
+			} else if (hijoDeCiudad.getNodeName().equals("mapa")) {
+				NodeList hijosDeMapa = hijoDeCiudad.getChildNodes();
+				for (int j = 0; j < hijosDeMapa.getLength(); j++) {
+					Node hijoDeMapa = hijosDeMapa.item(j);
+					if (hijoDeMapa.getNodeName().equals("Nodo")) {
+						NodeList hijosDeNodo = hijoDeMapa.getChildNodes();
+						String stringPunto = "";
+						Coordenada puntoAAgregar = new Coordenada();
+						for (int k = 0; k < hijosDeNodo.getLength(); k++) {
+							Node hijoDeNodo = hijosDeNodo.item(k);
+							if (hijoDeNodo.getNodeName().equals("Point")) {
+								stringPunto = hijoDeNodo.getTextContent();
+								String[] arrayPunto = stringPunto.split(",");
+								puntoAAgregar = new Coordenada(
+										Integer.valueOf(arrayPunto[0]),
+										Integer.valueOf(arrayPunto[1]));
+							} else if (hijoDeNodo.getNodeName().equals(
+									"UnidadComercial")) {
+								UnidadComercial uc = UnidadComercial
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(uc);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"UnidadIndustrial")) {
+								UnidadIndustrial ui = UnidadIndustrial
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(ui);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"EstacionDeBomberos")) {
+								EstacionDeBomberos eb = EstacionDeBomberos
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(eb);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"CentralNuclear")) {
+								CentralNuclear cn = CentralNuclear
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(cn);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"UnidadResidencial")) {
+								UnidadResidencial ur = UnidadResidencial
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(ur);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"PozoDeAgua")) {
+								PozoDeAgua pa = PozoDeAgua
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(pa);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"CentralMinera")) {
+								CentralMinera cm = CentralMinera
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(cm);
+							} else if (hijoDeNodo.getNodeName().equals(
+									"CentralEolica")) {
+								CentralEolica ce = CentralEolica
+										.fromElement(hijoDeNodo);
+								mapaEdilicio.agregar(ce);
+							}
+						}
+					}
+				}
+			} else if (hijoDeCiudad.getNodeName()
+					.equals("unidadesConPoblacion")) {
+				NodeList hijosDeUnidadesConPoblacion = hijoDeCiudad
+						.getChildNodes();
+				for (int j = 0; j < hijosDeUnidadesConPoblacion.getLength(); j++) {
+					Node hijoDeUnidadConPoblacion = hijosDeUnidadesConPoblacion
+							.item(j);
+					if (hijoDeUnidadConPoblacion.getNodeName().equals(
+							"UnidadResidencial")) {
+						UnidadResidencial ur = UnidadResidencial
+								.fromElement(hijoDeUnidadConPoblacion);
+						mapaEdilicio.unidadesConPoblacion.add(ur);
+					}
+				}
+			} else if (hijoDeCiudad.getNodeName().equals("unidadesConEmpleo")) {
+				NodeList hijosDeUnidadesConEmpleo = hijoDeCiudad
+						.getChildNodes();
+				for (int j = 0; j < hijosDeUnidadesConEmpleo.getLength(); j++) {
+					Node hijoDeUnidadConEmpleo = hijosDeUnidadesConEmpleo
+							.item(j);
+					if (hijoDeUnidadConEmpleo.getNodeName().equals(
+							"UnidadIndustrial")) {
+						UnidadIndustrial ui = UnidadIndustrial
+								.fromElement(hijoDeUnidadConEmpleo);
+						mapaEdilicio.unidadesConEmpleo.add(ui);
+					}
+				}
+			} else if (hijoDeCiudad.getNodeName().equals("unidadesDaniables")) {
+				NodeList hijosDeUnidadesDaniables = hijoDeCiudad
+						.getChildNodes();
+				for (int j = 0; j < hijosDeUnidadesDaniables.getLength(); j++) {
+					Node hijoDeUnidadDaniable = hijosDeUnidadesDaniables
+							.item(j);
+					if (hijoDeUnidadDaniable.getNodeName().equals(
+							"UnidadIndustrial")) {
+						UnidadIndustrial ui = UnidadIndustrial
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(ui);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"UnidadResidencial")) {
+						UnidadResidencial ur = UnidadResidencial
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(ur);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"UnidadComercial")) {
+						UnidadComercial uc = UnidadComercial
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(uc);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"CentralEolica")) {
+						CentralEolica ce = CentralEolica
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(ce);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"CentralMinera")) {
+						CentralMinera cm = CentralMinera
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(cm);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"CentralNuclear")) {
+						CentralNuclear cn = CentralNuclear
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(cn);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"EstacionDeBomberos")) {
+						EstacionDeBomberos eb = EstacionDeBomberos
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(eb);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"PozoDeAgua")) {
+						PozoDeAgua pa = PozoDeAgua
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(pa);
+					} else if (hijoDeUnidadDaniable.getNodeName()
+							.equals("Ruta")) {
+						Ruta rt = Ruta.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(rt);
+					} else if (hijoDeUnidadDaniable.getNodeName().equals(
+							"LineaTension")) {
+						LineaTension lt = LineaTension
+								.fromElement(hijoDeUnidadDaniable);
+						mapaEdilicio.unidadesDaniables.add(lt);
+					}
+				}
+			}
+
+		}
+		imprimirMapaEdilicio(mapaEdilicio);
+		return mapaEdilicio;
+	}
+
+	/* Para probar */
+	private static void imprimirMapaEdilicio(MapaEdilicio mapaEdilicio) {
+
+		for (Map.Entry e : mapaEdilicio.mapa.entrySet()) {
+			Coordenada clave = (Coordenada) e.getKey();
+			Unidad valor = (Unidad) e.getValue();
+
+			System.out.println(String.valueOf(clave.getX()));
+			System.out.println(String.valueOf(clave.getY()));
+			System.out.println(valor.getClass());
+
+		}
+	}
+
 }
