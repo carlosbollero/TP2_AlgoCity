@@ -1,7 +1,5 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -33,8 +31,7 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		coordenadas = new Coordenada(x, y);
 		costo = 250;
 		consumo = 0;
-		
-		
+
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -62,29 +59,28 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
-		//mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
+		// mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
 		mapa.agregarPuntoRelevanteEnTuberias(this);
 	}
 
 	@Override
 	public void repararse() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aplicarDanio(double unDanio) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aceptar(Visitante v) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
 	/* Persistencia */
 	// TODO falta probarlo
 	@Override

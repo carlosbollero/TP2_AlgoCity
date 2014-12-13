@@ -1,6 +1,5 @@
 package algo3.algocity.model.mapas;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -128,7 +127,6 @@ public class MapaTerritorio {
 		return null;
 	}
 	/****************************************************************/
-
 	
 	/* Persistencia */
 	@SuppressWarnings("rawtypes")
@@ -242,7 +240,5 @@ public class MapaTerritorio {
 			}
 		}
 	}
-	
-	
 	
 }

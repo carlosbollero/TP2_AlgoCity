@@ -36,7 +36,6 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 	}
 
-	
 	@Override
 	public void repararse() {
 		this.porcentajeDanios -= this.porcentajeReparacion();
@@ -44,8 +43,7 @@ public class CentralMinera extends UnidadEnergetica {
 			this.porcentajeDanios = 0;
 		}
 	}
-	
-	
+
 	protected double porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
@@ -54,42 +52,43 @@ public class CentralMinera extends UnidadEnergetica {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
-		//mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		// mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
 		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
-	
-	
-	
-	/*Persistencia*/
+
+	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {
-		
+
 		Element unidad = doc.createElement("CentralMinera");
-		
+
 		Element costo = doc.createElement("costo");
 		unidad.appendChild(costo);
-		costo.setTextContent(String.valueOf(this.costo));		
-		
+		costo.setTextContent(String.valueOf(this.costo));
+
 		Element consumo = doc.createElement("consumo");
 		unidad.appendChild(consumo);
 		consumo.setTextContent(String.valueOf(this.consumo));
-		
+
 		Element capacidad = doc.createElement("capacidad");
 		unidad.appendChild(capacidad);
 		capacidad.setTextContent(String.valueOf(this.capacidad));
-		
+
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
-		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
-		
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
 		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
-		
+
 		Element radioDeInfluencia = doc.createElement("radioDeInfluencia");
 		unidad.appendChild(radioDeInfluencia);
-		radioDeInfluencia.setTextContent(String.valueOf(this.radioDeInfluencia));
-		
+		radioDeInfluencia
+				.setTextContent(String.valueOf(this.radioDeInfluencia));
+
 		return unidad;
 	}
 
@@ -122,6 +121,5 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 		return cm;
 	}
-	
-	
+
 }

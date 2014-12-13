@@ -1,11 +1,11 @@
 package algo3.algocity.model.mapas;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Daniable;
@@ -92,6 +92,7 @@ public class Mapa {
 
 	public boolean agregarPuntoRelevanteEnRedElectrica(UnidadEnergetica ue) {
 		return redElectrica.agregarPosicionRelevante(ue);
+
 	}
 
 	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
@@ -135,6 +136,11 @@ public class Mapa {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
 
+	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
+			LinkedList<Point> listaCamino) {
+		return ciudad.getDaniablesEnElCaminoDe(listaCamino);
+	}
+
 	// METODOS PARA VALIDAR REQUISITOS
 	public Superficie superficie(Coordenada punto) {
 		return territorio.superficie(punto);
@@ -150,7 +156,6 @@ public class Mapa {
 	}
 
 	public boolean hayConexionConRedElectrica(Coordenada coordenadas) {
-		
 		return redElectrica.hayConexion(coordenadas);
 	}
 

@@ -1,7 +1,7 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

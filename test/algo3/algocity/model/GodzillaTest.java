@@ -3,7 +3,7 @@ package algo3.algocity.model;
 import static org.junit.Assert.*;
 
 import java.awt.Point;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.junit.Test;
 
@@ -13,30 +13,30 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
-import algo3.algocity.model.mapas.MapaEdilicio;
+import algo3.algocity.model.mapas.Mapa;
 
 public class GodzillaTest {
 	
-	int alto = 20;
-	int ancho = 20;
+	int alto = 10;
+	int ancho = 10;
 	
-	MapaEdilicio me;
+	Mapa me;
 	CatastrofeGodzilla g;
 
 	@Test
 	public void testSePuedeDaniarUnaUnidadResidencial() {
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadResidencial ur = new UnidadResidencial(1,1);
 		
 		ur.aceptar(g);
 		
-		assertEquals(ur.getSalud(), 0, 0);
+		assertEquals(ur.getSalud(),0,0);
 	}
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadComercial() {
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadComercial uc = new UnidadComercial(1,1);
 		
@@ -47,7 +47,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadIndustrial() {
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadIndustrial ui = new UnidadIndustrial(1,1);
 		
@@ -58,7 +58,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaLineaDeTension() {
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		LineaTension l = new LineaTension();
 		
@@ -69,7 +69,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaRuta() {
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		Ruta r = new Ruta();
 		
@@ -80,10 +80,10 @@ public class GodzillaTest {
 	
 	@Test
 	public void testGodzillaGenerarUnCaminoRecto(){
-		me = new MapaEdilicio(alto, ancho);
+		me = new Mapa(alto, ancho);
 		g = new CatastrofeGodzilla(me);
 		
-		ArrayList<Point> camino = g.genCaminoRecto();
+		LinkedList<Point> camino = g.genCaminoRecto();
 		
 		boolean resultado = true;
 		Point p;

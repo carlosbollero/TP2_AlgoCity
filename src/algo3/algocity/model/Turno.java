@@ -56,9 +56,6 @@ public class Turno extends Observable implements Runnable {
 		System.out.println("START");
 		while (jugando) {
 			avanzar();
-			// if(numero == 2){
-			// jugando = false;
-			// }
 		}
 		System.out.println("EXIT");
 	}

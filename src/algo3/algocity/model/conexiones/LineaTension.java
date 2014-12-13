@@ -1,7 +1,5 @@
 package algo3.algocity.model.conexiones;
 
-import java.awt.Point;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -33,7 +31,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	}
 
 	public LineaTension(int x, int y) {
-		//porcentajeDanios = 0;
+		porcentajeDanios = 0;
 		coordenadas = new Coordenada(x, y);
 	}
 
@@ -61,6 +59,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public void aplicarDanioGodzilla() {
 		estado = destruido;
+		this.porcentajeDanios = 100; 
 
 	}
 

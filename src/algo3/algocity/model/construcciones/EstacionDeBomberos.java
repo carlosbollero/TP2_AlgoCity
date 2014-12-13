@@ -1,11 +1,14 @@
 package algo3.algocity.model.construcciones;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -14,8 +17,7 @@ import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
 public class EstacionDeBomberos extends Unidad implements Daniable {
-	
-	
+
 	private Conector conexion;
 
 	public EstacionDeBomberos() {
@@ -39,6 +41,15 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		consumo = 0;
 		conexion = null;
 		this.coordenadas = new Coordenada(x, y);
+<<<<<<< HEAD
+=======
+	}
+
+	public void actuar(ArrayList<Visitable> objetivos) {
+		for (Visitable v : objetivos) {
+			v.aceptar(this);
+		}
+>>>>>>> dev-Mapa
 	}
 
 	// TODO Revisar si sirve el metodo

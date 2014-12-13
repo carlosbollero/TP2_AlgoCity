@@ -30,8 +30,10 @@ public class MapaConexiones {
 	int alto;
 	int ancho;
 	LinkedHashMap<Coordenada, Conector> mapa;
+
 	// ArrayList<Coordenada> posicionesRelevantes;
 	ArrayList<Unidad> posicionesRelevantes;
+
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 
@@ -40,6 +42,7 @@ public class MapaConexiones {
 		this.ancho = ancho;
 		this.mapa = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
+
 		// posicionesRelevantes = new ArrayList<Coordenada>();
 		posicionesRelevantes = new ArrayList<Unidad>();
 	}
@@ -122,6 +125,7 @@ public class MapaConexiones {
 			if (estaDentroDeRangoUnidadEnergetica(unPunto, ur)
 					|| hayConexion(unPunto, ur.coordenadas())) {
 				System.out.println("cumple que hay conexion \n");
+
 				return true;
 			}
 		}
@@ -147,17 +151,21 @@ public class MapaConexiones {
 		return false;
 	}
 
+
 	public boolean agregarPosicionRelevante(Unidad u) {
 		if (posicionesRelevantes == null) {
 			posicionesRelevantes = new ArrayList<Unidad>();
+
 		}
 		return posicionesRelevantes.add(u);
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad) {
+
 		for (Unidad ur : posicionesRelevantes) {
 			if (estaDentroDeRangoUnidadEnergetica(unidad.coordenadas(), ur)
 					|| hayConexion(unidad.coordenadas(), ur.coordenadas())) {
+
 				return true;
 			}
 		}
@@ -196,6 +204,8 @@ public class MapaConexiones {
 		return tieneCoordenadaOcupada(conector.coordenadas().x,
 				conector.coordenadas().y);
 	}
+	
+	
 
 	/* Persistencia */
 	@SuppressWarnings("rawtypes")

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -48,6 +49,7 @@ public class MapaEdilicio {
 	/* Para tests */
 	public MapaEdilicio() {
 		mapa = new HashMap<Coordenada, Unidad>();
+
 		unidadesConPoblacion = new ArrayList<Ocupable>();
 		unidadesConEmpleo = new ArrayList<Ocupable>();
 		unidadesDaniables = new ArrayList<Daniable>();
@@ -156,6 +158,24 @@ public class MapaEdilicio {
 			}
 		}
 		return unidadesADevolver;
+	}
+
+	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
+			LinkedList<Point> listaCamino) {
+
+		ArrayList<Daniable> listaDaniablesEnElCamino = new ArrayList<Daniable>();
+		Iterator<Point> iterador = listaCamino.iterator();
+		while (iterador.hasNext()) {
+			Point punto = iterador.next();
+			if (existeDaniable((int) punto.getX(), (int) punto.getY())) {
+
+				listaDaniablesEnElCamino.add(getDaniableEn((int) punto.getX(),
+						(int) punto.getY()));
+
+			}
+		}
+
+		return listaDaniablesEnElCamino;
 	}
 
 	private boolean existeDaniable(int x, int y) {

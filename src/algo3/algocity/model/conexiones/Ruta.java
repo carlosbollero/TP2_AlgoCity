@@ -1,6 +1,5 @@
 package algo3.algocity.model.conexiones;
 
-import java.awt.Point;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
