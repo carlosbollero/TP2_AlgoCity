@@ -1,6 +1,11 @@
 package algo3.algocity.view;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import algo3.algocity.model.mapas.Mapa;
 
@@ -12,12 +17,24 @@ public class Ventana extends JFrame {
 	
 	public Ventana(Mapa mapa){
 		super("Algoritmos 3 | AlgoCity");
+		definirPanelIzq();
+//		iniciarPanelInfo();
+//		iniciarPanelOpciones();
 		iniciarVistaMapa(mapa);
 		acomodar();
 	}
-	
+
+	private void definirPanelIzq() {
+		JPanel panelIzq = new JPanel();
+		panelIzq.setLayout(new BorderLayout());
+		add(panelIzq,BorderLayout.WEST);
+		panelIzq.add(new VistaPanelInfo(),BorderLayout.NORTH);
+		panelIzq.add(new VistaPanelOpciones(), BorderLayout.CENTER);
+		
+	}
+
 	private void acomodar() {
-		setSize(500, 400);
+		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +44,16 @@ public class Ventana extends JFrame {
 	private void iniciarVistaMapa(Mapa mapa){
 		add(new VistaMapa(mapa));
 	}
+	
+	private void iniciarPanelOpciones() {
+		add(new VistaPanelOpciones(),BorderLayout.WEST);	
+	}
+	
+	private void iniciarPanelInfo() {
+		add(new VistaPanelInfo(),BorderLayout.LINE_START);		
+	}
+	
+	
 	
 
 }
