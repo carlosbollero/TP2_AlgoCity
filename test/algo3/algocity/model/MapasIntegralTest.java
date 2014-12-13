@@ -34,7 +34,7 @@ public class MapasIntegralTest {
 	
 	@Test
 	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos(){
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 		
 		try{
@@ -81,7 +81,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		fu = new FabricaUnidadIndustrial();
 		Coordenada p = m.posicionConTierra();
 
@@ -96,7 +96,7 @@ public class MapasIntegralTest {
 	}
 	@Test
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		fu = new FabricaUnidadResidencial();
 		Coordenada p = m.posicionConTierra();
 
@@ -113,7 +113,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarPozoDeAguaSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioAguaParaTest();
 
 		fu = new FabricaPozoAgua();
@@ -133,7 +133,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarEstacionDeBomberosSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 
 		fu = new FabricaEstacionDeBomberos();
 
@@ -152,7 +152,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 		
 		

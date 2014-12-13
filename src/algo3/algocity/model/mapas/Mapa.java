@@ -22,9 +22,9 @@ public class Mapa {
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
 
-	public Mapa(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
+	public Mapa() {
+		alto = 14;
+		ancho = 14;
 		territorio = new MapaTerritorio(alto, ancho);
 		ciudad = new MapaEdilicio(alto, ancho);
 		tuberias = new MapaConexiones(alto, ancho);

@@ -23,7 +23,7 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoAplicaDanioASuEpicentro() {
-		m = new Mapa(10, 10);
+		m = new Mapa();
 
 		UnidadResidencial u1 = new UnidadResidencial(3, 3);
 
@@ -39,7 +39,7 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoAplicaDanioCorrespondienteAUnidadesAlrededor() {
-		m = new Mapa(10, 10);
+		m = new Mapa();
 
 		UnidadResidencial ur1 = new UnidadResidencial(1, 1);
 		UnidadComercial uc1 = new UnidadComercial(1, 2);
@@ -79,7 +79,7 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoNoAplicaDanioAUnidadesNoDaniablesAlrededor() {
-		m = new Mapa(10, 10);
+		m = new Mapa();
 
 		EstacionDeBomberos eb = new EstacionDeBomberos(1, 1);
 		PozoDeAgua pa = new PozoDeAgua(2, 2);
@@ -97,7 +97,7 @@ public class CatastrofeTerremotoTest {
 	@Test
 	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
 			throws NoSeCumplenLosRequisitosException {
-		m = new Mapa(10, 10);
+		m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
 		LineaTension lt = new LineaTension(m, 3, 5);
