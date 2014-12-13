@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 
 import algo3.algocity.model.terreno.Superficie;
 
-public class VistaPosicion extends JPanel {
+public class VistaTerreno extends JPanel {
 
 	private static final long serialVersionUID = -8808512415555786403L;
 
 	Image imagen;
 
-	public VistaPosicion(Superficie superficie) {
+	public VistaTerreno(Superficie superficie) {
 		imagen = (superficie.esAgua()) ? new ImageIcon("img/water.png")
 				.getImage() : new ImageIcon("img/dirt.png").getImage();
 

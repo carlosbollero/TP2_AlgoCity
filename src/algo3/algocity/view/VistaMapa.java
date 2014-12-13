@@ -21,7 +21,7 @@ public class VistaMapa extends JPanel {
 	private void inicializarVistaPosiciones(Mapa mapa){
 		for(int i = 0; i < mapa.getTamanio(); i++){
 			for (int j = 0; j < mapa.getTamanio(); j++){
-				add(new VistaPosicion(mapa.superficie(new Coordenada(i,j))));
+				add(new VistaTerreno(mapa.superficie(new Coordenada(i,j))));
 			}
 		}
 		
