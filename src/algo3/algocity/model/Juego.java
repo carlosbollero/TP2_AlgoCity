@@ -134,13 +134,13 @@ public class Juego {
 			TransformerFactoryConfigurationError, FileNotFoundException,
 			TransformerException {
 
-		// prueba1();
+		//prueba1();
 
-		// prueba2();
+		prueba2();
 
-		Juego juego = new Juego();
+		//Juego juego = new Juego();
 
-		juego.persistir();
+		//juego.persistir();
 
 	}
 
@@ -152,10 +152,10 @@ public class Juego {
 					.newDocumentBuilder().parse(new File("pruebamapa.xml"));
 			Element element = doc.getDocumentElement();
 
-			// Mapa mapa = Mapa.fromElement(element);
+			Mapa mapa = Mapa.fromElement(element);
 
-			// System.out.println(mapa.alto());
-			// System.out.println(mapa.ancho());
+			System.out.println(mapa.alto());
+			System.out.println(mapa.ancho());
 
 		} catch (SAXException e) {
 			e.printStackTrace();
