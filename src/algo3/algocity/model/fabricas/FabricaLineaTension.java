@@ -1,7 +1,5 @@
 package algo3.algocity.model.fabricas;
 
-import java.util.ArrayList;
-
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;

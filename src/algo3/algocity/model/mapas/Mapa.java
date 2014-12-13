@@ -1,7 +1,7 @@
 package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList; 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.conexiones.Conector;
@@ -10,6 +10,7 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.terreno.Superficie;
+import java.awt.Point; 
 
 public class Mapa {
 
@@ -112,6 +113,12 @@ public class Mapa {
 			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
 	}
+	
+	public ArrayList<Daniable> getDaniablesEnElCaminoDe (LinkedList<Point> listaCamino){
+	       return ciudad.getDaniablesEnElCaminoDe(listaCamino); 
+		}
+		
+	
 
 	// METODOS PARA VALIDAR REQUISITOS
 	public Superficie superficie(Coordenada punto) {

@@ -151,5 +151,7 @@ public class MapaConexiones {
 		return tieneCoordenadaOcupada(conector.coordenadas().x,
 				conector.coordenadas().y);
 	}
+	
+	
 
 }

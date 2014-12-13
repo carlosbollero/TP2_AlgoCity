@@ -55,6 +55,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public void aplicarDanioGodzilla() {
 		estado = destruido;
+		this.porcentajeDanios = 100; 
 
 	}
 

@@ -1,8 +1,10 @@
 package algo3.algocity.model.mapas;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import algo3.algocity.model.caracteristicas.Daniable;
@@ -117,7 +119,8 @@ public class MapaEdilicio {
 
 	}
 
-	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro, int radio) {
+	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,
+			int radio) {
 		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
 		Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
 		Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
@@ -130,6 +133,24 @@ public class MapaEdilicio {
 			}
 		}
 		return unidadesADevolver;
+	}
+
+	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
+			LinkedList<Point> listaCamino) {
+
+		ArrayList<Daniable> listaDaniablesEnElCamino = new ArrayList<Daniable>();
+		Iterator<Point> iterador = listaCamino.iterator();
+		while (iterador.hasNext()) {
+			Point punto = iterador.next();
+			if (existeDaniable((int) punto.getX(), (int) punto.getY())) {
+
+				listaDaniablesEnElCamino.add(getDaniableEn((int) punto.getX(),
+						(int) punto.getY()));
+
+			}
+		}
+
+		return listaDaniablesEnElCamino;
 	}
 
 	private boolean existeDaniable(int x, int y) {
@@ -155,7 +176,8 @@ public class MapaEdilicio {
 
 	}
 
-	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro, int radio) {
+	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro,
+			int radio) {
 		int xi;
 		int yi;
 		if (epicentro.getX() - radio < 0) {

@@ -25,7 +25,7 @@ public interface Visitante {
 	// public void visitar(Unidad unaUnidad); // usado por CatastrofeTerremoto
 	public void visitar(Daniable unaUnidad);
 
-	void visitar(UnidadResidencial unaUnidadResidencial);
+	public void visitar(UnidadResidencial unaUnidadResidencial);
 
 	
 
