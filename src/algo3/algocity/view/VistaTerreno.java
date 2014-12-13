@@ -1,11 +1,7 @@
 package algo3.algocity.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
