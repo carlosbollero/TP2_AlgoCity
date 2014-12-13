@@ -90,7 +90,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	protected double porcentajeReparacion() {
-		return (this.ESTADOINICIAL * 10) / 100;
+		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
 	@Override

@@ -29,12 +29,11 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	Coordenada coordenadas;
 
 	public LineaTension() {
-
 		this.costo = 5;
 	}
 
 	public LineaTension(int x, int y) {
-		porcentajeDanios = 0;
+		//porcentajeDanios = 0;
 		coordenadas = new Coordenada(x, y);
 	}
 

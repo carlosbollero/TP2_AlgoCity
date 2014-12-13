@@ -32,6 +32,7 @@ public class CentralEolica extends UnidadEnergetica {
 		coordenadas = new Coordenada(x, y);
 		this.costo = 1000;
 		this.capacidad = 100;
+		this.radioDeInfluencia = 4;
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -41,41 +42,55 @@ public class CentralEolica extends UnidadEnergetica {
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		//mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
-	
-	
-	
-	/*Persistencia*/
+
+	@Override
+	public void repararse() {
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0) {
+			this.porcentajeDanios = 0;
+		}
+	}
+
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 15) / 100;
+	}
+
+	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {
-		
+
 		Element unidad = doc.createElement("CentralEolica");
-		
+
 		Element costo = doc.createElement("costo");
 		unidad.appendChild(costo);
-		costo.setTextContent(String.valueOf(this.costo));		
-		
+		costo.setTextContent(String.valueOf(this.costo));
+
 		Element consumo = doc.createElement("consumo");
 		unidad.appendChild(consumo);
 		consumo.setTextContent(String.valueOf(this.consumo));
-		
+
 		Element capacidad = doc.createElement("capacidad");
 		unidad.appendChild(capacidad);
 		capacidad.setTextContent(String.valueOf(this.capacidad));
-		
+
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
-		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
-		
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
 		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
-		
+
 		Element radioDeInfluencia = doc.createElement("radioDeInfluencia");
 		unidad.appendChild(radioDeInfluencia);
-		radioDeInfluencia.setTextContent(String.valueOf(this.radioDeInfluencia));
-		
+		radioDeInfluencia
+				.setTextContent(String.valueOf(this.radioDeInfluencia));
+
 		return unidad;
 	}
 
@@ -107,6 +122,6 @@ public class CentralEolica extends UnidadEnergetica {
 			}
 		}
 		return ce;
-	}		
+	}
 
 }

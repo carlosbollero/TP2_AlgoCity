@@ -40,7 +40,7 @@ public class Tuberia implements Conector {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
-		return superficie.esTierra();
+		return (superficie.esTierra() || superficie.esAgua());
 	}
 
 	@Override

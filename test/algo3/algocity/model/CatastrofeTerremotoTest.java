@@ -1,18 +1,20 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
+import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Mapa;
@@ -48,6 +50,9 @@ public class CatastrofeTerremotoTest {
 		CentralNuclear cn1 = new CentralNuclear(4, 2);
 		UnidadResidencial ur2 = new UnidadResidencial(10, 10);
 		UnidadResidencial ur3 = new UnidadResidencial(1, 4);
+		UnidadIndustrial ui1 = new UnidadIndustrial(5, 5);
+		LineaTension lt = new LineaTension(3, 1);
+		Ruta rt = new Ruta(4, 3);
 
 		m.agregar(ur1);
 		m.agregar(uc1);
@@ -56,6 +61,9 @@ public class CatastrofeTerremotoTest {
 		m.agregar(cm1);
 		m.agregar(cn1);
 		m.agregar(ur2);
+		m.agregar(ui1);
+		m.agregar(lt);
+		m.agregar(rt);
 
 		assertEquals(100, ur1.getSalud(), 0);
 		assertEquals(100, uc1.getSalud(), 0);
@@ -64,6 +72,9 @@ public class CatastrofeTerremotoTest {
 		assertEquals(100, cn1.getSalud(), 0);
 		assertEquals(100, ur2.getSalud(), 0);
 		assertEquals(100, ur3.getSalud(), 0);
+		assertEquals(100, ui1.getSalud(), 0);
+		assertEquals(100, lt.getSalud(), 0);
+		assertEquals(100, rt.getSalud(), 0);
 
 		// Creacion de un terremoto con epicentro en (1,1)
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
@@ -75,6 +86,10 @@ public class CatastrofeTerremotoTest {
 		assertEquals(4.5, cn1.getSalud(), 0.1);
 		assertEquals(18.0, ur2.getSalud(), 0.1);
 		assertEquals(4.5, ur3.getSalud(), 0.1);
+		assertEquals(7.5, ui1.getSalud(), 0);
+		assertEquals(3.0, lt.getSalud(), 0);
+		assertEquals(4.5, rt.getSalud(), 0);
+
 	}
 
 	@Test
@@ -83,15 +98,18 @@ public class CatastrofeTerremotoTest {
 
 		EstacionDeBomberos eb = new EstacionDeBomberos(1, 1);
 		PozoDeAgua pa = new PozoDeAgua(2, 2);
+		Tuberia tb = new Tuberia(3, 3);
 
 		m.agregar(eb);
 		m.agregar(pa);
+		m.agregar(tb);
 
 		// Creacion de un terremoto con epicentro en (1,1)
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
 
 		assertEquals(100, eb.getSalud(), 0);
 		assertEquals(100, pa.getSalud(), 0);
+		assertEquals(100, tb.getSalud(), 0);
 	}
 
 	@Test

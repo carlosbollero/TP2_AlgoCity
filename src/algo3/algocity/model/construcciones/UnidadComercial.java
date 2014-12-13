@@ -42,15 +42,26 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		}
 	}
 
+	public double getDanios() {
+		return porcentajeDanios;
+	}
+	
 	public int consumo() {
 		return this.consumo;
 	}
 
 	@Override
 	public void repararse() {
-		// TODO Auto-generated method stub
-
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0) {
+			this.porcentajeDanios = 0;
+		}
 	}
+
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 7) / 100;
+	}
+	
 
 	@Override
 	public void aplicarDanio(double cantidad) {

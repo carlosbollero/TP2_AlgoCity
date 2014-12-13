@@ -7,13 +7,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.conexiones.Tuberia;
+import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa {
@@ -27,6 +30,8 @@ public class Mapa {
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
 
+	Reparador reparador;
+
 	public Mapa(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
@@ -35,12 +40,13 @@ public class Mapa {
 		tuberias = new MapaConexiones(alto, ancho);
 		rutas = new MapaConexiones(alto, ancho);
 		redElectrica = new MapaConexiones(alto, ancho);
+		this.reparador = null;
 	}
 
 	public Mapa() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public int alto() {
 		return alto;
 	}
@@ -73,12 +79,19 @@ public class Mapa {
 		return tuberias.agregar(tuberia);
 	}
 
-	public boolean agregarPuntoRelevanteEnTuberias(Coordenada punto) {
-		return tuberias.agregarPosicionRelevante(punto);
+	/*
+	 * public boolean agregarPuntoRelevanteEnTuberias(Coordenada punto) { return
+	 * tuberias.agregarPosicionRelevante(punto); }
+	 * 
+	 * public boolean agregarPuntoRelevanteEnRedElectrica(Coordenada punto) {
+	 * return redElectrica.agregarPosicionRelevante(punto); }
+	 */
+	public boolean agregarPuntoRelevanteEnTuberias(PozoDeAgua pa) {
+		return tuberias.agregarPosicionRelevante(pa);
 	}
 
-	public boolean agregarPuntoRelevanteEnRedElectrica(Coordenada punto) {
-		return redElectrica.agregarPosicionRelevante(punto);
+	public boolean agregarPuntoRelevanteEnRedElectrica(UnidadEnergetica ue) {
+		return redElectrica.agregarPosicionRelevante(ue);
 	}
 
 	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
@@ -137,6 +150,7 @@ public class Mapa {
 	}
 
 	public boolean hayConexionConRedElectrica(Coordenada coordenadas) {
+		
 		return redElectrica.hayConexion(coordenadas);
 	}
 
@@ -144,7 +158,19 @@ public class Mapa {
 		return rutas.hayConectorAdyacente(coordenadas);
 	}
 
-	// Método implementado solo para tests
+	public void agregarReparador() {
+		if (this.reparador == null) {
+			this.reparador = new Reparador(this);
+		}
+	}
+
+	public void reparar() {
+		if (this.reparador != null) {
+			this.reparador.actuar();
+		}
+	}
+
+	// Metodo implementado solo para tests
 	/*********************************************************/
 	public void setTerritorioTierraParaTest() {
 		boolean tierra = true;
@@ -155,6 +181,7 @@ public class Mapa {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
 	}
+
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
@@ -165,8 +192,7 @@ public class Mapa {
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
 	}
-	
-	
+
 	/* Persistencia */
 	public Element getElement(Document doc) {
 		Element mapa = doc.createElement("Mapa");
@@ -181,59 +207,51 @@ public class Mapa {
 
 		Element territorio = doc.createElement("territorio");
 		mapa.appendChild(territorio);
-		territorio = this.territorio.getElement(doc,territorio);
+		territorio = this.territorio.getElement(doc, territorio);
 
 		Element ciudad = doc.createElement("ciudad");
 		mapa.appendChild(ciudad);
-		ciudad = this.ciudad.getElement(doc,ciudad);
-				
+		ciudad = this.ciudad.getElement(doc, ciudad);
+
 		Element tuberias = doc.createElement("tuberias");
 		mapa.appendChild(tuberias);
-		tuberias = this.tuberias.getElement(doc,tuberias);
+		tuberias = this.tuberias.getElement(doc, tuberias);
 
 		Element rutas = doc.createElement("rutas");
 		mapa.appendChild(rutas);
-		rutas = this.rutas.getElement(doc,rutas);
+		rutas = this.rutas.getElement(doc, rutas);
 
 		Element redElectrica = doc.createElement("redElectrica");
 		mapa.appendChild(redElectrica);
-		redElectrica = this.redElectrica.getElement(doc,redElectrica);
+		redElectrica = this.redElectrica.getElement(doc, redElectrica);
 
 		return mapa;
 	}
-
-	public static Mapa fromElement(Element element) {
-		
-		Mapa mapa = new Mapa();
-		
-		NodeList childs = element.getChildNodes();
-		for (int i = 0; i < childs.getLength(); i++) {
-			Node child = childs.item(i);
-			
-			if (child.getNodeName().equals("alto")) {
-				mapa.alto = Integer.valueOf(child.getTextContent());
-			} else if (child.getNodeName().equals("ancho")) {
-				mapa.ancho = Integer.valueOf(child.getTextContent());
-			} else if(child.getNodeName().equals("territorio")){
-				MapaTerritorio territorio = MapaTerritorio.fromElement(child);
-				mapa.territorio = territorio;
-			} else if(child.getNodeName().equals("ciudad")){
-				MapaEdilicio ciudad = MapaEdilicio.fromElement(child);
-				mapa.ciudad = ciudad;
-			} else if(child.getNodeName().equals("tuberias")){
-				MapaConexiones tuberias = MapaConexiones.fromElement(child);
-				mapa.tuberias = tuberias;
-			} else if(child.getNodeName().equals("rutas")){
-				MapaConexiones rutas = MapaConexiones.fromElement(child);
-				mapa.rutas = rutas;
-			} else if (child.getNodeName().equals("redElectrica")){
-				MapaConexiones redElectrica = MapaConexiones.fromElement(child);
-				mapa.redElectrica = redElectrica;
-			}
-		}
-		System.out.println("mapa territorio");
-		mapa.territorio.imprimirTerritorio();
-
-		return mapa;
-	}	
+	/*
+	 * public static Mapa fromElement(Element element) {
+	 * 
+	 * Mapa mapa = new Mapa();
+	 * 
+	 * NodeList childs = element.getChildNodes(); for (int i = 0; i <
+	 * childs.getLength(); i++) { Node child = childs.item(i);
+	 * 
+	 * if (child.getNodeName().equals("alto")) { mapa.alto =
+	 * Integer.valueOf(child.getTextContent()); } else if
+	 * (child.getNodeName().equals("ancho")) { mapa.ancho =
+	 * Integer.valueOf(child.getTextContent()); } else
+	 * if(child.getNodeName().equals("territorio")){ MapaTerritorio territorio =
+	 * MapaTerritorio.fromElement(child); mapa.territorio = territorio; } else
+	 * if(child.getNodeName().equals("ciudad")){ MapaEdilicio ciudad =
+	 * MapaEdilicio.fromElement(child); mapa.ciudad = ciudad; } else
+	 * if(child.getNodeName().equals("tuberias")){ MapaConexiones tuberias =
+	 * MapaConexiones.fromElement(child); mapa.tuberias = tuberias; } else
+	 * if(child.getNodeName().equals("rutas")){ MapaConexiones rutas =
+	 * MapaConexiones.fromElement(child); mapa.rutas = rutas; } else if
+	 * (child.getNodeName().equals("redElectrica")){ MapaConexiones redElectrica
+	 * = MapaConexiones.fromElement(child); mapa.redElectrica = redElectrica; }
+	 * } System.out.println("mapa territorio");
+	 * mapa.territorio.imprimirTerritorio();
+	 * 
+	 * return mapa; }
+	 */
 }

@@ -33,7 +33,8 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		coordenadas = new Coordenada(x, y);
 		costo = 250;
 		consumo = 0;
-
+		
+		
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -61,7 +62,8 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
-		mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
+		//mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
+		mapa.agregarPuntoRelevanteEnTuberias(this);
 	}
 
 	@Override
