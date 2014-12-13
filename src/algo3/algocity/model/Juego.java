@@ -28,10 +28,6 @@ public class Juego {
 
 	private void crearVentana() {
 		JFrame ventana = new Ventana(new Mapa());
-		ventana.setSize(500, 400);
-		ventana.setLocation(8, 0);
-		ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	private void iniciarTurnos() {

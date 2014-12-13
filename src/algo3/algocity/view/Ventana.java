@@ -11,16 +11,21 @@ public class Ventana extends JFrame {
 	int tamanio;
 	
 	public Ventana(Mapa mapa){
-		super("Mapa");
-//		this.mapa = mapa; 
-		tamanio = mapa.getTamanio();
+		super("Algoritmos 3 | AlgoCity");
 		iniciarVistaMapa(mapa);
-		repaint();
+		acomodar();
 	}
 	
+	private void acomodar() {
+		setSize(500, 400);
+		setLocationRelativeTo(null);
+		setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+
 	private void iniciarVistaMapa(Mapa mapa){
-		getContentPane().add(new VistaMapa(mapa));
-//		setContentPane(new VistaMapa(mapa));
+		add(new VistaMapa(mapa));
 	}
 	
 
