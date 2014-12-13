@@ -15,6 +15,7 @@ public class Mapa {
 
 	int alto;
 	int ancho;
+	int tamanio;
 
 	MapaTerritorio territorio;
 	MapaEdilicio ciudad;
@@ -25,6 +26,7 @@ public class Mapa {
 	public Mapa() {
 		alto = 14;
 		ancho = 14;
+		tamanio = 14;
 		territorio = new MapaTerritorio(alto, ancho);
 		ciudad = new MapaEdilicio(alto, ancho);
 		tuberias = new MapaConexiones(alto, ancho);
@@ -155,5 +157,10 @@ public class Mapa {
 
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
+	}
+
+	public int getTamanio() {
+		return tamanio;
+		
 	}
 }

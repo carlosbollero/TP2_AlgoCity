@@ -154,11 +154,11 @@ public class MapasIntegralTest {
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos() {
 		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
-		
-		
+			
 		
 		PozoDeAgua pozo = new PozoDeAgua(1, 1);
 		m.agregar(pozo);
+			
 
 //		CREAR RED DE TUBERIAS
 		try{
@@ -166,7 +166,7 @@ public class MapasIntegralTest {
 			for (int i = 0; i < 10; i++){
 				Conector tub = fc.construir(m, 1, 1+i);
 				m.agregar(tub);
-			}		
+			}
 			
 	//		CREAR CENTRAL EOLICA
 			fe = new FabricaCentralEolica();

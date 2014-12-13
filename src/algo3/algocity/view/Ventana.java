@@ -1,29 +1,27 @@
 package algo3.algocity.view;
 
-import java.awt.Container;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import algo3.algocity.model.mapas.Mapa;
 
 public class Ventana extends JFrame {
 	
-	private static final long serialVersionUID = -4435193356021844493L;
+	private static final long serialVersionUID = 6947930227453761722L;
 	
-	int tamanio = 20;
-
-	public Ventana(int tamanio){
-		setTitle("Algoritmos 3 | AlgoCity");
-		Container contenedor = getContentPane();
-        contenedor.setLayout(new GridLayout(this.tamanio,this.tamanio));
-        for (int x = 0; x < tamanio; x++) {
-            for (int y = 0; y < tamanio; y++) {
-                contenedor.add(new JPanel());
-
-            }
-        }
-
-		
+	int tamanio;
+	
+	public Ventana(Mapa mapa){
+		super("Mapa");
+//		this.mapa = mapa; 
+		tamanio = mapa.getTamanio();
+		iniciarVistaMapa(mapa);
+		repaint();
 	}
+	
+	private void iniciarVistaMapa(Mapa mapa){
+		getContentPane().add(new VistaMapa(mapa));
+//		setContentPane(new VistaMapa(mapa));
+	}
+	
 
 }

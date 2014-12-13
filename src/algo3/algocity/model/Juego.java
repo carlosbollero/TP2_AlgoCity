@@ -27,7 +27,7 @@ public class Juego {
 	}
 
 	private void crearVentana() {
-		JFrame ventana = new Ventana(20);
+		JFrame ventana = new Ventana(new Mapa());
 		ventana.setSize(500, 400);
 		ventana.setLocation(8, 0);
 		ventana.setVisible(true);
@@ -39,7 +39,7 @@ public class Juego {
 	}
 
 	private void generarMapas() {
-		mapa = new Mapa(altoMapaJuego, anchoMapaJuego);
+		mapa = new Mapa();
 
 	}
 
