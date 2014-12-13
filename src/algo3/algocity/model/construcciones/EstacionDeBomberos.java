@@ -1,25 +1,21 @@
 package algo3.algocity.model.construcciones;
 
-import java.util.ArrayList;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
-
+public class EstacionDeBomberos extends Unidad implements Daniable {
+	
+	
 	private Conector conexion;
 
 	public EstacionDeBomberos() {
@@ -45,12 +41,6 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		this.coordenadas = new Coordenada(x, y);
 	}
 
-	public void actuar(ArrayList<Visitable> objetivos) {
-		for (Visitable v : objetivos) {
-			v.aceptar(this);
-		}
-	}
-
 	// TODO Revisar si sirve el metodo
 	public void conectarTuberia(Conector unaTuberia) {
 		conexion = unaTuberia;
@@ -61,45 +51,10 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 	}
 
 	@Override
-	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		unaUnidadResidencial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadComercial unaUnidadComercial) {
-		unaUnidadComercial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		unaUnidadIndustrial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		unaUnidadEnergetica.repararse();
-	}
-
-	@Override
-	public void visitar(LineaTension unaLineaTension) {
-		unaLineaTension.repararse();
-	}
-
-	@Override
-	public void visitar(Ruta unaRuta) {
-		unaRuta.repararse();
-	}
-
-	@Override
-	public void visitar(Daniable unaUnidad) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
 		return (superficie.esTierra());
 	}
-	
+
 	// @Override
 	// public void aplicarDanio(double i) {
 	// // TODO Auto-generated method stub
@@ -117,27 +72,27 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
+		mapa.agregarReparador();
 	}
 
 	@Override
 	public void repararse() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aplicarDanio(double unDanio) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void aceptar(Visitante v) {
 		v.visitar(this);
-		
+
 	}
-	
-	
+
 	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {
@@ -183,6 +138,5 @@ public class EstacionDeBomberos extends Unidad implements Visitante,Daniable {
 		}
 		return eb;
 	}
-	
 
 }

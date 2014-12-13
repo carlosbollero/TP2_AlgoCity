@@ -55,7 +55,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 	@Override
 	public void aceptar(Visitante unVisitante) {
 		unVisitante.visitar(this);
-
 	}
 
 	public int capacidad() {
@@ -77,16 +76,16 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 			this.porcentajeDanios = 0;
 		}
 	}
+
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 10) / 100;
+	}
 	
 	public void aplicarDanio(double cantidad) {
 		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
 			this.porcentajeDanios = 100;
 		}
-	}
-
-	protected double porcentajeReparacion() {
-		return (this.ESTADOINICIAL * 10) / 100;
 	}
 
 	private boolean hayConexionesEn(Mapa mapa) {

@@ -32,7 +32,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 	}
 
 	public Ruta(int x, int y) {
-		porcentajeDanios = 0;
+		//porcentajeDanios = 0;
 		costo = 10;
 		coordenadas = new Coordenada(x, y);
 

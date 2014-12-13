@@ -37,12 +37,25 @@ public class CentralNuclear extends UnidadEnergetica {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
+	
+	@Override
+	public void repararse() {
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0) {
+			this.porcentajeDanios = 0;
+		}
+	}
+	
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 3) / 100;
+	}
 
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+//		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
 	
 	

@@ -1,7 +1,5 @@
 package algo3.algocity.model.construcciones;
 
-import java.awt.Point;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,11 +36,26 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 	}
 
+	
+	@Override
+	public void repararse() {
+		this.porcentajeDanios -= this.porcentajeReparacion();
+		if (this.getDanios() < 0) {
+			this.porcentajeDanios = 0;
+		}
+	}
+	
+	
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 10) / 100;
+	}
+
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		//mapa.agregarPuntoRelevanteEnRedElectrica(coordenadas);
+		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
 	
 	
@@ -108,7 +121,7 @@ public class CentralMinera extends UnidadEnergetica {
 			}
 		}
 		return cm;
-	}		
+	}
 	
 	
 }

@@ -9,7 +9,7 @@ import algo3.algocity.model.terreno.Superficie;
 public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		Visitable {
 
-	final double ESTADOINICIAL = 100;
+	protected final double ESTADOINICIAL = 100;
 	int capacidad;
 	int radioDeInfluencia;
 	double porcentajeDanios;
@@ -26,20 +26,8 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		return capacidad;
 	}
 
-	private double getDanios() {
+	protected double getDanios() {
 		return this.porcentajeDanios;
-	}
-
-	protected double porcentajeReparacion() {
-		return (this.ESTADOINICIAL * 3) / 100;
-	}
-
-	@Override
-	public void repararse() {
-		this.porcentajeDanios -= this.porcentajeReparacion();
-		if (this.getDanios() < 0) {
-			this.porcentajeDanios = 0;
-		}
 	}
 
 	public double getSalud() {
