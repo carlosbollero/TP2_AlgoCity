@@ -1,6 +1,5 @@
 package algo3.algocity.model;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -12,6 +11,8 @@ import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
+import algo3.algocity.model.fabricas.FabricaCentralMineral;
+import algo3.algocity.model.fabricas.FabricaCentralNuclear;
 import algo3.algocity.model.fabricas.FabricaConectores;
 import algo3.algocity.model.fabricas.FabricaEnergetica;
 import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
@@ -35,7 +36,7 @@ public class MapasIntegralTest {
 	FabricaConectores fc;
 
 	@Test
-	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos(){
+	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos() {
 		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
@@ -162,7 +163,6 @@ public class MapasIntegralTest {
 		m.setTerritorioTierraParaTest();
 		PozoDeAgua pozo = new PozoDeAgua(1, 1);
 		m.agregar(pozo);
-			
 
 		// CREAR RED DE TUBERIAS
 		try {
@@ -172,8 +172,7 @@ public class MapasIntegralTest {
 				m.agregar(tub);
 			}
 
-			
-	//		CREAR CENTRAL EOLICA
+			// CREAR CENTRAL EOLICA
 			fe = new FabricaCentralEolica();
 
 			Unidad u = fe.construir(m, 1, 10);
@@ -186,7 +185,7 @@ public class MapasIntegralTest {
 	}
 
 	@Test
-	public void testlasUnidadesDentroDelRadioDeUnaCentralElectricaEstanProvistasDeElectricidad()
+	public void testlasUnidadesDentroDelRadioDeUnaCentralEolicaEstanProvistasDeElectricidad()
 			throws NoSeCumplenLosRequisitosException {
 
 		Mapa m = new Mapa();
@@ -219,6 +218,50 @@ public class MapasIntegralTest {
 
 		assertTrue(m.contiene(ue));
 
+		// CONSTRUYO UNA UNIDAD RESIDENCIAL QUE DEBE TENER ELECTRICIDAD
+		// POR ESTAR DENTRO DEL RADIO DE LA UNIDAD ENERGETICA
+		// fu = new FabricaUnidadResidencial();
+		UnidadResidencial ur = new UnidadResidencial(m, 3, 2);
+		m.agregar(ur);
+
+		assertTrue(m.contiene(ur));
+
+	}
+
+	@Test
+	public void testlasUnidadesDentroDelRadioDeUnaCentralMineraEstanProvistasDeElectricidad()
+			throws NoSeCumplenLosRequisitosException {
+
+		Mapa m = new Mapa();
+		m.setTerritorioTierraParaTest();
+
+		// CONSTRUYO UN POZO DE AGUA
+		PozoDeAgua p = new PozoDeAgua(4, 2);
+		m.agregar(p);
+
+		// construyo red de tuberias
+		fc = new FabricaTuberias();
+		Conector t = fc.construir(m, 4, 2);
+		m.agregar(t);
+		t = fc.construir(m, 3, 2);
+		m.agregar(t);
+		t = fc.construir(m, 2, 2);
+		m.agregar(t);
+
+		fc = new FabricaRuta();
+		Conector r = fc.construir(m, 4, 2);
+		m.agregar(r);
+		r = fc.construir(m, 3, 2);
+		m.agregar(r);
+		r = fc.construir(m, 2, 2);
+
+		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
+		fe = new FabricaCentralMineral();
+		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		m.agregar(ue);
+
+		assertTrue(m.contiene(ue));
+
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		// fu = new FabricaUnidadResidencial();
@@ -226,26 +269,49 @@ public class MapasIntegralTest {
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
-
-		/*
-		 * Mapa m = new Mapa(5, 5); m.setTerritorioTierraParaTest();
-		 * 
-		 * PozoDeAgua pa = new PozoDeAgua(1, 1); m.agregar(pa);
-		 * 
-		 * Tuberia tb0 = new Tuberia(m, 1, 1); Tuberia tb1 = new Tuberia(m, 2,
-		 * 1); Tuberia tb2 = new Tuberia(m, 3, 1); Tuberia tb3 = new Tuberia(m,
-		 * 4, 1);
-		 * 
-		 * Ruta rt = new Ruta(m, 4, 1); Ruta rt1 = new Ruta(m, 3, 1); Ruta rt2 =
-		 * new Ruta(m, 2, 1);
-		 * 
-		 * CentralNuclear ce = new CentralNuclear(m, 3, 1);
-		 * 
-		 * assertTrue(m.contiene(ce));
-		 * 
-		 * //UnidadResidencial ur = new UnidadResidencial(m, 4, 1);
-		 * 
-		 * //assertTrue(m.contiene(ur));
-		 */
 	}
+
+	@Test
+	public void testlasUnidadesDentroDelRadioDeUnaCentralNuclearEstanProvistasDeElectricidad()
+			throws NoSeCumplenLosRequisitosException {
+
+		Mapa m = new Mapa();
+		m.setTerritorioTierraParaTest();
+
+		// CONSTRUYO UN POZO DE AGUA
+		PozoDeAgua p = new PozoDeAgua(4, 2);
+		m.agregar(p);
+
+		// construyo red de tuberias
+		fc = new FabricaTuberias();
+		Conector t = fc.construir(m, 4, 2);
+		m.agregar(t);
+		t = fc.construir(m, 3, 2);
+		m.agregar(t);
+		t = fc.construir(m, 2, 2);
+		m.agregar(t);
+
+		fc = new FabricaRuta();
+		Conector r = fc.construir(m, 4, 2);
+		m.agregar(r);
+		r = fc.construir(m, 3, 2);
+		m.agregar(r);
+		r = fc.construir(m, 2, 2);
+
+		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
+		fe = new FabricaCentralNuclear();
+		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		m.agregar(ue);
+
+		assertTrue(m.contiene(ue));
+
+		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
+		// ENERGETICA
+		// fu = new FabricaUnidadResidencial();
+		UnidadResidencial ur = new UnidadResidencial(m, 3, 2);
+		m.agregar(ur);
+
+		assertTrue(m.contiene(ur));
+	}
+
 }

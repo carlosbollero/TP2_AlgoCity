@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Daniable;
@@ -32,7 +34,6 @@ public class Mapa {
 	MapaConexiones redElectrica;
 
 	Reparador reparador;
-
 
 	public Mapa() {
 		alto = 14;
@@ -199,9 +200,9 @@ public class Mapa {
 
 	public int getTamanio() {
 		return tamanio;
-		
+
 	}
-	
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
@@ -238,32 +239,40 @@ public class Mapa {
 
 		return mapa;
 	}
-	/*
-	 * public static Mapa fromElement(Element element) {
-	 * 
-	 * Mapa mapa = new Mapa();
-	 * 
-	 * NodeList childs = element.getChildNodes(); for (int i = 0; i <
-	 * childs.getLength(); i++) { Node child = childs.item(i);
-	 * 
-	 * if (child.getNodeName().equals("alto")) { mapa.alto =
-	 * Integer.valueOf(child.getTextContent()); } else if
-	 * (child.getNodeName().equals("ancho")) { mapa.ancho =
-	 * Integer.valueOf(child.getTextContent()); } else
-	 * if(child.getNodeName().equals("territorio")){ MapaTerritorio territorio =
-	 * MapaTerritorio.fromElement(child); mapa.territorio = territorio; } else
-	 * if(child.getNodeName().equals("ciudad")){ MapaEdilicio ciudad =
-	 * MapaEdilicio.fromElement(child); mapa.ciudad = ciudad; } else
-	 * if(child.getNodeName().equals("tuberias")){ MapaConexiones tuberias =
-	 * MapaConexiones.fromElement(child); mapa.tuberias = tuberias; } else
-	 * if(child.getNodeName().equals("rutas")){ MapaConexiones rutas =
-	 * MapaConexiones.fromElement(child); mapa.rutas = rutas; } else if
-	 * (child.getNodeName().equals("redElectrica")){ MapaConexiones redElectrica
-	 * = MapaConexiones.fromElement(child); mapa.redElectrica = redElectrica; }
-	 * } System.out.println("mapa territorio");
-	 * mapa.territorio.imprimirTerritorio();
-	 * 
-	 * return mapa; }
-	 */
+
+	public static Mapa fromElement(Element element) {
+
+		Mapa mapa = new Mapa();
+
+		NodeList childs = element.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++) {
+			Node child = childs.item(i);
+
+			if (child.getNodeName().equals("alto")) {
+				mapa.alto = Integer.valueOf(child.getTextContent());
+			} else if (child.getNodeName().equals("ancho")) {
+				mapa.ancho = Integer.valueOf(child.getTextContent());
+			} else if (child.getNodeName().equals("territorio")) {
+				MapaTerritorio territorio = MapaTerritorio.fromElement(child);
+				mapa.territorio = territorio;
+			} else if (child.getNodeName().equals("ciudad")) {
+				MapaEdilicio ciudad = MapaEdilicio.fromElement(child);
+				mapa.ciudad = ciudad;
+			} else if (child.getNodeName().equals("tuberias")) {
+				MapaConexiones tuberias = MapaConexiones.fromElement(child);
+				mapa.tuberias = tuberias;
+			} else if (child.getNodeName().equals("rutas")) {
+				MapaConexiones rutas = MapaConexiones.fromElement(child);
+				mapa.rutas = rutas;
+			} else if (child.getNodeName().equals("redElectrica")) {
+				MapaConexiones redElectrica = MapaConexiones.fromElement(child);
+				mapa.redElectrica = redElectrica;
+			}
+		}
+		System.out.println("mapa territorio");
+		mapa.territorio.imprimirTerritorio();
+
+		return mapa;
+	}
 
 }
