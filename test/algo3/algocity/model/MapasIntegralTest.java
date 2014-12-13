@@ -35,8 +35,8 @@ public class MapasIntegralTest {
 	FabricaConectores fc;
 
 	@Test
-	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos(){
+		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
 		try {
@@ -86,7 +86,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		fu = new FabricaUnidadIndustrial();
 		Coordenada p = m.posicionConTierra();
 
@@ -102,7 +102,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		fu = new FabricaUnidadResidencial();
 		Coordenada p = m.posicionConTierra();
 
@@ -119,7 +119,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarPozoDeAguaSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioAguaParaTest();
 
 		fu = new FabricaPozoAgua();
@@ -139,7 +139,7 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarEstacionDeBomberosSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 
 		fu = new FabricaEstacionDeBomberos();
 
@@ -158,11 +158,11 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos() {
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
-
 		PozoDeAgua pozo = new PozoDeAgua(1, 1);
 		m.agregar(pozo);
+			
 
 		// CREAR RED DE TUBERIAS
 		try {
@@ -172,7 +172,8 @@ public class MapasIntegralTest {
 				m.agregar(tub);
 			}
 
-			// CREAR CENTRAL EOLICA
+			
+	//		CREAR CENTRAL EOLICA
 			fe = new FabricaCentralEolica();
 
 			Unidad u = fe.construir(m, 1, 10);
@@ -188,7 +189,7 @@ public class MapasIntegralTest {
 	public void testlasUnidadesDentroDelRadioDeUnaCentralElectricaEstanProvistasDeElectricidad()
 			throws NoSeCumplenLosRequisitosException {
 
-		Mapa m = new Mapa(alto, ancho);
+		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA

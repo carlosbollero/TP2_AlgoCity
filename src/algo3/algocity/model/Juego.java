@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -32,6 +33,7 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.view.Ventana;
 
 public class Juego {
 
@@ -45,19 +47,31 @@ public class Juego {
 	Usuario usuario;
 
 	public Juego() {
-		generarMapas();
-		iniciarTurnos();
+
 	}
 
-	public void iniciarTurnos() {
+	public void iniciar() {
+		// generarMapas();
+		crearVentana();
+		// iniciarTurnos();
+	}
+
+	private void crearVentana() {
+		JFrame ventana = new Ventana(new Mapa());
+	}
+
+	private void iniciarTurnos() {
 		turnos = new Turno();
 	}
 
 	private void generarMapas() {
-		mapa = new Mapa(altoMapaJuego, anchoMapaJuego);
+		mapa = new Mapa();
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
+	
 	public void persistir() {
 
 		try {
@@ -108,7 +122,6 @@ public class Juego {
 
 		return juego;
 	}
-	
 
 	/*
 	 * 
@@ -121,9 +134,9 @@ public class Juego {
 			TransformerFactoryConfigurationError, FileNotFoundException,
 			TransformerException {
 
-		//prueba1();
+		// prueba1();
 
-		//prueba2();
+		// prueba2();
 
 		Juego juego = new Juego();
 
@@ -139,10 +152,10 @@ public class Juego {
 					.newDocumentBuilder().parse(new File("pruebamapa.xml"));
 			Element element = doc.getDocumentElement();
 
-			//Mapa mapa = Mapa.fromElement(element);
+			// Mapa mapa = Mapa.fromElement(element);
 
-			//System.out.println(mapa.alto());
-			//System.out.println(mapa.ancho());
+			// System.out.println(mapa.alto());
+			// System.out.println(mapa.ancho());
 
 		} catch (SAXException e) {
 			e.printStackTrace();
@@ -155,7 +168,7 @@ public class Juego {
 
 	public static void prueba1() {
 
-		Mapa mapa = new Mapa(10, 10);
+		Mapa mapa = new Mapa();
 
 		UnidadResidencial ur = new UnidadResidencial(10, 10);
 		ur.agregarseA(mapa);

@@ -105,7 +105,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		// mapa.agregar(this); hace un loop infinito este metodo
+		mapa.agregarACiudad(this);
 		mapa.agregarUnidadConEmpleo(this);
 		mapa.agregarUnidadDaniable(this);
 		mapa.agregarACiudad(this); // agregado

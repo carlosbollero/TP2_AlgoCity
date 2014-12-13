@@ -23,6 +23,7 @@ public class Mapa {
 
 	int alto;
 	int ancho;
+	int tamanio;
 
 	MapaTerritorio territorio;
 	MapaEdilicio ciudad;
@@ -32,19 +33,17 @@ public class Mapa {
 
 	Reparador reparador;
 
-	public Mapa(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
+
+	public Mapa() {
+		alto = 14;
+		ancho = 14;
+		tamanio = 14;
 		territorio = new MapaTerritorio(alto, ancho);
 		ciudad = new MapaEdilicio(alto, ancho);
 		tuberias = new MapaConexiones(alto, ancho);
 		rutas = new MapaConexiones(alto, ancho);
 		redElectrica = new MapaConexiones(alto, ancho);
 		this.reparador = null;
-	}
-
-	public Mapa() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int alto() {
@@ -198,7 +197,14 @@ public class Mapa {
 		return this.ciudad.capacidadDeEmpleo();
 	}
 
-	/* Persistencia */
+	public int getTamanio() {
+		return tamanio;
+		
+	}
+	
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	public Element getElement(Document doc) {
 		Element mapa = doc.createElement("Mapa");
 
@@ -259,4 +265,5 @@ public class Mapa {
 	 * 
 	 * return mapa; }
 	 */
+
 }

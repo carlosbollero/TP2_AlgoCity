@@ -25,8 +25,9 @@ public class GodzillaTest {
 
 	@Test
 	public void testSePuedeDaniarUnaUnidadResidencial() {
-		me = new Mapa(alto, ancho);
-		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
+
+		me = new Mapa();
+		CatastrofeGodzilla g = new CatastrofeGodzilla(20,20);
 		UnidadResidencial ur = new UnidadResidencial(1,1);
 		
 		ur.aceptar(g);
@@ -36,7 +37,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadComercial() {
-		me = new Mapa(alto, ancho);
+		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadComercial uc = new UnidadComercial(1,1);
 		
@@ -47,7 +48,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaUnidadIndustrial() {
-		me = new Mapa(alto, ancho);
+		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadIndustrial ui = new UnidadIndustrial(1,1);
 		
@@ -58,7 +59,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaLineaDeTension() {
-		me = new Mapa(alto, ancho);
+		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		LineaTension l = new LineaTension();
 		
@@ -69,7 +70,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testSePuedeDaniarUnaRuta() {
-		me = new Mapa(alto, ancho);
+		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		Ruta r = new Ruta();
 		
@@ -80,7 +81,7 @@ public class GodzillaTest {
 	
 	@Test
 	public void testGodzillaGenerarUnCaminoRecto(){
-		me = new Mapa(alto, ancho);
+		me = new Mapa();
 		g = new CatastrofeGodzilla(me);
 		
 		LinkedList<Point> camino = g.genCaminoRecto();

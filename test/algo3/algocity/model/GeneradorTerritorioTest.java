@@ -14,8 +14,8 @@ import algo3.algocity.model.terreno.Superficie;
 
 public class GeneradorTerritorioTest {
 	
-	int alto = 10;
-	int ancho = 50;
+	int alto = 14;
+	int ancho = 14;
 
 	@Test
 	public void testSePuedeGenerarPuntosCentrales() {
@@ -50,7 +50,7 @@ public class GeneradorTerritorioTest {
 				if (mapa.get(new Coordenada(i,j)).getSuperficie().esAgua()){
 					System.out.print("\u2593");
 				}else{
-					System.out.print("\u2591");					
+					System.out.print("\u2591");				
 				}
 			}
 			System.out.println();

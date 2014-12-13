@@ -24,7 +24,7 @@ public class IntegracionTest {
 	@Test
 	public void testSePuedeAgregarUnaNuevaUnidadComercialAlMapaUsandoFabricasYDaniarla() {
 
-		Mapa map = new Mapa(alto, ancho);
+		Mapa map = new Mapa();
 		FabricaUnidadComercial fuc = new FabricaUnidadComercial();
 		map.setTerritorioTierraParaTest();
 		try {
@@ -41,13 +41,15 @@ public class IntegracionTest {
 
 	}
 
+	
+//	HAY QUE MODIFICAR ESTE TEST
 	@Test
 	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() {
 
 		int x = 10;
 		int y = 50;
 
-		Mapa map = new Mapa(x, y);
+		Mapa map = new Mapa();
 		FabricaLineaTension flt = new FabricaLineaTension();
 		map.setTerritorioTierraParaTest();
 		for (int j = 0; j < y; j++) {

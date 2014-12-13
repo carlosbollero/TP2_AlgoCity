@@ -19,7 +19,7 @@ public class ReparadorTest {
 	@Test
 	public void testReparadorAplicaAUnidadesCorrespondientes() {
 
-		Mapa m = new Mapa(10, 10);
+		Mapa m = new Mapa();
 
 		UnidadResidencial ur1 = new UnidadResidencial(1, 1);
 		UnidadComercial uc1 = new UnidadComercial(1, 2);

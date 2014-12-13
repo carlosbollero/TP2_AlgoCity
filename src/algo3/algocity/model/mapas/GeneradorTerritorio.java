@@ -46,6 +46,9 @@ public class GeneradorTerritorio {
 		int cantidad = ((tamanio * 10) / 100);
 		for (int i = 0; i < cantidad; i++) {
 			Coordenada c = coordenadaAleatoria();
+			while (puntosCentrales.contains(c)) {
+				c = coordenadaAleatoria();
+			}
 			Superficie s = superficieAleatoria();
 			mapa.put(c, s);
 			puntosCentrales.add(c);
@@ -104,14 +107,7 @@ public class GeneradorTerritorio {
 	 * asegurandose que no repita una generada anteriormente como punto central.
 	 */
 	private Coordenada coordenadaAleatoria() {
-		boolean repetido = true;
-		Coordenada coord = null;
-		while (repetido) {
-			coord = new Coordenada(aleatorio.nextInt(alto),
-					aleatorio.nextInt(ancho));
-			repetido = puntosCentrales.contains(coord);
-		}
-		return coord;
+		return new Coordenada(aleatorio.nextInt(alto), aleatorio.nextInt(ancho));
 	}
 
 	/*
