@@ -16,10 +16,20 @@ public class Ventana extends JFrame {
 	public Ventana(Mapa mapa) {
 		super("Algoritmos 3 | AlgoCity");
 		definirPanelIzq();
-		// iniciarPanelInfo();
-		// iniciarPanelOpciones();
-		iniciarVistaMapa(mapa);
+		definirPanelDer(mapa);
+		definirPanelSup();
+		
 		acomodar();
+	}
+
+	private void definirPanelSup() {
+		add(new VistaPanelSup(), BorderLayout.PAGE_START);
+		
+	}
+
+	private void definirPanelDer(Mapa mapa) {
+		add(new VistaMapa(mapa));
+		
 	}
 
 	private void definirPanelIzq() {

@@ -17,7 +17,6 @@ public class VistaTerreno extends JPanel {
 	public VistaTerreno(Superficie superficie) {
 		imagen = (superficie.esAgua()) ? new ImageIcon("img/water.png")
 				.getImage() : new ImageIcon("img/dirt.png").getImage();
-
 	}
 
 	public void paintComponent(Graphics g) {
