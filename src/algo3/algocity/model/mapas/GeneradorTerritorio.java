@@ -1,7 +1,9 @@
 package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.SortedSet;
@@ -15,7 +17,7 @@ public class GeneradorTerritorio {
 
 	Random aleatorio;
 	SortedSet<Coordenada> puntosCentrales;
-	ArrayList<Coordenada> coordNoOcupadas;
+	LinkedList<Coordenada> coordNoOcupadas;
 	Map<Coordenada, Superficie> mapa;
 	int alto;
 	int ancho;
@@ -25,7 +27,7 @@ public class GeneradorTerritorio {
 		this.alto = alto;
 		this.ancho = ancho;
 		tamanio = alto * ancho;
-		coordNoOcupadas = new ArrayList<Coordenada>();
+		coordNoOcupadas = new LinkedList<Coordenada>();
 		rellenarCoordenadasNoOcupadas();
 		puntosCentrales = new TreeSet<Coordenada>();
 		mapa = new HashMap<Coordenada, Superficie>();
@@ -43,12 +45,12 @@ public class GeneradorTerritorio {
 	 * hay tierra. La cantidad de puntos es igual al 10% del tamaño del mapa.
 	 */
 	public void definirPuntosCentrales() {
-		int cantidad = ((tamanio * 10) / 100);
+		int cantidad = ((tamanio * 8) / 100);
 		for (int i = 0; i < cantidad; i++) {
 			Coordenada c = coordenadaAleatoria();
-			while (puntosCentrales.contains(c)) {
-				c = coordenadaAleatoria();
-			}
+//			while (puntosCentrales.contains(c)) {
+//				c = coordenadaAleatoria();
+//			}
 			Superficie s = superficieAleatoria();
 			mapa.put(c, s);
 			puntosCentrales.add(c);
@@ -103,7 +105,8 @@ public class GeneradorTerritorio {
 	 * asegurandose que no repita una generada anteriormente como punto central.
 	 */
 	private Coordenada coordenadaAleatoria() {
-		return new Coordenada(aleatorio.nextInt(alto), aleatorio.nextInt(ancho));
+		return coordNoOcupadas.remove(aleatorio.nextInt(coordNoOcupadas.size()));
+//		return new Coordenada(aleatorio.nextInt(alto), aleatorio.nextInt(ancho));
 	}
 
 	/*

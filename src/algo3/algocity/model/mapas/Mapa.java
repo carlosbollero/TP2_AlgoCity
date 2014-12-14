@@ -36,9 +36,9 @@ public class Mapa {
 	Reparador reparador;
 
 	public Mapa() {
-		alto = 14;
-		ancho = 14;
-		tamanio = 14;
+		alto = 20;
+		ancho = 20;
+		tamanio = 20;
 		territorio = new MapaTerritorio(alto, ancho);
 		ciudad = new MapaEdilicio(alto, ancho);
 		tuberias = new MapaConexiones(alto, ancho);
