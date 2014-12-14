@@ -41,9 +41,15 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 		this.consumo = 1;
 		this.capacidad = 100;
 		coordenadas = new Coordenada(x, y);
+		
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+			throw new NoSeCumplenLosRequisitosException();
+		}
+		/*
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		*/
 	}
 
 	public void aplicarDanioGodzilla() {

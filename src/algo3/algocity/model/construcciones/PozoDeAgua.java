@@ -39,7 +39,7 @@ public class PozoDeAgua extends Unidad implements Daniable {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
-		return (superficie.esAgua());
+		return (superficie.esAgua() || superficie.esTierra());
 	}
 
 	// @Override
@@ -59,7 +59,6 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	@Override
 	public void agregarseA(Mapa mapa) {
 		mapa.agregarACiudad(this);
-		// mapa.agregarPuntoRelevanteEnTuberias(coordenadas);
 		mapa.agregarPuntoRelevanteEnTuberias(this);
 	}
 
