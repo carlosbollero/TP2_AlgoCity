@@ -223,12 +223,11 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL QUE DEBE TENER ELECTRICIDAD
 		// POR ESTAR DENTRO DEL RADIO DE LA UNIDAD ENERGETICA
-		// fu = new FabricaUnidadResidencial();
-		UnidadResidencial ur = new UnidadResidencial(m, 3, 2);
+		fu = new FabricaUnidadResidencial();
+		Unidad ur = fu.construir(m, 3, 2);
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
-
 	}
 
 	@Test
@@ -271,8 +270,8 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
-		// fu = new FabricaUnidadResidencial();
-		UnidadResidencial ur = new UnidadResidencial(m, 3, 2);
+		fu = new FabricaUnidadResidencial();
+		Unidad ur = fu.construir(m, 3, 2);
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -306,7 +305,6 @@ public class MapasIntegralTest {
 		r = fc.construir(m, 2, 2);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
-		// fe = new FabricaCentralNuclear();
 		fe = new FabricaCentralNuclear();
 		UnidadEnergetica ue = fe.construir(m, 2, 2);
 		m.agregar(ue);
@@ -315,11 +313,11 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
-		// fu = new FabricaUnidadResidencial();
-		UnidadResidencial ur = new UnidadResidencial(m, 3, 2);
-		m.agregar(ur);
+		fu = new FabricaUnidadComercial();
+		Unidad uc = fu.construir(m, 3, 2);
+		m.agregar(uc);
 
-		assertTrue(m.contiene(ur));
+		assertTrue(m.contiene(uc));
 	}
 
 	@Test
@@ -340,6 +338,10 @@ public class MapasIntegralTest {
 		m.agregar(t);
 		t = fc.construir(m, 2, 2);
 		m.agregar(t);
+		t = fc.construir(m, 4, 3);
+		m.agregar(t);
+		t = fc.construir(m, 4, 4);
+		m.agregar(t);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
@@ -358,46 +360,31 @@ public class MapasIntegralTest {
 			Conector r = fc.construir(m, i, 2);
 			m.agregar(r);
 		}
+		assertEquals(100, ue.getSalud(), 0);
 
-		// Construyo unidades
-		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, 2, 4);
-		m.agregar(ur);
+		// Danio a la central
+		CatastrofeTerremoto ct = new CatastrofeTerremoto(m, 2, 2);
 
-		fu = new FabricaUnidadComercial();
-		Unidad uc = fu.construir(m, 3, 3);
-		m.agregar(uc);
+		assertEquals(0, ue.getSalud(), 0);
 
-		assertTrue(m.contiene(ur));
-		assertEquals(100, ur.getSalud(), 0);
-		assertTrue(m.contiene(uc));
-		assertEquals(100, uc.getSalud(), 0);
-
-		// Danio las unidades
-		CatastrofeTerremoto ct = new CatastrofeTerremoto(m, 1, 1);
-
-		assertEquals(4.5, ur.getSalud(), 0);
-		assertEquals(3, uc.getSalud(), 0);
-
-		// Reparo las unidades
+		// Reparo a la central
 		fu = new FabricaEstacionDeBomberos();
 		Unidad eb = fu.construir(m, 4, 4);
 		m.agregar(eb);
 
 		m.reparar();
 
-		assertEquals(14.5, ur.getSalud(), 0);
-		assertEquals(10, uc.getSalud(), 0);
+		assertEquals(15, ue.getSalud(), 0);
 	}
 
-	/*Tests negativos*/
+	/* Tests negativos */
 	@Test
 	public void testLasUnidadesNoSeAgreganSalvoQueSeCumplanLasCondiciones() {
 		Mapa m = new Mapa();
 		m.setTerritorioAguaParaTest();
 
 		try {
-			/*tiran excepcion*/
+			/* tiran excepcion */
 			fu = new FabricaUnidadResidencial();
 			Unidad ur = fu.construir(m, 1, 1);
 			fu = new FabricaUnidadIndustrial();
@@ -416,11 +403,11 @@ public class MapasIntegralTest {
 			Conector lt = fc.construir(m, 3, 3);
 			fc = new FabricaRuta();
 			Conector rt = fc.construir(m, 3, 4);
-			
-			/*no tira excepcion(pues territorio es agua)*/
+
+			/* no tira excepcion(pues territorio es agua) */
 			fc = new FabricaTuberias();
 			Conector tb = fc.construir(m, 4, 4);
-			
+
 			m.agregar(ur);
 			m.agregar(uc);
 			m.agregar(ui);
@@ -430,14 +417,14 @@ public class MapasIntegralTest {
 			m.agregar(lt);
 			m.agregar(rt);
 			m.agregar(tb);
-			
+
 			assertFalse(m.contiene(ur));
 			assertFalse(m.contiene(uc));
 			assertFalse(m.contiene(ui));
 			assertFalse(m.contiene(ce));
 			assertFalse(m.contiene(cm));
 			assertFalse(m.contiene(cn));
-			
+
 		} catch (NoSeCumplenLosRequisitosException e) {
 			System.out.println(e);
 		}

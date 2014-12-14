@@ -44,15 +44,10 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.consumo = 5;
 		this.capacidad = 25;
 		coordenadas = new Coordenada(x, y);
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && !hayConexionesEn(mapa))) {
+		if (!esConstruibleEn(mapa.superficie(coordenadas))
+				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
-		/*
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
-			// if (!mapa.sePuedeConstruir(this)){
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		*/
 	}
 
 	@Override

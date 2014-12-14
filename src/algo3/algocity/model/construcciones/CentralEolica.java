@@ -31,7 +31,8 @@ public class CentralEolica extends UnidadEnergetica {
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
 		this.coordenadas = new Coordenada(x, y);
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && !hayConexionesEn(mapa))) {
+		if (!esConstruibleEn(mapa.superficie(coordenadas))
+				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}

@@ -42,9 +42,10 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} else {
+		} 
+		/*else {
 			mapa.agregar(this);
-		}
+		}*/
 	}
 
 	public boolean estado() {
