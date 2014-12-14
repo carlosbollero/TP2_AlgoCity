@@ -14,8 +14,8 @@ import algo3.algocity.model.terreno.Superficie;
 
 public class GeneradorTerritorioTest {
 	
-	int alto = 20;
-	int ancho = 30;
+	int alto = 15;
+	int ancho = 50;
 
 	@Test
 	public void testSePuedeGenerarPuntosCentrales() {
