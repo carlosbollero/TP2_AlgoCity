@@ -36,7 +36,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		this.consumo = 2;
 		this.coordenadas = new Coordenada(x, y);
 		
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && !hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 		/*

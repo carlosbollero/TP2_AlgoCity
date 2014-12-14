@@ -1,13 +1,12 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
@@ -390,4 +389,59 @@ public class MapasIntegralTest {
 		assertEquals(14.5, ur.getSalud(), 0);
 		assertEquals(10, uc.getSalud(), 0);
 	}
+
+	/*Tests negativos*/
+	@Test
+	public void testLasUnidadesNoSeAgreganSalvoQueSeCumplanLasCondiciones() {
+		Mapa m = new Mapa();
+		m.setTerritorioAguaParaTest();
+
+		try {
+			/*tiran excepcion*/
+			fu = new FabricaUnidadResidencial();
+			Unidad ur = fu.construir(m, 1, 1);
+			fu = new FabricaUnidadIndustrial();
+			Unidad ui = fu.construir(m, 1, 2);
+			fu = new FabricaUnidadComercial();
+			Unidad uc = fu.construir(m, 2, 1);
+
+			fe = new FabricaCentralEolica();
+			UnidadEnergetica ce = fe.construir(m, 2, 2);
+			fe = new FabricaCentralMineral();
+			UnidadEnergetica cm = fe.construir(m, 2, 3);
+			fe = new FabricaCentralNuclear();
+			UnidadEnergetica cn = fe.construir(m, 3, 2);
+
+			fc = new FabricaLineaTension();
+			Conector lt = fc.construir(m, 3, 3);
+			fc = new FabricaRuta();
+			Conector rt = fc.construir(m, 3, 4);
+			
+			/*no tira excepcion(pues territorio es agua)*/
+			fc = new FabricaTuberias();
+			Conector tb = fc.construir(m, 4, 4);
+			
+			m.agregar(ur);
+			m.agregar(uc);
+			m.agregar(ui);
+			m.agregar(ce);
+			m.agregar(cm);
+			m.agregar(cn);
+			m.agregar(lt);
+			m.agregar(rt);
+			m.agregar(tb);
+			
+			assertFalse(m.contiene(ur));
+			assertFalse(m.contiene(uc));
+			assertFalse(m.contiene(ui));
+			assertFalse(m.contiene(ce));
+			assertFalse(m.contiene(cm));
+			assertFalse(m.contiene(cn));
+			
+		} catch (NoSeCumplenLosRequisitosException e) {
+			System.out.println(e);
+		}
+
+	}
+
 }

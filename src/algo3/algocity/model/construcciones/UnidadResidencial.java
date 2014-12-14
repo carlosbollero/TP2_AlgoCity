@@ -42,7 +42,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 		this.capacidad = 100;
 		coordenadas = new Coordenada(x, y);
 		
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && !hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 		/*

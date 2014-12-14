@@ -39,7 +39,7 @@ public class PozoDeAgua extends Unidad implements Daniable {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
-		return (superficie.esAgua() || superficie.esTierra());
+		return superficie.esAgua();
 	}
 
 	// @Override
