@@ -18,12 +18,11 @@ public class Ventana extends JFrame {
 		definirPanelIzq();
 		definirPanelDer(mapa);
 		definirPanelSup();
-		
 		acomodar();
 	}
 
 	private void definirPanelSup() {
-		add(new VistaPanelSup(), BorderLayout.PAGE_START);
+		setJMenuBar(new VistaPanelSup());
 		
 	}
 
