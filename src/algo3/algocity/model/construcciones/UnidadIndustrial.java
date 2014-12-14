@@ -44,10 +44,15 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.consumo = 5;
 		this.capacidad = 25;
 		coordenadas = new Coordenada(x, y);
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+			throw new NoSeCumplenLosRequisitosException();
+		}
+		/*
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			// if (!mapa.sePuedeConstruir(this)){
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		*/
 	}
 
 	@Override
@@ -94,13 +99,12 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
-		// TODO Auto-generated method stub
-		return false;
+		return superficie.esTierra();
 	}
 
 	private boolean hayConexionesEn(Mapa mapa) {
 		return (mapa.hayConexionConRedElectrica(coordenadas) && mapa
-				.hayConexionConRedElectrica(coordenadas));
+				.hayConexionConRutas(coordenadas));
 	}
 
 	@Override
@@ -108,7 +112,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadConEmpleo(this);
 		mapa.agregarUnidadDaniable(this);
-		mapa.agregarACiudad(this); // agregado
 	}
 
 	/* Persistencia */

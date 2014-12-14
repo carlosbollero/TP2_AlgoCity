@@ -1,9 +1,12 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
@@ -20,6 +23,7 @@ import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.fabricas.FabricaPozoAgua;
 import algo3.algocity.model.fabricas.FabricaRuta;
 import algo3.algocity.model.fabricas.FabricaTuberias;
+import algo3.algocity.model.fabricas.FabricaUnidadComercial;
 import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
 import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.fabricas.FabricaUnidades;
@@ -36,7 +40,7 @@ public class MapasIntegralTest {
 	FabricaConectores fc;
 
 	@Test
-	public void testSeCreaUnidadRecidencialSiCumpleConRequisitos() {
+	public void testSeCreaUnidadResidencialSiCumpleConRequisitos() {
 		Mapa m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
@@ -247,6 +251,8 @@ public class MapasIntegralTest {
 		m.agregar(t);
 		t = fc.construir(m, 2, 2);
 		m.agregar(t);
+		t = fc.construir(m, 1, 2);
+		m.agregar(t);
 
 		fc = new FabricaRuta();
 		Conector r = fc.construir(m, 4, 2);
@@ -254,6 +260,8 @@ public class MapasIntegralTest {
 		r = fc.construir(m, 3, 2);
 		m.agregar(r);
 		r = fc.construir(m, 2, 2);
+		m.agregar(r);
+		r = fc.construir(m, 1, 2);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralMineral();
@@ -299,6 +307,7 @@ public class MapasIntegralTest {
 		r = fc.construir(m, 2, 2);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
+		// fe = new FabricaCentralNuclear();
 		fe = new FabricaCentralNuclear();
 		UnidadEnergetica ue = fe.construir(m, 2, 2);
 		m.agregar(ue);
@@ -314,4 +323,71 @@ public class MapasIntegralTest {
 		assertTrue(m.contiene(ur));
 	}
 
+	@Test
+	public void testSeDanianUnidadesDelMapaYElReparadorLasRepara()
+			throws NoSeCumplenLosRequisitosException {
+		Mapa m = new Mapa();
+		m.setTerritorioTierraParaTest();
+
+		// CONSTRUYO UN POZO DE AGUA
+		PozoDeAgua p = new PozoDeAgua(4, 2);
+		m.agregar(p);
+
+		// construyo red de tuberias
+		fc = new FabricaTuberias();
+		Conector t = fc.construir(m, 4, 2);
+		m.agregar(t);
+		t = fc.construir(m, 3, 2);
+		m.agregar(t);
+		t = fc.construir(m, 2, 2);
+		m.agregar(t);
+
+		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
+		fe = new FabricaCentralEolica();
+		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		m.agregar(ue);
+
+		assertTrue(m.contiene(ue));
+
+		// CONSTRUYO LINEAS DE TENSION
+		fc = new FabricaLineaTension();
+		for (int i = 2; i <= 4; i++) {
+			fc = new FabricaLineaTension();
+			Conector lt = fc.construir(m, i, 2);
+			m.agregar(lt);
+			fc = new FabricaRuta();
+			Conector r = fc.construir(m, i, 2);
+			m.agregar(r);
+		}
+
+		// Construyo unidades
+		fu = new FabricaUnidadResidencial();
+		Unidad ur = fu.construir(m, 2, 4);
+		m.agregar(ur);
+
+		fu = new FabricaUnidadComercial();
+		Unidad uc = fu.construir(m, 3, 3);
+		m.agregar(uc);
+
+		assertTrue(m.contiene(ur));
+		assertEquals(100, ur.getSalud(), 0);
+		assertTrue(m.contiene(uc));
+		assertEquals(100, uc.getSalud(), 0);
+
+		// Danio las unidades
+		CatastrofeTerremoto ct = new CatastrofeTerremoto(m, 1, 1);
+
+		assertEquals(4.5, ur.getSalud(), 0);
+		assertEquals(3, uc.getSalud(), 0);
+
+		// Reparo las unidades
+		fu = new FabricaEstacionDeBomberos();
+		Unidad eb = fu.construir(m, 4, 4);
+		m.agregar(eb);
+
+		m.reparar();
+
+		assertEquals(14.5, ur.getSalud(), 0);
+		assertEquals(10, uc.getSalud(), 0);
+	}
 }
