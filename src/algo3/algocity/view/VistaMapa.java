@@ -11,7 +11,7 @@ import algo3.algocity.model.mapas.Mapa;
 public class VistaMapa extends JPanel {
 
 	private static final long serialVersionUID = 5750354545703155652L;
-	
+
 	Mapa mapa;
 
 	public VistaMapa(Mapa mapa) {

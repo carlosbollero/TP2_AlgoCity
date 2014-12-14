@@ -45,6 +45,10 @@ public class Ventana extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+//		Este metodo sirve para que la ventana se ajuste al tamanio
+//		minimo determinado por el tamanio de los paneles internos
+//		pack();
 
 	}
 
