@@ -27,11 +27,11 @@ public class CentralEolica extends UnidadEnergetica {
 	public CentralEolica(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
 
-		coordenadas = new Coordenada(x, y);
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
+		this.coordenadas = new Coordenada(x, y);
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}

@@ -34,16 +34,22 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			throws NoSeCumplenLosRequisitosException {
 		this.costo = 5;
 		this.consumo = 2;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = new Coordenada(x, y);
+		
+		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+			throw new NoSeCumplenLosRequisitosException();
+		}
+		/*
 		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		*/
 	}
 
 	public double getDanios() {
 		return porcentajeDanios;
 	}
-	
+
 	public int consumo() {
 		return this.consumo;
 	}
@@ -59,7 +65,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	protected double porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 7) / 100;
 	}
-	
 
 	@Override
 	public void aplicarDanio(double cantidad) {
@@ -91,7 +96,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
-
 		return superficie.esTierra();
 	}
 
@@ -100,45 +104,48 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		mapa.agregarACiudad(this);
 		mapa.agregarUnidadDaniable(this);
 	}
-	
-	/*Persistencia*/
+
+	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {
-		
+
 		Element unidad = doc.createElement("UnidadComercial");
-		
+
 		Element costo = doc.createElement("costo");
 		unidad.appendChild(costo);
-		costo.setTextContent(String.valueOf(this.costo));		
-		
+		costo.setTextContent(String.valueOf(this.costo));
+
 		Element consumo = doc.createElement("consumo");
 		unidad.appendChild(consumo);
 		consumo.setTextContent(String.valueOf(this.consumo));
-		
+
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
-		coordenadas.setTextContent((String.valueOf((int)this.coordenadas.getX()) +","+ String.valueOf((int)this.coordenadas.getY())));
-		
+		coordenadas
+				.setTextContent((String.valueOf((int) this.coordenadas.getX())
+						+ "," + String.valueOf((int) this.coordenadas.getY())));
+
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
 		porcentajeDanios.setTextContent(String.valueOf(this.porcentajeDanios));
-		
+
 		return unidad;
 	}
 
 	public static UnidadComercial fromElement(Node hijoDeNodo) {
-		
+
 		UnidadComercial uc = new UnidadComercial();
 		NodeList hijosDeUnidadComercial = hijoDeNodo.getChildNodes();
 
-		for (int i = 0; i < hijosDeUnidadComercial.getLength(); i++) {		
+		for (int i = 0; i < hijosDeUnidadComercial.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidadComercial.item(i);
-			if(hijoDeUnidad.getNodeName().equals("costo")){
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
 				uc.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if(hijoDeUnidad.getNodeName().equals("consumo")){
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
 				uc.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if(hijoDeUnidad.getNodeName().equals("porcentajeDanios")){
-				uc.porcentajeDanios = Double.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				uc.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
@@ -147,9 +154,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 						Integer.valueOf(arrayPunto[1]));
 				uc.coordenadas = punto;
 			}
-		}	
-		return uc;		
+		}
+		return uc;
 	}
-
 
 }

@@ -168,7 +168,7 @@ public class Mapa {
 			this.reparador = new Reparador(this);
 		}
 	}
-
+	
 	public void reparar() {
 		if (this.reparador != null) {
 			this.reparador.actuar();
