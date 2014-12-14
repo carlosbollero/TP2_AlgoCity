@@ -76,11 +76,7 @@ public class GeneradorTerritorio {
 		for (Coordenada coord : coordNoOcupadas) {
 			Superficie ref = superficieMasCercana(coord);
 			Superficie sup;
-			if (ref.esAgua()) {
-				sup = new SuperficieAgua();
-			} else {
-				sup = new SuperficieTierra();
-			}
+			sup = (ref.esAgua()) ? new SuperficieAgua()	: new SuperficieTierra();
 			mapa.put(coord, sup);
 		}
 
@@ -116,11 +112,7 @@ public class GeneradorTerritorio {
 	private Superficie superficieAleatoria() {
 		Superficie s;
 		int numero = aleatorio.nextInt(10);
-		if (numero > 7) {
-			s = new SuperficieAgua();
-		} else {
-			s = new SuperficieTierra();
-		}
+		s = (numero > 7) ? new SuperficieAgua() : new SuperficieTierra();
 		return s;
 	}
 
