@@ -35,15 +35,11 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		this.costo = 5;
 		this.consumo = 2;
 		this.coordenadas = new Coordenada(x, y);
-		
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+
+		if (!esConstruibleEn(mapa.superficie(coordenadas))
+				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
-		/*
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		*/
 	}
 
 	public double getDanios() {
@@ -82,7 +78,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	@Override
 	public void aceptar(Visitante unVisitante) {
 		unVisitante.visitar(this);
-
 	}
 
 	public void aplicarDanioGodzilla() {

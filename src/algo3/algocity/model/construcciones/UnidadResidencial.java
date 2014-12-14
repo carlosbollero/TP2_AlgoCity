@@ -1,6 +1,5 @@
 package algo3.algocity.model.construcciones;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,7 +14,8 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Visitable {
+public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
+		Visitable {
 
 	final double ESTADOINICIAL = 100;
 
@@ -41,15 +41,11 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 		this.consumo = 1;
 		this.capacidad = 100;
 		coordenadas = new Coordenada(x, y);
-		
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) || !hayConexionesEn(mapa))) {
+
+		if (!esConstruibleEn(mapa.superficie(coordenadas))
+				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
-		/*
-		if (!(esConstruibleEn(mapa.superficie(coordenadas)) && hayConexionesEn(mapa))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		*/
 	}
 
 	public void aplicarDanioGodzilla() {
@@ -85,7 +81,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 	protected double porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
-	
+
 	public void aplicarDanio(double cantidad) {
 		this.porcentajeDanios += cantidad;
 		if (this.porcentajeDanios > 100) {
@@ -109,9 +105,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable, Vis
 		mapa.agregarUnidadDaniable(this);
 	}
 
-	
-	
-	
 	/* Persistencia */
 	@Override
 	public Element getElement(Document doc) {

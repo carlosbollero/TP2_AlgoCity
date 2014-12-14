@@ -31,9 +31,10 @@ public class Tuberia implements Conector {
 		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} else {
-			mapa.agregar(this);
-		}
+		} 
+			/*else {
+		mapa.agregar(this);
+		}*/
 	}
 
 	@Override

@@ -44,9 +44,9 @@ public class Ruta implements Conector, Daniable, Visitable {
 		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} else {
+		} /*else {
 			mapa.agregar(this);
-		}
+		}*/
 	}
 
 	public boolean estado() {

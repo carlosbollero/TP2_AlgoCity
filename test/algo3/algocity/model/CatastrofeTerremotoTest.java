@@ -120,6 +120,8 @@ public class CatastrofeTerremotoTest {
 
 		LineaTension lt = new LineaTension(m, 3, 5);
 		Ruta rt = new Ruta(m, 4, 5);
+		m.agregar(lt);
+		m.agregar(rt);
 
 		assertEquals(100, lt.getSalud(), 0);
 		assertEquals(100, rt.getSalud(), 0);

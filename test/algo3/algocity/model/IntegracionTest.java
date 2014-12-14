@@ -56,7 +56,8 @@ public class IntegracionTest {
 			for (int i = 0; i < x; i++) {
 				try {
 					Conector lt = flt.construir(map, i, j);
-					lt.agregarseA(map);
+					//lt.agregarseA(map);
+					map.agregar(lt);
 				} catch (NoSeCumplenLosRequisitosException e) {
 					System.out.print(e);
 				}
