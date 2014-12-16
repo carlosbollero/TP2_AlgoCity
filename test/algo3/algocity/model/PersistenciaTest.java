@@ -31,12 +31,13 @@ import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.mapas.Mapa;
 
 public class PersistenciaTest {
 
 	@Test
-	public void testPersistirDosInstanciasDeJuegoDiferentes() {
+	public void testPersistirDosInstanciasDeJuegoDiferentes() throws NoSeEncontroElFicheroException {
 
 		Usuario user1 = new Usuario("Pepe");
 		Usuario user2 = new Usuario("Mari");
@@ -61,12 +62,15 @@ public class PersistenciaTest {
 
 		File fichero2 = new File("./saved/" + "Mari" + ".xml");
 		assertNotNull(fichero2);
+		
+		fichero1.delete();
+		fichero2.delete();
 	}
 
 	@Test
 	public void testPersistirUnJuegoCompleto()
 			throws NoSeCumplenLosRequisitosException, SAXException,
-			IOException, ParserConfigurationException {
+			IOException, ParserConfigurationException, NoSeEncontroElFicheroException {
 		/* Creacion de un usuario */
 		Usuario usuario = new Usuario("Juan");
 
@@ -126,6 +130,9 @@ public class PersistenciaTest {
 		/* Recupero una instancia de juego leyendo el fichero */
 		Juego juegoRecuperado = new Juego();
 		juegoRecuperado = juegoRecuperado.recuperar("Juan");
+		
+		fichero.delete();
+		
 
 		/* Corroboro que los datos leidos sean correctos */
 		assertEquals(juegoRecuperado.altoMapaJuego, 100);
