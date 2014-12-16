@@ -1,6 +1,7 @@
 package algo3.algocity.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -20,6 +21,8 @@ public class VistaMapa extends JPanel implements Observer {
 	LinkedList<VistaTerreno> territorio;
 
 	public VistaMapa(Mapa mapa) {
+		setVisible();
+		setPreferredSize(new Dimension(600,600));
 		this.mapa = mapa;
 		territorio = new LinkedList<VistaTerreno>();
 		setBackground(new Color(0));

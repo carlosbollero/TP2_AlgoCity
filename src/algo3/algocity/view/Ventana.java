@@ -1,6 +1,8 @@
 package algo3.algocity.view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,31 +17,40 @@ public class Ventana extends JFrame {
 	int tamanio;
 	Juego juego;
 	Mapa mapa;
-	VistaMapa vistaMapa;
+	VistaMapa vistaMapa;	
+	VistaMapaSubterraneo vistaMapaSubterraneo;
+	
 
 	public Ventana(Mapa mapa, Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
 		this.mapa = mapa;
 		definirPanelIzq();
-		definirPanelDer(mapa);
+		definirPanelDer();
 		definirPanelSup();
 		acomodar();
+		pack();
 	}
 
 	private void definirPanelSup() {
-		setJMenuBar(new VistaPanelSup(vistaMapa, juego));
+		setJMenuBar(new VistaPanelSup(vistaMapa, vistaMapaSubterraneo, juego));
 		
 	}
 
-	private void definirPanelDer(Mapa mapa) {
+	private void definirPanelDer() {
+		JPanel panelDer = new JPanel();
+		panelDer.setLayout(new CardLayout());
+		vistaMapaSubterraneo = new VistaMapaSubterraneo(mapa);
+		panelDer.add(vistaMapaSubterraneo);
 		vistaMapa = new VistaMapa(mapa);
-		add(vistaMapa);
+		panelDer.add(vistaMapa);
+		add(panelDer);
 		
 	}
 
 	private void definirPanelIzq() {
 		JPanel panelIzq = new JPanel();
+		panelIzq.setPreferredSize(new Dimension(200, 600));
 		panelIzq.setLayout(new BorderLayout());
 		add(panelIzq, BorderLayout.WEST);
 		panelIzq.add(new VistaPanelInfo(), BorderLayout.NORTH);
