@@ -19,7 +19,7 @@ public class Tuberia implements Conector {
 	public Tuberia() {
 		costo = 5;
 	}
-	
+
 	public Tuberia(int x, int y) {
 		costo = 5;
 		coordenadas = new Coordenada(x, y);
@@ -31,10 +31,10 @@ public class Tuberia implements Conector {
 		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} 
-			/*else {
-		mapa.agregar(this);
-		}*/
+		}
+		/*
+		 * else { mapa.agregar(this); }
+		 */
 	}
 
 	@Override
@@ -45,6 +45,10 @@ public class Tuberia implements Conector {
 	@Override
 	public Coordenada coordenadas() {
 		return coordenadas;
+	}
+	
+	public void setCoordenadas(Coordenada c){
+		this.coordenadas = c;
 	}
 
 	@Override
@@ -58,24 +62,22 @@ public class Tuberia implements Conector {
 		return 100;
 	}
 
-	
-	
-	/*Persistencia*/
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-				
 		Element conector = doc.createElement("Tuberia");
-		
+
 		Element costo = doc.createElement("costo");
 		conector.appendChild(costo);
 		costo.setTextContent(String.valueOf(this.costo));
-		
+
 		Element coordenadas = doc.createElement("coordenadas");
 		conector.appendChild(coordenadas);
 		coordenadas
 				.setTextContent((String.valueOf((int) this.coordenadas.getX())
 						+ "," + String.valueOf((int) this.coordenadas.getY())));
-
 
 		return conector;
 	}
@@ -95,8 +97,19 @@ public class Tuberia implements Conector {
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
 				tb.coordenadas = punto;
-			} 
+			}
 		}
 		return tb;
+	}
+
+	/* No evalua los invariantes de la clase */
+	public boolean equals(Tuberia tb) {
+		if (tb == this) {
+			return true;
+		} else if (tb.coordenadas().getX() == this.coordenadas().getX()
+				&& tb.coordenadas().getY() == this.coordenadas().getY()) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -26,7 +27,6 @@ public class CentralEolica extends UnidadEnergetica {
 
 	public CentralEolica(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
-
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
@@ -56,10 +56,11 @@ public class CentralEolica extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 15) / 100;
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("CentralEolica");
 
 		Element costo = doc.createElement("costo");
@@ -88,7 +89,6 @@ public class CentralEolica extends UnidadEnergetica {
 		unidad.appendChild(radioDeInfluencia);
 		radioDeInfluencia
 				.setTextContent(String.valueOf(this.radioDeInfluencia));
-
 		return unidad;
 	}
 
@@ -120,6 +120,18 @@ public class CentralEolica extends UnidadEnergetica {
 			}
 		}
 		return ce;
+	}
+
+	/* No evalua los invariantes de la clase */
+	public boolean equals(Daniable ce) {
+		if (ce == this) {
+			return true;
+		} else if (ce.coordenadas().getX() == this.coordenadas().getX()
+				&& ce.coordenadas().getY() == this.coordenadas().getY()
+				&& ((CentralEolica)ce).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
 	}
 
 }

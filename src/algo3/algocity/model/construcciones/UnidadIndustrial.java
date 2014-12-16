@@ -109,10 +109,11 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		mapa.agregarUnidadDaniable(this);
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("UnidadIndustrial");
 
 		Element costo = doc.createElement("costo");
@@ -141,7 +142,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public static UnidadIndustrial fromElement(Node hijoDeNodo) {
-
 		UnidadIndustrial ui = new UnidadIndustrial();
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -169,6 +169,18 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			}
 		}
 		return ui;
+	}
+	
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable ui){
+		if (ui == this) {
+			return true;
+		} else if (ui.coordenadas().getX() == this.coordenadas().getX()
+				&& ui.coordenadas().getY() == this.coordenadas().getY()
+				&& ((UnidadIndustrial)ui).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
 	}
 
 }

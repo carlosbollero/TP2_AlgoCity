@@ -130,7 +130,19 @@ public class Mapa {
 	public boolean contiene(Unidad u) {
 		return ciudad.contiene(u);
 	}
-
+	
+	public boolean contiene(LineaTension lt){
+		return redElectrica.contiene(lt);
+	}
+	
+	public boolean contiene(Ruta rt){
+		return rutas.contiene(rt);
+	}
+	
+	public boolean contiene(Tuberia tb){
+		return tuberias.contiene(tb);
+	}
+	
 	public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
 			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
@@ -174,6 +186,27 @@ public class Mapa {
 			this.reparador.actuar();
 		}
 	}
+	
+	/*Usados para corroborar tests de persistencia*/
+	public MapaEdilicio ciudad(){
+		return this.ciudad;
+	}
+	
+	public MapaConexiones tuberias(){
+		return this.tuberias;
+	}
+	
+	public MapaConexiones redElectrica(){
+		return this.redElectrica;
+	}
+	
+	public MapaConexiones rutas(){
+		return this.rutas;
+	}
+	
+	public MapaTerritorio territorio(){
+		return this.territorio;
+	}
 
 	// Metodo implementado solo para tests
 	/*********************************************************/
@@ -186,7 +219,7 @@ public class Mapa {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
 	}
-
+	
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
@@ -239,8 +272,8 @@ public class Mapa {
 
 		return mapa;
 	}
-
-	public static Mapa fromElement(Element element) {
+	
+	public static Mapa fromElement(Node element) {
 
 		Mapa mapa = new Mapa();
 
@@ -269,10 +302,7 @@ public class Mapa {
 				mapa.redElectrica = redElectrica;
 			}
 		}
-		System.out.println("mapa territorio");
-		mapa.territorio.imprimirTerritorio();
-
+		//mapa.territorio.imprimirTerritorio();
 		return mapa;
 	}
-
 }

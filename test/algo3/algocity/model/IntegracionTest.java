@@ -38,7 +38,6 @@ public class IntegracionTest {
 		} catch (NoSeCumplenLosRequisitosException e) {
 
 		}
-
 	}
 
 	

@@ -36,7 +36,7 @@ public class MapaEdilicio {
 	ArrayList<Ocupable> unidadesConPoblacion;
 	ArrayList<Ocupable> unidadesConEmpleo;
 	ArrayList<Daniable> unidadesDaniables;
-
+	
 	public MapaEdilicio(int alto, int ancho) {
 		this.alto = alto;
 		this.ancho = ancho;
@@ -250,7 +250,9 @@ public class MapaEdilicio {
 		return capacidad;
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/	
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element ciudad) {
 		Element alto = doc.createElement("alto");
@@ -311,7 +313,6 @@ public class MapaEdilicio {
 			Element unidad = o.getElement(doc);
 			unidadesDaniables.appendChild(unidad);
 		}
-
 		return ciudad;
 	}
 
@@ -337,7 +338,7 @@ public class MapaEdilicio {
 						Coordenada puntoAAgregar = new Coordenada();
 						for (int k = 0; k < hijosDeNodo.getLength(); k++) {
 							Node hijoDeNodo = hijosDeNodo.item(k);
-							if (hijoDeNodo.getNodeName().equals("Point")) {
+							if (hijoDeNodo.getNodeName().equals("Coordenada")) {
 								stringPunto = hijoDeNodo.getTextContent();
 								String[] arrayPunto = stringPunto.split(",");
 								puntoAAgregar = new Coordenada(
@@ -347,42 +348,50 @@ public class MapaEdilicio {
 									"UnidadComercial")) {
 								UnidadComercial uc = UnidadComercial
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(uc);
+								//mapaEdilicio.agregar(uc);
+								mapaEdilicio.mapa.put(puntoAAgregar, uc);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"UnidadIndustrial")) {
 								UnidadIndustrial ui = UnidadIndustrial
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(ui);
+								//mapaEdilicio.agregar(ui);
+								mapaEdilicio.mapa.put(puntoAAgregar, ui);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"EstacionDeBomberos")) {
 								EstacionDeBomberos eb = EstacionDeBomberos
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(eb);
+								//mapaEdilicio.agregar(eb);
+								mapaEdilicio.mapa.put(puntoAAgregar, eb);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralNuclear")) {
 								CentralNuclear cn = CentralNuclear
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(cn);
+								//mapaEdilicio.agregar(cn);
+								mapaEdilicio.mapa.put(puntoAAgregar, cn);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"UnidadResidencial")) {
 								UnidadResidencial ur = UnidadResidencial
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(ur);
+								//mapaEdilicio.agregar(ur);
+								mapaEdilicio.mapa.put(puntoAAgregar, ur);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"PozoDeAgua")) {
 								PozoDeAgua pa = PozoDeAgua
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(pa);
+								//mapaEdilicio.agregar(pa);
+								mapaEdilicio.mapa.put(puntoAAgregar, pa);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralMinera")) {
 								CentralMinera cm = CentralMinera
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(cm);
+								//mapaEdilicio.agregar(cm);
+								mapaEdilicio.mapa.put(puntoAAgregar, cm);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralEolica")) {
 								CentralEolica ce = CentralEolica
 										.fromElement(hijoDeNodo);
-								mapaEdilicio.agregar(ce);
+								//mapaEdilicio.agregar(ce);
+								mapaEdilicio.mapa.put(puntoAAgregar, ce);
 							}
 						}
 					}
@@ -474,7 +483,7 @@ public class MapaEdilicio {
 			}
 
 		}
-		imprimirMapaEdilicio(mapaEdilicio);
+		//imprimirMapaEdilicio(mapaEdilicio);
 		return mapaEdilicio;
 	}
 

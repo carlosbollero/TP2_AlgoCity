@@ -19,6 +19,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.model.conexiones.LineaTension;
@@ -33,21 +35,31 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.mapas.MapaEdilicio;
+import algo3.algocity.model.mapas.MapaTerritorio;
 import algo3.algocity.view.Ventana;
 
 public class Juego {
 
-	final int anchoMapaJuego = 100;
-	final int altoMapaJuego = 100;
+	int anchoMapaJuego = 100;
+	int altoMapaJuego = 100;
 
 	private Mapa mapa;
-
 	private Turno turnos;
+	private Poblacion poblacion;
+	private Usuario usuario;
 
-	Usuario usuario;
+	public Juego(Usuario u, Mapa map, Turno turnos, Poblacion p) {
+		this.usuario = u;
+		this.mapa = map;
+		this.turnos = turnos;
+		this.poblacion = p;
+	}
 
+	/* Usado para persistencia */
 	public Juego() {
-
+		this.mapa = new Mapa();
+		this.poblacion = new Poblacion();
 	}
 
 	public void iniciar() {
@@ -68,10 +80,25 @@ public class Juego {
 		mapa = new Mapa();
 	}
 
+	public Mapa mapa() {
+		return this.mapa;
+	}
+
+	public Usuario usuario() {
+		return this.usuario;
+	}
+
+	public Turno turno() {
+		return this.turnos;
+	}
+	
+	public Poblacion poblacion(){
+		return this.poblacion;
+	}
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
-	
 	public void persistir() {
 
 		try {
@@ -87,7 +114,7 @@ public class Juego {
 			transformer.setOutputProperty(
 					"{http://xml.apache.org/xslt}indent-amount", "2");
 			transformer.transform(new DOMSource(doc), new StreamResult(
-					new PrintStream("Juego.xml")));
+					new PrintStream(this.usuario.ruta())));
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -100,7 +127,17 @@ public class Juego {
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public Juego recuperar(String nombreUsuario) throws SAXException,
+			IOException, ParserConfigurationException {
+
+		Document doc = DocumentBuilderFactory.newInstance()
+				.newDocumentBuilder()
+				.parse(new File("./saved/" + nombreUsuario + ".xml"));
+		Element element = doc.getDocumentElement();
+		Juego juego = Juego.fromElement(element);
+		return juego;
 	}
 
 	private Element getElement(Document doc) {
@@ -114,123 +151,47 @@ public class Juego {
 		alto.setTextContent(String.valueOf(this.altoMapaJuego));
 		juego.appendChild(alto);
 
-		Element mapa = this.mapa.getElement(doc);
-		juego.appendChild(mapa);
+		Element usuario = this.usuario.getElement(doc);
+		juego.appendChild(usuario);
 
 		Element turnos = this.turnos.getElement(doc);
 		juego.appendChild(turnos);
 
+		Element poblacion = this.poblacion.getElement(doc);
+		juego.appendChild(poblacion);
+
+		Element mapa = this.mapa.getElement(doc);
+		juego.appendChild(mapa);
+
 		return juego;
 	}
 
-	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 * PARA PROBAR COMO SE GUARDAN LOS XML
-	 */
-	public static void main(String[] args) throws ParserConfigurationException,
-			TransformerFactoryConfigurationError, FileNotFoundException,
-			TransformerException {
+	private static Juego fromElement(Element element) {
+		Juego juego = new Juego();
 
-		//prueba1();
-
-		prueba2();
-
-		//Juego juego = new Juego();
-
-		//juego.persistir();
-
-	}
-
-	private static void prueba2() {
-
-		try {
-
-			Document doc = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder().parse(new File("pruebamapa.xml"));
-			Element element = doc.getDocumentElement();
-
-			Mapa mapa = Mapa.fromElement(element);
-
-			System.out.println(mapa.alto());
-			System.out.println(mapa.ancho());
-
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+		NodeList hijosDeJuego = element.getChildNodes();
+		for (int i = 0; i < hijosDeJuego.getLength(); i++) {
+			Node hijoDeJuego = hijosDeJuego.item(i);
+			if (hijoDeJuego.getNodeName().equals("anchoMapaJuego")) {
+				juego.anchoMapaJuego = Integer.valueOf(hijoDeJuego
+						.getTextContent());
+			} else if (hijoDeJuego.getNodeName().equals("altoMapaJuego")) {
+				juego.altoMapaJuego = Integer.valueOf(hijoDeJuego
+						.getTextContent());
+			} else if (hijoDeJuego.getNodeName().equals("Usuario")) {
+				Usuario usuario = Usuario.fromElement(hijoDeJuego);
+				juego.usuario = usuario;
+			} else if (hijoDeJuego.getNodeName().equals("Turnos")) {
+				Turno turnos = Turno.fromElement(hijoDeJuego);
+				juego.turnos = turnos;
+			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
+				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego);
+				juego.poblacion = poblacion;
+			} else if (hijoDeJuego.getNodeName().equals("Mapa")) {
+				Mapa mapa = Mapa.fromElement(hijoDeJuego);
+				juego.mapa = mapa;
+			}
 		}
+		return juego;
 	}
-
-	public static void prueba1() {
-
-		Mapa mapa = new Mapa();
-
-		UnidadResidencial ur = new UnidadResidencial(10, 10);
-		ur.agregarseA(mapa);
-
-		UnidadComercial uc = new UnidadComercial(2, 2);
-		uc.agregarseA(mapa);
-
-		UnidadIndustrial ui = new UnidadIndustrial(4, 8);
-		ui.agregarseA(mapa);
-
-		PozoDeAgua pa = new PozoDeAgua(5, 5);
-		pa.agregarseA(mapa);
-
-		EstacionDeBomberos eb = new EstacionDeBomberos(6, 6);
-		eb.agregarseA(mapa);
-
-		CentralNuclear cn = new CentralNuclear(4, 1);
-		cn.agregarseA(mapa);
-
-		CentralMinera cm = new CentralMinera(7, 1);
-		cm.agregarseA(mapa);
-
-		CentralEolica ce = new CentralEolica(1, 9);
-		ce.agregarseA(mapa);
-
-		LineaTension lt = new LineaTension(7, 2);
-		lt.agregarseA(mapa);
-
-		Ruta rt = new Ruta(9, 1);
-		rt.agregarseA(mapa);
-
-		Tuberia tb = new Tuberia(4, 7);
-		tb.agregarseA(mapa);
-
-		try {
-			Document doc = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder().newDocument();
-
-			Element element = mapa.getElement(doc);
-			doc.appendChild(element);
-
-			Transformer transformer = TransformerFactory.newInstance()
-					.newTransformer();
-
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(
-					"{http://xml.apache.org/xslt}indent-amount", "2");
-			transformer.transform(new DOMSource(doc), new StreamResult(
-					new PrintStream("pruebamapa.xml")));
-
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
-
-	}
-
 }

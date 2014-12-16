@@ -4,6 +4,10 @@ import java.util.Observable;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import algo3.algocity.model.mapas.Mapa;
 
 public class Turno extends Observable implements Runnable {
 	/*
@@ -60,7 +64,9 @@ public class Turno extends Observable implements Runnable {
 		System.out.println("EXIT");
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	public Element getElement(Document doc) {
 
 		Element turnos = doc.createElement("Turnos");
@@ -71,4 +77,18 @@ public class Turno extends Observable implements Runnable {
 
 		return turnos;
 	}
+
+	public static Turno fromElement(Node hijoDeJuego) {
+		Turno turno = new Turno();
+
+		NodeList childs = hijoDeJuego.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++) {
+			Node child = childs.item(i);
+			if (child.getNodeName().equals("numero")) {
+				turno.numero = Integer.valueOf(child.getTextContent());
+			}
+		}
+		return turno;
+	}
+
 }

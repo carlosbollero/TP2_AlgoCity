@@ -1,6 +1,5 @@
 package algo3.algocity.model.conexiones;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -9,6 +8,7 @@ import org.w3c.dom.NodeList;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -23,7 +23,6 @@ public class Ruta implements Conector, Daniable, Visitable {
 	boolean estado;
 	int costo;
 	double porcentajeDanios;
-
 	Coordenada coordenadas;
 
 	public Ruta() {
@@ -31,7 +30,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 	}
 
 	public Ruta(int x, int y) {
-		//porcentajeDanios = 0;
+		// porcentajeDanios = 0;
 		costo = 10;
 		coordenadas = new Coordenada(x, y);
 
@@ -44,9 +43,9 @@ public class Ruta implements Conector, Daniable, Visitable {
 		coordenadas = new Coordenada(x, y);
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} /*else {
-			mapa.agregar(this);
-		}*/
+		} /*
+		 * else { mapa.agregar(this); }
+		 */
 	}
 
 	public boolean estado() {
@@ -66,6 +65,10 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	public Coordenada coordenadas() {
 		return coordenadas;
+	}
+	
+	public void setCoordenadas(Coordenada c){
+		this.coordenadas = c;
 	}
 
 	@Override
@@ -107,9 +110,10 @@ public class Ruta implements Conector, Daniable, Visitable {
 		mapa.agregarARutas(this);
 		mapa.agregarUnidadDaniable(this);
 	}
-	
-	
-	/*Persistencia*/
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
 		Element conector = doc.createElement("Ruta");
@@ -142,7 +146,8 @@ public class Ruta implements Conector, Daniable, Visitable {
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
-				Coordenada punto = new Coordenada(Integer.valueOf(arrayPunto[0]),
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
 				rt.coordenadas = punto;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
@@ -153,4 +158,15 @@ public class Ruta implements Conector, Daniable, Visitable {
 		return rt;
 	}
 
+	/* No evalua los invariantes de la clase */
+	public boolean equals(Daniable rt) {
+		if (rt == this) {
+			return true;
+		} else if (rt.coordenadas().getX() == this.coordenadas().getX()
+				&& rt.coordenadas().getY() == this.coordenadas().getY()
+				&& ((Ruta)rt).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
+	}
 }
