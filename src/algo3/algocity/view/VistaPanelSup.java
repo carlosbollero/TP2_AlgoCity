@@ -7,13 +7,16 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import algo3.algocity.controller.AccionMouseGuardarJuego;
 import algo3.algocity.controller.AccionMouseVistaSubterranea;
 import algo3.algocity.controller.AccionMouseVistaSuperficial;
+import algo3.algocity.model.Juego;
 
 public class VistaPanelSup extends JMenuBar {
 
 	private static final long serialVersionUID = -3892726120581801752L;
 
+	Juego juego;
 	VistaMapa vistaMapa;
 
 	JMenu m_menu;
@@ -24,7 +27,8 @@ public class VistaPanelSup extends JMenuBar {
 	JMenuItem i_superficial;
 	JMenuItem i_subterranea;
 
-	public VistaPanelSup(VistaMapa vista) {
+	public VistaPanelSup(VistaMapa vista, Juego juego) {
+		this.juego = juego;
 		vistaMapa = vista;
 		setMenuArchivo();
 		add(m_menu);
@@ -35,6 +39,7 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuArchivo() {
 		m_menu = new JMenu("Menu");
 		i_guardar = new JMenuItem("Guardar");
+		i_guardar.addActionListener(new AccionMouseGuardarJuego(juego));
 		i_salir = new JMenuItem("Salir");
 		m_menu.add(i_guardar);
 		m_menu.addSeparator();
