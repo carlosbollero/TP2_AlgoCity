@@ -2,6 +2,12 @@ package algo3.algocity.model;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacion;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionCreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
@@ -92,5 +98,64 @@ public class Poblacion implements Observer {
 	public void actualizar() {
 		this.actualizarCapacidadHabitacional();
 		this.actualizarCapacidadEmpleo();
+	}
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
+
+	public Element getElement(Document doc) {
+		Element poblacion = doc.createElement("Poblacion");
+
+		Element cantidad = doc.createElement("Cantidad");
+		poblacion.appendChild(cantidad);
+		cantidad.setTextContent(String.valueOf(this.cantidad));
+
+		Element capacidadHabitacional = doc
+				.createElement("CapacidadHabitacional");
+		poblacion.appendChild(capacidadHabitacional);
+		capacidadHabitacional.setTextContent(String
+				.valueOf(this.capacidadHabitacional));
+
+		Element capacidadEmpleo = doc.createElement("CapacidadEmpleo");
+		poblacion.appendChild(capacidadEmpleo);
+		capacidadEmpleo.setTextContent(String.valueOf(this.capacidadEmpleo));
+
+		Element indiceCrecimiento = doc.createElement("IndiceCrecimiento");
+		poblacion.appendChild(indiceCrecimiento);
+		indiceCrecimiento
+				.setTextContent(String.valueOf(this.indiceCrecimiento));
+
+		return poblacion;
+	}
+
+	public static Poblacion fromElement(Node hijoDeJuego) {
+		Poblacion poblacion = new Poblacion();
+
+		NodeList childs = hijoDeJuego.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++) {
+			Node child = childs.item(i);
+			if (child.getNodeName().equals("Cantidad")) {
+				poblacion.cantidad = Integer.valueOf(child.getTextContent());
+			} else if (child.getNodeName().equals("CapacidadHabitacional")) {
+				poblacion.capacidadHabitacional = Integer.valueOf(child
+						.getTextContent());
+			} else if (child.getNodeName().equals("CapacidadEmpleo")) {
+				poblacion.capacidadEmpleo = Integer.valueOf(child
+						.getTextContent());
+			} else if(child.getNodeName().equals("IndiceCrecimiento")) {
+				poblacion.indiceCrecimiento = Integer.valueOf(child.getTextContent());
+			}
+		}
+		return poblacion;
+	}
+	
+	public boolean equals(Poblacion p){
+		if(this == p){
+			return true;
+		} else if(p.cantidad == this.cantidad && p.capacidadHabitacional == this.capacidadHabitacional && p.capacidadEmpleo == this.capacidadEmpleo && p.indiceCrecimiento == this.indiceCrecimiento){
+			return true;
+		}
+		return false;
 	}
 }

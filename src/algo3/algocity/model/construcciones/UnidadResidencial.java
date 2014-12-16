@@ -105,10 +105,11 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		mapa.agregarUnidadDaniable(this);
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("UnidadResidencial");
 
 		Element costo = doc.createElement("costo");
@@ -163,4 +164,15 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		return ur;
 	}
 
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable ur) {
+		if (ur == this) {
+			return true;
+		} else if (ur.coordenadas().getX() == this.coordenadas().getX()
+				&& ur.coordenadas().getY() == this.coordenadas().getY()
+				&& ((UnidadResidencial)ur).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
+	}
 }

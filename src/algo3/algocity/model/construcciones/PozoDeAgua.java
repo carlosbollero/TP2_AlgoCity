@@ -80,8 +80,9 @@ public class PozoDeAgua extends Unidad implements Daniable {
 
 	}
 
-	/* Persistencia */
-	// TODO falta probarlo
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
 
@@ -123,8 +124,18 @@ public class PozoDeAgua extends Unidad implements Daniable {
 				pa.coordenadas = punto;
 			}
 		}
-
 		return pa;
+	}
+
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable pa) {
+		if (pa == this) {
+			return true;
+		} else if (pa.coordenadas().getX() == this.coordenadas().getX()
+				&& pa.coordenadas().getY() == this.coordenadas().getY()) {
+			return true;
+		}
+		return false;
 	}
 
 }

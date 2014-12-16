@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -56,10 +57,11 @@ public class CentralMinera extends UnidadEnergetica {
 		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("CentralMinera");
 
 		Element costo = doc.createElement("costo");
@@ -120,6 +122,18 @@ public class CentralMinera extends UnidadEnergetica {
 			}
 		}
 		return cm;
+	}
+	
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable cm) {
+		if (cm == this) {
+			return true;
+		} else if (cm.coordenadas().getX() == this.coordenadas().getX()
+				&& cm.coordenadas().getY() == this.coordenadas().getY()
+				&& ((CentralMinera)cm).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
 	}
 
 }

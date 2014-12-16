@@ -1,14 +1,11 @@
 package algo3.algocity.model.construcciones;
 
-import java.util.ArrayList;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -43,11 +40,11 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		this.coordenadas = new Coordenada(x, y);
 	}
 
-//	public void actuar(ArrayList<Visitable> objetivos) {
-//		for (Visitable v : objetivos) {
-//			v.aceptar(this);
-//		}
-//	}
+	// public void actuar(ArrayList<Visitable> objetivos) {
+	// for (Visitable v : objetivos) {
+	// v.aceptar(this);
+	// }
+	// }
 
 	// TODO Revisar si sirve el metodo
 	public void conectarTuberia(Conector unaTuberia) {
@@ -101,7 +98,9 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
 
@@ -145,6 +144,17 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 			}
 		}
 		return eb;
+	}
+
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable eb) {
+		if (eb == this) {
+			return true;
+		} else if (eb.coordenadas().getX() == this.coordenadas().getX()
+				&& eb.coordenadas().getY() == this.coordenadas().getY()) {
+			return true;
+		}
+		return false;
 	}
 
 }

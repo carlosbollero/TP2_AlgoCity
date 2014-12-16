@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -23,7 +24,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 					// false para destruido
 	int costo;
 	double porcentajeDanios;
-	int danios;
+	int danios; //no usado?
 	Coordenada coordenadas;
 
 	public LineaTension() {
@@ -94,6 +95,10 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	public Coordenada coordenadas() {
 		return coordenadas;
 	}
+	
+	public void setCoordenadas(Coordenada c){
+		this.coordenadas = c;
+	}
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie) {
@@ -107,7 +112,9 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	}
 	
 	
-	/*Persistencia*/
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
 		Element conector = doc.createElement("LineaTension");
@@ -150,6 +157,18 @@ public class LineaTension implements Conector, Daniable, Visitable {
 			}
 		}
 		return lt;
+	}
+	
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable lt) {
+		if (lt == this) {
+			return true;
+		} else if (lt.coordenadas().getX() == this.coordenadas().getX()
+				&& lt.coordenadas().getY() == this.coordenadas().getY()
+				&& ((LineaTension)lt).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
 	}
 	
 }

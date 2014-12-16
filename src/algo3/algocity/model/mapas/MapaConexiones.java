@@ -107,6 +107,15 @@ public class MapaConexiones {
 				.containsVertex(elemento));
 	}
 
+	public Conector getConectorEn(int x, int y) {
+		if (tieneCoordenadaOcupada(x, y)) {
+			Coordenada p = new Coordenada(x, y);
+			return (this.mapa.get(p));
+		} else {
+			return null;
+		}
+	}
+
 	private boolean validarCoordenadas(int x, int y) {
 		return (this.estaDentroDeLimites(x, y));
 	}
@@ -159,6 +168,10 @@ public class MapaConexiones {
 		return posicionesRelevantes.add(u);
 	}
 
+	public ArrayList<Unidad> posicionesRelevantes() {
+		return this.posicionesRelevantes;
+	}
+
 	public boolean sePuedeConstruir(Unidad unidad) {
 		for (Unidad ur : posicionesRelevantes) {
 			if (estaDentroDeRangoUnidadEnergetica(unidad.coordenadas(), ur)
@@ -195,10 +208,11 @@ public class MapaConexiones {
 				conector.coordenadas().y);
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element red) {
-
 		Element alto = doc.createElement("alto");
 		red.appendChild(alto);
 		alto.setTextContent(String.valueOf(this.alto));
@@ -242,15 +256,10 @@ public class MapaConexiones {
 			posicionesRelevantes.appendChild(punto);
 			punto.appendChild(p.getElement(doc));
 		}
-
 		// TODO
 		// El grafo no es necesario serializarlo?
 		return red;
 	}
-
-	// falta implementar el cambio que ahora posicionesRelevantes no contiene
-	// mas una coordenada
-	// sino que contiene Unidades
 
 	public static MapaConexiones fromElement(Node tuberias) {
 		MapaConexiones mapaConexiones = new MapaConexiones();
@@ -258,7 +267,6 @@ public class MapaConexiones {
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {
 			Node hijoDeRed = hijosDeRed.item(i);
-
 			if (hijoDeRed.getNodeName().equals("alto")) {
 				mapaConexiones.alto = Integer.valueOf(hijoDeRed
 						.getTextContent());
@@ -284,15 +292,18 @@ public class MapaConexiones {
 							} else if (hijoDeNodo.getNodeName().equals(
 									"Tuberia")) {
 								Tuberia tb = Tuberia.fromElement(hijoDeNodo);
+								tb.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(tb);
 
 							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
 								Ruta rt = Ruta.fromElement(hijoDeNodo);
+								rt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(rt);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"LineaTension")) {
 								LineaTension lt = LineaTension
 										.fromElement(hijoDeNodo);
+								lt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(lt);
 							}
 						}
@@ -307,53 +318,37 @@ public class MapaConexiones {
 					Node hijoDePosicionRelevante = hijosDePosicionesRelevantes
 							.item(k);
 					if (hijoDePosicionRelevante.getNodeName().equals("Unidad")) {
-						System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
 						NodeList hijosDeUnidad = hijoDePosicionRelevante
 								.getChildNodes();
-
 						for (int l = 0; l < hijosDeUnidad.getLength(); l++) {
 							Node hijoDeUnidad = hijosDeUnidad.item(l);
 							if (hijoDeUnidad.getNodeName().equals(
 									"CentralMinera")) {
-								System.out
-										.println("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
-								CentralMinera ce = CentralMinera
-										.fromElement(hijoDePosicionRelevante
-												.getFirstChild());
-								mapaConexiones.posicionesRelevantes.add(ce);
+								CentralMinera cm = CentralMinera
+										.fromElement(hijoDeUnidad);
+								mapaConexiones.posicionesRelevantes.add(cm);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralNuclear")) {
-								System.out
-										.println("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
-								CentralNuclear ce = CentralNuclear
-										.fromElement(hijoDePosicionRelevante
-												.getFirstChild());
-								mapaConexiones.posicionesRelevantes.add(ce);
+								CentralNuclear cn = CentralNuclear
+										.fromElement(hijoDeUnidad);
+								mapaConexiones.posicionesRelevantes.add(cn);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralEolica")) {
-								System.out
-										.println("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
 								CentralEolica ce = CentralEolica
-										.fromElement(hijoDePosicionRelevante
-												.getFirstChild());
+										.fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(ce);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"PozoDeAgua")) {
-								System.out
-										.println("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
-								PozoDeAgua ce = PozoDeAgua
-										.fromElement(hijoDePosicionRelevante
-												.getFirstChild());
-								mapaConexiones.posicionesRelevantes.add(ce);
+								PozoDeAgua pa = PozoDeAgua
+										.fromElement(hijoDeUnidad);
+								mapaConexiones.posicionesRelevantes.add(pa);
 							}
 						}
-
 					}
 				}
 			}
 		}
-
-		imprimirMapaConexiones(mapaConexiones);
+		//imprimirMapaConexiones(mapaConexiones);
 		return mapaConexiones;
 	}
 

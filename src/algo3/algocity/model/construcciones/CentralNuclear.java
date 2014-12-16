@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -26,19 +27,16 @@ public class CentralNuclear extends UnidadEnergetica {
 
 	public CentralNuclear(Mapa mapa, int x, int y)
 			throws NoSeCumplenLosRequisitosException {
-
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
 		this.coordenadas = new Coordenada(x, y);
-		
-		
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 	}
-	
+
 	@Override
 	public void repararse() {
 		this.porcentajeDanios -= this.porcentajeReparacion();
@@ -46,7 +44,7 @@ public class CentralNuclear extends UnidadEnergetica {
 			this.porcentajeDanios = 0;
 		}
 	}
-	
+
 	protected double porcentajeReparacion() {
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
@@ -57,13 +55,12 @@ public class CentralNuclear extends UnidadEnergetica {
 		mapa.agregarUnidadDaniable(this);
 		mapa.agregarPuntoRelevanteEnRedElectrica(this);
 	}
-	
-	
-	/* Persistencia */
-	// TODO falta probarlo
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("CentralNuclear");
 
 		Element costo = doc.createElement("costo");
@@ -97,7 +94,6 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	public static CentralNuclear fromElement(Node hijoDeNodo) {
-
 		CentralNuclear cn = new CentralNuclear();
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -125,8 +121,18 @@ public class CentralNuclear extends UnidadEnergetica {
 			}
 		}
 		return cn;
-
 	}
-	
+
+	/* No evalua los invariantes de la clase */
+	public boolean equals(Daniable cn) {
+		if (cn == this) {
+			return true;
+		} else if (cn.coordenadas().getX() == this.coordenadas().getX()
+				&& cn.coordenadas().getY() == this.coordenadas().getY()
+				&& ((CentralNuclear)cn).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
+	}
 
 }

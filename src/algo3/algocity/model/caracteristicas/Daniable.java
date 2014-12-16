@@ -20,5 +20,6 @@ public interface Daniable {
 	
 	/*Persistencia*/
 	public Element getElement(Document doc);
-
+	
+	public boolean equals(Daniable d);
 }

@@ -128,10 +128,11 @@ public class MapaTerritorio {
 	}
 	/****************************************************************/
 	
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element territorio) {
-
 		Element alto = doc.createElement("alto");
 		territorio.appendChild(alto);
 		alto.setTextContent(String.valueOf(this.alto));

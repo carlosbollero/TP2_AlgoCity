@@ -100,10 +100,11 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		mapa.agregarUnidadDaniable(this);
 	}
 
-	/* Persistencia */
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@Override
 	public Element getElement(Document doc) {
-
 		Element unidad = doc.createElement("UnidadComercial");
 
 		Element costo = doc.createElement("costo");
@@ -151,6 +152,18 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			}
 		}
 		return uc;
+	}
+	
+	/*No evalua los invariantes de la clase*/
+	public boolean equals(Daniable uc) {
+		if (uc == this) {
+			return true;
+		} else if (uc.coordenadas().getX() == this.coordenadas().getX()
+				&& uc.coordenadas().getY() == this.coordenadas().getY()
+				&& ((UnidadComercial)uc).porcentajeDanios == this.porcentajeDanios) {
+			return true;
+		}
+		return false;
 	}
 
 }

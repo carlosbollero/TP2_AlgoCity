@@ -1,14 +1,23 @@
 package algo3.algocity.model;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 public class Usuario {
 
 	private String nombre;
-	private final String ruta;
+	private String ruta;
 
 	public Usuario(String unNombre) {
-
 		this.nombre = unNombre;
-		this.ruta = "./saved/" + unNombre;
+		this.ruta = "./saved/" + unNombre + ".xml";
+	}
+
+	/* Para persistencia */
+	public Usuario() {
+		this.ruta = "";
+		this.nombre = "";
 	}
 
 	public void nombre(String nuevoNombre) {
@@ -19,9 +28,9 @@ public class Usuario {
 		return nombre;
 	}
 
-//	public void ruta(String ruta) {
-//		this.ruta = ruta;
-//	}
+	// public void ruta(String ruta) {
+	// this.ruta = ruta;
+	// }
 
 	public String ruta() {
 		return ruta;
@@ -43,4 +52,20 @@ public class Usuario {
 	 * true; personajeEnJuego = unPersonaje; } } personajeEnJuego.jugar(); }
 	 */
 
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
+	public Element getElement(Document doc) {
+		Element usuario = doc.createElement("Usuario");
+		usuario.setTextContent(this.nombre);
+
+		return usuario;
+	}
+
+	public static Usuario fromElement(Node hijoDeJuego) {
+		Usuario usuario = new Usuario();
+		usuario.nombre = hijoDeJuego.getTextContent();
+		usuario.ruta = "./saved/" + hijoDeJuego.getTextContent() + ".xml";
+		return usuario;
+	}
 }
