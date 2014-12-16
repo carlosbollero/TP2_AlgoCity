@@ -23,20 +23,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.CentralEolica;
-import algo3.algocity.model.construcciones.CentralMinera;
-import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.EstacionDeBomberos;
-import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.UnidadComercial;
-import algo3.algocity.model.construcciones.UnidadIndustrial;
-import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaEdilicio;
-import algo3.algocity.model.mapas.MapaTerritorio;
 import algo3.algocity.view.Ventana;
 
 public class Juego {
@@ -58,18 +45,17 @@ public class Juego {
 
 	/* Usado para persistencia */
 	public Juego() {
-		this.mapa = new Mapa();
-		this.poblacion = new Poblacion();
+//		this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 	}
 
 	public void iniciar() {
-		// generarMapas();
+		generarMapas();
 		crearVentana();
 		// iniciarTurnos();
 	}
 
 	private void crearVentana() {
-		JFrame ventana = new Ventana(new Mapa(), this);
+		JFrame ventana = new Ventana(mapa, this);
 	}
 
 	private void iniciarTurnos() {
@@ -91,8 +77,8 @@ public class Juego {
 	public Turno turno() {
 		return this.turnos;
 	}
-	
-	public Poblacion poblacion(){
+
+	public Poblacion poblacion() {
 		return this.poblacion;
 	}
 
