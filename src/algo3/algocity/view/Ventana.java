@@ -12,6 +12,7 @@ public class Ventana extends JFrame {
 	private static final long serialVersionUID = 6947930227453761722L;
 
 	int tamanio;
+	VistaMapa vistaMapa;
 
 	public Ventana(Mapa mapa) {
 		super("Algoritmos 3 | AlgoCity");
@@ -22,12 +23,13 @@ public class Ventana extends JFrame {
 	}
 
 	private void definirPanelSup() {
-		setJMenuBar(new VistaPanelSup());
+		setJMenuBar(new VistaPanelSup(vistaMapa));
 		
 	}
 
 	private void definirPanelDer(Mapa mapa) {
-		add(new VistaMapa(mapa));
+		vistaMapa = new VistaMapa(mapa);
+		add(vistaMapa);
 		
 	}
 

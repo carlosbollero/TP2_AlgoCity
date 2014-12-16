@@ -3,6 +3,7 @@ package algo3.algocity.model.mapas;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Observable;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,7 +22,7 @@ import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.terreno.Superficie;
 
-public class Mapa {
+public class Mapa extends Observable {
 
 	int alto;
 	int ancho;
@@ -213,11 +214,15 @@ public class Mapa {
 	public void setTerritorioTierraParaTest() {
 		boolean tierra = true;
 		territorio = new MapaTerritorio(alto, ancho, tierra);
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setTerritorioAguaParaTest() {
 		boolean agua = false;
 		territorio = new MapaTerritorio(alto, ancho, agua);
+		setChanged();
+		notifyObservers();
 	}
 	
 	/*********************************************************/
