@@ -69,7 +69,7 @@ public class Juego {
 	}
 
 	private void crearVentana() {
-		JFrame ventana = new Ventana(new Mapa());
+		JFrame ventana = new Ventana(new Mapa(), this);
 	}
 
 	private void iniciarTurnos() {
