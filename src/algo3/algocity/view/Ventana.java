@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Ventana extends JFrame {
@@ -12,10 +13,14 @@ public class Ventana extends JFrame {
 	private static final long serialVersionUID = 6947930227453761722L;
 
 	int tamanio;
+	Juego juego;
+	Mapa mapa;
 	VistaMapa vistaMapa;
 
-	public Ventana(Mapa mapa) {
+	public Ventana(Mapa mapa, Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
+		this.juego = juego;
+		this.mapa = mapa;
 		definirPanelIzq();
 		definirPanelDer(mapa);
 		definirPanelSup();
@@ -23,7 +28,7 @@ public class Ventana extends JFrame {
 	}
 
 	private void definirPanelSup() {
-		setJMenuBar(new VistaPanelSup(vistaMapa));
+		setJMenuBar(new VistaPanelSup(vistaMapa, juego));
 		
 	}
 
