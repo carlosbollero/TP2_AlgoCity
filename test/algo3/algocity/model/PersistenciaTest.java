@@ -37,7 +37,8 @@ import algo3.algocity.model.mapas.Mapa;
 public class PersistenciaTest {
 
 	@Test
-	public void testPersistirDosInstanciasDeJuegoDiferentes() throws NoSeEncontroElFicheroException {
+	public void testPersistirDosInstanciasDeJuegoDiferentes()
+			throws NoSeEncontroElFicheroException {
 
 		Usuario user1 = new Usuario("Pepe");
 		Usuario user2 = new Usuario("Mari");
@@ -62,15 +63,20 @@ public class PersistenciaTest {
 
 		File fichero2 = new File("./saved/" + "Mari" + ".xml");
 		assertNotNull(fichero2);
-		
-		fichero1.delete();
-		fichero2.delete();
+
+		if (fichero1.delete() && fichero2.delete()) {
+			System.out.println("Los ficheros de prueba fueron eliminados");
+		} else {
+			System.out
+					.println("Los ficheros de prueba no pudieron ser eliminados");
+		}
 	}
 
 	@Test
 	public void testPersistirUnJuegoCompleto()
 			throws NoSeCumplenLosRequisitosException, SAXException,
-			IOException, ParserConfigurationException, NoSeEncontroElFicheroException {
+			IOException, ParserConfigurationException,
+			NoSeEncontroElFicheroException {
 		/* Creacion de un usuario */
 		Usuario usuario = new Usuario("Juan");
 
@@ -114,8 +120,8 @@ public class PersistenciaTest {
 
 		/* Creacion de Turno */
 		Turno turno = new Turno();
-		
-		/*Creacion de Poblacion*/
+
+		/* Creacion de Poblacion */
 		Poblacion poblacion = new Poblacion();
 
 		/* Creacion de Juego */
@@ -130,8 +136,14 @@ public class PersistenciaTest {
 		/* Recupero una instancia de juego leyendo el fichero */
 		Juego juegoRecuperado = new Juego();
 		juegoRecuperado = juegoRecuperado.recuperar("Juan");
+
 		
-		fichero.delete();
+		if (fichero.delete()) {
+			System.out.println("Los ficheros de prueba fueron eliminados");
+		} else {
+			System.out
+					.println("Los ficheros de prueba no pudieron ser eliminados");
+		}
 		
 
 		/* Corroboro que los datos leidos sean correctos */
@@ -140,7 +152,7 @@ public class PersistenciaTest {
 		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
 		assertEquals(juegoRecuperado.turno().getTurno(), 1);
 		assertTrue(juegoRecuperado.poblacion().equals(juego.poblacion()));
-		
+
 		// Chequea la ciudad
 		Unidad urRecuperada = juegoRecuperado.mapa().ciudad()
 				.getUnidadEn(ur.coordenadas().getX(), ur.coordenadas().getY());

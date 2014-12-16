@@ -39,30 +39,22 @@ public class IntegracionTest {
 
 		}
 	}
-
 	
-//	HAY QUE MODIFICAR ESTE TEST
 	@Test
 	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() {
-
-		int x = 10;
-		int y = 50;
 
 		Mapa map = new Mapa();
 		FabricaLineaTension flt = new FabricaLineaTension();
 		map.setTerritorioTierraParaTest();
-		for (int j = 0; j < y; j++) {
-			for (int i = 0; i < x; i++) {
+		for (int j = 0; j < map.ancho(); j++) {
+			for (int i = 0; i < map.alto(); i++) {
 				try {
 					Conector lt = flt.construir(map, i, j);
-					//lt.agregarseA(map);
 					map.agregar(lt);
 				} catch (NoSeCumplenLosRequisitosException e) {
-					System.out.print(e);
+					System.out.println(e);
 				}
-
 			}
-
 		}
 
 		CatastrofeGodzilla god = new CatastrofeGodzilla(map);
@@ -74,8 +66,6 @@ public class IntegracionTest {
 		Iterator<Daniable> it = listaObjectivosGodzilla.iterator();
 		while (it.hasNext()) {
 			Daniable uni = it.next();
-
-			System.out.println(uni.getSalud());
 			assertEquals(uni.getSalud(), 0, 0);
 		}
 	}
