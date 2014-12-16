@@ -53,11 +53,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>2,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>2,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>2,11</Coordenada>
@@ -65,11 +65,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>2,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>2,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>2,14</Coordenada>
@@ -141,15 +141,15 @@
         </Nodo>
         <Nodo>
           <Coordenada>3,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>3,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>3,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>3,14</Coordenada>
@@ -593,11 +593,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>9,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>9,5</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>9,6</Coordenada>
@@ -653,15 +653,15 @@
         </Nodo>
         <Nodo>
           <Coordenada>9,19</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>10,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>10,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>10,2</Coordenada>
@@ -737,15 +737,15 @@
         </Nodo>
         <Nodo>
           <Coordenada>11,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,3</Coordenada>
@@ -781,19 +781,19 @@
         </Nodo>
         <Nodo>
           <Coordenada>11,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>11,15</Coordenada>
@@ -817,19 +817,19 @@
         </Nodo>
         <Nodo>
           <Coordenada>12,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,4</Coordenada>
@@ -861,27 +861,27 @@
         </Nodo>
         <Nodo>
           <Coordenada>12,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,15</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,16</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>12,17</Coordenada>
@@ -897,19 +897,19 @@
         </Nodo>
         <Nodo>
           <Coordenada>13,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,4</Coordenada>
@@ -937,31 +937,31 @@
         </Nodo>
         <Nodo>
           <Coordenada>13,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,15</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,16</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>13,17</Coordenada>
@@ -977,23 +977,23 @@
         </Nodo>
         <Nodo>
           <Coordenada>14,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,5</Coordenada>
@@ -1013,15 +1013,15 @@
         </Nodo>
         <Nodo>
           <Coordenada>14,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,12</Coordenada>
@@ -1029,19 +1029,19 @@
         </Nodo>
         <Nodo>
           <Coordenada>14,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,15</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,16</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>14,17</Coordenada>
@@ -1057,7 +1057,7 @@
         </Nodo>
         <Nodo>
           <Coordenada>15,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,1</Coordenada>
@@ -1065,19 +1065,19 @@
         </Nodo>
         <Nodo>
           <Coordenada>15,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,5</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,6</Coordenada>
@@ -1093,31 +1093,31 @@
         </Nodo>
         <Nodo>
           <Coordenada>15,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,15</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,16</Coordenada>
@@ -1129,39 +1129,39 @@
         </Nodo>
         <Nodo>
           <Coordenada>15,18</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>15,19</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,5</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,6</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,7</Coordenada>
@@ -1177,23 +1177,23 @@
         </Nodo>
         <Nodo>
           <Coordenada>16,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,14</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,15</Coordenada>
@@ -1201,51 +1201,51 @@
         </Nodo>
         <Nodo>
           <Coordenada>16,16</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,17</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,18</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>16,19</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,5</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,6</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,7</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,8</Coordenada>
@@ -1253,23 +1253,23 @@
         </Nodo>
         <Nodo>
           <Coordenada>17,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,14</Coordenada>
@@ -1281,63 +1281,63 @@
         </Nodo>
         <Nodo>
           <Coordenada>17,16</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,17</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,18</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>17,19</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,5</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,6</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,7</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,8</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,11</Coordenada>
@@ -1345,11 +1345,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>18,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,14</Coordenada>
@@ -1357,7 +1357,7 @@
         </Nodo>
         <Nodo>
           <Coordenada>18,15</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,16</Coordenada>
@@ -1365,51 +1365,51 @@
         </Nodo>
         <Nodo>
           <Coordenada>18,17</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,18</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>18,19</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,0</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,1</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,2</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,3</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,4</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,5</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,6</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,7</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,8</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,9</Coordenada>
@@ -1417,23 +1417,23 @@
         </Nodo>
         <Nodo>
           <Coordenada>19,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,14</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,15</Coordenada>
@@ -1449,11 +1449,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>19,18</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>19,19</Coordenada>
-          <Superficie>T</Superficie>
+          <Superficie>A</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,0</Coordenada>
@@ -1485,31 +1485,31 @@
         </Nodo>
         <Nodo>
           <Coordenada>0,7</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,8</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,11</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>0,14</Coordenada>
@@ -1569,15 +1569,15 @@
         </Nodo>
         <Nodo>
           <Coordenada>1,8</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>1,9</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>1,10</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>1,11</Coordenada>
@@ -1585,11 +1585,11 @@
         </Nodo>
         <Nodo>
           <Coordenada>1,12</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>1,13</Coordenada>
-          <Superficie>A</Superficie>
+          <Superficie>T</Superficie>
         </Nodo>
         <Nodo>
           <Coordenada>1,14</Coordenada>
