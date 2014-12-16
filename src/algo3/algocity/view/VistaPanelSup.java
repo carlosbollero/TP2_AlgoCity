@@ -13,25 +13,24 @@ import algo3.algocity.controller.AccionMouseVistaSuperficial;
 public class VistaPanelSup extends JMenuBar {
 
 	private static final long serialVersionUID = -3892726120581801752L;
-	
+
 	VistaMapa vistaMapa;
-	
+
 	JMenu m_menu;
 	JMenu m_vista;
-	
+
 	JMenuItem i_guardar;
 	JMenuItem i_salir;
 	JMenuItem i_superficial;
 	JMenuItem i_subterranea;
 
-	public VistaPanelSup(VistaMapa vista){
+	public VistaPanelSup(VistaMapa vista) {
 		vistaMapa = vista;
 		setMenuArchivo();
 		add(m_menu);
 		setMenuVista();
 		add(m_vista);
 	}
-
 
 	private void setMenuArchivo() {
 		m_menu = new JMenu("Menu");
@@ -45,13 +44,11 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuVista() {
 		m_vista = new JMenu("Vista");
 		i_superficial = new JMenuItem("Superficial");
-		i_superficial.addMouseListener(new AccionMouseVistaSuperficial(vistaMapa));
+		i_superficial.addActionListener(new AccionMouseVistaSuperficial(vistaMapa));
 		i_subterranea = new JMenuItem("Subterranea");
-		i_subterranea.addMouseListener(new AccionMouseVistaSubterranea(vistaMapa));
+		i_subterranea.addActionListener(new AccionMouseVistaSubterranea(vistaMapa));
 		m_vista.add(i_superficial);
-		m_vista.add(i_subterranea);		
+		m_vista.add(i_subterranea);
 	}
-	
-	
 
 }

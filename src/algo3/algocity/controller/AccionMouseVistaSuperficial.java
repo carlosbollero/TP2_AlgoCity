@@ -1,11 +1,11 @@
 package algo3.algocity.controller;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import algo3.algocity.view.VistaMapa;
 
-public class AccionMouseVistaSuperficial implements MouseListener {
+public class AccionMouseVistaSuperficial implements ActionListener {
 	
 	VistaMapa vista;
 	
@@ -14,33 +14,10 @@ public class AccionMouseVistaSuperficial implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		vista.setVisible(true);
-
+	public void actionPerformed(ActionEvent arg0) {
+		vista.setVisible();
+		
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		mouseClicked(e);
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
