@@ -28,17 +28,15 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 	private void rellenar() {
 		for (int i = 0; i < mapa.getTamanio(); i++) {
 			for (int j = 0; j < mapa.getTamanio(); j++) {
-				VistaTerrenoSub sub = new VistaTerrenoSub(new Coordenada(i, j));
+				VistaTerrenoSub sub = new VistaTerrenoSub(mapa.tuberias() ,new Coordenada(i, j));
 				add(sub);
 			}
 		}
-
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		rellenar();
-		
 	}
 
 }

@@ -45,6 +45,7 @@ public class Juego {
 
 	/* Usado para persistencia */
 	public Juego() {
+		poblacion = new Poblacion();
 //		this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 	}
 
