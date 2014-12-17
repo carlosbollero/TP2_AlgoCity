@@ -1,27 +1,22 @@
 package algo3.algocity.controller;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import algo3.algocity.view.VistaMapa;
-
 public class AccionMouseVistaSuperficial implements ActionListener {
 	
-	VistaMapa vista;
-	JPanel tuberias;
+	JPanel panel;
 	
-	public AccionMouseVistaSuperficial(VistaMapa vista, JPanel tuberias) {
-		this.vista = vista;
-		this.tuberias = tuberias;
+	public AccionMouseVistaSuperficial(JPanel panel) {
+		this.panel = panel;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		tuberias.setVisible(false);
-		vista.setVisible();
-		
+	public void actionPerformed(ActionEvent e) {
+		((CardLayout) panel.getLayout()).show(panel, "superficie");
 		
 	}
 
