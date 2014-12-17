@@ -1,5 +1,6 @@
 package algo3.algocity.view;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -19,6 +20,7 @@ public class VistaPanelOpciones extends JPanel {
 	JButton b_lineaTension;
 
 	public VistaPanelOpciones() {
+		setPreferredSize(new Dimension(200, 550));
 		setLayout(new GridLayout(4, 2));
 		inicializarMenu();
 	}

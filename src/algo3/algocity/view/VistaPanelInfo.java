@@ -1,31 +1,37 @@
 package algo3.algocity.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+
+import algo3.algocity.model.Juego;
 
 public class VistaPanelInfo extends JPanel {
 
 	private static final long serialVersionUID = -7918349684154728725L;
 
-	JTextArea mensaje;
+	JTextPane texto;
+	Juego juego;
 
-	public VistaPanelInfo() {
+	public VistaPanelInfo(Juego juego) {
+		this.juego = juego;
+		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(200, 250));
 		setBorder(BorderFactory.createTitledBorder("Info"));
-		mensaje = new JTextArea();
-		mensaje.setLineWrap(true);
-		mensaje.setWrapStyleWord(true);
-		mensaje.setEditable(false);
-		mensaje.setFocusable(false);
-		mensaje.setOpaque(false);
-		add(mensaje);
+		
+		texto = new JTextPane();
+		texto.setBackground(null);
+		texto.setEditable(false);
+		
+		add(texto, BorderLayout.WEST);
+		agregarTexto("Poblacion  " + juego.poblacion().getCantidad());
 	}
 
 	public void agregarTexto(String texto) {
-		mensaje.setText(texto);
+		this.texto.setText(texto);
 	}
 
 }

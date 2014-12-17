@@ -54,7 +54,7 @@ public class Ventana extends JFrame {
 		panelIzq.setPreferredSize(new Dimension(200, 600));
 		panelIzq.setLayout(new BorderLayout());
 		add(panelIzq, BorderLayout.WEST);
-		panelIzq.add(new VistaPanelInfo(), BorderLayout.NORTH);
+		panelIzq.add(new VistaPanelInfo(juego), BorderLayout.NORTH);
 		panelIzq.add(new VistaPanelOpciones(), BorderLayout.CENTER);
 
 	}
