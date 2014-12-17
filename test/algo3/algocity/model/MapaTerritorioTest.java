@@ -26,10 +26,11 @@ public class MapaTerritorioTest {
 				assertTrue(mt.superficie(p).esAgua()
 						|| mt.superficie(p).esTierra());
 			}
-
 		}
 	}
 	
+	/*Este test puede llegar a fallar en el caso particular que el mapa se cree
+	 * sin ninguna posicion con agua*/
 	@Test
 	public void testSePuedeConsultarSuSePuedeConstruirEnUnaCoordenadaDeAgua(){
 		mt = new MapaTerritorio(alto, ancho);
