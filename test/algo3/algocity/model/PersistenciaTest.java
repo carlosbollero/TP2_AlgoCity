@@ -130,6 +130,7 @@ public class PersistenciaTest {
 		juego.persistir();
 
 		/* Corroboro que se haya creado el fichero */
+		// Asegurarse que exista el directorio saved
 		File fichero = new File("./saved/" + "Juan" + ".xml");
 		assertNotNull(fichero);
 
@@ -137,14 +138,12 @@ public class PersistenciaTest {
 		Juego juegoRecuperado = new Juego();
 		juegoRecuperado = juegoRecuperado.recuperar("Juan");
 
-		
 		if (fichero.delete()) {
 			System.out.println("Los ficheros de prueba fueron eliminados");
 		} else {
 			System.out
 					.println("Los ficheros de prueba no pudieron ser eliminados");
 		}
-		
 
 		/* Corroboro que los datos leidos sean correctos */
 		assertEquals(juegoRecuperado.altoMapaJuego, 100);
