@@ -45,15 +45,15 @@ public class VistaTerreno extends JPanel implements Observer {
 		return coordenada;
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
+		super.paintComponents(g);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		imagen = (mapa.superficie(coordenada).esAgua()) ? new ImageIcon(
-				"img/water.png").getImage() : new ImageIcon("img/dirt.png")
-				.getImage();
+		setImagen();
 		repaint();
 
 	}

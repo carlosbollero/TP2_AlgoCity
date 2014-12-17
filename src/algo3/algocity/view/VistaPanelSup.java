@@ -17,9 +17,9 @@ public class VistaPanelSup extends JMenuBar {
 
 	Juego juego;
 	VistaMapa vistaMapa;
-	JPanel vistaTuberias;
+	VistaMapaSubterraneo vistaMapaSub;
 
-	JMenu m_menu;
+	JMenu m_archivo;
 	JMenuItem i_guardar;
 	JMenuItem i_salir;
 
@@ -29,38 +29,46 @@ public class VistaPanelSup extends JMenuBar {
 
 	JMenu m_ayuda;
 	JMenuItem i_acerca;
+	
+	JPanel panelDer;
 
-	public VistaPanelSup(VistaMapa vista, JPanel vistatuberias, Juego juego) {
+	public VistaPanelSup(VistaMapa vista, VistaMapaSubterraneo vistaSub, Juego juego) {
 		this.juego = juego;
 		vistaMapa = vista;
-		this.vistaTuberias = vistatuberias;
+		this.vistaMapaSub = vistaSub;
 		setMenuArchivo();
 		setMenuVista();
 		setMenuAyuda();
 
 	}
+	
+	public VistaPanelSup(JPanel panel, Juego juego) {
+		this.juego = juego;
+		this.panelDer = panel;
+		setMenuArchivo();
+		setMenuVista();
+		setMenuAyuda();
+	}
 
 	private void setMenuArchivo() {
-		m_menu = new JMenu("Menu");
+		m_archivo = new JMenu("Archivo");
 		i_guardar = new JMenuItem("Guardar");
 		i_guardar.addActionListener(new AccionMouseGuardarJuego(juego));
 		i_salir = new JMenuItem("Salir");
 		i_salir.addActionListener(new AccionMouseSalirJuego());
-		m_menu.add(i_guardar);
-		m_menu.addSeparator();
-		m_menu.add(i_salir);
+		m_archivo.add(i_guardar);
+		m_archivo.addSeparator();
+		m_archivo.add(i_salir);
 
-		add(m_menu);
+		add(m_archivo);
 	}
 
 	private void setMenuVista() {
 		m_vista = new JMenu("Vista");
 		i_superficial = new JMenuItem("Superficial");
-		i_superficial.addActionListener(new AccionMouseVistaSuperficial(
-				vistaMapa, vistaTuberias));
+		i_superficial.addActionListener(new AccionMouseVistaSuperficial(panelDer));
 		i_subterranea = new JMenuItem("Subterranea");
-		i_subterranea.addActionListener(new AccionMouseVistaSubterranea(
-				vistaMapa, vistaTuberias));
+		i_subterranea.addActionListener(new AccionMouseVistaSubterranea(panelDer));
 		m_vista.add(i_superficial);
 		m_vista.add(i_subterranea);
 
