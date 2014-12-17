@@ -2,6 +2,7 @@ package algo3.algocity.view;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -12,8 +13,9 @@ public class VistaPanelInfo extends JPanel {
 	JTextArea mensaje;
 
 	public VistaPanelInfo() {
-		setPreferredSize(new Dimension(200, 200));
-		mensaje = new JTextArea("Area para info");
+		setPreferredSize(new Dimension(200, 250));
+		setBorder(BorderFactory.createTitledBorder("Info"));
+		mensaje = new JTextArea();
 		mensaje.setLineWrap(true);
 		mensaje.setWrapStyleWord(true);
 		mensaje.setEditable(false);
