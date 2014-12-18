@@ -54,12 +54,7 @@ public class Juego {
 
 	public void iniciar() {
 		generarMapas();
-		crearVentana();
 		// iniciarTurnos();
-	}
-
-	private void crearVentana() {
-		JFrame ventana = new Ventana(this);
 	}
 
 	private void iniciarTurnos() {
