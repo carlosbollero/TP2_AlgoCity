@@ -103,8 +103,12 @@ public class MapaConexiones {
 	}
 
 	public boolean contiene(Conector elemento) {
-		return (this.mapa.containsValue(elemento) && this.grafo
+		return (mapa.containsValue(elemento) && grafo
 				.containsVertex(elemento));
+	}
+	
+	public boolean contiene(Coordenada coord){
+		return (mapa.containsKey(coord));
 	}
 
 	public Conector getConectorEn(int x, int y) {

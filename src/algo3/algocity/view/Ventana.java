@@ -1,6 +1,8 @@
 package algo3.algocity.view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,60 +17,54 @@ public class Ventana extends JFrame {
 	int tamanio;
 	Juego juego;
 	Mapa mapa;
-	VistaMapa vistaMapa;
 
-	public Ventana(Mapa mapa, Juego juego) {
+	JPanel panelDer, panelIzq;
+
+	public Ventana(Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
-		this.mapa = mapa;
-		definirPanelIzq();
-		definirPanelDer(mapa);
-		definirPanelSup();
+		this.mapa = juego.mapa();
+		setPanelIzq();
+		setPanelDer();
+		setPanelSup();
 		acomodar();
 	}
 
-	private void definirPanelSup() {
-		setJMenuBar(new VistaPanelSup(vistaMapa, juego));
-		
+	private void setPanelSup() {
+		setJMenuBar(new VistaPanelSup(panelDer, juego));
+
 	}
 
-	private void definirPanelDer(Mapa mapa) {
-		vistaMapa = new VistaMapa(mapa);
-		add(vistaMapa);
-		
+	private void setPanelDer() {
+		panelDer = new JPanel();
+		panelDer.setLayout(new CardLayout());
+		VistaMapaSubterraneo vistaMapaSubterraneo = new VistaMapaSubterraneo(mapa);
+		panelDer.add(vistaMapaSubterraneo, "subterraneo");
+		VistaMapa vistaMapa = new VistaMapa(mapa);
+		panelDer.add(vistaMapa, "superficie");
+		add(panelDer);
+		((CardLayout) panelDer.getLayout()).show(panelDer, "superficie");
+
 	}
 
-	private void definirPanelIzq() {
-		JPanel panelIzq = new JPanel();
+	private void setPanelIzq() {
+		panelIzq = new JPanel();
+		panelIzq.setPreferredSize(new Dimension(200, 600));
 		panelIzq.setLayout(new BorderLayout());
 		add(panelIzq, BorderLayout.WEST);
-		panelIzq.add(new VistaPanelInfo(), BorderLayout.NORTH);
+		panelIzq.add(new VistaPanelInfo(juego), BorderLayout.NORTH);
 		panelIzq.add(new VistaPanelOpciones(), BorderLayout.CENTER);
 
 	}
 
 	private void acomodar() {
-		setSize(800, 600);
+		// setSize(800, 600);
+		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-//		Este metodo sirve para que la ventana se ajuste al tamanio
-//		minimo determinado por el tamanio de los paneles internos
-//		pack();
+		validate();
 
-	}
-
-	private void iniciarVistaMapa(Mapa mapa) {
-		add(new VistaMapa(mapa));
-	}
-
-	private void iniciarPanelOpciones() {
-		add(new VistaPanelOpciones(), BorderLayout.WEST);
-	}
-
-	private void iniciarPanelInfo() {
-		add(new VistaPanelInfo(), BorderLayout.LINE_START);
 	}
 
 }

@@ -14,11 +14,12 @@ import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
 import algo3.algocity.model.mapas.Mapa;
 
-public class Poblacion implements Observer {
+public class Poblacion extends Observable implements Observer {
 	int cantidad;
 	int capacidadHabitacional;
 	int capacidadEmpleo;
 	int indiceCrecimiento;
+	int tasa;
 	EstadoPoblacion estadoActual;
 	Mapa mapa;
 
@@ -27,7 +28,8 @@ public class Poblacion implements Observer {
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
-		estadoActual = new EstadoPoblacionEstable();
+		tasa = 20;
+		estadoActual = new EstadoPoblacionCreciendo();
 	}
 
 	public Poblacion(Mapa mapa) {
@@ -52,7 +54,7 @@ public class Poblacion implements Observer {
 	}
 
 	public void aumentar() {
-		cantidad++;
+		cantidad += tasa;
 	}
 
 	public void aumentar(int cantidad) {
@@ -65,7 +67,7 @@ public class Poblacion implements Observer {
 	}
 
 	public void disminuir() {
-		cantidad--;
+		cantidad-= tasa;
 	}
 
 	public void disminuir(int cantidad) {

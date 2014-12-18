@@ -2,12 +2,7 @@ package algo3.algocity.model;
 
 import static org.junit.Assert.*;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import org.junit.Test;
-
-import algo3.algocity.model.TurnoTest.TestObserver;
 
 public class TurnoTest {
 
@@ -31,66 +26,19 @@ public class TurnoTest {
 	}
 	
 	@Test
-	public void testLosTurnosCorrenPorUnHiloDeEjecucionDiferente(){
-		Turno t = new Turno();
-		t.iniciarHilo();
+	public void testElTurnoAvanzaAutomaticamenteCadaCiertoTiempo(){
+		Turno turno = new Turno();
 		
-		assertTrue(t.estaVivo());
-		
-		t.finalizar();
+		assertEquals(turno.getTurno(), 1);
 		
 		try {
-			Thread.sleep(1);
+			Thread.sleep(turno.getDelay()+1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		assertFalse(t.estaVivo());
-	}
-
-//	@Test
-//	public void testElTurnoAvanzaAutomaticamente() throws InterruptedException {
-//		Turno t = new Turno();
-//
-//		assertEquals(t.getTurno(), 1);
-//
-//		Thread.sleep(1000);
-//
-//		assertEquals(t.getTurno(), 2);
-//
-//	}
-	
-	
-	@Test
-	public void testTurnosSeEjecutaEnUnHiloDiferente() {
-		Turno t = new Turno();
-		t.iniciarHilo();
-		TestObserver obs = new TestObserver();
-		t.addObserver(obs);
-		
-		assertTrue(t.estaVivo());
-		
-		t.finalizar();
-		try {
-			Thread.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		assertFalse(t.estaVivo());
-	} 
-	
-	public class TestObserver implements Observer {
-		int turn = 0;
-		
-		@Override
-		public void update(Observable o, Object arg) {
-			turn++;
-		}
-		
+		assertEquals(turno.getTurno(), 2);
 	}
 
 }

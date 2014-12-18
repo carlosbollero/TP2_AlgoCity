@@ -41,21 +41,20 @@ public class Juego {
 		this.mapa = map;
 		this.turnos = turnos;
 		this.poblacion = p;
+		this.turnos.addObserver(this.poblacion);
 	}
 
 	/* Usado para persistencia */
 	public Juego() {
+		poblacion = new Poblacion();
+		turnos = new Turno();
+		turnos.addObserver(poblacion);
 //		this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 	}
 
 	public void iniciar() {
 		generarMapas();
-		crearVentana();
 		// iniciarTurnos();
-	}
-
-	private void crearVentana() {
-		JFrame ventana = new Ventana(mapa, this);
 	}
 
 	private void iniciarTurnos() {

@@ -1,67 +1,46 @@
 package algo3.algocity.model;
 
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import algo3.algocity.model.mapas.Mapa;
+public class Turno extends Observable{
 
-public class Turno extends Observable implements Runnable {
-	/*
-	 * La idea es que turno se ejecute en un thread distinto para poder hacer
-	 * que avance cada cierto tiempo de manera automatica
-	 */
 	int numero;
-	volatile boolean jugando;
-	Thread hilo;
+	Timer timer;
+	long delay;
+	
+	TimerTask tarea = new TimerTask() {		
+		@Override
+		public void run() {
+			avanzar();			
+		}
+	};
 
 	public Turno() {
 		numero = 1;
-		jugando = true;
+		delay = 5000;
+		timer = new Timer();
+		timer.schedule(tarea, delay, delay);
 	}
 
 	public int getTurno() {
 		return numero;
+	}
+	
+	public long getDelay(){
+		return delay;
 	}
 
 	public void avanzar() {
 		numero++;
 		setChanged();
 		notifyObservers();
-	}
-
-	public void iniciarHilo() {
-		hilo = new Thread(this, "TURNO");
-		hilo.start();
-	}
-
-	public void finalizar() {
-		jugando = false;
-	}
-
-	public boolean estaVivo() {
-		return hilo.isAlive();
-	}
-
-	public void join() {
-		try {
-			hilo.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void run() {
-		System.out.println("START");
-		while (jugando) {
-			avanzar();
-		}
-		System.out.println("EXIT");
 	}
 
 	/**********************************************************************/
