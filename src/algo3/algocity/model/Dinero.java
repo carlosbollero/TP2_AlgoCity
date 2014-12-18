@@ -3,6 +3,8 @@ package algo3.algocity.model;
 import java.util.Observable;
 import java.util.Observer;
 
+import algo3.algocity.model.excepciones.NoTieneSuficientesFondosException;
+
 public class Dinero implements Observer {
 	
 	Turno turno;
@@ -27,7 +29,14 @@ public class Dinero implements Observer {
 		return cantidad;
 	}
 	
-	public void cobrar(int costo){
+//	public void cobrar(int costo){
+//		cantidad -= costo;
+//	}
+	
+	public void cobrar(int costo) throws NoTieneSuficientesFondosException {
+		if (cantidad < costo){
+			throw new NoTieneSuficientesFondosException();
+		}
 		cantidad -= costo;
 	}
 	
