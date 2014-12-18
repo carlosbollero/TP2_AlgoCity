@@ -10,13 +10,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Turno extends Observable{
-	/*
-	 * La idea es que turno se ejecute en un thread distinto para poder hacer
-	 * que avance cada cierto tiempo de manera automatica
-	 */
+
 	int numero;
-	volatile boolean jugando;
-	Thread hilo;
 	Timer timer;
 	long delay;
 	
@@ -30,7 +25,6 @@ public class Turno extends Observable{
 	public Turno() {
 		numero = 1;
 		delay = 5000;
-		jugando = true;
 		timer = new Timer();
 		timer.schedule(tarea, delay, delay);
 	}
@@ -47,10 +41,6 @@ public class Turno extends Observable{
 		numero++;
 		setChanged();
 		notifyObservers();
-	}
-
-	public void finalizar() {
-		jugando = false;
 	}
 
 	/**********************************************************************/
