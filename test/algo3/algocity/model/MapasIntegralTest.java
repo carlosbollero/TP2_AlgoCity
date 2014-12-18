@@ -6,11 +6,9 @@ import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
-import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaCentralMineral;
@@ -91,6 +89,8 @@ public class MapasIntegralTest {
 	@Test
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
 		Mapa m = new Mapa();
+
+
 		fu = new FabricaUnidadIndustrial();
 		Coordenada p = m.posicionConTierra();
 
