@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -24,7 +23,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.view.Ventana;
 
 public class Juego {
 
@@ -35,20 +33,24 @@ public class Juego {
 	private Turno turnos;
 	private Poblacion poblacion;
 	private Usuario usuario;
+	private Dinero dinero;
 
-	public Juego(Usuario u, Mapa map, Turno turnos, Poblacion p) {
-		this.usuario = u;
-		this.mapa = map;
-		this.turnos = turnos;
-		this.poblacion = p;
-		this.turnos.addObserver(this.poblacion);
+	public Juego(Usuario u, Mapa map, Turno t, Poblacion p) {
+		usuario = u;
+		mapa = map;
+		turnos = t;
+		poblacion = p;
+		dinero = new Dinero(p, t);
+		turnos.addObserver(this.poblacion);
 	}
 
 	/* Usado para persistencia */
 	public Juego() {
 		poblacion = new Poblacion();
 		turnos = new Turno();
+		dinero = new Dinero(poblacion, turnos);
 		turnos.addObserver(poblacion);
+		turnos.addObserver(dinero);
 //		this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 	}
 
@@ -79,6 +81,11 @@ public class Juego {
 
 	public Poblacion poblacion() {
 		return this.poblacion;
+	}
+	
+
+	public Dinero dinero() {
+		return dinero;
 	}
 
 	/**********************************************************************/
@@ -179,4 +186,5 @@ public class Juego {
 		}
 		return juego;
 	}
+
 }
