@@ -1,7 +1,5 @@
 package algo3.algocity.view;
 
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
