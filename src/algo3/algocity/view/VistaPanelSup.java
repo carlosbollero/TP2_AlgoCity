@@ -5,6 +5,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import algo3.algocity.controller.AccionMouseAcerca;
 import algo3.algocity.controller.AccionMouseGuardarJuego;
 import algo3.algocity.controller.AccionMouseSalirJuego;
 import algo3.algocity.controller.AccionMouseVistaSubterranea;
@@ -78,7 +79,7 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuAyuda() {
 		m_ayuda = new JMenu("Ayuda");
 		i_acerca = new JMenuItem("Acerca");
-		// i_acerca.addActionListener(new AccionMouseAcerca());
+		 i_acerca.addActionListener(new AccionMouseAcerca());
 		m_ayuda.add(i_acerca);
 
 		add(m_ayuda);
