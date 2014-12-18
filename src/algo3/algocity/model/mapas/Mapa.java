@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
@@ -20,6 +21,7 @@ import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.excepciones.NoTieneSuficientesFondosException;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
@@ -33,10 +35,24 @@ public class Mapa extends Observable {
 	MapaConexiones tuberias;
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
+	
+	Dinero dinero;
 
 	Reparador reparador;
 
 	public Mapa() {
+		alto = 20;
+		ancho = 20;
+		tamanio = 20;
+		territorio = new MapaTerritorio(alto, ancho);
+		ciudad = new MapaEdilicio(alto, ancho);
+		tuberias = new MapaConexiones(alto, ancho);
+		rutas = new MapaConexiones(alto, ancho);
+		redElectrica = new MapaConexiones(alto, ancho);
+		this.reparador = null;
+	}
+	
+	public Mapa(Dinero dinero) {
 		alto = 20;
 		ancho = 20;
 		tamanio = 20;
@@ -55,9 +71,22 @@ public class Mapa extends Observable {
 	public int ancho() {
 		return ancho;
 	}
+	
+//	public void agregar(Unidad unidad) {
+//		unidad.agregarseA(this);
+//	}
 
+//	Verificar si es correcto
+//	y ver que crashea la persistencia
 	public void agregar(Unidad unidad) {
-		unidad.agregarseA(this);
+		try {
+			if (dinero.cobrar(unidad.costo())){
+				unidad.agregarseA(this);			
+			}
+		} catch (NoTieneSuficientesFondosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void agregar(Conector conector) {
