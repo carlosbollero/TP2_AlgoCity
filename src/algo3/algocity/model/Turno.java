@@ -1,13 +1,13 @@
 package algo3.algocity.model;
 
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import algo3.algocity.model.mapas.Mapa;
 
 public class Turno extends Observable implements Runnable {
 	/*
@@ -17,14 +17,31 @@ public class Turno extends Observable implements Runnable {
 	int numero;
 	volatile boolean jugando;
 	Thread hilo;
+	Timer timer;
+	long delay;
+	
+	TimerTask tarea = new TimerTask() {
+		
+		@Override
+		public void run() {
+			avanzar();			
+		}
+	};
 
 	public Turno() {
 		numero = 1;
+		delay = 5000;
 		jugando = true;
+		timer = new Timer();
+		timer.schedule(tarea, delay, delay);
 	}
 
 	public int getTurno() {
 		return numero;
+	}
+	
+	public long getDelay(){
+		return delay;
 	}
 
 	public void avanzar() {
@@ -34,8 +51,8 @@ public class Turno extends Observable implements Runnable {
 	}
 
 	public void iniciarHilo() {
-		hilo = new Thread(this, "TURNO");
-		hilo.start();
+//		hilo = new Thread(this, "TURNO");
+//		hilo.start();
 	}
 
 	public void finalizar() {

@@ -14,7 +14,7 @@ import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
 import algo3.algocity.model.mapas.Mapa;
 
-public class Poblacion implements Observer {
+public class Poblacion extends Observable implements Observer {
 	int cantidad;
 	int capacidadHabitacional;
 	int capacidadEmpleo;
@@ -27,7 +27,7 @@ public class Poblacion implements Observer {
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
-		estadoActual = new EstadoPoblacionEstable();
+		estadoActual = new EstadoPoblacionCreciendo();
 	}
 
 	public Poblacion(Mapa mapa) {
