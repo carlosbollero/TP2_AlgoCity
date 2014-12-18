@@ -34,7 +34,7 @@ public class ControladorMouse extends MouseAdapter {
 	
 	public void mouseClicked(MouseEvent mouseEvent) {
 //		mapa.agregar(new Ruta(10,10));
-		mapa.setTerritorioTierraParaTest();
+//		mapa.setTerritorioTierraParaTest();
 //		vistaMapa.setInvisible();
 //		mapa.agregar(new Ruta(mapa, x, y));
 	}
