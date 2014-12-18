@@ -64,7 +64,7 @@ public class Juego {
 	}
 
 	private void generarMapas() {
-		mapa = new Mapa();
+		mapa = new Mapa(dinero);
 	}
 
 	public Mapa mapa() {
