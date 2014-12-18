@@ -33,11 +33,12 @@ public class Dinero implements Observer {
 //		cantidad -= costo;
 //	}
 	
-	public void cobrar(int costo) throws NoTieneSuficientesFondosException {
+	public boolean cobrar(int costo) throws NoTieneSuficientesFondosException {
 		if (cantidad < costo){
 			throw new NoTieneSuficientesFondosException();
 		}
 		cantidad -= costo;
+		return true;
 	}
 	
 }
