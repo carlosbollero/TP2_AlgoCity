@@ -17,15 +17,13 @@ public class Ventana extends JFrame {
 	int tamanio;
 	Juego juego;
 	Mapa mapa;
-	// VistaMapa vistaMapa;
-	// VistaMapaSubterraneo vistaMapaSubterraneo;
 
 	JPanel panelDer, panelIzq;
 
-	public Ventana(Mapa mapa, Juego juego) {
+	public Ventana(Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
-		this.mapa = mapa;
+		this.mapa = juego.mapa();
 		setPanelIzq();
 		setPanelDer();
 		setPanelSup();
