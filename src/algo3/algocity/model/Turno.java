@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class Turno extends Observable implements Runnable {
+public class Turno extends Observable{
 	/*
 	 * La idea es que turno se ejecute en un thread distinto para poder hacer
 	 * que avance cada cierto tiempo de manera automatica
@@ -20,8 +20,7 @@ public class Turno extends Observable implements Runnable {
 	Timer timer;
 	long delay;
 	
-	TimerTask tarea = new TimerTask() {
-		
+	TimerTask tarea = new TimerTask() {		
 		@Override
 		public void run() {
 			avanzar();			
@@ -50,35 +49,8 @@ public class Turno extends Observable implements Runnable {
 		notifyObservers();
 	}
 
-	public void iniciarHilo() {
-//		hilo = new Thread(this, "TURNO");
-//		hilo.start();
-	}
-
 	public void finalizar() {
 		jugando = false;
-	}
-
-	public boolean estaVivo() {
-		return hilo.isAlive();
-	}
-
-	public void join() {
-		try {
-			hilo.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void run() {
-		System.out.println("START");
-		while (jugando) {
-			avanzar();
-		}
-		System.out.println("EXIT");
 	}
 
 	/**********************************************************************/
