@@ -26,7 +26,12 @@ public class VistaPanelOpciones extends JPanel {
 	}
 
 	private void inicializarMenu() {
-
+		setImagenes();
+		setEtiquetas();
+		agregarBotonesAlPanel();
+	}
+	
+	private void setImagenes(){
 		b_residencial = new JButton(new ImageIcon("img/b_residencial.png"));
 		b_industrial = new JButton(new ImageIcon("img/b_industrial.png"));
 		b_comercial = new JButton(new ImageIcon("img/b_comercial.png"));
@@ -34,14 +39,26 @@ public class VistaPanelOpciones extends JPanel {
 		b_nuclear = new JButton(new ImageIcon("img/b_nuclear.png"));
 		b_ruta = new JButton(new ImageIcon("img/b_ruta.png"));
 		b_lineaTension = new JButton(new ImageIcon("img/b_linea_tension.png"));
-
+	}
+	
+	private void setEtiquetas(){
+		b_residencial.setToolTipText("Unidad Residencial");
+		b_industrial.setToolTipText("Unidad Industrial");
+		b_comercial.setToolTipText("Unidad Comercial");
+		b_bomberos.setToolTipText("Bomberos");
+		b_nuclear.setToolTipText("Central Nuclear");
+		b_ruta.setToolTipText("Ruta");
+		b_lineaTension.setToolTipText("Linea de Tensión");
+	}
+	
+	private void agregarBotonesAlPanel() {
 		add(b_residencial);
 		add(b_comercial);
 		add(b_industrial);
 		add(b_bomberos);
 		add(b_nuclear);
 		add(b_ruta);
-		add(b_lineaTension);
+		add(b_lineaTension);		
 	}
 
 }
