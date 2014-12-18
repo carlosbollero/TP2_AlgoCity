@@ -19,6 +19,7 @@ public class Poblacion extends Observable implements Observer {
 	int capacidadHabitacional;
 	int capacidadEmpleo;
 	int indiceCrecimiento;
+	int tasa;
 	EstadoPoblacion estadoActual;
 	Mapa mapa;
 
@@ -27,6 +28,7 @@ public class Poblacion extends Observable implements Observer {
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
+		tasa = 20;
 		estadoActual = new EstadoPoblacionCreciendo();
 	}
 
@@ -52,7 +54,7 @@ public class Poblacion extends Observable implements Observer {
 	}
 
 	public void aumentar() {
-		cantidad++;
+		cantidad += tasa;
 	}
 
 	public void aumentar(int cantidad) {
@@ -65,7 +67,7 @@ public class Poblacion extends Observable implements Observer {
 	}
 
 	public void disminuir() {
-		cantidad--;
+		cantidad-= tasa;
 	}
 
 	public void disminuir(int cantidad) {
