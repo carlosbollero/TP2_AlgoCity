@@ -45,7 +45,9 @@ public class IntegracionTest {
 	}
 
 	@Test
-	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() throws NoSeCumplenLosRequisitosException{
+	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest()
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
@@ -53,7 +55,7 @@ public class IntegracionTest {
 		map.setTerritorioTierraParaTest();
 		for (int j = 0; j < map.ancho(); j++) {
 			for (int i = 0; i < map.alto(); i++) {
-				Conector lt = flt.construir(map, new Coordenada(i, j));
+				Conector lt = flt.construir(map, d, new Coordenada(i, j));
 				map.agregar(lt);				
 			}
 		}
