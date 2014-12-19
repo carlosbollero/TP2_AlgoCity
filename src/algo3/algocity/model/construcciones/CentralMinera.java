@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -25,17 +26,19 @@ public class CentralMinera extends UnidadEnergetica {
 		this.radioDeInfluencia = 10;
 	}
 
-	public CentralMinera(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public CentralMinera(Mapa mapa ,algo3.algocity.model.Dinero dinero, Coordenada coord)
+ throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.fabricas.FabricaUnidadComercial;
@@ -22,13 +23,15 @@ public class IntegracionTest {
 	int ancho = 10;
 
 	@Test
-	public void testSePuedeAgregarUnaNuevaUnidadComercialAlMapaUsandoFabricasYDaniarla() {
+	public void testSePuedeAgregarUnaNuevaUnidadComercialAlMapaUsandoFabricasYDaniarla()
+			throws FondosInsuficientesException {
 
 		Mapa map = new Mapa();
+		Dinero d = new Dinero();
 		FabricaUnidadComercial fuc = new FabricaUnidadComercial();
 		map.setTerritorioTierraParaTest();
 		try {
-			UnidadComercial uc = fuc.construir(map, 2, 2);
+			UnidadComercial uc = fuc.construir(map, d, 2, 2);
 			CatastrofeGodzilla god = new CatastrofeGodzilla(map);
 			uc.agregarseA(map);
 			uc.aceptar(god);
@@ -44,6 +47,7 @@ public class IntegracionTest {
 	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() {
 
 		Mapa map = new Mapa();
+		Dinero d = new Dinero();
 		FabricaLineaTension flt = new FabricaLineaTension();
 		map.setTerritorioTierraParaTest();
 		for (int j = 0; j < map.ancho(); j++) {

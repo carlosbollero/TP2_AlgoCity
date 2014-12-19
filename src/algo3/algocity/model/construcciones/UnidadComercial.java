@@ -5,9 +5,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -30,16 +32,17 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		this.consumo = 2;
 	}
 
-	public UnidadComercial(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public UnidadComercial(Mapa mapa, Dinero dinero, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 		this.costo = 5;
 		this.consumo = 2;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 	}
 
 	public double getDanios() {

@@ -6,10 +6,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -36,18 +38,18 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 25;
 	}
 
-	public UnidadIndustrial(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public UnidadIndustrial(Mapa mapa, Dinero dinero, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 
-		coordenadas = new Coordenada(x, y);
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
-		coordenadas = new Coordenada(x, y);
+		coordenadas = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 	}
 
 	@Override

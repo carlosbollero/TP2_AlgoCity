@@ -5,9 +5,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -22,15 +24,17 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		consumo = 0;
 	}
 
-	public EstacionDeBomberos(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
-		coordenadas = new Coordenada(x, y);
+		coordenadas = coord;
 		costo = 1500;
 		consumo = 0;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 	}
 
 	public EstacionDeBomberos(int x, int y) {

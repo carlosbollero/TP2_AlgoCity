@@ -21,7 +21,6 @@ import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
-import algo3.algocity.model.excepciones.NoTieneSuficientesFondosException;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
@@ -51,18 +50,6 @@ public class Mapa extends Observable {
 		redElectrica = new MapaConexiones(alto, ancho);
 		this.reparador = null;
 	}
-	
-	public Mapa(Dinero dinero) {
-		alto = 20;
-		ancho = 20;
-		tamanio = 20;
-		territorio = new MapaTerritorio(alto, ancho);
-		ciudad = new MapaEdilicio(alto, ancho);
-		tuberias = new MapaConexiones(alto, ancho);
-		rutas = new MapaConexiones(alto, ancho);
-		redElectrica = new MapaConexiones(alto, ancho);
-		this.reparador = null;
-	}
 
 	public int alto() {
 		return alto;
@@ -72,21 +59,8 @@ public class Mapa extends Observable {
 		return ancho;
 	}
 	
-//	public void agregar(Unidad unidad) {
-//		unidad.agregarseA(this);
-//	}
-
-//	Verificar si es correcto
-//	y ver que crashea la persistencia
 	public void agregar(Unidad unidad) {
-		try {
-			if (dinero.cobrar(unidad.costo())){
-				unidad.agregarseA(this);			
-			}
-		} catch (NoTieneSuficientesFondosException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		unidad.agregarseA(this);
 	}
 
 	public void agregar(Conector conector) {

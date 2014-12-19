@@ -58,6 +58,7 @@ public class MapaTerritorio {
 
 	private void inicializar() {
 		mapa = generador.generarTerritorio();
+		
 	}
 
 	private boolean agregar(Superficie superficie, int x, int y) {
