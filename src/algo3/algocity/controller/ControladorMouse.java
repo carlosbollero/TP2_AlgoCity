@@ -3,7 +3,6 @@ package algo3.algocity.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.view.VistaMapa;
 import algo3.algocity.view.VistaTerreno;
