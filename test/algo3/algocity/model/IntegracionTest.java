@@ -11,6 +11,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaLineaTension;
@@ -25,29 +26,26 @@ public class IntegracionTest {
 
 	@Test
 	public void testSePuedeAgregarUnaNuevaUnidadComercialAlMapaUsandoFabricasYDaniarla()
-			throws FondosInsuficientesException {
-
-		// HAY QUE AGREGAR SISTEMAELECTRICO
+			throws FondosInsuficientesException,
+			NoSeCumplenLosRequisitosException,
+			CapacidadElectricaInsuficienteException {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
+		SistemaElectrico s = new SistemaElectrico();
 		FabricaUnidadComercial fuc = new FabricaUnidadComercial();
 		map.setTerritorioTierraParaTest();
-		try {
-			UnidadComercial uc = fuc.construir(map, d, new Coordenada(2, 2));
-			CatastrofeGodzilla god = new CatastrofeGodzilla(map);
-			uc.agregarseA(map);
-			uc.aceptar(god);
+		UnidadComercial uc = fuc.construir(map, d, s, new Coordenada(2, 2));
+		CatastrofeGodzilla god = new CatastrofeGodzilla(map);
+		uc.agregarseA(map);
+		uc.aceptar(god);
 
-			assertEquals(uc.getSalud(), 25, 0);
+		assertEquals(uc.getSalud(), 25, 0);
 
-		} catch (NoSeCumplenLosRequisitosException e) {
-
-		}
 	}
 
 	@Test
-	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() {
+	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest() throws NoSeCumplenLosRequisitosException{
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
@@ -55,12 +53,8 @@ public class IntegracionTest {
 		map.setTerritorioTierraParaTest();
 		for (int j = 0; j < map.ancho(); j++) {
 			for (int i = 0; i < map.alto(); i++) {
-				try {
-					Conector lt = flt.construir(map, new Coordenada(i, j));
-					map.agregar(lt);
-				} catch (NoSeCumplenLosRequisitosException e) {
-					System.out.println(e);
-				}
+				Conector lt = flt.construir(map, new Coordenada(i, j));
+				map.agregar(lt);				
 			}
 		}
 
