@@ -12,6 +12,7 @@ import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class ReparadorTest {
@@ -21,16 +22,16 @@ public class ReparadorTest {
 
 		Mapa m = new Mapa();
 
-		UnidadResidencial ur1 = new UnidadResidencial(1, 1);
-		UnidadComercial uc1 = new UnidadComercial(1, 2);
-		CentralEolica ce1 = new CentralEolica(2, 3);
-		CentralMinera cm1 = new CentralMinera(3, 2);
-		CentralNuclear cn1 = new CentralNuclear(4, 2);
-		UnidadResidencial ur2 = new UnidadResidencial(10, 10);
-		UnidadResidencial ur3 = new UnidadResidencial(1, 4);
-		UnidadIndustrial ui1 = new UnidadIndustrial(5, 5);
-		LineaTension lt = new LineaTension(1, 1);
-		Ruta rt = new Ruta(1, 2);
+		UnidadResidencial ur1 = new UnidadResidencial(new Coordenada(1, 1));
+		UnidadComercial uc1 = new UnidadComercial(new Coordenada(1, 2));
+		CentralEolica ce1 = new CentralEolica(new Coordenada(2, 3));
+		CentralMinera cm1 = new CentralMinera(new Coordenada(3, 2));
+		CentralNuclear cn1 = new CentralNuclear(new Coordenada(4, 1));
+		UnidadResidencial ur2 = new UnidadResidencial(new Coordenada(10, 10));
+		UnidadResidencial ur3 = new UnidadResidencial(new Coordenada(1, 4));
+		UnidadIndustrial ui1 = new UnidadIndustrial(new Coordenada(5, 5));
+		LineaTension lt = new LineaTension(new Coordenada(1, 1));
+		Ruta rt = new Ruta(new Coordenada(1, 2));
 
 		m.agregar(ur1);
 		m.agregar(uc1);
@@ -91,7 +92,4 @@ public class ReparadorTest {
 		assertEquals(100, rt.getSalud(), 0);
 	}
 
-	
-	
-	
 }

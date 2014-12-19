@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -20,14 +21,14 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.radioDeInfluencia = 25;
 	}
 
-	public CentralNuclear(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public CentralNuclear(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
 	}
 
-	public CentralNuclear(Mapa mapa ,Dinero dinero, Coordenada coord)
+	public CentralNuclear(Mapa mapa ,Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException {
 		this.costo = 10000;
@@ -38,6 +39,7 @@ public class CentralNuclear extends UnidadEnergetica {
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		sisElectrico.aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
 	}
 

@@ -13,6 +13,7 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class GodzillaTest {
@@ -28,7 +29,7 @@ public class GodzillaTest {
 
 		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(20, 20);
-		UnidadResidencial ur = new UnidadResidencial(1, 1);
+		UnidadResidencial ur = new UnidadResidencial(new Coordenada(1, 1));
 
 		ur.aceptar(g);
 
@@ -39,7 +40,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadComercial() {
 		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadComercial uc = new UnidadComercial(1, 1);
+		UnidadComercial uc = new UnidadComercial(new Coordenada(1, 1));
 
 		uc.aceptar(g);
 
@@ -50,7 +51,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadIndustrial() {
 		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadIndustrial ui = new UnidadIndustrial(1, 1);
+		UnidadIndustrial ui = new UnidadIndustrial(new Coordenada(1, 1));
 
 		ui.aceptar(g);
 

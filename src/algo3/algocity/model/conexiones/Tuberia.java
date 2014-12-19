@@ -20,15 +20,15 @@ public class Tuberia implements Conector {
 		costo = 5;
 	}
 
-	public Tuberia(int x, int y) {
+	public Tuberia(Coordenada coordenada) {
 		costo = 5;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 	}
 
-	public Tuberia(Mapa mapa, int x, int y)
+	public Tuberia(Mapa mapa, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException {
 		costo = 5;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}

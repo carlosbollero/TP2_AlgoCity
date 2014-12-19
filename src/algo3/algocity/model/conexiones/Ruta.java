@@ -29,18 +29,18 @@ public class Ruta implements Conector, Daniable, Visitable {
 		this.costo = 10;
 	}
 
-	public Ruta(int x, int y) {
+	public Ruta(Coordenada coordenada) {
 		// porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 
 	}
 
-	public Ruta(Mapa mapa, int x, int y)
+	public Ruta(Mapa mapa, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException {
 		porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		} /*

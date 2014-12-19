@@ -1,6 +1,7 @@
 package algo3.algocity.model.fabricas;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -10,11 +11,11 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class FabricaCentralEolica implements FabricaEnergetica {
 
-	public UnidadEnergetica construir(Mapa mapa ,Dinero dinero, int x, int y)
+	public UnidadEnergetica construir(Mapa mapa ,Dinero dinero, SistemaElectrico sisElectrico, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException {
 
-		return new CentralEolica(mapa, dinero, new Coordenada(x, y));
+		return new CentralEolica(mapa, dinero, sisElectrico, coordenada);
 	}
 
 }

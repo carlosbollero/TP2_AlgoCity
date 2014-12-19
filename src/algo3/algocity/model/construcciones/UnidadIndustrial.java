@@ -7,10 +7,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -31,15 +33,17 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 25;
 	}
 
-	public UnidadIndustrial(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public UnidadIndustrial(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
 	}
 
-	public UnidadIndustrial(Mapa mapa, Dinero dinero, Coordenada coord)
-			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
+	public UnidadIndustrial(Mapa mapa, Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException,
+			CapacidadElectricaInsuficienteException {
 
 		this.costo = 10;
 		this.consumo = 5;
@@ -49,6 +53,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		sisElectrico.consumir(consumo);
 		dinero.cobrar(costo);
 	}
 

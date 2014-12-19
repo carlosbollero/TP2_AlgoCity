@@ -21,10 +21,10 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		consumo = 0;
 	}
 
-	public PozoDeAgua(int x, int y) {
+	public PozoDeAgua(Coordenada coord) {
 		costo = 250;
 		consumo = 0;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 	}
 
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)

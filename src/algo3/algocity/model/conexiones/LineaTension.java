@@ -31,15 +31,15 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		this.costo = 5;
 	}
 
-	public LineaTension(int x, int y) {
+	public LineaTension(Coordenada coordenada) {
 		porcentajeDanios = 0;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 	}
 
-	public LineaTension(Mapa mapa, int x, int y)
+	public LineaTension(Mapa mapa, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException {
 		porcentajeDanios = 0;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();

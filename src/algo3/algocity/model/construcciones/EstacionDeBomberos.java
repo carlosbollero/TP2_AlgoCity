@@ -37,11 +37,11 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		dinero.cobrar(costo);
 	}
 
-	public EstacionDeBomberos(int x, int y) {
+	public EstacionDeBomberos(Coordenada coord) {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 	}
 
 	// public void actuar(ArrayList<Visitable> objetivos) {

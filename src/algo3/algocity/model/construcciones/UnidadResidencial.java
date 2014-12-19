@@ -6,10 +6,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -30,8 +32,8 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 100;
 	}
 
-	public UnidadResidencial(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public UnidadResidencial(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -50,9 +52,10 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 //		}
 //	}
 
-	public UnidadResidencial(Mapa mapa, Dinero dinero,Coordenada coord)
+	public UnidadResidencial(Mapa mapa, Dinero dinero, SistemaElectrico sElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException,
+			CapacidadElectricaInsuficienteException {
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -62,7 +65,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
-		
+		sElectrico.consumir(consumo);
 		dinero.cobrar(costo);
 	}
 

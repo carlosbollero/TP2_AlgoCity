@@ -36,7 +36,7 @@ public class MapaTerritorioTest {
 		mt = new MapaTerritorio(alto, ancho);
 		
 		Coordenada coord = mt.posicionConAgua();
-		Unidad p = new PozoDeAgua(mt.posicionConAgua().getX(), mt.posicionConAgua().getY());
+		Unidad p = new PozoDeAgua(new Coordenada(mt.posicionConAgua().getX(), mt.posicionConAgua().getY()));
 		
 		assertTrue(mt.sePuedeConstruir(p));
 		

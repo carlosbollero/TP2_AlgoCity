@@ -12,7 +12,7 @@ import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
-import algo3.algocity.model.fabricas.FabricaCentralMineral;
+import algo3.algocity.model.fabricas.FabricaCentralMinera;
 import algo3.algocity.model.fabricas.FabricaCentralNuclear;
 import algo3.algocity.model.fabricas.FabricaConectores;
 import algo3.algocity.model.fabricas.FabricaEnergetica;
@@ -36,6 +36,18 @@ public class MapasIntegralTest {
 	FabricaUnidades fu;
 	FabricaEnergetica fe;
 	FabricaConectores fc;
+	
+	/*
+	 * 
+	 * HAY QUE CAMBIAR TODOS LOS CONSTRUCTORES
+	 * TIENEN Q INCLUIR SISTEMAELECTRICO Y
+	 * RECIBIR TIPO COORDENADA 
+	 * 
+	 */
+	
+	
+	
+	
 
 	@Test
 	public void testSeCreaUnidadResidencialSiCumpleConRequisitos()
@@ -273,7 +285,7 @@ public class MapasIntegralTest {
 		r = fc.construir(m, 1, 2);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
-		fe = new FabricaCentralMineral();
+		fe = new FabricaCentralMinera();
 		UnidadEnergetica ue = fe.construir(m, d, 2, 2);
 		m.agregar(ue);
 
@@ -411,7 +423,7 @@ public class MapasIntegralTest {
 
 			fe = new FabricaCentralEolica();
 			UnidadEnergetica ce = fe.construir(m, d, 2, 2);
-			fe = new FabricaCentralMineral();
+			fe = new FabricaCentralMinera();
 			UnidadEnergetica cm = fe.construir(m, d, 2, 3);
 			fe = new FabricaCentralNuclear();
 			UnidadEnergetica cn = fe.construir(m, d, 3, 2);
