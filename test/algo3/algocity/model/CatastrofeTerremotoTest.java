@@ -16,6 +16,7 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -115,12 +116,14 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
-			throws NoSeCumplenLosRequisitosException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
+		Dinero d = new Dinero();
 		m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
-		LineaTension lt = new LineaTension(m, new Coordenada(3, 5));
-		Ruta rt = new Ruta(m, new Coordenada(4, 5));
+		LineaTension lt = new LineaTension(m, d, new Coordenada(3, 5));
+		Ruta rt = new Ruta(m, d, new Coordenada(4, 5));
 		m.agregar(lt);
 		m.agregar(rt);
 
