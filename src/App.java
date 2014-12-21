@@ -9,7 +9,7 @@ public class App {
 		Juego juego = new Juego();
 		juego.iniciar();
 		VentanaInicial ventanaInicio = new VentanaInicial(juego);
-		//Ventana ventana = new Ventana(juego);
+		Ventana ventana = new Ventana(juego);
 	}
 
 }
