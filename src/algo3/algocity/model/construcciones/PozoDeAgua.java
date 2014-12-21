@@ -5,8 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -19,22 +21,23 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		consumo = 0;
 	}
 
-	public PozoDeAgua(int x, int y) {
+	public PozoDeAgua(Coordenada coord) {
 		costo = 250;
 		consumo = 0;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 	}
 
-	public PozoDeAgua(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 
-		coordenadas = new Coordenada(x, y);
+		coordenadas = coord;
 		costo = 250;
 		consumo = 0;
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 	}
 
 	@Override

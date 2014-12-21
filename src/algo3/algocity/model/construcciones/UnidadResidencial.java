@@ -5,10 +5,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -28,24 +32,41 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 100;
 	}
 
-	public UnidadResidencial(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public UnidadResidencial(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
 	}
 
-	public UnidadResidencial(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+//	public UnidadResidencial(Mapa mapa, int x, int y)
+//			throws NoSeCumplenLosRequisitosException {
+//		this.costo = 5;
+//		this.consumo = 1;
+//		this.capacidad = 100;
+//		coordenadas = new Coordenada(x, y);
+//
+//		if (!esConstruibleEn(mapa.superficie(coordenadas))
+//				|| !hayConexionesEn(mapa)) {
+//			throw new NoSeCumplenLosRequisitosException();
+//		}
+//	}
+
+	public UnidadResidencial(Mapa mapa, Dinero dinero, SistemaElectrico sElectrico, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException,
+			CapacidadElectricaInsuficienteException {
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
-		coordenadas = new Coordenada(x, y);
+		coordenadas = coord;
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		sElectrico.consumir(consumo);
+		dinero.cobrar(costo);
 	}
 
 	public void aplicarDanioGodzilla() {
@@ -164,13 +185,13 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		return ur;
 	}
 
-	/*No evalua los invariantes de la clase*/
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ur) {
 		if (ur == this) {
 			return true;
 		} else if (ur.coordenadas().getX() == this.coordenadas().getX()
 				&& ur.coordenadas().getY() == this.coordenadas().getY()
-				&& ((UnidadResidencial)ur).porcentajeDanios == this.porcentajeDanios) {
+				&& ((UnidadResidencial) ur).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

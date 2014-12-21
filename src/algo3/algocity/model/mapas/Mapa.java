@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
@@ -33,6 +34,8 @@ public class Mapa extends Observable {
 	MapaConexiones tuberias;
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
+	
+	Dinero dinero;
 
 	Reparador reparador;
 
@@ -55,7 +58,7 @@ public class Mapa extends Observable {
 	public int ancho() {
 		return ancho;
 	}
-
+	
 	public void agregar(Unidad unidad) {
 		unidad.agregarseA(this);
 	}

@@ -16,7 +16,9 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CatastrofeTerremotoTest {
@@ -27,7 +29,7 @@ public class CatastrofeTerremotoTest {
 	public void testTerremotoAplicaDanioASuEpicentro() {
 		m = new Mapa();
 
-		UnidadResidencial u1 = new UnidadResidencial(3, 3);
+		UnidadResidencial u1 = new UnidadResidencial(new Coordenada(3, 3));
 
 		m.agregar(u1);
 
@@ -43,16 +45,16 @@ public class CatastrofeTerremotoTest {
 	public void testTerremotoAplicaDanioCorrespondienteAUnidadesAlrededor() {
 		m = new Mapa();
 
-		UnidadResidencial ur1 = new UnidadResidencial(1, 1);
-		UnidadComercial uc1 = new UnidadComercial(1, 2);
-		CentralEolica ce1 = new CentralEolica(2, 3);
-		CentralMinera cm1 = new CentralMinera(3, 2);
-		CentralNuclear cn1 = new CentralNuclear(4, 2);
-		UnidadResidencial ur2 = new UnidadResidencial(10, 10);
-		UnidadResidencial ur3 = new UnidadResidencial(1, 4);
-		UnidadIndustrial ui1 = new UnidadIndustrial(5, 5);
-		LineaTension lt = new LineaTension(3, 1);
-		Ruta rt = new Ruta(4, 3);
+		UnidadResidencial ur1 = new UnidadResidencial(new Coordenada(1, 1));
+		UnidadComercial uc1 = new UnidadComercial(new Coordenada(1, 2));
+		CentralEolica ce1 = new CentralEolica(new Coordenada(2, 3));
+		CentralMinera cm1 = new CentralMinera(new Coordenada(3, 2));
+		CentralNuclear cn1 = new CentralNuclear(new Coordenada(4, 2));
+		UnidadResidencial ur2 = new UnidadResidencial(new Coordenada(10, 10));
+		UnidadResidencial ur3 = new UnidadResidencial(new Coordenada(1, 4));
+		UnidadIndustrial ui1 = new UnidadIndustrial(new Coordenada(5, 5));
+		LineaTension lt = new LineaTension(new Coordenada(3, 1));
+		Ruta rt = new Ruta(new Coordenada(4, 3));
 
 		m.agregar(ur1);
 		m.agregar(uc1);
@@ -96,9 +98,9 @@ public class CatastrofeTerremotoTest {
 	public void testTerremotoNoAplicaDanioAUnidadesNoDaniablesAlrededor() {
 		m = new Mapa();
 
-		EstacionDeBomberos eb = new EstacionDeBomberos(1, 1);
-		PozoDeAgua pa = new PozoDeAgua(2, 2);
-		Tuberia tb = new Tuberia(3, 3);
+		EstacionDeBomberos eb = new EstacionDeBomberos(new Coordenada(1, 1));
+		PozoDeAgua pa = new PozoDeAgua(new Coordenada(2, 2));
+		Tuberia tb = new Tuberia(new Coordenada(3, 3));
 
 		m.agregar(eb);
 		m.agregar(pa);
@@ -114,12 +116,14 @@ public class CatastrofeTerremotoTest {
 
 	@Test
 	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
-			throws NoSeCumplenLosRequisitosException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
+		Dinero d = new Dinero();
 		m = new Mapa();
 		m.setTerritorioTierraParaTest();
 
-		LineaTension lt = new LineaTension(m, 3, 5);
-		Ruta rt = new Ruta(m, 4, 5);
+		LineaTension lt = new LineaTension(m, d, new Coordenada(3, 5));
+		Ruta rt = new Ruta(m, d, new Coordenada(4, 5));
 		m.agregar(lt);
 		m.agregar(rt);
 

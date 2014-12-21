@@ -14,6 +14,7 @@ import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.mapas.Coordenada;
 
 public class UnidadTest {
 
@@ -23,14 +24,15 @@ public class UnidadTest {
 
 	@Test
 	public void testUnidadResidencialTieneConsumoValido() {
-		Unidad unaUnidadResidencial = new UnidadResidencial(1,1);
+		Unidad unaUnidadResidencial = new UnidadResidencial(
+				new Coordenada(1, 1));
 
 		assertEquals(unaUnidadResidencial.consumo(), 1);
 	}
 
 	@Test
 	public void testUnidadComercialTieneConsumoValido() {
-		Unidad unaUnidadComercial = new UnidadComercial(1,1);
+		Unidad unaUnidadComercial = new UnidadComercial(new Coordenada(1, 1));
 
 		assertEquals(unaUnidadComercial.consumo(), 2);
 	}
@@ -207,6 +209,5 @@ public class UnidadTest {
 	}
 }
 
-	// TODO faltan tests de reparaciones
+// TODO faltan tests de reparaciones
 
-	

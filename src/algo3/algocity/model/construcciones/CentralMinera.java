@@ -5,7 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -18,24 +21,27 @@ public class CentralMinera extends UnidadEnergetica {
 		this.radioDeInfluencia = 10;
 	}
 
-	public CentralMinera(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public CentralMinera(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
 	}
 
-	public CentralMinera(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public CentralMinera(Mapa mapa , Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+ throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		sisElectrico.aumentarCapacidad(capacidad);
+		dinero.cobrar(costo);
 	}
 
 	@Override

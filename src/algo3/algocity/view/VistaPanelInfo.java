@@ -15,18 +15,24 @@ public class VistaPanelInfo extends JPanel implements Observer {
 
 	private static final long serialVersionUID = -7918349684154728725L;
 
+	JTextPane textoTurno;
 	JTextPane textoPoblacion;
 	JTextPane textoOcupacion;
-	JTextPane textoTurno;
+	JTextPane textoDinero;
 	Juego juego;
 
 	public VistaPanelInfo(Juego juego) {
 		this.juego = juego;
 		this.juego.turno().addObserver(this);
-		this.juego.poblacion().addObserver(this);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(200, 250));
 		setBorder(BorderFactory.createTitledBorder("Info"));
+		
+		textoTurno = new JTextPane();
+		textoTurno.setBackground(null);
+		textoTurno.setEditable(false);
+		textoTurno.setBorder(BorderFactory.createEtchedBorder());
+		textoTurno.setText("Turno  " + juego.turno().getTurno());
 		
 		textoPoblacion = new JTextPane();
 		textoPoblacion.setBackground(null);
@@ -40,15 +46,16 @@ public class VistaPanelInfo extends JPanel implements Observer {
 		textoOcupacion.setBorder(BorderFactory.createEtchedBorder());
 		textoOcupacion.setText("Ocupacion  " + juego.poblacion().getCapacidadEmpleo());
 		
-		textoTurno = new JTextPane();
-		textoTurno.setBackground(null);
-		textoTurno.setEditable(false);
-		textoTurno.setBorder(BorderFactory.createEtchedBorder());
-		textoTurno.setText("Turno  " + juego.turno().getTurno());
+		textoDinero = new JTextPane();
+		textoDinero.setBackground(null);
+		textoDinero.setEditable(false);
+		textoDinero.setBorder(BorderFactory.createEtchedBorder());
+		textoDinero.setText("Dinero  $" + juego.dinero().getCantidad());
 		
 		add(textoTurno);
 		add(textoPoblacion);
 		add(textoOcupacion);
+		add(textoDinero);
 	}
 
 	@Override
@@ -56,7 +63,7 @@ public class VistaPanelInfo extends JPanel implements Observer {
 		textoTurno.setText("Turno  " + juego.turno().getTurno());
 		textoPoblacion.setText("Poblacion  " + juego.poblacion().getCantidad());
 		textoOcupacion.setText("Ocupacion  " + juego.poblacion().getCapacidadEmpleo());
-		
+		textoDinero.setText("Dinero  $" + juego.dinero().getCantidad());
 	}
 
 }

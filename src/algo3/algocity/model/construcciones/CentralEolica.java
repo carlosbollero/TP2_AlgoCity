@@ -5,7 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -18,23 +21,26 @@ public class CentralEolica extends UnidadEnergetica {
 		this.radioDeInfluencia = 4;
 	}
 
-	public CentralEolica(int x, int y) {
-		coordenadas = new Coordenada(x, y);
+	public CentralEolica(Coordenada coord) {
+		coordenadas = coord;
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
 	}
 
-	public CentralEolica(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public CentralEolica(Mapa mapa ,Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
-		this.coordenadas = new Coordenada(x, y);
+		this.coordenadas = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		sisElectrico.aumentarCapacidad(capacidad);
+		dinero.cobrar(costo);
 	}
 
 	@Override

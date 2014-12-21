@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -20,18 +22,20 @@ public class Tuberia implements Conector {
 		costo = 5;
 	}
 
-	public Tuberia(int x, int y) {
+	public Tuberia(Coordenada coordenada) {
 		costo = 5;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 	}
 
-	public Tuberia(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public Tuberia(Mapa mapa, Dinero dinero, Coordenada coordenada)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		costo = 5;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
+		dinero.cobrar(costo);
 		/*
 		 * else { mapa.agregar(this); }
 		 */

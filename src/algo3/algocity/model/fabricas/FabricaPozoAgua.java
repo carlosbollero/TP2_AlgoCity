@@ -1,21 +1,22 @@
 package algo3.algocity.model.fabricas;
 
+import algo3.algocity.model.Dinero;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class FabricaPozoAgua implements FabricaUnidades {
 
-	public Unidad construir(Mapa mapa, int x, int y) {
+	public Unidad construir(Mapa mapa, Dinero dinero, SistemaElectrico sisElectrico, Coordenada coordenada)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
-		try {
-			return new PozoDeAgua(mapa, x, y);
+			return new PozoDeAgua(mapa, dinero, coordenada);
 
-		} catch (NoSeCumplenLosRequisitosException e) {
-			System.out.println(e);
-			return null;
-		}
 	}
 
 }

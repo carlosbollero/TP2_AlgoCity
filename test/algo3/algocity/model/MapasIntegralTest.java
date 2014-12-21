@@ -6,14 +6,13 @@ import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
-import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
-import algo3.algocity.model.fabricas.FabricaCentralMineral;
+import algo3.algocity.model.fabricas.FabricaCentralMinera;
 import algo3.algocity.model.fabricas.FabricaCentralNuclear;
 import algo3.algocity.model.fabricas.FabricaConectores;
 import algo3.algocity.model.fabricas.FabricaEnergetica;
@@ -37,65 +36,84 @@ public class MapasIntegralTest {
 	FabricaUnidades fu;
 	FabricaEnergetica fe;
 	FabricaConectores fc;
+	
+	/*
+	 * 
+	 * HAY QUE CAMBIAR TODOS LOS CONSTRUCTORES
+	 * TIENEN Q INCLUIR SISTEMAELECTRICO Y
+	 * RECIBIR TIPO COORDENADA 
+	 * 
+	 */
+	
+	
+	
+	
 
 	@Test
-	public void testSeCreaUnidadResidencialSiCumpleConRequisitos() {
+	public void testSeCreaUnidadResidencialSiCumpleConRequisitos()
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero dinero = new Dinero();
 		m.setTerritorioTierraParaTest();
 
-		try {
-			// CONSTRUYO UN POZO DE AGUA
-			PozoDeAgua p = new PozoDeAgua(4, 2);
-			m.agregar(p);
+		// try {
+		// CONSTRUYO UN POZO DE AGUA
+		PozoDeAgua p = new PozoDeAgua(4, 2);
+		m.agregar(p);
 
-			// construyo red de tuberias
-			fc = new FabricaTuberias();
-			Conector t = fc.construir(m, 4, 2);
-			m.agregar(t);
-			t = fc.construir(m, 3, 2);
-			m.agregar(t);
-			t = fc.construir(m, 2, 2);
-			m.agregar(t);
+		// construyo red de tuberias
+		fc = new FabricaTuberias();
+		Conector t = fc.construir(m, 4, 2);
+		m.agregar(t);
+		t = fc.construir(m, 3, 2);
+		m.agregar(t);
+		t = fc.construir(m, 2, 2);
+		m.agregar(t);
 
-			// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
-			fe = new FabricaCentralEolica();
-			UnidadEnergetica ue = fe.construir(m, 2, 2);
-			m.agregar(ue);
+		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
+		fe = new FabricaCentralEolica();
+		UnidadEnergetica ue = fe.construir(m, dinero, 2, 2);
+		m.agregar(ue);
 
-			assertTrue(m.contiene(ue));
+		assertTrue(m.contiene(ue));
 
-			// CONSTRUYO LINEAS DE TENSION
+		// CONSTRUYO LINEAS DE TENSION
+		fc = new FabricaLineaTension();
+		for (int i = 2; i <= 4; i++) {
 			fc = new FabricaLineaTension();
-			for (int i = 2; i <= 4; i++) {
-				fc = new FabricaLineaTension();
-				Conector lt = fc.construir(m, 2, i);
-				m.agregar(lt);
-				fc = new FabricaRuta();
-				Conector r = fc.construir(m, 2, i);
-				m.agregar(r);
-			}
-
-			// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
-			// ENERGETICA
-			fu = new FabricaUnidadResidencial();
-			Unidad ur = fu.construir(m, 2, 4);
-			m.agregar(ur);
-
-			assertTrue(m.contiene(ur));
-
-		} catch (NoSeCumplenLosRequisitosException e) {
-			System.out.println(e);
+			Conector lt = fc.construir(m, 2, i);
+			m.agregar(lt);
+			fc = new FabricaRuta();
+			Conector r = fc.construir(m, 2, i);
+			m.agregar(r);
 		}
+
+		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
+		// ENERGETICA
+		fu = new FabricaUnidadResidencial();
+		Unidad ur = fu.construir(m, dinero, 2, 4);
+		m.agregar(ur);
+
+		assertTrue(m.contiene(ur));
+
+		// } catch (NoSeCumplenLosRequisitosException e) {
+		// // System.out.println(e);
+		// fail(e);
+		// }
 	}
 
 	@Test
-	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos() {
+	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos()
+			throws FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
+
 		fu = new FabricaUnidadIndustrial();
 		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, p.getX(), p.getY());
+			Unidad u = fu.construir(m, d, p.getX(), p.getY());
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 
@@ -105,13 +123,15 @@ public class MapasIntegralTest {
 	}
 
 	@Test
-	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos() {
+	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos()
+			throws FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		fu = new FabricaUnidadResidencial();
 		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, p.getX(), p.getY());
+			Unidad u = fu.construir(m, d, p.getX(), p.getY());
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 
@@ -122,47 +142,47 @@ public class MapasIntegralTest {
 	}
 
 	@Test
-	public void testAgregarPozoDeAguaSiCumpleConLosRequisitos() {
+	public void testAgregarPozoDeAguaSiCumpleConLosRequisitos()
+			throws FondosInsuficientesException,
+			NoSeCumplenLosRequisitosException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioAguaParaTest();
 
 		fu = new FabricaPozoAgua();
 
 		Coordenada p = m.posicionConAgua();
 
-		try {
-			PozoDeAgua u = (PozoDeAgua) fu.construir(m, p.getX(), p.getY());
-			m.agregar(u);
+		PozoDeAgua u = (PozoDeAgua) fu.construir(m, d, p.getX(), p.getY());
+		m.agregar(u);
 
-			assertTrue(m.contiene(u));
+		assertTrue(m.contiene(u));
 
-		} catch (NoSeCumplenLosRequisitosException e) {
-			System.out.println(e);
-		}
 	}
 
 	@Test
-	public void testAgregarEstacionDeBomberosSiCumpleConLosRequisitos() {
+	public void testAgregarEstacionDeBomberosSiCumpleConLosRequisitos()
+			throws FondosInsuficientesException,
+			NoSeCumplenLosRequisitosException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 
 		fu = new FabricaEstacionDeBomberos();
 
 		Coordenada p = m.posicionConTierra();
 
-		try {
-			Unidad u = fu.construir(m, p.getX(), p.getY());
-			m.agregar(u);
+		Unidad u = fu.construir(m, d, p.getX(), p.getY());
+		m.agregar(u);
 
-			assertTrue(m.contiene(u));
+		assertTrue(m.contiene(u));
 
-		} catch (NoSeCumplenLosRequisitosException e) {
-			System.out.println(e);
-		}
 	}
 
 	@Test
-	public void testAgregarCentralEolicaSiCumpleConLosRequisitos() {
+	public void testAgregarCentralEolicaSiCumpleConLosRequisitos()
+			throws FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
 		PozoDeAgua pozo = new PozoDeAgua(1, 1);
 		m.agregar(pozo);
@@ -178,7 +198,7 @@ public class MapasIntegralTest {
 			// CREAR CENTRAL EOLICA
 			fe = new FabricaCentralEolica();
 
-			Unidad u = fe.construir(m, 1, 10);
+			Unidad u = fe.construir(m, d, 1, 10);
 			m.agregar(u);
 
 			assertTrue(m.contiene(u));
@@ -189,9 +209,10 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testlasUnidadesDentroDelRadioDeUnaCentralEolicaEstanProvistasDeElectricidad()
-			throws NoSeCumplenLosRequisitosException {
-
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -216,7 +237,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
-		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		UnidadEnergetica ue = fe.construir(m, d, 2, 2);
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -224,7 +245,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL QUE DEBE TENER ELECTRICIDAD
 		// POR ESTAR DENTRO DEL RADIO DE LA UNIDAD ENERGETICA
 		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, 3, 2);
+		Unidad ur = fu.construir(m, d, 3, 2);
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -232,9 +253,11 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testlasUnidadesDentroDelRadioDeUnaCentralMineraEstanProvistasDeElectricidad()
-			throws NoSeCumplenLosRequisitosException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -262,8 +285,8 @@ public class MapasIntegralTest {
 		r = fc.construir(m, 1, 2);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
-		fe = new FabricaCentralMineral();
-		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		fe = new FabricaCentralMinera();
+		UnidadEnergetica ue = fe.construir(m, d, 2, 2);
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -271,7 +294,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, 3, 2);
+		Unidad ur = fu.construir(m, d, 3, 2);
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -279,9 +302,11 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testlasUnidadesDentroDelRadioDeUnaCentralNuclearEstanProvistasDeElectricidad()
-			throws NoSeCumplenLosRequisitosException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -306,7 +331,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralNuclear();
-		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		UnidadEnergetica ue = fe.construir(m, d, 2, 2);
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -314,7 +339,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		fu = new FabricaUnidadComercial();
-		Unidad uc = fu.construir(m, 3, 2);
+		Unidad uc = fu.construir(m, d, 3, 2);
 		m.agregar(uc);
 
 		assertTrue(m.contiene(uc));
@@ -322,8 +347,10 @@ public class MapasIntegralTest {
 
 	@Test
 	public void testSeDanianUnidadesDelMapaYElReparadorLasRepara()
-			throws NoSeCumplenLosRequisitosException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -345,7 +372,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
-		UnidadEnergetica ue = fe.construir(m, 2, 2);
+		UnidadEnergetica ue = fe.construir(m, d, 2, 2);
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -369,7 +396,7 @@ public class MapasIntegralTest {
 
 		// Reparo a la central
 		fu = new FabricaEstacionDeBomberos();
-		Unidad eb = fu.construir(m, 4, 4);
+		Unidad eb = fu.construir(m, d, 4, 4);
 		m.agregar(eb);
 
 		m.reparar();
@@ -379,25 +406,27 @@ public class MapasIntegralTest {
 
 	/* Tests negativos */
 	@Test
-	public void testLasUnidadesNoSeAgreganSalvoQueSeCumplanLasCondiciones() {
+	public void testLasUnidadesNoSeAgreganSalvoQueSeCumplanLasCondiciones()
+			throws FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
 		m.setTerritorioAguaParaTest();
 
 		try {
 			/* tiran excepcion */
 			fu = new FabricaUnidadResidencial();
-			Unidad ur = fu.construir(m, 1, 1);
+			Unidad ur = fu.construir(m, d, 1, 1);
 			fu = new FabricaUnidadIndustrial();
-			Unidad ui = fu.construir(m, 1, 2);
+			Unidad ui = fu.construir(m, d, 1, 2);
 			fu = new FabricaUnidadComercial();
-			Unidad uc = fu.construir(m, 2, 1);
+			Unidad uc = fu.construir(m, d, 2, 1);
 
 			fe = new FabricaCentralEolica();
-			UnidadEnergetica ce = fe.construir(m, 2, 2);
-			fe = new FabricaCentralMineral();
-			UnidadEnergetica cm = fe.construir(m, 2, 3);
+			UnidadEnergetica ce = fe.construir(m, d, 2, 2);
+			fe = new FabricaCentralMinera();
+			UnidadEnergetica cm = fe.construir(m, d, 2, 3);
 			fe = new FabricaCentralNuclear();
-			UnidadEnergetica cn = fe.construir(m, 3, 2);
+			UnidadEnergetica cn = fe.construir(m, d, 3, 2);
 
 			fc = new FabricaLineaTension();
 			Conector lt = fc.construir(m, 3, 3);

@@ -58,7 +58,7 @@ public class Ventana extends JFrame {
 	}
 
 	private void acomodar() {
-		// setSize(800, 600);
+		 setPreferredSize(new Dimension (800, 600));
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);

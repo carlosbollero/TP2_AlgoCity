@@ -2,8 +2,10 @@ package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -36,7 +38,20 @@ public class GeneradorTerritorio {
 	public Map<Coordenada, Superficie> generarTerritorio() {
 		definirPuntosCentrales();
 		definirRestoDelMapa();
+		if(!hayAgua()){
+			generarTerritorio();
+		}
 		return mapa;
+	}
+
+	private boolean hayAgua() {
+		boolean hayAgua = false;
+		Iterator<Entry<Coordenada, Superficie>> it = mapa.entrySet().iterator();
+		while(!hayAgua && it.hasNext()){
+			Map.Entry<Coordenada, Superficie> entry = (Map.Entry<Coordenada, Superficie>)it.next();
+			if (entry.getValue().esAgua()){ hayAgua = true;}
+		}
+		return hayAgua;
 	}
 
 	/*

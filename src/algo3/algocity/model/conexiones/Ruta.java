@@ -5,10 +5,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -29,21 +31,24 @@ public class Ruta implements Conector, Daniable, Visitable {
 		this.costo = 10;
 	}
 
-	public Ruta(int x, int y) {
+	public Ruta(Coordenada coordenada) {
 		// porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 
 	}
 
-	public Ruta(Mapa mapa, int x, int y)
-			throws NoSeCumplenLosRequisitosException {
+	public Ruta(Mapa mapa, Dinero dinero, Coordenada coordenada)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException {
 		porcentajeDanios = 0;
 		costo = 10;
-		coordenadas = new Coordenada(x, y);
+		this.coordenadas = coordenada;
 		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} /*
+		}
+		dinero.cobrar(costo);
+		/*
 		 * else { mapa.agregar(this); }
 		 */
 	}

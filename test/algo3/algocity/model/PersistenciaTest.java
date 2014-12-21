@@ -32,6 +32,7 @@ import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class PersistenciaTest {
@@ -87,37 +88,37 @@ public class PersistenciaTest {
 
 		/* Creacion de algunas unidades en el mapa */
 		// agregando de esta forma no se validan requisitos
-		UnidadResidencial ur = new UnidadResidencial(10, 10);
+		UnidadResidencial ur = new UnidadResidencial(new Coordenada(10, 10));
 		ur.agregarseA(mapa);
 
-		UnidadComercial uc = new UnidadComercial(2, 2);
+		UnidadComercial uc = new UnidadComercial(new Coordenada(2, 2));
 		uc.agregarseA(mapa);
 
-		UnidadIndustrial ui = new UnidadIndustrial(4, 8);
+		UnidadIndustrial ui = new UnidadIndustrial(new Coordenada(4, 8));
 		ui.agregarseA(mapa);
 
-		PozoDeAgua pa = new PozoDeAgua(5, 5);
+		PozoDeAgua pa = new PozoDeAgua(new Coordenada(5, 5));
 		pa.agregarseA(mapa);
 
-		EstacionDeBomberos eb = new EstacionDeBomberos(6, 6);
+		EstacionDeBomberos eb = new EstacionDeBomberos(new Coordenada(6, 6));
 		eb.agregarseA(mapa);
 
-		CentralNuclear cn = new CentralNuclear(4, 1);
+		CentralNuclear cn = new CentralNuclear(new Coordenada(4, 1));
 		cn.agregarseA(mapa);
 
-		CentralMinera cm = new CentralMinera(7, 1);
+		CentralMinera cm = new CentralMinera(new Coordenada(7, 1));
 		cm.agregarseA(mapa);
 
-		CentralEolica ce = new CentralEolica(1, 9);
+		CentralEolica ce = new CentralEolica(new Coordenada(1, 9));
 		ce.agregarseA(mapa);
 
-		LineaTension lt = new LineaTension(7, 2);
+		LineaTension lt = new LineaTension(new Coordenada(7, 2));
 		lt.agregarseA(mapa);
 
-		Ruta rt = new Ruta(9, 1);
+		Ruta rt = new Ruta(new Coordenada(9, 1));
 		rt.agregarseA(mapa);
 
-		Tuberia tb = new Tuberia(4, 7);
+		Tuberia tb = new Tuberia(new Coordenada(4, 7));
 		tb.agregarseA(mapa);
 
 		/* Creacion de Turno */
