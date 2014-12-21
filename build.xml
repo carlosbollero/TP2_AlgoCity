@@ -33,6 +33,7 @@
 
 	<target name="compilar.aplicacion" depends="setup, resolve">
 		<javac srcdir="src" destdir="${build}" includeantruntime="false" debug="yes">
+			<classpath refid="classpath" />
 		</javac>
 	</target>
 	

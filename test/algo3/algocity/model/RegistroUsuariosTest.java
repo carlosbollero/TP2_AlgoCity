@@ -2,10 +2,30 @@ package algo3.algocity.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
-public class ControladorUsuariosTest {
+import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 
+public class RegistroUsuariosTest {
+
+	
+	@Test
+	public void testSePuedenLeerLosNombresDeUsuariosPreviamenteGuardados() throws NoSeEncontroElFicheroException{
+		
+		RegistroUsuarios ru = new RegistroUsuarios();
+		
+		ArrayList<String> nombresUsers = ru.nombresUsuarios();
+		
+		assertFalse(nombresUsers.isEmpty());		
+	}
+	
+	
+	
+	
+	
+	
 	
 	//COMENTADO POR EL MOMENTO
 	/*

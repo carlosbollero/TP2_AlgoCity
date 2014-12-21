@@ -8,6 +8,7 @@ public class Usuario {
 
 	private String nombre;
 	private String ruta;
+	private int puntaje;
 
 	public Usuario(String unNombre) {
 		this.nombre = unNombre;
@@ -28,6 +29,14 @@ public class Usuario {
 		return nombre;
 	}
 
+	public void puntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+
+	public int puntaje() {
+		return this.puntaje;
+	}
+
 	// public void ruta(String ruta) {
 	// this.ruta = ruta;
 	// }
@@ -36,29 +45,13 @@ public class Usuario {
 		return ruta;
 	}
 
-	/*
-	 * 
-	 * public String getRutaJuegoAsociado(){ return rutaJuegoAsociado; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * public void jugar(String nombrePersonaje){ Iterator<Personaje> it =
-	 * personajes.iterator(); boolean encontrado = false; Personaje
-	 * personajeEnJuego = null;
-	 * 
-	 * while(it.hasNext() && !encontrado){ Personaje unPersonaje = it.next();
-	 * if(unPersonaje.getNombrePersonaje() == nombrePersonaje){ encontrado =
-	 * true; personajeEnJuego = unPersonaje; } } personajeEnJuego.jugar(); }
-	 */
-
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
 	public Element getElement(Document doc) {
 		Element usuario = doc.createElement("Usuario");
 		usuario.setTextContent(this.nombre);
-
+		//falta agregar la persistencia del puntaje
 		return usuario;
 	}
 

@@ -131,6 +131,7 @@ public class PersistenciaTest {
 		juego.persistir();
 
 		/* Corroboro que se haya creado el fichero */
+		// Asegurarse que exista el directorio saved
 		File fichero = new File("./saved/" + "Juan" + ".xml");
 		assertNotNull(fichero);
 

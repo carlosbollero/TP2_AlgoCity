@@ -1,5 +1,6 @@
 import algo3.algocity.model.Juego;
 import algo3.algocity.view.Ventana;
+import algo3.algocity.view.VentanaInicial;
 
 public class App {
 
@@ -7,7 +8,8 @@ public class App {
 
 		Juego juego = new Juego();
 		juego.iniciar();
-		Ventana ventana = new Ventana(juego);
+		VentanaInicial ventanaInicio = new VentanaInicial(juego);
+		//Ventana ventana = new Ventana(juego);
 	}
 
 }
