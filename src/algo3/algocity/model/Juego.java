@@ -1,8 +1,10 @@
 package algo3.algocity.model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.swing.JFrame;
@@ -83,8 +85,9 @@ public class Juego {
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**********************************************************************/
-	public void persistir() {
+	/**
+	 * @throws IOException ********************************************************************/
+	public void persistir() throws IOException {
 
 		try {
 			Document doc = DocumentBuilderFactory.newInstance()
@@ -100,6 +103,17 @@ public class Juego {
 					"{http://xml.apache.org/xslt}indent-amount", "2");
 			transformer.transform(new DOMSource(doc), new StreamResult(
 					new PrintStream(this.usuario.ruta())));
+			
+			
+			
+			//TODO
+			//falta cerrar el document
+			
+//			doc.close();
+			//InputStream in = new FileInputStream(this.usuario.ruta());
+			//in.close();
+
+			
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

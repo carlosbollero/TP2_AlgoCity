@@ -75,8 +75,8 @@ public class VistaJugadorNuevoMenu extends JPanel {
 
 		/* Ajusto el panel de informe */
 		this.panelInforme = new JTextField("");
-		this.panelInforme.setPreferredSize(new Dimension(250, 27));
-		this.panelInforme.setMaximumSize(new Dimension(250, 27));
+		this.panelInforme.setPreferredSize(new Dimension(350, 27));
+		this.panelInforme.setMaximumSize(new Dimension(350, 27));
 		this.panelInforme.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.panelInforme.setAlignmentY(Component.CENTER_ALIGNMENT);
 		// this.panelInforme.setBackground(Color.white);

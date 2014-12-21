@@ -38,7 +38,7 @@ public class PersistenciaTest {
 
 	@Test
 	public void testPersistirDosInstanciasDeJuegoDiferentes()
-			throws NoSeEncontroElFicheroException {
+			throws NoSeEncontroElFicheroException, IOException {
 
 		Usuario user1 = new Usuario("Pepe");
 		Usuario user2 = new Usuario("Mari");
@@ -59,8 +59,9 @@ public class PersistenciaTest {
 		juego2.persistir();
 
 		File fichero1 = new File("./saved/" + "Pepe" + ".xml");
-		assertNotNull(fichero1);
+		assertTrue(fichero1.exists());
 
+		
 		File fichero2 = new File("./saved/" + "Mari" + ".xml");
 		assertNotNull(fichero2);
 
@@ -70,6 +71,7 @@ public class PersistenciaTest {
 			System.out
 					.println("Los ficheros de prueba no pudieron ser eliminados");
 		}
+		
 	}
 
 	@Test
