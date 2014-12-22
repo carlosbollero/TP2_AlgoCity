@@ -5,7 +5,7 @@
 
 
 #Faltantes
-
+- Arreglar MapasIntegralTest (Carlos)
 
 
 TP2_AlgoCity
