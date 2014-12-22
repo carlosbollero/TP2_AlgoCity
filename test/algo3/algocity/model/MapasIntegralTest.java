@@ -70,8 +70,8 @@ public class MapasIntegralTest {
 		m.agregar(t);
 		t = fc.construir(m, d, new Coordenada(3, 2));
 		m.agregar(t);
-		t = fc.construir(m, d, new Coordenada(3, 2));
-		m.agregar(t);
+//		t = fc.construir(m, d, new Coordenada(2, 2));
+//		m.agregar(t);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
