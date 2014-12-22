@@ -7,8 +7,8 @@ import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 
 public class SistemaElectrico implements Observer {
 	
-	int capacidad;
-	int consumiendo;
+	private int capacidad;
+	private int consumo;
 	
 	public SistemaElectrico() {
 		capacidad = 0;	
@@ -23,16 +23,24 @@ public class SistemaElectrico implements Observer {
 	}
 	
 	public void consumir(int cantidad) throws CapacidadElectricaInsuficienteException{
-		if (consumiendo + cantidad > capacidad){
+		if (consumo + cantidad > capacidad){
 			throw new CapacidadElectricaInsuficienteException();
 		}
-		consumiendo += cantidad;
+		consumo += cantidad;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		disminuirCapacidad((int)arg);
 		
+	}
+	
+	public int capacidad(){
+		return capacidad;
+	}
+	
+	public int consumo(){
+		return consumo;
 	}
 
 }
