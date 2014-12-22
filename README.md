@@ -4,6 +4,9 @@
   También se mide el radio. (PENDIENTE)
 
 
+#Faltantes
+
+
 
 TP2_AlgoCity
 ============
