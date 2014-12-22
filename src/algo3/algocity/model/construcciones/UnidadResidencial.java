@@ -13,6 +13,9 @@ import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -39,23 +42,25 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 100;
 	}
 
-//	public UnidadResidencial(Mapa mapa, int x, int y)
-//			throws NoSeCumplenLosRequisitosException {
-//		this.costo = 5;
-//		this.consumo = 1;
-//		this.capacidad = 100;
-//		coordenadas = new Coordenada(x, y);
-//
-//		if (!esConstruibleEn(mapa.superficie(coordenadas))
-//				|| !hayConexionesEn(mapa)) {
-//			throw new NoSeCumplenLosRequisitosException();
-//		}
-//	}
+	// public UnidadResidencial(Mapa mapa, int x, int y)
+	// throws NoSeCumplenLosRequisitosException {
+	// this.costo = 5;
+	// this.consumo = 1;
+	// this.capacidad = 100;
+	// coordenadas = new Coordenada(x, y);
+	//
+	// if (!esConstruibleEn(mapa.superficie(coordenadas))
+	// || !hayConexionesEn(mapa)) {
+	// throw new NoSeCumplenLosRequisitosException();
+	// }
+	// }
 
-	public UnidadResidencial(Mapa mapa, Dinero dinero, SistemaElectrico sElectrico, Coordenada coord)
+	public UnidadResidencial(Mapa mapa, Dinero dinero,
+			SistemaElectrico sElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
-			CapacidadElectricaInsuficienteException {
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -110,7 +115,8 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		}
 	}
 
-	private boolean hayConexionesEn(Mapa mapa) {
+	private boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		return (mapa.hayConexionCompleta(coordenadas));
 	}
 

@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -29,12 +30,13 @@ public class Tuberia implements Conector {
 
 	public Tuberia(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie {
 		costo = 5;
 		this.coordenadas = coordenada;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		esConstruibleEn(mapa.superficie(coordenadas));
+		// if (!esConstruibleEn(mapa.superficie(coordenadas))) {
+		// throw new NoSeCumplenLosRequisitosException();
+		// }
 		dinero.cobrar(costo);
 		/*
 		 * else { mapa.agregar(this); }
@@ -42,7 +44,11 @@ public class Tuberia implements Conector {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws NoSePuedeConstruirEnSuperficie {
+		if (!(superficie.esTierra() || superficie.esAgua())){
+			throw new NoSePuedeConstruirEnSuperficie();
+		}
 		return (superficie.esTierra() || superficie.esAgua());
 	}
 
@@ -50,8 +56,8 @@ public class Tuberia implements Conector {
 	public Coordenada coordenadas() {
 		return coordenadas;
 	}
-	
-	public void setCoordenadas(Coordenada c){
+
+	public void setCoordenadas(Coordenada c) {
 		this.coordenadas = c;
 	}
 

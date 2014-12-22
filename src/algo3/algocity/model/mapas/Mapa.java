@@ -21,6 +21,9 @@ import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
@@ -34,7 +37,7 @@ public class Mapa extends Observable {
 	MapaConexiones tuberias;
 	MapaConexiones rutas;
 	MapaConexiones redElectrica;
-	
+
 	Dinero dinero;
 
 	Reparador reparador;
@@ -58,7 +61,7 @@ public class Mapa extends Observable {
 	public int ancho() {
 		return ancho;
 	}
-	
+
 	public void agregar(Unidad unidad) {
 		unidad.agregarseA(this);
 	}
@@ -134,19 +137,19 @@ public class Mapa extends Observable {
 	public boolean contiene(Unidad u) {
 		return ciudad.contiene(u);
 	}
-	
-	public boolean contiene(LineaTension lt){
+
+	public boolean contiene(LineaTension lt) {
 		return redElectrica.contiene(lt);
 	}
-	
-	public boolean contiene(Ruta rt){
+
+	public boolean contiene(Ruta rt) {
 		return rutas.contiene(rt);
 	}
-	
-	public boolean contiene(Tuberia tb){
+
+	public boolean contiene(Tuberia tb) {
 		return tuberias.contiene(tb);
 	}
-	
+
 	public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
 			int radio) {
 		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
@@ -162,20 +165,34 @@ public class Mapa extends Observable {
 		return territorio.superficie(punto);
 	}
 
-	public boolean hayConexionCompleta(Coordenada coordenadas) {
+	public boolean hayConexionCompleta(Coordenada coordenadas)
+			throws NoHayConexionConTuberias, NoHayConexionConRutas,
+			NoHayConexionConRedElectrica {
 		return (hayConexionConRutas(coordenadas) && hayConexionConTuberias(coordenadas))
 				&& hayConexionConRedElectrica(coordenadas);
 	}
 
-	public boolean hayConexionConTuberias(Coordenada coordenadas) {
+	public boolean hayConexionConTuberias(Coordenada coordenadas)
+			throws NoHayConexionConTuberias {
+		if (!tuberias.hayConexion(coordenadas)) {
+			throw new NoHayConexionConTuberias();
+		}
 		return tuberias.hayConexion(coordenadas);
 	}
 
-	public boolean hayConexionConRedElectrica(Coordenada coordenadas) {
+	public boolean hayConexionConRedElectrica(Coordenada coordenadas)
+			throws NoHayConexionConRedElectrica {
+		if (!redElectrica.hayConexion(coordenadas)) {
+			throw new NoHayConexionConRedElectrica();
+		}
 		return redElectrica.hayConexion(coordenadas);
 	}
 
-	public boolean hayConexionConRutas(Coordenada coordenadas) {
+	public boolean hayConexionConRutas(Coordenada coordenadas)
+			throws NoHayConexionConRutas {
+		if (!rutas.hayConectorAdyacente(coordenadas)) {
+			throw new NoHayConexionConRutas();
+		}
 		return rutas.hayConectorAdyacente(coordenadas);
 	}
 
@@ -184,31 +201,31 @@ public class Mapa extends Observable {
 			this.reparador = new Reparador(this);
 		}
 	}
-	
+
 	public void reparar() {
 		if (this.reparador != null) {
 			this.reparador.actuar();
 		}
 	}
-	
-	/*Usados para corroborar tests de persistencia*/
-	public MapaEdilicio ciudad(){
+
+	/* Usados para corroborar tests de persistencia */
+	public MapaEdilicio ciudad() {
 		return this.ciudad;
 	}
-	
-	public MapaConexiones tuberias(){
+
+	public MapaConexiones tuberias() {
 		return this.tuberias;
 	}
-	
-	public MapaConexiones redElectrica(){
+
+	public MapaConexiones redElectrica() {
 		return this.redElectrica;
 	}
-	
-	public MapaConexiones rutas(){
+
+	public MapaConexiones rutas() {
 		return this.rutas;
 	}
-	
-	public MapaTerritorio territorio(){
+
+	public MapaTerritorio territorio() {
 		return this.territorio;
 	}
 
@@ -227,7 +244,7 @@ public class Mapa extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	/*********************************************************/
 
 	// CONSULTA PARA ACTUALIZACION DE POBLACION
@@ -280,7 +297,7 @@ public class Mapa extends Observable {
 
 		return mapa;
 	}
-	
+
 	public static Mapa fromElement(Node element) {
 
 		Mapa mapa = new Mapa();
@@ -310,7 +327,7 @@ public class Mapa extends Observable {
 				mapa.redElectrica = redElectrica;
 			}
 		}
-		//mapa.territorio.imprimirTerritorio();
+		// mapa.territorio.imprimirTerritorio();
 		return mapa;
 	}
 }

@@ -13,6 +13,9 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.fabricas.FabricaUnidadComercial;
@@ -28,7 +31,8 @@ public class IntegracionTest {
 	public void testSePuedeAgregarUnaNuevaUnidadComercialAlMapaUsandoFabricasYDaniarla()
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException,
-			CapacidadElectricaInsuficienteException {
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
@@ -56,7 +60,7 @@ public class IntegracionTest {
 		for (int j = 0; j < map.ancho(); j++) {
 			for (int i = 0; i < map.alto(); i++) {
 				Conector lt = flt.construir(map, d, new Coordenada(i, j));
-				map.agregar(lt);				
+				map.agregar(lt);
 			}
 		}
 

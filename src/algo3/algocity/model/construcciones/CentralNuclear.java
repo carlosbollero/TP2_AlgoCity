@@ -9,7 +9,9 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -28,9 +30,11 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.radioDeInfluencia = 25;
 	}
 
-	public CentralNuclear(Mapa mapa ,Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralNuclear(Mapa mapa, Dinero dinero,
+			SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			NoHayConexionConTuberias {
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
@@ -135,7 +139,7 @@ public class CentralNuclear extends UnidadEnergetica {
 			return true;
 		} else if (cn.coordenadas().getX() == this.coordenadas().getX()
 				&& cn.coordenadas().getY() == this.coordenadas().getY()
-				&& ((CentralNuclear)cn).porcentajeDanios == this.porcentajeDanios) {
+				&& ((CentralNuclear) cn).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;
