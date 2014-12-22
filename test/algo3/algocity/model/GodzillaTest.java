@@ -1,7 +1,6 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -142,7 +141,7 @@ public class GodzillaTest {
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad, 65);
+		assertEquals(s.capacidad(), 65);
 	}
 	
 	@Test
@@ -172,7 +171,7 @@ public class GodzillaTest {
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad, 260);
+		assertEquals(s.capacidad(), 260);
 	}
 
 
