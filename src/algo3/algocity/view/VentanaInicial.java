@@ -3,6 +3,7 @@ package algo3.algocity.view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,11 +15,9 @@ public class VentanaInicial extends JFrame {
 	private static final long serialVersionUID = 832543094709914213L;
 
 	JPanel panelFondo;
-	Juego juego;
 
-	public VentanaInicial(Juego juego) {
+	public VentanaInicial() {
 		super("Algoritmos 3 | AlgoCity");
-		this.juego = juego;
 		initPanelFondo();
 		setPanelFondo();
 		acomodar();
@@ -48,10 +47,10 @@ public class VentanaInicial extends JFrame {
 
 		add(panelFondo);
 
-		 mostrarVistaInicial();
+		mostrarVistaInicial();
 		// mostrarVistaJugadorNuevoOExistente();
 		// mostrarVistaJugadorNuevo();
-		//mostrarVistaJugadorExistente();
+		// mostrarVistaJugadorExistente();
 	}
 
 	public void mostrarVistaInicial() {
@@ -71,11 +70,6 @@ public class VentanaInicial extends JFrame {
 		((CardLayout) panelFondo.getLayout()).show(panelFondo,
 				"vistaJugExistente");
 	}
-	
-	
-	public Juego juego(){
-		return this.juego;
-	}
 
 	private void acomodar() {
 		setPreferredSize(new Dimension(800, 600));
@@ -87,6 +81,23 @@ public class VentanaInicial extends JFrame {
 
 		// agregado para que tenga tamanio fijo
 		setResizable(false);
+	}
+
+	public Juego comenzar() {
+		//devuelve la instancia de juego que corresponda
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void ocultar() {
+		setVisible(false);
+		
+	}
+
+	public void cerrar() {
+		this.dispose();
+		
 	}
 
 }

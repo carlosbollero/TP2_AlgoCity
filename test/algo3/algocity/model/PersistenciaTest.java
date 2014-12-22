@@ -53,8 +53,14 @@ public class PersistenciaTest {
 		Poblacion p1 = new Poblacion();
 		Poblacion p2 = new Poblacion();
 
-		Juego juego1 = new Juego(user1, mapa1, turno1, p1);
-		Juego juego2 = new Juego(user2, mapa2, turno2, p2);
+		Dinero dinero1 = new Dinero();
+		Dinero dinero2 = new Dinero();
+
+		Juego juego1 = new Juego(user1, mapa1, turno1, p1, dinero1);
+		Juego juego2 = new Juego(user2, mapa2, turno2, p2, dinero2);
+
+		// Juego juego1 = new Juego();
+		// Juego juego2 = new Juego();
 
 		juego1.persistir();
 		juego2.persistir();
@@ -62,7 +68,6 @@ public class PersistenciaTest {
 		File fichero1 = new File("./saved/" + "Pepe" + ".xml");
 		assertTrue(fichero1.exists());
 
-		
 		File fichero2 = new File("./saved/" + "Mari" + ".xml");
 		assertNotNull(fichero2);
 
@@ -72,7 +77,7 @@ public class PersistenciaTest {
 			System.out
 					.println("Los ficheros de prueba no pudieron ser eliminados");
 		}
-		
+
 	}
 
 	@Test
@@ -127,10 +132,14 @@ public class PersistenciaTest {
 		/* Creacion de Poblacion */
 		Poblacion poblacion = new Poblacion();
 
+		/* Creacion de dinero */
+		Dinero dinero = new Dinero();
+
 		/* Creacion de Juego */
-		Juego juego = new Juego(usuario, mapa, turno, poblacion);
+		Juego juego = new Juego(usuario, mapa, turno, poblacion, dinero);
 
 		juego.persistir();
+		juego.turno().detener();
 
 		/* Corroboro que se haya creado el fichero */
 		// Asegurarse que exista el directorio saved
@@ -149,10 +158,9 @@ public class PersistenciaTest {
 		}
 
 		/* Corroboro que los datos leidos sean correctos */
-		assertEquals(juegoRecuperado.altoMapaJuego, 100);
-		assertEquals(juegoRecuperado.anchoMapaJuego, 100);
 		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
 		assertEquals(juegoRecuperado.turno().getTurno(), 1);
+		assertEquals(juegoRecuperado.dinero().getCantidad(), 20000);
 		assertTrue(juegoRecuperado.poblacion().equals(juego.poblacion()));
 
 		// Chequea la ciudad
