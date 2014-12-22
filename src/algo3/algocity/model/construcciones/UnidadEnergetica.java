@@ -1,10 +1,14 @@
 package algo3.algocity.model.construcciones;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -68,4 +72,42 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		}
 		return superficie.esTierra();
 	}
+	
+	
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
+	
+	//PRUEBA SUBIR ESTE METODO
+	//TODO, ver si borrando los metodos en los hijos funciona bien
+	public void fromElement(Node hijoDeNodo) {
+		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
+
+		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+			Node hijoDeUnidad = hijosDeUnidad.item(i);
+			if (hijoDeUnidad.getNodeName().equals("costo")) {
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
+				this.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
+				this.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
+						.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("radioDeInfluencia")) {
+				this.radioDeInfluencia = Integer.valueOf(hijoDeUnidad
+						.getTextContent());
+			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+				String stringPunto = hijoDeUnidad.getTextContent();
+				String[] arrayPunto = stringPunto.split(",");
+				Coordenada punto = new Coordenada(
+						Integer.valueOf(arrayPunto[0]),
+						Integer.valueOf(arrayPunto[1]));
+				this.coordenadas = punto;
+			}
+		}
+	}
+	
+	
+	
 }

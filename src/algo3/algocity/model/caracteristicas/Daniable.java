@@ -22,7 +22,10 @@ public interface Daniable {
 	/*Persistencia*/
 	public Element getElement(Document doc);
 	
-	public Daniable fromElement(Node child);
+	
+	//TODO 
+	public void fromElement(Node child);
+	
 	
 	public boolean equals(Daniable d);
 

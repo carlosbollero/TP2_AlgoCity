@@ -295,19 +295,31 @@ public class MapaConexiones {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"Tuberia")) {
-								Tuberia tb = Tuberia.fromElement(hijoDeNodo);
+								
+								Tuberia tb = new Tuberia();
+								tb.fromElement(hijoDeNodo);
 								tb.setCoordenadas(puntoAAgregar);
+//								Tuberia tb = Tuberia.fromElement(hijoDeNodo);
+//								tb.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(tb);
 
 							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
-								Ruta rt = Ruta.fromElement(hijoDeNodo);
+								
+								Ruta rt = new Ruta();
+								rt.fromElement(hijoDeNodo);
 								rt.setCoordenadas(puntoAAgregar);
+//								Ruta rt = Ruta.fromElement(hijoDeNodo);
+//								rt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(rt);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"LineaTension")) {
-								LineaTension lt = LineaTension
-										.fromElement(hijoDeNodo);
+								LineaTension lt = new LineaTension();
+								lt.fromElement(hijoDeNodo);
 								lt.setCoordenadas(puntoAAgregar);
+								
+//								LineaTension lt = LineaTension
+//										.fromElement(hijoDeNodo);
+//								lt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(lt);
 							}
 						}
@@ -328,23 +340,35 @@ public class MapaConexiones {
 							Node hijoDeUnidad = hijosDeUnidad.item(l);
 							if (hijoDeUnidad.getNodeName().equals(
 									"CentralMinera")) {
-								CentralMinera cm = CentralMinera
-										.fromElement(hijoDeUnidad);
+								CentralMinera cm = new CentralMinera();
+								cm.fromElement(hijoDeUnidad);
+								
+//								CentralMinera cm = CentralMinera
+//										.fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(cm);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralNuclear")) {
-								CentralNuclear cn = CentralNuclear
-										.fromElement(hijoDeUnidad);
+								CentralNuclear cn = new CentralNuclear();
+								cn.fromElement(hijoDeUnidad);
+								
+//								CentralNuclear cn = CentralNuclear
+//										.fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(cn);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralEolica")) {
-								CentralEolica ce = CentralEolica
-										.fromElement(hijoDeUnidad);
+								CentralEolica ce = new CentralEolica();
+								ce.fromElement(hijoDeUnidad);
+								
+//								CentralEolica ce = CentralEolica
+//										.fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(ce);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"PozoDeAgua")) {
-								PozoDeAgua pa = PozoDeAgua
-										.fromElement(hijoDeUnidad);
+								PozoDeAgua pa = new PozoDeAgua();
+								pa.fromElement(hijoDeUnidad);
+								
+//								PozoDeAgua pa = PozoDeAgua
+//										.fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(pa);
 							}
 						}

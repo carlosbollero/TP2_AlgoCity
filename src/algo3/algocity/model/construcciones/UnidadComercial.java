@@ -142,19 +142,18 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return unidad;
 	}
 
-	public static UnidadComercial fromElement(Node hijoDeNodo) {
-
-		UnidadComercial uc = new UnidadComercial();
+	
+	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidadComercial = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidadComercial.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidadComercial.item(i);
 			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				uc.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				uc.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				uc.porcentajeDanios = Double.valueOf(hijoDeUnidad
+				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
@@ -162,11 +161,11 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				uc.coordenadas = punto;
+				this.coordenadas = punto;
 			}
 		}
-		return uc;
 	}
+	
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable uc) {

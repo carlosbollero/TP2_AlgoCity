@@ -71,8 +71,8 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public Coordenada coordenadas() {
 		return coordenadas;
 	}
-	
-	public void setCoordenadas(Coordenada c){
+
+	public void setCoordenadas(Coordenada c) {
 		this.coordenadas = c;
 	}
 
@@ -140,28 +140,50 @@ public class Ruta implements Conector, Daniable, Visitable {
 		return conector;
 	}
 
-	public static Ruta fromElement(Node hijoDeUnidadDaniable) {
-		Ruta rt = new Ruta();
+	public void fromElement(Node hijoDeUnidadDaniable) {
+
 		NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidad.item(i);
 			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				rt.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				rt.coordenadas = punto;
+				this.coordenadas = punto;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				rt.porcentajeDanios = Double.valueOf(hijoDeUnidad
+				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
 			}
 		}
-		return rt;
 	}
+
+	// public Ruta fromElement(Node hijoDeUnidadDaniable) {
+	// Ruta rt = new Ruta();
+	// NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
+	//
+	// for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+	// Node hijoDeUnidad = hijosDeUnidad.item(i);
+	// if (hijoDeUnidad.getNodeName().equals("costo")) {
+	// rt.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+	// } else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+	// String stringPunto = hijoDeUnidad.getTextContent();
+	// String[] arrayPunto = stringPunto.split(",");
+	// Coordenada punto = new Coordenada(
+	// Integer.valueOf(arrayPunto[0]),
+	// Integer.valueOf(arrayPunto[1]));
+	// rt.coordenadas = punto;
+	// } else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+	// rt.porcentajeDanios = Double.valueOf(hijoDeUnidad
+	// .getTextContent());
+	// }
+	// }
+	// return rt;
+	// }
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable rt) {
@@ -169,7 +191,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 			return true;
 		} else if (rt.coordenadas().getX() == this.coordenadas().getX()
 				&& rt.coordenadas().getY() == this.coordenadas().getY()
-				&& ((Ruta)rt).porcentajeDanios == this.porcentajeDanios) {
+				&& ((Ruta) rt).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

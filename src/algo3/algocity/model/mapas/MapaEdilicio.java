@@ -346,51 +346,43 @@ public class MapaEdilicio {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"UnidadComercial")) {
-								UnidadComercial uc = UnidadComercial
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(uc);
+								UnidadComercial uc = new UnidadComercial();
+								uc.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, uc);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"UnidadIndustrial")) {
-								UnidadIndustrial ui = UnidadIndustrial
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(ui);
+								UnidadIndustrial ui = new UnidadIndustrial();
+								ui.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, ui);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"EstacionDeBomberos")) {
-								EstacionDeBomberos eb = EstacionDeBomberos
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(eb);
+								EstacionDeBomberos eb = new EstacionDeBomberos();
+								eb.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, eb);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralNuclear")) {
-								CentralNuclear cn = CentralNuclear
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(cn);
+								CentralNuclear cn = new CentralNuclear();
+								cn.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, cn);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"UnidadResidencial")) {
-								UnidadResidencial ur = UnidadResidencial
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(ur);
+								UnidadResidencial ur = new UnidadResidencial();
+								ur.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, ur);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"PozoDeAgua")) {
-								PozoDeAgua pa = PozoDeAgua
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(pa);
+								PozoDeAgua pa = new PozoDeAgua();
+								pa.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, pa);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralMinera")) {
-								CentralMinera cm = CentralMinera
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(cm);
+								CentralMinera cm = new CentralMinera();
+								cm.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, cm);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralEolica")) {
-								CentralEolica ce = CentralEolica
-										.fromElement(hijoDeNodo);
-								//mapaEdilicio.agregar(ce);
+								CentralEolica ce = new CentralEolica();
+								ce.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, ce);
 							}
 						}
@@ -405,8 +397,8 @@ public class MapaEdilicio {
 							.item(j);
 					if (hijoDeUnidadConPoblacion.getNodeName().equals(
 							"UnidadResidencial")) {
-						UnidadResidencial ur = UnidadResidencial
-								.fromElement(hijoDeUnidadConPoblacion);
+						UnidadResidencial ur = new UnidadResidencial();
+						ur.fromElement(hijoDeUnidadConPoblacion);
 						mapaEdilicio.unidadesConPoblacion.add(ur);
 					}
 				}
@@ -418,8 +410,8 @@ public class MapaEdilicio {
 							.item(j);
 					if (hijoDeUnidadConEmpleo.getNodeName().equals(
 							"UnidadIndustrial")) {
-						UnidadIndustrial ui = UnidadIndustrial
-								.fromElement(hijoDeUnidadConEmpleo);
+						UnidadIndustrial ui = new UnidadIndustrial();
+						ui.fromElement(hijoDeUnidadConEmpleo);
 						mapaEdilicio.unidadesConEmpleo.add(ui);
 					}
 				}
@@ -431,52 +423,54 @@ public class MapaEdilicio {
 							.item(j);
 					if (hijoDeUnidadDaniable.getNodeName().equals(
 							"UnidadIndustrial")) {
-						UnidadIndustrial ui = UnidadIndustrial
-								.fromElement(hijoDeUnidadDaniable);
+						UnidadIndustrial ui = new UnidadIndustrial();
+						ui.fromElement(hijoDeUnidadDaniable);
+						
 						mapaEdilicio.unidadesDaniables.add(ui);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"UnidadResidencial")) {
-						UnidadResidencial ur = UnidadResidencial
-								.fromElement(hijoDeUnidadDaniable);
+						UnidadResidencial ur = new UnidadResidencial();
+						ur.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(ur);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"UnidadComercial")) {
-						UnidadComercial uc = UnidadComercial
-								.fromElement(hijoDeUnidadDaniable);
+						UnidadComercial uc = new UnidadComercial();
+						uc.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(uc);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"CentralEolica")) {
-						CentralEolica ce = CentralEolica
-								.fromElement(hijoDeUnidadDaniable);
+						CentralEolica ce = new CentralEolica();
+						ce.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(ce);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"CentralMinera")) {
-						CentralMinera cm = CentralMinera
-								.fromElement(hijoDeUnidadDaniable);
+						CentralMinera cm = new CentralMinera();
+						cm.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(cm);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"CentralNuclear")) {
-						CentralNuclear cn = CentralNuclear
-								.fromElement(hijoDeUnidadDaniable);
+						CentralNuclear cn = new CentralNuclear();
+						cn.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(cn);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"EstacionDeBomberos")) {
-						EstacionDeBomberos eb = EstacionDeBomberos
-								.fromElement(hijoDeUnidadDaniable);
+						EstacionDeBomberos eb = new EstacionDeBomberos();
+						eb.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(eb);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"PozoDeAgua")) {
-						PozoDeAgua pa = PozoDeAgua
-								.fromElement(hijoDeUnidadDaniable);
+						PozoDeAgua pa = new PozoDeAgua();
+						pa.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(pa);
 					} else if (hijoDeUnidadDaniable.getNodeName()
 							.equals("Ruta")) {
-						Ruta rt = Ruta.fromElement(hijoDeUnidadDaniable);
+						Ruta rt = new Ruta();
+						rt.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(rt);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"LineaTension")) {
-						LineaTension lt = LineaTension
-								.fromElement(hijoDeUnidadDaniable);
+						LineaTension lt = new LineaTension();
+						lt.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(lt);
 					}
 				}
