@@ -9,7 +9,9 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -28,9 +30,11 @@ public class CentralEolica extends UnidadEnergetica {
 		this.radioDeInfluencia = 4;
 	}
 
-	public CentralEolica(Mapa mapa ,Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralEolica(Mapa mapa, Dinero dinero,
+			SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			NoHayConexionConTuberias {
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
@@ -134,7 +138,7 @@ public class CentralEolica extends UnidadEnergetica {
 			return true;
 		} else if (ce.coordenadas().getX() == this.coordenadas().getX()
 				&& ce.coordenadas().getY() == this.coordenadas().getY()
-				&& ((CentralEolica)ce).porcentajeDanios == this.porcentajeDanios) {
+				&& ((CentralEolica) ce).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

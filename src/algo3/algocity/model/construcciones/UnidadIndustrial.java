@@ -1,6 +1,5 @@
 package algo3.algocity.model.construcciones;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,6 +13,8 @@ import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -40,10 +41,12 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 25;
 	}
 
-	public UnidadIndustrial(Mapa mapa, Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+	public UnidadIndustrial(Mapa mapa, Dinero dinero,
+			SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
-			CapacidadElectricaInsuficienteException {
+			CapacidadElectricaInsuficienteException,
+			NoHayConexionConRedElectrica, NoHayConexionConRutas {
 
 		this.costo = 10;
 		this.consumo = 5;
@@ -104,7 +107,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		return superficie.esTierra();
 	}
 
-	private boolean hayConexionesEn(Mapa mapa) {
+	private boolean hayConexionesEn(Mapa mapa)
+			throws NoHayConexionConRedElectrica, NoHayConexionConRutas {
 		return (mapa.hayConexionConRedElectrica(coordenadas) && mapa
 				.hayConexionConRutas(coordenadas));
 	}
@@ -177,14 +181,14 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		}
 		return ui;
 	}
-	
-	/*No evalua los invariantes de la clase*/
-	public boolean equals(Daniable ui){
+
+	/* No evalua los invariantes de la clase */
+	public boolean equals(Daniable ui) {
 		if (ui == this) {
 			return true;
 		} else if (ui.coordenadas().getX() == this.coordenadas().getX()
 				&& ui.coordenadas().getY() == this.coordenadas().getY()
-				&& ((UnidadIndustrial)ui).porcentajeDanios == this.porcentajeDanios) {
+				&& ((UnidadIndustrial) ui).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

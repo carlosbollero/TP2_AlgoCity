@@ -9,7 +9,9 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -28,9 +30,11 @@ public class CentralMinera extends UnidadEnergetica {
 		this.radioDeInfluencia = 10;
 	}
 
-	public CentralMinera(Mapa mapa , Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
- throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+	public CentralMinera(Mapa mapa, Dinero dinero,
+			SistemaElectrico sisElectrico, Coordenada coord)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			NoHayConexionConTuberias {
 
 		this.costo = 3000;
 		this.capacidad = 400;
@@ -129,14 +133,14 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 		return cm;
 	}
-	
-	/*No evalua los invariantes de la clase*/
+
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable cm) {
 		if (cm == this) {
 			return true;
 		} else if (cm.coordenadas().getX() == this.coordenadas().getX()
 				&& cm.coordenadas().getY() == this.coordenadas().getY()
-				&& ((CentralMinera)cm).porcentajeDanios == this.porcentajeDanios) {
+				&& ((CentralMinera) cm).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

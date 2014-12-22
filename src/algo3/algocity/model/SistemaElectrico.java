@@ -1,8 +1,11 @@
 package algo3.algocity.model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 
-public class SistemaElectrico {
+public class SistemaElectrico implements Observer {
 	
 	int capacidad;
 	int consumiendo;
@@ -24,6 +27,12 @@ public class SistemaElectrico {
 			throw new CapacidadElectricaInsuficienteException();
 		}
 		consumiendo += cantidad;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		capacidad -= (int)arg;
+		
 	}
 
 }

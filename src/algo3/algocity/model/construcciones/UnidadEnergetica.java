@@ -3,6 +3,8 @@ package algo3.algocity.model.construcciones;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
@@ -40,10 +42,12 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 			this.porcentajeDanios = 100;
 		}
 	}
-	
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 35;
+		int reduccionCapacidad = (100 * (int) porcentajeDanios) / capacidad;
+		setChanged();
+		notifyObservers(reduccionCapacidad);
 
 	}
 
@@ -53,12 +57,15 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 
 	}
 
-	public boolean hayConexionesEn(Mapa mapa) {
+	public boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias {
 		return (mapa.hayConexionConTuberias(coordenadas));
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie {
+		if (!superficie.esTierra()){
+			throw new NoSePuedeConstruirEnSuperficie();
+		}
 		return superficie.esTierra();
 	}
 }

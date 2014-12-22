@@ -12,6 +12,9 @@ import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -34,10 +37,12 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		this.consumo = 2;
 	}
 
-	public UnidadComercial(Mapa mapa, Dinero dinero, SistemaElectrico sisElectrico, Coordenada coord)
+	public UnidadComercial(Mapa mapa, Dinero dinero,
+			SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
-			CapacidadElectricaInsuficienteException {
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		this.costo = 5;
 		this.consumo = 2;
 		this.coordenadas = coord;
@@ -93,7 +98,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
 	}
 
-	private boolean hayConexionesEn(Mapa mapa) {
+	private boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		return (mapa.hayConexionCompleta(coordenadas));
 	}
 
@@ -161,14 +167,14 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		}
 		return uc;
 	}
-	
-	/*No evalua los invariantes de la clase*/
+
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable uc) {
 		if (uc == this) {
 			return true;
 		} else if (uc.coordenadas().getX() == this.coordenadas().getX()
 				&& uc.coordenadas().getY() == this.coordenadas().getY()
-				&& ((UnidadComercial)uc).porcentajeDanios == this.porcentajeDanios) {
+				&& ((UnidadComercial) uc).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

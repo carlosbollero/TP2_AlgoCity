@@ -1,14 +1,17 @@
 package algo3.algocity.model.construcciones;
 
 
+import java.util.Observable;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public abstract class Unidad {
+public abstract class Unidad extends Observable{
 
 	int costo;
 	int consumo;
@@ -28,7 +31,7 @@ public abstract class Unidad {
 
 //	public abstract void aplicarDanio(double i);
 
-	public abstract boolean esConstruibleEn(Superficie superficie);
+	public abstract boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie;
 
 	public abstract double getSalud();
 	
