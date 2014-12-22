@@ -59,9 +59,6 @@ public class PersistenciaTest {
 		Juego juego1 = new Juego(user1, mapa1, turno1, p1, dinero1);
 		Juego juego2 = new Juego(user2, mapa2, turno2, p2, dinero2);
 
-		// Juego juego1 = new Juego();
-		// Juego juego2 = new Juego();
-
 		juego1.persistir();
 		juego2.persistir();
 
@@ -158,7 +155,7 @@ public class PersistenciaTest {
 		}
 
 		/* Corroboro que los datos leidos sean correctos */
-		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
+ 		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
 		assertEquals(juegoRecuperado.turno().getTurno(), 1);
 		assertEquals(juegoRecuperado.dinero().getCantidad(), 20000);
 		assertTrue(juegoRecuperado.poblacion().equals(juego.poblacion()));
