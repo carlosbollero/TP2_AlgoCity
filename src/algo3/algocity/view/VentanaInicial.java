@@ -37,14 +37,14 @@ public class VentanaInicial extends JFrame {
 //		File file = new File("sound/SummerTown.wav");
 //		sonido.open(AudioSystem.getAudioInputStream(file));
 //		sonido.loop(Clip.LOOP_CONTINUOUSLY);
+		
 		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
-        AudioStream audioStream = new AudioStream(in);
-        AudioPlayer.player.start(audioStream);
+		AudioStream audioStream = new AudioStream(in);
+		AudioPlayer.player.start(audioStream);
 		
 	}
 
 	private void initPanelFondo() {
-
 		/* Creo el unico panel que tiene la ventana de inicio */
 		this.panelFondo = new JPanel();
 	}

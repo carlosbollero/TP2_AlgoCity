@@ -51,6 +51,8 @@ public class Mapa extends Observable {
 		tuberias = new MapaConexiones(alto, ancho);
 		rutas = new MapaConexiones(alto, ancho);
 		redElectrica = new MapaConexiones(alto, ancho);
+		this.dinero = new Dinero();
+
 		this.reparador = null;
 	}
 
@@ -295,6 +297,16 @@ public class Mapa extends Observable {
 		mapa.appendChild(redElectrica);
 		redElectrica = this.redElectrica.getElement(doc, redElectrica);
 
+		Element dinero = this.dinero.getElement(doc);
+		mapa.appendChild(dinero);
+		// dinero = this.dinero.getElement(doc);
+
+		Element reparador = doc.createElement("reparador");
+		mapa.appendChild(reparador);
+		if (this.reparador != null) {
+			reparador = this.reparador.getElement(doc);
+		}
+
 		return mapa;
 	}
 
@@ -325,6 +337,12 @@ public class Mapa extends Observable {
 			} else if (child.getNodeName().equals("redElectrica")) {
 				MapaConexiones redElectrica = MapaConexiones.fromElement(child);
 				mapa.redElectrica = redElectrica;
+			} else if (child.getNodeName().equals("Dinero")) {
+				Dinero dinero = Dinero.fromElement(child);
+				mapa.dinero = dinero;
+			} else if (child.getNodeName().equals("reparador")) {
+				Reparador reparador = Reparador.fromElement(child);
+				mapa.reparador = reparador;
 			}
 		}
 		// mapa.territorio.imprimirTerritorio();
