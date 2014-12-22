@@ -3,6 +3,7 @@ package algo3.algocity.model;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class Usuario {
 
@@ -50,15 +51,36 @@ public class Usuario {
 	/**********************************************************************/
 	public Element getElement(Document doc) {
 		Element usuario = doc.createElement("Usuario");
-		usuario.setTextContent(this.nombre);
-		//falta agregar la persistencia del puntaje
+
+		Element nombre = doc.createElement("nombre");
+		nombre.setTextContent(this.nombre);
+		usuario.appendChild(nombre);
+
+		Element ruta = doc.createElement("ruta");
+		ruta.setTextContent(this.ruta);
+		usuario.appendChild(ruta);
+
+		Element puntaje = doc.createElement("puntaje");
+		puntaje.setTextContent(String.valueOf(this.puntaje));
+		usuario.appendChild(puntaje);
+
 		return usuario;
 	}
 
 	public static Usuario fromElement(Node hijoDeJuego) {
+
 		Usuario usuario = new Usuario();
-		usuario.nombre = hijoDeJuego.getTextContent();
-		usuario.ruta = "./saved/" + hijoDeJuego.getTextContent() + ".xml";
+		NodeList childs = hijoDeJuego.getChildNodes();
+		for (int i = 0; i < childs.getLength(); i++) {
+			Node child = childs.item(i);
+			if (child.getNodeName().equals("nombre")) {
+				usuario.nombre = child.getTextContent();
+			} else if (child.getNodeName().equals("ruta")) {
+				usuario.ruta = child.getTextContent();
+			} else if (child.getNodeName().equals("puntaje")) {
+				usuario.puntaje = Integer.valueOf(child.getTextContent());
+			}
+		}
 		return usuario;
 	}
 }

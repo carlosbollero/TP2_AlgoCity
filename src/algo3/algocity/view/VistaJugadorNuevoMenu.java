@@ -21,7 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import algo3.algocity.controller.AccionMouseCrearJugadorNuevo;
+import algo3.algocity.controller.AccionMouseComenzarConJugadorNuevo;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.controller.AccionMouseVolverMenuJugadorNuevoOExistente;
 
@@ -42,13 +42,10 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.ventanaPortadora = ventana;
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-
 		setContenido();
-
 	}
 
 	private void setContenido() {
@@ -75,20 +72,21 @@ public class VistaJugadorNuevoMenu extends JPanel {
 
 		/* Ajusto el panel de informe */
 		this.panelInforme = new JTextField("");
-		this.panelInforme.setPreferredSize(new Dimension(250, 27));
-		this.panelInforme.setMaximumSize(new Dimension(250, 27));
+		this.panelInforme.setPreferredSize(new Dimension(350, 27));
+		this.panelInforme.setMaximumSize(new Dimension(350, 27));
 		this.panelInforme.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.panelInforme.setAlignmentY(Component.CENTER_ALIGNMENT);
 		// this.panelInforme.setBackground(Color.white);
-		// this.panelInforme.setForeground(Color.red);
+		this.panelInforme.setForeground(Color.red);
+		this.panelInforme.setHorizontalAlignment(JTextField.CENTER);
 
 		/* Ajusto los botones */
 		this.bComenzar = new JButton("¡ Comenzar !");
 		this.bComenzar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bComenzar
-				.addActionListener(new AccionMouseCrearJugadorNuevo(
-						this.ventanaPortadora, areaNombre.getText(),
+				.addActionListener(new AccionMouseComenzarConJugadorNuevo(
+						this.ventanaPortadora, areaNombre,
 						this.panelInforme));
 
 		this.bVolver = new JButton("Volver");
