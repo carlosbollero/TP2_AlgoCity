@@ -3,6 +3,7 @@ package algo3.algocity.model.caracteristicas;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import algo3.algocity.model.mapas.Coordenada;
 
@@ -21,5 +22,8 @@ public interface Daniable {
 	/*Persistencia*/
 	public Element getElement(Document doc);
 	
+	public Daniable fromElement(Node child);
+	
 	public boolean equals(Daniable d);
+
 }
