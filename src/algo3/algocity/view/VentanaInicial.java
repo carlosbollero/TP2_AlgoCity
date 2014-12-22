@@ -42,8 +42,8 @@ public class VentanaInicial extends JFrame {
 //		sonido.open(AudioSystem.getAudioInputStream(file));
 //		sonido.loop(Clip.LOOP_CONTINUOUSLY);
 		
-		//InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
-		InputStream in = new FileInputStream(new File("sound/SimCityMusicTheme.wav"));
+		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
+		//InputStream in = new FileInputStream(new File("sound/SimCityMusicTheme.wav"));
 		
 		AudioStream audioStream = new AudioStream(in);
 		AudioPlayer.player.start(audioStream);
