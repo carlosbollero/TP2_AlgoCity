@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -15,6 +16,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import algo3.algocity.model.Juego;
 
 public class VentanaInicial extends JFrame {
@@ -23,7 +26,8 @@ public class VentanaInicial extends JFrame {
 
 	JPanel panelFondo;
 
-	public VentanaInicial() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+	public VentanaInicial() throws LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
 		super("Algoritmos 3 | AlgoCity");
 		initPanelFondo();
 		setPanelFondo();
@@ -31,15 +35,20 @@ public class VentanaInicial extends JFrame {
 		initSonido();
 	}
 
-	private void initSonido() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-		Clip sonido = AudioSystem.getClip();
-		File file = new File("sound/SummerTown.wav");
-		sonido.open(AudioSystem.getAudioInputStream(file));
-		sonido.loop(Clip.LOOP_CONTINUOUSLY);
+	private void initSonido() throws LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
+//		Clip sonido = AudioSystem.getClip();
+//		File file = new File("sound/SummerTown.wav");
+//		sonido.open(AudioSystem.getAudioInputStream(file));
+//		sonido.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
+		AudioStream audioStream = new AudioStream(in);
+		AudioPlayer.player.start(audioStream);
+		
 	}
 
 	private void initPanelFondo() {
-
 		/* Creo el unico panel que tiene la ventana de inicio */
 		this.panelFondo = new JPanel();
 	}
@@ -99,20 +108,20 @@ public class VentanaInicial extends JFrame {
 	}
 
 	public Juego comenzar() {
-		//devuelve la instancia de juego que corresponda
-		
+		// devuelve la instancia de juego que corresponda
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void ocultar() {
 		setVisible(false);
-		
+
 	}
 
 	public void cerrar() {
 		this.dispose();
-		
+
 	}
 
 }
