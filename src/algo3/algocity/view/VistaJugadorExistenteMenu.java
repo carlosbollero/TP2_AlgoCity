@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import algo3.algocity.controller.AccionMouseComenzarConJugadorExistente;
 import algo3.algocity.controller.AccionMouseVolverMenuJugadorNuevoOExistente;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.RegistroUsuarios;
@@ -31,7 +32,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 
 	VentanaInicial ventanaPortadora;
 	Image imagenFondo;
-	
+
 	JButton bComenzar;
 	JButton bVolver;
 
@@ -49,7 +50,6 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		try {
 			setContenido();
 		} catch (NoSeEncontroElFicheroException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -70,10 +70,9 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		this.etiquetaMensaje.setForeground(Color.black);
 		// this.etiquetaMensaje.setBackground(null);
 
-		
 		/* Configura el panel de usuarios existentes */
-		
-		//Obtengo los usuarios existentes
+
+		// Obtengo los usuarios existentes
 		RegistroUsuarios ru = new RegistroUsuarios();
 		ArrayList<String> nombres = ru.nombresUsuarios();
 		String[] datos = new String[nombres.size()];
@@ -81,17 +80,13 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		int i = 0;
 		while (it.hasNext()) {
 			datos[i] = it.next();
-			i++;	
+			i++;
 		}
-		
-		JList lista = new JList(datos);
-		// lista.addElement(“Elemento añadido”);
+
+		JList<String> lista = new JList<String>(datos);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lista.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		// Object[] selección = lista.getSelectedValues();
-		// recoge los índices seleccionados
-		// int[] índices = lista.getSelectedIndices();
-		
+
 		JScrollPane panelDesplazamiento = new JScrollPane(lista);
 
 		panelDesplazamiento.setPreferredSize(new Dimension(175, 85));
@@ -100,19 +95,21 @@ public class VistaJugadorExistenteMenu extends JPanel {
 				.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panelDesplazamiento.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelDesplazamiento.setAlignmentY(Component.CENTER_ALIGNMENT);
-		
-		
-		/*Ajusto los botones*/
+
+		/* Ajusto los botones */
 		this.bComenzar = new JButton("¡ Comenzar !");
 		this.bComenzar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
-		
-		
+		this.bComenzar
+				.addActionListener(new AccionMouseComenzarConJugadorExistente(
+						this.ventanaPortadora, lista));
+
 		this.bVolver = new JButton("Volver");
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
-		this.bVolver.addActionListener(new AccionMouseVolverMenuJugadorNuevoOExistente(this.ventanaPortadora));
-				
+		this.bVolver
+				.addActionListener(new AccionMouseVolverMenuJugadorNuevoOExistente(
+						this.ventanaPortadora));
 
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		add(this.etiquetaMensaje);

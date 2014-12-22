@@ -15,10 +15,11 @@ public class Turno extends Observable{
 	Timer timer;
 	long delay;
 	
+	
 	TimerTask tarea = new TimerTask() {		
 		@Override
 		public void run() {
-			avanzar();			
+			avanzar();		
 		}
 	};
 
@@ -26,7 +27,7 @@ public class Turno extends Observable{
 		numero = 1;
 		delay = 5000;
 		timer = new Timer();
-		timer.schedule(tarea, delay, delay);
+		timer.schedule(tarea, delay, delay);		
 	}
 
 	public int getTurno() {
@@ -41,6 +42,10 @@ public class Turno extends Observable{
 		numero++;
 		setChanged();
 		notifyObservers();
+	}
+	
+	public void detener(){
+		this.timer.cancel();
 	}
 
 	/**********************************************************************/

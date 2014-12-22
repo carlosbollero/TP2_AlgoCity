@@ -62,7 +62,6 @@ public class RegistroUsuarios {
 		if (usuarios.isEmpty()) {
 
 			usuarios.add(unUsuario);
-
 		} else if (!existeNombreUsuario(unUsuario.nombre())) {
 			usuarios.add(unUsuario);
 		}
@@ -71,23 +70,25 @@ public class RegistroUsuarios {
 	public boolean existeNombreUsuario(String nombreUsuarioAChequear)
 			throws NombreDeUsuarioYaExisteException {
 		
+		System.out.println(nombreUsuarioAChequear);
+		for(String a : nombresUsuarios){
+			System.out.println(a);
+		}
+		return (nombresUsuarios.contains(nombreUsuarioAChequear));
+
+		/*
 		boolean encontrado = false;
 		Iterator<String> iteradorUsuarios = nombresUsuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			String unNombre = iteradorUsuarios.next();
 
-			if (unNombre.equals(nombreUsuarioAChequear)) {
+			if (unNombre == nombreUsuarioAChequear) {
 
 				encontrado = true;
 			}
 		}
-		/*
-		if (encontrado) {
-			return false;
-			//throw new NombreDeUsuarioYaExisteException();
-		}
-		*/
 		return encontrado;
+		*/
 	}
 /*
 	public boolean existeUsuario(Usuario usuarioAChequear)
@@ -111,11 +112,12 @@ public class RegistroUsuarios {
 
 
 	public boolean crearUsuario(String nombreIngresado) {
-		if(nombreIngresado.length() >= 4){
+		
+		if (nombreIngresado.length() > 3 && !nombreIngresado.contains(" ") && !nombreIngresado.contains(",")) {
 			return( nombresUsuarios.add(nombreIngresado) );
-			
 		}
 		return false;	
 	}
+
 
 }
