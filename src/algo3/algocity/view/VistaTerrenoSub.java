@@ -19,15 +19,16 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 	Coordenada coordenada;
 	Image imagen;
 
-	public VistaTerrenoSub(MapaConexiones mapa, Coordenada coord) {
-		this.mapa = mapa;
+	public VistaTerrenoSub(MapaConexiones m, Coordenada coord) {
+		mapa = m;
+		mapa.addObserver(this);
 		coordenada = coord;
 		setImagen();
 	}
 
 	private void setImagen() {
 		imagen = (mapa.contiene(coordenada)) ? new ImageIcon(
-				"img/underground - copia.png").getImage() : new ImageIcon(
+				"img/tuberia.png").getImage() : new ImageIcon(
 				"img/underground.png").getImage();
 //		imagen = new ImageIcon("img/underground.png").getImage();
 	}
@@ -40,6 +41,7 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		setImagen();
 		repaint();
 	}
 
