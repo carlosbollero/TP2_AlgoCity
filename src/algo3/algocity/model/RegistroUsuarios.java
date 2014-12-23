@@ -2,12 +2,9 @@ package algo3.algocity.model;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
-import algo3.algocity.model.mapas.Coordenada;
 
 /**
  * Clase controladora del login y registro de usuarios
