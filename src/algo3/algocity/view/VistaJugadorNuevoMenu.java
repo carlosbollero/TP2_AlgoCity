@@ -81,7 +81,7 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.panelInforme.setHorizontalAlignment(JTextField.CENTER);
 
 		/* Ajusto los botones */
-		this.bComenzar = new JButton("¡ Comenzar !");
+		this.bComenzar = new JButton(" Comenzar !!");
 		this.bComenzar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bComenzar
