@@ -39,7 +39,6 @@ public class Mapa extends Observable {
 	MapaConexiones redElectrica;
 
 	Dinero dinero;
-
 	Reparador reparador;
 
 	public Mapa() {
@@ -230,6 +229,10 @@ public class Mapa extends Observable {
 	public MapaTerritorio territorio() {
 		return this.territorio;
 	}
+	
+	public Reparador reparador(){
+		return this.reparador;
+	}
 
 	// Metodo implementado solo para tests
 	/*********************************************************/
@@ -299,12 +302,14 @@ public class Mapa extends Observable {
 
 		Element dinero = this.dinero.getElement(doc);
 		mapa.appendChild(dinero);
-		// dinero = this.dinero.getElement(doc);
 
-		Element reparador = doc.createElement("reparador");
-		mapa.appendChild(reparador);
-		if (this.reparador != null) {
-			reparador = this.reparador.getElement(doc);
+		if (this.reparador == null) {
+			Element reparador = doc.createElement("reparador");
+			mapa.appendChild(reparador);
+			
+		}else{
+			Element reparador = this.reparador.getElement(doc);
+			mapa.appendChild(reparador);
 		}
 
 		return mapa;
@@ -341,7 +346,7 @@ public class Mapa extends Observable {
 				Dinero dinero = Dinero.fromElement(child);
 				mapa.dinero = dinero;
 			} else if (child.getNodeName().equals("reparador")) {
-				Reparador reparador = Reparador.fromElement(child);
+				Reparador reparador = Reparador.fromElement(child,mapa);
 				mapa.reparador = reparador;
 			}
 		}

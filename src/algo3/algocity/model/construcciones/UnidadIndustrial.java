@@ -152,22 +152,22 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		return unidad;
 	}
 
-	public static UnidadIndustrial fromElement(Node hijoDeNodo) {
-		UnidadIndustrial ui = new UnidadIndustrial();
+	
+	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidad.item(i);
 			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				ui.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				ui.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
 				;
 			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
-				ui.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
 				;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				ui.porcentajeDanios = Double.valueOf(hijoDeUnidad
+				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
 				;
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
@@ -176,12 +176,11 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				ui.coordenadas = punto;
+				this.coordenadas = punto;
 			}
 		}
-		return ui;
 	}
-
+	
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ui) {
 		if (ui == this) {

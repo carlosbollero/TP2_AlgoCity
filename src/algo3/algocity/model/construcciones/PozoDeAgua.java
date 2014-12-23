@@ -107,27 +107,26 @@ public class PozoDeAgua extends Unidad implements Daniable {
 
 		return unidad;
 	}
-
-	public static PozoDeAgua fromElement(Node hijoDeNodo) {
-		PozoDeAgua pa = new PozoDeAgua();
+	
+	
+	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidad.item(i);
 			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				pa.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				pa.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				pa.coordenadas = punto;
+				this.coordenadas = punto;
 			}
 		}
-		return pa;
 	}
 
 	/*No evalua los invariantes de la clase*/

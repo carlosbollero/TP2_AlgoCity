@@ -288,6 +288,11 @@ public class PersistenciaTest {
 			Unidad u = itURelevantesElect.next();
 			assertTrue(((UnidadEnergetica) u).equals((UnidadEnergetica) uRec));
 		}
+		
+		//Chequea el reparador
+		assertTrue(juego.mapa().reparador().equals(juegoRecuperado.mapa().reparador()));
+		
+		
 	}
 
 }

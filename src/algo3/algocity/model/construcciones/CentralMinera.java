@@ -104,36 +104,6 @@ public class CentralMinera extends UnidadEnergetica {
 		return unidad;
 	}
 
-	public static CentralMinera fromElement(Node hijoDeNodo) {
-		CentralMinera cm = new CentralMinera();
-		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
-
-		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
-			Node hijoDeUnidad = hijosDeUnidad.item(i);
-			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				cm.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				cm.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
-				cm.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				cm.porcentajeDanios = Double.valueOf(hijoDeUnidad
-						.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("radioDeInfluencia")) {
-				cm.radioDeInfluencia = Integer.valueOf(hijoDeUnidad
-						.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
-				String stringPunto = hijoDeUnidad.getTextContent();
-				String[] arrayPunto = stringPunto.split(",");
-				Coordenada punto = new Coordenada(
-						Integer.valueOf(arrayPunto[0]),
-						Integer.valueOf(arrayPunto[1]));
-				cm.coordenadas = punto;
-			}
-		}
-		return cm;
-	}
-
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable cm) {
 		if (cm == this) {
