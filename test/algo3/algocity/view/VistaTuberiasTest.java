@@ -22,17 +22,36 @@ public class VistaTuberiasTest {
 		j.mapa().agregar(
 				new FabricaTuberias().construir(j.mapa(), j.dinero(),
 						new Coordenada(1, 1)));
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		j.mapa().agregar(
 				new FabricaTuberias().construir(j.mapa(), j.dinero(),
 						new Coordenada(1, 2)));
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		j.mapa().agregar(
 				new FabricaTuberias().construir(j.mapa(), j.dinero(),
 						new Coordenada(1, 3)));
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		j.mapa().agregar(
 				new FabricaTuberias().construir(j.mapa(), j.dinero(),
 						new Coordenada(1, 4)));
+
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
