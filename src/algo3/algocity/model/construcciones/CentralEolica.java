@@ -102,36 +102,6 @@ public class CentralEolica extends UnidadEnergetica {
 		return unidad;
 	}
 
-	public static CentralEolica fromElement(Node hijoDeNodo) {
-		CentralEolica ce = new CentralEolica();
-		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
-
-		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
-			Node hijoDeUnidad = hijosDeUnidad.item(i);
-			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				ce.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				ce.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
-				ce.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				ce.porcentajeDanios = Double.valueOf(hijoDeUnidad
-						.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("radioDeInfluencia")) {
-				ce.radioDeInfluencia = Integer.valueOf(hijoDeUnidad
-						.getTextContent());
-			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
-				String stringPunto = hijoDeUnidad.getTextContent();
-				String[] arrayPunto = stringPunto.split(",");
-				Coordenada punto = new Coordenada(
-						Integer.valueOf(arrayPunto[0]),
-						Integer.valueOf(arrayPunto[1]));
-				ce.coordenadas = punto;
-			}
-		}
-		return ce;
-	}
-
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ce) {
 		if (ce == this) {

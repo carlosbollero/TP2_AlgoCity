@@ -106,7 +106,10 @@ public class Juego {
 	public Dinero dinero() {
 		return dinero;
 	}
-
+	
+	public Reparador reparador(){
+		return this.mapa.reparador();
+	}
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**

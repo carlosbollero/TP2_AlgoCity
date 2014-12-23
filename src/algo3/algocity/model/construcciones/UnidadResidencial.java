@@ -164,33 +164,32 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		return unidad;
 	}
 
-	public static UnidadResidencial fromElement(Node hijoDeNodo) {
-		UnidadResidencial ur = new UnidadResidencial();
+	
+	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
 			Node hijoDeUnidad = hijosDeUnidad.item(i);
 			if (hijoDeUnidad.getNodeName().equals("costo")) {
-				ur.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("consumo")) {
-				ur.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.consumo = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("capacidad")) {
-				ur.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
+				this.capacidad = Integer.valueOf(hijoDeUnidad.getTextContent());
 			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeUnidad.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				ur.coordenadas = punto;
+				this.coordenadas = punto;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-				ur.porcentajeDanios = Double.valueOf(hijoDeUnidad
+				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
 			}
 		}
-		return ur;
 	}
-
+	
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ur) {
 		if (ur == this) {

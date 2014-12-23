@@ -92,24 +92,26 @@ public class Tuberia implements Conector {
 		return conector;
 	}
 
-	public static Tuberia fromElement(Node hijoDeNodo) {
-		Tuberia tb = new Tuberia();
+	
+	public void fromElement(Node hijoDeNodo){
+		
 		NodeList hijosDeTuberia = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeTuberia.getLength(); i++) {
 			Node hijoDeTuberia = hijosDeTuberia.item(i);
 			if (hijoDeTuberia.getNodeName().equals("costo")) {
-				tb.costo = Integer.valueOf(hijoDeTuberia.getTextContent());
+				this.costo = Integer.valueOf(hijoDeTuberia.getTextContent());
 			} else if (hijoDeTuberia.getNodeName().equals("coordenadas")) {
 				String stringPunto = hijoDeTuberia.getTextContent();
 				String[] arrayPunto = stringPunto.split(",");
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				tb.coordenadas = punto;
+				this.coordenadas = punto;
 			}
 		}
-		return tb;
+		
+		
 	}
 
 	/* No evalua los invariantes de la clase */

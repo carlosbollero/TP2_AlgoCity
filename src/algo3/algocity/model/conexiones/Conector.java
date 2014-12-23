@@ -20,4 +20,5 @@ public interface Conector {
 	
 	/*Persistencia*/
 	public abstract Element getElement(Document doc);
+	
 }
