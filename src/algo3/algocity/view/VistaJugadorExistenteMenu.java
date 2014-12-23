@@ -47,14 +47,11 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
 
-		try {
-			setContenido();
-		} catch (NoSeEncontroElFicheroException e) {
-			e.printStackTrace();
-		}
+		setContenido();
+
 	}
 
-	private void setContenido() throws NoSeEncontroElFicheroException {
+	private void setContenido() {
 
 		/* Configura la etiqueta Elija un Usuario */
 		this.etiquetaMensaje = new JLabel("Elija un Usuario", JLabel.CENTER);
@@ -73,8 +70,15 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		/* Configura el panel de usuarios existentes */
 
 		// Obtengo los usuarios existentes
-		RegistroUsuarios ru = new RegistroUsuarios();
-		ArrayList<String> nombres = ru.nombresUsuarios();
+		RegistroUsuarios ru;
+		ArrayList<String> nombres;
+		try {
+			ru = new RegistroUsuarios();
+			nombres = ru.nombresUsuarios();
+		} catch (NoSeEncontroElFicheroException e) {
+			e.printStackTrace();
+			nombres = new ArrayList<String>();
+		}
 		String[] datos = new String[nombres.size()];
 		Iterator<String> it = nombres.iterator();
 		int i = 0;
