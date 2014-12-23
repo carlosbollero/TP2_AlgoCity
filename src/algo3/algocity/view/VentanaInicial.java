@@ -11,10 +11,14 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import algo3.algocity.model.Juego;
+import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 
 public class VentanaInicial extends JFrame {
 
@@ -24,7 +28,7 @@ public class VentanaInicial extends JFrame {
 	AudioStream audioStream;
 
 	public VentanaInicial() throws LineUnavailableException, IOException,
-			UnsupportedAudioFileException {
+			UnsupportedAudioFileException, SAXException, ParserConfigurationException, NoSeEncontroElFicheroException {
 		super("Algoritmos 3 | AlgoCity");
 		initPanelFondo();
 		setPanelFondo();
@@ -38,13 +42,12 @@ public class VentanaInicial extends JFrame {
 //		File file = new File("sound/SummerTown.wav");
 //		sonido.open(AudioSystem.getAudioInputStream(file));
 //		sonido.loop(Clip.LOOP_CONTINUOUSLY);
-		
+	
 //		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
 		InputStream in = new FileInputStream(new File("sound/SimCityMusicTheme.wav"));
 		
 		audioStream = new AudioStream(in);
 		AudioPlayer.player.start(audioStream);
-		
 	}
 	
 	private void stopSonido(){
@@ -56,7 +59,7 @@ public class VentanaInicial extends JFrame {
 		this.panelFondo = new JPanel();
 	}
 
-	private void setPanelFondo() {
+	private void setPanelFondo() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException {
 
 		panelFondo.setLayout(new CardLayout());
 
@@ -65,12 +68,14 @@ public class VentanaInicial extends JFrame {
 				this);
 		VistaJugadorNuevo vista3 = new VistaJugadorNuevo(this);
 		VistaJugadorExistente vista4 = new VistaJugadorExistente(this);
+		VistaPuntajes vista5 = new VistaPuntajes(this);
 
 		/* El panel del fondo es uno solo y se va intercambiando su contenido */
 		panelFondo.add(vista1, "vistaInicial");
 		panelFondo.add(vista2, "vistaJugNuevoOExist");
 		panelFondo.add(vista3, "vistaJugNuevo");
 		panelFondo.add(vista4, "vistaJugExistente");
+		panelFondo.add(vista5, "vistaPuntajes");
 
 		add(panelFondo);
 
@@ -96,6 +101,11 @@ public class VentanaInicial extends JFrame {
 	public void mostrarVistaJugadorExistente() {
 		((CardLayout) panelFondo.getLayout()).show(panelFondo,
 				"vistaJugExistente");
+	}
+	
+	public void mostrarVistaPuntajes(){
+		((CardLayout) panelFondo.getLayout()).show(panelFondo,
+				"vistaPuntajes");
 	}
 
 	private void acomodar() {

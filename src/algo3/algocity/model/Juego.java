@@ -47,6 +47,7 @@ public class Juego {
 		turnos.addObserver(this.poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
+		
 	}
 
 	/* Usado para persistencia */
@@ -133,7 +134,7 @@ public class Juego {
 					new PrintStream(this.usuario.ruta())));
 
 			// TODO
-			// falta cerrar el document
+			// falta cerrar el documento
 
 			// doc.close();
 			// InputStream in = new FileInputStream(this.usuario.ruta());
@@ -166,14 +167,6 @@ public class Juego {
 	private Element getElement(Document doc) {
 		Element juego = doc.createElement("Juego");
 
-//		Element ancho = doc.createElement("anchoMapaJuego");
-//		ancho.setTextContent(String.valueOf(this.anchoMapaJuego));
-//		juego.appendChild(ancho);
-//
-//		Element alto = doc.createElement("altoMapaJuego");
-//		alto.setTextContent(String.valueOf(this.altoMapaJuego));
-//		juego.appendChild(alto);
-
 		Element usuario = this.usuario.getElement(doc);
 		juego.appendChild(usuario);
 
@@ -192,7 +185,8 @@ public class Juego {
 		return juego;
 	}
 
-	private static Juego fromElement(Element element) {
+	//La visibilidad no es private, pues RegistroUsuarios debe tener acceso a ella
+	static Juego fromElement(Element element) {
 		Juego juego = new Juego();
 
 		NodeList hijosDeJuego = element.getChildNodes();

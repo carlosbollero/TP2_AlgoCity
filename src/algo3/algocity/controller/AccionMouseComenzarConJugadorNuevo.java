@@ -2,8 +2,12 @@ package algo3.algocity.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Juego;
@@ -61,7 +65,7 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 			} catch (NombreDeUsuarioYaExisteException e) {
 				e.printStackTrace();
 			}
-		} catch (NoSeEncontroElFicheroException e) {
+		} catch (NoSeEncontroElFicheroException | SAXException | IOException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 
