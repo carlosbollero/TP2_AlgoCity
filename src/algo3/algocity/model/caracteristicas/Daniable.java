@@ -15,7 +15,7 @@ public interface Daniable {
 
 	public double getSalud();
 
-	public Coordenada coordenadas();
+	public Coordenada coordenada();
 	
 	public void aceptar(Visitante v);
 	

@@ -59,9 +59,9 @@ public class MapaEdilicioTest {
 	public void testSePuedeConsultarUnaCoordenadaDelMapa() {
 		MapaEdilicio m = new MapaEdilicio(alto, ancho);
 
-		assertFalse(m.tieneCoordenadaOcupada(1, 1));
+		assertFalse(m.tieneCoordenadaOcupada(null));
 		assertTrue(m.agregar(new PozoDeAgua(new Coordenada(1, 1))));
-		assertTrue(m.tieneCoordenadaOcupada(1, 1));
+		assertTrue(m.tieneCoordenadaOcupada(null));
 	}
 
 	@Test

@@ -53,7 +53,7 @@ public class Tuberia implements Conector {
 	}
 
 	@Override
-	public Coordenada coordenadas() {
+	public Coordenada coordenada() {
 		return coordenadas;
 	}
 
@@ -118,8 +118,8 @@ public class Tuberia implements Conector {
 	public boolean equals(Tuberia tb) {
 		if (tb == this) {
 			return true;
-		} else if (tb.coordenadas().getX() == this.coordenadas().getX()
-				&& tb.coordenadas().getY() == this.coordenadas().getY()) {
+		} else if (tb.coordenada().getX() == this.coordenada().getX()
+				&& tb.coordenada().getY() == this.coordenada().getY()) {
 			return true;
 		}
 		return false;

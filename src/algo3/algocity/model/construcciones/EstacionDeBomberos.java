@@ -28,10 +28,10 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException {
 
-		coordenadas = coord;
+		coordenada = coord;
 		costo = 1500;
 		consumo = 0;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
+		if (!esConstruibleEn(mapa.superficie(coordenada))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 		dinero.cobrar(costo);
@@ -41,7 +41,7 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		costo = 1500;
 		consumo = 0;
 		conexion = null;
-		this.coordenadas = coord;
+		this.coordenada = coord;
 	}
 
 	// public void actuar(ArrayList<Visitable> objetivos) {
@@ -121,8 +121,8 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		return unidad;
 	}
@@ -143,7 +143,7 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
@@ -152,8 +152,8 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 	public boolean equals(Daniable eb) {
 		if (eb == this) {
 			return true;
-		} else if (eb.coordenadas().getX() == this.coordenadas().getX()
-				&& eb.coordenadas().getY() == this.coordenadas().getY()) {
+		} else if (eb.coordenada().getX() == this.coordenada().getX()
+				&& eb.coordenada().getY() == this.coordenada().getY()) {
 			return true;
 		}
 		return false;

@@ -57,7 +57,7 @@ public class MapaConexionesTest {
 		mc.agregar(c1);
 		mc.agregar(c2);
 
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c2)));
+		assertFalse(mc.hayConexion(mc.getCoordenadaDe(c1), mc.getCoordenadaDe(c2)));
 
 		Conector c3 = new Ruta(new Coordenada(3, 3));
 		Conector c4 = new Ruta(new Coordenada(3, 4));
@@ -65,11 +65,11 @@ public class MapaConexionesTest {
 		mc.agregar(c3);
 		mc.agregar(c4);
 
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c3)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c4)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c2), mc.coordenadas(c3)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c2), mc.coordenadas(c4)));
-		assertTrue(mc.hayConexion(mc.coordenadas(c3), mc.coordenadas(c4)));
+		assertFalse(mc.hayConexion(mc.getCoordenadaDe(c1), mc.getCoordenadaDe(c3)));
+		assertFalse(mc.hayConexion(mc.getCoordenadaDe(c1), mc.getCoordenadaDe(c4)));
+		assertFalse(mc.hayConexion(mc.getCoordenadaDe(c2), mc.getCoordenadaDe(c3)));
+		assertFalse(mc.hayConexion(mc.getCoordenadaDe(c2), mc.getCoordenadaDe(c4)));
+		assertTrue(mc.hayConexion(mc.getCoordenadaDe(c3), mc.getCoordenadaDe(c4)));
 
 	}
 

@@ -24,7 +24,7 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 
 	public CentralMinera(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
@@ -39,8 +39,8 @@ public class CentralMinera extends UnidadEnergetica {
 		this.costo = 3000;
 		this.capacidad = 400;
 		this.radioDeInfluencia = 10;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		this.coordenada = coord;
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -62,9 +62,7 @@ public class CentralMinera extends UnidadEnergetica {
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	/**********************************************************************/
@@ -89,8 +87,8 @@ public class CentralMinera extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -108,8 +106,8 @@ public class CentralMinera extends UnidadEnergetica {
 	public boolean equals(Daniable cm) {
 		if (cm == this) {
 			return true;
-		} else if (cm.coordenadas().getX() == this.coordenadas().getX()
-				&& cm.coordenadas().getY() == this.coordenadas().getY()
+		} else if (cm.coordenada().getX() == this.coordenada().getX()
+				&& cm.coordenada().getY() == this.coordenada().getY()
 				&& ((CentralMinera) cm).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

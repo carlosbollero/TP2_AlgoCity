@@ -24,7 +24,7 @@ public class CentralEolica extends UnidadEnergetica {
 	}
 
 	public CentralEolica(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
@@ -38,8 +38,8 @@ public class CentralEolica extends UnidadEnergetica {
 		this.costo = 1000;
 		this.capacidad = 100;
 		this.radioDeInfluencia = 4;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		this.coordenada = coord;
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -49,9 +49,7 @@ public class CentralEolica extends UnidadEnergetica {
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	@Override
@@ -88,8 +86,8 @@ public class CentralEolica extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -106,8 +104,8 @@ public class CentralEolica extends UnidadEnergetica {
 	public boolean equals(Daniable ce) {
 		if (ce == this) {
 			return true;
-		} else if (ce.coordenadas().getX() == this.coordenadas().getX()
-				&& ce.coordenadas().getY() == this.coordenadas().getY()
+		} else if (ce.coordenada().getX() == this.coordenada().getX()
+				&& ce.coordenada().getY() == this.coordenada().getY()
 				&& ((CentralEolica) ce).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

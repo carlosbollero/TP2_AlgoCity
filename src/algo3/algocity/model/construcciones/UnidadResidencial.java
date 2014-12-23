@@ -36,7 +36,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public UnidadResidencial(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
@@ -64,9 +64,9 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.costo = 5;
 		this.consumo = 1;
 		this.capacidad = 100;
-		coordenadas = coord;
+		coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 //			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -117,7 +117,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 
 	private boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		return (mapa.hayConexionCompleta(coordenadas));
+		return (mapa.hayConexionCompleta(coordenada));
 	}
 
 	@Override
@@ -127,9 +127,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadConPoblacion(this);
-		mapa.agregarUnidadDaniable(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	/**********************************************************************/
@@ -154,8 +152,8 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -182,7 +180,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
 				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
@@ -194,8 +192,8 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	public boolean equals(Daniable ur) {
 		if (ur == this) {
 			return true;
-		} else if (ur.coordenadas().getX() == this.coordenadas().getX()
-				&& ur.coordenadas().getY() == this.coordenadas().getY()
+		} else if (ur.coordenada().getX() == this.coordenada().getX()
+				&& ur.coordenada().getY() == this.coordenada().getY()
 				&& ((UnidadResidencial) ur).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

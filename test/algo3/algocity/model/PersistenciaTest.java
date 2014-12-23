@@ -162,35 +162,35 @@ public class PersistenciaTest {
 
 		// Chequea la ciudad
 		Unidad urRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ur.coordenadas().getX(), ur.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((UnidadResidencial) urRecuperada).equals(ur));
 
 		Unidad uiRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ui.coordenadas().getX(), ui.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((UnidadIndustrial) uiRecuperada).equals(ui));
 
 		Unidad ucRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(uc.coordenadas().getX(), uc.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((UnidadComercial) ucRecuperada).equals(uc));
 
 		Unidad paRecuperado = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(pa.coordenadas().getX(), pa.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((PozoDeAgua) paRecuperado).equals(pa));
 
 		Unidad ebRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(eb.coordenadas().getX(), eb.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((EstacionDeBomberos) ebRecuperada).equals(eb));
 
 		Unidad cnRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(cn.coordenadas().getX(), cn.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((CentralNuclear) cnRecuperada).equals(cn));
 
 		Unidad cmRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(cm.coordenadas().getX(), cm.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((CentralMinera) cmRecuperada).equals(cm));
 
 		Unidad ceRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ce.coordenadas().getX(), ce.coordenadas().getY());
+				.getUnidadEn(null);
 		assertTrue(((CentralEolica) ceRecuperada).equals(ce));
 
 		// Chequea unidades con poblacion
@@ -242,7 +242,7 @@ public class PersistenciaTest {
 		Conector tbRecuperada = juegoRecuperado
 				.mapa()
 				.tuberias()
-				.getConectorEn(tb.coordenadas().getX(), tb.coordenadas().getY());
+				.getConectorEn(tb.coordenada().getX(), tb.coordenada().getY());
 		assertTrue(((Tuberia) tbRecuperada).equals(tb));
 
 		// Chequea posiciones relevantes de tuberias
@@ -263,7 +263,7 @@ public class PersistenciaTest {
 		Conector rtRecuperada = juegoRecuperado
 				.mapa()
 				.rutas()
-				.getConectorEn(rt.coordenadas().getX(), rt.coordenadas().getY());
+				.getConectorEn(rt.coordenada().getX(), rt.coordenada().getY());
 		assertTrue(((Ruta) rtRecuperada).equals(rt));
 		// rutas no tiene posiciones relevantes
 
@@ -271,7 +271,7 @@ public class PersistenciaTest {
 		Conector ltRecuperada = juegoRecuperado
 				.mapa()
 				.redElectrica()
-				.getConectorEn(lt.coordenadas().getX(), lt.coordenadas().getY());
+				.getConectorEn(lt.coordenada().getX(), lt.coordenada().getY());
 		assertTrue(((LineaTension) ltRecuperada).equals(lt));
 
 		// Chequea posiciones relevantes en red electrica

@@ -68,7 +68,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	}
 
-	public Coordenada coordenadas() {
+	public Coordenada coordenada() {
 		return coordenadas;
 	}
 
@@ -189,8 +189,8 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public boolean equals(Daniable rt) {
 		if (rt == this) {
 			return true;
-		} else if (rt.coordenadas().getX() == this.coordenadas().getX()
-				&& rt.coordenadas().getY() == this.coordenadas().getY()
+		} else if (rt.coordenada().getX() == this.coordenada().getX()
+				&& rt.coordenada().getY() == this.coordenada().getY()
 				&& ((Ruta) rt).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

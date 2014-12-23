@@ -32,42 +32,37 @@ import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
 
-public class MapaConexiones extends Observable {
+public abstract class MapaConexiones extends Observable {
 
-	int alto;
-	int ancho;
-	LinkedHashMap<Coordenada, Conector> mapa;
-	ArrayList<Coordenada> posicionesRelevantes;
-
+	int tamanio;
+	LinkedHashMap<Coordenada, Conector> mapaConectores;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
+	Mapa mapa;
 
-	public MapaConexiones(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
-		this.mapa = new LinkedHashMap<Coordenada, Conector>();
+	public MapaConexiones(int tamanio) {
+
+		this.tamanio = tamanio;
+		this.mapaConectores = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	/* Para tests */
 	public MapaConexiones() {
-		this.mapa = new LinkedHashMap<Coordenada, Conector>();
+		this.mapaConectores = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	public boolean agregar(Conector elemento) {
-		int x = elemento.coordenadas().getX();
-		int y = elemento.coordenadas().getY();
-		if (this.validarCoordenadas(x, y) && !this.contiene(elemento)
-				&& !this.tieneCoordenadaOcupada(x, y)) {
-			this.mapa.put(new Coordenada(x, y), elemento);
+		int x = elemento.coordenada().getX();
+		int y = elemento.coordenada().getY();
+		if (validarCoordenadas(x, y) && !contiene(elemento)
+				&& !tieneCoordenadaOcupada(x, y)) {
+			this.mapaConectores.put(new Coordenada(x, y), elemento);
 			this.grafo.addVertex(elemento);
 			this.actualizarGrafo(elemento, x, y);
-			
+
 			setChanged();
 			notifyObservers();
 			return true;
@@ -80,14 +75,14 @@ public class MapaConexiones extends Observable {
 	}
 
 	private void actualizarGrafo(Conector elemento, int x, int y) {
-		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
+		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
 			if (hayDistanciaMinima(new Coordenada(x, y), entry.getKey())) {
 				grafo.addEdge(elemento, entry.getValue());
 			}
 		}
 	}
 
-	private boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
+	protected boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
 		boolean resultado = false;
 		int x1 = point.getX();
 		int y1 = point.getY();
@@ -99,25 +94,21 @@ public class MapaConexiones extends Observable {
 		if ((x1 == x2) && (Math.abs(y1 - y2) == 1)) {
 			resultado = true;
 		}
-		// if ((Math.abs(x1 - x2) == 1) && (Math.abs(y1 - y2) == 1)) {
-		// return true;
-		// }
 		return resultado;
 	}
 
 	public boolean contiene(Conector elemento) {
-		return (mapa.containsValue(elemento) && grafo
-				.containsVertex(elemento));
+		return (mapaConectores.containsValue(elemento) && grafo.containsVertex(elemento));
 	}
-	
-	public boolean contiene(Coordenada coord){
-		return (mapa.containsKey(coord));
+
+	public boolean contiene(Coordenada coord) {
+		return (mapaConectores.containsKey(coord));
 	}
 
 	public Conector getConectorEn(int x, int y) {
 		if (tieneCoordenadaOcupada(x, y)) {
 			Coordenada p = new Coordenada(x, y);
-			return (this.mapa.get(p));
+			return (this.mapaConectores.get(p));
 		} else {
 			return null;
 		}
@@ -128,29 +119,22 @@ public class MapaConexiones extends Observable {
 	}
 
 	private boolean estaDentroDeLimites(int x, int y) {
-		return ((x >= 0) && (x <= this.alto) && (y >= 0) && (y <= this.ancho));
+		return ((x >= 0) && (x <= tamanio) && (y >= 0) && (y <= tamanio));
 	}
 
 	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapa.containsKey(new Coordenada(x, y)));
+		return (this.mapaConectores.containsKey(new Coordenada(x, y)));
 	}
+	
+	public abstract boolean hayConexion(Coordenada unPunto);
 
 	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
-		return (camino.pathExists(mapa.get(unPunto), mapa.get(otroPunto)));
+		return (camino.pathExists(mapaConectores.get(unPunto), mapaConectores.get(otroPunto)));
 	}
 
-	public boolean hayConexion(Coordenada unPunto) {
-		for (Coordenada c : posicionesRelevantes) {
-			if (hayConexion(unPunto, c)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public Coordenada coordenadas(Conector elemento) {
-		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
+	public Coordenada getCoordenadaDe(Conector elemento) {
+		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
 			if (entry.getValue().equals(elemento)) {
 				return entry.getKey();
 			}
@@ -158,65 +142,9 @@ public class MapaConexiones extends Observable {
 		return null;
 	}
 
-	public boolean hayConectorAdyacente(Coordenada coord) {
-		for (Entry<Coordenada, Conector> entry : mapa.entrySet()) {
-			if (hayDistanciaMinima(coord, entry.getKey())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean agregarPosicionRelevante(Coordenada c) {
-		if (posicionesRelevantes == null) {
-			posicionesRelevantes = new ArrayList<Coordenada>();
-		}
-		return posicionesRelevantes.add(c);
-	}
-
-	public ArrayList<Coordenada> posicionesRelevantes() {
-		return this.posicionesRelevantes;
-	}
-
-	public boolean sePuedeConstruir(Coordenada c) {
-		for (Coordenada coord : posicionesRelevantes) {
-			if (estaDentroDeRangoUnidadEnergetica(c)
-					|| hayConexion(c, coord)) {
-
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean estaDentroDeRangoUnidadEnergetica(
-			Coordenada coordACorroborar) {
-		for (Coordenada c : posicionesRelevantes){
-			
-		}
-		
-		
-		// TODO CORREGIRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-//		if (unidadRelevante instanceof UnidadEnergetica) {
-//			int rango = ((UnidadEnergetica) unidadRelevante)
-//					.getRadioDeInfluencia();
-//			return estaDentroDeRango(coordACorroborar,
-//					unidadRelevante.coordenadas(), rango);
-//		}
-		return false;
-	}
-
-//	private boolean estaDentroDeRango(Coordenada coordACorroborar,
-//			Coordenada coordURelevante, int rango) {
-//		if (coordACorroborar.distancia(coordURelevante) <= rango) {
-//			return true;
-//		}
-//		return false;
-//	}
-
 	public boolean sePuedeConstruir(Conector conector) {
-		return tieneCoordenadaOcupada(conector.coordenadas().x,
-				conector.coordenadas().y);
+		return tieneCoordenadaOcupada(conector.coordenada().x,
+				conector.coordenada().y);
 	}
 
 	/**********************************************************************/
@@ -226,17 +154,17 @@ public class MapaConexiones extends Observable {
 	public Element getElement(Document doc, Element red) {
 		Element alto = doc.createElement("alto");
 		red.appendChild(alto);
-		alto.setTextContent(String.valueOf(this.alto));
+		alto.setTextContent(String.valueOf(this.tamanio));
 
 		Element ancho = doc.createElement("ancho");
 		red.appendChild(ancho);
-		ancho.setTextContent(String.valueOf(this.ancho));
+		ancho.setTextContent(String.valueOf(this.tamanio));
 
 		Element mapa = doc.createElement("mapa");
 		red.appendChild(mapa);
 
 		/* Serializacion de conectores del mapa */
-		for (Map.Entry e : this.mapa.entrySet()) {
+		for (Map.Entry e : this.mapaConectores.entrySet()) {
 			Coordenada clave = (Coordenada) e.getKey();
 			Conector valor = (Conector) e.getValue();
 
@@ -302,31 +230,31 @@ public class MapaConexiones extends Observable {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"Tuberia")) {
-								
+
 								Tuberia tb = new Tuberia();
 								tb.fromElement(hijoDeNodo);
 								tb.setCoordenadas(puntoAAgregar);
-//								Tuberia tb = Tuberia.fromElement(hijoDeNodo);
-//								tb.setCoordenadas(puntoAAgregar);
+								// Tuberia tb = Tuberia.fromElement(hijoDeNodo);
+								// tb.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(tb);
 
 							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
-								
+
 								Ruta rt = new Ruta();
 								rt.fromElement(hijoDeNodo);
 								rt.setCoordenadas(puntoAAgregar);
-//								Ruta rt = Ruta.fromElement(hijoDeNodo);
-//								rt.setCoordenadas(puntoAAgregar);
+								// Ruta rt = Ruta.fromElement(hijoDeNodo);
+								// rt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(rt);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"LineaTension")) {
 								LineaTension lt = new LineaTension();
 								lt.fromElement(hijoDeNodo);
 								lt.setCoordenadas(puntoAAgregar);
-								
-//								LineaTension lt = LineaTension
-//										.fromElement(hijoDeNodo);
-//								lt.setCoordenadas(puntoAAgregar);
+
+								// LineaTension lt = LineaTension
+								// .fromElement(hijoDeNodo);
+								// lt.setCoordenadas(puntoAAgregar);
 								mapaConexiones.agregar(lt);
 							}
 						}
@@ -349,33 +277,33 @@ public class MapaConexiones extends Observable {
 									"CentralMinera")) {
 								CentralMinera cm = new CentralMinera();
 								cm.fromElement(hijoDeUnidad);
-								
-//								CentralMinera cm = CentralMinera
-//										.fromElement(hijoDeUnidad);
+
+								// CentralMinera cm = CentralMinera
+								// .fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(cm);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralNuclear")) {
 								CentralNuclear cn = new CentralNuclear();
 								cn.fromElement(hijoDeUnidad);
-								
-//								CentralNuclear cn = CentralNuclear
-//										.fromElement(hijoDeUnidad);
+
+								// CentralNuclear cn = CentralNuclear
+								// .fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(cn);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralEolica")) {
 								CentralEolica ce = new CentralEolica();
 								ce.fromElement(hijoDeUnidad);
-								
-//								CentralEolica ce = CentralEolica
-//										.fromElement(hijoDeUnidad);
+
+								// CentralEolica ce = CentralEolica
+								// .fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(ce);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"PozoDeAgua")) {
 								PozoDeAgua pa = new PozoDeAgua();
 								pa.fromElement(hijoDeUnidad);
-								
-//								PozoDeAgua pa = PozoDeAgua
-//										.fromElement(hijoDeUnidad);
+
+								// PozoDeAgua pa = PozoDeAgua
+								// .fromElement(hijoDeUnidad);
 								mapaConexiones.posicionesRelevantes.add(pa);
 							}
 						}
@@ -383,14 +311,14 @@ public class MapaConexiones extends Observable {
 				}
 			}
 		}
-		//imprimirMapaConexiones(mapaConexiones);
+		// imprimirMapaConexiones(mapaConexiones);
 		return mapaConexiones;
 	}
 
 	/* Para probar */
 	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
 		System.out.println("imprimiendo mapa conexiones");
-		for (Map.Entry e : mapaConexiones.mapa.entrySet()) {
+		for (Map.Entry e : mapaConexiones.mapaConectores.entrySet()) {
 			Coordenada clave = (Coordenada) e.getKey();
 			Conector valor = (Conector) e.getValue();
 

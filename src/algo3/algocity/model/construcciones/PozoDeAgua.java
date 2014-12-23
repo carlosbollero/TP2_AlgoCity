@@ -24,17 +24,17 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	public PozoDeAgua(Coordenada coord) {
 		costo = 250;
 		consumo = 0;
-		this.coordenadas = coord;
+		this.coordenada = coord;
 	}
 
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 
-		coordenadas = coord;
+		coordenada = coord;
 		costo = 250;
 		consumo = 0;
 
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
+		if (!esConstruibleEn(mapa.superficie(coordenada))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
 		dinero.cobrar(costo);
@@ -61,8 +61,7 @@ public class PozoDeAgua extends Unidad implements Daniable {
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarPuntoRelevanteEnTuberias(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	@Override
@@ -102,8 +101,8 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		return unidad;
 	}
@@ -124,7 +123,7 @@ public class PozoDeAgua extends Unidad implements Daniable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
@@ -133,8 +132,8 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	public boolean equals(Daniable pa) {
 		if (pa == this) {
 			return true;
-		} else if (pa.coordenadas().getX() == this.coordenadas().getX()
-				&& pa.coordenadas().getY() == this.coordenadas().getY()) {
+		} else if (pa.coordenada().getX() == this.coordenada().getX()
+				&& pa.coordenada().getY() == this.coordenada().getY()) {
 			return true;
 		}
 		return false;

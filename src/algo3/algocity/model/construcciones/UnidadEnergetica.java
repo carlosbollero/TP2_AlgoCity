@@ -24,7 +24,7 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		return this.costo;
 	}
 
-	public int getRadioDeInfluencia() {
+	public int getRadio() {
 		return radioDeInfluencia;
 	}
 
@@ -62,24 +62,24 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	}
 
 	public boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias {
-		return (mapa.hayConexionConTuberias(coordenadas));
+		return (mapa.hayConexionConTuberias(coordenada));
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie {
-		if (!superficie.esTierra()){
+	public boolean esConstruibleEn(Superficie superficie)
+			throws NoSePuedeConstruirEnSuperficie {
+		if (!superficie.esTierra()) {
 			throw new NoSePuedeConstruirEnSuperficie();
 		}
 		return superficie.esTierra();
 	}
-	
-	
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
-	
-	//PRUEBA SUBIR ESTE METODO
-	//TODO, ver si borrando los metodos en los hijos funciona bien
+
+	// PRUEBA SUBIR ESTE METODO
+	// TODO, ver si borrando los metodos en los hijos funciona bien
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -103,11 +103,9 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
-	
-	
-	
+
 }

@@ -37,7 +37,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadResidencial() {
 
 		me = new Mapa();
-		CatastrofeGodzilla g = new CatastrofeGodzilla(20, 20);
+		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadResidencial ur = new UnidadResidencial(new Coordenada(1, 1));
 
 		ur.aceptar(g);

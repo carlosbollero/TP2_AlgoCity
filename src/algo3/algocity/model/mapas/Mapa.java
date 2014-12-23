@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Reparador;
+import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.conexiones.Conector;
@@ -28,47 +29,36 @@ import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
 
-	int alto;
-	int ancho;
+
 	int tamanio;
 
 	MapaTerritorio territorio;
 	MapaEdilicio ciudad;
-	MapaConexiones tuberias;
-	MapaConexiones rutas;
-	MapaConexiones redElectrica;
+	MapaTuberias tuberias;
+	MapaRutas rutas;
+	MapaElectrico redElectrica;
 
 	Dinero dinero;
 	Reparador reparador;
 
 	public Mapa() {
-		alto = 20;
-		ancho = 20;
 		tamanio = 20;
-		territorio = new MapaTerritorio(alto, ancho);
-		ciudad = new MapaEdilicio(alto, ancho);
-		tuberias = new MapaConexiones(alto, ancho);
-		rutas = new MapaConexiones(alto, ancho);
-		redElectrica = new MapaConexiones(alto, ancho);
+		territorio = new MapaTerritorio(tamanio);
+		ciudad = new MapaEdilicio(tamanio);
+		tuberias = new MapaTuberias(tamanio);
+		rutas = new MapaRutas(tamanio);
+		redElectrica = new MapaElectrico(tamanio);
 		this.dinero = new Dinero();
 
 		this.reparador = null;
 	}
 
-	public int alto() {
-		return alto;
+	public int tamanio(){
+		return tamanio;
 	}
 
-	public int ancho() {
-		return ancho;
-	}
-
-	public void agregar(Unidad unidad) {
+	public void agregar(Agregable unidad) {
 		unidad.agregarseA(this);
-	}
-
-	public void agregar(Conector conector) {
-		conector.agregarseA(this);
 	}
 
 	public boolean agregarACiudad(Unidad unidad) {
@@ -87,40 +77,8 @@ public class Mapa extends Observable {
 		return tuberias.agregar(tuberia);
 	}
 
-	/*
-	 * public boolean agregarPuntoRelevanteEnTuberias(Coordenada punto) { return
-	 * tuberias.agregarPosicionRelevante(punto); }
-	 * 
-	 * public boolean agregarPuntoRelevanteEnRedElectrica(Coordenada punto) {
-	 * return redElectrica.agregarPosicionRelevante(punto); }
-	 */
-	public boolean agregarPuntoRelevanteEnTuberias(PozoDeAgua pa) {
-		return tuberias.agregarPosicionRelevante(pa);
-	}
-
-	public boolean agregarPuntoRelevanteEnRedElectrica(UnidadEnergetica ue) {
-		return redElectrica.agregarPosicionRelevante(ue);
-
-	}
-
-	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
-		return ciudad.agregarUnidadConPoblacion(unidad);
-	}
-
-	public boolean agregarUnidadConEmpleo(Ocupable unidad) {
-		return ciudad.agregarUnidadConEmpleo(unidad);
-	}
-
 	public boolean agregarUnidadDaniable(Daniable unidad) {
 		return ciudad.agregarUnidadDaniable(unidad);
-	}
-
-	public ArrayList<Ocupable> unidadesConPoblacion() {
-		return ciudad.unidadesConPoblacion();
-	}
-
-	public ArrayList<Ocupable> unidadesConEmpleo() {
-		return ciudad.unidadesConEmpleo();
 	}
 
 	public ArrayList<Daniable> unidadesDaniables() {
@@ -191,10 +149,10 @@ public class Mapa extends Observable {
 
 	public boolean hayConexionConRutas(Coordenada coordenadas)
 			throws NoHayConexionConRutas {
-		if (!rutas.hayConectorAdyacente(coordenadas)) {
+		if (!rutas.hayConexion(coordenadas)) {
 			throw new NoHayConexionConRutas();
 		}
-		return rutas.hayConectorAdyacente(coordenadas);
+		return rutas.hayConexion(coordenadas);
 	}
 
 	public void agregarReparador() {
@@ -211,41 +169,41 @@ public class Mapa extends Observable {
 
 	/* Usados para corroborar tests de persistencia */
 	public MapaEdilicio ciudad() {
-		return this.ciudad;
+		return ciudad;
 	}
 
 	public MapaConexiones tuberias() {
-		return this.tuberias;
+		return tuberias;
 	}
 
 	public MapaConexiones redElectrica() {
-		return this.redElectrica;
+		return redElectrica;
 	}
 
 	public MapaConexiones rutas() {
-		return this.rutas;
+		return rutas;
 	}
 
 	public MapaTerritorio territorio() {
-		return this.territorio;
+		return territorio;
 	}
 	
 	public Reparador reparador(){
-		return this.reparador;
+		return reparador;
 	}
 
 	// Metodo implementado solo para tests
 	/*********************************************************/
 	public void setTerritorioTierraParaTest() {
 		boolean tierra = true;
-		territorio = new MapaTerritorio(alto, ancho, tierra);
+		territorio = new MapaTerritorio(tamanio, tierra);
 		setChanged();
 		notifyObservers();
 	}
 
 	public void setTerritorioAguaParaTest() {
 		boolean agua = false;
-		territorio = new MapaTerritorio(alto, ancho, agua);
+		territorio = new MapaTerritorio(tamanio, agua);
 		setChanged();
 		notifyObservers();
 	}

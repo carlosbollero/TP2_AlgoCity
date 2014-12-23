@@ -160,7 +160,7 @@ public class UnidadTest {
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralEolica = 4
 		CentralEolica unaCentralEolica = new CentralEolica();
-		assertEquals(unaCentralEolica.getRadioDeInfluencia(), 4);
+		assertEquals(unaCentralEolica.getRadio(), 4);
 	}
 
 	@Test
@@ -168,14 +168,14 @@ public class UnidadTest {
 		// Radio de influencia centralMinera = 10
 		CentralMinera unaCentralMinera = new CentralMinera();
 
-		assertEquals(unaCentralMinera.getRadioDeInfluencia(), 10);
+		assertEquals(unaCentralMinera.getRadio(), 10);
 	}
 
 	@Test
 	public void testCentralNuclearTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralNuclear = 25
 		CentralNuclear unaCentralNuclear = new CentralNuclear();
-		assertEquals(unaCentralNuclear.getRadioDeInfluencia(), 25);
+		assertEquals(unaCentralNuclear.getRadio(), 25);
 	}
 
 	/**/

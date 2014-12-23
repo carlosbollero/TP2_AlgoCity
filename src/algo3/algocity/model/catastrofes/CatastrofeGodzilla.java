@@ -18,8 +18,7 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class CatastrofeGodzilla implements Visitante {
 
-	private int ancho;
-	private int alto;
+	private int tamanio;
 	private Random aleatorio;
 	private LinkedList<Point> caminoGodzilla;
 
@@ -31,18 +30,8 @@ public class CatastrofeGodzilla implements Visitante {
 
 	}
 
-	// deberia haber un constructor de Godzilla que reciba un mapa
-	public CatastrofeGodzilla(int x, int y) {
-
-		this.ancho = x;
-		this.alto = y;
-		this.caminoGodzilla = new LinkedList<Point>();
-
-	}
-
 	public CatastrofeGodzilla(Mapa mapa) {
-		this.ancho = mapa.ancho();
-		this.alto = mapa.alto();
+		tamanio = mapa.tamanio();
 		this.caminoGodzilla = new LinkedList<Point>();
 
 	}
@@ -55,13 +44,13 @@ public class CatastrofeGodzilla implements Visitante {
 		Point puntoInicio;
 		Point puntoFinal;
 		if (this.girarMoneda() == 0) {
-			puntoInicio = new Point(this.aleatorio.nextInt(this.ancho + 1), 0);
-			puntoFinal = new Point(this.aleatorio.nextInt(ancho + 1), this.alto);
+			puntoInicio = new Point(aleatorio.nextInt(tamanio + 1), 0);
+			puntoFinal = new Point(aleatorio.nextInt(tamanio + 1), tamanio);
 		} else {
-			puntoInicio = new Point(0, this.aleatorio.nextInt(alto + 1));
-			puntoFinal = new Point(this.ancho, this.aleatorio.nextInt(alto + 1));
+			puntoInicio = new Point(0, aleatorio.nextInt(tamanio + 1));
+			puntoFinal = new Point(tamanio, aleatorio.nextInt(tamanio + 1));
 		}
-		if (this.girarMoneda() == 0 || this.girarMoneda() == 1) {
+		if (girarMoneda() == 0 || girarMoneda() == 1) {
 			this.caminarEnLineaRecta(puntoInicio, puntoFinal);
 		} else {
 			this.caminarEnZigZag(puntoInicio, puntoFinal);
@@ -86,8 +75,7 @@ public class CatastrofeGodzilla implements Visitante {
 	}
 
 	public void caminarEnZigZag(Point puntoInicio, Point puntoFinal) {
-		CaminarEnZigZag caminarEnZigZag = new CaminarEnZigZag(this.ancho,
-				this.alto);
+		CaminarEnZigZag caminarEnZigZag = new CaminarEnZigZag(tamanio, tamanio);
 		this.caminoGodzilla = caminarEnZigZag.devolverCamino(puntoInicio,
 				puntoFinal);
 
@@ -98,7 +86,6 @@ public class CatastrofeGodzilla implements Visitante {
 			u.aceptar(this);
 		}
 	}
-	
 
 	@Override
 	public void visitar(UnidadResidencial unaUnidadResidencial) {

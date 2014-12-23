@@ -32,7 +32,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	}
 
 	public UnidadComercial(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 5;
 		this.consumo = 2;
 	}
@@ -45,9 +45,9 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		this.costo = 5;
 		this.consumo = 2;
-		this.coordenadas = coord;
+		this.coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -100,7 +100,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
 	private boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		return (mapa.hayConexionCompleta(coordenadas));
+		return (mapa.hayConexionCompleta(coordenada));
 	}
 
 	@Override
@@ -132,8 +132,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -161,7 +161,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
@@ -171,8 +171,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	public boolean equals(Daniable uc) {
 		if (uc == this) {
 			return true;
-		} else if (uc.coordenadas().getX() == this.coordenadas().getX()
-				&& uc.coordenadas().getY() == this.coordenadas().getY()
+		} else if (uc.coordenada().getX() == this.coordenada().getX()
+				&& uc.coordenada().getY() == this.coordenada().getY()
 				&& ((UnidadComercial) uc).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

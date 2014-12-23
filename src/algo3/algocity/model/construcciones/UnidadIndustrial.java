@@ -35,7 +35,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	public UnidadIndustrial(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
@@ -51,8 +51,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.costo = 10;
 		this.consumo = 5;
 		this.capacidad = 25;
-		coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		coordenada = coord;
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -109,15 +109,13 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	private boolean hayConexionesEn(Mapa mapa)
 			throws NoHayConexionConRedElectrica, NoHayConexionConRutas {
-		return (mapa.hayConexionConRedElectrica(coordenadas) && mapa
-				.hayConexionConRutas(coordenadas));
+		return (mapa.hayConexionConRedElectrica(coordenada) && mapa
+				.hayConexionConRutas(coordenada));
 	}
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadConEmpleo(this);
-		mapa.agregarUnidadDaniable(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	/**********************************************************************/
@@ -142,8 +140,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -176,7 +174,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
@@ -185,8 +183,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	public boolean equals(Daniable ui) {
 		if (ui == this) {
 			return true;
-		} else if (ui.coordenadas().getX() == this.coordenadas().getX()
-				&& ui.coordenadas().getY() == this.coordenadas().getY()
+		} else if (ui.coordenada().getX() == this.coordenada().getX()
+				&& ui.coordenada().getY() == this.coordenada().getY()
 				&& ((UnidadIndustrial) ui).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

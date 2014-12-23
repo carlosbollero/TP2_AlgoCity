@@ -6,16 +6,16 @@ import java.util.Observable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public abstract class Unidad extends Observable{
+public abstract class Unidad extends Observable implements Agregable{
 
 	int costo;
 	int consumo;
-	Coordenada coordenadas;
+	Coordenada coordenada;
 
 	public int costo() {
 		return this.costo;
@@ -25,19 +25,13 @@ public abstract class Unidad extends Observable{
 		return consumo;
 	}
 
-	public Coordenada coordenadas() {
-		return coordenadas;
+	public Coordenada coordenada() {
+		return coordenada;
 	}
-
-//	public abstract void aplicarDanio(double i);
 
 	public abstract boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie;
 
 	public abstract double getSalud();
-	
-	//public abstract Agregador agregador();
-
-	public abstract void agregarseA(Mapa mapa);
 	
 	/* Persistencia */
 	public abstract Element getElement(Document doc);

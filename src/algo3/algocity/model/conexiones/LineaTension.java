@@ -95,7 +95,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		return (this.ESTADOINICIAL - this.porcentajeDanios);
 	}
 
-	public Coordenada coordenadas() {
+	public Coordenada coordenada() {
 		return coordenadas;
 	}
 	
@@ -192,8 +192,8 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	public boolean equals(Daniable lt) {
 		if (lt == this) {
 			return true;
-		} else if (lt.coordenadas().getX() == this.coordenadas().getX()
-				&& lt.coordenadas().getY() == this.coordenadas().getY()
+		} else if (lt.coordenada().getX() == this.coordenada().getX()
+				&& lt.coordenada().getY() == this.coordenada().getY()
 				&& ((LineaTension)lt).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

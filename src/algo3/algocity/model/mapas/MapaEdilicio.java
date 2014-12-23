@@ -24,62 +24,80 @@ import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 
 public class MapaEdilicio {
 
-	private int alto;
-	private int ancho;
+	private int tamanio;
 
 	HashMap<Coordenada, Unidad> mapa;
-	ArrayList<Ocupable> unidadesConPoblacion;
-	ArrayList<Ocupable> unidadesConEmpleo;
+
 	ArrayList<Daniable> unidadesDaniables;
-	
-	public MapaEdilicio(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
+
+	// prueba
+	ArrayList<UnidadEnergetica> unidadesEnergeticas;
+	ArrayList<PozoDeAgua> pozosDeAgua;
+	ArrayList<EstacionDeBomberos> estacionesBomberos;
+	ArrayList<UnidadResidencial> unidadesResidenciales;
+	ArrayList<UnidadIndustrial> unidadesIndustriales;
+	ArrayList<UnidadComercial> unidadesComerciales;
+
+	public MapaEdilicio(int tamanio) {
+		this.tamanio = tamanio;
 		mapa = new HashMap<Coordenada, Unidad>();
-		unidadesConPoblacion = new ArrayList<Ocupable>();
-		unidadesConEmpleo = new ArrayList<Ocupable>();
 		unidadesDaniables = new ArrayList<Daniable>();
+		unidadesResidenciales = new ArrayList<UnidadResidencial>();
+		unidadesIndustriales = new ArrayList<UnidadIndustrial>();
+		unidadesComerciales = new ArrayList<UnidadComercial>();
+		estacionesBomberos = new ArrayList<EstacionDeBomberos>();
+		pozosDeAgua = new ArrayList<PozoDeAgua>();
+		unidadesEnergeticas = new ArrayList<UnidadEnergetica>();
 	}
 
 	/* Para tests */
 	public MapaEdilicio() {
 		mapa = new HashMap<Coordenada, Unidad>();
 
-		unidadesConPoblacion = new ArrayList<Ocupable>();
-		unidadesConEmpleo = new ArrayList<Ocupable>();
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
 	public boolean agregar(Unidad elemento) {
-		int x = elemento.coordenadas().getX();
-		int y = elemento.coordenadas().getY();
+		int x = elemento.coordenada().getX();
+		int y = elemento.coordenada().getY();
 		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
 			return false;
 		}
-		if (!this.mapa.containsKey(elemento.coordenadas())) {
-			this.mapa.put(elemento.coordenadas(), elemento);
+		if (!this.mapa.containsKey(elemento.coordenada())) {
+			this.mapa.put(elemento.coordenada(), elemento);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean agregarUnidadConPoblacion(Ocupable unidad) {
-		if (unidadesConPoblacion == null) {
-			unidadesConPoblacion = new ArrayList<Ocupable>();
-		}
-		return unidadesConPoblacion.add(unidad);
+	public boolean agregar(PozoDeAgua p) {
+		return pozosDeAgua.add(p);
 	}
 
-	public boolean agregarUnidadConEmpleo(Ocupable unidad) {
-		if (unidadesConEmpleo == null) {
-			unidadesConEmpleo = new ArrayList<Ocupable>();
-		}
-		return unidadesConEmpleo.add(unidad);
+	public boolean agregar(EstacionDeBomberos e) {
+		return estacionesBomberos.add(e);
+	}
+
+	public boolean agregar(UnidadResidencial u) {
+		return unidadesResidenciales.add(u);
+	}
+
+	public boolean agregar(UnidadIndustrial u) {
+		return unidadesIndustriales.add(u);
+	}
+
+	public boolean agregar(UnidadComercial u) {
+		return unidadesComerciales.add(u);
+	}
+
+	public boolean agregar(UnidadEnergetica u) {
+		return unidadesEnergeticas.add(u);
 	}
 
 	public boolean agregarUnidadDaniable(Daniable unidad) {
@@ -89,12 +107,12 @@ public class MapaEdilicio {
 		return unidadesDaniables.add(unidad);
 	}
 
-	public ArrayList<Ocupable> unidadesConPoblacion() {
-		return unidadesConPoblacion;
+	public ArrayList<UnidadEnergetica> getUnidadesEnergeticas() {
+		return unidadesEnergeticas;
 	}
 
-	public ArrayList<Ocupable> unidadesConEmpleo() {
-		return unidadesConEmpleo;
+	public ArrayList<PozoDeAgua> getPozosDeAgua() {
+		return pozosDeAgua;
 	}
 
 	public ArrayList<Daniable> unidadesDaniables() {
@@ -110,15 +128,15 @@ public class MapaEdilicio {
 	}
 
 	private boolean estaDentroDeLimites(int i, int j) {
-		return ((i >= 0) && (i <= this.alto) && (j >= 0) && (j <= this.ancho));
+		return ((i >= 0) && (i <= tamanio) && (j >= 0) && (j <= tamanio));
 	}
 
 	public boolean contiene(Unidad unaUnidad) {
 		return (this.mapa.containsValue(unaUnidad));
 	}
 
-	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapa.containsKey(new Coordenada(x, y)));
+	public boolean tieneCoordenadaOcupada(Coordenada coord) {
+		return (this.mapa.containsKey(coord));
 	}
 
 	public boolean vacia() {
@@ -134,10 +152,9 @@ public class MapaEdilicio {
 		return null;
 	}
 
-	public Unidad getUnidadEn(int x, int y) {
-		if (tieneCoordenadaOcupada(x, y)) {
-			Coordenada p = new Coordenada(x, y);
-			return (this.mapa.get(p));
+	public Unidad getUnidadEn(Coordenada coord) {
+		if (tieneCoordenadaOcupada(coord)) {
+			return (this.mapa.get(coord));
 		} else {
 			return null;
 		}
@@ -182,7 +199,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
+			if (d.coordenada().getX() == x && d.coordenada().getY() == y) {
 				return true;
 			}
 		}
@@ -193,7 +210,7 @@ public class MapaEdilicio {
 		Iterator<Daniable> it = unidadesDaniables.iterator();
 		while (it.hasNext()) {
 			Daniable d = it.next();
-			if (d.coordenadas().getX() == x && d.coordenadas().getY() == y) {
+			if (d.coordenada().getX() == x && d.coordenada().getY() == y) {
 				return d;
 			}
 		}
@@ -236,7 +253,7 @@ public class MapaEdilicio {
 
 	public int capacidadDePoblacion() {
 		int capacidad = 0;
-		for (Ocupable unidad : unidadesConPoblacion) {
+		for (UnidadResidencial unidad : unidadesResidenciales) {
 			capacidad += unidad.capacidad();
 		}
 		return capacidad;
@@ -244,7 +261,7 @@ public class MapaEdilicio {
 
 	public int capacidadDeEmpleo() {
 		int capacidad = 0;
-		for (Ocupable unidad : unidadesConEmpleo) {
+		for (UnidadIndustrial unidad : unidadesIndustriales) {
 			capacidad += unidad.capacidad();
 		}
 		return capacidad;
@@ -252,7 +269,7 @@ public class MapaEdilicio {
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**********************************************************************/	
+	/**********************************************************************/
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element ciudad) {
 		Element alto = doc.createElement("alto");
@@ -425,7 +442,7 @@ public class MapaEdilicio {
 							"UnidadIndustrial")) {
 						UnidadIndustrial ui = new UnidadIndustrial();
 						ui.fromElement(hijoDeUnidadDaniable);
-						
+
 						mapaEdilicio.unidadesDaniables.add(ui);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"UnidadResidencial")) {
@@ -477,22 +494,8 @@ public class MapaEdilicio {
 			}
 
 		}
-		//imprimirMapaEdilicio(mapaEdilicio);
+		// imprimirMapaEdilicio(mapaEdilicio);
 		return mapaEdilicio;
-	}
-
-	/* Para probar */
-	private static void imprimirMapaEdilicio(MapaEdilicio mapaEdilicio) {
-
-		for (Map.Entry e : mapaEdilicio.mapa.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Unidad valor = (Unidad) e.getValue();
-
-			System.out.println(String.valueOf(clave.getX()));
-			System.out.println(String.valueOf(clave.getY()));
-			System.out.println(valor.getClass());
-
-		}
 	}
 
 }

@@ -2,8 +2,6 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
@@ -24,7 +22,7 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	public CentralNuclear(Coordenada coord) {
-		coordenadas = coord;
+		coordenada = coord;
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
@@ -38,8 +36,8 @@ public class CentralNuclear extends UnidadEnergetica {
 		this.costo = 10000;
 		this.capacidad = 1000;
 		this.radioDeInfluencia = 25;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
+		this.coordenada = coord;
+		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -61,9 +59,7 @@ public class CentralNuclear extends UnidadEnergetica {
 
 	@Override
 	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
+		mapa.ciudad().agregar(this);
 	}
 
 	/**********************************************************************/
@@ -88,8 +84,8 @@ public class CentralNuclear extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -107,8 +103,8 @@ public class CentralNuclear extends UnidadEnergetica {
 	public boolean equals(Daniable cn) {
 		if (cn == this) {
 			return true;
-		} else if (cn.coordenadas().getX() == this.coordenadas().getX()
-				&& cn.coordenadas().getY() == this.coordenadas().getY()
+		} else if (cn.coordenada().getX() == this.coordenada().getX()
+				&& cn.coordenada().getY() == this.coordenada().getY()
 				&& ((CentralNuclear) cn).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
