@@ -2,6 +2,9 @@
 
 - Conexion con tuberías y con red eléctrica se evaluar de la misma manera.
   También se mide el radio. (CARLOS)
+  
+- En la ventana de inicio, el panel para elegir entre la lista de usuarios,
+  depende de que la carpeta /saved/ esté creada.
 
 
 #Faltantes
