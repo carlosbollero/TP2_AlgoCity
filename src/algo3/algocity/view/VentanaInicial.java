@@ -21,6 +21,7 @@ public class VentanaInicial extends JFrame {
 	private static final long serialVersionUID = 832543094709914213L;
 
 	JPanel panelFondo;
+	AudioStream audioStream;
 
 	public VentanaInicial() throws LineUnavailableException, IOException,
 			UnsupportedAudioFileException {
@@ -41,9 +42,13 @@ public class VentanaInicial extends JFrame {
 //		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
 		InputStream in = new FileInputStream(new File("sound/SimCityMusicTheme.wav"));
 		
-		AudioStream audioStream = new AudioStream(in);
+		audioStream = new AudioStream(in);
 		AudioPlayer.player.start(audioStream);
 		
+	}
+	
+	private void stopSonido(){
+		AudioPlayer.player.stop(audioStream);
 	}
 
 	private void initPanelFondo() {
@@ -119,6 +124,7 @@ public class VentanaInicial extends JFrame {
 
 	public void cerrar() {
 		this.dispose();
+		stopSonido();
 
 	}
 
