@@ -1,6 +1,5 @@
 package algo3.algocity.model;
 
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,7 +10,7 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 
-public class Dinero implements Observer {
+public class Dinero extends Observable implements Observer {
 
 	Turno turno;
 	Poblacion poblacion;
@@ -32,13 +31,17 @@ public class Dinero implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (turno.getTurno() % 30 == 0) {
-			cantidad += poblacion.getCantidad() * 10;
-		}
+		cobrarImpuestos();
 	}
 
 	public int getCantidad() {
 		return cantidad;
+	}
+	
+	private void cobrarImpuestos(){
+		if (turno.getTurno() % 30 == 0) {
+			cantidad += poblacion.getCantidad() * 10;
+		}
 	}
 
 	// public void cobrar(int costo){
@@ -50,6 +53,8 @@ public class Dinero implements Observer {
 			throw new FondosInsuficientesException();
 		}
 		cantidad -= costo;
+		setChanged();
+		notifyObservers();
 		return true;
 	}
 
