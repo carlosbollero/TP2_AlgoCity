@@ -97,7 +97,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		panelDesplazamiento.setAlignmentY(Component.CENTER_ALIGNMENT);
 
 		/* Ajusto los botones */
-		this.bComenzar = new JButton("ก Comenzar !");
+		this.bComenzar = new JButton("ยก Comenzar !");
 		this.bComenzar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bComenzar
