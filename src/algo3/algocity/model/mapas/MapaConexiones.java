@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Observable;
 
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
@@ -34,7 +35,7 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 
-public class MapaConexiones {
+public class MapaConexiones extends Observable {
 
 	int alto;
 	int ancho;
@@ -67,6 +68,9 @@ public class MapaConexiones {
 			this.mapa.put(new Coordenada(x, y), elemento);
 			this.grafo.addVertex(elemento);
 			this.actualizarGrafo(elemento, x, y);
+			
+			setChanged();
+			notifyObservers();
 			return true;
 		}
 		return false;
