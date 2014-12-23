@@ -1,7 +1,6 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -9,11 +8,10 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
-import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.CentralEolica;
+import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
@@ -116,33 +114,6 @@ public class GodzillaTest {
 		assertTrue(resultado);
 	}
 
-	public void crearCaminoDeTuberias(Mapa mapa, Dinero dinero,
-			Coordenada inicio, Coordenada fin)
-			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie {
-		System.out.print("[" + inicio.getX() + "," + inicio.getY() + "]");
-		System.out.print("[" + fin.getX() + "," + fin.getY() + "]");
-		System.out.println();
-		for (int i = inicio.getX(); i != fin.getX();) {
-			for (int j = inicio.getY(); j !=fin.getY();) {
-				System.out.print("[" + i + "," + j + "]");
-				mapa.agregar(new FabricaTuberias().construir(mapa, dinero,
-						new Coordenada(i, j)));
-				if (inicio.getY() < fin.getY()) {
-					j++;
-				} else {
-					j--;
-				}
-			}
-			if (inicio.getX() < fin.getX()) {
-				i++;
-			} else {
-				i--;
-			}
-		}
-		mapa.agregar(new FabricaTuberias().construir(mapa, dinero, fin));
-	}
-
 	@Test
 	public void testSePuedeDaniarUnaUnidadEnergetica()
 			throws NoSeCumplenLosRequisitosException,
@@ -151,25 +122,57 @@ public class GodzillaTest {
 		Mapa m = new Mapa();
 		
 		Dinero d = new Dinero();
-		Coordenada c1 = m.posicionConAgua();
-//		System.out.println(c1.getX() + "," + c1.getY());
-		Coordenada c2 = m.posicionConTierra();
-//		System.out.println(c2.getX() + "," + c2.getY());
-		PozoDeAgua p = new PozoDeAgua(m, d, c1);
+		m.setTerritorioAguaParaTest();
+		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1,1));
 		m.agregar(p);
+		
+		m.setTerritorioTierraParaTest();
 
-		crearCaminoDeTuberias(m, d, c1, c2);
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,1)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,2)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,3)));
 
 		SistemaElectrico s = new SistemaElectrico();
-		UnidadEnergetica ue = new CentralEolica(m, d, s, c2);
-		CatastrofeGodzilla g = new CatastrofeGodzilla(20, 20);
+		UnidadEnergetica ue = new CentralEolica(m, d, s, new Coordenada(1,3));
+		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
 		m.agregar(ue);
 		ue.addObserver(s);
 
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad, 65);
+		assertEquals(s.capacidad(), 65);
 	}
+	
+	@Test
+	public void testSePuedeDaniarUnaCentralMinera()
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			NoHayConexionConTuberias {
+		Mapa m = new Mapa();
+		
+		Dinero d = new Dinero();
+		m.setTerritorioAguaParaTest();
+		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1,1));
+		m.agregar(p);
+		
+		m.setTerritorioTierraParaTest();
+
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,1)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,2)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,3)));
+
+		SistemaElectrico s = new SistemaElectrico();
+		UnidadEnergetica ue = new CentralMinera(m, d, s, new Coordenada(1,3));
+		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
+		m.agregar(ue);
+		ue.addObserver(s);
+
+		ue.aceptar(g);
+
+		assertEquals(ue.getSalud(), 65, 0);
+		assertEquals(s.capacidad(), 260);
+	}
+
 
 }

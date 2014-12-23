@@ -49,7 +49,7 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 
 	public void aplicarDanioGodzilla() {
 		porcentajeDanios = 35;
-		int reduccionCapacidad = (100 * (int) porcentajeDanios) / capacidad;
+		int reduccionCapacidad = (capacidad * (int) porcentajeDanios) / 100;
 		setChanged();
 		notifyObservers(reduccionCapacidad);
 

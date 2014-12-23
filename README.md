@@ -1,3 +1,13 @@
+#Errores
+
+- Conexion con tuberías y con red eléctrica se evaluar de la misma manera.
+  También se mide el radio. (CARLOS)
+
+
+#Faltantes
+- Arreglar MapasIntegralTest (ARREGLADO)
+
+
 TP2_AlgoCity
 ============
 
