@@ -32,7 +32,6 @@ import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 
 public class MapaConexiones extends Observable {
@@ -40,7 +39,7 @@ public class MapaConexiones extends Observable {
 	int alto;
 	int ancho;
 	LinkedHashMap<Coordenada, Conector> mapa;
-	ArrayList<Unidad> posicionesRelevantes;
+	ArrayList<Coordenada> posicionesRelevantes;
 
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
@@ -50,14 +49,14 @@ public class MapaConexiones extends Observable {
 		this.ancho = ancho;
 		this.mapa = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Unidad>();
+		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	/* Para tests */
 	public MapaConexiones() {
 		this.mapa = new LinkedHashMap<Coordenada, Conector>();
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
-		posicionesRelevantes = new ArrayList<Unidad>();
+		posicionesRelevantes = new ArrayList<Coordenada>();
 	}
 
 	public boolean agregar(Conector elemento) {
@@ -142,9 +141,8 @@ public class MapaConexiones extends Observable {
 	}
 
 	public boolean hayConexion(Coordenada unPunto) {
-		for (Unidad ur : posicionesRelevantes) {
-			if (estaDentroDeRangoUnidadEnergetica(unPunto, ur)
-					|| hayConexion(unPunto, ur.coordenadas())) {
+		for (Coordenada c : posicionesRelevantes) {
+			if (hayConexion(unPunto, c)) {
 				return true;
 			}
 		}
@@ -169,21 +167,21 @@ public class MapaConexiones extends Observable {
 		return false;
 	}
 
-	public boolean agregarPosicionRelevante(Unidad u) {
+	public boolean agregarPosicionRelevante(Coordenada c) {
 		if (posicionesRelevantes == null) {
-			posicionesRelevantes = new ArrayList<Unidad>();
+			posicionesRelevantes = new ArrayList<Coordenada>();
 		}
-		return posicionesRelevantes.add(u);
+		return posicionesRelevantes.add(c);
 	}
 
-	public ArrayList<Unidad> posicionesRelevantes() {
+	public ArrayList<Coordenada> posicionesRelevantes() {
 		return this.posicionesRelevantes;
 	}
 
-	public boolean sePuedeConstruir(Unidad unidad) {
-		for (Unidad ur : posicionesRelevantes) {
-			if (estaDentroDeRangoUnidadEnergetica(unidad.coordenadas(), ur)
-					|| hayConexion(unidad.coordenadas(), ur.coordenadas())) {
+	public boolean sePuedeConstruir(Coordenada c) {
+		for (Coordenada coord : posicionesRelevantes) {
+			if (estaDentroDeRangoUnidadEnergetica(c)
+					|| hayConexion(c, coord)) {
 
 				return true;
 			}
@@ -191,25 +189,30 @@ public class MapaConexiones extends Observable {
 		return false;
 	}
 
-	private boolean estaDentroDeRangoUnidadEnergetica(
-			Coordenada coordACorroborar, Unidad unidadRelevante) {
-		// TODO CORREGIRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-		if (unidadRelevante instanceof UnidadEnergetica) {
-			int rango = ((UnidadEnergetica) unidadRelevante)
-					.getRadioDeInfluencia();
-			return estaDentroDeRango(coordACorroborar,
-					unidadRelevante.coordenadas(), rango);
+	public boolean estaDentroDeRangoUnidadEnergetica(
+			Coordenada coordACorroborar) {
+		for (Coordenada c : posicionesRelevantes){
+			
 		}
+		
+		
+		// TODO CORREGIRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+//		if (unidadRelevante instanceof UnidadEnergetica) {
+//			int rango = ((UnidadEnergetica) unidadRelevante)
+//					.getRadioDeInfluencia();
+//			return estaDentroDeRango(coordACorroborar,
+//					unidadRelevante.coordenadas(), rango);
+//		}
 		return false;
 	}
 
-	private boolean estaDentroDeRango(Coordenada coordACorroborar,
-			Coordenada coordURelevante, int rango) {
-		if (coordACorroborar.distancia(coordURelevante) <= rango) {
-			return true;
-		}
-		return false;
-	}
+//	private boolean estaDentroDeRango(Coordenada coordACorroborar,
+//			Coordenada coordURelevante, int rango) {
+//		if (coordACorroborar.distancia(coordURelevante) <= rango) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public boolean sePuedeConstruir(Conector conector) {
 		return tieneCoordenadaOcupada(conector.coordenadas().x,
@@ -253,13 +256,13 @@ public class MapaConexiones extends Observable {
 		Element posicionesRelevantes = doc
 				.createElement("posicionesRelevantes");
 		red.appendChild(posicionesRelevantes);
-		Iterator<Unidad> it = this.posicionesRelevantes.iterator();
+		Iterator<Coordenada> it = this.posicionesRelevantes.iterator();
 		/*
 		 * falta probar esta parte.. solo se estan agregando las coordenadas
 		 * como posiciones relevantes
 		 */
 		while (it.hasNext()) {
-			Unidad p = it.next();
+			Coordenada p = it.next();
 			Element punto = doc.createElement("Unidad");
 			posicionesRelevantes.appendChild(punto);
 			punto.appendChild(p.getElement(doc));
