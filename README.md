@@ -4,7 +4,7 @@
   También se mide el radio. (CARLOS)
   
 - En la ventana de inicio, el panel para elegir entre la lista de usuarios,
-  depende de que la carpeta /saved/ esté creada.
+  depende de que la carpeta /saved/ esté creada.(SOLUCIONADO)
 
 
 #Faltantes
