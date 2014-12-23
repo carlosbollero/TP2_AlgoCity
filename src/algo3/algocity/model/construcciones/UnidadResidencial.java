@@ -68,7 +68,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 
 		if (!esConstruibleEn(mapa.superficie(coordenadas))
 				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
+//			throw new NoSeCumplenLosRequisitosException();
 		}
 		sElectrico.consumir(consumo);
 		dinero.cobrar(costo);
