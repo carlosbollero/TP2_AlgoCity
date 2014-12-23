@@ -1,14 +1,13 @@
 #Errores
 
 - Conexion con tuberías y con red eléctrica se evaluar de la misma manera.
-  También se mide el radio. (CARLOS)
-  
+  También se mide el radio. [CARLOS]
 - En la ventana de inicio, el panel para elegir entre la lista de usuarios,
-  depende de que la carpeta /saved/ esté creada.(SOLUCIONADO)
-
+  depende de que la carpeta /saved/ esté creada y no vacía.[SOLUCIONADO]
 
 #Faltantes
-- Arreglar MapasIntegralTest (ARREGLADO)
+- Arreglar MapasIntegralTest [SOLUCIONADO]
+- Interacción botones--crear unidad--agregar a mapa [PENDIENTE]
 
 
 TP2_AlgoCity
