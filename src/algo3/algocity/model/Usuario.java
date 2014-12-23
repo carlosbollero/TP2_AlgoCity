@@ -1,11 +1,14 @@
 package algo3.algocity.model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class Usuario {
+public class Usuario{
 
 	private String nombre;
 	private String ruta;
@@ -14,6 +17,7 @@ public class Usuario {
 	public Usuario(String unNombre) {
 		this.nombre = unNombre;
 		this.ruta = "./saved/" + unNombre + ".xml";
+		this.puntaje = 0;
 	}
 
 	/* Para persistencia */
@@ -83,4 +87,5 @@ public class Usuario {
 		}
 		return usuario;
 	}
+
 }
