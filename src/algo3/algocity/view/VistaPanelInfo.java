@@ -24,6 +24,7 @@ public class VistaPanelInfo extends JPanel implements Observer {
 	public VistaPanelInfo(Juego juego) {
 		this.juego = juego;
 		this.juego.turno().addObserver(this);
+		this.juego.dinero().addObserver(this);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(200, 250));
 		setBorder(BorderFactory.createTitledBorder("Info"));
