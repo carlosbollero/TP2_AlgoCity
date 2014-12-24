@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import algo3.algocity.model.conexiones.LineaTension;
+import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.PozoDeAgua;
@@ -13,6 +13,10 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
+import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -22,7 +26,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeAgregarUnidadesAlMapa()
-			throws CoordenadaInvalidaException{
+			throws CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 
 		Unidad u = new UnidadResidencial(new Coordenada(4, 4));
@@ -60,7 +64,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeConsultarUnaCoordenadaDelMapa()
-			throws CoordenadaInvalidaException{
+			throws CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 
 		assertFalse(m.ciudad().tieneCoordenadaOcupada(new Coordenada(1, 1)));
@@ -70,7 +74,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa()
-			throws CoordenadaInvalidaException {
+			throws CoordenadaInvalidaException{
 		Mapa m = new Mapa();
 
 		Unidad u = new UnidadResidencial(new Coordenada(1, 1));
@@ -80,26 +84,28 @@ public class MapaEdilicioTest {
 	}
 
 	@Test
-	public void testNoSePuedeConstruirFueraDeLimiteDelMapa() {
+	public void testNoSePuedeConstruirFueraDeLimiteDelMapa()
+			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 		Mapa m = new Mapa();
+		Dinero d = new Dinero();
+		SistemaElectrico s = new SistemaElectrico();
 
-		Unidad eb = new EstacionDeBomberos(new Coordenada(40, 4));
-		
-
-		try{
+		try {
+			Unidad eb = new FabricaEstacionDeBomberos().construir(m, d, s,
+					new Coordenada(40, 4));
 			m.agregar(eb);
-		}catch (CoordenadaInvalidaException e){
-			assertFalse(m.contiene(eb));
+		} catch (CoordenadaInvalidaException e) {
+			assertTrue(m.ciudad().vacia());
 		}
-		
-		LineaTension lt = new LineaTension(new Coordenada(50,40));
-		
-		try{
+
+		try {
+			Conector lt = new FabricaLineaTension().construir(m, d,
+					new Coordenada(10, 40));
 			m.agregar(lt);
-		}catch (CoordenadaInvalidaException e){
-			assertFalse(m.contiene(lt));
+		} catch (CoordenadaInvalidaException e) {
+			assertEquals(0, m.redElectrica().cantidadElementos());
 		}
-		
+
 	}
 
 	@Test

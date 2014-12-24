@@ -12,6 +12,7 @@ import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -44,15 +45,15 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException,
-			NoHayConexionConRedElectrica, NoHayConexionConRutas {
+			NoHayConexionConRedElectrica, NoHayConexionConRutas,
+			CoordenadaInvalidaException {
 
 		super(10, 5);
 		this.capacidad = 25;
 		coordenada = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenada))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
 		sisElectrico.consumir(consumo);
 		dinero.cobrar(costo);
 	}
@@ -120,8 +121,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		// TODO Auto-generated method stub
 		return mapa.ciudad().contiene(this);
 	}
-
-
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/

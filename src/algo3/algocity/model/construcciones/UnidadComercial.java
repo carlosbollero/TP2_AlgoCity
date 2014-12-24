@@ -11,6 +11,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -39,14 +40,14 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		super(5, 2);
 		this.coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenada))
-				|| !hayConexionesEn(mapa)) {
-//			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
 		sisElectrico.consumir(consumo);
 		dinero.cobrar(costo);
 	}
@@ -172,7 +173,5 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		}
 		return false;
 	}
-
-
 
 }

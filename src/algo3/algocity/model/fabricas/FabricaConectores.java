@@ -14,6 +14,6 @@ public interface FabricaConectores {
 	public abstract Conector construir(Mapa mapa, Dinero dinero,
 			Coordenada coordenada) throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			CoordenadaInvalidaException;
+			CoordenadaInvalidaException, CoordenadaInvalidaException;
 
 }

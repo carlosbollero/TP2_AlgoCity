@@ -9,6 +9,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -39,13 +40,12 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public LineaTension(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		porcentajeDanios = 0;
 		this.coordenada = coordenada;
 
-		if (!esConstruibleEn(mapa.superficie(coordenada))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coordenada);
+		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);
 	}
 
@@ -67,10 +67,10 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	@Override
 	public void repararse() {
 		porcentajeDanios = 0;
-//		this.porcentajeDanios -= this.porcentajeReparacion();
-//		if (this.getDanios() < 0) {
-//			this.porcentajeDanios = 0;
-//		}
+		// this.porcentajeDanios -= this.porcentajeReparacion();
+		// if (this.getDanios() < 0) {
+		// this.porcentajeDanios = 0;
+		// }
 	}
 
 	public double getDanios() {
@@ -107,13 +107,13 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	@Override
 	public boolean agregarseA(Mapa mapa) {
 		return mapa.redElectrica().agregar(this);
-//		mapa.agregarUnidadDaniable(this);
+		// mapa.agregarUnidadDaniable(this);
 	}
 
 	@Override
 	public boolean estaContenidoEn(Mapa mapa) {
 		return mapa.redElectrica().contiene(this);
-		
+
 	}
 
 	/**********************************************************************/
@@ -196,6 +196,5 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		}
 		return false;
 	}
-
 
 }

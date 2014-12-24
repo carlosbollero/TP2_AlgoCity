@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -24,13 +25,12 @@ public class CentralMinera extends UnidadEnergetica {
 			SistemaElectrico sisElectrico, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		super(3000, 400, 10);
 		this.coordenada = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenada))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
 		sisElectrico.aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
 	}
@@ -105,6 +105,5 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 		return false;
 	}
-
 
 }

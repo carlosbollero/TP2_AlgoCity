@@ -30,8 +30,6 @@ import algo3.algocity.model.construcciones.UnidadResidencial;
 
 public class MapaEdilicio {
 
-	private int tamanio;
-
 	Mapa mapaSuperior;
 	HashMap<Coordenada, Unidad> mapa;
 
@@ -46,7 +44,6 @@ public class MapaEdilicio {
 	ArrayList<UnidadComercial> unidadesComerciales;
 
 	public MapaEdilicio(Mapa m) {
-		tamanio = m.tamanio();
 		mapa = new HashMap<Coordenada, Unidad>();
 		unidadesDaniables = new ArrayList<Daniable>();
 		unidadesResidenciales = new ArrayList<UnidadResidencial>();
@@ -167,7 +164,6 @@ public class MapaEdilicio {
 		} else {
 			return null;
 		}
-
 	}
 
 //	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,

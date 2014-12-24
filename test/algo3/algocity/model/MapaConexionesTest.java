@@ -11,10 +11,6 @@ import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaConexiones;
-import algo3.algocity.model.mapas.MapaElectrico;
-import algo3.algocity.model.mapas.MapaRutas;
-import algo3.algocity.model.mapas.MapaTuberias;
 
 public class MapaConexionesTest {
 

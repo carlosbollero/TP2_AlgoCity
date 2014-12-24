@@ -4,6 +4,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -17,7 +18,7 @@ public class FabricaCentralMinera implements FabricaEnergetica {
 			SistemaElectrico sisElectrico, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 
 		return new CentralMinera(mapa, dinero, sisElectrico, coordenada);
 	}

@@ -9,6 +9,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -39,13 +40,12 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	public Ruta(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		porcentajeDanios = 0;
 		costo = 10;
 		this.coordenadas = coordenada;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coordenada);
+		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);
 		/*
 		 * else { mapa.agregar(this); }
@@ -113,10 +113,10 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public boolean agregarseA(Mapa mapa) {
 		return mapa.rutas().agregar(this);
 	}
-	
+
 	@Override
 	public boolean estaContenidoEn(Mapa mapa) {
-		return mapa.rutas().contiene(this);		
+		return mapa.rutas().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -199,6 +199,5 @@ public class Ruta implements Conector, Daniable, Visitable {
 		}
 		return false;
 	}
-
 
 }

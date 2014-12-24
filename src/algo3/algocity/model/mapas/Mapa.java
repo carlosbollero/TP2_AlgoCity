@@ -1,6 +1,5 @@
 package algo3.algocity.model.mapas;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -14,16 +13,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Ocupable;
-import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
-import algo3.algocity.model.excepciones.ElementoYaContenidoEnMapaException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
@@ -58,11 +48,8 @@ public class Mapa extends Observable {
 		return tamanio;
 	}
 
-	public boolean agregar(Agregable unidad)
-			throws CoordenadaInvalidaException{
-//		if (validarCoordenadas(unidad.coordenada())
-//				&& !unidad.estaContenidoEn(this)) {
-		if (!unidad.estaContenidoEn(this)) {
+	public boolean agregar(Agregable unidad){
+		if (!contiene(unidad)) {
 			return unidad.agregarseA(this);
 		}
 		return false;
@@ -81,11 +68,11 @@ public class Mapa extends Observable {
 	}
 
 	private boolean estaDentroDeLimites(Coordenada coord) {
-	return ((coord.getX() >= 0) && (coord.getX() < tamanio)
-			&& (coord.getY() >= 0) && (coord.getY() < tamanio));
-}
-	
-	public ArrayList<Daniable> unidadesDaniables(){
+		return ((coord.getX() >= 0) && (coord.getX() < tamanio)
+				&& (coord.getY() >= 0) && (coord.getY() < tamanio));
+	}
+
+	public ArrayList<Daniable> unidadesDaniables() {
 		ArrayList<Daniable> lista = new ArrayList<Daniable>();
 		lista.addAll(ciudad().unidadesDaniables());
 		lista.addAll(redElectrica().unidadesDaniables());

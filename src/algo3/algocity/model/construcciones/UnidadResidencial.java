@@ -12,6 +12,7 @@ import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -30,12 +31,12 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	double porcentajeDanios;
 
 	public UnidadResidencial() {
-		super(5,1);
+		super(5, 1);
 		this.capacidad = 100;
 	}
 
 	public UnidadResidencial(Coordenada coord) {
-		super(5,1);
+		super(5, 1);
 		coordenada = coord;
 		this.capacidad = 100;
 	}
@@ -58,15 +59,15 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		super(5,1);
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
+		super(5, 1);
 		this.capacidad = 100;
 		coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenada))
-				|| !hayConexionesEn(mapa)) {
-//			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
 		sElectrico.consumir(consumo);
 		dinero.cobrar(costo);
 	}
@@ -164,7 +165,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		return unidad;
 	}
 
-	
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -189,7 +189,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			}
 		}
 	}
-	
+
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ur) {
 		if (ur == this) {

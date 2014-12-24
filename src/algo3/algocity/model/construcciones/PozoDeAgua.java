@@ -7,31 +7,32 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class PozoDeAgua extends Unidad{
+public class PozoDeAgua extends Unidad {
 
 	public PozoDeAgua() {
-		super(250,0);
+		super(250, 0);
 	}
 
 	public PozoDeAgua(Coordenada coord) {
-		super(250,0);
+		super(250, 0);
 		this.coordenada = coord;
 	}
 
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
-			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		super(250, 0);
 		coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenada))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);
 	}
 
@@ -64,7 +65,6 @@ public class PozoDeAgua extends Unidad{
 		return mapa.ciudad().contiene(this);
 	}
 
-
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
@@ -89,8 +89,7 @@ public class PozoDeAgua extends Unidad{
 
 		return unidad;
 	}
-	
-	
+
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -111,7 +110,7 @@ public class PozoDeAgua extends Unidad{
 		}
 	}
 
-	/*No evalua los invariantes de la clase*/
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable pa) {
 		if (pa == this) {
 			return true;
@@ -121,6 +120,5 @@ public class PozoDeAgua extends Unidad{
 		}
 		return false;
 	}
-
 
 }

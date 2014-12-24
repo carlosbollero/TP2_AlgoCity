@@ -36,7 +36,6 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 
 public abstract class MapaConexiones extends Observable {
 
-//	int tamanio;
 	LinkedHashMap<Coordenada, Conector> mapaConectores;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
@@ -44,7 +43,6 @@ public abstract class MapaConexiones extends Observable {
 
 	public MapaConexiones(Mapa mapa) {
 		this.mapa = mapa;
-//		tamanio = mapa.tamanio();
 		mapaConectores = new LinkedHashMap<Coordenada, Conector>();
 		grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
 	}
