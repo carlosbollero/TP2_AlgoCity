@@ -10,6 +10,7 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -53,7 +54,8 @@ public class MapasIntegralTest {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -70,8 +72,8 @@ public class MapasIntegralTest {
 		m.agregar(t);
 		t = fc.construir(m, d, new Coordenada(3, 2));
 		m.agregar(t);
-//		t = fc.construir(m, d, new Coordenada(2, 2));
-//		m.agregar(t);
+		// t = fc.construir(m, d, new Coordenada(2, 2));
+		// m.agregar(t);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
@@ -109,7 +111,8 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos()
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoSeCumplenLosRequisitosException {
+			NoHayConexionConRutas, NoSeCumplenLosRequisitosException,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -130,7 +133,8 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos()
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRedElectrica, NoSeCumplenLosRequisitosException {
+			NoHayConexionConRedElectrica, NoSeCumplenLosRequisitosException,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -151,7 +155,8 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -173,7 +178,8 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -193,7 +199,7 @@ public class MapasIntegralTest {
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos()
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -223,7 +229,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -271,7 +277,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -324,7 +330,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -372,7 +378,8 @@ public class MapasIntegralTest {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -416,6 +423,7 @@ public class MapasIntegralTest {
 
 		// Danio a la central
 		CatastrofeTerremoto ct = new CatastrofeTerremoto(m, 2, 2);
+		ct.iniciar();
 
 		assertEquals(0, ue.getSalud(), 0);
 

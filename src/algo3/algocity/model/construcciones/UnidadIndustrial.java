@@ -29,15 +29,13 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	double porcentajeDanios;
 
 	public UnidadIndustrial() {
-		this.costo = 10;
-		this.consumo = 5;
+		super(10, 5);
 		this.capacidad = 25;
 	}
 
 	public UnidadIndustrial(Coordenada coord) {
+		super(10, 5);
 		coordenada = coord;
-		this.costo = 10;
-		this.consumo = 5;
 		this.capacidad = 25;
 	}
 
@@ -48,8 +46,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			CapacidadElectricaInsuficienteException,
 			NoHayConexionConRedElectrica, NoHayConexionConRutas {
 
-		this.costo = 10;
-		this.consumo = 5;
+		super(10, 5);
 		this.capacidad = 25;
 		coordenada = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenada))
@@ -114,9 +111,17 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
 	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		// TODO Auto-generated method stub
+		return mapa.ciudad().contiene(this);
+	}
+
+
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -150,7 +155,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		return unidad;
 	}
 
-	
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -178,7 +182,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			}
 		}
 	}
-	
+
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable ui) {
 		if (ui == this) {

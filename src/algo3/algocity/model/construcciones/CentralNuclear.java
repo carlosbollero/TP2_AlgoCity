@@ -15,17 +15,9 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class CentralNuclear extends UnidadEnergetica {
 
-	public CentralNuclear() {
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
-	}
-
 	public CentralNuclear(Coordenada coord) {
+		super(10000, 1000, 25);
 		coordenada = coord;
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
 	}
 
 	public CentralNuclear(Mapa mapa, Dinero dinero,
@@ -33,9 +25,7 @@ public class CentralNuclear extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias {
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
+		super(10000, 1000, 25);
 		this.coordenada = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
@@ -58,8 +48,13 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -97,7 +92,7 @@ public class CentralNuclear extends UnidadEnergetica {
 				.setTextContent(String.valueOf(this.radioDeInfluencia));
 
 		return unidad;
-	}	
+	}
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable cn) {
@@ -110,5 +105,6 @@ public class CentralNuclear extends UnidadEnergetica {
 		}
 		return false;
 	}
+
 
 }

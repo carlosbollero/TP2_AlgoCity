@@ -1,5 +1,7 @@
 #Errores
 
+- En el test de RegistroUsuarios, depende de que se haya creado previamente un archivo.
+  O que se haya corrido previamente otro test. Hay que modificarlo.  [PENDIENTE]
 - Conexion con tuberías y con red eléctrica se evaluar de la misma manera.
   También se mide el radio. [CARLOS]
 - En la ventana de inicio, el panel para elegir entre la lista de usuarios,

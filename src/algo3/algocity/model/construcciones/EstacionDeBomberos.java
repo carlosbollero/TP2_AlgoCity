@@ -15,22 +15,20 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class EstacionDeBomberos extends Unidad implements Daniable {
+public class EstacionDeBomberos extends Unidad{
 
 	private Conector conexion;
 
 	public EstacionDeBomberos() {
-		costo = 1500;
-		consumo = 0;
+		super(1500, 0);
 	}
 
 	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException {
 
+		super(1500, 0);
 		coordenada = coord;
-		costo = 1500;
-		consumo = 0;
 		if (!esConstruibleEn(mapa.superficie(coordenada))) {
 			throw new NoSeCumplenLosRequisitosException();
 		}
@@ -38,8 +36,7 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 	}
 
 	public EstacionDeBomberos(Coordenada coord) {
-		costo = 1500;
-		consumo = 0;
+		super(1500, 0);
 		conexion = null;
 		this.coordenada = coord;
 	}
@@ -79,28 +76,16 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
+	public boolean agregarseA(Mapa mapa) {
 		mapa.agregarReparador();
+		return mapa.ciudad().agregar(this);
 	}
 
 	@Override
-	public void repararse() {
-		// TODO Auto-generated method stub
-
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
-	@Override
-	public void aplicarDanio(double unDanio) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void aceptar(Visitante v) {
-		v.visitar(this);
-
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -126,8 +111,7 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 
 		return unidad;
 	}
-	
-	
+
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -148,7 +132,7 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		}
 	}
 
-	/*No evalua los invariantes de la clase*/
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable eb) {
 		if (eb == this) {
 			return true;
@@ -158,5 +142,6 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		}
 		return false;
 	}
+
 
 }

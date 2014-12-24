@@ -2,8 +2,6 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
@@ -17,17 +15,9 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class CentralMinera extends UnidadEnergetica {
 
-	public CentralMinera() {
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
-	}
-
 	public CentralMinera(Coordenada coord) {
+		super(3000, 400, 10);
 		coordenada = coord;
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
 	}
 
 	public CentralMinera(Mapa mapa, Dinero dinero,
@@ -35,10 +25,7 @@ public class CentralMinera extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias {
-
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
+		super(3000, 400, 10);
 		this.coordenada = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
@@ -61,8 +48,13 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -113,5 +105,6 @@ public class CentralMinera extends UnidadEnergetica {
 		}
 		return false;
 	}
+
 
 }

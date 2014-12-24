@@ -12,13 +12,15 @@ import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class ReparadorTest {
 
 	@Test
-	public void testReparadorAplicaAUnidadesCorrespondientes() {
+	public void testReparadorAplicaAUnidadesCorrespondientes()
+			throws CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 

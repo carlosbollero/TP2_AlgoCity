@@ -16,9 +16,14 @@ public abstract class Unidad extends Observable implements Agregable{
 	int costo;
 	int consumo;
 	Coordenada coordenada;
+	
+	public Unidad(int costo, int consumo) {
+		this.costo = costo;
+		this.consumo = consumo;
+	}
 
 	public int costo() {
-		return this.costo;
+		return costo;
 	}
 
 	public int consumo() {

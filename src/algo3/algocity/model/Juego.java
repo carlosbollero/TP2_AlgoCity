@@ -1,10 +1,8 @@
 package algo3.algocity.model;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Juego {
@@ -36,6 +35,7 @@ public class Juego {
 	private Poblacion poblacion;
 	private Usuario usuario;
 	private Dinero dinero;
+	private GeneradorCatastrofe genCatastrofe;
 
 	public Juego(Usuario u, Mapa map, Turno t, Poblacion p, Dinero d) {
 		crearDirectorioGuardados();
@@ -44,6 +44,7 @@ public class Juego {
 		turnos = t;
 		poblacion = p;
 		dinero = d;
+		genCatastrofe = new GeneradorCatastrofe(mapa);
 		turnos.addObserver(this.poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
@@ -57,6 +58,8 @@ public class Juego {
 		poblacion = new Poblacion();
 		turnos = new Turno();
 		dinero = new Dinero(poblacion, turnos);
+		genCatastrofe = new GeneradorCatastrofe(mapa);
+		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());

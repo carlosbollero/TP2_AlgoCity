@@ -25,15 +25,15 @@ public class VistaMapa extends JPanel implements Observer {
 		setPreferredSize(new Dimension(600, 600));
 		this.mapa = mapa;
 		territorio = new LinkedList<VistaTerreno>();
-		setLayout(new GridLayout(mapa.getTamanio(), mapa.getTamanio()));
+		setLayout(new GridLayout(mapa.tamanio(), mapa.tamanio()));
 		rellenar();
 		mapa.addObserver(this);
 		addMouseListener(new ControladorMouse(mapa, this));
 	}
 
 	private void rellenar() {
-		for (int i = 0; i < mapa.getTamanio(); i++) {
-			for (int j = 0; j < mapa.getTamanio(); j++) {
+		for (int i = 0; i < mapa.tamanio(); i++) {
+			for (int j = 0; j < mapa.tamanio(); j++) {
 				Coordenada coord = new Coordenada(i, j);
 				// add(new VistaTerreno(mapa.superficie(coord), coord));
 				VistaTerreno superficie = new VistaTerreno(mapa, coord);

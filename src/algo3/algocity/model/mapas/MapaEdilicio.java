@@ -32,6 +32,7 @@ public class MapaEdilicio {
 
 	private int tamanio;
 
+	Mapa mapaSuperior;
 	HashMap<Coordenada, Unidad> mapa;
 
 	ArrayList<Daniable> unidadesDaniables;
@@ -44,8 +45,8 @@ public class MapaEdilicio {
 	ArrayList<UnidadIndustrial> unidadesIndustriales;
 	ArrayList<UnidadComercial> unidadesComerciales;
 
-	public MapaEdilicio(int tamanio) {
-		this.tamanio = tamanio;
+	public MapaEdilicio(Mapa m) {
+		tamanio = m.tamanio();
 		mapa = new HashMap<Coordenada, Unidad>();
 		unidadesDaniables = new ArrayList<Daniable>();
 		unidadesResidenciales = new ArrayList<UnidadResidencial>();
@@ -63,49 +64,55 @@ public class MapaEdilicio {
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
-	public boolean agregar(Unidad elemento) {
-		int x = elemento.coordenada().getX();
-		int y = elemento.coordenada().getY();
-		if (!this.validarCoordenadas(x, y) || this.contiene(elemento)) {
-			return false;
-		}
-		if (!this.mapa.containsKey(elemento.coordenada())) {
-			this.mapa.put(elemento.coordenada(), elemento);
-			return true;
-		}
-		return false;
-	}
+//	public boolean agregar(Unidad elemento) {
+//		int x = elemento.coordenada().getX();
+//		int y = elemento.coordenada().getY();
+//		if (!.validarCoordenadas(x, y) || this.contiene(elemento)) {
+//			return false;
+//		}
+//		if (!this.mapa.containsKey(elemento.coordenada())) {
+//			this.mapa.put(elemento.coordenada(), elemento);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public boolean agregar(PozoDeAgua p) {
+		mapa.put(p.coordenada(), p);
 		return pozosDeAgua.add(p);
 	}
 
 	public boolean agregar(EstacionDeBomberos e) {
+		mapa.put(e.coordenada(), e);
 		return estacionesBomberos.add(e);
 	}
 
 	public boolean agregar(UnidadResidencial u) {
+		mapa.put(u.coordenada(), u);
 		return unidadesResidenciales.add(u);
 	}
 
 	public boolean agregar(UnidadIndustrial u) {
+		mapa.put(u.coordenada(), u);
 		return unidadesIndustriales.add(u);
 	}
 
 	public boolean agregar(UnidadComercial u) {
+		mapa.put(u.coordenada(), u);
 		return unidadesComerciales.add(u);
 	}
 
 	public boolean agregar(UnidadEnergetica u) {
+		mapa.put(u.coordenada(), u);
 		return unidadesEnergeticas.add(u);
 	}
 
-	public boolean agregarUnidadDaniable(Daniable unidad) {
-		if (unidadesDaniables == null) {
-			unidadesDaniables = new ArrayList<Daniable>();
-		}
-		return unidadesDaniables.add(unidad);
-	}
+//	public boolean agregarUnidadDaniable(Daniable unidad) {
+//		if (unidadesDaniables == null) {
+//			unidadesDaniables = new ArrayList<Daniable>();
+//		}
+//		return unidadesDaniables.add(unidad);
+//	}
 
 	public ArrayList<UnidadEnergetica> getUnidadesEnergeticas() {
 		return unidadesEnergeticas;
@@ -114,21 +121,23 @@ public class MapaEdilicio {
 	public ArrayList<PozoDeAgua> getPozosDeAgua() {
 		return pozosDeAgua;
 	}
+	
+	public ArrayList<EstacionDeBomberos> getestacionesDeBomberos() {
+		return estacionesBomberos;
+	}
 
 	public ArrayList<Daniable> unidadesDaniables() {
-		return unidadesDaniables;
+//		return unidadesDaniables;
+		ArrayList<Daniable> lista = new ArrayList<Daniable>(unidadesResidenciales);
+		lista.addAll(unidadesIndustriales);
+		lista.addAll(unidadesComerciales);
+		lista.addAll(unidadesEnergeticas);
+//		lista.addAll(mapaSuperior.redElectrica().)
+		return lista;
 	}
 
 	public void remover(int x, int y) {
 		this.mapa.remove(new Coordenada(x, y));
-	}
-
-	private boolean validarCoordenadas(int x, int y) {
-		return (this.estaDentroDeLimites(x, y));
-	}
-
-	private boolean estaDentroDeLimites(int i, int j) {
-		return ((i >= 0) && (i <= tamanio) && (j >= 0) && (j <= tamanio));
 	}
 
 	public boolean contiene(Unidad unaUnidad) {
@@ -161,37 +170,33 @@ public class MapaEdilicio {
 
 	}
 
-	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,
-			int radio) {
-		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
-		Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
-		Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
-
-		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
-			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
-				if (validarCoordenadas(x, y) && existeDaniable(x, y)) {
-					unidadesADevolver.add((Daniable) this.getDaniableEn(x, y));
-				}
-			}
-		}
-		return unidadesADevolver;
-	}
+//	public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,
+//			int radio) {
+//		ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
+//		Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
+//		Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
+//
+//		for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
+//			for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
+//				if (validarCoordenadas(x, y) && existeDaniable(x, y)) {
+//					unidadesADevolver.add((Daniable) this.getDaniableEn(x, y));
+//				}
+//			}
+//		}
+//		return unidadesADevolver;
+//	}
 
 	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
-			LinkedList<Point> listaCamino) {
-
+			LinkedList<Coordenada> listaCamino) {
 		ArrayList<Daniable> listaDaniablesEnElCamino = new ArrayList<Daniable>();
-		Iterator<Point> iterador = listaCamino.iterator();
+		Iterator<Coordenada> iterador = listaCamino.iterator();
 		while (iterador.hasNext()) {
-			Point punto = iterador.next();
+			Coordenada punto = iterador.next();
 			if (existeDaniable((int) punto.getX(), (int) punto.getY())) {
-
 				listaDaniablesEnElCamino.add(getDaniableEn((int) punto.getX(),
 						(int) punto.getY()));
-
 			}
 		}
-
 		return listaDaniablesEnElCamino;
 	}
 
@@ -218,38 +223,38 @@ public class MapaEdilicio {
 
 	}
 
-	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro,
-			int radio) {
-		int xi;
-		int yi;
-		if (epicentro.getX() - radio < 0) {
-			xi = 0;
-		} else {
-			xi = (int) epicentro.getX() - radio;
-		}
-		if (epicentro.getY() - radio < 0) {
-			yi = 0;
-		} else {
-			yi = (int) epicentro.getY() - radio;
-		}
-		return new Coordenada(xi, yi);
-	}
-
-	private Coordenada calcularCoordenadaDeFin(Coordenada epicentro, int radio) {
-		int xf;
-		int yf;
-		if (epicentro.getX() - radio < 0) {
-			xf = radio;
-		} else {
-			xf = (int) epicentro.getX() + radio;
-		}
-		if (epicentro.getY() - radio < 0) {
-			yf = radio;
-		} else {
-			yf = (int) epicentro.getY() + radio;
-		}
-		return new Coordenada(xf, yf);
-	}
+//	private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro,
+//			int radio) {
+//		int xi;
+//		int yi;
+//		if (epicentro.getX() - radio < 0) {
+//			xi = 0;
+//		} else {
+//			xi = (int) epicentro.getX() - radio;
+//		}
+//		if (epicentro.getY() - radio < 0) {
+//			yi = 0;
+//		} else {
+//			yi = (int) epicentro.getY() - radio;
+//		}
+//		return new Coordenada(xi, yi);
+//	}
+//
+//	private Coordenada calcularCoordenadaDeFin(Coordenada epicentro, int radio) {
+//		int xf;
+//		int yf;
+//		if (epicentro.getX() - radio < 0) {
+//			xf = radio;
+//		} else {
+//			xf = (int) epicentro.getX() + radio;
+//		}
+//		if (epicentro.getY() - radio < 0) {
+//			yf = radio;
+//		} else {
+//			yf = (int) epicentro.getY() + radio;
+//		}
+//		return new Coordenada(xf, yf);
+//	}
 
 	public int capacidadDePoblacion() {
 		int capacidad = 0;

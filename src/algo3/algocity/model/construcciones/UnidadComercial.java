@@ -22,19 +22,16 @@ import algo3.algocity.model.terreno.Superficie;
 
 public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
-	int consumo;
 	final double ESTADOINICIAL = 100;
 	double porcentajeDanios;
 
 	public UnidadComercial() {
-		this.costo = 5;
-		this.consumo = 2;
+		super(5, 2);
 	}
 
 	public UnidadComercial(Coordenada coord) {
+		super(5, 2);
 		coordenada = coord;
-		this.costo = 5;
-		this.consumo = 2;
 	}
 
 	public UnidadComercial(Mapa mapa, Dinero dinero,
@@ -43,13 +40,12 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		this.costo = 5;
-		this.consumo = 2;
+		super(5, 2);
 		this.coordenada = coord;
 
 		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
+//			throw new NoSeCumplenLosRequisitosException();
 		}
 		sisElectrico.consumir(consumo);
 		dinero.cobrar(costo);
@@ -59,15 +55,11 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return porcentajeDanios;
 	}
 
-	public int consumo() {
-		return this.consumo;
-	}
-
 	@Override
 	public void repararse() {
-		this.porcentajeDanios -= this.porcentajeReparacion();
-		if (this.getDanios() < 0) {
-			this.porcentajeDanios = 0;
+		porcentajeDanios -= porcentajeReparacion();
+		if (getDanios() < 0) {
+			porcentajeDanios = 0;
 		}
 	}
 
@@ -109,9 +101,13 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -142,7 +138,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return unidad;
 	}
 
-	
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidadComercial = hijoDeNodo.getChildNodes();
 
@@ -165,7 +160,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			}
 		}
 	}
-	
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable uc) {
@@ -178,5 +172,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		}
 		return false;
 	}
+
+
 
 }

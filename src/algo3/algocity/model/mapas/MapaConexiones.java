@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -35,17 +36,17 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 
 public abstract class MapaConexiones extends Observable {
 
-	int tamanio;
+//	int tamanio;
 	LinkedHashMap<Coordenada, Conector> mapaConectores;
 	SimpleGraph<Conector, DefaultEdge> grafo;
 	ConnectivityInspector<Conector, DefaultEdge> camino;
 	Mapa mapa;
 
-	public MapaConexiones(int tamanio) {
-
-		this.tamanio = tamanio;
-		this.mapaConectores = new LinkedHashMap<Coordenada, Conector>();
-		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
+	public MapaConexiones(Mapa mapa) {
+		this.mapa = mapa;
+//		tamanio = mapa.tamanio();
+		mapaConectores = new LinkedHashMap<Coordenada, Conector>();
+		grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
 	}
 
 	/* Para tests */
@@ -54,32 +55,37 @@ public abstract class MapaConexiones extends Observable {
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
 	}
 
-	public boolean agregar(Conector elemento) {
-		int x = elemento.coordenada().getX();
-		int y = elemento.coordenada().getY();
-		if (validarCoordenadas(x, y) && !contiene(elemento)
-				&& !tieneCoordenadaOcupada(x, y)) {
-			this.mapaConectores.put(new Coordenada(x, y), elemento);
-			this.grafo.addVertex(elemento);
-			this.actualizarGrafo(elemento, x, y);
-
-			setChanged();
-			notifyObservers();
-			return true;
-		}
-		return false;
-	}
+	// public boolean agregar(Conector elemento) {
+	// int x = elemento.coordenada().getX();
+	// int y = elemento.coordenada().getY();
+	// if (validarCoordenadas(x, y) && !contiene(elemento)
+	// && !tieneCoordenadaOcupada(x, y)) {
+	// this.mapaConectores.put(new Coordenada(x, y), elemento);
+	// this.grafo.addVertex(elemento);
+	// this.actualizarGrafo(elemento, x, y);
+	//
+	// setChanged();
+	// notifyObservers();
+	// return true;
+	// }
+	// return false;
+	// }
 
 	public int cantidadElementos() {
 		return (grafo.vertexSet().size());
 	}
 
-	private void actualizarGrafo(Conector elemento, int x, int y) {
-		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-			if (hayDistanciaMinima(new Coordenada(x, y), entry.getKey())) {
-				grafo.addEdge(elemento, entry.getValue());
+	protected void actualizarGrafo(Conector elemento) {
+		for(Conector c : grafo.vertexSet()){
+			if (hayDistanciaMinima(elemento.coordenada(), c.coordenada())) {
+				grafo.addEdge(elemento, c);
 			}
 		}
+//		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
+//			if (hayDistanciaMinima(elemento.coordenada(), entry.getKey())) {
+//				grafo.addEdge(elemento, entry.getValue());
+//			}
+//		}
 	}
 
 	protected boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
@@ -98,39 +104,41 @@ public abstract class MapaConexiones extends Observable {
 	}
 
 	public boolean contiene(Conector elemento) {
-		return (mapaConectores.containsValue(elemento) && grafo.containsVertex(elemento));
+		return (mapaConectores.containsValue(elemento) && grafo
+				.containsVertex(elemento));
 	}
 
 	public boolean contiene(Coordenada coord) {
 		return (mapaConectores.containsKey(coord));
 	}
 
-	public Conector getConectorEn(int x, int y) {
-		if (tieneCoordenadaOcupada(x, y)) {
-			Coordenada p = new Coordenada(x, y);
-			return (this.mapaConectores.get(p));
+	public Conector getConectorEn(Coordenada coord) {
+		if (tieneCoordenadaOcupada(coord)) {
+			return (this.mapaConectores.get(coord));
 		} else {
 			return null;
 		}
 	}
 
-	private boolean validarCoordenadas(int x, int y) {
-		return (this.estaDentroDeLimites(x, y));
+//	protected boolean validarCoordenadas(Coordenada coord) {
+//		return (this.estaDentroDeLimites(coord));
+//	}
+//
+//	private boolean estaDentroDeLimites(Coordenada coord) {
+//		return ((coord.getX() >= 0) && (coord.getX() <= tamanio)
+//				&& (coord.getY() >= 0) && (coord.getY() <= tamanio));
+//	}
+
+	public boolean tieneCoordenadaOcupada(Coordenada coord) {
+		return (this.mapaConectores.containsKey(coord));
 	}
 
-	private boolean estaDentroDeLimites(int x, int y) {
-		return ((x >= 0) && (x <= tamanio) && (y >= 0) && (y <= tamanio));
-	}
-
-	public boolean tieneCoordenadaOcupada(int x, int y) {
-		return (this.mapaConectores.containsKey(new Coordenada(x, y)));
-	}
-	
 	public abstract boolean hayConexion(Coordenada unPunto);
 
 	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
-		return (camino.pathExists(mapaConectores.get(unPunto), mapaConectores.get(otroPunto)));
+		return (camino.pathExists(mapaConectores.get(unPunto),
+				mapaConectores.get(otroPunto)));
 	}
 
 	public Coordenada getCoordenadaDe(Conector elemento) {
@@ -143,8 +151,7 @@ public abstract class MapaConexiones extends Observable {
 	}
 
 	public boolean sePuedeConstruir(Conector conector) {
-		return tieneCoordenadaOcupada(conector.coordenada().x,
-				conector.coordenada().y);
+		return tieneCoordenadaOcupada(conector.coordenada());
 	}
 
 	/**********************************************************************/
@@ -326,6 +333,13 @@ public abstract class MapaConexiones extends Observable {
 			System.out.println(String.valueOf(clave.getY()));
 			System.out.println(valor.getClass());
 		}
+	}
+
+	public ArrayList<Daniable> unidadesDaniables() {
+		for (Daniable d : grafo.vertexSet()) {
+
+		}
+		return null;
 	}
 
 }

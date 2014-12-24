@@ -30,15 +30,13 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	double porcentajeDanios;
 
 	public UnidadResidencial() {
-		this.costo = 5;
-		this.consumo = 1;
+		super(5,1);
 		this.capacidad = 100;
 	}
 
 	public UnidadResidencial(Coordenada coord) {
+		super(5,1);
 		coordenada = coord;
-		this.costo = 5;
-		this.consumo = 1;
 		this.capacidad = 100;
 	}
 
@@ -61,8 +59,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		this.costo = 5;
-		this.consumo = 1;
+		super(5,1);
 		this.capacidad = 100;
 		coordenada = coord;
 
@@ -126,8 +123,13 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -199,4 +201,5 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		}
 		return false;
 	}
+
 }

@@ -20,12 +20,22 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	int radioDeInfluencia;
 	double porcentajeDanios;
 
+	public UnidadEnergetica(int costo, int capacidad, int radio) {
+		super(costo, 0);
+		this.capacidad = capacidad;
+		this.radioDeInfluencia = radio;
+	}
+
 	public int costo() {
 		return this.costo;
 	}
 
 	public int getRadio() {
 		return radioDeInfluencia;
+	}
+
+	public boolean estaDentroDeRadio(Coordenada coord) {
+		return (coordenada.distancia(coord) <= radioDeInfluencia);
 	}
 
 	public int getCapacidad() {

@@ -80,7 +80,7 @@ public class PoblacionTest {
 		p.setIndice(1); 	//positivo crece
 							//negativo decrece
 		try {
-			Thread.sleep(t.getDelay()+1);
+			Thread.sleep(t.getDelay()+2);
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

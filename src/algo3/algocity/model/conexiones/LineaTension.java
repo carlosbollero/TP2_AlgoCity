@@ -25,8 +25,8 @@ public class LineaTension implements Conector, Daniable, Visitable {
 					// false para destruido
 	int costo;
 	double porcentajeDanios;
-	int danios; //no usado?
-	Coordenada coordenadas;
+	int danios; // no usado?
+	Coordenada coordenada;
 
 	public LineaTension() {
 		this.costo = 5;
@@ -34,22 +34,19 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public LineaTension(Coordenada coordenada) {
 		porcentajeDanios = 0;
-		this.coordenadas = coordenada;
+		this.coordenada = coordenada;
 	}
 
 	public LineaTension(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException {
 		porcentajeDanios = 0;
-		this.coordenadas = coordenada;
+		this.coordenada = coordenada;
 
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
+		if (!esConstruibleEn(mapa.superficie(coordenada))) {
 			throw new NoSeCumplenLosRequisitosException();
-		} 
+		}
 		dinero.cobrar(costo);
-		/*else {
-			mapa.agregar(this);
-		}*/
 	}
 
 	public boolean estado() {
@@ -64,16 +61,16 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public void aplicarDanioGodzilla() {
 		estado = destruido;
-		this.porcentajeDanios = 100; 
 
 	}
 
 	@Override
 	public void repararse() {
-		this.porcentajeDanios -= this.porcentajeReparacion();
-		if (this.getDanios() < 0) {
-			this.porcentajeDanios = 0;
-		}
+		porcentajeDanios = 0;
+//		this.porcentajeDanios -= this.porcentajeReparacion();
+//		if (this.getDanios() < 0) {
+//			this.porcentajeDanios = 0;
+//		}
 	}
 
 	public double getDanios() {
@@ -85,22 +82,21 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	}
 
 	public void aplicarDanio(double cantidad) {
-		this.porcentajeDanios += cantidad;
-		if (this.porcentajeDanios > 100) {
-			this.porcentajeDanios = 100;
-		}
+		estado = destruido;
+		porcentajeDanios = (porcentajeDanios + cantidad > ESTADOINICIAL) ? ESTADOINICIAL
+				: porcentajeDanios + cantidad;
 	}
 
 	public double getSalud() {
-		return (this.ESTADOINICIAL - this.porcentajeDanios);
+		return (ESTADOINICIAL - porcentajeDanios);
 	}
 
 	public Coordenada coordenada() {
-		return coordenadas;
+		return coordenada;
 	}
-	
-	public void setCoordenadas(Coordenada c){
-		this.coordenadas = c;
+
+	public void setCoordenadas(Coordenada c) {
+		this.coordenada = c;
 	}
 
 	@Override
@@ -109,12 +105,17 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarARedElectrica(this);
-		mapa.agregarUnidadDaniable(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.redElectrica().agregar(this);
+//		mapa.agregarUnidadDaniable(this);
 	}
-	
-	
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.redElectrica().contiene(this);
+		
+	}
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
@@ -129,8 +130,8 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		Element coordenadas = doc.createElement("coordenadas");
 		conector.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		conector.appendChild(porcentajeDanios);
@@ -138,10 +139,9 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 		return conector;
 	}
-	
-	
-	public void fromElement(Node hijoDeUnidadDaniable){
-		
+
+	public void fromElement(Node hijoDeUnidadDaniable) {
+
 		NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
 
 		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
@@ -154,50 +154,48 @@ public class LineaTension implements Conector, Daniable, Visitable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
 				this.porcentajeDanios = Double.valueOf(hijoDeUnidad
 						.getTextContent());
 			}
-		}		
+		}
 	}
 
-//	public LineaTension fromElement(Node hijoDeUnidadDaniable) {
-//		LineaTension lt = new LineaTension();
-//		NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
-//
-//		for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
-//			Node hijoDeUnidad = hijosDeUnidad.item(i);
-//			if (hijoDeUnidad.getNodeName().equals("costo")) {
-//				lt.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
-//			} else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
-//				String stringPunto = hijoDeUnidad.getTextContent();
-//				String[] arrayPunto = stringPunto.split(",");
-//				Coordenada punto = new Coordenada(
-//						Integer.valueOf(arrayPunto[0]),
-//						Integer.valueOf(arrayPunto[1]));
-//				lt.coordenadas = punto;
-//			} else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
-//				lt.porcentajeDanios = Double.valueOf(hijoDeUnidad
-//						.getTextContent());
-//			}
-//		}
-//		return lt;
-//	}
-	
-	
-	
-	
-	/*No evalua los invariantes de la clase*/
+	// public LineaTension fromElement(Node hijoDeUnidadDaniable) {
+	// LineaTension lt = new LineaTension();
+	// NodeList hijosDeUnidad = hijoDeUnidadDaniable.getChildNodes();
+	//
+	// for (int i = 0; i < hijosDeUnidad.getLength(); i++) {
+	// Node hijoDeUnidad = hijosDeUnidad.item(i);
+	// if (hijoDeUnidad.getNodeName().equals("costo")) {
+	// lt.costo = Integer.valueOf(hijoDeUnidad.getTextContent());
+	// } else if (hijoDeUnidad.getNodeName().equals("coordenadas")) {
+	// String stringPunto = hijoDeUnidad.getTextContent();
+	// String[] arrayPunto = stringPunto.split(",");
+	// Coordenada punto = new Coordenada(
+	// Integer.valueOf(arrayPunto[0]),
+	// Integer.valueOf(arrayPunto[1]));
+	// lt.coordenadas = punto;
+	// } else if (hijoDeUnidad.getNodeName().equals("porcentajeDanios")) {
+	// lt.porcentajeDanios = Double.valueOf(hijoDeUnidad
+	// .getTextContent());
+	// }
+	// }
+	// return lt;
+	// }
+
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable lt) {
 		if (lt == this) {
 			return true;
 		} else if (lt.coordenada().getX() == this.coordenada().getX()
 				&& lt.coordenada().getY() == this.coordenada().getY()
-				&& ((LineaTension)lt).porcentajeDanios == this.porcentajeDanios) {
+				&& ((LineaTension) lt).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;
 	}
-	
+
+
 }

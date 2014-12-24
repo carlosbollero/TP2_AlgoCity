@@ -2,8 +2,6 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.SistemaElectrico;
@@ -17,17 +15,9 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class CentralEolica extends UnidadEnergetica {
 
-	public CentralEolica() {
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
-	}
-
 	public CentralEolica(Coordenada coord) {
+		super(1000, 100, 4);
 		coordenada = coord;
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
 	}
 
 	public CentralEolica(Mapa mapa, Dinero dinero,
@@ -35,9 +25,7 @@ public class CentralEolica extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias {
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
+		super(1000, 100, 4);
 		this.coordenada = coord;
 		if (!esConstruibleEn(mapa.superficie(coordenada))
 				|| !hayConexionesEn(mapa)) {
@@ -47,11 +35,10 @@ public class CentralEolica extends UnidadEnergetica {
 		dinero.cobrar(costo);
 	}
 
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 15) / 100;
 	}
-
+	
 	@Override
 	public void repararse() {
 		this.porcentajeDanios -= this.porcentajeReparacion();
@@ -59,9 +46,15 @@ public class CentralEolica extends UnidadEnergetica {
 			this.porcentajeDanios = 0;
 		}
 	}
+	
+	@Override
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
+	}
 
-	protected double porcentajeReparacion() {
-		return (this.ESTADOINICIAL * 15) / 100;
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -111,5 +104,6 @@ public class CentralEolica extends UnidadEnergetica {
 		}
 		return false;
 	}
+
 
 }

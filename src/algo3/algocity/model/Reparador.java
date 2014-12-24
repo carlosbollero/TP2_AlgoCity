@@ -2,6 +2,8 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,7 +11,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -24,33 +25,39 @@ import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
 
-public class Reparador implements Visitante {
+public class Reparador implements Visitante, Observer {
 
 	private Mapa mapa;
 	private ArrayList<Daniable> objetivos;
 
 	public Reparador(Mapa mapa) {
 		this.mapa = mapa;
-		this.objetivos = mapa.unidadesDaniables();
+		objetivos = new ArrayList<Daniable>();
+		actualizarObjetivos();;
 	}
 
 	// Para persistencia
 	public Reparador() {
-		this.objetivos = new ArrayList<Daniable>();
-	}
-
-	public void addObjetivo(Daniable d) {
-		objetivos.add(d);
+		objetivos = new ArrayList<Daniable>();
 	}
 
 	public void actuar() {
-		for (Daniable v : this.objetivos) {
-			v.aceptar(this);
+		for (Daniable v : objetivos) {
+			v.repararse();
+//			v.aceptar(this);
 		}
 	}
 
 	public void actualizarObjetivos() {
-		this.objetivos = mapa.unidadesDaniables();
+		objetivos.addAll(mapa.rutas().unidadesDaniables());
+		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
+		objetivos.addAll(mapa.ciudad().unidadesDaniables());
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		actuar();
+		
 	}
 
 	@Override
@@ -201,4 +208,5 @@ public class Reparador implements Visitante {
 		}
 		return resultado;
 	}
+
 }

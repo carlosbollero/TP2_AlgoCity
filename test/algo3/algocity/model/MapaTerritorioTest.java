@@ -12,17 +12,16 @@ import algo3.algocity.model.mapas.MapaTerritorio;
 
 public class MapaTerritorioTest {
 
-	int alto = 10;
-	int ancho = 10;
+	int tamanio = 10;
 	MapaTerritorio mt;
 
 	@Test
 	public void testTerritorioSeCreaConEstadoValido() {
-		mt = new MapaTerritorio(alto, ancho);
+		mt = new MapaTerritorio(tamanio);
 		
 
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
+		for (int x = 0; x < tamanio; x++) {
+			for (int y = 0; y < tamanio; y++) {
 				Coordenada p = new Coordenada(x, y);
 				assertTrue(mt.superficie(p).esAgua()
 						|| mt.superficie(p).esTierra());
@@ -35,7 +34,7 @@ public class MapaTerritorioTest {
 	@Test
 	public void testSePuedeConsultarSuSePuedeConstruirEnUnaCoordenadaDeAgua()
 			throws NoSePuedeConstruirEnSuperficie {
-		mt = new MapaTerritorio(alto, ancho);
+		mt = new MapaTerritorio(tamanio);
 		
 		Coordenada coord = mt.posicionConAgua();
 		Unidad p = new PozoDeAgua(new Coordenada(coord.getX(), coord.getY()));

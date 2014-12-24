@@ -7,32 +7,27 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class PozoDeAgua extends Unidad implements Daniable {
+public class PozoDeAgua extends Unidad{
 
 	public PozoDeAgua() {
-		costo = 250;
-		consumo = 0;
+		super(250,0);
 	}
 
 	public PozoDeAgua(Coordenada coord) {
-		costo = 250;
-		consumo = 0;
+		super(250,0);
 		this.coordenada = coord;
 	}
 
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
-
+		super(250, 0);
 		coordenada = coord;
-		costo = 250;
-		consumo = 0;
 
 		if (!esConstruibleEn(mapa.superficie(coordenada))) {
 			throw new NoSeCumplenLosRequisitosException();
@@ -60,27 +55,15 @@ public class PozoDeAgua extends Unidad implements Daniable {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.ciudad().agregar(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
 	}
 
 	@Override
-	public void repararse() {
-		// TODO Auto-generated method stub
-
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
-	@Override
-	public void aplicarDanio(double unDanio) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void aceptar(Visitante v) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -138,5 +121,6 @@ public class PozoDeAgua extends Unidad implements Daniable {
 		}
 		return false;
 	}
+
 
 }

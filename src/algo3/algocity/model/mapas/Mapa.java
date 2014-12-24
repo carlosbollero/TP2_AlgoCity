@@ -22,13 +22,14 @@ import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.ElementoYaContenidoEnMapaException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
-
 
 	int tamanio;
 
@@ -42,47 +43,54 @@ public class Mapa extends Observable {
 	Reparador reparador;
 
 	public Mapa() {
-		tamanio = 20;
+		tamanio = 40;
 		territorio = new MapaTerritorio(tamanio);
-		ciudad = new MapaEdilicio(tamanio);
-		tuberias = new MapaTuberias(tamanio);
-		rutas = new MapaRutas(tamanio);
-		redElectrica = new MapaElectrico(tamanio);
+		ciudad = new MapaEdilicio(this);
+		tuberias = new MapaTuberias(this);
+		rutas = new MapaRutas(this);
+		redElectrica = new MapaElectrico(this);
 		this.dinero = new Dinero();
 
 		this.reparador = null;
 	}
 
-	public int tamanio(){
+	public int tamanio() {
 		return tamanio;
 	}
 
-	public void agregar(Agregable unidad) {
-		unidad.agregarseA(this);
+	public boolean agregar(Agregable unidad)
+			throws CoordenadaInvalidaException{
+//		if (validarCoordenadas(unidad.coordenada())
+//				&& !unidad.estaContenidoEn(this)) {
+		if (!unidad.estaContenidoEn(this)) {
+			return unidad.agregarseA(this);
+		}
+		return false;
 	}
 
-	public boolean agregarACiudad(Unidad unidad) {
-		return ciudad.agregar(unidad);
+	public boolean contiene(Agregable u) {
+		return u.estaContenidoEn(this);
 	}
 
-	public boolean agregarARedElectrica(LineaTension linea) {
-		return redElectrica.agregar(linea);
+	public boolean validarCoordenadas(Coordenada coord)
+			throws CoordenadaInvalidaException {
+		if (!estaDentroDeLimites(coord)) {
+			throw new CoordenadaInvalidaException();
+		}
+		return true;
 	}
 
-	public boolean agregarARutas(Ruta ruta) {
-		return rutas.agregar(ruta);
-	}
-
-	public boolean agregarATuberias(Tuberia tuberia) {
-		return tuberias.agregar(tuberia);
-	}
-
-	public boolean agregarUnidadDaniable(Daniable unidad) {
-		return ciudad.agregarUnidadDaniable(unidad);
-	}
-
-	public ArrayList<Daniable> unidadesDaniables() {
-		return ciudad.unidadesDaniables();
+	private boolean estaDentroDeLimites(Coordenada coord) {
+	return ((coord.getX() >= 0) && (coord.getX() < tamanio)
+			&& (coord.getY() >= 0) && (coord.getY() < tamanio));
+}
+	
+	public ArrayList<Daniable> unidadesDaniables(){
+		ArrayList<Daniable> lista = new ArrayList<Daniable>();
+		lista.addAll(ciudad().unidadesDaniables());
+		lista.addAll(redElectrica().unidadesDaniables());
+		lista.addAll(rutas().unidadesDaniables());
+		return lista;
 	}
 
 	public Coordenada posicionConAgua() {
@@ -93,29 +101,45 @@ public class Mapa extends Observable {
 		return territorio.posicionConTierra();
 	}
 
-	public boolean contiene(Unidad u) {
-		return ciudad.contiene(u);
-	}
+	// public boolean agregarACiudad(Unidad unidad) {
+	// return ciudad.agregar(unidad);
+	// }
+	//
+	// public boolean agregarARedElectrica(LineaTension linea) {
+	// return redElectrica.agregar(linea);
+	// }
+	//
+	// public boolean agregarARutas(Ruta ruta) {
+	// return rutas.agregar(ruta);
+	// }
+	//
+	// public boolean agregarATuberias(Tuberia tuberia) {
+	// return tuberias.agregar(tuberia);
+	// }
 
-	public boolean contiene(LineaTension lt) {
-		return redElectrica.contiene(lt);
-	}
+	// public boolean agregarUnidadDaniable(Daniable unidad) {
+	// return ciudad.agregarUnidadDaniable(unidad);
+	// }
 
-	public boolean contiene(Ruta rt) {
-		return rutas.contiene(rt);
-	}
+	// public boolean contiene(LineaTension lt) {
+	// return redElectrica.contiene(lt);
+	// }
+	//
+	// public boolean contiene(Ruta rt) {
+	// return rutas.contiene(rt);
+	// }
+	//
+	// public boolean contiene(Tuberia tb) {
+	// return tuberias.contiene(tb);
+	// }
 
-	public boolean contiene(Tuberia tb) {
-		return tuberias.contiene(tb);
-	}
-
-	public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
-			int radio) {
-		return ciudad.getUnidadesAlrededorDe(epicentro, radio);
-	}
+	// public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
+	// int radio) {
+	// return ciudad.getUnidadesAlrededorDe(epicentro, radio);
+	// }
 
 	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
-			LinkedList<Point> listaCamino) {
+			LinkedList<Coordenada> listaCamino) {
 		return ciudad.getDaniablesEnElCaminoDe(listaCamino);
 	}
 
@@ -172,23 +196,23 @@ public class Mapa extends Observable {
 		return ciudad;
 	}
 
-	public MapaConexiones tuberias() {
+	public MapaTuberias tuberias() {
 		return tuberias;
 	}
 
-	public MapaConexiones redElectrica() {
+	public MapaElectrico redElectrica() {
 		return redElectrica;
 	}
 
-	public MapaConexiones rutas() {
+	public MapaRutas rutas() {
 		return rutas;
 	}
 
 	public MapaTerritorio territorio() {
 		return territorio;
 	}
-	
-	public Reparador reparador(){
+
+	public Reparador reparador() {
 		return reparador;
 	}
 
@@ -217,11 +241,6 @@ public class Mapa extends Observable {
 
 	public int capacidadDeEmpleo() {
 		return this.ciudad.capacidadDeEmpleo();
-	}
-
-	public int getTamanio() {
-		return tamanio;
-
 	}
 
 	/**********************************************************************/
@@ -264,8 +283,8 @@ public class Mapa extends Observable {
 		if (this.reparador == null) {
 			Element reparador = doc.createElement("reparador");
 			mapa.appendChild(reparador);
-			
-		}else{
+
+		} else {
 			Element reparador = this.reparador.getElement(doc);
 			mapa.appendChild(reparador);
 		}
@@ -304,7 +323,7 @@ public class Mapa extends Observable {
 				Dinero dinero = Dinero.fromElement(child);
 				mapa.dinero = dinero;
 			} else if (child.getNodeName().equals("reparador")) {
-				Reparador reparador = Reparador.fromElement(child,mapa);
+				Reparador reparador = Reparador.fromElement(child, mapa);
 				mapa.reparador = reparador;
 			}
 		}

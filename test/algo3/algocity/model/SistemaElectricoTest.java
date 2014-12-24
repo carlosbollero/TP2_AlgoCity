@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -27,7 +28,7 @@ public class SistemaElectricoTest {
 	public void testSeAumentaLaCapacidadAlCrearUnidadesEnergeticas()
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -62,7 +63,8 @@ public class SistemaElectricoTest {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		SistemaElectrico s = new SistemaElectrico();
@@ -78,10 +80,10 @@ public class SistemaElectricoTest {
 
 		assertEquals(s.capacidad(), 100);
 
-		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(1,1)));
-		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(2,1)));
-		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(3,1)));
-		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(4,1)));
+		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(1, 1)));
+		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(2, 1)));
+		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(3, 1)));
+		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(4, 1)));
 		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
 				new Coordenada(1, 0)));
 		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
@@ -90,7 +92,7 @@ public class SistemaElectricoTest {
 				new Coordenada(3, 0)));
 		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
 				new Coordenada(4, 0)));
-		
+
 		assertEquals(s.consumo(), 4);
 	}
 

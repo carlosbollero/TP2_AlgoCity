@@ -12,6 +12,7 @@ import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
@@ -38,7 +39,7 @@ public class IntegracionTest {
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
@@ -51,12 +52,13 @@ public class IntegracionTest {
 		map.agregar(new FabricaTuberias().construir(map, d,
 				new Coordenada(1, 2)));
 		map.agregar(new FabricaTuberias().construir(map, d,
-				new Coordenada(2,2)));
+				new Coordenada(2, 2)));
 		map.setTerritorioTierraParaTest();
-		map.agregar(new FabricaCentralEolica().construir(map, d, s, new Coordenada(1,2)));
+		map.agregar(new FabricaCentralEolica().construir(map, d, s,
+				new Coordenada(1, 2)));
 		FabricaUnidadComercial fuc = new FabricaUnidadComercial();
 		map.agregar(new FabricaRuta().construir(map, d, new Coordenada(2, 1)));
-		
+
 		UnidadComercial uc = fuc.construir(map, d, s, new Coordenada(2, 2));
 		CatastrofeGodzilla god = new CatastrofeGodzilla(map);
 		uc.agregarseA(map);
@@ -67,16 +69,16 @@ public class IntegracionTest {
 	}
 
 	@Test
-	public void SePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllastest()
+	public void testSePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllas()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
 		FabricaLineaTension flt = new FabricaLineaTension();
 		map.setTerritorioTierraParaTest();
-		for (int j = 0; j < map.ancho(); j++) {
-			for (int i = 0; i < map.alto(); i++) {
+		for (int j = 0; j < map.tamanio(); j++) {
+			for (int i = 0; i < map.tamanio(); i++) {
 				Conector lt = flt.construir(map, d, new Coordenada(i, j));
 				map.agregar(lt);
 			}
