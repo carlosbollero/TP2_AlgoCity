@@ -18,14 +18,15 @@ public class VistaVentanaAcerca extends JFrame {
 	JTextPane titulo;
 	JPanel panel;
 
-	String alumno1 = "\n  Olivera, Rodrigo";
-	String alumno2 = "\n  Botalla, Tomas";
-	String alumno3 = "\n  Bollero, Carlos";
+	String alumnos = "   Alumnos:";
+	String alumno1 = "\n    Olivera, Rodrigo";
+	String alumno2 = "\n    Botalla, Tomas";
+	String alumno3 = "\n    Bollero, Carlos";
 	
 	public VistaVentanaAcerca() {
 		
 		texto = new JTextPane();
-		texto.setText("Alumnos:" + alumno1 + alumno2 + alumno3);
+		texto.setText(alumnos + alumno1 + alumno2 + alumno3);
 		texto.setEditable(false);
 		texto.setBackground(null);
 		texto.setFocusable(false);
