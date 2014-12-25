@@ -10,6 +10,7 @@ import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -26,7 +27,7 @@ public class ReparadorTest {
 
 		UnidadResidencial ur1 = new UnidadResidencial(new Coordenada(1, 1));
 		UnidadComercial uc1 = new UnidadComercial(new Coordenada(1, 2));
-		CentralEolica ce1 = new CentralEolica(new Coordenada(2, 3));
+		UnidadEnergetica ce1 = new CentralEolica(new Coordenada(2, 3));
 		CentralMinera cm1 = new CentralMinera(new Coordenada(3, 2));
 		CentralNuclear cn1 = new CentralNuclear(new Coordenada(4, 1));
 		UnidadResidencial ur2 = new UnidadResidencial(new Coordenada(10, 10));

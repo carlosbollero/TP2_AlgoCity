@@ -1,7 +1,6 @@
 package algo3.algocity.model.fabricas;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -16,15 +15,14 @@ import algo3.algocity.model.mapas.Mapa;
 public class FabricaUnidadComercial implements FabricaUnidades {
 
 	@Override
-	public UnidadComercial construir(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coordenada)
+	public UnidadComercial construir(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException {
 
-		return new UnidadComercial(mapa, dinero, sisElectrico, coordenada);
+		return new UnidadComercial(mapa, dinero, coordenada);
 	}
 
 }

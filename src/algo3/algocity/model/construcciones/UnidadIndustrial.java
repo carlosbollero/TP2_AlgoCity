@@ -6,7 +6,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -40,8 +39,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 25;
 	}
 
-	public UnidadIndustrial(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public UnidadIndustrial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException,
@@ -54,7 +52,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
 		hayConexionesEn(mapa);
-		sisElectrico.consumir(consumo);
+		mapa.sistemaElectrico().consumir(consumo);
 		dinero.cobrar(costo);
 	}
 
@@ -118,7 +116,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public boolean estaContenidoEn(Mapa mapa) {
-		// TODO Auto-generated method stub
 		return mapa.ciudad().contiene(this);
 	}
 

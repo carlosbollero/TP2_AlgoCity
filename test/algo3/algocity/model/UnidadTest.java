@@ -12,6 +12,7 @@ import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Coordenada;
@@ -131,7 +132,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralEolica = 100
-		CentralEolica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
+		UnidadEnergetica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
 
 		assertEquals(unaCentralEolica.getCapacidad(), 100);
 	}
@@ -159,7 +160,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralEolica = 4
-		CentralEolica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
+		UnidadEnergetica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
 		assertEquals(unaCentralEolica.getRadio(), 4);
 	}
 

@@ -27,7 +27,7 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 	}
 
 	private void setImagen() {
-		imagen = (mapa.contiene(coordenada)) ? new ImageIcon(
+		imagen = (mapa.tieneCoordenadaOcupada(coordenada)) ? new ImageIcon(
 				"img/tuberia.png").getImage() : new ImageIcon(
 				"img/underground.png").getImage();
 //		imagen = new ImageIcon("img/underground.png").getImage();

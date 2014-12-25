@@ -399,7 +399,7 @@ public class MapaEdilicio {
 								mapaEdilicio.mapa.put(puntoAAgregar, cm);
 							} else if (hijoDeNodo.getNodeName().equals(
 									"CentralEolica")) {
-								CentralEolica ce = new CentralEolica();
+								UnidadEnergetica ce = new CentralEolica();
 								ce.fromElement(hijoDeNodo);
 								mapaEdilicio.mapa.put(puntoAAgregar, ce);
 							}
@@ -452,12 +452,12 @@ public class MapaEdilicio {
 						mapaEdilicio.unidadesDaniables.add(ur);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"UnidadComercial")) {
-						UnidadComercial uc = new UnidadComercial();
+						Daniable uc = new UnidadComercial();
 						uc.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(uc);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(
 							"CentralEolica")) {
-						CentralEolica ce = new CentralEolica();
+						UnidadEnergetica ce = new CentralEolica();
 						ce.fromElement(hijoDeUnidadDaniable);
 						mapaEdilicio.unidadesDaniables.add(ce);
 					} else if (hijoDeUnidadDaniable.getNodeName().equals(

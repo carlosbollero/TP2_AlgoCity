@@ -43,9 +43,8 @@ public class IntegracionTest {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		map.setTerritorioAguaParaTest();
-		map.agregar(new FabricaPozoAgua().construir(map, d, s, new Coordenada(
+		map.agregar(new FabricaPozoAgua().construir(map, d, new Coordenada(
 				1, 1)));
 		map.agregar(new FabricaTuberias().construir(map, d,
 				new Coordenada(1, 1)));
@@ -54,12 +53,12 @@ public class IntegracionTest {
 		map.agregar(new FabricaTuberias().construir(map, d,
 				new Coordenada(2, 2)));
 		map.setTerritorioTierraParaTest();
-		map.agregar(new FabricaCentralEolica().construir(map, d, s,
+		map.agregar(new FabricaCentralEolica().construir(map, d,
 				new Coordenada(1, 2)));
 		FabricaUnidadComercial fuc = new FabricaUnidadComercial();
 		map.agregar(new FabricaRuta().construir(map, d, new Coordenada(2, 1)));
 
-		UnidadComercial uc = fuc.construir(map, d, s, new Coordenada(2, 2));
+		UnidadComercial uc = fuc.construir(map, d, new Coordenada(2, 2));
 		CatastrofeGodzilla god = new CatastrofeGodzilla(map);
 		uc.agregarseA(map);
 		uc.aceptar(god);

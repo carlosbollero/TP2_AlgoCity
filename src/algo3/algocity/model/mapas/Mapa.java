@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Reparador;
+import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -28,7 +29,7 @@ public class Mapa extends Observable {
 	MapaTuberias tuberias;
 	MapaRutas rutas;
 	MapaElectrico redElectrica;
-
+	SistemaElectrico sistemaElectrico;
 	Dinero dinero;
 	Reparador reparador;
 
@@ -39,9 +40,10 @@ public class Mapa extends Observable {
 		tuberias = new MapaTuberias(this);
 		rutas = new MapaRutas(this);
 		redElectrica = new MapaElectrico(this);
-		this.dinero = new Dinero();
-
-		this.reparador = null;
+		dinero = new Dinero();
+		sistemaElectrico = new SistemaElectrico();
+		
+		reparador = null;
 	}
 
 	public int tamanio() {
@@ -49,10 +51,10 @@ public class Mapa extends Observable {
 	}
 
 	public boolean agregar(Agregable unidad){
-		if (!contiene(unidad)) {
-			return unidad.agregarseA(this);
+		if (contiene(unidad)) {
+			return false;
 		}
-		return false;
+		return unidad.agregarseA(this);		
 	}
 
 	public boolean contiene(Agregable u) {
@@ -202,6 +204,10 @@ public class Mapa extends Observable {
 	public Reparador reparador() {
 		return reparador;
 	}
+	
+	public SistemaElectrico sistemaElectrico() {
+		return sistemaElectrico;
+	}
 
 	// Metodo implementado solo para tests
 	/*********************************************************/
@@ -317,4 +323,5 @@ public class Mapa extends Observable {
 		// mapa.territorio.imprimirTerritorio();
 		return mapa;
 	}
+
 }

@@ -33,6 +33,7 @@ import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.PozoDeAgua;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 
 public abstract class MapaConexiones extends Observable {
 
@@ -53,37 +54,16 @@ public abstract class MapaConexiones extends Observable {
 		this.grafo = new SimpleGraph<Conector, DefaultEdge>(DefaultEdge.class);
 	}
 
-	// public boolean agregar(Conector elemento) {
-	// int x = elemento.coordenada().getX();
-	// int y = elemento.coordenada().getY();
-	// if (validarCoordenadas(x, y) && !contiene(elemento)
-	// && !tieneCoordenadaOcupada(x, y)) {
-	// this.mapaConectores.put(new Coordenada(x, y), elemento);
-	// this.grafo.addVertex(elemento);
-	// this.actualizarGrafo(elemento, x, y);
-	//
-	// setChanged();
-	// notifyObservers();
-	// return true;
-	// }
-	// return false;
-	// }
-
 	public int cantidadElementos() {
 		return (grafo.vertexSet().size());
 	}
 
 	protected void actualizarGrafo(Conector elemento) {
-		for(Conector c : grafo.vertexSet()){
+		for (Conector c : grafo.vertexSet()) {
 			if (hayDistanciaMinima(elemento.coordenada(), c.coordenada())) {
 				grafo.addEdge(elemento, c);
 			}
 		}
-//		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-//			if (hayDistanciaMinima(elemento.coordenada(), entry.getKey())) {
-//				grafo.addEdge(elemento, entry.getValue());
-//			}
-//		}
 	}
 
 	protected boolean hayDistanciaMinima(Coordenada point, Coordenada key) {
@@ -102,47 +82,29 @@ public abstract class MapaConexiones extends Observable {
 	}
 
 	public boolean contiene(Conector elemento) {
-		return (mapaConectores.containsValue(elemento) && grafo
-				.containsVertex(elemento));
+		return (grafo.containsVertex(elemento));
 	}
-
-	public boolean contiene(Coordenada coord) {
-		return (mapaConectores.containsKey(coord));
-	}
-
-	public Conector getConectorEn(Coordenada coord) {
-		if (tieneCoordenadaOcupada(coord)) {
-			return (this.mapaConectores.get(coord));
-		} else {
-			return null;
-		}
-	}
-
-//	protected boolean validarCoordenadas(Coordenada coord) {
-//		return (this.estaDentroDeLimites(coord));
-//	}
-//
-//	private boolean estaDentroDeLimites(Coordenada coord) {
-//		return ((coord.getX() >= 0) && (coord.getX() <= tamanio)
-//				&& (coord.getY() >= 0) && (coord.getY() <= tamanio));
-//	}
 
 	public boolean tieneCoordenadaOcupada(Coordenada coord) {
-		return (this.mapaConectores.containsKey(coord));
+		for (Conector c : grafo.vertexSet()) {
+			if (c.coordenada().equals(coord)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public abstract boolean hayConexion(Coordenada unPunto);
 
 	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
-		return (camino.pathExists(mapaConectores.get(unPunto),
-				mapaConectores.get(otroPunto)));
+		return (camino.pathExists(getConector(unPunto), getConector(otroPunto)));
 	}
 
-	public Coordenada getCoordenadaDe(Conector elemento) {
-		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-			if (entry.getValue().equals(elemento)) {
-				return entry.getKey();
+	private Conector getConector(Coordenada coord) {
+		for (Conector c : grafo.vertexSet()) {
+			if (c.coordenada().equals(coord)) {
+				return c;
 			}
 		}
 		return null;
@@ -296,7 +258,7 @@ public abstract class MapaConexiones extends Observable {
 								mapaConexiones.posicionesRelevantes.add(cn);
 							} else if (hijoDeUnidad.getNodeName().equals(
 									"CentralEolica")) {
-								CentralEolica ce = new CentralEolica();
+								UnidadEnergetica ce = new CentralEolica();
 								ce.fromElement(hijoDeUnidad);
 
 								// CentralEolica ce = CentralEolica

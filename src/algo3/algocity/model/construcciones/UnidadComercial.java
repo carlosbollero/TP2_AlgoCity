@@ -6,7 +6,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
@@ -35,8 +34,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		coordenada = coord;
 	}
 
-	public UnidadComercial(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public UnidadComercial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
@@ -48,7 +46,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
 		hayConexionesEn(mapa);
-		sisElectrico.consumir(consumo);
+		mapa.sistemaElectrico().consumir(consumo);
 		dinero.cobrar(costo);
 	}
 
@@ -100,6 +98,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	public boolean esConstruibleEn(Superficie superficie) {
 		return superficie.esTierra();
 	}
+
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {

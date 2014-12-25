@@ -38,7 +38,6 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 	@Override
 	public void iniciar() {
 		comenzar();
-
 	}
 
 	// Comienzo aleatorio de Godzilla , que puede ser tanto el linea recta como
@@ -56,29 +55,26 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 			puntoFinal = new Coordenada(tamanio, aleatorio.nextInt(tamanio + 1));
 		}
 		if (girarMoneda() == 0 || girarMoneda() == 1) {
-			this.caminarEnLineaRecta(puntoInicio, puntoFinal);
+			caminarEnLineaRecta(puntoInicio, puntoFinal);
 		} else {
-			this.caminarEnZigZag(puntoInicio, puntoFinal);
+			caminarEnZigZag(puntoInicio, puntoFinal);
 		}
 	}
 
 	// 50/50 chances, esta para dejar el codigo mas limpio en comenzar.
 	public int girarMoneda() {
-		return this.aleatorio.nextInt(2);
+		return aleatorio.nextInt(2);
 	}
 
-	// Funcion obtenida de internet, utiliza el algoritmo de Berensham para el
-	// dibujo de lineas rectas,
-	// lo cambie para que en cambio de dibujar, guarde estos valores.
 	public void caminarEnLineaRecta(Coordenada puntoInicio, Coordenada puntoFinal) {
 		CaminarEnLineaRecta caminarEnLineaRecta = new CaminarEnLineaRecta();
-		this.caminoGodzilla = caminarEnLineaRecta.devolverCamino(puntoInicio,
+		caminoGodzilla = caminarEnLineaRecta.devolverCamino(puntoInicio,
 				puntoFinal);
 	}
 
 	public void caminarEnZigZag(Coordenada puntoInicio, Coordenada puntoFinal) {
 		CaminarEnZigZag caminarEnZigZag = new CaminarEnZigZag(tamanio, tamanio);
-		this.caminoGodzilla = caminarEnZigZag.devolverCamino(puntoInicio,
+		caminoGodzilla = caminarEnZigZag.devolverCamino(puntoInicio,
 				puntoFinal);
 	}
 
@@ -90,7 +86,7 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 
 	public LinkedList<Coordenada> genCaminoRecto() {
 		comenzar();
-		return this.caminoGodzilla;
+		return caminoGodzilla;
 	}
 
 	// Metodo para tests.
@@ -100,8 +96,8 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 		Coordenada puntoFinal;
 		puntoInicio = new Coordenada(0, 0);
 		puntoFinal = new Coordenada(tamanio, 0);
-		this.caminarEnLineaRecta(puntoInicio, puntoFinal);
-		return this.caminoGodzilla;
+		caminarEnLineaRecta(puntoInicio, puntoFinal);
+		return caminoGodzilla;
 	}
 
 	@Override
@@ -134,9 +130,4 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 		unaRuta.aplicarDanioGodzilla();
 	}
 
-	@Override
-	public void visitar(Daniable unaUnidad) {
-		// TODO Auto-generated method stub
-
-	}
 }

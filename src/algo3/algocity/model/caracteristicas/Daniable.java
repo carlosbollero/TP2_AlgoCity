@@ -23,12 +23,14 @@ public interface Daniable extends Visitable {
 	
 	/*Persistencia*/
 	public Element getElement(Document doc);
-	
-	
-	//TODO 
+
 	public void fromElement(Node child);
 	
 	
 	public boolean equals(Daniable d);
+
+//	public abstract boolean estaContenidoEn(Mapa mapa);
+//
+//	public abstract boolean agregarseA(Mapa mapa);
 
 }

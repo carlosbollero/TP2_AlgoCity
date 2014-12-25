@@ -36,7 +36,9 @@ public abstract class Unidad extends Observable implements Agregable{
 
 	public abstract boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie;
 
-	public abstract double getSalud();
+//	public abstract double getSalud();
+	
+	
 	
 	/* Persistencia */
 	public abstract Element getElement(Document doc);

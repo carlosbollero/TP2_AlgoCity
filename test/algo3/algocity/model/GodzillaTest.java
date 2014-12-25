@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -47,7 +48,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadComercial() {
 		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadComercial uc = new UnidadComercial(new Coordenada(1, 1));
+		Daniable uc = new UnidadComercial(new Coordenada(1, 1));
 
 		uc.aceptar(g);
 
@@ -104,8 +105,9 @@ public class GodzillaTest {
 			}
 			q = camino.get(i + 1);
 			if (!((Math.abs(p.getX() - q.getX()) == 1) && (p.getY() == q.getY()))
-					&& (!((p.getX() == q.getX()) && (Math.abs(p.getY() - q.getY()) == 1)) && !((Math
-							.abs(p.getX() - q.getX()) == 1) && (Math.abs(p.getY() - q.getY()) == 1)))) {
+					&& (!((p.getX() == q.getX()) && (Math.abs(p.getY()
+							- q.getY()) == 1)) && !((Math.abs(p.getX()
+							- q.getX()) == 1) && (Math.abs(p.getY() - q.getY()) == 1)))) {
 				resultado = false;
 			}
 		}
@@ -130,16 +132,15 @@ public class GodzillaTest {
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 2)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 3)));
 
-		SistemaElectrico s = new SistemaElectrico();
-		UnidadEnergetica ue = new CentralEolica(m, d, s, new Coordenada(1, 3));
+		UnidadEnergetica ue = new CentralEolica(m, d, new Coordenada(1, 3));
 		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
 		m.agregar(ue);
-		ue.addObserver(s);
+		ue.addObserver(m.sistemaElectrico());
 
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad(), 65);
+		assertEquals(m.sistemaElectrico().capacidad(), 65);
 	}
 
 	@Test
@@ -160,16 +161,15 @@ public class GodzillaTest {
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 2)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 3)));
 
-		SistemaElectrico s = new SistemaElectrico();
-		UnidadEnergetica ue = new CentralMinera(m, d, s, new Coordenada(1, 3));
+		UnidadEnergetica ue = new CentralMinera(m, d, new Coordenada(1, 3));
 		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
 		m.agregar(ue);
-		ue.addObserver(s);
+		ue.addObserver(m.sistemaElectrico());
 
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad(), 260);
+		assertEquals(m.sistemaElectrico().capacidad(), 260);
 	}
 
 }

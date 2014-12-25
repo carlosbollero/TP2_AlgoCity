@@ -6,7 +6,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -54,8 +53,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	// }
 	// }
 
-	public UnidadResidencial(Mapa mapa, Dinero dinero,
-			SistemaElectrico sElectrico, Coordenada coord)
+	public UnidadResidencial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
@@ -68,7 +66,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
 		hayConexionesEn(mapa);
-		sElectrico.consumir(consumo);
+		mapa.sistemaElectrico().consumir(consumo);
 		dinero.cobrar(costo);
 	}
 

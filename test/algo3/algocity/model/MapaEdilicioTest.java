@@ -88,10 +88,9 @@ public class MapaEdilicioTest {
 			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 
 		try {
-			Unidad eb = new FabricaEstacionDeBomberos().construir(m, d, s,
+			Unidad eb = new FabricaEstacionDeBomberos().construir(m, d,
 					new Coordenada(40, 4));
 			m.agregar(eb);
 		} catch (CoordenadaInvalidaException e) {

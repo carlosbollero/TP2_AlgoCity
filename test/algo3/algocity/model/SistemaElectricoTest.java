@@ -31,30 +31,28 @@ public class SistemaElectricoTest {
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 
 		m.setTerritorioAguaParaTest();
-		m.agregar(new FabricaPozoAgua()
-				.construir(m, d, s, new Coordenada(0, 1)));
+		m.agregar(new FabricaPozoAgua().construir(m, d, new Coordenada(0, 1)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(0, 1)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(0, 0)));
 		m.setTerritorioTierraParaTest();
-		m.agregar(new FabricaCentralEolica().construir(m, d, s, new Coordenada(
-				0, 0)));
+		m.agregar(new FabricaCentralEolica().construir(m, d, new Coordenada(0,
+				0)));
 
-		assertEquals(s.capacidad(), 100);
+		assertEquals(m.sistemaElectrico().capacidad(), 100);
 
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 0)));
-		m.agregar(new FabricaCentralMinera().construir(m, d, s, new Coordenada(
-				1, 0)));
+		m.agregar(new FabricaCentralMinera().construir(m, d, new Coordenada(1,
+				0)));
 
-		assertEquals(s.capacidad(), 500);
+		assertEquals(m.sistemaElectrico().capacidad(), 500);
 
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(2, 0)));
-		m.agregar(new FabricaCentralNuclear().construir(m, d, s,
-				new Coordenada(2, 0)));
+		m.agregar(new FabricaCentralNuclear().construir(m, d, new Coordenada(2,
+				0)));
 
-		assertEquals(s.capacidad(), 1500);
+		assertEquals(m.sistemaElectrico().capacidad(), 1500);
 
 	}
 
@@ -67,33 +65,31 @@ public class SistemaElectricoTest {
 			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 
 		m.setTerritorioAguaParaTest();
-		m.agregar(new FabricaPozoAgua()
-				.construir(m, d, s, new Coordenada(0, 1)));
+		m.agregar(new FabricaPozoAgua().construir(m, d, new Coordenada(0, 1)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(0, 1)));
 		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(0, 0)));
 		m.setTerritorioTierraParaTest();
-		m.agregar(new FabricaCentralEolica().construir(m, d, s, new Coordenada(
-				0, 0)));
+		m.agregar(new FabricaCentralEolica().construir(m, d, new Coordenada(0,
+				0)));
 
-		assertEquals(s.capacidad(), 100);
+		assertEquals(m.sistemaElectrico().capacidad(), 100);
 
 		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(1, 1)));
 		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(2, 1)));
 		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(3, 1)));
 		m.agregar(new FabricaRuta().construir(m, d, new Coordenada(4, 1)));
-		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
+		m.agregar(new FabricaUnidadResidencial().construir(m, d,
 				new Coordenada(1, 0)));
-		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
+		m.agregar(new FabricaUnidadResidencial().construir(m, d,
 				new Coordenada(2, 0)));
-		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
+		m.agregar(new FabricaUnidadResidencial().construir(m, d,
 				new Coordenada(3, 0)));
-		m.agregar(new FabricaUnidadResidencial().construir(m, d, s,
+		m.agregar(new FabricaUnidadResidencial().construir(m, d,
 				new Coordenada(4, 0)));
 
-		assertEquals(s.consumo(), 4);
+		assertEquals(m.sistemaElectrico().consumo(), 4);
 	}
 
 }

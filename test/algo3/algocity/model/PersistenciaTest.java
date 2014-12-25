@@ -93,7 +93,7 @@ public class PersistenciaTest {
 		UnidadResidencial ur = new UnidadResidencial(new Coordenada(10, 10));
 		ur.agregarseA(mapa);
 
-		UnidadComercial uc = new UnidadComercial(new Coordenada(2, 2));
+		Daniable uc = new UnidadComercial(new Coordenada(2, 2));
 		uc.agregarseA(mapa);
 
 		UnidadIndustrial ui = new UnidadIndustrial(new Coordenada(4, 8));
@@ -111,7 +111,7 @@ public class PersistenciaTest {
 		CentralMinera cm = new CentralMinera(new Coordenada(7, 1));
 		cm.agregarseA(mapa);
 
-		CentralEolica ce = new CentralEolica(new Coordenada(1, 9));
+		UnidadEnergetica ce = new CentralEolica(new Coordenada(1, 9));
 		ce.agregarseA(mapa);
 
 		LineaTension lt = new LineaTension(new Coordenada(7, 2));
@@ -171,7 +171,7 @@ public class PersistenciaTest {
 
 		Unidad ucRecuperada = juegoRecuperado.mapa().ciudad()
 				.getUnidadEn(null);
-		assertTrue(((UnidadComercial) ucRecuperada).equals(uc));
+		assertTrue(((Daniable) ucRecuperada).equals(uc));
 
 		Unidad paRecuperado = juegoRecuperado.mapa().ciudad()
 				.getUnidadEn(null);
@@ -191,7 +191,7 @@ public class PersistenciaTest {
 
 		Unidad ceRecuperada = juegoRecuperado.mapa().ciudad()
 				.getUnidadEn(null);
-		assertTrue(((CentralEolica) ceRecuperada).equals(ce));
+		assertTrue(((UnidadEnergetica) ceRecuperada).equals(ce));
 
 		// Chequea unidades con poblacion
 		ArrayList<Ocupable> uConPoblacionRecuperadas = juegoRecuperado.mapa()

@@ -4,7 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -21,8 +20,7 @@ public class CentralEolica extends UnidadEnergetica {
 		coordenada = coord;
 	}
 
-	public CentralEolica(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralEolica(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
@@ -31,7 +29,7 @@ public class CentralEolica extends UnidadEnergetica {
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
 		hayConexionesEn(mapa);
-		sisElectrico.aumentarCapacidad(capacidad);
+		mapa.sistemaElectrico().aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
 	}
 
@@ -45,16 +43,6 @@ public class CentralEolica extends UnidadEnergetica {
 		if (this.getDanios() < 0) {
 			this.porcentajeDanios = 0;
 		}
-	}
-
-	@Override
-	public boolean agregarseA(Mapa mapa) {
-		return mapa.ciudad().agregar(this);
-	}
-
-	@Override
-	public boolean estaContenidoEn(Mapa mapa) {
-		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -99,7 +87,7 @@ public class CentralEolica extends UnidadEnergetica {
 			return true;
 		} else if (ce.coordenada().getX() == this.coordenada().getX()
 				&& ce.coordenada().getY() == this.coordenada().getY()
-				&& ((CentralEolica) ce).porcentajeDanios == this.porcentajeDanios) {
+				&& ((UnidadEnergetica) ce).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

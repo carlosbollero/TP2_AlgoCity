@@ -1,7 +1,6 @@
 package algo3.algocity.model.fabricas;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -12,8 +11,7 @@ import algo3.algocity.model.mapas.Mapa;
 
 public class FabricaPozoAgua implements FabricaUnidades {
 
-	public Unidad construir(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coordenada)
+	public Unidad construir(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException {
 

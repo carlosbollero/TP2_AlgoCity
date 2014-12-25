@@ -25,7 +25,7 @@ import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
 
-public class Reparador implements Visitante, Observer {
+public class Reparador implements Observer {
 
 	private Mapa mapa;
 	private ArrayList<Daniable> objetivos;
@@ -33,7 +33,7 @@ public class Reparador implements Visitante, Observer {
 	public Reparador(Mapa mapa) {
 		this.mapa = mapa;
 		objetivos = new ArrayList<Daniable>();
-		actualizarObjetivos();;
+		actualizarObjetivos();
 	}
 
 	// Para persistencia
@@ -42,6 +42,7 @@ public class Reparador implements Visitante, Observer {
 	}
 
 	public void actuar() {
+		actualizarObjetivos();
 		for (Daniable v : objetivos) {
 			v.repararse();
 //			v.aceptar(this);
@@ -60,48 +61,10 @@ public class Reparador implements Visitante, Observer {
 		
 	}
 
-	@Override
-	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		unaUnidadResidencial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadComercial unaUnidadComercial) {
-		unaUnidadComercial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		unaUnidadIndustrial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		unaUnidadEnergetica.repararse();
-	}
-
-	@Override
-	public void visitar(LineaTension unaLineaTension) {
-		unaLineaTension.repararse();
-	}
-
-	@Override
-	public void visitar(Ruta unaRuta) {
-		unaRuta.repararse();
-	}
-
-	@Override
-	public void visitar(Daniable unaUnidad) {
-		unaUnidad.repararse();
-	}
-
 	public ArrayList<Daniable> objetivos() {
 		return this.objetivos;
 	}
 
-	public Mapa mapa() {
-		return this.mapa;
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -148,12 +111,12 @@ public class Reparador implements Visitante, Observer {
 						reparador.objetivos.add(ur);
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadComercial")) {
-						UnidadComercial uc = new UnidadComercial();
+						Daniable uc = new UnidadComercial();
 						uc.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(uc);
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralEolica")) {
-						CentralEolica ce = new CentralEolica();
+						UnidadEnergetica ce = new CentralEolica();
 						ce.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(ce);
 					} else if (hijoDeObjetivo.getNodeName().equals(

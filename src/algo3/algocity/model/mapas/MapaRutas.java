@@ -1,28 +1,31 @@
 package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.Ruta;
 
 public class MapaRutas extends MapaConexiones {
+	
+	ArrayList<Ruta> listado;
 
 	public MapaRutas(Mapa mapa) {
 		super(mapa);
+		listado = new ArrayList<Ruta>();
 	}
 
 	public boolean agregar(Ruta ruta) {
-		if (!contiene(ruta) && !tieneCoordenadaOcupada(ruta.coordenada())) {
-			mapaConectores.put(ruta.coordenada(), ruta);
-			grafo.addVertex(ruta);
-			actualizarGrafo(ruta);
-			setChanged();
-			notifyObservers();
-			return true;
+		if (contiene(ruta) || tieneCoordenadaOcupada(ruta.coordenada())) {
+			return false;
 		}
-		return false;
+		listado.add(ruta);
+//		mapaConectores.put(ruta.coordenada(), ruta);
+		grafo.addVertex(ruta);
+		actualizarGrafo(ruta);
+		setChanged();
+		notifyObservers();
+		return true;
 	}
 
 	@Override
@@ -31,8 +34,8 @@ public class MapaRutas extends MapaConexiones {
 	}
 
 	public boolean hayConectorAdyacente(Coordenada coord) {
-		for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-			if (hayDistanciaMinima(coord, entry.getKey())) {
+		for (Conector c : grafo.vertexSet()) {
+			if (hayDistanciaMinima(coord, c.coordenada())) {
 				return true;
 			}
 		}

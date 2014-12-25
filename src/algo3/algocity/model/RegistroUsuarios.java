@@ -18,12 +18,26 @@ public class RegistroUsuarios {
 	private ArrayList<String> nombresUsuarios;
 
 	
-	public RegistroUsuarios() throws NoSeEncontroElFicheroException {
+	public RegistroUsuarios(){
 
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 
-		leerUsuarios();
+		iniciar();
+//		try {
+//			leerUsuarios();
+//		} catch (NoSeEncontroElFicheroException e) {
+//			crearDirectorio();
+//		}
+	}
+	
+	private void iniciar(){
+		try {
+			leerUsuarios();
+		} catch (NoSeEncontroElFicheroException e) {
+			crearDirectorio();
+			iniciar();
+		}
 	}
 
 	
@@ -43,6 +57,14 @@ public class RegistroUsuarios {
 
 			nombresUsuarios.add(arrayUser[0]);
 		}
+	}
+	
+	private void crearDirectorio() {
+		File guardados = new File("saved");
+		if (!guardados.exists()) {
+			guardados.mkdir();
+		}
+
 	}
 
 	public ArrayList<Usuario> usuarios() {

@@ -7,7 +7,6 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -67,13 +66,13 @@ public class EstacionDeBomberos extends Unidad {
 	//
 	// }
 
-	@Override
-	public double getSalud() {
-		// TODO revisar de hacerlo de otra forma
-		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-		// entiendan este mensaje nose si es lo mejor
-		return 100;
-	}
+//	@Override
+//	public double getSalud() {
+//		// TODO revisar de hacerlo de otra forma
+//		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+//		// entiendan este mensaje nose si es lo mejor
+//		return 100;
+//	}
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {

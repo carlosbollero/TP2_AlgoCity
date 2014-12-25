@@ -11,7 +11,7 @@ public class MapaTuberias extends MapaConexiones {
 
 	public boolean agregar(Tuberia tuberia) {
 		if (!contiene(tuberia) && !tieneCoordenadaOcupada(tuberia.coordenada())) {
-			mapaConectores.put(tuberia.coordenada(), tuberia);
+//			mapaConectores.put(tuberia.coordenada(), tuberia);
 			grafo.addVertex(tuberia);
 			actualizarGrafo(tuberia);
 			setChanged();
