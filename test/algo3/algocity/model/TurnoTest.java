@@ -32,13 +32,13 @@ public class TurnoTest {
 		assertEquals(turno.getTurno(), 1);
 		
 		try {
-			Thread.sleep(turno.getDelay()+1);
+			Thread.sleep(turno.getDelay()+5);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		assertEquals(turno.getTurno(), 2);
+		assertEquals(2, turno.getTurno());
 	}
 
 }

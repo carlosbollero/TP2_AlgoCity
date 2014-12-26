@@ -1,36 +1,37 @@
 package algo3.algocity.model.catastrofes;
 
-import java.awt.Point;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import algo3.algocity.model.mapas.Coordenada;
+
 public class CaminarEnZigZag implements Movimiento {
 
-	private LinkedList<Point> caminoRetorno;
-	private LinkedList<Point> caminoCentrico;
-	private LinkedList<Point> caminoAlternativo;
+	private LinkedList<Coordenada> caminoRetorno;
+	private LinkedList<Coordenada> caminoCentrico;
+	private LinkedList<Coordenada> caminoAlternativo;
 	private int alto;
 	private int ancho;
 
 	public CaminarEnZigZag(int ancho, int alto) {
 
-		this.caminoRetorno = new LinkedList<Point>();
-		this.caminoCentrico = new LinkedList<Point>();
-		this.caminoAlternativo = new LinkedList<Point>();
+		this.caminoRetorno = new LinkedList<Coordenada>();
+		this.caminoCentrico = new LinkedList<Coordenada>();
+		this.caminoAlternativo = new LinkedList<Coordenada>();
 		this.ancho = ancho;
 		this.alto = alto;
 	}
 
 	@Override
-	public LinkedList<Point> devolverCamino(Point puntoInicio, Point puntoFinal) {
+	public LinkedList<Coordenada> devolverCamino(Coordenada puntoInicio, Coordenada puntoFinal) {
 		CaminarEnLineaRecta caminoEnLineaRecta = new CaminarEnLineaRecta();
 		this.caminoCentrico = caminoEnLineaRecta.devolverCamino(puntoInicio,
 				puntoFinal);
 		this.caminoAlternativo = caminoEnLineaRecta.devolverCamino(
 				this.validarPunto(puntoInicio), this.validarPunto(puntoFinal));
 
-		Iterator<Point> iteradorCaminoCentrico = caminoCentrico.iterator();
-		Iterator<Point> iteradorCaminoAlternativo = caminoAlternativo
+		Iterator<Coordenada> iteradorCaminoCentrico = caminoCentrico.iterator();
+		Iterator<Coordenada> iteradorCaminoAlternativo = caminoAlternativo
 				.iterator();
 		boolean alternar = false;
 		while (iteradorCaminoCentrico.hasNext()
@@ -52,20 +53,16 @@ public class CaminarEnZigZag implements Movimiento {
 		return this.caminoRetorno;
 	}
 
-	public Point validarPunto(Point punto) {
-
+	public Coordenada validarPunto(Coordenada punto) {
 		int puntoX = (int) punto.getX() + 1;
 		int puntoY = (int) punto.getY() + 1;
-
 		if (puntoX > this.ancho) {
 			puntoX -= 2;
 		}
 		if (puntoY > this.alto) {
 			puntoY -= 2;
 		}
-
-		Point puntoRetorno = new Point(puntoX, puntoY);
-
+		Coordenada puntoRetorno = new Coordenada(puntoX, puntoY);
 		return puntoRetorno;
 	}
 

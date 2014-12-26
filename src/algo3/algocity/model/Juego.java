@@ -1,10 +1,8 @@
 package algo3.algocity.model;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Juego {
@@ -36,6 +35,7 @@ public class Juego {
 	private Poblacion poblacion;
 	private Usuario usuario;
 	private Dinero dinero;
+	private GeneradorCatastrofe genCatastrofe;
 
 	public Juego(Usuario u, Mapa map, Turno t, Poblacion p, Dinero d) {
 		crearDirectorioGuardados();
@@ -44,7 +44,9 @@ public class Juego {
 		turnos = t;
 		poblacion = p;
 		dinero = d;
-		turnos.addObserver(this.poblacion);
+		genCatastrofe = new GeneradorCatastrofe(mapa);
+		turnos.addObserver(genCatastrofe);
+		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
 		
@@ -58,6 +60,8 @@ public class Juego {
 		poblacion = new Poblacion();
 		turnos = new Turno();
 		dinero = new Dinero(poblacion, turnos);
+		genCatastrofe = new GeneradorCatastrofe(mapa);
+		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
@@ -162,8 +166,8 @@ public class Juego {
 		Element element = doc.getDocumentElement();
 		Juego juego = Juego.fromElement(element);
 		return juego;
-	}
-
+	}	
+	
 	private Element getElement(Document doc) {
 		Element juego = doc.createElement("Juego");
 
@@ -192,25 +196,24 @@ public class Juego {
 		NodeList hijosDeJuego = element.getChildNodes();
 		for (int i = 0; i < hijosDeJuego.getLength(); i++) {
 			Node hijoDeJuego = hijosDeJuego.item(i);
-			if (hijoDeJuego.getNodeName().equals("Usuario")) {
+			if (hijoDeJuego.getNodeName().equals("Mapa")) {
+				Mapa mapa = Mapa.fromElement(hijoDeJuego);
+				juego.mapa = mapa;
+			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
+				Dinero dinero = Dinero.fromElement(hijoDeJuego,juego.mapa);
+				juego.dinero = dinero;
+			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
+				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego,juego.mapa);
+				juego.poblacion = poblacion;
+			} else if (hijoDeJuego.getNodeName().equals("Usuario")) {
 				Usuario usuario = Usuario.fromElement(hijoDeJuego);
 				juego.usuario = usuario;
 			} else if (hijoDeJuego.getNodeName().equals("Turnos")) {
 				Turno turnos = Turno.fromElement(hijoDeJuego);
 				juego.turnos = turnos;
-			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
-				Dinero dinero = Dinero.fromElement(hijoDeJuego);
-				juego.dinero = dinero;
-			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
-				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego);
-				juego.poblacion = poblacion;
-			} else if (hijoDeJuego.getNodeName().equals("Mapa")) {
-				Mapa mapa = Mapa.fromElement(hijoDeJuego);
-				juego.mapa = mapa;
 			}
 		}
 		juego.poblacion.actualizar(juego.mapa());
 		return juego;
 	}
-
 }

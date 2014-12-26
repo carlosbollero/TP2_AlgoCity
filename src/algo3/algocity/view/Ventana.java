@@ -17,6 +17,7 @@ public class Ventana extends JFrame {
 	int tamanio;
 	Juego juego;
 	Mapa mapa;
+	VistaMapa mapaVista ;
 
 	JPanel panelDer, panelIzq;
 
@@ -24,8 +25,8 @@ public class Ventana extends JFrame {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
 		this.mapa = juego.mapa();
-		setPanelIzq();
 		setPanelDer();
+		setPanelIzq();
 		setPanelSup();
 		acomodar();
 	}
@@ -40,8 +41,8 @@ public class Ventana extends JFrame {
 		panelDer.setLayout(new CardLayout());
 		VistaMapaSubterraneo vistaMapaSubterraneo = new VistaMapaSubterraneo(mapa);
 		panelDer.add(vistaMapaSubterraneo, "subterraneo");
-		VistaMapa vistaMapa = new VistaMapa(mapa);
-		panelDer.add(vistaMapa, "superficie");
+		mapaVista = new VistaMapa(mapa, juego);
+		panelDer.add(mapaVista, "superficie");
 		add(panelDer);
 		((CardLayout) panelDer.getLayout()).show(panelDer, "superficie");
 
@@ -53,7 +54,7 @@ public class Ventana extends JFrame {
 		panelIzq.setLayout(new BorderLayout());
 		add(panelIzq, BorderLayout.WEST);
 		panelIzq.add(new VistaPanelInfo(juego), BorderLayout.NORTH);
-		panelIzq.add(new VistaPanelOpciones(), BorderLayout.CENTER);
+		panelIzq.add(new VistaPanelOpciones(mapaVista), BorderLayout.CENTER);
 
 	}
 
@@ -65,6 +66,10 @@ public class Ventana extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		validate();
 
+	}
+	
+	public static void main(String[] args) {
+		new Ventana(new Juego());
 	}
 
 }

@@ -1,12 +1,13 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.awt.Point;
 import java.util.LinkedList;
 
 import org.junit.Test;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.catastrofes.CatastrofeGodzilla;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
@@ -17,18 +18,16 @@ import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaTuberias;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class GodzillaTest {
-
-	int alto = 10;
-	int ancho = 10;
 
 	Mapa me;
 	CatastrofeGodzilla g;
@@ -37,7 +36,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadResidencial() {
 
 		me = new Mapa();
-		CatastrofeGodzilla g = new CatastrofeGodzilla(20, 20);
+		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
 		UnidadResidencial ur = new UnidadResidencial(new Coordenada(1, 1));
 
 		ur.aceptar(g);
@@ -49,7 +48,7 @@ public class GodzillaTest {
 	public void testSePuedeDaniarUnaUnidadComercial() {
 		me = new Mapa();
 		CatastrofeGodzilla g = new CatastrofeGodzilla(me);
-		UnidadComercial uc = new UnidadComercial(new Coordenada(1, 1));
+		Daniable uc = new UnidadComercial(new Coordenada(1, 1));
 
 		uc.aceptar(g);
 
@@ -94,20 +93,21 @@ public class GodzillaTest {
 		me = new Mapa();
 		g = new CatastrofeGodzilla(me);
 
-		LinkedList<Point> camino = g.genCaminoRecto();
+		LinkedList<Coordenada> camino = g.genCaminoRecto();
 
 		boolean resultado = true;
-		Point p;
-		Point q;
+		Coordenada p;
+		Coordenada q;
 		for (int i = 0; i < camino.size(); i++) {
 			p = camino.get(i);
 			if (i + 1 >= camino.size()) {
 				break;
 			}
 			q = camino.get(i + 1);
-			if (!((Math.abs(p.x - q.x) == 1) && (p.y == q.y))
-					&& (!((p.x == q.x) && (Math.abs(p.y - q.y) == 1)) && !((Math
-							.abs(p.x - q.x) == 1) && (Math.abs(p.y - q.y) == 1)))) {
+			if (!((Math.abs(p.getX() - q.getX()) == 1) && (p.getY() == q.getY()))
+					&& (!((p.getX() == q.getX()) && (Math.abs(p.getY()
+							- q.getY()) == 1)) && !((Math.abs(p.getX()
+							- q.getX()) == 1) && (Math.abs(p.getY() - q.getY()) == 1)))) {
 				resultado = false;
 			}
 		}
@@ -117,62 +117,59 @@ public class GodzillaTest {
 	@Test
 	public void testSePuedeDaniarUnaUnidadEnergetica()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
-		
+
 		Dinero d = new Dinero();
 		m.setTerritorioAguaParaTest();
-		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1,1));
+		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1, 1));
 		m.agregar(p);
-		
+
 		m.setTerritorioTierraParaTest();
 
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,1)));
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,2)));
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,3)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 1)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 2)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 3)));
 
-		SistemaElectrico s = new SistemaElectrico();
-		UnidadEnergetica ue = new CentralEolica(m, d, s, new Coordenada(1,3));
+		UnidadEnergetica ue = new CentralEolica(m, d, new Coordenada(1, 3));
 		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
 		m.agregar(ue);
-		ue.addObserver(s);
+		ue.addObserver(m.sistemaElectrico());
 
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad(), 65);
+		assertEquals(m.sistemaElectrico().capacidad(), 65);
 	}
-	
+
 	@Test
 	public void testSePuedeDaniarUnaCentralMinera()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
-		
+
 		Dinero d = new Dinero();
 		m.setTerritorioAguaParaTest();
-		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1,1));
+		PozoDeAgua p = new PozoDeAgua(m, d, new Coordenada(1, 1));
 		m.agregar(p);
-		
+
 		m.setTerritorioTierraParaTest();
 
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,1)));
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,2)));
-		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1,3)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 1)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 2)));
+		m.agregar(new FabricaTuberias().construir(m, d, new Coordenada(1, 3)));
 
-		SistemaElectrico s = new SistemaElectrico();
-		UnidadEnergetica ue = new CentralMinera(m, d, s, new Coordenada(1,3));
+		UnidadEnergetica ue = new CentralMinera(m, d, new Coordenada(1, 3));
 		CatastrofeGodzilla g = new CatastrofeGodzilla(m);
 		m.agregar(ue);
-		ue.addObserver(s);
+		ue.addObserver(m.sistemaElectrico());
 
 		ue.aceptar(g);
 
 		assertEquals(ue.getSalud(), 65, 0);
-		assertEquals(s.capacidad(), 260);
+		assertEquals(m.sistemaElectrico().capacidad(), 260);
 	}
-
 
 }

@@ -30,13 +30,37 @@ public class RegistroUsuarios {
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
 
-	public RegistroUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException {
+//<<<<<<< HEAD
+//	public RegistroUsuarios() throws NoSeEncontroElFicheroException,
+//			SAXException, IOException, ParserConfigurationException {
+//
+//		usuarios = new ArrayList<Usuario>();
+//		nombresUsuarios = new ArrayList<String>();
+//		listaPuntajes = new HashMap<String, Integer>();
+//		leerUsuarios();
+//=======
+	
+	public RegistroUsuarios() throws SAXException, IOException, ParserConfigurationException{
 
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
-		leerUsuarios();
+
+		iniciar();
+//		try {
+//			leerUsuarios();
+//		} catch (NoSeEncontroElFicheroException e) {
+//			crearDirectorio();
+//		}
+	}
+	
+	private void iniciar() throws SAXException, IOException, ParserConfigurationException{
+		try {
+			leerUsuarios();
+		} catch (NoSeEncontroElFicheroException e) {
+			crearDirectorio();
+			iniciar();
+		}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
@@ -73,6 +97,14 @@ public class RegistroUsuarios {
 			nombresUsuarios.add(arrayUser[0]);
 			leerUsuario(arrayUser[0]);
 		}
+	}
+	
+	private void crearDirectorio() {
+		File guardados = new File("saved");
+		if (!guardados.exists()) {
+			guardados.mkdir();
+		}
+
 	}
 
 	public ArrayList<Usuario> usuarios() {

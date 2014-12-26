@@ -36,39 +36,39 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		RegistroUsuarios ru = null;
 		try {
-			RegistroUsuarios ru = new RegistroUsuarios();
-			try {
-				if (ru.existeNombreUsuario(panelIngreso.getText())) {
-					panelInforme.setText("Jugador ya existente. Ingrese otro");
-					panelIngreso.setText("");
-				} else if (!ru.crearUsuario(panelIngreso.getText())) {
-					panelInforme
-							.setText("El nombre de jugador debe contener al menos 4 caracteres");
-					panelIngreso.setText("");
+			ru = new RegistroUsuarios();
+		} catch (SAXException | IOException | ParserConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			if (ru.existeNombreUsuario(panelIngreso.getText())) {
+				panelInforme.setText("Jugador ya existente. Ingrese otro");
+				panelIngreso.setText("");
+			} else if (!ru.crearUsuario(panelIngreso.getText())) {
+				panelInforme
+						.setText("El nombre de jugador debe contener al menos 4 caracteres");
+				panelIngreso.setText("");
 
-				} else {
-					panelInforme.setText("");
-					ru.crearUsuario(panelIngreso.getText());
-					Usuario usuario = new Usuario(panelIngreso.getText());
-					ru.addUsuario(usuario);
-					Mapa mapa = new Mapa();
-					Turno turno = new Turno();
-					Poblacion poblacion = new Poblacion();
-					Dinero dinero = new Dinero();
+			} else {
+				panelInforme.setText("");
+				ru.crearUsuario(panelIngreso.getText());
+				Usuario usuario = new Usuario(panelIngreso.getText());
+				ru.addUsuario(usuario);
+				Mapa mapa = new Mapa();
+				Turno turno = new Turno();
+				Poblacion poblacion = new Poblacion();
+				Dinero dinero = new Dinero();
 
-					this.ventanaPortadora.cerrar();
-					Ventana ventanaJuego = new Ventana(new Juego(usuario, mapa,
-							turno, poblacion, dinero));
-				}
-
-			} catch (NombreDeUsuarioYaExisteException e) {
-				e.printStackTrace();
+				this.ventanaPortadora.cerrar();
+				Ventana ventanaJuego = new Ventana(new Juego(usuario, mapa,
+						turno, poblacion, dinero));
 			}
-		} catch (NoSeEncontroElFicheroException | SAXException | IOException | ParserConfigurationException e) {
+		} catch (NombreDeUsuarioYaExisteException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

@@ -1,10 +1,8 @@
 package algo3.algocity.model.catastrofes;
  
-import java.awt.Point; 
-import java.util.LinkedList; 
+import java.util.LinkedList;
 
-
-
+import algo3.algocity.model.mapas.Coordenada;
 
 public class CaminarEnLineaRecta implements Movimiento {
 
@@ -15,13 +13,13 @@ public class CaminarEnLineaRecta implements Movimiento {
 	
 	
 	@Override
-	public LinkedList<Point> devolverCamino (Point puntoInicio, Point puntoFinal){
+	public LinkedList<Coordenada> devolverCamino (Coordenada puntoInicio, Coordenada puntoFinal){
 		
-		LinkedList<Point> caminoRecorrido = new LinkedList<Point>(); 
-		int x = (int)puntoInicio.getX(); 
-		int y = (int)puntoInicio.getY(); 
-	    int w = (int)puntoFinal.getX() - (int)puntoInicio.getX() ;
-	    int h = (int)puntoFinal.getY() - (int)puntoInicio.getY() ;
+		LinkedList<Coordenada> caminoRecorrido = new LinkedList<Coordenada>(); 
+		int x = puntoInicio.getX(); 
+		int y = puntoInicio.getY(); 
+	    int w = puntoFinal.getX() - puntoInicio.getX() ;
+	    int h = puntoFinal.getY() - puntoInicio.getY() ;
 	    int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
 	    if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
 	    if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
@@ -36,7 +34,7 @@ public class CaminarEnLineaRecta implements Movimiento {
 	    }
 	    int numerator = longest >> 1 ;
 	    for (int i=0;i<=longest;i++) {
-	    	Point punto = new Point (x,y); 
+	    	Coordenada punto = new Coordenada (x,y); 
 	        caminoRecorrido.add (punto); 
 	        numerator += shortest ;
 	        if (!(numerator<longest)) {

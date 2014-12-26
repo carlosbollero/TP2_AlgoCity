@@ -2,50 +2,39 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralMinera extends UnidadEnergetica {
 
-	public CentralMinera() {
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
-	}
-
 	public CentralMinera(Coordenada coord) {
-		coordenadas = coord;
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
+		super(3000, 400, 10);
+		coordenada = coord;
 	}
 
-	public CentralMinera(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralMinera(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
-
-		this.costo = 3000;
-		this.capacidad = 400;
-		this.radioDeInfluencia = 10;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		sisElectrico.aumentarCapacidad(capacidad);
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
+		super(3000, 400, 10);
+		this.coordenada = coord;
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
+		mapa.sistemaElectrico().aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
+	}
+
+	public CentralMinera() {
+		super(3000, 400, 10);
 	}
 
 	@Override
@@ -60,12 +49,15 @@ public class CentralMinera extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
 
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
-	}
+	// @Override
+	// public boolean agregarseA(Mapa mapa) {
+	// return mapa.ciudad().agregar(this);
+	// }
+	//
+	// @Override
+	// public boolean estaContenidoEn(Mapa mapa) {
+	// return mapa.ciudad().contiene(this);
+	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -89,8 +81,8 @@ public class CentralMinera extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -108,8 +100,8 @@ public class CentralMinera extends UnidadEnergetica {
 	public boolean equals(Daniable cm) {
 		if (cm == this) {
 			return true;
-		} else if (cm.coordenadas().getX() == this.coordenadas().getX()
-				&& cm.coordenadas().getY() == this.coordenadas().getY()
+		} else if (cm.coordenada().getX() == this.coordenada().getX()
+				&& cm.coordenada().getY() == this.coordenada().getY()
 				&& ((CentralMinera) cm).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

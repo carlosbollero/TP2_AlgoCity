@@ -12,26 +12,25 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.terreno.Superficie;
 import algo3.algocity.model.terreno.SuperficieAgua;
 import algo3.algocity.model.terreno.SuperficieTierra;
 
 public class MapaTerritorio {
 
-	int alto;
-	int ancho;
+	int tamanio;
 	final boolean tierra = true;
 	final boolean agua = false;
 	Map<Coordenada, Superficie> mapa;
 	GeneradorTerritorio generador;
 	Random aleatorio;
 
-	public MapaTerritorio(int alto, int ancho) {
-		this.alto = alto;
-		this.ancho = ancho;
+	public MapaTerritorio(int tamanio) {
+
+		this.tamanio = tamanio;
 		aleatorio = new Random();
-		generador = new GeneradorTerritorio(alto, ancho);
+		generador = new GeneradorTerritorio(tamanio, tamanio);
 		mapa = new HashMap<Coordenada, Superficie>();
 		
 		inicializar();
@@ -39,9 +38,8 @@ public class MapaTerritorio {
 
 	// CONSTRUCTOR PARA TESTS
 	/*************************************************************/
-	public MapaTerritorio(int alto, int ancho, boolean test) {
-		this.alto = alto;
-		this.ancho = ancho;
+	public MapaTerritorio(int tamanio, boolean test) {
+		this.tamanio = tamanio;
 		this.mapa = new HashMap<Coordenada, Superficie>();
 		if (test) {
 			inicializarConTierraParaTest();
@@ -81,22 +79,22 @@ public class MapaTerritorio {
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad)
-			throws NoSePuedeConstruirEnSuperficie {
-		return unidad.esConstruibleEn(superficie(unidad.coordenadas())
+			throws SuperficieInvalidaParaConstruir {
+		return unidad.esConstruibleEn(superficie(unidad.coordenada())
 				.getSuperficie());
 	}
 
 	public boolean sePuedeConstruir(Conector conector)
-			throws NoSePuedeConstruirEnSuperficie {
-		return conector.esConstruibleEn(superficie(conector.coordenadas())
+			throws SuperficieInvalidaParaConstruir {
+		return conector.esConstruibleEn(superficie(conector.coordenada())
 				.getSuperficie());
 	}
 
 	// METODOS UTILIZADOS POR TESTS PARA NO TRABAJAR SOBRE RANDOM
 	/****************************************************************/
 	private void inicializarConTierraParaTest() {
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
+		for (int x = 0; x < tamanio; x++) {
+			for (int y = 0; y < tamanio; y++) {
 				Superficie posicion = new SuperficieTierra();
 				agregar(posicion, x, y);
 			}
@@ -104,8 +102,8 @@ public class MapaTerritorio {
 	}
 
 	private void inicializarConAguaParaTest() {
-		for (int x = 0; x < alto; x++) {
-			for (int y = 0; y < ancho; y++) {
+		for (int x = 0; x < tamanio; x++) {
+			for (int y = 0; y < tamanio; y++) {
 				Superficie posicion = new SuperficieAgua();
 				agregar(posicion, x, y);
 			}
@@ -139,11 +137,11 @@ public class MapaTerritorio {
 	public Element getElement(Document doc, Element territorio) {
 		Element alto = doc.createElement("alto");
 		territorio.appendChild(alto);
-		alto.setTextContent(String.valueOf(this.alto));
+		alto.setTextContent(String.valueOf(this.tamanio));
 
 		Element ancho = doc.createElement("ancho");
 		territorio.appendChild(ancho);
-		ancho.setTextContent(String.valueOf(this.ancho));
+		ancho.setTextContent(String.valueOf(this.tamanio));
 
 		Element mapa = doc.createElement("mapa");
 		territorio.appendChild(mapa);
@@ -181,10 +179,10 @@ public class MapaTerritorio {
 		for (int i = 0; i < hijosDeTerritorio.getLength(); i++) {
 			Node hijoDeTerritorio = hijosDeTerritorio.item(i);
 			if (hijoDeTerritorio.getNodeName().equals("alto")) {
-				mapaTerritorio.alto = Integer.valueOf(hijoDeTerritorio
+				mapaTerritorio.tamanio = Integer.valueOf(hijoDeTerritorio
 						.getTextContent());
 			} else if (hijoDeTerritorio.getNodeName().equals("ancho")) {
-				mapaTerritorio.ancho = Integer.valueOf(hijoDeTerritorio
+				mapaTerritorio.tamanio = Integer.valueOf(hijoDeTerritorio
 						.getTextContent());
 			} else if (hijoDeTerritorio.getNodeName().equals("mapa")) {
 				NodeList hijosDeMapa = hijoDeTerritorio.getChildNodes();
@@ -227,23 +225,6 @@ public class MapaTerritorio {
 		}
 
 		return mapaTerritorio;
-	}
-
-	/* Para probar */
-	public void imprimirTerritorio() {
-		for (Map.Entry e : this.mapa.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Superficie valor = (Superficie) e.getValue();
-
-			System.out.println(String.valueOf(clave.getX()));
-			System.out.println(String.valueOf(clave.getY()));
-			if (valor.esTierra()) {
-				System.out.println("T");
-			}
-			if (valor.esAgua()) {
-				System.out.println("A");
-			}
-		}
 	}
 	
 }

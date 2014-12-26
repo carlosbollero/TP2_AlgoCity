@@ -7,7 +7,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -20,12 +20,22 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	int radioDeInfluencia;
 	double porcentajeDanios;
 
+	public UnidadEnergetica(int costo, int capacidad, int radio) {
+		super(costo, 0);
+		this.capacidad = capacidad;
+		this.radioDeInfluencia = radio;
+	}
+
 	public int costo() {
 		return this.costo;
 	}
 
-	public int getRadioDeInfluencia() {
+	public int getRadio() {
 		return radioDeInfluencia;
+	}
+
+	public boolean estaDentroDeRadio(Coordenada coord) {
+		return (coordenada.distancia(coord) <= radioDeInfluencia);
 	}
 
 	public int getCapacidad() {
@@ -62,24 +72,38 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	}
 
 	public boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias {
-		return (mapa.hayConexionConTuberias(coordenadas));
+		return (mapa.hayConexionConTuberias(coordenada));
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie {
-		if (!superficie.esTierra()){
-			throw new NoSePuedeConstruirEnSuperficie();
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (!superficie.esTierra()) {
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esTierra();
 	}
 	
-	
+	@Override
+	public boolean agregarseA(Mapa mapa) {
+		if(mapa.ciudad().agregar(this)){
+			addObserver(mapa.sistemaElectrico());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
+	}
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
-	
-	//PRUEBA SUBIR ESTE METODO
-	//TODO, ver si borrando los metodos en los hijos funciona bien
+
+	// PRUEBA SUBIR ESTE METODO
+	// TODO, ver si borrando los metodos en los hijos funciona bien
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -103,11 +127,11 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
-	
-	
-	
+
+
+
 }

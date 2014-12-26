@@ -7,41 +7,39 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.Conector;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class EstacionDeBomberos extends Unidad implements Daniable {
+public class EstacionDeBomberos extends Unidad {
 
 	private Conector conexion;
 
 	public EstacionDeBomberos() {
-		costo = 1500;
-		consumo = 0;
+		super(1500, 0);
 	}
 
 	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 
-		coordenadas = coord;
-		costo = 1500;
-		consumo = 0;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		super(1500, 0);
+		coordenada = coord;
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);
 	}
 
 	public EstacionDeBomberos(Coordenada coord) {
-		costo = 1500;
-		consumo = 0;
+		super(1500, 0);
 		conexion = null;
-		this.coordenadas = coord;
+		this.coordenada = coord;
 	}
 
 	// public void actuar(ArrayList<Visitable> objetivos) {
@@ -60,8 +58,23 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (!superficie.esTierra()) {
+			throw new SuperficieInvalidaParaConstruir();
+		}
 		return (superficie.esTierra());
+	}
+
+	@Override
+	public boolean agregarseA(Mapa mapa) {
+		mapa.agregarReparador();
+		return mapa.ciudad().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	// @Override
@@ -70,37 +83,13 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 	//
 	// }
 
-	@Override
-	public double getSalud() {
-		// TODO revisar de hacerlo de otra forma
-		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-		// entiendan este mensaje nose si es lo mejor
-		return 100;
-	}
-
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarReparador();
-	}
-
-	@Override
-	public void repararse() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void aplicarDanio(double unDanio) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void aceptar(Visitante v) {
-		v.visitar(this);
-
-	}
+	// @Override
+	// public double getSalud() {
+	// // TODO revisar de hacerlo de otra forma
+	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+	// // entiendan este mensaje nose si es lo mejor
+	// return 100;
+	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -121,13 +110,12 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		return unidad;
 	}
-	
-	
+
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidad = hijoDeNodo.getChildNodes();
 
@@ -143,17 +131,17 @@ public class EstacionDeBomberos extends Unidad implements Daniable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
 
-	/*No evalua los invariantes de la clase*/
+	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable eb) {
 		if (eb == this) {
 			return true;
-		} else if (eb.coordenadas().getX() == this.coordenadas().getX()
-				&& eb.coordenadas().getY() == this.coordenadas().getY()) {
+		} else if (eb.coordenada().getX() == this.coordenada().getX()
+				&& eb.coordenada().getY() == this.coordenada().getY()) {
 			return true;
 		}
 		return false;

@@ -9,17 +9,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.MapaConexiones;
+import algo3.algocity.model.mapas.MapaTuberias;
 
 public class VistaTerrenoSub extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 8179004051089239685L;
 
-	MapaConexiones mapa;
+	MapaTuberias mapa;
 	Coordenada coordenada;
 	Image imagen;
 
-	public VistaTerrenoSub(MapaConexiones m, Coordenada coord) {
+	public VistaTerrenoSub(MapaTuberias m, Coordenada coord) {
 		mapa = m;
 		mapa.addObserver(this);
 		coordenada = coord;
@@ -27,7 +27,7 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 	}
 
 	private void setImagen() {
-		imagen = (mapa.contiene(coordenada)) ? new ImageIcon(
+		imagen = (mapa.tieneCoordenadaOcupada(coordenada)) ? new ImageIcon(
 				"img/tuberia.png").getImage() : new ImageIcon(
 				"img/underground.png").getImage();
 //		imagen = new ImageIcon("img/underground.png").getImage();

@@ -76,13 +76,13 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		// Obtengo los usuarios existentes
 		RegistroUsuarios ru;
 		ArrayList<String> nombres;
-		try {
-			ru = new RegistroUsuarios();
-			nombres = ru.nombresUsuarios();
-		} catch (NoSeEncontroElFicheroException e) {
-			e.printStackTrace();
-			nombres = new ArrayList<String>();
-		}
+//		try {
+		ru = new RegistroUsuarios();
+		nombres = ru.nombresUsuarios();
+//		} catch (NoSeEncontroElFicheroException e) {
+//			e.printStackTrace();
+//			nombres = new ArrayList<String>();
+////		}
 		String[] datos = new String[nombres.size()];
 		Iterator<String> it = nombres.iterator();
 		int i = 0;

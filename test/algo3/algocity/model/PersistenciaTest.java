@@ -102,6 +102,9 @@ public class PersistenciaTest {
 		PozoDeAgua pa = new PozoDeAgua(new Coordenada(5, 5));
 		pa.agregarseA(mapa);
 
+		// TODO, si la estacion de bomberos se agrega antes que otras unidades,
+		// a estas unidades que fueron agregadas despues no las tiene en su
+		// lista de objetivos
 		EstacionDeBomberos eb = new EstacionDeBomberos(new Coordenada(6, 6));
 		eb.agregarseA(mapa);
 
@@ -111,7 +114,7 @@ public class PersistenciaTest {
 		CentralMinera cm = new CentralMinera(new Coordenada(7, 1));
 		cm.agregarseA(mapa);
 
-		CentralEolica ce = new CentralEolica(new Coordenada(1, 9));
+		UnidadEnergetica ce = new CentralEolica(new Coordenada(1, 9));
 		ce.agregarseA(mapa);
 
 		LineaTension lt = new LineaTension(new Coordenada(7, 2));
@@ -123,6 +126,8 @@ public class PersistenciaTest {
 		Tuberia tb = new Tuberia(new Coordenada(4, 7));
 		tb.agregarseA(mapa);
 
+		// EstacionDeBomberos eb = new EstacionDeBomberos(new Coordenada(6, 6));
+		// eb.agregarseA(mapa);
 		/* Creacion de Turno */
 		Turno turno = new Turno();
 
@@ -135,6 +140,7 @@ public class PersistenciaTest {
 		/* Creacion de Juego */
 		Juego juego = new Juego(usuario, mapa, turno, poblacion, dinero);
 
+		// TODO, el sistema electrico no actualiza su capacidad y consumo	
 		juego.persistir();
 		juego.turno().detener();
 
@@ -154,53 +160,49 @@ public class PersistenciaTest {
 					.println("Los ficheros de prueba no pudieron ser eliminados");
 		}
 
+		
+		
+		
+		
 		/* Corroboro que los datos leidos sean correctos */
- 		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
+		assertEquals(juegoRecuperado.usuario().nombre(), "Juan");
 		assertEquals(juegoRecuperado.turno().getTurno(), 1);
 		assertEquals(juegoRecuperado.dinero().getCantidad(), 20000);
 		assertTrue(juegoRecuperado.poblacion().equals(juego.poblacion()));
-
+//
 		// Chequea la ciudad
-		Unidad urRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ur.coordenadas().getX(), ur.coordenadas().getY());
+		Unidad urRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(ur.coordenada());
 		assertTrue(((UnidadResidencial) urRecuperada).equals(ur));
 
-		Unidad uiRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ui.coordenadas().getX(), ui.coordenadas().getY());
+		Unidad uiRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(ui.coordenada());
 		assertTrue(((UnidadIndustrial) uiRecuperada).equals(ui));
 
-		Unidad ucRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(uc.coordenadas().getX(), uc.coordenadas().getY());
-		assertTrue(((UnidadComercial) ucRecuperada).equals(uc));
+		Unidad ucRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(uc.coordenada());
+		assertTrue(((Daniable) ucRecuperada).equals(uc));
 
-		Unidad paRecuperado = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(pa.coordenadas().getX(), pa.coordenadas().getY());
+		Unidad paRecuperado = juegoRecuperado.mapa().ciudad().getUnidadEn(pa.coordenada());
 		assertTrue(((PozoDeAgua) paRecuperado).equals(pa));
 
-		Unidad ebRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(eb.coordenadas().getX(), eb.coordenadas().getY());
+		Unidad ebRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(eb.coordenada());
 		assertTrue(((EstacionDeBomberos) ebRecuperada).equals(eb));
 
-		Unidad cnRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(cn.coordenadas().getX(), cn.coordenadas().getY());
+		Unidad cnRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(cn.coordenada());
 		assertTrue(((CentralNuclear) cnRecuperada).equals(cn));
 
-		Unidad cmRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(cm.coordenadas().getX(), cm.coordenadas().getY());
+		Unidad cmRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(cm.coordenada());
 		assertTrue(((CentralMinera) cmRecuperada).equals(cm));
 
-		Unidad ceRecuperada = juegoRecuperado.mapa().ciudad()
-				.getUnidadEn(ce.coordenadas().getX(), ce.coordenadas().getY());
-		assertTrue(((CentralEolica) ceRecuperada).equals(ce));
+		Unidad ceRecuperada = juegoRecuperado.mapa().ciudad().getUnidadEn(ce.coordenada());
+		assertTrue(((UnidadEnergetica) ceRecuperada).equals(ce));
 
 		// Chequea unidades con poblacion
-		ArrayList<Ocupable> uConPoblacionRecuperadas = juegoRecuperado.mapa()
-				.ciudad().unidadesConPoblacion();
-		ArrayList<Ocupable> uConPoblacion = juego.mapa().ciudad()
-				.unidadesConPoblacion();
-		Iterator<Ocupable> itUConPoblacionRecuperadas = uConPoblacionRecuperadas
+		ArrayList<UnidadResidencial> uConPoblacionRecuperadas = juegoRecuperado
+				.mapa().ciudad().unidadesResidenciales();
+		ArrayList<UnidadResidencial> uConPoblacion = juego.mapa().ciudad()
+				.unidadesResidenciales();
+		Iterator<UnidadResidencial> itUConPoblacionRecuperadas = uConPoblacionRecuperadas
 				.iterator();
-		Iterator<Ocupable> itUConPoblacion = uConPoblacion.iterator();
+		Iterator<UnidadResidencial> itUConPoblacion = uConPoblacion.iterator();
 		while (itUConPoblacionRecuperadas.hasNext()
 				&& itUConPoblacion.hasNext()) {
 			UnidadResidencial uRes = (UnidadResidencial) itUConPoblacion.next();
@@ -210,13 +212,13 @@ public class PersistenciaTest {
 		}
 
 		// Chequea unidades con empleo
-		ArrayList<Ocupable> uConEmpleoRecuperadas = juegoRecuperado.mapa()
-				.ciudad().unidadesConEmpleo();
-		ArrayList<Ocupable> uConEmpleo = juego.mapa().ciudad()
-				.unidadesConEmpleo();
-		Iterator<Ocupable> itUConEmpleoRecuperadas = uConEmpleoRecuperadas
+		ArrayList<UnidadIndustrial> uConEmpleoRecuperadas = juegoRecuperado.mapa()
+				.ciudad().unidadesIndustriales();
+		ArrayList<UnidadIndustrial> uConEmpleo = juego.mapa().ciudad()
+				.unidadesIndustriales();
+		Iterator<UnidadIndustrial> itUConEmpleoRecuperadas = uConEmpleoRecuperadas
 				.iterator();
-		Iterator<Ocupable> itUConEmpleo = uConEmpleo.iterator();
+		Iterator<UnidadIndustrial> itUConEmpleo = uConEmpleo.iterator();
 		while (itUConEmpleoRecuperadas.hasNext() && itUConEmpleo.hasNext()) {
 			UnidadIndustrial uInd = (UnidadIndustrial) itUConEmpleo.next();
 			UnidadIndustrial uIndRec = (UnidadIndustrial) itUConEmpleoRecuperadas
@@ -224,75 +226,38 @@ public class PersistenciaTest {
 			assertTrue(uInd.equals(uIndRec));
 		}
 
-		// Chequea unidades daniables
-		ArrayList<Daniable> uDaniablesRecuperadas = juegoRecuperado.mapa()
-				.ciudad().unidadesDaniables();
-		ArrayList<Daniable> uDaniables = juego.mapa().ciudad()
-				.unidadesDaniables();
-		Iterator<Daniable> itUDaniablesRecuperadas = uDaniablesRecuperadas
-				.iterator();
-		Iterator<Daniable> itUDaniables = uDaniables.iterator();
-		while (itUDaniablesRecuperadas.hasNext() && itUDaniables.hasNext()) {
-			Daniable u = itUDaniables.next();
-			Daniable uRec = itUDaniablesRecuperadas.next();
-			assertTrue(u.equals(uRec));
-		}
+//		// Chequea unidades daniables
+//		ArrayList<Daniable> uDaniablesRecuperadas = juegoRecuperado.mapa()
+//				.ciudad().unidadesDaniables();
+//		ArrayList<Daniable> uDaniables = juego.mapa().ciudad()
+//				.unidadesDaniables();
+//		Iterator<Daniable> itUDaniablesRecuperadas = uDaniablesRecuperadas
+//				.iterator();
+//		Iterator<Daniable> itUDaniables = uDaniables.iterator();
+//		while (itUDaniablesRecuperadas.hasNext() && itUDaniables.hasNext()) {
+//			Daniable u = itUDaniables.next();
+//			Daniable uRec = itUDaniablesRecuperadas.next();
+//			assertTrue(u.equals(uRec));
+//		}
 
 		// Chequea tuberias
-		Conector tbRecuperada = juegoRecuperado
-				.mapa()
-				.tuberias()
-				.getConectorEn(tb.coordenadas().getX(), tb.coordenadas().getY());
+		Conector tbRecuperada = juegoRecuperado.mapa().tuberias()
+				.getConectorEn(tb.coordenada().getX(), tb.coordenada().getY());
 		assertTrue(((Tuberia) tbRecuperada).equals(tb));
 
-		// Chequea posiciones relevantes de tuberias
-		ArrayList<Unidad> uRelevantesRecuperadas = juegoRecuperado.mapa()
-				.tuberias().posicionesRelevantes();
-		ArrayList<Unidad> uRelevantes = juego.mapa().tuberias()
-				.posicionesRelevantes();
-		Iterator<Unidad> itURelevantesRecuperadas = uRelevantesRecuperadas
-				.iterator();
-		Iterator<Unidad> itURelevantes = uRelevantes.iterator();
-		while (itURelevantesRecuperadas.hasNext() && itURelevantes.hasNext()) {
-			Unidad uRec = itURelevantesRecuperadas.next();
-			Unidad u = itURelevantes.next();
-			assertTrue(((PozoDeAgua) u).equals((PozoDeAgua) uRec));
-		}
-
 		// Chequea rutas
-		Conector rtRecuperada = juegoRecuperado
-				.mapa()
-				.rutas()
-				.getConectorEn(rt.coordenadas().getX(), rt.coordenadas().getY());
+		Conector rtRecuperada = juegoRecuperado.mapa().rutas()
+				.getConectorEn(rt.coordenada().getX(), rt.coordenada().getY());
 		assertTrue(((Ruta) rtRecuperada).equals(rt));
-		// rutas no tiene posiciones relevantes
 
 		// Chequea la red electrica
-		Conector ltRecuperada = juegoRecuperado
-				.mapa()
-				.redElectrica()
-				.getConectorEn(lt.coordenadas().getX(), lt.coordenadas().getY());
+		Conector ltRecuperada = juegoRecuperado.mapa().redElectrica()
+				.getConectorEn(lt.coordenada().getX(), lt.coordenada().getY());
 		assertTrue(((LineaTension) ltRecuperada).equals(lt));
 
-		// Chequea posiciones relevantes en red electrica
-		ArrayList<Unidad> uRelevantesRecuperadasElect = juegoRecuperado.mapa()
-				.redElectrica().posicionesRelevantes();
-		ArrayList<Unidad> uRelevantesElect = juego.mapa().redElectrica()
-				.posicionesRelevantes();
-		Iterator<Unidad> itURelevantesRecuperadasElect = uRelevantesRecuperadasElect
-				.iterator();
-		Iterator<Unidad> itURelevantesElect = uRelevantesElect.iterator();
-		while (itURelevantesRecuperadasElect.hasNext()
-				&& itURelevantesElect.hasNext()) {
-			Unidad uRec = itURelevantesRecuperadasElect.next();
-			Unidad u = itURelevantesElect.next();
-			assertTrue(((UnidadEnergetica) u).equals((UnidadEnergetica) uRec));
-		}
-		
-		//Chequea el reparador
-		assertTrue(juego.mapa().reparador().equals(juegoRecuperado.mapa().reparador()));
-		
-		
+		// Chequea el reparador
+		assertTrue(juego.mapa().reparador()
+				.equals(juegoRecuperado.mapa().reparador()));
 	}
 
 }

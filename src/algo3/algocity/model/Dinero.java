@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.mapas.Mapa;
 
 public class Dinero extends Observable implements Observer {
 
@@ -60,8 +61,7 @@ public class Dinero extends Observable implements Observer {
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**
-	 * ********************************************************************/
+	/**********************************************************************/
 
 	public Element getElement(Document doc) {
 
@@ -80,7 +80,7 @@ public class Dinero extends Observable implements Observer {
 		return dinero;
 	}
 
-	public static Dinero fromElement(Node hijoDeJuego) {
+	public static Dinero fromElement(Node hijoDeJuego,Mapa mapa) {
 
 		Dinero dinero = new Dinero();
 
@@ -92,12 +92,11 @@ public class Dinero extends Observable implements Observer {
 			if (child.getNodeName().equals("Turnos")) {
 				dinero.turno = Turno.fromElement(child);
 			} else if (child.getNodeName().equals("Poblacion")) {
-				dinero.poblacion = Poblacion.fromElement(child);
+				dinero.poblacion = Poblacion.fromElement(child,mapa);
 			} else if (child.getNodeName().equals("Cantidad")) {
 				dinero.cantidad = Integer.valueOf(child.getTextContent());
 			}
 		}
 		return dinero;
 	}
-
 }

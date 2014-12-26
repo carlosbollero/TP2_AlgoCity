@@ -6,9 +6,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -17,7 +18,7 @@ public class Tuberia implements Conector {
 
 	int costo;
 	int danios;
-	Coordenada coordenadas;
+	Coordenada coordenada;
 
 	public Tuberia() {
 		costo = 5;
@@ -25,15 +26,17 @@ public class Tuberia implements Conector {
 
 	public Tuberia(Coordenada coordenada) {
 		costo = 5;
-		this.coordenadas = coordenada;
+		this.coordenada = coordenada;
 	}
 
 	public Tuberia(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie {
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			CoordenadaInvalidaException {
 		costo = 5;
-		this.coordenadas = coordenada;
-		esConstruibleEn(mapa.superficie(coordenadas));
+		this.coordenada = coordenada;
+		mapa.validarCoordenadas(coordenada);
+		esConstruibleEn(mapa.superficie(coordenada));
 		// if (!esConstruibleEn(mapa.superficie(coordenadas))) {
 		// throw new NoSeCumplenLosRequisitosException();
 		// }
@@ -45,31 +48,35 @@ public class Tuberia implements Conector {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
-		if (!(superficie.esTierra() || superficie.esAgua())){
-			throw new NoSePuedeConstruirEnSuperficie();
+			throws SuperficieInvalidaParaConstruir {
+		if (!(superficie.esTierra() || superficie.esAgua())) {
+			throw new SuperficieInvalidaParaConstruir();
 		}
-		return (superficie.esTierra() || superficie.esAgua());
+		return true;
 	}
 
 	@Override
-	public Coordenada coordenadas() {
-		return coordenadas;
+	public Coordenada coordenada() {
+		return coordenada;
 	}
 
 	public void setCoordenadas(Coordenada c) {
-		this.coordenadas = c;
-	}
-
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarATuberias(this);
+		coordenada = c;
 	}
 
 	@Override
 	public double getSalud() {
-		// TODO Auto-generated method stub
 		return 100;
+	}
+
+	@Override
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.tuberias().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.tuberias().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -86,15 +93,14 @@ public class Tuberia implements Conector {
 		Element coordenadas = doc.createElement("coordenadas");
 		conector.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		return conector;
 	}
 
-	
-	public void fromElement(Node hijoDeNodo){
-		
+	public void fromElement(Node hijoDeNodo) {
+
 		NodeList hijosDeTuberia = hijoDeNodo.getChildNodes();
 
 		for (int i = 0; i < hijosDeTuberia.getLength(); i++) {
@@ -107,21 +113,21 @@ public class Tuberia implements Conector {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
-		
-		
+
 	}
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Tuberia tb) {
 		if (tb == this) {
 			return true;
-		} else if (tb.coordenadas().getX() == this.coordenadas().getX()
-				&& tb.coordenadas().getY() == this.coordenadas().getY()) {
+		} else if (tb.coordenada().getX() == this.coordenada().getX()
+				&& tb.coordenada().getY() == this.coordenada().getY()) {
 			return true;
 		}
 		return false;
 	}
+
 }

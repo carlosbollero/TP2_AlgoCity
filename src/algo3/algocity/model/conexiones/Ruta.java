@@ -9,7 +9,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
-import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -40,13 +40,12 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	public Ruta(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		porcentajeDanios = 0;
 		costo = 10;
 		this.coordenadas = coordenada;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
+		mapa.validarCoordenadas(coordenada);
+		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);
 		/*
 		 * else { mapa.agregar(this); }
@@ -68,7 +67,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	}
 
-	public Coordenada coordenadas() {
+	public Coordenada coordenada() {
 		return coordenadas;
 	}
 
@@ -111,9 +110,13 @@ public class Ruta implements Conector, Daniable, Visitable {
 	}
 
 	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarARutas(this);
-		mapa.agregarUnidadDaniable(this);
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.rutas().agregar(this);
+	}
+
+	@Override
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.rutas().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -189,11 +192,12 @@ public class Ruta implements Conector, Daniable, Visitable {
 	public boolean equals(Daniable rt) {
 		if (rt == this) {
 			return true;
-		} else if (rt.coordenadas().getX() == this.coordenadas().getX()
-				&& rt.coordenadas().getY() == this.coordenadas().getY()
+		} else if (rt.coordenada().getX() == this.coordenada().getX()
+				&& rt.coordenada().getY() == this.coordenada().getY()
 				&& ((Ruta) rt).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;
 	}
+
 }

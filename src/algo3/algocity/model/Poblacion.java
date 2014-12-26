@@ -140,9 +140,9 @@ public class Poblacion implements Observer {
 		return poblacion;
 	}
 
-	public static Poblacion fromElement(Node hijoDeJuego) {
+	public static Poblacion fromElement(Node hijoDeJuego,Mapa mapa) {
 		Poblacion poblacion = new Poblacion();
-
+		//Poblacion poblacion = new Poblacion(mapa);
 		NodeList childs = hijoDeJuego.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
@@ -161,7 +161,7 @@ public class Poblacion implements Observer {
 				poblacion.tasa = Integer.valueOf(child.getTextContent());
 			}
 		}
-		// poblacion.actualizar(null);
+		poblacion.actualizar(mapa);
 		return poblacion;
 	}
 

@@ -6,52 +6,47 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.terreno.Superficie;
 
 public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
-	int consumo;
 	final double ESTADOINICIAL = 100;
 	double porcentajeDanios;
 
 	public UnidadComercial() {
-		this.costo = 5;
-		this.consumo = 2;
+		super(5, 2);
 	}
 
 	public UnidadComercial(Coordenada coord) {
-		coordenadas = coord;
-		this.costo = 5;
-		this.consumo = 2;
+		super(5, 2);
+		coordenada = coord;
 	}
 
-	public UnidadComercial(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public UnidadComercial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		this.costo = 5;
-		this.consumo = 2;
-		this.coordenadas = coord;
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
+		super(5, 2);
+		this.coordenada = coord;
 
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		sisElectrico.consumir(consumo);
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
+		mapa.sistemaElectrico().consumir(consumo);
 		dinero.cobrar(costo);
 	}
 
@@ -59,15 +54,11 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return porcentajeDanios;
 	}
 
-	public int consumo() {
-		return this.consumo;
-	}
-
 	@Override
 	public void repararse() {
-		this.porcentajeDanios -= this.porcentajeReparacion();
-		if (this.getDanios() < 0) {
-			this.porcentajeDanios = 0;
+		porcentajeDanios -= porcentajeReparacion();
+		if (getDanios() < 0) {
+			porcentajeDanios = 0;
 		}
 	}
 
@@ -100,18 +91,26 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 
 	private boolean hayConexionesEn(Mapa mapa) throws NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		return (mapa.hayConexionCompleta(coordenadas));
+		return (mapa.hayConexionCompleta(coordenada));
+	}
+
+//	@Override
+//	public boolean esConstruibleEn(Superficie superficie)
+//			throws SuperficieInvalidaParaConstruir {
+//		if (!superficie.esTierra()) {
+//			throw new SuperficieInvalidaParaConstruir();
+//		}
+//		return superficie.esTierra();
+//	}
+
+	@Override
+	public boolean agregarseA(Mapa mapa) {
+		return mapa.ciudad().agregar(this);
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
-		return superficie.esTierra();
-	}
-
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
+	public boolean estaContenidoEn(Mapa mapa) {
+		return mapa.ciudad().contiene(this);
 	}
 
 	/**********************************************************************/
@@ -132,8 +131,8 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -142,7 +141,6 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return unidad;
 	}
 
-	
 	public void fromElement(Node hijoDeNodo) {
 		NodeList hijosDeUnidadComercial = hijoDeNodo.getChildNodes();
 
@@ -161,18 +159,17 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 				Coordenada punto = new Coordenada(
 						Integer.valueOf(arrayPunto[0]),
 						Integer.valueOf(arrayPunto[1]));
-				this.coordenadas = punto;
+				this.coordenada = punto;
 			}
 		}
 	}
-	
 
 	/* No evalua los invariantes de la clase */
 	public boolean equals(Daniable uc) {
 		if (uc == this) {
 			return true;
-		} else if (uc.coordenadas().getX() == this.coordenadas().getX()
-				&& uc.coordenadas().getY() == this.coordenadas().getY()
+		} else if (uc.coordenada().getX() == this.coordenada().getX()
+				&& uc.coordenada().getY() == this.coordenada().getY()
 				&& ((UnidadComercial) uc).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

@@ -3,18 +3,16 @@ package algo3.algocity.model.conexiones;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.caracteristicas.Agregable;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public interface Conector {
+public interface Conector extends Agregable {
 
-	public abstract Coordenada coordenadas();
+	public abstract Coordenada coordenada();
 	
-	public abstract boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie ;
-
-	public abstract void agregarseA(Mapa mapa);
+	public abstract boolean esConstruibleEn(Superficie superficie) throws SuperficieInvalidaParaConstruir ;
 	
 	public abstract double getSalud();
 	
