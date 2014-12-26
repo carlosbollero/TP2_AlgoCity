@@ -29,6 +29,10 @@ public class SistemaElectrico implements Observer {
 		consumo += cantidad;
 	}
 
+	
+	/*
+	 * SistemaElectrico observa a las unidades energeticas
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		disminuirCapacidad((int)arg);
