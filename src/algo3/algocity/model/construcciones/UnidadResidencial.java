@@ -20,7 +20,6 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.terreno.Superficie;
 
 public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		Visitable {

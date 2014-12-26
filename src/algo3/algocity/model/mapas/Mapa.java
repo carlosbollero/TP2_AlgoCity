@@ -34,7 +34,7 @@ public class Mapa extends Observable {
 	Reparador reparador;
 
 	public Mapa() {
-		tamanio = 40;
+		tamanio = 20;
 		territorio = new MapaTerritorio(tamanio);
 		ciudad = new MapaEdilicio(this);
 		tuberias = new MapaTuberias(this);

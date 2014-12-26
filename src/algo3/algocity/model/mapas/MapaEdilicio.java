@@ -142,7 +142,6 @@ public class MapaEdilicio extends Observable {
 		lista.addAll(unidadesIndustriales);
 		lista.addAll(unidadesComerciales);
 		lista.addAll(unidadesEnergeticas);
-//		lista.addAll(mapaSuperior.redElectrica().)
 		return lista;
 	}
 

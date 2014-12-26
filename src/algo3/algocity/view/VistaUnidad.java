@@ -8,7 +8,6 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import algo3.algocity.controller.ControladorMouse;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.mapas.MapaEdilicio;
@@ -33,7 +32,7 @@ public class VistaUnidad extends JPanel implements Observer {
 	}
 
 	public void setImagen(){
-		imagen = new ImageIcon("img/central_nuclear.png").getImage();
+		imagen = new ImageIcon("img/bomberos.png").getImage();
 	}
 	
 	public Coordenada coordenada(){

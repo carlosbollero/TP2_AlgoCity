@@ -45,7 +45,8 @@ public class Juego {
 		poblacion = p;
 		dinero = d;
 		genCatastrofe = new GeneradorCatastrofe(mapa);
-		turnos.addObserver(this.poblacion);
+		turnos.addObserver(genCatastrofe);
+		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
 	}

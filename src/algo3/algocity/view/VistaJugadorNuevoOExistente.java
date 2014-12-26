@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class VistaJugadorNuevoOExistente extends JPanel{
