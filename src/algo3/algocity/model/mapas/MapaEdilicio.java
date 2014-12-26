@@ -78,42 +78,42 @@ public class MapaEdilicio extends Observable {
 	public boolean agregar(PozoDeAgua p) {
 		mapa.put(p.coordenada(), p);
 		setChanged();
-		notifyObservers();
+		notifyObservers(p.coordenada());
 		return pozosDeAgua.add(p);
 	}
 
 	public boolean agregar(EstacionDeBomberos e) {
 		mapa.put(e.coordenada(), e);
 		setChanged();
-		notifyObservers();
+		notifyObservers(e.coordenada());
 		return estacionesBomberos.add(e);
 	}
 
 	public boolean agregar(UnidadResidencial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers();
+		notifyObservers(u.coordenada());
 		return unidadesResidenciales.add(u);
 	}
 
 	public boolean agregar(UnidadIndustrial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers();
+		notifyObservers(u.coordenada());
 		return unidadesIndustriales.add(u);
 	}
 
 	public boolean agregar(UnidadComercial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers();
+		notifyObservers(u.coordenada());
 		return unidadesComerciales.add(u);
 	}
 
 	public boolean agregar(UnidadEnergetica u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers();
+		notifyObservers(u.coordenada());
 		return unidadesEnergeticas.add(u);
 	}
 

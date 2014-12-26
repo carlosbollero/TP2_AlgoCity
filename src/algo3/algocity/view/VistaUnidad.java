@@ -13,29 +13,27 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.mapas.MapaEdilicio;
 
-public class VistaTerreno extends JPanel implements Observer {
+public class VistaUnidad extends JPanel implements Observer {
 
-	private static final long serialVersionUID = -8808512415555786403L;
-
+	private static final long serialVersionUID = -1933418471723107152L;
+	
 	Coordenada coordenada;
 	Mapa mapa;
 	Image imagen;
 	MapaEdilicio ciudad;
 
-	public VistaTerreno(Mapa mapa, Coordenada coord) {
+	public VistaUnidad(Mapa mapa, Coordenada coord) {
 		this.mapa = mapa;
 		ciudad = mapa.ciudad();
 		coordenada = coord;
 		mapa.addObserver(this);
 		ciudad.addObserver(this);
-		addMouseListener(new ControladorMouse(mapa, this));
+//		addMouseListener(new ControladorMouse(mapa, this));
 		setImagen();
 	}
-	
+
 	public void setImagen(){
-		imagen = (mapa.superficie(coordenada).esAgua()) ? new ImageIcon(
-				"img/water.png").getImage() : new ImageIcon("img/dirt.png")
-				.getImage();
+		imagen = new ImageIcon("img/central_nuclear.png").getImage();
 	}
 	
 	public Coordenada coordenada(){
@@ -47,7 +45,7 @@ public class VistaTerreno extends JPanel implements Observer {
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
 		super.paintComponents(g);
 	}
-
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		setImagen();
