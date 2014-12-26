@@ -11,6 +11,7 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -25,7 +26,8 @@ public class EstacionDeBomberos extends Unidad {
 
 	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			NoSePuedeConstruirEnSuperficie {
 
 		super(1500, 0);
 		coordenada = coord;
@@ -56,23 +58,13 @@ public class EstacionDeBomberos extends Unidad {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws NoSePuedeConstruirEnSuperficie {
+		if (!superficie.esTierra()) {
+			throw new NoSePuedeConstruirEnSuperficie();
+		}
 		return (superficie.esTierra());
 	}
-
-	// @Override
-	// public void aplicarDanio(double i) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-
-//	@Override
-//	public double getSalud() {
-//		// TODO revisar de hacerlo de otra forma
-//		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-//		// entiendan este mensaje nose si es lo mejor
-//		return 100;
-//	}
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {
@@ -84,6 +76,20 @@ public class EstacionDeBomberos extends Unidad {
 	public boolean estaContenidoEn(Mapa mapa) {
 		return mapa.ciudad().contiene(this);
 	}
+
+	// @Override
+	// public void aplicarDanio(double i) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+
+	// @Override
+	// public double getSalud() {
+	// // TODO revisar de hacerlo de otra forma
+	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+	// // entiendan este mensaje nose si es lo mejor
+	// return 100;
+	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/

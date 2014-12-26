@@ -17,6 +17,7 @@ import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -58,7 +59,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, NoSePuedeConstruirEnSuperficie {
 		super(5, 1);
 		this.capacidad = 100;
 		coordenada = coord;
@@ -117,7 +118,11 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws NoSePuedeConstruirEnSuperficie {
+		if (!superficie.esTierra()) {
+			throw new NoSePuedeConstruirEnSuperficie();
+		}
 		return superficie.esTierra();
 	}
 

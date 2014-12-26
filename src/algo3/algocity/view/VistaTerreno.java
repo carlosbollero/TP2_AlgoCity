@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import algo3.algocity.controller.ControladorMouse;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.terreno.Superficie;
+import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class VistaTerreno extends JPanel implements Observer {
 
@@ -20,17 +20,14 @@ public class VistaTerreno extends JPanel implements Observer {
 	Coordenada coordenada;
 	Mapa mapa;
 	Image imagen;
-
-	public VistaTerreno(Superficie superficie, Coordenada coord) {
-		coordenada = coord;
-		imagen = (superficie.esAgua()) ? new ImageIcon("img/water.png")
-				.getImage() : new ImageIcon("img/dirt.png").getImage();
-	}
+	MapaEdilicio ciudad;
 
 	public VistaTerreno(Mapa mapa, Coordenada coord) {
 		this.mapa = mapa;
+		ciudad = mapa.ciudad();
 		coordenada = coord;
 		mapa.addObserver(this);
+		ciudad.addObserver(this);
 		addMouseListener(new ControladorMouse(mapa, this));
 		setImagen();
 	}

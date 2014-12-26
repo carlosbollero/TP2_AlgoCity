@@ -10,6 +10,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -27,7 +28,8 @@ public class PozoDeAgua extends Unidad {
 
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			NoSePuedeConstruirEnSuperficie {
 		super(250, 0);
 		coordenada = coord;
 
@@ -37,7 +39,11 @@ public class PozoDeAgua extends Unidad {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws NoSePuedeConstruirEnSuperficie {
+		if (!superficie.esAgua()) {
+			throw new NoSePuedeConstruirEnSuperficie();
+		}
 		return superficie.esAgua();
 	}
 
@@ -47,13 +53,13 @@ public class PozoDeAgua extends Unidad {
 	//
 	// }
 
-//	@Override
-//	public double getSalud() {
-//		// TODO revisar de hacerlo de otra forma
-//		// por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-//		// entiendan este mensaje nose si es lo mejor
-//		return 100;
-//	}
+	// @Override
+	// public double getSalud() {
+	// // TODO revisar de hacerlo de otra forma
+	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
+	// // entiendan este mensaje nose si es lo mejor
+	// return 100;
+	// }
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {

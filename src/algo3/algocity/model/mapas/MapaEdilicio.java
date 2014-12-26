@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Map.Entry;
 
 import org.w3c.dom.Document;
@@ -28,7 +29,7 @@ import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 
-public class MapaEdilicio {
+public class MapaEdilicio extends Observable {
 
 	Mapa mapaSuperior;
 	HashMap<Coordenada, Unidad> mapa;
@@ -76,31 +77,43 @@ public class MapaEdilicio {
 
 	public boolean agregar(PozoDeAgua p) {
 		mapa.put(p.coordenada(), p);
+		setChanged();
+		notifyObservers();
 		return pozosDeAgua.add(p);
 	}
 
 	public boolean agregar(EstacionDeBomberos e) {
 		mapa.put(e.coordenada(), e);
+		setChanged();
+		notifyObservers();
 		return estacionesBomberos.add(e);
 	}
 
 	public boolean agregar(UnidadResidencial u) {
 		mapa.put(u.coordenada(), u);
+		setChanged();
+		notifyObservers();
 		return unidadesResidenciales.add(u);
 	}
 
 	public boolean agregar(UnidadIndustrial u) {
 		mapa.put(u.coordenada(), u);
+		setChanged();
+		notifyObservers();
 		return unidadesIndustriales.add(u);
 	}
 
 	public boolean agregar(UnidadComercial u) {
 		mapa.put(u.coordenada(), u);
+		setChanged();
+		notifyObservers();
 		return unidadesComerciales.add(u);
 	}
 
 	public boolean agregar(UnidadEnergetica u) {
 		mapa.put(u.coordenada(), u);
+		setChanged();
+		notifyObservers();
 		return unidadesEnergeticas.add(u);
 	}
 
@@ -135,6 +148,8 @@ public class MapaEdilicio {
 
 	public void remover(int x, int y) {
 		this.mapa.remove(new Coordenada(x, y));
+		setChanged();
+		notifyObservers();
 	}
 
 	public boolean contiene(Unidad unaUnidad) {
