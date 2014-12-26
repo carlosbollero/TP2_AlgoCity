@@ -10,15 +10,14 @@ public class MapaTuberias extends MapaConexiones {
 	}
 
 	public boolean agregar(Tuberia tuberia) {
-		if (!contiene(tuberia) && !tieneCoordenadaOcupada(tuberia.coordenada())) {
-//			mapaConectores.put(tuberia.coordenada(), tuberia);
-			grafo.addVertex(tuberia);
-			actualizarGrafo(tuberia);
-			setChanged();
-			notifyObservers();
-			return true;
+		if (contiene(tuberia) || tieneCoordenadaOcupada(tuberia.coordenada())) {
+			return false;
 		}
-		return false;
+		grafo.addVertex(tuberia);
+		actualizarGrafo(tuberia);
+		setChanged();
+		notifyObservers();
+		return true;
 	}
 
 	@Override

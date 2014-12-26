@@ -17,14 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 import algo3.algocity.controller.AccionMouseComenzarConJugadorExistente;
 import algo3.algocity.controller.AccionMouseVolverMenuJugadorNuevoOExistente;
-import algo3.algocity.model.Juego;
 import algo3.algocity.model.RegistroUsuarios;
-import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 
 public class VistaJugadorExistenteMenu extends JPanel {
 

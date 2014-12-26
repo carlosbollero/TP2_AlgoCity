@@ -20,7 +20,6 @@ public class MapaRutas extends MapaConexiones {
 			return false;
 		}
 		listado.add(ruta);
-//		mapaConectores.put(ruta.coordenada(), ruta);
 		grafo.addVertex(ruta);
 		actualizarGrafo(ruta);
 		setChanged();

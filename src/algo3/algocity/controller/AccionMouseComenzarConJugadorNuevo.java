@@ -11,7 +11,6 @@ import algo3.algocity.model.Poblacion;
 import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.model.Turno;
 import algo3.algocity.model.Usuario;
-import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.view.Ventana;

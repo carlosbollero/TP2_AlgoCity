@@ -226,22 +226,5 @@ public class MapaTerritorio {
 
 		return mapaTerritorio;
 	}
-
-	/* Para probar */
-	public void imprimirTerritorio() {
-		for (Map.Entry e : this.mapa.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Superficie valor = (Superficie) e.getValue();
-
-			System.out.println(String.valueOf(clave.getX()));
-			System.out.println(String.valueOf(clave.getY()));
-			if (valor.esTierra()) {
-				System.out.println("T");
-			}
-			if (valor.esAgua()) {
-				System.out.println("A");
-			}
-		}
-	}
 	
 }
