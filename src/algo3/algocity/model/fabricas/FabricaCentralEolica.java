@@ -7,7 +7,7 @@ import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -15,7 +15,7 @@ public class FabricaCentralEolica implements FabricaEnergetica {
 
 	public UnidadEnergetica construir(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
 
 		return new CentralEolica(mapa, dinero, coordenada);

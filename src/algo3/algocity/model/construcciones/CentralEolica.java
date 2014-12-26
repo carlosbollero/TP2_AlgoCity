@@ -9,7 +9,7 @@ import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -22,7 +22,7 @@ public class CentralEolica extends UnidadEnergetica {
 
 	public CentralEolica(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		super(1000, 100, 4);
 		this.coordenada = coord;

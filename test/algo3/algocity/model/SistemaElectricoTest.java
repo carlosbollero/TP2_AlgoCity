@@ -11,7 +11,7 @@ import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaCentralMinera;
 import algo3.algocity.model.fabricas.FabricaCentralNuclear;
@@ -27,7 +27,7 @@ public class SistemaElectricoTest {
 	@Test
 	public void testSeAumentaLaCapacidadAlCrearUnidadesEnergeticas()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -59,7 +59,7 @@ public class SistemaElectricoTest {
 	@Test
 	public void testSeAumentaElConsumoAlCrearUnidadesQueConsumen()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException {

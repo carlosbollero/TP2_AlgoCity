@@ -11,7 +11,7 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -27,7 +27,7 @@ public class EstacionDeBomberos extends Unidad {
 	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException,
-			NoSePuedeConstruirEnSuperficie {
+			SuperficieInvalidaParaConstruir {
 
 		super(1500, 0);
 		coordenada = coord;
@@ -59,9 +59,9 @@ public class EstacionDeBomberos extends Unidad {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		if (!superficie.esTierra()) {
-			throw new NoSePuedeConstruirEnSuperficie();
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return (superficie.esTierra());
 	}

@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.terreno.Superficie;
 import algo3.algocity.model.terreno.SuperficieAgua;
 import algo3.algocity.model.terreno.SuperficieTierra;
@@ -79,13 +79,13 @@ public class MapaTerritorio {
 	}
 
 	public boolean sePuedeConstruir(Unidad unidad)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		return unidad.esConstruibleEn(superficie(unidad.coordenada())
 				.getSuperficie());
 	}
 
 	public boolean sePuedeConstruir(Conector conector)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		return conector.esConstruibleEn(superficie(conector.coordenada())
 				.getSuperficie());
 	}

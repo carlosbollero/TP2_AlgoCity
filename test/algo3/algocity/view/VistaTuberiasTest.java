@@ -6,7 +6,7 @@ import algo3.algocity.model.Juego;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaTuberias;
 import algo3.algocity.model.mapas.Coordenada;
 
@@ -15,7 +15,7 @@ public class VistaTuberiasTest {
 	@Test
 	public void testSeCreanTuberiasYSeMuestranEnLaGUI()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		Juego j = new Juego();
 		Ventana v = new Ventana(j);
 		j.mapa().agregar(

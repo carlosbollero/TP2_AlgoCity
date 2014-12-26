@@ -16,7 +16,7 @@ import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaCentralMinera;
 import algo3.algocity.model.fabricas.FabricaCentralNuclear;
@@ -52,7 +52,7 @@ public class MapasIntegralTest {
 	@Test
 	public void testSeCreaUnidadResidencialSiCumpleConRequisitos()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException {
@@ -193,7 +193,7 @@ public class MapasIntegralTest {
 	@Test
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos()
 			throws FondosInsuficientesException,
-			NoSeCumplenLosRequisitosException, NoSePuedeConstruirEnSuperficie,
+			NoSeCumplenLosRequisitosException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -223,7 +223,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		m.setTerritorioTierraParaTest();
@@ -270,7 +270,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -322,7 +322,7 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
@@ -367,7 +367,7 @@ public class MapasIntegralTest {
 	@Test
 	public void testSeDanianUnidadesDelMapaYElReparadorLasRepara()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException {

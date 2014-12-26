@@ -16,7 +16,7 @@ import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -45,7 +45,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException,
 			NoHayConexionConRedElectrica, NoHayConexionConRutas,
-			CoordenadaInvalidaException, NoSePuedeConstruirEnSuperficie {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 
 		super(10, 5);
 		this.capacidad = 25;
@@ -101,9 +101,9 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		if (!superficie.esTierra()) {
-			throw new NoSePuedeConstruirEnSuperficie();
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esTierra();
 	}

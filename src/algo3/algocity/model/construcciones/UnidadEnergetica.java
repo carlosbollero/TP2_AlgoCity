@@ -7,7 +7,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -77,9 +77,9 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		if (!superficie.esTierra()) {
-			throw new NoSePuedeConstruirEnSuperficie();
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esTierra();
 	}

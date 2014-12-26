@@ -9,7 +9,7 @@ import algo3.algocity.model.Dinero;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -31,7 +31,7 @@ public class Tuberia implements Conector {
 
 	public Tuberia(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			CoordenadaInvalidaException {
 		costo = 5;
 		this.coordenada = coordenada;
@@ -48,9 +48,9 @@ public class Tuberia implements Conector {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		if (!(superficie.esTierra() || superficie.esAgua())) {
-			throw new NoSePuedeConstruirEnSuperficie();
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return true;
 	}

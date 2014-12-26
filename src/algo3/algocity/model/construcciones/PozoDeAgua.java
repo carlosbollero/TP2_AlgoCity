@@ -10,7 +10,7 @@ import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -29,7 +29,7 @@ public class PozoDeAgua extends Unidad {
 	public PozoDeAgua(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException,
-			NoSePuedeConstruirEnSuperficie {
+			SuperficieInvalidaParaConstruir {
 		super(250, 0);
 		coordenada = coord;
 
@@ -40,9 +40,9 @@ public class PozoDeAgua extends Unidad {
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		if (!superficie.esAgua()) {
-			throw new NoSePuedeConstruirEnSuperficie();
+			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esAgua();
 	}

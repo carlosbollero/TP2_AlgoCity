@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.MapaTerritorio;
 
@@ -33,7 +33,7 @@ public class MapaTerritorioTest {
 	 * sin ninguna posicion con agua*/
 	@Test
 	public void testSePuedeConsultarSuSePuedeConstruirEnUnaCoordenadaDeAgua()
-			throws NoSePuedeConstruirEnSuperficie {
+			throws SuperficieInvalidaParaConstruir {
 		mt = new MapaTerritorio(tamanio);
 		
 		Coordenada coord = mt.posicionConAgua();

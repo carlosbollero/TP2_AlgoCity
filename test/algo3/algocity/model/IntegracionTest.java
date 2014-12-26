@@ -18,7 +18,7 @@ import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.fabricas.FabricaPozoAgua;
@@ -39,7 +39,7 @@ public class IntegracionTest {
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie, CoordenadaInvalidaException {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
