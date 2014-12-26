@@ -9,6 +9,7 @@ import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -19,7 +20,7 @@ public class FabricaUnidadIndustrial implements FabricaUnidades {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException,
 			NoHayConexionConRedElectrica, NoHayConexionConRutas,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 
 		return new UnidadIndustrial(mapa, dinero, coordenada);
 	}

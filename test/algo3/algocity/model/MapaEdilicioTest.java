@@ -15,6 +15,7 @@ import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
 import algo3.algocity.model.fabricas.FabricaLineaTension;
 import algo3.algocity.model.mapas.Coordenada;
@@ -74,7 +75,7 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testSePuedeConsultarSiUnUbicableEstaEnElMapa()
-			throws CoordenadaInvalidaException{
+			throws CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 
 		Unidad u = new UnidadResidencial(new Coordenada(1, 1));
@@ -85,7 +86,8 @@ public class MapaEdilicioTest {
 
 	@Test
 	public void testNoSePuedeConstruirFueraDeLimiteDelMapa()
-			throws NoSeCumplenLosRequisitosException, FondosInsuficientesException {
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 

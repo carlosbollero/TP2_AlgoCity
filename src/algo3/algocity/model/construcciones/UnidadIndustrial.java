@@ -19,7 +19,6 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.terreno.Superficie;
 
 public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		Visitable {
@@ -99,14 +98,14 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
-	@Override
-	public boolean esConstruibleEn(Superficie superficie)
-			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esTierra()) {
-			throw new SuperficieInvalidaParaConstruir();
-		}
-		return superficie.esTierra();
-	}
+//	@Override
+//	public boolean esConstruibleEn(Superficie superficie)
+//			throws SuperficieInvalidaParaConstruir {
+//		if (!superficie.esTierra()) {
+//			throw new SuperficieInvalidaParaConstruir();
+//		}
+//		return superficie.esTierra();
+//	}
 
 	private boolean hayConexionesEn(Mapa mapa)
 			throws NoHayConexionConRedElectrica, NoHayConexionConRutas {

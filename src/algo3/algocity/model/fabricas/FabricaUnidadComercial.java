@@ -9,18 +9,19 @@ import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class FabricaUnidadComercial implements FabricaUnidades {
 
 	@Override
-	public UnidadComercial construir(Mapa mapa, Dinero dinero, Coordenada coordenada)
-			throws NoSeCumplenLosRequisitosException,
+	public UnidadComercial construir(Mapa mapa, Dinero dinero,
+			Coordenada coordenada) throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 
 		return new UnidadComercial(mapa, dinero, coordenada);
 	}

@@ -12,9 +12,10 @@ import algo3.algocity.model.mapas.Mapa;
 
 public interface FabricaEnergetica {
 
-	public abstract UnidadEnergetica construir(Mapa mapa, Dinero dinero, Coordenada coordenada)
-			throws NoSeCumplenLosRequisitosException,
+	public abstract UnidadEnergetica construir(Mapa mapa, Dinero dinero,
+			Coordenada coordenada) throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
-			NoHayConexionConTuberias, CoordenadaInvalidaException;
+			NoHayConexionConTuberias, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir;
 
 }

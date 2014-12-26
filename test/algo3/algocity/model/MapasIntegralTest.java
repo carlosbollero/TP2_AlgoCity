@@ -111,7 +111,7 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoSeCumplenLosRequisitosException,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 
@@ -132,7 +132,7 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRedElectrica, NoSeCumplenLosRequisitosException,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		fu = new FabricaUnidadResidencial();
@@ -153,7 +153,7 @@ public class MapasIntegralTest {
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 		m.setTerritorioAguaParaTest();
@@ -175,7 +175,7 @@ public class MapasIntegralTest {
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			CoordenadaInvalidaException {
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
 
