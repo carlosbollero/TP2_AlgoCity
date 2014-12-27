@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import algo3.algocity.view.VistaVentanaAcerca;
 
-public class AccionMouseAcerca implements ActionListener {
+public class AccionMenuAcerca implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

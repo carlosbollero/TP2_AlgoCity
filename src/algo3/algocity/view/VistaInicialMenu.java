@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import algo3.algocity.controller.AccionMouseContinuarPartida;
-import algo3.algocity.controller.AccionMouseSalirJuego;
+import algo3.algocity.controller.AccionMenuSalirJuego;
 import algo3.algocity.controller.AccionMouseVerPuntajes;
 
 public class VistaInicialMenu extends JPanel{
@@ -72,7 +72,7 @@ public class VistaInicialMenu extends JPanel{
 		
 		add(bSalir);
 		bSalir.setAlignmentX(Component.CENTER_ALIGNMENT);
-		bSalir.addActionListener(new AccionMouseSalirJuego());
+		bSalir.addActionListener(new AccionMenuSalirJuego());
 	}
 	
 	/*Setea la imagen de fondo del panel*/

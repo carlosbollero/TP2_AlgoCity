@@ -30,7 +30,7 @@ public class VistaTerreno extends JPanel implements Observer {
 		coordenada = coord;
 //		mapa.addObserver(this);
 //		ciudad.addObserver(this);
-		addMouseListener(new ControladorMouse(mapa, this, vMapa, juego));
+		addMouseListener(new ControladorMouse(mapa, coord, vMapa, juego));
 		unidad = null;
 		setImagen();
 	}

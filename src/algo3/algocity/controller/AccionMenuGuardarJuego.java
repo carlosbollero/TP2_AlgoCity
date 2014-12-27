@@ -6,11 +6,11 @@ import java.io.IOException;
 
 import algo3.algocity.model.Juego;
 
-public class AccionMouseGuardarJuego implements ActionListener {
+public class AccionMenuGuardarJuego implements ActionListener {
 
 	Juego juego;
 
-	public AccionMouseGuardarJuego(Juego juego) {
+	public AccionMenuGuardarJuego(Juego juego) {
 		 this.juego = juego;
 	}
 

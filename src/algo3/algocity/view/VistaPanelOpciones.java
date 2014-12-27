@@ -22,7 +22,8 @@ import algo3.algocity.controller.accionboton.AccionBotonTuberia;
 public class VistaPanelOpciones extends JPanel {
 
 	private static final long serialVersionUID = 6011424322780190648L;
-
+	
+	Ventana ventana;
 	VistaMapa vMapa;
 	JButton b_residencial;
 	JButton b_comercial;
@@ -36,9 +37,10 @@ public class VistaPanelOpciones extends JPanel {
 	JButton b_tuberia;
 	JButton b_pozoDeAgua;
 	JButton b_buldozer;
-
-	public VistaPanelOpciones(VistaMapa vMapa) {
-		this.vMapa = vMapa;
+	
+	public VistaPanelOpciones(Ventana ventana) {
+		this.ventana = ventana;
+		vMapa = ventana.getVistaPanelDer().getVistaMapa();
 		setPreferredSize(new Dimension(200, 550));
 		setLayout(new GridLayout(4, 3));
 		inicializarMenu();

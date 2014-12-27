@@ -1,11 +1,9 @@
 package algo3.algocity.view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Mapa;
@@ -17,9 +15,10 @@ public class Ventana extends JFrame {
 	int tamanio;
 	Juego juego;
 	Mapa mapa;
-	VistaMapa mapaVista ;
 
-	JPanel panelDer, panelIzq;
+	VistaPanelDer panelDer;
+	VistaPanelIzq panelIzq;
+	VistaPanelSup panelSup;
 
 	public Ventana(Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
@@ -32,34 +31,23 @@ public class Ventana extends JFrame {
 	}
 
 	private void setPanelSup() {
-		setJMenuBar(new VistaPanelSup(panelDer, juego));
-
+		panelSup = new VistaPanelSup(juego, this);
+		setJMenuBar(panelSup);
 	}
 
 	private void setPanelDer() {
-		panelDer = new JPanel();
-		panelDer.setLayout(new CardLayout());
-		VistaMapaSubterraneo vistaMapaSubterraneo = new VistaMapaSubterraneo(mapa);
-		panelDer.add(vistaMapaSubterraneo, "subterraneo");
-		mapaVista = new VistaMapa(mapa, juego);
-		panelDer.add(mapaVista, "superficie");
-		add(panelDer);
-		((CardLayout) panelDer.getLayout()).show(panelDer, "superficie");
+		panelDer = new VistaPanelDer(juego, this);
+		add(panelDer, BorderLayout.CENTER);
 
 	}
 
 	private void setPanelIzq() {
-		panelIzq = new JPanel();
-		panelIzq.setPreferredSize(new Dimension(200, 600));
-		panelIzq.setLayout(new BorderLayout());
+		panelIzq = new VistaPanelIzq(juego, this);
 		add(panelIzq, BorderLayout.WEST);
-		panelIzq.add(new VistaPanelInfo(juego), BorderLayout.NORTH);
-		panelIzq.add(new VistaPanelOpciones(mapaVista), BorderLayout.CENTER);
-
 	}
 
 	private void acomodar() {
-		 setPreferredSize(new Dimension (800, 600));
+		setPreferredSize(new Dimension(800, 600));
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -68,6 +56,18 @@ public class Ventana extends JFrame {
 
 	}
 	
+	public VistaPanelSup getVistaPanelSup(){
+		return panelSup;
+	}
+
+	public VistaPanelDer getVistaPanelDer() {
+		return panelDer;
+	}
+
+	public VistaPanelIzq getVistaPanelIzq() {
+		return panelIzq;
+	}
+
 	public static void main(String[] args) {
 		new Ventana(new Juego());
 	}

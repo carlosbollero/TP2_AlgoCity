@@ -20,14 +20,12 @@ public class VistaMapa extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 5750354545703155652L;
 
-	FabricaEnergetica energetica;
-	FabricaUnidades unidades;
-	FabricaConectores conectores;
+//	FabricaEnergetica energetica;
+//	FabricaUnidades unidades;
+//	FabricaConectores conectores;
 	Mapa mapa;
 	HashMap<Coordenada, JPanel> territorio;
 	JPanel[][] tabla;
-	// JTable grilla;
-	// LinkedList<JPanel> territorio;
 	Juego juego;
 
 	public VistaMapa(Mapa mapa, Juego juego) {
@@ -36,7 +34,7 @@ public class VistaMapa extends JPanel implements Observer {
 		this.juego = juego;
 		this.mapa = mapa;
 
-		mapa.addObserver(this);
+//		mapa.addObserver(this);
 		mapa.ciudad().addObserver(this);
 		territorio = new HashMap<Coordenada, JPanel>();
 		tabla = new JPanel[mapa.tamanio()][mapa.tamanio()];
@@ -77,6 +75,21 @@ public class VistaMapa extends JPanel implements Observer {
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	
 
 	public void aniadirConector(FabricaConectores conector) {
 		conectores = conector;
@@ -119,5 +132,10 @@ public class VistaMapa extends JPanel implements Observer {
 		this.unidades = null;
 		this.conectores = null;
 	}
+
+	public void construir(Coordenada coordenada) {
+		// TODO Auto-generated method stub
+		
+	}*/
 
 }

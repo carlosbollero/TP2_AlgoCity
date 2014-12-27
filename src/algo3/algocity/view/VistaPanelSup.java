@@ -1,15 +1,16 @@
 package algo3.algocity.view;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import algo3.algocity.controller.AccionMouseAcerca;
-import algo3.algocity.controller.AccionMouseGuardarJuego;
-import algo3.algocity.controller.AccionMouseSalirJuego;
-import algo3.algocity.controller.AccionMouseVistaSubterranea;
-import algo3.algocity.controller.AccionMouseVistaSuperficial;
+import algo3.algocity.controller.AccionMenuAcerca;
+import algo3.algocity.controller.AccionMenuGuardarJuego;
+import algo3.algocity.controller.AccionMenuSalirJuego;
+import algo3.algocity.controller.AccionMenuVistaSubterranea;
+import algo3.algocity.controller.AccionMenuVistaSuperficial;
 import algo3.algocity.model.Juego;
 
 public class VistaPanelSup extends JMenuBar {
@@ -19,6 +20,9 @@ public class VistaPanelSup extends JMenuBar {
 	Juego juego;
 	VistaMapa vistaMapa;
 	VistaMapaSubterraneo vistaMapaSub;
+	
+	JPanel panelDer;
+	JFrame ventana;
 
 	JMenu m_archivo;
 	JMenuItem i_guardar;
@@ -30,22 +34,10 @@ public class VistaPanelSup extends JMenuBar {
 
 	JMenu m_ayuda;
 	JMenuItem i_acerca;
-	
-	JPanel panelDer;
 
-	public VistaPanelSup(VistaMapa vista, VistaMapaSubterraneo vistaSub, Juego juego) {
+	public VistaPanelSup(Juego juego, Ventana ventana) {
 		this.juego = juego;
-		vistaMapa = vista;
-		this.vistaMapaSub = vistaSub;
-		setMenuArchivo();
-		setMenuVista();
-		setMenuAyuda();
-
-	}
-	
-	public VistaPanelSup(JPanel panel, Juego juego) {
-		this.juego = juego;
-		this.panelDer = panel;
+		panelDer = ventana.getVistaPanelDer();
 		setMenuArchivo();
 		setMenuVista();
 		setMenuAyuda();
@@ -54,9 +46,9 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuArchivo() {
 		m_archivo = new JMenu("Archivo");
 		i_guardar = new JMenuItem("Guardar");
-		i_guardar.addActionListener(new AccionMouseGuardarJuego(juego));
+		i_guardar.addActionListener(new AccionMenuGuardarJuego(juego));
 		i_salir = new JMenuItem("Salir");
-		i_salir.addActionListener(new AccionMouseSalirJuego());
+		i_salir.addActionListener(new AccionMenuSalirJuego());
 		m_archivo.add(i_guardar);
 		m_archivo.addSeparator();
 		m_archivo.add(i_salir);
@@ -67,9 +59,11 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuVista() {
 		m_vista = new JMenu("Vista");
 		i_superficial = new JMenuItem("Superficial");
-		i_superficial.addActionListener(new AccionMouseVistaSuperficial(panelDer));
+		i_superficial.addActionListener(new AccionMenuVistaSuperficial(
+				panelDer));
 		i_subterranea = new JMenuItem("Subterranea");
-		i_subterranea.addActionListener(new AccionMouseVistaSubterranea(panelDer));
+		i_subterranea.addActionListener(new AccionMenuVistaSubterranea(
+				panelDer));
 		m_vista.add(i_superficial);
 		m_vista.add(i_subterranea);
 
@@ -79,7 +73,7 @@ public class VistaPanelSup extends JMenuBar {
 	private void setMenuAyuda() {
 		m_ayuda = new JMenu("Ayuda");
 		i_acerca = new JMenuItem("Acerca");
-		 i_acerca.addActionListener(new AccionMouseAcerca());
+		i_acerca.addActionListener(new AccionMenuAcerca());
 		m_ayuda.add(i_acerca);
 
 		add(m_ayuda);

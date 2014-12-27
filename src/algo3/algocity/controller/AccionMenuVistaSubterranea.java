@@ -6,19 +6,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-public class AccionMouseVistaSuperficial implements ActionListener {
+public class AccionMenuVistaSubterranea implements ActionListener {
 	
 	JPanel panel;
 	
-	public AccionMouseVistaSuperficial(JPanel panel) {
+	public AccionMenuVistaSubterranea(JPanel panel) {
 		this.panel = panel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		((CardLayout) panel.getLayout()).show(panel, "superficie");
-		
+		((CardLayout) panel.getLayout()).show(panel, "subterraneo");
 	}
-
 
 }

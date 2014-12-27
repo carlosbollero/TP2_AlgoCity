@@ -2,6 +2,7 @@ package algo3.algocity.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -9,15 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.text.StyleConstants;
 
 public class VistaVentanaAcerca extends JFrame {
 
 	private static final long serialVersionUID = -1474006066988397183L;
 	
-	JTextPane texto;
-	JTextPane titulo;
+	JTextPane texto, link;
 	JPanel panel;
 
+	String vinculo = "https://github.com/carlosbollero/TP2_AlgoCity";
 	String alumnos = "   Alumnos:";
 	String alumno1 = "\n    Olivera, Rodrigo";
 	String alumno2 = "\n    Botalla, Tomas";
@@ -31,10 +33,19 @@ public class VistaVentanaAcerca extends JFrame {
 		texto.setBackground(null);
 		texto.setFocusable(false);
 		
+		link = new JTextPane();
+		link.setText(vinculo);
+		link.setEditable(false);
+		link.setBackground(null);
+		link.setFont(new Font("Serif", Font.ITALIC, 11));
+		link.setAlignmentX(StyleConstants.ALIGN_CENTER);
+		link.setFocusable(true);
+		
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.add(new ImagenAlgoCity(), BorderLayout.CENTER);
 		panel.add(texto, BorderLayout.EAST);
+		panel.add(link, BorderLayout.SOUTH);
 		
 		add(panel);
 		
