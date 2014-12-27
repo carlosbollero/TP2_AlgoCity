@@ -271,6 +271,7 @@ public class Mapa extends Observable {
 
 		Element sistemaElectrico = this.sistemaElectrico.getElement(doc);
 		mapa.appendChild(sistemaElectrico);
+		
 		Element ciudad = doc.createElement("ciudad");
 		mapa.appendChild(ciudad);
 		ciudad = this.ciudad.getElement(doc, ciudad);

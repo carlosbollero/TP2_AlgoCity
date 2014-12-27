@@ -50,11 +50,6 @@ public class RegistroUsuarios {
 		listaPuntajes = new HashMap<String, Integer>();
 
 		iniciar();
-		// try {
-		// leerUsuarios();
-		// } catch (NoSeEncontroElFicheroException e) {
-		// crearDirectorio();
-		// }
 	}
 
 	private void iniciar() throws SAXException, IOException,

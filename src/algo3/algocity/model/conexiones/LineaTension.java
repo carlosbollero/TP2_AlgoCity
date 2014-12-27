@@ -15,6 +15,7 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
+import algo3.algocity.model.Constantes;
 
 public class LineaTension implements Conector, Daniable, Visitable {
 

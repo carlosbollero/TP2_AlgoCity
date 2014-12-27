@@ -113,16 +113,13 @@ public class MapaTuberias extends MapaConexiones {
 									"Tuberia")) {
 								Tuberia tb = new Tuberia(mapa,d,puntoAAgregar);
 								tb.fromElement(hijoDeNodo);
-								//tb.setCoordenadas(puntoAAgregar);
 								mapaTuberias.agregar(tb);
-								//mapaTuberias.mapaConectores.put(puntoAAgregar,tb);
 							} 
 						}
 					}
 				}
 			} 
 		}
-		// imprimirMapaConexiones(mapaConexiones);
 		return mapaTuberias;
 	}
 }

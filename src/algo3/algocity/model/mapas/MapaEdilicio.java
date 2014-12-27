@@ -145,6 +145,18 @@ public class MapaEdilicio extends Observable {
 	public ArrayList<EstacionDeBomberos> getestacionesDeBomberos() {
 		return estacionesBomberos;
 	}
+	
+	public ArrayList<UnidadComercial> getUnidadesComerciales(){
+		return this.unidadesComerciales;
+	}
+	
+	public ArrayList<UnidadResidencial> getUnidadesResidenciales(){
+		return this.unidadesResidenciales;
+	}
+	
+	public ArrayList<UnidadIndustrial> getUnidadesIndustriales(){
+		return this.unidadesIndustriales;
+	}
 
 	public ArrayList<Daniable> unidadesDaniables() {
 		// return unidadesDaniables;
@@ -310,24 +322,141 @@ public class MapaEdilicio extends Observable {
 		Element mapa = doc.createElement("mapa");
 		ciudad.appendChild(mapa);
 
-		/* Serializacion de unidades del mapa */
-		for (Map.Entry e : this.mapa.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Unidad valor = (Unidad) e.getValue();
+		
+//TODO, falta inicializar estas listas en mapaEdilicio
+		
+		/*Escritura de pozos de agua*/
+		ArrayList<PozoDeAgua> pozosDeAgua = this.mapaSuperior.ciudad().getPozosDeAgua();
+		Iterator<PozoDeAgua> it0 = pozosDeAgua.iterator();
+		while(it0.hasNext()){
+			PozoDeAgua pa = it0.next();
 
 			Element nodo = doc.createElement("Nodo");
 			mapa.appendChild(nodo);
 
 			Element point = doc.createElement("Coordenada");
 			nodo.appendChild(point);
-			point.setTextContent(String.valueOf((int) clave.getX()) + ","
-					+ String.valueOf((int) clave.getY()));
+			point.setTextContent(String.valueOf((int) pa.coordenada().getX()) + ","
+					+ String.valueOf((int) pa.coordenada().getY()));
 
-			Element unidad = valor.getElement(doc);
-			nodo.appendChild(unidad);
+			Element unidad = pa.getElement(doc);
+			nodo.appendChild(unidad);	
 		}
+		
+		/*Escritura de estaciones de bomberos*/
+		ArrayList<EstacionDeBomberos> estacionesDeBomberos = this.mapaSuperior.ciudad().getestacionesDeBomberos();
+		Iterator<EstacionDeBomberos> it1 = estacionesDeBomberos.iterator();
+		while(it1.hasNext()){
+			EstacionDeBomberos eb = it1.next();
 
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) eb.coordenada().getX()) + ","
+					+ String.valueOf((int) eb.coordenada().getY()));
+
+			Element unidad = eb.getElement(doc);
+			nodo.appendChild(unidad);	
+		}
+		
+		/*Escritura de unidades energeticas*/
+		ArrayList<UnidadEnergetica> unidadesEnergeticas = this.mapaSuperior.ciudad().getUnidadesEnergeticas();
+		Iterator<UnidadEnergetica> it2 = unidadesEnergeticas.iterator();
+		while(it2.hasNext()){
+			UnidadEnergetica eb = it2.next();
+
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) eb.coordenada().getX()) + ","
+					+ String.valueOf((int) eb.coordenada().getY()));
+
+			Element unidad = eb.getElement(doc);
+			nodo.appendChild(unidad);	
+		}
+		
+		/*Escritura de unidades comerciales*/
+		ArrayList<UnidadComercial> unidadesComerciales = this.mapaSuperior.ciudad().getUnidadesComerciales();
+		Iterator<UnidadComercial> it3 = unidadesComerciales.iterator();
+		while(it3.hasNext()){
+			UnidadComercial eb = it3.next();
+
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) eb.coordenada().getX()) + ","
+					+ String.valueOf((int) eb.coordenada().getY()));
+
+			Element unidad = eb.getElement(doc);
+			nodo.appendChild(unidad);	
+		}
+		
+		/*Escritura de unidades industriales*/
+		ArrayList<UnidadIndustrial> unidadesIndustriales = this.mapaSuperior.ciudad().getUnidadesIndustriales();
+		Iterator<UnidadIndustrial> it4 = unidadesIndustriales.iterator();
+		while(it4.hasNext()){
+			UnidadIndustrial eb = it4.next();
+
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) eb.coordenada().getX()) + ","
+					+ String.valueOf((int) eb.coordenada().getY()));
+
+			Element unidad = eb.getElement(doc);
+			nodo.appendChild(unidad);	
+		}
+		
+		/*Escritura de unidades residenciales*/
+		ArrayList<UnidadResidencial> unidadesResidenciales = this.mapaSuperior.ciudad().getUnidadesResidenciales();
+		Iterator<UnidadResidencial> it5 = unidadesResidenciales.iterator();
+		while(it5.hasNext()){
+			UnidadResidencial eb = it5.next();
+
+			Element nodo = doc.createElement("Nodo");
+			mapa.appendChild(nodo);
+
+			Element point = doc.createElement("Coordenada");
+			nodo.appendChild(point);
+			point.setTextContent(String.valueOf((int) eb.coordenada().getX()) + ","
+					+ String.valueOf((int) eb.coordenada().getY()));
+
+			Element unidad = eb.getElement(doc);
+			nodo.appendChild(unidad);	
+		}
+		
 		return ciudad;
+		
+		
+		//LAS UNIDADES SE TIENEN QUE ESCRIBIR NECESARIAMENTE EN EL ORDEN CORRECTO
+		//CON ESTA IMPLEMENTACION SE ESCRIBEN EN CUALQUIER ORDEN
+		//TODO
+//		/* Serializacion de unidades del mapa */
+//		for (Map.Entry e : this.mapa.entrySet()) {
+//			Coordenada clave = (Coordenada) e.getKey();
+//			Unidad valor = (Unidad) e.getValue();
+//
+//			Element nodo = doc.createElement("Nodo");
+//			mapa.appendChild(nodo);
+//
+//			Element point = doc.createElement("Coordenada");
+//			nodo.appendChild(point);
+//			point.setTextContent(String.valueOf((int) clave.getX()) + ","
+//					+ String.valueOf((int) clave.getY()));
+//
+//			Element unidad = valor.getElement(doc);
+//			nodo.appendChild(unidad);
+//		}
+//
+//		return ciudad;
 	}
 
 	public static MapaEdilicio fromElement(Node ciudad, Mapa mapa, Dinero d)

@@ -13,9 +13,9 @@ public interface Agregable {
 
 	public boolean estaContenidoEn(Mapa mapa);
 	
-	public static Agregable fromElement(Node child) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public static Agregable fromElement(Node child) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

@@ -1,8 +1,10 @@
 package algo3.algocity.model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -148,9 +150,9 @@ public class Juego {
 			// TODO
 			// falta cerrar el documento
 
-			// doc.close();
-			// InputStream in = new FileInputStream(this.usuario.ruta());
-			// in.close();
+			//doc.close();
+			InputStream in = new FileInputStream(this.usuario.ruta());
+			in.close();
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
