@@ -111,16 +111,13 @@ public class MapaRutas extends MapaConexiones {
 									"Ruta")) {
 								Ruta rt = new Ruta(mapa,d,puntoAAgregar);
 								rt.fromElement(hijoDeNodo);
-								//rt.setCoordenadas(puntoAAgregar);
 								mapaRutas.agregar(rt);
-								//mapaTuberias.mapaConectores.put(puntoAAgregar,tb);
 							} 
 						}
 					}
 				}
 			} 
 		}
-		// imprimirMapaConexiones(mapaConexiones);
 		return mapaRutas;
 	}
 }

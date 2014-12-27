@@ -17,7 +17,4 @@ public class Constantes {
 	public final int CONSUMO_U_INDUSTRIAL = 5;
 	public final int CONSUMO_U_COMERCIAL = 2;
 	public final int CONSUMO_U_RESIDENCIAL = 1;
-	
-	
-	
 }

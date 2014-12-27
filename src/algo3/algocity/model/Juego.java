@@ -192,10 +192,10 @@ public class Juego {
 		
 		Element dinero = this.dinero.getElement(doc);
 		juego.appendChild(dinero);
-
+		
 		Element mapa = this.mapa.getElement(doc);
 		juego.appendChild(mapa);
-
+		
 		return juego;
 	}
 

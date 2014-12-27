@@ -148,8 +148,6 @@ public abstract class MapaConexiones extends Observable {
 			Element conector = valor.getElement(doc);
 			nodo.appendChild(conector);
 		}
-		// TODO
-		// El grafo no es necesario serializarlo?
 		return red;
 	}
 

@@ -37,22 +37,32 @@ public class RegistroUsuarios {
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
-	
-	public RegistroUsuarios() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
+
+	public RegistroUsuarios() throws SAXException, IOException,
+			ParserConfigurationException, NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
 
 		iniciar();
-//		try {
-//			leerUsuarios();
-//		} catch (NoSeEncontroElFicheroException e) {
-//			crearDirectorio();
-//		}
+		// try {
+		// leerUsuarios();
+		// } catch (NoSeEncontroElFicheroException e) {
+		// crearDirectorio();
+		// }
 	}
-	
-	private void iniciar() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
+
+	private void iniciar() throws SAXException, IOException,
+			ParserConfigurationException, NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		try {
 			leerUsuarios();
 		} catch (NoSeEncontroElFicheroException e) {
@@ -62,7 +72,11 @@ public class RegistroUsuarios {
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			IOException, ParserConfigurationException,
+			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
@@ -78,7 +92,11 @@ public class RegistroUsuarios {
 	}
 
 	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			SAXException, IOException, ParserConfigurationException,
+			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 
@@ -96,7 +114,7 @@ public class RegistroUsuarios {
 			leerUsuario(arrayUser[0]);
 		}
 	}
-	
+
 	private void crearDirectorio() {
 		File guardados = new File("saved");
 		if (!guardados.exists()) {
@@ -158,9 +176,7 @@ public class RegistroUsuarios {
 		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
-
 			if (unUsuario == usuarioAChequear) {
-
 				encontrado = true;
 			}
 		}

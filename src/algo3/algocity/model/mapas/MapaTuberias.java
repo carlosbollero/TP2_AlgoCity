@@ -83,8 +83,6 @@ public class MapaTuberias extends MapaConexiones {
 			Element conector = valor.getElement(doc);
 			nodo.appendChild(conector);
 		}
-		// TODO
-		// El grafo no es necesario serializarlo?
 		return red;
 	}
 	

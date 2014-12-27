@@ -103,16 +103,13 @@ public class MapaElectrico extends MapaConexiones {
 									"LineaTension")) {
 								LineaTension lt = new LineaTension(mapa,d,puntoAAgregar);
 								lt.fromElement(hijoDeNodo);
-								//lt.setCoordenadas(puntoAAgregar);
 								mapaElectrico.agregar(lt);
-								//mapaTuberias.mapaConectores.put(puntoAAgregar,tb);
 							} 
 						}
 					}
 				}
 			} 
 		}
-		// imprimirMapaConexiones(mapaConexiones);
 		return mapaElectrico;
 	}
 }
