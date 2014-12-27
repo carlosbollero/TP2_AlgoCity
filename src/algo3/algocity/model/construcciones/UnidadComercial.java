@@ -165,7 +165,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable uc) {
+	public boolean equals(Unidad uc) {
 		if (uc == this) {
 			return true;
 		} else if (uc.coordenada().getX() == this.coordenada().getX()

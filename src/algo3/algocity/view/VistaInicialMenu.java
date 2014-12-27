@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import algo3.algocity.controller.AccionMouseContinuarPartida;
+import algo3.algocity.controller.AccionMouseIniciarPartida;
 import algo3.algocity.controller.AccionMouseSalirJuego;
 import algo3.algocity.controller.AccionMouseVerPuntajes;
 
@@ -52,7 +53,7 @@ public class VistaInicialMenu extends JPanel{
 		
 		add(bIniciarPartida);
 		bIniciarPartida.setAlignmentX(Component.CENTER_ALIGNMENT);
-		bIniciarPartida.addActionListener(new AccionMouseContinuarPartida(ventanaPortadora));
+		bIniciarPartida.addActionListener(new AccionMouseIniciarPartida(ventanaPortadora));
 		
 		add(Box.createRigidArea(new Dimension(0,25)));
 		

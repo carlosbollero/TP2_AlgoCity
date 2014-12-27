@@ -14,9 +14,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 /**
  * Clase controladora del login y registro de usuarios
@@ -29,18 +37,8 @@ public class RegistroUsuarios {
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
-
-//<<<<<<< HEAD
-//	public RegistroUsuarios() throws NoSeEncontroElFicheroException,
-//			SAXException, IOException, ParserConfigurationException {
-//
-//		usuarios = new ArrayList<Usuario>();
-//		nombresUsuarios = new ArrayList<String>();
-//		listaPuntajes = new HashMap<String, Integer>();
-//		leerUsuarios();
-//=======
 	
-	public RegistroUsuarios() throws SAXException, IOException, ParserConfigurationException{
+	public RegistroUsuarios() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
 
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
@@ -54,7 +52,7 @@ public class RegistroUsuarios {
 //		}
 	}
 	
-	private void iniciar() throws SAXException, IOException, ParserConfigurationException{
+	private void iniciar() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
 		try {
 			leerUsuarios();
 		} catch (NoSeEncontroElFicheroException e) {
@@ -64,7 +62,7 @@ public class RegistroUsuarios {
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException {
+			IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
@@ -80,7 +78,7 @@ public class RegistroUsuarios {
 	}
 
 	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException {
+			SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 

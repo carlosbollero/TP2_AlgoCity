@@ -97,7 +97,7 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable cn) {
+	public boolean equals(Unidad cn) {
 		if (cn == this) {
 			return true;
 		} else if (cn.coordenada().getX() == this.coordenada().getX()

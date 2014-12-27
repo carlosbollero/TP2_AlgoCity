@@ -65,7 +65,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
-		hayConexionesEn(mapa);
+		hayConexionesEn(mapa); //este metodo es el q no cumplia cuando levnato de persist
 		mapa.sistemaElectrico().consumir(consumo);
 		dinero.cobrar(costo);
 	}
@@ -193,7 +193,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ur) {
+	public boolean equals(Unidad ur) {
 		if (ur == this) {
 			return true;
 		} else if (ur.coordenada().getX() == this.coordenada().getX()
@@ -203,5 +203,4 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		}
 		return false;
 	}
-
 }

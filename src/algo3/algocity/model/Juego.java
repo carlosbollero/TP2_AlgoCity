@@ -23,6 +23,14 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Juego {
@@ -157,8 +165,10 @@ public class Juego {
 		}
 	}
 
+	//Al recuperar una instancia de juego, esta debe ser valida
+	//y cumplir con todos sus requisitos
 	public Juego recuperar(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException {
+			IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
@@ -170,7 +180,7 @@ public class Juego {
 	
 	private Element getElement(Document doc) {
 		Element juego = doc.createElement("Juego");
-
+		
 		Element usuario = this.usuario.getElement(doc);
 		juego.appendChild(usuario);
 
@@ -190,28 +200,28 @@ public class Juego {
 	}
 
 	//La visibilidad no es private, pues RegistroUsuarios debe tener acceso a ella
-	static Juego fromElement(Element element) {
+	static Juego fromElement(Element element) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		Juego juego = new Juego();
 
 		NodeList hijosDeJuego = element.getChildNodes();
 		for (int i = 0; i < hijosDeJuego.getLength(); i++) {
 			Node hijoDeJuego = hijosDeJuego.item(i);
-			if (hijoDeJuego.getNodeName().equals("Mapa")) {
-				Mapa mapa = Mapa.fromElement(hijoDeJuego);
-				juego.mapa = mapa;
-			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
-				Dinero dinero = Dinero.fromElement(hijoDeJuego,juego.mapa);
-				juego.dinero = dinero;
-			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
-				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego,juego.mapa);
-				juego.poblacion = poblacion;
-			} else if (hijoDeJuego.getNodeName().equals("Usuario")) {
+			if (hijoDeJuego.getNodeName().equals("Usuario")) {
 				Usuario usuario = Usuario.fromElement(hijoDeJuego);
 				juego.usuario = usuario;
 			} else if (hijoDeJuego.getNodeName().equals("Turnos")) {
 				Turno turnos = Turno.fromElement(hijoDeJuego);
 				juego.turnos = turnos;
-			}
+			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
+				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego,juego.mapa);
+				juego.poblacion = poblacion;
+			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
+				Dinero dinero = Dinero.fromElement(hijoDeJuego,juego.mapa,juego.turnos,juego.poblacion);
+				juego.dinero = dinero;
+			} else if(hijoDeJuego.getNodeName().equals("Mapa")) {
+				Mapa mapa = Mapa.fromElement(hijoDeJuego,juego.mapa,juego.dinero,juego.turnos,juego.poblacion);
+				juego.mapa = mapa;
+			} 
 		}
 		juego.poblacion.actualizar(juego.mapa());
 		return juego;

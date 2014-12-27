@@ -18,7 +18,15 @@ import org.xml.sax.SAXException;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import algo3.algocity.model.Juego;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class VentanaInicial extends JFrame {
 
@@ -28,7 +36,7 @@ public class VentanaInicial extends JFrame {
 	AudioStream audioStream;
 
 	public VentanaInicial() throws LineUnavailableException, IOException,
-			UnsupportedAudioFileException, SAXException, ParserConfigurationException, NoSeEncontroElFicheroException {
+			UnsupportedAudioFileException, SAXException, ParserConfigurationException, NoSeEncontroElFicheroException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		super("Algoritmos 3 | AlgoCity");
 		initPanelFondo();
 		setPanelFondo();
@@ -59,20 +67,17 @@ public class VentanaInicial extends JFrame {
 		this.panelFondo = new JPanel();
 	}
 
-	private void setPanelFondo() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException {
+	private void setPanelFondo() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		panelFondo.setLayout(new CardLayout());
 
 		VistaInicial vista1 = new VistaInicial(this);
-		VistaJugadorNuevoOExistente vista2 = new VistaJugadorNuevoOExistente(
-				this);
 		VistaJugadorNuevo vista3 = new VistaJugadorNuevo(this);
 		VistaJugadorExistente vista4 = new VistaJugadorExistente(this);
 		VistaPuntajes vista5 = new VistaPuntajes(this);
 
 		/* El panel del fondo es uno solo y se va intercambiando su contenido */
 		panelFondo.add(vista1, "vistaInicial");
-		panelFondo.add(vista2, "vistaJugNuevoOExist");
 		panelFondo.add(vista3, "vistaJugNuevo");
 		panelFondo.add(vista4, "vistaJugExistente");
 		panelFondo.add(vista5, "vistaPuntajes");
@@ -80,18 +85,10 @@ public class VentanaInicial extends JFrame {
 		add(panelFondo);
 
 		mostrarVistaInicial();
-		// mostrarVistaJugadorNuevoOExistente();
-		// mostrarVistaJugadorNuevo();
-		// mostrarVistaJugadorExistente();
 	}
 
 	public void mostrarVistaInicial() {
 		((CardLayout) panelFondo.getLayout()).show(panelFondo, "vistaInicial");
-	}
-
-	public void mostrarVistaJugadorNuevoOExistente() {
-		((CardLayout) panelFondo.getLayout()).show(panelFondo,
-				"vistaJugNuevoOExist");
 	}
 
 	public void mostrarVistaJugadorNuevo() {

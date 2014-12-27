@@ -47,5 +47,7 @@ public abstract class Unidad extends Observable implements Agregable {
 
 	/* Persistencia */
 	public abstract Element getElement(Document doc);
+	
+	public abstract boolean equals(Unidad u);
 
 }

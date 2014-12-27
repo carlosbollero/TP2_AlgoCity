@@ -86,7 +86,7 @@ public class CentralEolica extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ce) {
+	public boolean equals(Unidad ce) {
 		if (ce == this) {
 			return true;
 		} else if (ce.coordenada().getX() == this.coordenada().getX()

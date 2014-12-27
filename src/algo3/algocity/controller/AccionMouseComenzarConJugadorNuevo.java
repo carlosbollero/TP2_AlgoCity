@@ -15,8 +15,16 @@ import algo3.algocity.model.Poblacion;
 import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.model.Turno;
 import algo3.algocity.model.Usuario;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.view.Ventana;
 import algo3.algocity.view.VentanaInicial;
@@ -39,7 +47,13 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 		RegistroUsuarios ru = null;
 		try {
 			ru = new RegistroUsuarios();
-		} catch (SAXException | IOException | ParserConfigurationException e1) {
+		} catch (SAXException | IOException | ParserConfigurationException
+				| NoSeCumplenLosRequisitosException
+				| FondosInsuficientesException
+				| SuperficieInvalidaParaConstruir | CoordenadaInvalidaException
+				| CapacidadElectricaInsuficienteException
+				| NoHayConexionConTuberias | NoHayConexionConRutas
+				| NoHayConexionConRedElectrica e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

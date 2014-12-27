@@ -7,9 +7,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Dinero;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.PozoDeAgua;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class MapaTuberias extends MapaConexiones {
 
@@ -83,9 +88,9 @@ public class MapaTuberias extends MapaConexiones {
 		return red;
 	}
 	
-	public static MapaTuberias fromElement(Node tuberias, Mapa mapa) {
+	public static MapaTuberias fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		MapaTuberias mapaTuberias = new MapaTuberias(mapa);
-		mapaTuberias.mapa = mapa;
+		//mapaTuberias.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {
@@ -108,9 +113,9 @@ public class MapaTuberias extends MapaConexiones {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"Tuberia")) {
-								Tuberia tb = new Tuberia();
+								Tuberia tb = new Tuberia(mapa,d,puntoAAgregar);
 								tb.fromElement(hijoDeNodo);
-								tb.setCoordenadas(puntoAAgregar);
+								//tb.setCoordenadas(puntoAAgregar);
 								mapaTuberias.agregar(tb);
 								//mapaTuberias.mapaConectores.put(puntoAAgregar,tb);
 							} 

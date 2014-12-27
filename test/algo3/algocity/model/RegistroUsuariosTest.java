@@ -10,16 +10,24 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class RegistroUsuariosTest {
 
 	@Test
 	public void testSePuedenLeerLosNombresDeUsuariosPreviamenteGuardados()
 			throws NoSeEncontroElFicheroException, SAXException, IOException,
-			ParserConfigurationException {
+			ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		RegistroUsuarios ru = new RegistroUsuarios();
 
@@ -32,7 +40,7 @@ public class RegistroUsuariosTest {
 	@Test
 	public void testSePuedeCrearUnNuevoUsuario()
 			throws NoSeEncontroElFicheroException, SAXException, IOException,
-			ParserConfigurationException, NombreDeUsuarioYaExisteException {
+			ParserConfigurationException, NombreDeUsuarioYaExisteException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		RegistroUsuarios ru = new RegistroUsuarios();
 

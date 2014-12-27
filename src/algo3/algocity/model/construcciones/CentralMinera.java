@@ -97,7 +97,7 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable cm) {
+	public boolean equals(Unidad cm) {
 		if (cm == this) {
 			return true;
 		} else if (cm.coordenada().getX() == this.coordenada().getX()

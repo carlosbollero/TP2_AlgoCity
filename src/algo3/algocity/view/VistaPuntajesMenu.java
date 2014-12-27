@@ -25,7 +25,15 @@ import algo3.algocity.controller.AccionMouseJugadorExistente;
 import algo3.algocity.controller.AccionMouseJugadorNuevo;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.model.RegistroUsuarios;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class VistaPuntajesMenu extends JPanel {
 	private static final long serialVersionUID = -5991160202284758342L;
@@ -35,7 +43,7 @@ public class VistaPuntajesMenu extends JPanel {
 	
 	JButton bVolver;
 
-	public VistaPuntajesMenu(VentanaInicial ventana) throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException {
+	public VistaPuntajesMenu(VentanaInicial ventana) throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		super();
 		this.ventanaPortadora = ventana;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -46,7 +54,7 @@ public class VistaPuntajesMenu extends JPanel {
 		setContenido();
 	}
 
-	private void setContenido() throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException {
+	private void setContenido() throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		bVolver = new JButton("Volver");
 

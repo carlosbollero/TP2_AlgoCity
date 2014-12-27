@@ -10,14 +10,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
+import algo3.algocity.model.Poblacion;
 import algo3.algocity.model.Reparador;
 import algo3.algocity.model.SistemaElectrico;
+import algo3.algocity.model.Turno;
 import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.terreno.Superficie;
 
 public class Mapa extends Observable {
@@ -154,6 +160,7 @@ public class Mapa extends Observable {
 
 	public boolean hayConexionConRedElectrica(Coordenada coordenadas)
 			throws NoHayConexionConRedElectrica {
+
 		if (!redElectrica.hayConexion(coordenadas)) {
 			throw new NoHayConexionConRedElectrica();
 		}
@@ -250,10 +257,6 @@ public class Mapa extends Observable {
 		mapa.appendChild(territorio);
 		territorio = this.territorio.getElement(doc, territorio);
 
-		Element ciudad = doc.createElement("ciudad");
-		mapa.appendChild(ciudad);
-		ciudad = this.ciudad.getElement(doc, ciudad);
-
 		Element tuberias = doc.createElement("tuberias");
 		mapa.appendChild(tuberias);
 		tuberias = this.tuberias.getElement(doc, tuberias);
@@ -268,7 +271,10 @@ public class Mapa extends Observable {
 
 		Element sistemaElectrico = this.sistemaElectrico.getElement(doc);
 		mapa.appendChild(sistemaElectrico);
-		
+		Element ciudad = doc.createElement("ciudad");
+		mapa.appendChild(ciudad);
+		ciudad = this.ciudad.getElement(doc, ciudad);
+
 		Element dinero = this.dinero.getElement(doc);
 		mapa.appendChild(dinero);
 
@@ -284,10 +290,9 @@ public class Mapa extends Observable {
 		return mapa;
 	}
 
-	public static Mapa fromElement(Node element) {
-
-		Mapa mapa = new Mapa();
-
+	
+	public static Mapa fromElement(Node element, Mapa mapa, Dinero d, Turno turnos, Poblacion poblacion) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
+		
 		NodeList childs = element.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
@@ -295,25 +300,19 @@ public class Mapa extends Observable {
 			if (child.getNodeName().equals("tamanio")) {
 				mapa.tamanio = Integer.valueOf(child.getTextContent());
 			} else if (child.getNodeName().equals("territorio")) {
-				//MapaTerritorio territorio = MapaTerritorio.fromElement(child);
 				mapa.territorio = MapaTerritorio.fromElement(child);
 			} else if (child.getNodeName().equals("tuberias")) {
-				//MapaTuberias tuberias = MapaTuberias.fromElement(child,mapa);
-				mapa.tuberias = MapaTuberias.fromElement(child,mapa);
+				mapa.tuberias = MapaTuberias.fromElement(child,mapa,d);
 			} else if (child.getNodeName().equals("rutas")) {
-				//MapaRutas rutas = MapaRutas.fromElement(child,mapa);
-				mapa.rutas = MapaRutas.fromElement(child,mapa);
+				mapa.rutas = MapaRutas.fromElement(child,mapa,d);
 			} else if (child.getNodeName().equals("redElectrica")) {
-				//MapaElectrico redElectrica = MapaElectrico.fromElement(child,mapa);
-				mapa.redElectrica = MapaElectrico.fromElement(child,mapa);
+				mapa.redElectrica = MapaElectrico.fromElement(child,mapa,d);
 			} else if (child.getNodeName().equals("ciudad")) {
-				//MapaEdilicio ciudad = MapaEdilicio.fromElement(child,mapa);
-				mapa.ciudad = MapaEdilicio.fromElement(child, mapa);
+				mapa.ciudad = MapaEdilicio.fromElement(child, mapa,d);
 			} else if (child.getNodeName().equals("sistemaElectrico")) {
-				//SistemaElectrico sistemaElectrico = SistemaElectrico.fromElement(child);
 				mapa.sistemaElectrico = SistemaElectrico.fromElement(child);
 			} else if (child.getNodeName().equals("Dinero")) {
-				Dinero dinero = Dinero.fromElement(child,mapa);
+				Dinero dinero = Dinero.fromElement(child,mapa,turnos,poblacion);
 				mapa.dinero = dinero;
 			} else if (child.getNodeName().equals("reparador")) {
 				Reparador reparador = Reparador.fromElement(child, mapa);

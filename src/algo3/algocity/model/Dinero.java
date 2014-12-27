@@ -39,6 +39,14 @@ public class Dinero extends Observable implements Observer {
 		return cantidad;
 	}
 	
+	public void setCantidad(int i) {
+		this.cantidad = i;
+	}
+	
+	public void add(int cantidad){
+		this.cantidad += cantidad;
+	}
+	
 	private void cobrarImpuestos(){
 		if (turno.getTurno() % 30 == 0) {
 			cantidad += poblacion.getCantidad() * 10;
@@ -80,10 +88,8 @@ public class Dinero extends Observable implements Observer {
 		return dinero;
 	}
 
-	public static Dinero fromElement(Node hijoDeJuego,Mapa mapa) {
-
-		Dinero dinero = new Dinero();
-
+	public static Dinero fromElement(Node hijoDeJuego,Mapa mapa, Turno t, Poblacion p) {
+		Dinero dinero = new Dinero(p,t);
 		NodeList childs = hijoDeJuego.getChildNodes();
 
 		for (int i = 0; i < childs.getLength(); i++) {
@@ -97,6 +103,8 @@ public class Dinero extends Observable implements Observer {
 				dinero.cantidad = Integer.valueOf(child.getTextContent());
 			}
 		}
+		//dinero.cobrarImpuestos();
 		return dinero;
 	}
+
 }

@@ -117,7 +117,7 @@ public class PozoDeAgua extends Unidad {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable pa) {
+	public boolean equals(Unidad pa) {
 		if (pa == this) {
 			return true;
 		} else if (pa.coordenada().getX() == this.coordenada().getX()

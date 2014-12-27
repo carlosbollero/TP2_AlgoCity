@@ -24,9 +24,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.controller.AccionMouseComenzarConJugadorExistente;
-import algo3.algocity.controller.AccionMouseVolverMenuJugadorNuevoOExistente;
+import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.model.RegistroUsuarios;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class VistaJugadorExistenteMenu extends JPanel {
 
@@ -41,7 +49,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	JLabel etiquetaMensaje;
 
 	public VistaJugadorExistenteMenu(VentanaInicial ventana)
-			throws SAXException, IOException, ParserConfigurationException {
+			throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		this.ventanaPortadora = ventana;
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -55,7 +63,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	}
 
 	private void setContenido() throws SAXException, IOException,
-			ParserConfigurationException {
+			ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		/* Configura la etiqueta Elija un Usuario */
 		this.etiquetaMensaje = new JLabel("Elija un Usuario", JLabel.CENTER);
@@ -116,7 +124,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bVolver
-				.addActionListener(new AccionMouseVolverMenuJugadorNuevoOExistente(
+				.addActionListener(new AccionMouseVolverMenuInicioJuego(
 						this.ventanaPortadora));
 
 		add(Box.createRigidArea(new Dimension(0, 250)));

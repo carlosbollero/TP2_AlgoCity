@@ -9,7 +9,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class VistaPuntajes extends JPanel {
 
@@ -19,7 +27,7 @@ public class VistaPuntajes extends JPanel {
 	
 	JPanel panelCentral;
 	
-	public VistaPuntajes(VentanaInicial ventana) throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException{
+	public VistaPuntajes(VentanaInicial ventana) throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
 		this.ventanaPortadora = ventana;
 
 		setPreferredSize(new Dimension(800, 600));
@@ -34,7 +42,7 @@ public class VistaPuntajes extends JPanel {
 		
 	}
 	
-	private void setPaneles() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException{
+	private void setPaneles() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
 		
 		VistaPuntajesMenu vistaMenu = new VistaPuntajesMenu(this.ventanaPortadora);
 		panelCentral.add(vistaMenu);

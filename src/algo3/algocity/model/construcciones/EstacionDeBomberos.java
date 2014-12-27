@@ -137,7 +137,8 @@ public class EstacionDeBomberos extends Unidad {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable eb) {
+	@Override
+	public boolean equals(Unidad eb) {
 		if (eb == this) {
 			return true;
 		} else if (eb.coordenada().getX() == this.coordenada().getX()

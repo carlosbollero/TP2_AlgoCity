@@ -184,7 +184,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ui) {
+	public boolean equals(Unidad ui) {
 		if (ui == this) {
 			return true;
 		} else if (ui.coordenada().getX() == this.coordenada().getX()
