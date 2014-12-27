@@ -7,17 +7,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import algo3.algocity.view.acciones.AccionBotonBomberos;
-import algo3.algocity.view.acciones.AccionBotonCentralEolica;
-import algo3.algocity.view.acciones.AccionBotonComercio;
-import algo3.algocity.view.acciones.AccionBotonIndustrial;
-import algo3.algocity.view.acciones.AccionBotonLineaTension;
-import algo3.algocity.view.acciones.AccionBotonMinera;
-import algo3.algocity.view.acciones.AccionBotonNuclear;
-import algo3.algocity.view.acciones.AccionBotonPozoAgua;
-import algo3.algocity.view.acciones.AccionBotonResidencia;
-import algo3.algocity.view.acciones.AccionBotonRuta;
-import algo3.algocity.view.acciones.AccionBotonTuberia;
+import algo3.algocity.controller.accionboton.AccionBotonBomberos;
+import algo3.algocity.controller.accionboton.AccionBotonCentralEolica;
+import algo3.algocity.controller.accionboton.AccionBotonComercio;
+import algo3.algocity.controller.accionboton.AccionBotonIndustrial;
+import algo3.algocity.controller.accionboton.AccionBotonLineaTension;
+import algo3.algocity.controller.accionboton.AccionBotonMinera;
+import algo3.algocity.controller.accionboton.AccionBotonNuclear;
+import algo3.algocity.controller.accionboton.AccionBotonPozoAgua;
+import algo3.algocity.controller.accionboton.AccionBotonResidencia;
+import algo3.algocity.controller.accionboton.AccionBotonRuta;
+import algo3.algocity.controller.accionboton.AccionBotonTuberia;
 
 public class VistaPanelOpciones extends JPanel {
 

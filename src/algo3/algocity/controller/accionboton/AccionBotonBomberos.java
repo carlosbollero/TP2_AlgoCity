@@ -1,10 +1,9 @@
-package algo3.algocity.view.acciones;
+package algo3.algocity.controller.accionboton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
-import algo3.algocity.model.fabricas.FabricaRuta;
 import algo3.algocity.view.VistaMapa;
 
 public class AccionBotonBomberos implements ActionListener {

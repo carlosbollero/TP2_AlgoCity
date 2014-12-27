@@ -48,7 +48,6 @@ public class VistaMapa extends JPanel implements Observer {
 		for (int i = 0; i < mapa.tamanio(); i++) {
 			for (int j = 0; j < mapa.tamanio(); j++) {
 				Coordenada coord = new Coordenada(i, j);
-				// add(new VistaTerreno(mapa.superficie(coord), coord));
 				VistaTerreno superficie = new VistaTerreno(mapa, coord, this,
 						juego);
 				tabla[i][j] = superficie;

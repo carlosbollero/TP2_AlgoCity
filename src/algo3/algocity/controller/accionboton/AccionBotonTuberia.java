@@ -1,4 +1,4 @@
-package algo3.algocity.view.acciones;
+package algo3.algocity.controller.accionboton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
