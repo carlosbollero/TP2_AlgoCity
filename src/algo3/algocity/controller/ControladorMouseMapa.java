@@ -41,14 +41,14 @@ import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
 import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.mapas.Coordenada;
 
-public class ControladorMouseVistaMapa extends MouseAdapter implements Observer {
+public abstract class ControladorMouseMapa extends MouseAdapter implements Observer {
 	
 	Coordenada coordenada;
 	Juego juego;
 	StateConstruir estadoActual;
 	ControladorMensajes controlador;
 
-	public ControladorMouseVistaMapa(Juego j, Coordenada c) {
+	public ControladorMouseMapa(Juego j, Coordenada c) {
 		juego = j;
 		coordenada = c;
 	}
@@ -118,8 +118,12 @@ public class ControladorMouseVistaMapa extends MouseAdapter implements Observer 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("siente el click");
 		try {
-			estadoActual.construir(juego, coordenada);
+			if(estadoActual != null){
+				System.out.println("no null");
+				estadoActual.construir(juego, coordenada);				
+			}
 		} catch (NoSeCumplenLosRequisitosException
 				| FondosInsuficientesException
 				| SuperficieInvalidaParaConstruir | NoHayConexionConTuberias

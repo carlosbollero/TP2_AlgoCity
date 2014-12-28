@@ -1,4 +1,4 @@
-package algo3.algocity.view.botonesPanelOpciones;
+package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonResidencia;
 

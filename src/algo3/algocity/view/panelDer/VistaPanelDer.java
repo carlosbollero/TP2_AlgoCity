@@ -21,9 +21,9 @@ public class VistaPanelDer extends JPanel {
 	public VistaPanelDer(Juego juego, VentanaJuego ventana) {
 		contenedor = ventana;
 		setLayout(new CardLayout());
-		subterraneo = new VistaMapaSubterraneo(juego.mapa());
+		subterraneo = new VistaMapaSubterraneo(juego, this);
 		add(subterraneo, "subterraneo");
-		mapa = new VistaMapa(juego.mapa(), juego, this);
+		mapa = new VistaMapa(juego, this);
 		add(mapa, "superficie");
 		((CardLayout) getLayout()).show(this, "superficie");
 		ventana.getControladorMensajes().addObserver(

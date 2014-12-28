@@ -8,29 +8,38 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import algo3.algocity.controller.ControladorMouseMapa;
+import algo3.algocity.controller.ControladorMouseMapaSub;
+import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.MapaTuberias;
 
 public class VistaTerrenoSub extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 8179004051089239685L;
 
-	MapaTuberias mapa;
+	Juego juego;
 	Coordenada coordenada;
 	Image imagen;
+	ControladorMouseMapa controlador;
 
-	public VistaTerrenoSub(MapaTuberias m, Coordenada coord) {
-		mapa = m;
-		mapa.addObserver(this);
+	public VistaTerrenoSub(Juego juego, Coordenada coord) {
+		this.juego = juego;
+		juego.mapa().tuberias().addObserver(this);
 		coordenada = coord;
+		controlador = new ControladorMouseMapaSub(juego, coord);
+		addMouseListener(controlador);
 		setImagen();
 	}
 
-	private void setImagen() {
-		imagen = (mapa.tieneCoordenadaOcupada(coordenada)) ? new ImageIcon(
+	public void setImagen() {
+		imagen = (juego.mapa().tuberias().tieneCoordenadaOcupada(coordenada)) ? new ImageIcon(
 				"img/tuberia.png").getImage() : new ImageIcon(
 				"img/underground.png").getImage();
-//		imagen = new ImageIcon("img/underground.png").getImage();
+		// imagen = new ImageIcon("img/underground.png").getImage();
+	}
+	
+	public ControladorMouseMapa getControlador(){
+		return controlador;
 	}
 
 	@Override
@@ -42,6 +51,7 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		setImagen();
+		revalidate();
 		repaint();
 	}
 

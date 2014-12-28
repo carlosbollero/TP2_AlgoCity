@@ -8,11 +8,11 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import algo3.algocity.controller.ControladorMouseVistaMapa;
+import algo3.algocity.controller.ControladorMouseMapa;
+import algo3.algocity.controller.ControladorMouseMapaSup;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.view.botonesPanelOpciones.Boton;
 
 public class VistaTerreno extends JPanel implements Observer {
 
@@ -21,18 +21,18 @@ public class VistaTerreno extends JPanel implements Observer {
 	Coordenada coordenada;
 	Mapa mapa;
 	Image terreno;
-	ControladorMouseVistaMapa controlador;
+	ControladorMouseMapa controlador;
 
 	public VistaTerreno(Mapa mapa, Coordenada coord, VistaMapa vMapa,
 			Juego juego) {
 		this.mapa = mapa;
 		coordenada = coord;
-		controlador = new ControladorMouseVistaMapa(juego, coord);
+		controlador = new ControladorMouseMapaSup(juego, coord);
 		addMouseListener(controlador);
 		setImagen();
 	}
 
-	public ControladorMouseVistaMapa getControlador() {
+	public ControladorMouseMapa getControlador() {
 		return controlador;
 	}
 

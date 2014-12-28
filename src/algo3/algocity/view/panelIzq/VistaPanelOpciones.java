@@ -6,20 +6,20 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import algo3.algocity.view.botonesPanelOpciones.Boton;
-import algo3.algocity.view.botonesPanelOpciones.BotonBomberos;
-import algo3.algocity.view.botonesPanelOpciones.BotonBulldozer;
-import algo3.algocity.view.botonesPanelOpciones.BotonCentralEolica;
-import algo3.algocity.view.botonesPanelOpciones.BotonCentralMinera;
-import algo3.algocity.view.botonesPanelOpciones.BotonCentralNuclear;
-import algo3.algocity.view.botonesPanelOpciones.BotonLineaTension;
-import algo3.algocity.view.botonesPanelOpciones.BotonPozoDeAgua;
-import algo3.algocity.view.botonesPanelOpciones.BotonRuta;
-import algo3.algocity.view.botonesPanelOpciones.BotonTuberia;
-import algo3.algocity.view.botonesPanelOpciones.BotonUnidadComercial;
-import algo3.algocity.view.botonesPanelOpciones.BotonUnidadIndustrial;
-import algo3.algocity.view.botonesPanelOpciones.BotonUnidadResidencial;
 import algo3.algocity.view.panelDer.VistaMapa;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.Boton;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonBomberos;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonBulldozer;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonCentralEolica;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonCentralMinera;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonCentralNuclear;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonLineaTension;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonPozoDeAgua;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonRuta;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonTuberia;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonUnidadComercial;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonUnidadIndustrial;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.BotonUnidadResidencial;
 
 public class VistaPanelOpciones extends JPanel {
 
@@ -41,18 +41,22 @@ public class VistaPanelOpciones extends JPanel {
 	Boton b_bulldozer;
 	
 	ArrayList<Boton> botones;
+	ArrayList<Boton> botonesAccionSup;
+	ArrayList<Boton> botonesAccionSub;
 	
 	public VistaPanelOpciones(VistaPanelIzq contenedor) {
 		this.contenedor = contenedor;
 		setPreferredSize(new Dimension(200, 550));
 		setLayout(new GridLayout(4, 3));
 		botones = new ArrayList<Boton>();
+		botonesAccionSub = new ArrayList<Boton>();
+		botonesAccionSub = new ArrayList<Boton>();
 		inicializarMenu();
 	}
 
 	private void inicializarMenu() {
 		setBotones();
-		agregarBotonesAlPanel();
+		agregarBotones();
 	}
 
 	private void setBotones() {
@@ -71,10 +75,11 @@ public class VistaPanelOpciones extends JPanel {
 		for(Boton b : botones){
 			b.setControladorMensajes(contenedor.getControladorMensajes());
 		}
+//		botonesAccionSup = botones.;
 	}
 
 
-	private void agregarBotonesAlPanel() {
+	private void agregarBotones() {
 		for(Boton boton : botones){
 			add(boton);
 		}

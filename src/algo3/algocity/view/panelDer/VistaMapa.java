@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.view.botonesPanelOpciones.Boton;
+import algo3.algocity.view.panelIzq.botonesPanelOpciones.Boton;
 
 public class VistaMapa extends JPanel implements Observer {
 
@@ -22,12 +22,12 @@ public class VistaMapa extends JPanel implements Observer {
 	VistaPanelDer contenedor;
 	JPanel[][] tabla;
 
-	public VistaMapa(Mapa mapa, Juego juego, VistaPanelDer contenedor) {
+	public VistaMapa(Juego juego, VistaPanelDer contenedor) {
 		this.contenedor = contenedor;
 		setBorder(BorderFactory.createTitledBorder("Mapa superficial"));
 		setPreferredSize(new Dimension(600, 600));
 		this.juego = juego;
-		this.mapa = mapa;
+		mapa = juego.mapa();
 		mapa.ciudad().addObserver(this);
 		mapa.redElectrica().addObserver(this);
 		mapa.rutas().addObserver(this);

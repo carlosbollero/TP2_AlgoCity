@@ -14,13 +14,10 @@ import algo3.algocity.model.mapas.Coordenada;
 
 public class StateConstruirTuberias implements StateConstruir {
 	
-	/*
-	 * Esta vacia por que es invocado desde mapa superficial
-	 * 
-	 */
-	
+	FabricaTuberias fabrica;	
 	
 	public StateConstruirTuberias(FabricaTuberias f) {
+		fabrica = f;
 	}
 
 	@Override
@@ -30,6 +27,7 @@ public class StateConstruirTuberias implements StateConstruir {
 			NoHayConexionConTuberias, CoordenadaInvalidaException,
 			CapacidadElectricaInsuficienteException,
 			NoHayConexionConRedElectrica, NoHayConexionConRutas {
+		j.mapa().agregar(fabrica.construir(j.mapa(), j.dinero(), c));
 	}
 
 }
