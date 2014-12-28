@@ -41,7 +41,6 @@ public class SistemaElectrico implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		disminuirCapacidad((int)arg);
-		
 	}
 	
 	public int capacidad(){

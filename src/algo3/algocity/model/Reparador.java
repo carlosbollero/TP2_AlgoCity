@@ -51,7 +51,6 @@ public class Reparador implements Observer {
 	}
 
 	public void actualizarObjetivos() {
-		
 		objetivos.addAll(mapa.rutas().unidadesDaniables());
 		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
 		objetivos.addAll(mapa.ciudad().unidadesDaniables());
@@ -60,7 +59,6 @@ public class Reparador implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		actuar();
-
 	}
 
 	public ArrayList<Daniable> objetivos() {
@@ -166,10 +164,9 @@ public class Reparador implements Observer {
 				}
 			}
 		}
-		
 		//revisar este metodo, porque vuelve a agregar los objetivos cada vez que se guarda
 		//el juego
-		//reparador.actualizarObjetivos();
+		reparador.actualizarObjetivos();
 		return reparador;
 	}
 

@@ -328,9 +328,6 @@ public class MapaEdilicio extends Observable {
 	public Element getElement(Document doc, Element ciudad) {
 		Element mapa = doc.createElement("mapa");
 		ciudad.appendChild(mapa);
-
-		
-//TODO, falta inicializar estas listas en mapaEdilicio
 		
 		/*Escritura de pozos de agua*/
 		ArrayList<PozoDeAgua> pozosDeAgua = this.mapaSuperior.ciudad().getPozosDeAgua();

@@ -45,8 +45,6 @@ public class MapaTuberias extends MapaConexiones {
 		return false;
 	}
 
-
-
 	public Conector getConectorEn(int x, int y) {
 		Coordenada coordEvaluar = new Coordenada(x,y);
 		for (Conector c : grafo.vertexSet()) {

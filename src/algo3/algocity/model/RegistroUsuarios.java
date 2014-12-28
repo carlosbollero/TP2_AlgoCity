@@ -78,8 +78,6 @@ public class RegistroUsuarios {
 		Juego juego = Juego.fromElement(element);
 
 		juego.usuario().puntaje(juego.poblacion().getCantidad());
-
-		juego.usuario().puntaje(juego.poblacion().getCantidad());
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
 				.getCantidad());
