@@ -317,9 +317,10 @@ public class Mapa extends Observable {
 			} else if (child.getNodeName().equals("sistemaElectrico")) {
 				mapa.sistemaElectrico = SistemaElectrico.fromElement(child);
 			} else if (child.getNodeName().equals("Dinero")) {
-				Dinero dinero = Dinero.fromElement(child, mapa, turnos,
-						poblacion);
-				mapa.dinero = dinero;
+//				Dinero dinero = Dinero.fromElement(child, mapa, turnos,
+//						poblacion);
+//				mapa.dinero = dinero;
+				mapa.dinero = d;
 			} else if (child.getNodeName().equals("reparador")) {
 				Reparador reparador = Reparador.fromElement(child, mapa);
 				mapa.reparador = reparador;

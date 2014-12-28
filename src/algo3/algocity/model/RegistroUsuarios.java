@@ -36,32 +36,26 @@ public class RegistroUsuarios {
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
 
-	
-	
 	public RegistroUsuarios() throws SAXException, IOException,
-		ParserConfigurationException{
+			ParserConfigurationException {
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
 		iniciar();
 	}
-	
-	
-	
-	
 
 	private void iniciar() throws SAXException, IOException,
-	ParserConfigurationException {
-	try {
-	leerUsuarios();
-	} catch (NoSeEncontroElFicheroException e) {
-	crearDirectorio();
-	iniciar();
-	}
+			ParserConfigurationException {
+		try {
+			leerUsuarios();
+		} catch (NoSeEncontroElFicheroException e) {
+			crearDirectorio();
+			iniciar();
+		}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException{
+			IOException, ParserConfigurationException {
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
 				.parse(new File("./saved/" + nombreUsuario + ".xml"));
@@ -82,10 +76,12 @@ public class RegistroUsuarios {
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
 				.getCantidad());
+		//agregado para que se actualicen los puntajes en el xml
+		juego.persistir();
 	}
 
 	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException{
+			SAXException, IOException, ParserConfigurationException {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 
@@ -154,7 +150,7 @@ public class RegistroUsuarios {
 		// }
 		boolean devolucion = nombresUsuarios.contains(nombreUsuarioAChequear);
 		if (devolucion) {
-			//throw new NombreDeUsuarioYaExisteException();
+			// throw new NombreDeUsuarioYaExisteException();
 		}
 		return devolucion;
 	}
