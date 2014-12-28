@@ -27,6 +27,10 @@ import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
+import algo3.algocity.view.vistaInicial.VistaInicial;
+import algo3.algocity.view.vistaInicial.VistaJugadorExistente;
+import algo3.algocity.view.vistaInicial.VistaJugadorNuevo;
+import algo3.algocity.view.vistaInicial.VistaPuntajes;
 
 public class VentanaInicial extends JFrame {
 

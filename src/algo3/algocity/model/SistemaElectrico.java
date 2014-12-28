@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 
-public class SistemaElectrico implements Observer {
+public class SistemaElectrico extends Observable implements Observer {
 	
 	private int capacidad;
 	private int consumo;
@@ -21,10 +21,14 @@ public class SistemaElectrico implements Observer {
 	
 	public void aumentarCapacidad(int cantidad){
 		capacidad += cantidad;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void disminuirCapacidad(int cantidad){
 		capacidad -= cantidad;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void consumir(int cantidad) throws CapacidadElectricaInsuficienteException{
@@ -32,6 +36,8 @@ public class SistemaElectrico implements Observer {
 			throw new CapacidadElectricaInsuficienteException();
 		}
 		consumo += cantidad;
+		setChanged();
+		notifyObservers();
 	}
 
 	

@@ -7,18 +7,18 @@ import java.lang.reflect.Method;
 import java.util.Observable;
 import java.util.Observer;
 
-import algo3.algocity.controller.estadocontroladormouse.StateConstruir;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirBomberos;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirCentralEolica;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirCentralMinera;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirCentralNuclear;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirLineasDeTension;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirPozoAgua;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirRutas;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirTuberias;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirUnidadComercial;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirUnidadIndustrial;
-import algo3.algocity.controller.estadocontroladormouse.StateConstruirUnidadResidencial;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruir;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirBomberos;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirCentralEolica;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirCentralMinera;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirCentralNuclear;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirLineasDeTension;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirPozoAgua;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirRutas;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirTuberias;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirUnidadComercial;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirUnidadIndustrial;
+import algo3.algocity.controller.estadoControladorMouse.StateConstruirUnidadResidencial;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -46,6 +46,7 @@ public class ControladorMouseVistaMapa extends MouseAdapter implements Observer 
 	Coordenada coordenada;
 	Juego juego;
 	StateConstruir estadoActual;
+	ControladorMensajes controlador;
 
 	public ControladorMouseVistaMapa(Juego j, Coordenada c) {
 		juego = j;
@@ -126,8 +127,13 @@ public class ControladorMouseVistaMapa extends MouseAdapter implements Observer 
 				| CapacidadElectricaInsuficienteException
 				| NoHayConexionConRedElectrica | NoHayConexionConRutas e1) {
 			System.out.println(e1);
+			controlador.recibirYNotificar(e1.getClass().getSimpleName());
 		}
 		super.mouseClicked(e);
+	}
+	
+	public void setControladorMensajes(ControladorMensajes c){
+		controlador = c;
 	}
 
 }

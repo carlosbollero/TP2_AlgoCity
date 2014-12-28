@@ -17,7 +17,7 @@ import algo3.algocity.model.Turno;
 import algo3.algocity.model.Usuario;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.view.Ventana;
+import algo3.algocity.view.VentanaJuego;
 import algo3.algocity.view.VentanaInicial;
 
 public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
@@ -61,7 +61,7 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 				Dinero dinero = new Dinero();
 
 				this.ventanaPortadora.cerrar();
-				Ventana ventanaJuego = new Ventana(new Juego(usuario, mapa,
+				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario, mapa,
 						turno, poblacion, dinero));
 			}
 

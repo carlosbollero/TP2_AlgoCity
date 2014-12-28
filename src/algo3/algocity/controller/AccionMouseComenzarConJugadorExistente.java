@@ -18,7 +18,7 @@ import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
-import algo3.algocity.view.Ventana;
+import algo3.algocity.view.VentanaJuego;
 import algo3.algocity.view.VentanaInicial;
 
 public class AccionMouseComenzarConJugadorExistente implements ActionListener {
@@ -41,7 +41,7 @@ public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 					.getSelectedValue().toString());
 			juegoARecuperar.actualizar();
 			this.ventanaPortadora.cerrar();
-			Ventana ventanaJuego = new Ventana(juegoARecuperar);
+			VentanaJuego ventanaJuego = new VentanaJuego(juegoARecuperar);
 		} catch (SAXException | IOException | ParserConfigurationException
 				| NoSeCumplenLosRequisitosException
 				| FondosInsuficientesException
