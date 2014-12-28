@@ -50,6 +50,7 @@ public class VistaMapa extends JPanel implements Observer {
 					boton.getAccion().addObserver(superficie.getControlador());
 				}
 				add(tabla[i][j]);
+				actualizar(new Coordenada(i, j));
 			}
 		}
 	}
