@@ -1,6 +1,7 @@
 package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonRuta;
+import algo3.algocity.model.Constantes;
 
 public class BotonRuta extends Boton {
 
@@ -8,7 +9,8 @@ public class BotonRuta extends Boton {
 	
 	public BotonRuta() {
 		super("img/b_ruta");
-		setToolTipText("Ruta");
+		etiqueta = "Ruta $ " + Constantes.COSTO_RUTA;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonRuta();
 		addActionListener(accion);
 	}

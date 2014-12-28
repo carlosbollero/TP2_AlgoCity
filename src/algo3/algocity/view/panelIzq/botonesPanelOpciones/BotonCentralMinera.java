@@ -9,7 +9,7 @@ public class BotonCentralMinera extends Boton {
 	
 	public BotonCentralMinera() {
 		super("img/b_central_minera.png");
-		etiqueta = "Central Minera \n $" + Constantes.COSTO_C_MINERA;
+		etiqueta = "Central Minera $ " + Constantes.COSTO_C_MINERA;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonCentralMinera();
 		addActionListener(accion);

@@ -9,7 +9,7 @@ public class BotonBomberos extends Boton {
 
 	public BotonBomberos() {
 		super("img/b_bomberos.png");
-		etiqueta = "Estacion de Bomberos \n$ " + Constantes.COSTO_E_BOMBEROS;
+		etiqueta = "Estacion de Bomberos $ " + Constantes.COSTO_E_BOMBEROS;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonBomberos();
 		addActionListener(accion);

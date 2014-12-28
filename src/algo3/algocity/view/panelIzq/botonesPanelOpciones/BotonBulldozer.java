@@ -8,7 +8,7 @@ public class BotonBulldozer extends Boton {
 	
 	public BotonBulldozer() {
 		super("img/b_bulldozer.png");
-		etiqueta = "Bulldozer \n$0";
+		etiqueta = "Bulldozer $ 0";
 		setToolTipText(etiqueta);
 		accion = new AccionBotonBulldozer();
 		addActionListener(accion);

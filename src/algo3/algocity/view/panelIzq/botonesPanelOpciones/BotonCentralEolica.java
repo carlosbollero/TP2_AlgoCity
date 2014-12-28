@@ -9,7 +9,7 @@ public class BotonCentralEolica extends Boton {
 
 	public BotonCentralEolica() {
 		super("img/b_central_eolica.png");
-		etiqueta = "Central Eolica \n $" + Constantes.COSTO_C_EOLICA;
+		etiqueta = "Central Eolica $ " + Constantes.COSTO_C_EOLICA;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonCentralEolica();
 		addActionListener(accion);
