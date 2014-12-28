@@ -28,6 +28,7 @@ public class CentralMinera extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
+
 		super(Constantes.COSTO_C_MINERA, Constantes.CAPACIDAD_C_MINERA,
 				Constantes.RADIO_C_MINERA);
 		this.coordenada = coord;

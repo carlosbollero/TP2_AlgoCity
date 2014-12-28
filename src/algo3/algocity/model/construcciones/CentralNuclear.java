@@ -51,6 +51,15 @@ public class CentralNuclear extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
+//	@Override
+//	public boolean agregarseA(Mapa mapa) {
+//		return mapa.ciudad().agregar(this);
+//	}
+//
+//	@Override
+//	public boolean estaContenidoEn(Mapa mapa) {
+//		return mapa.ciudad().contiene(this);
+//	}
 	// @Override
 	// public boolean agregarseA(Mapa mapa) {
 	// return mapa.ciudad().agregar(this);

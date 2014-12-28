@@ -39,6 +39,14 @@ public class Dinero extends Observable implements Observer {
 		return cantidad;
 	}
 	
+	public void setCantidad(int i) {
+		this.cantidad = i;
+	}
+	
+	public void add(int cantidad){
+		this.cantidad += cantidad;
+	}
+	
 	private void cobrarImpuestos(){
 		if (turno.getTurno() % Constantes.CANT_TURNOS_IMPUESTOS == 0) {
 			cantidad += poblacion.getCantidad() * Constantes.IMPUESTO_POR_HABITANTE;
@@ -58,15 +66,10 @@ public class Dinero extends Observable implements Observer {
 		notifyObservers();
 		return true;
 	}
-	
-	public void add(int cantidad){
-		this.cantidad += cantidad;
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**
-	 * ********************************************************************/
+	/**********************************************************************/
 
 
 	public Element getElement(Document doc) {

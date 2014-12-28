@@ -195,6 +195,4 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		}
 		return false;
 	}
-
-
 }

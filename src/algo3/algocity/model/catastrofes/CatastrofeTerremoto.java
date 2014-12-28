@@ -7,7 +7,7 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CatastrofeTerremoto implements Catastrofe {
-
+	
 	int tamanio;
 	int radio;
 	double tasa;
@@ -42,7 +42,6 @@ public class CatastrofeTerremoto implements Catastrofe {
 	@Override
 	public void iniciar() {
 		actuar();
-
 	}
 
 	public void actuar() {
@@ -53,5 +52,4 @@ public class CatastrofeTerremoto implements Catastrofe {
 			}
 		}
 	}
-
 }

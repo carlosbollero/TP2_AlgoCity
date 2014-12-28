@@ -9,6 +9,7 @@
 
 package algo3.algocity.model.mapas;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -19,6 +20,7 @@ import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 
 public abstract class MapaConexiones extends Observable {
@@ -99,6 +101,15 @@ public abstract class MapaConexiones extends Observable {
 	public boolean sePuedeConstruir(Conector conector) {
 		return tieneCoordenadaOcupada(conector.coordenada());
 	}
+	
+	
+//TODO
+	public ArrayList<Daniable> unidadesDaniables() {
+		for (Conector d : grafo.vertexSet()) {
+
+		}
+		return null;
+	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -127,26 +138,5 @@ public abstract class MapaConexiones extends Observable {
 		}
 		return red;
 	}
-
-//	/* Para probar */
-//	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
-//		System.out.println("imprimiendo mapa conexiones");
-//		for (Map.Entry<Coordenada, Conector> e : mapaConexiones.mapaConectores.entrySet()) {
-//			Coordenada clave = (Coordenada) e.getKey();
-//			Conector valor = (Conector) e.getValue();
-//
-//			System.out.println(String.valueOf(clave.getX()));
-//			System.out.println(String.valueOf(clave.getY()));
-//			System.out.println(valor.getClass());
-//		}
-//	}
-
-
-//	public ArrayList<Daniable> unidadesDaniables() {
-//		for (Daniable d : grafo.vertexSet()) {
-//
-//		}
-//		return null;
-//	}
 
 }

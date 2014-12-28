@@ -34,7 +34,6 @@ public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
 		Juego juegoARecuperar = new Juego();
 		try {
 			juegoARecuperar = juegoARecuperar.recuperar(listaUsuarios
@@ -51,7 +50,6 @@ public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 				| NoHayConexionConRedElectrica e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
