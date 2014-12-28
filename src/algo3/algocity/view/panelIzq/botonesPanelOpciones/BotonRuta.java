@@ -8,7 +8,7 @@ public class BotonRuta extends Boton {
 	private static final long serialVersionUID = -8203627685307550080L;
 	
 	public BotonRuta() {
-		super("img/b_ruta");
+		super("img/b_ruta.png");
 		etiqueta = "Ruta $ " + Constantes.COSTO_RUTA;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonRuta();
