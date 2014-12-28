@@ -88,4 +88,24 @@
   <!-- End of 'Resolve dependencies -->
 
 
+
+
+	<target name="compilar.paquete" depends="test">
+	<javac srcdir="src" destdir="${build}/classes" debug="no"></javac>
+	</target>
+
+	<target name="empaquetar" depends="compilar.paquete">
+	<copydir src="img"
+	dest="${build}/classes/Vista/imagenes"
+	includes="**/*.pngjava " />
+	<jar destfile="${build}/dist/GPS.jar" basedir="${build}/classes"/>
+	</target>
+
+	<target name="empaquetar.aplicacion" depends="empaquetar">
+	<java classname="algo3.algocity.App" fork="true">
+	<classpath refid="classpath"/>
+	<classpath location="${build}/dist/GPS.jar" />
+	</java>
+	</target>
+
 </project>
