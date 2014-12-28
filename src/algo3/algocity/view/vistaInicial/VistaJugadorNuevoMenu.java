@@ -80,15 +80,13 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bComenzar
 				.addActionListener(new AccionMouseComenzarConJugadorNuevo(
-						this.ventanaPortadora, areaNombre,
-						this.panelInforme));
+						this.ventanaPortadora, areaNombre, this.panelInforme));
 
 		this.bVolver = new JButton("Volver");
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
-		this.bVolver
-				.addActionListener(new AccionMouseVolverMenuInicioJuego(
-						this.ventanaPortadora));
+		this.bVolver.addActionListener(new AccionMouseVolverMenuInicioJuego(
+				this.ventanaPortadora));
 
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		add(this.panelNombre);
@@ -104,8 +102,6 @@ public class VistaJugadorNuevoMenu extends JPanel {
 	/* Setea la imagen de fondo del panel */
 	@Override
 	public void paintComponent(Graphics g) {
-		Dimension tamanio = getSize();
-		// Dimension tamanio = new Dimension(800,600);
 		this.imagenFondo = new ImageIcon("img/fondoAlgoCity.jpg").getImage();
 		g.drawImage(this.imagenFondo, 0, 0, getWidth(), getHeight(), null);
 		setOpaque(false);

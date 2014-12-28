@@ -7,7 +7,6 @@ import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
@@ -47,20 +46,6 @@ public class PozoDeAgua extends Unidad {
 		}
 		return superficie.esAgua();
 	}
-
-	// @Override
-	// public void aplicarDanio(double i) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-
-	// @Override
-	// public double getSalud() {
-	// // TODO revisar de hacerlo de otra forma
-	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-	// // entiendan este mensaje nose si es lo mejor
-	// return 100;
-	// }
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {

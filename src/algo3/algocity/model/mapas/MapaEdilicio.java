@@ -310,7 +310,7 @@ public class MapaEdilicio extends Observable {
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
-	@SuppressWarnings("rawtypes")
+//	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element ciudad) {
 		Element mapa = doc.createElement("mapa");
 		ciudad.appendChild(mapa);

@@ -25,13 +25,12 @@ public class VistaUnidad extends JPanel implements Observer {
 		this.mapa = mapa;
 		ciudad = mapa.ciudad();
 		coordenada = coord;
-//		mapa.addObserver(this);
-//		ciudad.addObserver(this);
-//		addMouseListener(new ControladorMouse(mapa, this));
 		setImagen();
 	}
 	
-	public VistaUnidad(String nombre) {
+	public VistaUnidad(Mapa mapa, Coordenada coord, String nombre) {
+		this.mapa = mapa;
+		coordenada = coord;
 		setImagen(nombre);
 	}
 	

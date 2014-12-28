@@ -75,14 +75,14 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		return (mapa.hayConexionConTuberias(coordenada));
 	}
 
-	@Override
-	public boolean esConstruibleEn(Superficie superficie)
-			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esTierra()) {
-			throw new SuperficieInvalidaParaConstruir();
-		}
-		return superficie.esTierra();
-	}
+//	@Override
+//	public boolean esConstruibleEn(Superficie superficie)
+//			throws SuperficieInvalidaParaConstruir {
+//		if (!superficie.esTierra()) {
+//			throw new SuperficieInvalidaParaConstruir();
+//		}
+//		return superficie.esTierra();
+//	}
 	
 	@Override
 	public boolean agregarseA(Mapa mapa) {

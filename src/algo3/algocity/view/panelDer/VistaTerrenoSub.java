@@ -37,8 +37,8 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 				"img/underground.png").getImage();
 		// imagen = new ImageIcon("img/underground.png").getImage();
 	}
-	
-	public ControladorMouseMapa getControlador(){
+
+	public ControladorMouseMapa getControlador() {
 		return controlador;
 	}
 

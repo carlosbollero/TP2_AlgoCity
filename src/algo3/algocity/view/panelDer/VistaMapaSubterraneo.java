@@ -37,7 +37,8 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 	private void rellenar() {
 		for (int i = 0; i < mapa.tamanio(); i++) {
 			for (int j = 0; j < mapa.tamanio(); j++) {
-				VistaTerrenoSub sub = new VistaTerrenoSub(juego ,new Coordenada(i, j));
+				VistaTerrenoSub sub = new VistaTerrenoSub(juego,
+						new Coordenada(i, j));
 				sub.getControlador().setControladorMensajes(
 						contenedor.getControladorMensajes());
 				for (Boton boton : contenedor.getVentana().getPanelIzq()
@@ -52,16 +53,15 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-//		rellenar();
-//		revalidate();
+		// rellenar();
+		// revalidate();
 		actualizar((Coordenada) arg);
 	}
-	
+
 	private void actualizar(Coordenada coord) {
-		if(mapa.tuberias().tieneCoordenadaOcupada(coord)){
-			((VistaTerrenoSub)tabla[coord.getX()][coord.getY()]).setImagen();
+		if (mapa.tuberias().tieneCoordenadaOcupada(coord)) {
+			((VistaTerrenoSub) tabla[coord.getX()][coord.getY()]).setImagen();
 		}
-//		repintar(coord);
 	}
 
 }

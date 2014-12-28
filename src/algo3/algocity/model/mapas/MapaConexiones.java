@@ -128,18 +128,18 @@ public abstract class MapaConexiones extends Observable {
 		return red;
 	}
 
-	/* Para probar */
-	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
-		System.out.println("imprimiendo mapa conexiones");
-		for (Map.Entry e : mapaConexiones.mapaConectores.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Conector valor = (Conector) e.getValue();
-
-			System.out.println(String.valueOf(clave.getX()));
-			System.out.println(String.valueOf(clave.getY()));
-			System.out.println(valor.getClass());
-		}
-	}
+//	/* Para probar */
+//	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
+//		System.out.println("imprimiendo mapa conexiones");
+//		for (Map.Entry<Coordenada, Conector> e : mapaConexiones.mapaConectores.entrySet()) {
+//			Coordenada clave = (Coordenada) e.getKey();
+//			Conector valor = (Conector) e.getValue();
+//
+//			System.out.println(String.valueOf(clave.getX()));
+//			System.out.println(String.valueOf(clave.getY()));
+//			System.out.println(valor.getClass());
+//		}
+//	}
 
 
 //	public ArrayList<Daniable> unidadesDaniables() {

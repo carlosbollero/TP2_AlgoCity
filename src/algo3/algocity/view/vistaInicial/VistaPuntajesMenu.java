@@ -31,10 +31,12 @@ public class VistaPuntajesMenu extends JPanel {
 
 	VentanaInicial ventanaPortadora;
 	Image imagenFondo;
-	
+
 	JButton bVolver;
 
-	public VistaPuntajesMenu(VentanaInicial ventana) throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException {
+	public VistaPuntajesMenu(VentanaInicial ventana)
+			throws NoSeEncontroElFicheroException, SAXException, IOException,
+			ParserConfigurationException {
 		super();
 		this.ventanaPortadora = ventana;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -45,7 +47,8 @@ public class VistaPuntajesMenu extends JPanel {
 		setContenido();
 	}
 
-	private void setContenido() throws NoSeEncontroElFicheroException, SAXException, IOException, ParserConfigurationException {
+	private void setContenido() throws NoSeEncontroElFicheroException,
+			SAXException, IOException, ParserConfigurationException {
 
 		bVolver = new JButton("Volver");
 
@@ -61,7 +64,7 @@ public class VistaPuntajesMenu extends JPanel {
 			datos[i] = it.next();
 			i++;
 		}
-		
+
 		JList<String> lista = new JList<String>(datos);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lista.setLayoutOrientation(JList.HORIZONTAL_WRAP);
@@ -76,8 +79,8 @@ public class VistaPuntajesMenu extends JPanel {
 		panelDesplazamiento.setAlignmentY(Component.CENTER_ALIGNMENT);
 
 		add(panelDesplazamiento);
-		add(Box.createRigidArea(new Dimension(0, 25)));	
-				
+		add(Box.createRigidArea(new Dimension(0, 25)));
+
 		add(bVolver);
 		bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		bVolver.addActionListener(new AccionMouseVolverMenuInicioJuego(
@@ -88,7 +91,6 @@ public class VistaPuntajesMenu extends JPanel {
 	/* Setea la imagen de fondo del panel */
 	@Override
 	public void paintComponent(Graphics g) {
-		Dimension tamanio = getSize();
 		this.imagenFondo = new ImageIcon("img/fondoAlgoCity.jpg").getImage();
 		g.drawImage(this.imagenFondo, 0, 0, getWidth(), getHeight(), null);
 		setOpaque(false);

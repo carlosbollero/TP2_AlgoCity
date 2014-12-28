@@ -16,8 +16,6 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.EstacionDeBomberos;
-import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
@@ -44,7 +42,6 @@ public class Reparador implements Observer {
 		actualizarObjetivos();
 		for (Daniable v : objetivos) {
 			v.repararse();
-//			v.aceptar(this);
 		}
 	}
 
@@ -58,13 +55,12 @@ public class Reparador implements Observer {
 	public void update(Observable o, Object arg) {
 		System.out.println(o.getClass());
 		actuar();
-		
+
 	}
 
 	public ArrayList<Daniable> objetivos() {
 		return this.objetivos;
 	}
-
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -72,10 +68,10 @@ public class Reparador implements Observer {
 	public Element getElement(Document doc) {
 
 		Element reparador = doc.createElement("reparador");
-		//No se guarda el mapa en reparador, para no guardarlo dos veces
-//		Element mapa = this.mapa.getElement(doc);
-//		reparador.appendChild(mapa);
-		
+		// No se guarda el mapa en reparador, para no guardarlo dos veces
+		// Element mapa = this.mapa.getElement(doc);
+		// reparador.appendChild(mapa);
+
 		Element objetivos = doc.createElement("Objetivos");
 		reparador.appendChild(objetivos);
 		for (Daniable d : this.objetivos) {
@@ -85,7 +81,6 @@ public class Reparador implements Observer {
 		return reparador;
 	}
 
-
 	public static Reparador fromElement(Node hijoDeJuego, Mapa mapa) {
 
 		Reparador reparador = new Reparador();
@@ -94,13 +89,10 @@ public class Reparador implements Observer {
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
 			if (child.getNodeName().equals("Objetivos")) {
-				NodeList hijosDeObjetivos = child
-						.getChildNodes();
+				NodeList hijosDeObjetivos = child.getChildNodes();
 				for (int j = 0; j < hijosDeObjetivos.getLength(); j++) {
-					Node hijoDeObjetivo = hijosDeObjetivos
-							.item(j);
-					if (hijoDeObjetivo.getNodeName().equals(
-							"UnidadIndustrial")) {
+					Node hijoDeObjetivo = hijosDeObjetivos.item(j);
+					if (hijoDeObjetivo.getNodeName().equals("UnidadIndustrial")) {
 						UnidadIndustrial ui = new UnidadIndustrial();
 						ui.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(ui);
@@ -129,8 +121,7 @@ public class Reparador implements Observer {
 						CentralNuclear cn = new CentralNuclear();
 						cn.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(cn);
-					} else if (hijoDeObjetivo.getNodeName()
-							.equals("Ruta")) {
+					} else if (hijoDeObjetivo.getNodeName().equals("Ruta")) {
 						Ruta rt = new Ruta();
 						rt.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(rt);
@@ -140,7 +131,7 @@ public class Reparador implements Observer {
 						lt.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(lt);
 					}
-				}		
+				}
 			}
 			reparador.mapa = mapa;
 		}
@@ -151,12 +142,12 @@ public class Reparador implements Observer {
 	public boolean equals(Reparador r) {
 		if (r == this) {
 			return true;
-		} 
+		}
 		boolean resultado = true;
 		Iterator<Daniable> itThis = this.objetivos().iterator();
 		Iterator<Daniable> it = r.objetivos().iterator();
-		while(it.hasNext() && itThis.hasNext() && resultado){
-			if(!it.next().equals(itThis.next())){
+		while (it.hasNext() && itThis.hasNext() && resultado) {
+			if (!it.next().equals(itThis.next())) {
 				resultado = false;
 			}
 		}

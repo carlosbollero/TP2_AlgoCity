@@ -41,8 +41,9 @@ import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
 import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.mapas.Coordenada;
 
-public abstract class ControladorMouseMapa extends MouseAdapter implements Observer {
-	
+public abstract class ControladorMouseMapa extends MouseAdapter implements
+		Observer {
+
 	Coordenada coordenada;
 	Juego juego;
 	StateConstruir estadoActual;
@@ -103,15 +104,15 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements Obser
 	public void update(Observable arg0, FabricaCentralNuclear fabrica) {
 		estadoActual = new StateConstruirCentralNuclear(fabrica);
 	}
-	
+
 	public void update(Observable arg0, FabricaTuberias fabrica) {
 		estadoActual = new StateConstruirTuberias(fabrica);
 	}
-	
+
 	public void update(Observable arg0, FabricaLineaTension fabrica) {
 		estadoActual = new StateConstruirLineasDeTension(fabrica);
 	}
-	
+
 	public void update(Observable arg0, FabricaRuta fabrica) {
 		estadoActual = new StateConstruirRutas(fabrica);
 	}
@@ -120,9 +121,9 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements Obser
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("siente el click");
 		try {
-			if(estadoActual != null){
+			if (estadoActual != null) {
 				System.out.println("no null");
-				estadoActual.construir(juego, coordenada);				
+				estadoActual.construir(juego, coordenada);
 			}
 		} catch (NoSeCumplenLosRequisitosException
 				| FondosInsuficientesException
@@ -135,8 +136,8 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements Obser
 		}
 		super.mouseClicked(e);
 	}
-	
-	public void setControladorMensajes(ControladorMensajes c){
+
+	public void setControladorMensajes(ControladorMensajes c) {
 		controlador = c;
 	}
 

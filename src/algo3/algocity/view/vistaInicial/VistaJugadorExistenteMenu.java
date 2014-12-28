@@ -55,7 +55,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	}
 
 	private void setContenido() throws SAXException, IOException,
-			ParserConfigurationException{
+			ParserConfigurationException {
 
 		/* Configura la etiqueta Elija un Usuario */
 		this.etiquetaMensaje = new JLabel("Elija un Usuario", JLabel.CENTER);
@@ -110,9 +110,8 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		this.bVolver = new JButton("Volver");
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
-		this.bVolver
-				.addActionListener(new AccionMouseVolverMenuInicioJuego(
-						this.ventanaPortadora));
+		this.bVolver.addActionListener(new AccionMouseVolverMenuInicioJuego(
+				this.ventanaPortadora));
 
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		add(this.etiquetaMensaje);
@@ -129,7 +128,6 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	/* Setea la imagen de fondo del panel */
 	@Override
 	public void paintComponent(Graphics g) {
-		Dimension tamanio = getSize();
 		this.imagenFondo = new ImageIcon("img/fondoAlgoCity.jpg").getImage();
 		g.drawImage(this.imagenFondo, 0, 0, getWidth(), getHeight(), null);
 		setOpaque(false);

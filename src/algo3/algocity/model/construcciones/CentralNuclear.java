@@ -5,7 +5,6 @@ import org.w3c.dom.Element;
 
 import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
@@ -15,7 +14,7 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralNuclear extends UnidadEnergetica {
-	
+
 	public CentralNuclear() {
 
 		super(10000, 1000, 25);
@@ -30,7 +29,8 @@ public class CentralNuclear extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
-		super(Constantes.COSTO_C_NUCLEAR, Constantes.CAPACIDAD_C_NUCLEAR, Constantes.RADIO_C_NUCLEAR);
+		super(Constantes.COSTO_C_NUCLEAR, Constantes.CAPACIDAD_C_NUCLEAR,
+				Constantes.RADIO_C_NUCLEAR);
 		this.coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
@@ -51,15 +51,15 @@ public class CentralNuclear extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
-//	@Override
-//	public boolean agregarseA(Mapa mapa) {
-//		return mapa.ciudad().agregar(this);
-//	}
-//
-//	@Override
-//	public boolean estaContenidoEn(Mapa mapa) {
-//		return mapa.ciudad().contiene(this);
-//	}
+	// @Override
+	// public boolean agregarseA(Mapa mapa) {
+	// return mapa.ciudad().agregar(this);
+	// }
+	//
+	// @Override
+	// public boolean estaContenidoEn(Mapa mapa) {
+	// return mapa.ciudad().contiene(this);
+	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/

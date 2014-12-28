@@ -1,8 +1,9 @@
 package algo3.algocity.model;
 
+
 public class Constantes {
 	
-	public static final int TAMANIO_MAPA = 30;	//cuadrado
+	public static final int TAMANIO_MAPA = 20;	//cuadrado
 	
 	public static final int DINERO_INICIAL = 20000;
 	public static final int POBLACION_INICIAL = 0;

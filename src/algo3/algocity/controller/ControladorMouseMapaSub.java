@@ -16,7 +16,7 @@ import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.mapas.Coordenada;
 
 public class ControladorMouseMapaSub extends ControladorMouseMapa {
-	
+
 	public ControladorMouseMapaSub(Juego j, Coordenada c) {
 		super(j, c);
 	}
@@ -52,11 +52,11 @@ public class ControladorMouseMapaSub extends ControladorMouseMapa {
 	public void update(Observable arg0, FabricaCentralNuclear fabrica) {
 		estadoActual = null;
 	}
-	
+
 	public void update(Observable arg0, FabricaLineaTension fabrica) {
 		estadoActual = null;
 	}
-	
+
 	public void update(Observable arg0, FabricaRuta fabrica) {
 		estadoActual = null;
 	}

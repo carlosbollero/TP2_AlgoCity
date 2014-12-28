@@ -1,8 +1,5 @@
 package algo3.algocity.model;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
