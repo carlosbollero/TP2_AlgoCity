@@ -1,36 +1,26 @@
 package algo3.algocity.view.panelDer;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
+import algo3.algocity.controller.ControladorMouseMapaSup;
+import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaEdilicio;
 
-public class VistaUnidad extends JPanel implements Observer {
+public class VistaUnidad extends VistaPosicion{
 
 	private static final long serialVersionUID = -1933418471723107152L;
-	
-	Coordenada coordenada;
-	Mapa mapa;
-	Image imagen;
-	MapaEdilicio ciudad;
 
-	public VistaUnidad(Mapa mapa, Coordenada coord) {
-		this.mapa = mapa;
-		ciudad = mapa.ciudad();
-		coordenada = coord;
+	public VistaUnidad(Juego juego, Coordenada coord) {
+		super(juego, coord);
+		controlador = new ControladorMouseMapaSup(juego, coord, this);
+		addMouseListener(controlador);
 		setImagen();
 	}
 	
-	public VistaUnidad(Mapa mapa, Coordenada coord, String nombre) {
-		this.mapa = mapa;
-		coordenada = coord;
+	public VistaUnidad(Juego juego, Coordenada coord, String nombre) {
+		super(juego, coord);
 		setImagen(nombre);
 	}
 	
@@ -41,17 +31,7 @@ public class VistaUnidad extends JPanel implements Observer {
 	public void setImagen(){
 		imagen = new ImageIcon("img/bomberos.png").getImage();
 	}
-	
-	public Coordenada coordenada(){
-		return coordenada;
-	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
-		super.paintComponents(g);
-	}
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		setImagen();

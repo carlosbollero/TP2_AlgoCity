@@ -16,7 +16,7 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 	Juego juego;
 	Mapa mapa;
 	VistaPanelDer contenedor;
-	JPanel[][] tabla;
+	VistaPosicion[][] tabla;
 
 	public VistaMapaSubterraneo(Juego juego, VistaPanelDer contenedor) {
 		this.contenedor = contenedor;
@@ -26,14 +26,14 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 		mapa.tuberias().addObserver(this);
 		setPreferredSize(new Dimension(600, 600));
 		setLayout(new GridLayout(mapa.tamanio(), mapa.tamanio()));
-		tabla = new JPanel[mapa.tamanio()][mapa.tamanio()];
+		tabla = new VistaPosicion[mapa.tamanio()][mapa.tamanio()];
 		rellenar();
 	}
 
 	private void rellenar() {
 		for (int i = 0; i < mapa.tamanio(); i++) {
 			for (int j = 0; j < mapa.tamanio(); j++) {
-				VistaTerrenoSub sub = new VistaTerrenoSub(juego,
+				VistaPosicion sub = new VistaTerrenoSub(juego,
 						new Coordenada(i, j));
 				sub.getControlador().setControladorMensajes(
 						contenedor.getControladorMensajes());
@@ -49,14 +49,12 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// rellenar();
-		// revalidate();
 		actualizar((Coordenada) arg);
 	}
 
 	private void actualizar(Coordenada coord) {
 		if (mapa.tuberias().tieneCoordenadaOcupada(coord)) {
-			((VistaTerrenoSub) tabla[coord.getX()][coord.getY()]).setImagen();
+			(tabla[coord.getX()][coord.getY()]).setImagen();
 		}
 	}
 }

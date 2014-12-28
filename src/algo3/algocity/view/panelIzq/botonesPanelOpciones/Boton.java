@@ -10,6 +10,7 @@ public class Boton extends JButton {
 	
 	private static final long serialVersionUID = -5976624750905368981L;
 	
+	String etiqueta;
 	AccionBoton accion;
 
 	public Boton(String imagen) {

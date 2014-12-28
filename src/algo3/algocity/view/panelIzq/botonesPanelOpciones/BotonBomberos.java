@@ -7,11 +7,10 @@ public class BotonBomberos extends Boton {
 
 	private static final long serialVersionUID = -991774239798536781L;
 
-	String costo = "\n$ " + Constantes.COSTO_E_BOMBEROS;
-
 	public BotonBomberos() {
 		super("img/b_bomberos.png");
-		setToolTipText("Estacion de Bomberos" + costo);
+		etiqueta = "Estacion de Bomberos \n$ " + Constantes.COSTO_E_BOMBEROS;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonBomberos();
 		addActionListener(accion);
 	}

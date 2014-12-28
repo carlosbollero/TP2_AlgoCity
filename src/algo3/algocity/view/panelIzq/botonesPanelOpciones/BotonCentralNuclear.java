@@ -1,6 +1,7 @@
 package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonCentralNuclear;
+import algo3.algocity.model.Constantes;
 
 public class BotonCentralNuclear extends Boton {
 
@@ -8,7 +9,8 @@ public class BotonCentralNuclear extends Boton {
 	
 	public BotonCentralNuclear() {
 		super("img/b_central_nuclear.png");
-		setToolTipText("Central Nuclear");
+		etiqueta = "Central Nuclear \n $" + Constantes.COSTO_C_NUCLEAR;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonCentralNuclear();
 		addActionListener(accion);
 	}

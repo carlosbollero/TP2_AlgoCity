@@ -20,7 +20,7 @@ public class VistaMapa extends JPanel implements Observer {
 	Juego juego;
 	Mapa mapa;
 	VistaPanelDer contenedor;
-	JPanel[][] tabla;
+	VistaPosicion[][] tabla;
 
 	public VistaMapa(Juego juego, VistaPanelDer contenedor) {
 		this.contenedor = contenedor;
@@ -31,7 +31,7 @@ public class VistaMapa extends JPanel implements Observer {
 		mapa.ciudad().addObserver(this);
 		mapa.redElectrica().addObserver(this);
 		mapa.rutas().addObserver(this);
-		tabla = new JPanel[mapa.tamanio()][mapa.tamanio()];
+		tabla = new VistaPosicion[mapa.tamanio()][mapa.tamanio()];
 		setLayout(new GridLayout(mapa.tamanio(), mapa.tamanio()));
 		rellenar();
 	}
@@ -40,34 +40,30 @@ public class VistaMapa extends JPanel implements Observer {
 		for (int i = 0; i < mapa.tamanio(); i++) {
 			for (int j = 0; j < mapa.tamanio(); j++) {
 				Coordenada coord = new Coordenada(i, j);
-				VistaTerreno superficie = new VistaTerreno(mapa, coord, this,
-						juego);
-				superficie.getControlador().setControladorMensajes(
+				setPosicion(coord);
+				tabla[i][j].getControlador().setControladorMensajes(
 						contenedor.getControladorMensajes());
-				tabla[i][j] = superficie;
 				for (Boton boton : contenedor.getVentana().getPanelIzq()
 						.getPanelOpciones().getBotones()) {
-					boton.getAccion().addObserver(superficie.getControlador());
+					boton.getAccion().addObserver(tabla[i][j].getControlador());
 				}
 				add(tabla[i][j]);
-				actualizar(new Coordenada(i, j));
 			}
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// rellenar();
+		Coordenada coord = (Coordenada) arg;
 		System.out.println("agregado");
-		actualizar((Coordenada) arg);
+		setPosicion(coord);
+		repintar(coord);
 	}
 
-	private void actualizar(Coordenada coord) {
+	private void setPosicion(Coordenada coord) {
 		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
-				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(mapa, coord)
-				: new VistaTerreno(mapa, coord, this, juego);
-
-		repintar(coord);
+				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(juego, coord)
+				: new VistaTerreno(juego, coord);
 	}
 
 	private void repintar(Coordenada coord) {

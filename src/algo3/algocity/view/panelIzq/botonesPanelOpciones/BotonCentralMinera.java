@@ -1,6 +1,7 @@
 package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonCentralMinera;
+import algo3.algocity.model.Constantes;
 
 public class BotonCentralMinera extends Boton {
 
@@ -8,7 +9,8 @@ public class BotonCentralMinera extends Boton {
 	
 	public BotonCentralMinera() {
 		super("img/b_central_minera.png");
-		setToolTipText("Central Minera");
+		etiqueta = "Central Minera \n $" + Constantes.COSTO_C_MINERA;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonCentralMinera();
 		addActionListener(accion);
 	}
