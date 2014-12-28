@@ -1,9 +1,6 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 

@@ -1,8 +1,5 @@
 package algo3.algocity.model.caracteristicas;
 
-import org.w3c.dom.Node;
-
-
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
