@@ -45,6 +45,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 		porcentajeDanios = 0;
 		costo = Constantes.COSTO_RUTA;
 		this.coordenadas = coordenada;
+		
 		mapa.validarCoordenadas(coordenada);
 		esConstruibleEn(mapa.superficie(coordenada));
 		dinero.cobrar(costo);

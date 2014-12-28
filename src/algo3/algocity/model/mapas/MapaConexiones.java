@@ -114,26 +114,27 @@ public abstract class MapaConexiones extends Observable {
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
+	
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element red) {
 
 		Element mapa = doc.createElement("mapa");
 		red.appendChild(mapa);
-
+		
 		/* Serializacion de conectores del mapa */
-		for (Map.Entry e : this.mapaConectores.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Conector valor = (Conector) e.getValue();
-
+		for (Conector tuberia : grafo.vertexSet()) {
+			Coordenada coord = tuberia.coordenada();
+			Conector tub = tuberia;
+			
 			Element nodo = doc.createElement("Nodo");
 			mapa.appendChild(nodo);
-
+			
 			Element point = doc.createElement("Coordenada");
 			nodo.appendChild(point);
-			point.setTextContent(String.valueOf((int) clave.getX()) + ","
-					+ String.valueOf((int) clave.getY()));
-
-			Element conector = valor.getElement(doc);
+			point.setTextContent(String.valueOf((int) coord.getX()) + ","
+					+ String.valueOf((int) coord.getY()));
+			
+			Element conector = tub.getElement(doc);
 			nodo.appendChild(conector);
 		}
 		return red;
