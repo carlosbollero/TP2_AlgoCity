@@ -46,6 +46,10 @@ public class Tuberia implements Conector {
 		 * else { mapa.agregar(this); }
 		 */
 	}
+	
+	public int costo() {
+		return this.costo;
+	}
 
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
@@ -130,5 +134,4 @@ public class Tuberia implements Conector {
 		}
 		return false;
 	}
-
 }

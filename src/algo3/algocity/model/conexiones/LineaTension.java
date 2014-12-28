@@ -51,6 +51,10 @@ public class LineaTension implements Conector, Daniable, Visitable {
 		dinero.cobrar(costo);
 	}
 
+	public int costo() {
+		return this.costo;
+	}
+
 	public boolean estado() {
 		return estado;
 	}
