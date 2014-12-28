@@ -1,6 +1,7 @@
 package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -59,13 +60,24 @@ public class MapaRutas extends MapaConexiones {
 	// }
 	// }
 
-	public ArrayList<Daniable> unidadesDaniables() {
+	
+	public ArrayList<Daniable> unidadesDaniables(){
 		ArrayList<Daniable> lista = new ArrayList<Daniable>();
-		for (Conector c : grafo.vertexSet()) {
-			lista.add((Daniable) c);
+		Iterator<Ruta> it = listado.iterator();
+		while(it.hasNext()){
+			lista.add(it.next());
 		}
 		return lista;
 	}
+	
+	//TODO, revisar, pareciera que no se agregan las rutas al grafo
+//	public ArrayList<Daniable> unidadesDaniables() {
+//		ArrayList<Daniable> lista = new ArrayList<Daniable>();
+//		for (Conector c : grafo.vertexSet()) {
+//			lista.add((Daniable) c);
+//		}
+//		return lista;
+//	}
 
 	public Conector getConectorEn(int x, int y) {
 		Coordenada coordEvaluar = new Coordenada(x, y);
