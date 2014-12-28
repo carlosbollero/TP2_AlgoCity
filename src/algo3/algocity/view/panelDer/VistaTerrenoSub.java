@@ -4,19 +4,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 import algo3.algocity.controller.ControladorMouseMapa;
 import algo3.algocity.controller.ControladorMouseMapaSub;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
 
 public class VistaTerrenoSub extends JPanel implements Observer {
-
 	private static final long serialVersionUID = 8179004051089239685L;
-
 	Juego juego;
 	Coordenada coordenada;
 	Image imagen;
@@ -54,5 +50,4 @@ public class VistaTerrenoSub extends JPanel implements Observer {
 		revalidate();
 		repaint();
 	}
-
 }

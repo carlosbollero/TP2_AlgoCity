@@ -28,7 +28,9 @@ public class CentralEolica extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
+
 		super(Constantes.COSTO_C_EOLICA, Constantes.CAPACIDAD_C_EOLICA, Constantes.RADIO_C_EOLICA);
+
 		this.coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));

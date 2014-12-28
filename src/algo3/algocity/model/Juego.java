@@ -56,7 +56,6 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
-
 	}
 
 	/* Usado para persistencia */
@@ -90,6 +89,10 @@ public class Juego {
 	public void actualizar() {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
+	}
+
+	private void iniciarTurnos() {
+		turnos = new Turno();
 	}
 
 	private void generarMapas() {
@@ -236,4 +239,5 @@ public class Juego {
 		juego.poblacion.actualizar(juego.mapa());
 		return juego;
 	}
+
 }

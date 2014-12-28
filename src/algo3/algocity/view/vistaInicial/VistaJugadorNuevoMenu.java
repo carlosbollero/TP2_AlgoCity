@@ -6,7 +6,6 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -14,18 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import algo3.algocity.controller.AccionMouseComenzarConJugadorNuevo;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaJugadorNuevoMenu extends JPanel {
-
 	private static final long serialVersionUID = -4357344124215831133L;
-
 	VentanaInicial ventanaPortadora;
 	Image imagenFondo;
-
 	JPanel panelNombre;
 	JTextField areaNombre;
 	JTextField panelInforme;
@@ -34,7 +29,6 @@ public class VistaJugadorNuevoMenu extends JPanel {
 
 	public VistaJugadorNuevoMenu(VentanaInicial ventana) {
 		this.ventanaPortadora = ventana;
-
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
@@ -43,7 +37,6 @@ public class VistaJugadorNuevoMenu extends JPanel {
 	}
 
 	private void setContenido() {
-
 		/* Ajusto el panel del nombre */
 		this.panelNombre = new JPanel();
 		this.panelNombre.setPreferredSize(new Dimension(400, 28));
@@ -52,7 +45,6 @@ public class VistaJugadorNuevoMenu extends JPanel {
 				.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.panelNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.panelNombre.setAlignmentY(Component.CENTER_ALIGNMENT);
-
 		/* Agrego los componentes del panel del nombre */
 		JLabel etiquetaNombre = new JLabel("Nombre Jugador:", JLabel.CENTER);
 		etiquetaNombre.setOpaque(true);
@@ -61,9 +53,7 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.panelNombre.add(etiquetaNombre);
 		this.panelNombre.add(Box.createRigidArea(new Dimension(10, 0)));
 		this.panelNombre.add(this.areaNombre);
-
 		// this.panelNombre.setBackground(Color.lightGray);
-
 		/* Ajusto el panel de informe */
 		this.panelInforme = new JTextField("");
 		this.panelInforme.setPreferredSize(new Dimension(350, 27));
@@ -73,7 +63,6 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		// this.panelInforme.setBackground(Color.white);
 		this.panelInforme.setForeground(Color.red);
 		this.panelInforme.setHorizontalAlignment(JTextField.CENTER);
-
 		/* Ajusto los botones */
 		this.bComenzar = new JButton(" Comenzar !!");
 		this.bComenzar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -81,13 +70,11 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.bComenzar
 				.addActionListener(new AccionMouseComenzarConJugadorNuevo(
 						this.ventanaPortadora, areaNombre, this.panelInforme));
-
 		this.bVolver = new JButton("Volver");
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bVolver.addActionListener(new AccionMouseVolverMenuInicioJuego(
 				this.ventanaPortadora));
-
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		add(this.panelNombre);
 		add(Box.createRigidArea(new Dimension(0, 25)));

@@ -28,7 +28,6 @@ public class EstacionDeBomberos extends Unidad {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException,
 			SuperficieInvalidaParaConstruir {
-
 		super(Constantes.COSTO_E_BOMBEROS, 0);
 		coordenada = coord;
 		mapa.validarCoordenadas(coord);
@@ -137,6 +136,7 @@ public class EstacionDeBomberos extends Unidad {
 	}
 
 	/* No evalua los invariantes de la clase */
+	@Override
 	public boolean equals(Unidad eb) {
 		if (eb == this) {
 			return true;

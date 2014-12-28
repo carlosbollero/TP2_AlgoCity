@@ -1,6 +1,5 @@
 package algo3.algocity.model;
 
-
 public class Constantes {
 	
 	public static final int TAMANIO_MAPA = 20;	//cuadrado

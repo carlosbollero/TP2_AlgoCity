@@ -14,7 +14,7 @@ import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 
 public class MapaRutas extends MapaConexiones {
-	
+
 	ArrayList<Ruta> listado;
 
 	public MapaRutas(Mapa mapa) {
@@ -26,6 +26,8 @@ public class MapaRutas extends MapaConexiones {
 		if (contiene(ruta) || tieneCoordenadaOcupada(ruta.coordenada())) {
 			return false;
 		}
+		// AGREGAODO
+		// mapaConectores.put(ruta.coordenada(),ruta);
 		listado.add(ruta);
 		grafo.addVertex(ruta);
 		actualizarGrafo(ruta);
@@ -64,11 +66,30 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return lista;
 	}
-	
-	
-	public static MapaRutas fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, CoordenadaInvalidaException {
+
+	public Conector getConectorEn(int x, int y) {
+		Coordenada coordEvaluar = new Coordenada(x, y);
+		for (Conector c : grafo.vertexSet()) {
+			if (c.coordenada().equals(coordEvaluar)) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**
+	 * @throws CoordenadaInvalidaException
+	 * @throws FondosInsuficientesException
+	 * @throws NoSeCumplenLosRequisitosException
+	 ********************************************************************/
+
+	public static MapaRutas fromElement(Node tuberias, Mapa mapa, Dinero d)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		MapaRutas mapaRutas = new MapaRutas(mapa);
-		//mapaRutas.mapa = mapa;
+		// mapaRutas.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {
@@ -89,16 +110,15 @@ public class MapaRutas extends MapaConexiones {
 								puntoAAgregar = new Coordenada(
 										Integer.valueOf(arrayPunto[0]),
 										Integer.valueOf(arrayPunto[1]));
-							} else if (hijoDeNodo.getNodeName().equals(
-									"Ruta")) {
-								Ruta rt = new Ruta(mapa,d,puntoAAgregar);
+							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
+								Ruta rt = new Ruta(mapa, d, puntoAAgregar);
 								rt.fromElement(hijoDeNodo);
 								mapaRutas.agregar(rt);
-							} 
+							}
 						}
 					}
 				}
-			} 
+			}
 		}
 		return mapaRutas;
 	}

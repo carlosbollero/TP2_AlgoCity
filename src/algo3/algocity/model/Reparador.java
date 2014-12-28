@@ -44,7 +44,8 @@ public class Reparador implements Observer {
 			v.repararse();
 		}
 	}
-
+	
+	
 	public void actualizarObjetivos() {
 		objetivos = new ArrayList<Daniable>(mapa.rutas().unidadesDaniables());
 		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
@@ -55,12 +56,22 @@ public class Reparador implements Observer {
 	public void update(Observable o, Object arg) {
 		System.out.println(o.getClass());
 		actuar();
-
 	}
 
+	
 	public ArrayList<Daniable> objetivos() {
 		return this.objetivos;
 	}
+	
+	
+//	public HashSet<Daniable> objetivos() {
+//		
+//		//uso un hashset para evitar elementos repetidos
+//		HashSet<Daniable> setObjetivos = new HashSet<Daniable>(this.objetivos);
+//		
+//		return setObjetivos;
+//		//return this.objetivos;
+//	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -82,8 +93,8 @@ public class Reparador implements Observer {
 	}
 
 	public static Reparador fromElement(Node hijoDeJuego, Mapa mapa) {
-
 		Reparador reparador = new Reparador();
+		reparador.mapa = mapa;
 
 		NodeList childs = hijoDeJuego.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
@@ -95,12 +106,16 @@ public class Reparador implements Observer {
 					if (hijoDeObjetivo.getNodeName().equals("UnidadIndustrial")) {
 						UnidadIndustrial ui = new UnidadIndustrial();
 						ui.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ui);
+						if(!reparador.objetivos.contains(ui)){
+							reparador.objetivos.add(ui);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadResidencial")) {
 						UnidadResidencial ur = new UnidadResidencial();
 						ur.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ur);
+						if(!reparador.objetivos.contains(ur)){
+							reparador.objetivos.add(ur);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadComercial")) {
 						Daniable uc = new UnidadComercial();
@@ -110,31 +125,42 @@ public class Reparador implements Observer {
 							"CentralEolica")) {
 						UnidadEnergetica ce = new CentralEolica();
 						ce.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ce);
+						if(!reparador.objetivos.contains(ce)){
+							reparador.objetivos.add(ce);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralMinera")) {
 						CentralMinera cm = new CentralMinera();
 						cm.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(cm);
+						if(!reparador.objetivos.contains(cm)){
+							reparador.objetivos.add(cm);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralNuclear")) {
 						CentralNuclear cn = new CentralNuclear();
 						cn.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(cn);
+						if(!reparador.objetivos.contains(cn)){
+							reparador.objetivos.add(cn);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals("Ruta")) {
 						Ruta rt = new Ruta();
 						rt.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(rt);
+						if(!reparador.objetivos.contains(rt)){
+							reparador.objetivos.add(rt);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"LineaTension")) {
 						LineaTension lt = new LineaTension();
 						lt.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(lt);
+						if(!reparador.objetivos.contains(lt)){
+							reparador.objetivos.add(lt);
+						}
 					}
 				}
 			}
-			reparador.mapa = mapa;
 		}
+		//revisar este metodo, porque vuelve a agregar los objetivos cada vez que se guarda
+		//el juego
 		reparador.actualizarObjetivos();
 		return reparador;
 	}

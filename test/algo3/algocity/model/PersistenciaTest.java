@@ -77,7 +77,6 @@ public class PersistenciaTest {
 	}
 	
 	
-	
 	@Test
 	public void testPruebaPersistenciaEstacionBomberos() throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir, IOException, SAXException, ParserConfigurationException{
 		Usuario user = new Usuario("testUser1");

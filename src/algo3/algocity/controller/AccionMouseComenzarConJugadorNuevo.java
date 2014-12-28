@@ -49,7 +49,6 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 				panelInforme
 						.setText("El nombre de jugador debe contener al menos 4 caracteres");
 				panelIngreso.setText("");
-
 			} else {
 				panelInforme.setText("");
 				ru.crearUsuario(panelIngreso.getText());
@@ -59,12 +58,10 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 				Turno turno = new Turno();
 				Poblacion poblacion = new Poblacion();
 				Dinero dinero = new Dinero();
-
 				this.ventanaPortadora.cerrar();
-				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario, mapa,
-						turno, poblacion, dinero));
+				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario,
+						mapa, turno, poblacion, dinero));
 			}
-
 		} catch (NombreDeUsuarioYaExisteException e) {
 			e.printStackTrace();
 		}

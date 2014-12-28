@@ -26,6 +26,8 @@ public class MapaTuberias extends MapaConexiones {
 		if (contiene(tuberia) || tieneCoordenadaOcupada(tuberia.coordenada())) {
 			return false;
 		}
+		//AGREGADo
+		//mapaConectores.put(tuberia.coordenada(),tuberia);
 		grafo.addVertex(tuberia);
 		actualizarGrafo(tuberia);
 		setChanged();
@@ -43,6 +45,20 @@ public class MapaTuberias extends MapaConexiones {
 		return false;
 	}
 
+	public Conector getConectorEn(int x, int y) {
+		Coordenada coordEvaluar = new Coordenada(x,y);
+		for (Conector c : grafo.vertexSet()) {
+			if (c.coordenada().equals(coordEvaluar)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element red) {
 
@@ -68,12 +84,10 @@ public class MapaTuberias extends MapaConexiones {
 		return red;
 	}
 
-	public static MapaTuberias fromElement(Node tuberias, Mapa mapa, Dinero d)
-			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
-			CoordenadaInvalidaException {
+	
+	public static MapaTuberias fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		MapaTuberias mapaTuberias = new MapaTuberias(mapa);
-		// mapaTuberias.mapa = mapa;
+		//mapaTuberias.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {

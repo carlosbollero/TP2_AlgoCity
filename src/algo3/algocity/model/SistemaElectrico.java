@@ -47,7 +47,6 @@ public class SistemaElectrico extends Observable implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		disminuirCapacidad((int)arg);
-		
 	}
 	
 	public int capacidad(){
@@ -57,7 +56,11 @@ public class SistemaElectrico extends Observable implements Observer {
 	public int consumo(){
 		return consumo;
 	}
-	
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**********************************************************************/
+
 	public Element getElement(Document doc) {
 
 		Element sistemaElectrico = doc.createElement("SistemaElectrico");
@@ -93,6 +96,5 @@ public class SistemaElectrico extends Observable implements Observer {
 		}
 		return sistemaElectrico;
 	}
-
 
 }

@@ -36,29 +36,32 @@ public class RegistroUsuarios {
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
 
-
+	
+	
 	public RegistroUsuarios() throws SAXException, IOException,
-			ParserConfigurationException{
-
+		ParserConfigurationException{
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
 		iniciar();
 	}
+	
+	
+	
+	
 
 	private void iniciar() throws SAXException, IOException,
-			ParserConfigurationException {
-		try {
-			leerUsuarios();
-		} catch (NoSeEncontroElFicheroException e) {
-			crearDirectorio();
-			iniciar();
-		}
+	ParserConfigurationException {
+	try {
+	leerUsuarios();
+	} catch (NoSeEncontroElFicheroException e) {
+	crearDirectorio();
+	iniciar();
+	}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
 			IOException, ParserConfigurationException{
-
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
 				.parse(new File("./saved/" + nombreUsuario + ".xml"));
@@ -75,9 +78,6 @@ public class RegistroUsuarios {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-//		juego.usuario().puntaje(juego.poblacion().getCantidad());
-
 		juego.usuario().puntaje(juego.poblacion().getCantidad());
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()

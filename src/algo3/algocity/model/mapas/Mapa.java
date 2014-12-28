@@ -49,7 +49,6 @@ public class Mapa extends Observable {
 		redElectrica = new MapaElectrico(this);
 		dinero = new Dinero();
 		sistemaElectrico = new SistemaElectrico();
-
 		reparador = null;
 	}
 
@@ -161,6 +160,7 @@ public class Mapa extends Observable {
 
 	public boolean hayConexionConRedElectrica(Coordenada coordenadas)
 			throws NoHayConexionConRedElectrica {
+
 		if (!redElectrica.hayConexion(coordenadas)) {
 			throw new NoHayConexionConRedElectrica();
 		}
@@ -328,4 +328,5 @@ public class Mapa extends Observable {
 		// mapa.territorio.imprimirTerritorio();
 		return mapa;
 	}
+
 }

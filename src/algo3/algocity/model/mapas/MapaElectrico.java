@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -14,7 +14,7 @@ import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 
 public class MapaElectrico extends MapaConexiones {
-	
+
 	ArrayList<LineaTension> listado;
 
 	public MapaElectrico(Mapa mapa) {
@@ -26,6 +26,8 @@ public class MapaElectrico extends MapaConexiones {
 		if (contiene(linea) || tieneCoordenadaOcupada(linea.coordenada())) {
 			return false;
 		}
+		// AGREGADO
+		// mapaConectores.put(linea.coordenada(),linea);
 		listado.add(linea);
 		grafo.addVertex(linea);
 		actualizarGrafo(linea);
@@ -54,11 +56,31 @@ public class MapaElectrico extends MapaConexiones {
 		}
 		return lista;
 	}
-	
-	
-	public static MapaElectrico fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, CoordenadaInvalidaException {
+
+	public Conector getConectorEn(int x, int y) {
+		Coordenada coordEvaluar = new Coordenada(x, y);
+		for (Conector c : grafo.vertexSet()) {
+			if (c.coordenada().equals(coordEvaluar)) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	/**********************************************************************/
+	/**************************** Persistencia ****************************/
+	/**
+	 * @param d
+	 * @throws CoordenadaInvalidaException
+	 * @throws FondosInsuficientesException
+	 * @throws NoSeCumplenLosRequisitosException
+	 ********************************************************************/
+
+	public static MapaElectrico fromElement(Node tuberias, Mapa mapa, Dinero d)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		MapaElectrico mapaElectrico = new MapaElectrico(mapa);
-		//mapaElectrico.mapa = mapa;
+		// mapaElectrico.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {
@@ -81,16 +103,16 @@ public class MapaElectrico extends MapaConexiones {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"LineaTension")) {
-								LineaTension lt = new LineaTension(mapa,d,puntoAAgregar);
+								LineaTension lt = new LineaTension(mapa, d,
+										puntoAAgregar);
 								lt.fromElement(hijoDeNodo);
 								mapaElectrico.agregar(lt);
-							} 
+							}
 						}
 					}
 				}
-			} 
+			}
 		}
 		return mapaElectrico;
 	}
-
 }

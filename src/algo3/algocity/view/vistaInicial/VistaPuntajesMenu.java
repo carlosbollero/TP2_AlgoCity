@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -18,9 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.SAXException;
-
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
@@ -28,10 +25,8 @@ import algo3.algocity.view.VentanaInicial;
 
 public class VistaPuntajesMenu extends JPanel {
 	private static final long serialVersionUID = -5991160202284758342L;
-
 	VentanaInicial ventanaPortadora;
 	Image imagenFondo;
-
 	JButton bVolver;
 
 	public VistaPuntajesMenu(VentanaInicial ventana)
@@ -43,17 +38,13 @@ public class VistaPuntajesMenu extends JPanel {
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-
 		setContenido();
 	}
 
 	private void setContenido() throws NoSeEncontroElFicheroException,
 			SAXException, IOException, ParserConfigurationException {
-
 		bVolver = new JButton("Volver");
-
 		add(Box.createRigidArea(new Dimension(0, 250)));
-
 		// Obtengo los usuarios existentes
 		RegistroUsuarios ru = new RegistroUsuarios();
 		ArrayList<String> puntajes = ru.listaPuntajesString();
@@ -64,23 +55,18 @@ public class VistaPuntajesMenu extends JPanel {
 			datos[i] = it.next();
 			i++;
 		}
-
 		JList<String> lista = new JList<String>(datos);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		lista.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-
 		JScrollPane panelDesplazamiento = new JScrollPane(lista);
-
 		panelDesplazamiento.setPreferredSize(new Dimension(175, 85));
 		panelDesplazamiento.setMaximumSize(new Dimension(175, 85));
 		panelDesplazamiento
 				.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panelDesplazamiento.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelDesplazamiento.setAlignmentY(Component.CENTER_ALIGNMENT);
-
 		add(panelDesplazamiento);
 		add(Box.createRigidArea(new Dimension(0, 25)));
-
 		add(bVolver);
 		bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		bVolver.addActionListener(new AccionMouseVolverMenuInicioJuego(

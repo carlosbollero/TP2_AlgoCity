@@ -41,6 +41,19 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 100;
 	}
 
+	// public UnidadResidencial(Mapa mapa, int x, int y)
+	// throws NoSeCumplenLosRequisitosException {
+	// this.costo = 5;
+	// this.consumo = 1;
+	// this.capacidad = 100;
+	// coordenadas = new Coordenada(x, y);
+	//
+	// if (!esConstruibleEn(mapa.superficie(coordenadas))
+	// || !hayConexionesEn(mapa)) {
+	// throw new NoSeCumplenLosRequisitosException();
+	// }
+	// }
+
 	public UnidadResidencial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,
@@ -50,7 +63,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		super(5, 1);
 		capacidad = Constantes.CAPACIDAD_U_RESIDENCIAL;
 		coordenada = coord;
-
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
 		hayConexionesEn(mapa);
@@ -105,6 +117,15 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		return (mapa.hayConexionCompleta(coordenada));
 	}
+
+	// @Override
+	// public boolean esConstruibleEn(Superficie superficie)
+	// throws SuperficieInvalidaParaConstruir {
+	// if (!superficie.esTierra()) {
+	// throw new SuperficieInvalidaParaConstruir();
+	// }
+	// return superficie.esTierra();
+	// }
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {
