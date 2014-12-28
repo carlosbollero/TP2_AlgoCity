@@ -81,31 +81,12 @@ public class MapaTuberias extends MapaConexiones {
 			Element conector = tub.getElement(doc);
 			nodo.appendChild(conector);
 		}
-
-		//viejo, usaba mapaConectores
-//		/* Serializacion de conectores del mapa */
-//		for (Map.Entry e : this.mapaConectores.entrySet()) {
-//			Coordenada clave = (Coordenada) e.getKey();
-//			Conector valor = (Conector) e.getValue();
-//
-//			Element nodo = doc.createElement("Nodo");
-//			mapa.appendChild(nodo);
-//
-//			Element point = doc.createElement("Coordenada");
-//			nodo.appendChild(point);
-//			point.setTextContent(String.valueOf((int) clave.getX()) + ","
-//					+ String.valueOf((int) clave.getY()));
-//
-//			Element conector = valor.getElement(doc);
-//			nodo.appendChild(conector);
-//		}
 		return red;
 	}
 
 	
 	public static MapaTuberias fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		MapaTuberias mapaTuberias = new MapaTuberias(mapa);
-		//mapaTuberias.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {

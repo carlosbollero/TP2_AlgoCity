@@ -80,7 +80,6 @@ public class MapaElectrico extends MapaConexiones {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException {
 		MapaElectrico mapaElectrico = new MapaElectrico(mapa);
-		// mapaElectrico.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {

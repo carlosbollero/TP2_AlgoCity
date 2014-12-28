@@ -101,7 +101,6 @@ public class MapaRutas extends MapaConexiones {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException {
 		MapaRutas mapaRutas = new MapaRutas(mapa);
-		// mapaRutas.mapa = mapa;
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
 		for (int i = 0; i < hijosDeRed.getLength(); i++) {
