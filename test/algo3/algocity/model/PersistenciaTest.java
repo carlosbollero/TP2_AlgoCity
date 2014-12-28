@@ -153,16 +153,16 @@ public class PersistenciaTest {
 	}
 	
 	
-	@Test
-	public void testRecuperarUnaInstanciaDeJuegoPreviamenteCreadaCompleta() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
-		
-		Juego juegoRecuperado = new Juego();
-		juegoRecuperado = juegoRecuperado.recuperar("testUser2");
-		juegoRecuperado.turno().detener();
-		
-		juegoRecuperado.getClass();
-
-	}
+//	@Test
+//	public void testRecuperarUnaInstanciaDeJuegoPreviamenteCreadaCompleta() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
+//		
+//		Juego juegoRecuperado = new Juego();
+//		juegoRecuperado = juegoRecuperado.recuperar("testUser2");
+//		juegoRecuperado.turno().detener();
+//		
+//		juegoRecuperado.getClass();
+//
+//	}
 	
 	
 	

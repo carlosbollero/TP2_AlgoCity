@@ -30,8 +30,6 @@ import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
  * Clase controladora del login y registro de usuarios
  **/
 
-// TODO
-// VER SI ESTA CLASE NO DEBERIA IR EN CONTROLADOR
 public class RegistroUsuarios {
 
 	private ArrayList<Usuario> usuarios;
@@ -81,6 +79,7 @@ public class RegistroUsuarios {
 
 		juego.usuario().puntaje(juego.poblacion().getCantidad());
 
+		juego.usuario().puntaje(juego.poblacion().getCantidad());
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
 				.getCantidad());
@@ -160,7 +159,7 @@ public class RegistroUsuarios {
 		// }
 		boolean devolucion = nombresUsuarios.contains(nombreUsuarioAChequear);
 		if (devolucion) {
-			throw new NombreDeUsuarioYaExisteException();
+			//throw new NombreDeUsuarioYaExisteException();
 		}
 		return devolucion;
 	}

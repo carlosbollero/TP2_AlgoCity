@@ -1,6 +1,7 @@
 package algo3.algocity.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -50,6 +51,7 @@ public class Reparador implements Observer {
 	}
 
 	public void actualizarObjetivos() {
+		
 		objetivos.addAll(mapa.rutas().unidadesDaniables());
 		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
 		objetivos.addAll(mapa.ciudad().unidadesDaniables());
@@ -62,8 +64,21 @@ public class Reparador implements Observer {
 	}
 
 	public ArrayList<Daniable> objetivos() {
+		
+		//HashSet<Daniable> setObjetivos = new HashSet<Daniable>(this.objetivos);
+		
+		//return setObjetivos;
 		return this.objetivos;
 	}
+	
+//	public HashSet<Daniable> objetivos() {
+//		
+//		//uso un hashset para evitar elementos repetidos
+//		HashSet<Daniable> setObjetivos = new HashSet<Daniable>(this.objetivos);
+//		
+//		return setObjetivos;
+//		//return this.objetivos;
+//	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -98,12 +113,16 @@ public class Reparador implements Observer {
 					if (hijoDeObjetivo.getNodeName().equals("UnidadIndustrial")) {
 						UnidadIndustrial ui = new UnidadIndustrial();
 						ui.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ui);
+						if(!reparador.objetivos.contains(ui)){
+							reparador.objetivos.add(ui);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadResidencial")) {
 						UnidadResidencial ur = new UnidadResidencial();
 						ur.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ur);
+						if(!reparador.objetivos.contains(ur)){
+							reparador.objetivos.add(ur);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadComercial")) {
 						UnidadComercial uc = new UnidadComercial();
@@ -113,31 +132,44 @@ public class Reparador implements Observer {
 							"CentralEolica")) {
 						UnidadEnergetica ce = new CentralEolica();
 						ce.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(ce);
+						if(!reparador.objetivos.contains(ce)){
+							reparador.objetivos.add(ce);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralMinera")) {
 						CentralMinera cm = new CentralMinera();
 						cm.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(cm);
+						if(!reparador.objetivos.contains(cm)){
+							reparador.objetivos.add(cm);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralNuclear")) {
 						CentralNuclear cn = new CentralNuclear();
 						cn.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(cn);
+						if(!reparador.objetivos.contains(cn)){
+							reparador.objetivos.add(cn);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals("Ruta")) {
 						Ruta rt = new Ruta();
 						rt.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(rt);
+						if(!reparador.objetivos.contains(rt)){
+							reparador.objetivos.add(rt);
+						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"LineaTension")) {
 						LineaTension lt = new LineaTension();
 						lt.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(lt);
+						if(!reparador.objetivos.contains(lt)){
+							reparador.objetivos.add(lt);
+						}
 					}
 				}
 			}
 		}
-		reparador.actualizarObjetivos();
+		
+		//revisar este metodo, porque vuelve a agregar los objetivos cada vez que se guarda
+		//el juego
+		//reparador.actualizarObjetivos();
 		return reparador;
 	}
 

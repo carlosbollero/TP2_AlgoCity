@@ -161,7 +161,7 @@ public class Poblacion implements Observer {
 				poblacion.tasa = Integer.valueOf(child.getTextContent());
 			}
 		}
-		//poblacion.actualizar(mapa);
+		poblacion.actualizar(mapa);
 		return poblacion;
 	}
 

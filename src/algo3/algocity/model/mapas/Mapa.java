@@ -282,7 +282,6 @@ public class Mapa extends Observable {
 		if (this.reparador == null) {
 			Element reparador = doc.createElement("reparador");
 			mapa.appendChild(reparador);
-
 		} else {
 			Element reparador = this.reparador.getElement(doc);
 			mapa.appendChild(reparador);

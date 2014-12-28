@@ -63,12 +63,19 @@ public class MapaEdilicio extends Observable {
 		estacionesBomberos = new ArrayList<EstacionDeBomberos>();
 		pozosDeAgua = new ArrayList<PozoDeAgua>();
 		unidadesEnergeticas = new ArrayList<UnidadEnergetica>();
+		mapaSuperior = m;
 	}
 
 	/* Para tests */
 	public MapaEdilicio() {
 		mapa = new HashMap<Coordenada, Unidad>();
-
+		unidadesDaniables = new ArrayList<Daniable>();
+		unidadesResidenciales = new ArrayList<UnidadResidencial>();
+		unidadesIndustriales = new ArrayList<UnidadIndustrial>();
+		unidadesComerciales = new ArrayList<UnidadComercial>();
+		estacionesBomberos = new ArrayList<EstacionDeBomberos>();
+		pozosDeAgua = new ArrayList<PozoDeAgua>();
+		unidadesEnergeticas = new ArrayList<UnidadEnergetica>();
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
