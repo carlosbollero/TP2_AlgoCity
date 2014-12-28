@@ -131,15 +131,15 @@ public class PersistenciaTest {
 		assertTrue(((EstacionDeBomberos) urRecuperada).equals(eb));
 	}
 	
-	@Test
-	public void testPruebaSiInstanciaDeJuegoPasadaAVentanaJuegoEsValida() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
-		
-		Juego juegoLeido = new Juego();
-		juegoLeido = juegoLeido.recuperar("Jose");
-		juegoLeido.getClass();
-		VentanaJuego vj = new VentanaJuego(juegoLeido);
-		
-	}
+//	@Test
+//	public void testPruebaSiInstanciaDeJuegoPasadaAVentanaJuegoEsValida() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
+//		
+//		Juego juegoLeido = new Juego();
+//		juegoLeido = juegoLeido.recuperar("Jose");
+//		juegoLeido.getClass();
+//		VentanaJuego vj = new VentanaJuego(juegoLeido);
+//		
+//	}
 	
 //	@Test
 //	public void testRecuperarUnaInstanciaDeJuegoPreviamenteCreadaCompleta() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
