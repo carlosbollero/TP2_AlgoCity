@@ -14,49 +14,78 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 /**
  * Clase controladora del login y registro de usuarios
  **/
 
-// TODO
-// VER SI ESTA CLASE NO DEBERIA IR EN CONTROLADOR
 public class RegistroUsuarios {
 
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
 
-	public RegistroUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException {
+
+	public RegistroUsuarios() throws SAXException, IOException,
+			ParserConfigurationException{
 
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
-		leerUsuarios();
+		iniciar();
+	}
+
+	private void iniciar() throws SAXException, IOException,
+			ParserConfigurationException {
+		try {
+			leerUsuarios();
+		} catch (NoSeEncontroElFicheroException e) {
+			crearDirectorio();
+			iniciar();
+		}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException {
+			IOException, ParserConfigurationException{
 
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
 				.parse(new File("./saved/" + nombreUsuario + ".xml"));
 		Element element = doc.getDocumentElement();
-		Juego juego = Juego.fromElement(element);
+		Juego juego = null;
+		try {
+			juego = Juego.fromElement(element);
+		} catch (NoSeCumplenLosRequisitosException
+				| FondosInsuficientesException
+				| SuperficieInvalidaParaConstruir | CoordenadaInvalidaException
+				| CapacidadElectricaInsuficienteException
+				| NoHayConexionConTuberias | NoHayConexionConRutas
+				| NoHayConexionConRedElectrica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		juego.usuario().puntaje(juego.poblacion().getCantidad());
 
 		juego.usuario().puntaje(juego.poblacion().getCantidad());
-
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
 				.getCantidad());
 	}
 
 	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException {
+			SAXException, IOException, ParserConfigurationException{
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 
@@ -75,6 +104,14 @@ public class RegistroUsuarios {
 		}
 	}
 
+	private void crearDirectorio() {
+		File guardados = new File("saved");
+		if (!guardados.exists()) {
+			guardados.mkdir();
+		}
+
+	}
+
 	public ArrayList<Usuario> usuarios() {
 		return this.usuarios;
 	}
@@ -89,7 +126,7 @@ public class RegistroUsuarios {
 
 	public ArrayList<String> listaPuntajesString() {
 		ArrayList<String> arrADevolver = new ArrayList<String>();
-		for (Map.Entry entry : listaPuntajes.entrySet()) {
+		for (Map.Entry<String, Integer> entry : listaPuntajes.entrySet()) {
 			arrADevolver.add(entry.getKey() + ": "
 					+ String.valueOf(entry.getValue()));
 		}
@@ -117,7 +154,7 @@ public class RegistroUsuarios {
 		// }
 		boolean devolucion = nombresUsuarios.contains(nombreUsuarioAChequear);
 		if (devolucion) {
-			throw new NombreDeUsuarioYaExisteException();
+			//throw new NombreDeUsuarioYaExisteException();
 		}
 		return devolucion;
 	}
@@ -128,9 +165,7 @@ public class RegistroUsuarios {
 		Iterator<Usuario> iteradorUsuarios = usuarios.iterator();
 		while (iteradorUsuarios.hasNext() && (!encontrado)) {
 			Usuario unUsuario = iteradorUsuarios.next();
-
 			if (unUsuario == usuarioAChequear) {
-
 				encontrado = true;
 			}
 		}

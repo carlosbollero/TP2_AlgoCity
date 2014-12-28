@@ -1,44 +1,52 @@
 package algo3.algocity.model.construcciones;
 
-
 import java.util.Observable;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.caracteristicas.Agregable;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public abstract class Unidad extends Observable{
+public abstract class Unidad extends Observable implements Agregable {
 
 	int costo;
 	int consumo;
-	Coordenada coordenadas;
+	Coordenada coordenada;
+
+	public Unidad(int costo, int consumo) {
+		this.costo = costo;
+		this.consumo = consumo;
+	}
 
 	public int costo() {
-		return this.costo;
+		return costo;
 	}
 
 	public int consumo() {
 		return consumo;
 	}
 
-	public Coordenada coordenadas() {
-		return coordenadas;
+	public Coordenada coordenada() {
+		return coordenada;
 	}
 
-//	public abstract void aplicarDanio(double i);
-
-	public abstract boolean esConstruibleEn(Superficie superficie) throws NoSePuedeConstruirEnSuperficie;
-
-	public abstract double getSalud();
+	// public abstract boolean esConstruibleEn(Superficie superficie) throws
+	// SuperficieInvalidaParaConstruir;
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (!superficie.esTierra()) {
+			throw new SuperficieInvalidaParaConstruir();
+		}
+		return superficie.esTierra();
+	}
 	
-	//public abstract Agregador agregador();
+	public abstract boolean equals(Unidad u);
 
-	public abstract void agregarseA(Mapa mapa);
-	
+	// public abstract double getSalud();
+
 	/* Persistencia */
 	public abstract Element getElement(Document doc);
 

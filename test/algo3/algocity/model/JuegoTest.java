@@ -1,14 +1,11 @@
-package algo3.algocity.model;
-
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import algo3.algocity.model.mapas.MapaConexiones;
-import algo3.algocity.model.mapas.MapaEdilicio;
-import algo3.algocity.model.mapas.MapaTerritorio;
-
-public class JuegoTest {
+//package algo3.algocity.model;
+//
+//import static org.junit.Assert.*;
+//
+//import org.junit.Test;
+//
+//
+//public class JuegoTest {
 
 	/*
 	 * @Test public void testAgregarPozoDeAguaEnMapaCorrespondiente() {
@@ -138,4 +135,4 @@ public class JuegoTest {
 	 * ((int)puntoDeUnaTierra.getX(), (int)puntoDeUnaTierra.getY())); }
 	 */
 
-}
+//}

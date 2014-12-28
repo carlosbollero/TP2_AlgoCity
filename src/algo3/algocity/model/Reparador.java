@@ -2,6 +2,8 @@ package algo3.algocity.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,8 +11,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitable;
-import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.CentralEolica;
@@ -24,77 +24,47 @@ import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Mapa;
 
-public class Reparador implements Visitante {
+public class Reparador implements Observer {
 
 	private Mapa mapa;
 	private ArrayList<Daniable> objetivos;
 
 	public Reparador(Mapa mapa) {
 		this.mapa = mapa;
-		this.objetivos = mapa.unidadesDaniables();
+		objetivos = new ArrayList<Daniable>();
+		actualizarObjetivos();
 	}
 
 	// Para persistencia
 	public Reparador() {
-		this.objetivos = new ArrayList<Daniable>();
-	}
-
-	public void addObjetivo(Daniable d) {
-		objetivos.add(d);
+		objetivos = new ArrayList<Daniable>();
 	}
 
 	public void actuar() {
-		for (Daniable v : this.objetivos) {
-			v.aceptar(this);
+		actualizarObjetivos();
+		for (Daniable v : objetivos) {
+			v.repararse();
+//			v.aceptar(this);
 		}
 	}
 
 	public void actualizarObjetivos() {
-		this.objetivos = mapa.unidadesDaniables();
+		objetivos = new ArrayList<Daniable>(mapa.rutas().unidadesDaniables());
+		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
+		objetivos.addAll(mapa.ciudad().unidadesDaniables());
 	}
 
 	@Override
-	public void visitar(UnidadResidencial unaUnidadResidencial) {
-		unaUnidadResidencial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadComercial unaUnidadComercial) {
-		unaUnidadComercial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadIndustrial unaUnidadIndustrial) {
-		unaUnidadIndustrial.repararse();
-	}
-
-	@Override
-	public void visitar(UnidadEnergetica unaUnidadEnergetica) {
-		unaUnidadEnergetica.repararse();
-	}
-
-	@Override
-	public void visitar(LineaTension unaLineaTension) {
-		unaLineaTension.repararse();
-	}
-
-	@Override
-	public void visitar(Ruta unaRuta) {
-		unaRuta.repararse();
-	}
-
-	@Override
-	public void visitar(Daniable unaUnidad) {
-		unaUnidad.repararse();
+	public void update(Observable o, Object arg) {
+		System.out.println(o.getClass());
+		actuar();
+		
 	}
 
 	public ArrayList<Daniable> objetivos() {
 		return this.objetivos;
 	}
 
-	public Mapa mapa() {
-		return this.mapa;
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -141,12 +111,12 @@ public class Reparador implements Visitante {
 						reparador.objetivos.add(ur);
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadComercial")) {
-						UnidadComercial uc = new UnidadComercial();
+						Daniable uc = new UnidadComercial();
 						uc.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(uc);
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"CentralEolica")) {
-						CentralEolica ce = new CentralEolica();
+						UnidadEnergetica ce = new CentralEolica();
 						ce.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(ce);
 					} else if (hijoDeObjetivo.getNodeName().equals(
@@ -159,16 +129,6 @@ public class Reparador implements Visitante {
 						CentralNuclear cn = new CentralNuclear();
 						cn.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(cn);
-					} else if (hijoDeObjetivo.getNodeName().equals(
-							"EstacionDeBomberos")) {
-						EstacionDeBomberos eb = new EstacionDeBomberos();
-						eb.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(eb);
-					} else if (hijoDeObjetivo.getNodeName().equals(
-							"PozoDeAgua")) {
-						PozoDeAgua pa = new PozoDeAgua();
-						pa.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(pa);
 					} else if (hijoDeObjetivo.getNodeName()
 							.equals("Ruta")) {
 						Ruta rt = new Ruta();
@@ -184,6 +144,7 @@ public class Reparador implements Visitante {
 			}
 			reparador.mapa = mapa;
 		}
+		reparador.actualizarObjetivos();
 		return reparador;
 	}
 
@@ -201,4 +162,5 @@ public class Reparador implements Visitante {
 		}
 		return resultado;
 	}
+
 }

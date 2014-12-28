@@ -10,12 +10,13 @@ import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
 import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaCentralMinera;
 import algo3.algocity.model.fabricas.FabricaCentralNuclear;
@@ -51,12 +52,12 @@ public class MapasIntegralTest {
 	@Test
 	public void testSeCreaUnidadResidencialSiCumpleConRequisitos()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 
 		// try {
@@ -70,12 +71,12 @@ public class MapasIntegralTest {
 		m.agregar(t);
 		t = fc.construir(m, d, new Coordenada(3, 2));
 		m.agregar(t);
-//		t = fc.construir(m, d, new Coordenada(2, 2));
-//		m.agregar(t);
+		// t = fc.construir(m, d, new Coordenada(2, 2));
+		// m.agregar(t);
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
-		UnidadEnergetica ue = fe.construir(m, d, s, new Coordenada(2, 2));
+		UnidadEnergetica ue = fe.construir(m, d, new Coordenada(2, 2));
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -94,7 +95,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, d, s, new Coordenada(2, 4));
+		Unidad ur = fu.construir(m, d, new Coordenada(2, 4));
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -109,16 +110,16 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirindustriaYNoCumplirLosRequisitos()
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoSeCumplenLosRequisitosException {
+			NoHayConexionConRutas, NoSeCumplenLosRequisitosException,
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 
 		fu = new FabricaUnidadIndustrial();
 		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, d, s, p);
+			Unidad u = fu.construir(m, d, p);
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 		} catch (NoHayConexionConRedElectrica er) {
@@ -130,15 +131,15 @@ public class MapasIntegralTest {
 	public void testSelanzaExcepcionAlQuererConstruirResidenciaYNoCumplirLosRequisitos()
 			throws FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRedElectrica, NoSeCumplenLosRequisitosException {
+			NoHayConexionConRedElectrica, NoSeCumplenLosRequisitosException,
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		fu = new FabricaUnidadResidencial();
 		Coordenada p = m.posicionConTierra();
 
 		try {
-			Unidad u = fu.construir(m, d, s, p);
+			Unidad u = fu.construir(m, d, p);
 			m.agregar(u);
 			assertTrue(m.contiene(u));
 		} catch (NoHayConexionConRutas er) {
@@ -151,17 +152,17 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioAguaParaTest();
 
 		fu = new FabricaPozoAgua();
 
 		Coordenada p = m.posicionConAgua();
 
-		PozoDeAgua u = (PozoDeAgua) fu.construir(m, d, s, p);
+		PozoDeAgua u = (PozoDeAgua) fu.construir(m, d, p);
 		m.agregar(u);
 
 		assertTrue(m.contiene(u));
@@ -173,16 +174,16 @@ public class MapasIntegralTest {
 			throws FondosInsuficientesException,
 			NoSeCumplenLosRequisitosException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 
 		fu = new FabricaEstacionDeBomberos();
 
 		Coordenada p = m.posicionConTierra();
 
-		Unidad u = fu.construir(m, d, s, p);
+		Unidad u = fu.construir(m, d, p);
 		m.agregar(u);
 
 		assertTrue(m.contiene(u));
@@ -192,11 +193,10 @@ public class MapasIntegralTest {
 	@Test
 	public void testAgregarCentralEolicaSiCumpleConLosRequisitos()
 			throws FondosInsuficientesException,
-			NoSeCumplenLosRequisitosException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
+			NoSeCumplenLosRequisitosException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 		PozoDeAgua pozo = new PozoDeAgua(new Coordenada(1, 1));
 		m.agregar(pozo);
@@ -211,7 +211,7 @@ public class MapasIntegralTest {
 		// CREAR CENTRAL EOLICA
 		fe = new FabricaCentralEolica();
 
-		Unidad u = fe.construir(m, d, s, new Coordenada(1, 10));
+		Unidad u = fe.construir(m, d, new Coordenada(1, 10));
 		m.agregar(u);
 
 		assertTrue(m.contiene(u));
@@ -223,10 +223,9 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -251,7 +250,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
-		UnidadEnergetica ue = fe.construir(m, d, s, new Coordenada(2, 2));
+		UnidadEnergetica ue = fe.construir(m, d, new Coordenada(2, 2));
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -259,7 +258,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL QUE DEBE TENER ELECTRICIDAD
 		// POR ESTAR DENTRO DEL RADIO DE LA UNIDAD ENERGETICA
 		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, d, s, new Coordenada(3, 2));
+		Unidad ur = fu.construir(m, d, new Coordenada(3, 2));
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -271,11 +270,10 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -304,7 +302,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralMinera();
-		UnidadEnergetica ue = fe.construir(m, d, s, new Coordenada(2, 2));
+		UnidadEnergetica ue = fe.construir(m, d, new Coordenada(2, 2));
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -312,7 +310,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		fu = new FabricaUnidadResidencial();
-		Unidad ur = fu.construir(m, d, s, new Coordenada(3, 2));
+		Unidad ur = fu.construir(m, d, new Coordenada(3, 2));
 		m.agregar(ur);
 
 		assertTrue(m.contiene(ur));
@@ -324,11 +322,10 @@ public class MapasIntegralTest {
 			FondosInsuficientesException,
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
-			NoSePuedeConstruirEnSuperficie {
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -353,7 +350,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralNuclear();
-		UnidadEnergetica ue = fe.construir(m, d, s, new Coordenada(2, 2));
+		UnidadEnergetica ue = fe.construir(m, d, new Coordenada(2, 2));
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -361,7 +358,7 @@ public class MapasIntegralTest {
 		// CONSTRUYO UNA UNIDAD RESIDENCIAL CONECTADA A LA CENTRAL
 		// ENERGETICA
 		fu = new FabricaUnidadComercial();
-		Unidad uc = fu.construir(m, d, s, new Coordenada(3, 2));
+		Unidad uc = fu.construir(m, d, new Coordenada(3, 2));
 		m.agregar(uc);
 
 		assertTrue(m.contiene(uc));
@@ -370,12 +367,12 @@ public class MapasIntegralTest {
 	@Test
 	public void testSeDanianUnidadesDelMapaYElReparadorLasRepara()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CapacidadElectricaInsuficienteException,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			NoHayConexionConRutas, NoHayConexionConRedElectrica,
+			CoordenadaInvalidaException {
 		Mapa m = new Mapa();
 		Dinero d = new Dinero();
-		SistemaElectrico s = new SistemaElectrico();
 		m.setTerritorioTierraParaTest();
 
 		// CONSTRUYO UN POZO DE AGUA
@@ -397,7 +394,7 @@ public class MapasIntegralTest {
 
 		// CONSTRUYO UNA UNIDAD ENERGETICA CONECTADA AL POZO DE AGUA
 		fe = new FabricaCentralEolica();
-		UnidadEnergetica ue = fe.construir(m, d, s, new Coordenada(2, 2));
+		UnidadEnergetica ue = fe.construir(m, d, new Coordenada(2, 2));
 		m.agregar(ue);
 
 		assertTrue(m.contiene(ue));
@@ -416,12 +413,13 @@ public class MapasIntegralTest {
 
 		// Danio a la central
 		CatastrofeTerremoto ct = new CatastrofeTerremoto(m, 2, 2);
+		ct.iniciar();
 
 		assertEquals(0, ue.getSalud(), 0);
 
 		// Reparo a la central
 		fu = new FabricaEstacionDeBomberos();
-		Unidad eb = fu.construir(m, d, s, new Coordenada(4, 4));
+		Unidad eb = fu.construir(m, d, new Coordenada(4, 4));
 		m.agregar(eb);
 
 		m.reparar();

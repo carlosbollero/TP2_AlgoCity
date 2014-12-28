@@ -12,6 +12,7 @@ import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.mapas.Coordenada;
@@ -85,21 +86,21 @@ public class UnidadTest {
 
 	@Test
 	public void testCentralEolicaTieneCostoValido() {
-		Unidad unaCentralEolica = new CentralEolica();
+		Unidad unaCentralEolica = new CentralEolica(new Coordenada(1,1));
 
 		assertEquals(unaCentralEolica.costo(), 1000);
 	}
 
 	@Test
 	public void testCentralMineraTieneCostoValido() {
-		Unidad unaCentralMinera = new CentralMinera();
+		Unidad unaCentralMinera = new CentralMinera(new Coordenada(1,1));
 
 		assertEquals(unaCentralMinera.costo(), 3000);
 	}
 
 	@Test
 	public void testCentralNuclearTieneCostoValido() {
-		Unidad unaCentralNuclear = new CentralNuclear();
+		Unidad unaCentralNuclear = new CentralNuclear(new Coordenada(1,1));
 
 		assertEquals(unaCentralNuclear.costo(), 10000);
 	}
@@ -131,7 +132,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralEolica = 100
-		CentralEolica unaCentralEolica = new CentralEolica();
+		UnidadEnergetica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
 
 		assertEquals(unaCentralEolica.getCapacidad(), 100);
 	}
@@ -139,7 +140,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralMineraTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralMinera = 400
-		CentralMinera unaCentralMinera = new CentralMinera();
+		CentralMinera unaCentralMinera = new CentralMinera(new Coordenada(1,1));
 
 		assertEquals(unaCentralMinera.getCapacidad(), 400);
 	}
@@ -147,7 +148,7 @@ public class UnidadTest {
 	@Test
 	public void testCentralNuclearTieneCapacidadAbastecimientoValida() {
 		// Capacidad de abastecimiento centralNuclear = 1000
-		CentralNuclear unaCentralNuclear = new CentralNuclear();
+		CentralNuclear unaCentralNuclear = new CentralNuclear(new Coordenada(1,1));
 
 		assertEquals(unaCentralNuclear.getCapacidad(), 1000);
 	}
@@ -159,23 +160,23 @@ public class UnidadTest {
 	@Test
 	public void testCentralEolicaTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralEolica = 4
-		CentralEolica unaCentralEolica = new CentralEolica();
-		assertEquals(unaCentralEolica.getRadioDeInfluencia(), 4);
+		UnidadEnergetica unaCentralEolica = new CentralEolica(new Coordenada(1,1));
+		assertEquals(unaCentralEolica.getRadio(), 4);
 	}
 
 	@Test
 	public void testCentralMineraTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralMinera = 10
-		CentralMinera unaCentralMinera = new CentralMinera();
+		CentralMinera unaCentralMinera = new CentralMinera(new Coordenada(1,1));
 
-		assertEquals(unaCentralMinera.getRadioDeInfluencia(), 10);
+		assertEquals(unaCentralMinera.getRadio(), 10);
 	}
 
 	@Test
 	public void testCentralNuclearTieneRadioDeInfluenciaValido() {
 		// Radio de influencia centralNuclear = 25
-		CentralNuclear unaCentralNuclear = new CentralNuclear();
-		assertEquals(unaCentralNuclear.getRadioDeInfluencia(), 25);
+		CentralNuclear unaCentralNuclear = new CentralNuclear(new Coordenada(1,1));
+		assertEquals(unaCentralNuclear.getRadio(), 25);
 	}
 
 	/**/
@@ -202,7 +203,7 @@ public class UnidadTest {
 
 	@Test
 	public void testAplicarDanioAUnidadEnergetica() {
-		Daniable unaUnidadEnergetica = new CentralEolica();
+		Daniable unaUnidadEnergetica = new CentralEolica(new Coordenada(1,1));
 		unaUnidadEnergetica.aplicarDanio(50);
 
 		assertEquals(50, unaUnidadEnergetica.getSalud(), 0);

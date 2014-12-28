@@ -1,21 +1,20 @@
 package algo3.algocity.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.EstacionDeBomberos;
-import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
+import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
 import algo3.algocity.model.construcciones.UnidadResidencial;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.mapas.Coordenada;
@@ -26,7 +25,8 @@ public class CatastrofeTerremotoTest {
 	Mapa m;
 
 	@Test
-	public void testTerremotoAplicaDanioASuEpicentro() {
+	public void testTerremotoAplicaDanioASuEpicentro()
+			throws CoordenadaInvalidaException {
 		m = new Mapa();
 
 		UnidadResidencial u1 = new UnidadResidencial(new Coordenada(3, 3));
@@ -37,17 +37,19 @@ public class CatastrofeTerremotoTest {
 
 		// Creacion de un terremoto con epicentro en (3,3)
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 3, 3);
+		catastrofe.iniciar();
 
 		assertEquals(0, u1.getSalud(), 0);
 	}
 
 	@Test
-	public void testTerremotoAplicaDanioCorrespondienteAUnidadesAlrededor() {
+	public void testTerremotoAplicaDanioCorrespondienteAUnidadesAlrededor()
+			throws CoordenadaInvalidaException {
 		m = new Mapa();
 
 		UnidadResidencial ur1 = new UnidadResidencial(new Coordenada(1, 1));
 		UnidadComercial uc1 = new UnidadComercial(new Coordenada(1, 2));
-		CentralEolica ce1 = new CentralEolica(new Coordenada(2, 3));
+		UnidadEnergetica ce1 = new CentralEolica(new Coordenada(2, 3));
 		CentralMinera cm1 = new CentralMinera(new Coordenada(3, 2));
 		CentralNuclear cn1 = new CentralNuclear(new Coordenada(4, 2));
 		UnidadResidencial ur2 = new UnidadResidencial(new Coordenada(10, 10));
@@ -80,6 +82,7 @@ public class CatastrofeTerremotoTest {
 
 		// Creacion de un terremoto con epicentro en (1,1)
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
+		catastrofe.iniciar();
 
 		assertEquals(0, ur1.getSalud(), 0);
 		assertEquals(1.5, uc1.getSalud(), 0);
@@ -95,29 +98,9 @@ public class CatastrofeTerremotoTest {
 	}
 
 	@Test
-	public void testTerremotoNoAplicaDanioAUnidadesNoDaniablesAlrededor() {
-		m = new Mapa();
-
-		EstacionDeBomberos eb = new EstacionDeBomberos(new Coordenada(1, 1));
-		PozoDeAgua pa = new PozoDeAgua(new Coordenada(2, 2));
-		Tuberia tb = new Tuberia(new Coordenada(3, 3));
-
-		m.agregar(eb);
-		m.agregar(pa);
-		m.agregar(tb);
-
-		// Creacion de un terremoto con epicentro en (1,1)
-		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 1, 1);
-
-		assertEquals(100, eb.getSalud(), 0);
-		assertEquals(100, pa.getSalud(), 0);
-		assertEquals(100, tb.getSalud(), 0);
-	}
-
-	@Test
 	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException {
+			FondosInsuficientesException, CoordenadaInvalidaException {
 		Dinero d = new Dinero();
 		m = new Mapa();
 		m.setTerritorioTierraParaTest();
@@ -131,6 +114,7 @@ public class CatastrofeTerremotoTest {
 		assertEquals(100, rt.getSalud(), 0);
 
 		CatastrofeTerremoto catastrofe = new CatastrofeTerremoto(m, 5, 5);
+		catastrofe.iniciar();
 
 		assertEquals(3, lt.getSalud(), 0);
 		assertEquals(1.5, rt.getSalud(), 0);

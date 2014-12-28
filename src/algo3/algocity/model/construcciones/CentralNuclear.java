@@ -2,48 +2,40 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralNuclear extends UnidadEnergetica {
-
+	
 	public CentralNuclear() {
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
+
+		super(10000, 1000, 25);
 	}
 
 	public CentralNuclear(Coordenada coord) {
-		coordenadas = coord;
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
+		super(10000, 1000, 25);
+		coordenada = coord;
 	}
 
-	public CentralNuclear(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralNuclear(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
-		this.costo = 10000;
-		this.capacidad = 1000;
-		this.radioDeInfluencia = 25;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		sisElectrico.aumentarCapacidad(capacidad);
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
+		super(Constantes.COSTO_C_NUCLEAR, Constantes.CAPACIDAD_C_NUCLEAR, Constantes.RADIO_C_NUCLEAR);
+		this.coordenada = coord;
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
+		mapa.sistemaElectrico().aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
 	}
 
@@ -59,12 +51,15 @@ public class CentralNuclear extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 3) / 100;
 	}
 
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
-	}
+//	@Override
+//	public boolean agregarseA(Mapa mapa) {
+//		return mapa.ciudad().agregar(this);
+//	}
+//
+//	@Override
+//	public boolean estaContenidoEn(Mapa mapa) {
+//		return mapa.ciudad().contiene(this);
+//	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -88,8 +83,8 @@ public class CentralNuclear extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -101,14 +96,14 @@ public class CentralNuclear extends UnidadEnergetica {
 				.setTextContent(String.valueOf(this.radioDeInfluencia));
 
 		return unidad;
-	}	
+	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable cn) {
+	public boolean equals(Unidad cn) {
 		if (cn == this) {
 			return true;
-		} else if (cn.coordenadas().getX() == this.coordenadas().getX()
-				&& cn.coordenadas().getY() == this.coordenadas().getY()
+		} else if (cn.coordenada().getX() == this.coordenada().getX()
+				&& cn.coordenada().getY() == this.coordenada().getY()
 				&& ((CentralNuclear) cn).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}

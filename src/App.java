@@ -12,7 +12,9 @@ import algo3.algocity.view.VentanaInicial;
 public class App {
 
 	public static void main(String arg[]) throws LineUnavailableException,
-			IOException, UnsupportedAudioFileException, SAXException, ParserConfigurationException, NoSeEncontroElFicheroException {
+
+			IOException, UnsupportedAudioFileException, SAXException,
+			ParserConfigurationException, NoSeEncontroElFicheroException{
 		VentanaInicial ventanaInicio = new VentanaInicial();
 	}
 

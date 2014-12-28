@@ -2,56 +2,44 @@ package algo3.algocity.model.construcciones;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.SistemaElectrico;
 import algo3.algocity.model.caracteristicas.Daniable;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
-import algo3.algocity.model.excepciones.NoSePuedeConstruirEnSuperficie;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralEolica extends UnidadEnergetica {
-
+	
 	public CentralEolica() {
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
+		super(1000, 100, 4);
 	}
 
 	public CentralEolica(Coordenada coord) {
-		coordenadas = coord;
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
+		super(1000, 100, 4);
+		coordenada = coord;
 	}
 
-	public CentralEolica(Mapa mapa, Dinero dinero,
-			SistemaElectrico sisElectrico, Coordenada coord)
+	public CentralEolica(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, NoSePuedeConstruirEnSuperficie,
-			NoHayConexionConTuberias {
-		this.costo = 1000;
-		this.capacidad = 100;
-		this.radioDeInfluencia = 4;
-		this.coordenadas = coord;
-		if (!esConstruibleEn(mapa.superficie(coordenadas))
-				|| !hayConexionesEn(mapa)) {
-			throw new NoSeCumplenLosRequisitosException();
-		}
-		sisElectrico.aumentarCapacidad(capacidad);
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			NoHayConexionConTuberias, CoordenadaInvalidaException {
+		super(Constantes.COSTO_C_EOLICA, Constantes.CAPACIDAD_C_EOLICA, Constantes.RADIO_C_EOLICA);
+		this.coordenada = coord;
+		mapa.validarCoordenadas(coord);
+		esConstruibleEn(mapa.superficie(coordenada));
+		hayConexionesEn(mapa);
+		mapa.sistemaElectrico().aumentarCapacidad(capacidad);
 		dinero.cobrar(costo);
 	}
 
-	@Override
-	public void agregarseA(Mapa mapa) {
-		mapa.agregarACiudad(this);
-		mapa.agregarUnidadDaniable(this);
-		mapa.agregarPuntoRelevanteEnRedElectrica(this);
+	protected double porcentajeReparacion() {
+		return (this.ESTADOINICIAL * 15) / 100;
 	}
 
 	@Override
@@ -60,10 +48,6 @@ public class CentralEolica extends UnidadEnergetica {
 		if (this.getDanios() < 0) {
 			this.porcentajeDanios = 0;
 		}
-	}
-
-	protected double porcentajeReparacion() {
-		return (this.ESTADOINICIAL * 15) / 100;
 	}
 
 	/**********************************************************************/
@@ -88,8 +72,8 @@ public class CentralEolica extends UnidadEnergetica {
 		Element coordenadas = doc.createElement("coordenadas");
 		unidad.appendChild(coordenadas);
 		coordenadas
-				.setTextContent((String.valueOf((int) this.coordenadas.getX())
-						+ "," + String.valueOf((int) this.coordenadas.getY())));
+				.setTextContent((String.valueOf((int) this.coordenada.getX())
+						+ "," + String.valueOf((int) this.coordenada.getY())));
 
 		Element porcentajeDanios = doc.createElement("porcentajeDanios");
 		unidad.appendChild(porcentajeDanios);
@@ -103,12 +87,12 @@ public class CentralEolica extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ce) {
+	public boolean equals(Unidad ce) {
 		if (ce == this) {
 			return true;
-		} else if (ce.coordenadas().getX() == this.coordenadas().getX()
-				&& ce.coordenadas().getY() == this.coordenadas().getY()
-				&& ((CentralEolica) ce).porcentajeDanios == this.porcentajeDanios) {
+		} else if (ce.coordenada().getX() == this.coordenada().getX()
+				&& ce.coordenada().getY() == this.coordenada().getY()
+				&& ((UnidadEnergetica) ce).porcentajeDanios == this.porcentajeDanios) {
 			return true;
 		}
 		return false;

@@ -19,6 +19,10 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
+import algo3.algocity.view.vistaInicial.VistaInicial;
+import algo3.algocity.view.vistaInicial.VistaJugadorExistente;
+import algo3.algocity.view.vistaInicial.VistaJugadorNuevo;
+import algo3.algocity.view.vistaInicial.VistaPuntajes;
 
 public class VentanaInicial extends JFrame {
 
@@ -28,7 +32,8 @@ public class VentanaInicial extends JFrame {
 	AudioStream audioStream;
 
 	public VentanaInicial() throws LineUnavailableException, IOException,
-			UnsupportedAudioFileException, SAXException, ParserConfigurationException, NoSeEncontroElFicheroException {
+			UnsupportedAudioFileException, SAXException,
+			ParserConfigurationException, NoSeEncontroElFicheroException {
 		super("Algoritmos 3 | AlgoCity");
 		initPanelFondo();
 		setPanelFondo();
@@ -38,19 +43,21 @@ public class VentanaInicial extends JFrame {
 
 	private void initSonido() throws LineUnavailableException, IOException,
 			UnsupportedAudioFileException {
-//		Clip sonido = AudioSystem.getClip();
-//		File file = new File("sound/SummerTown.wav");
-//		sonido.open(AudioSystem.getAudioInputStream(file));
-//		sonido.loop(Clip.LOOP_CONTINUOUSLY);
-	
-//		InputStream in = new FileInputStream(new File("sound/SummerTown.wav"));
-		InputStream in = new FileInputStream(new File("sound/SimCityMusicTheme.wav"));
-		
+		// Clip sonido = AudioSystem.getClip();
+		// File file = new File("sound/SummerTown.wav");
+		// sonido.open(AudioSystem.getAudioInputStream(file));
+		// sonido.loop(Clip.LOOP_CONTINUOUSLY);
+
+		// InputStream in = new FileInputStream(new
+		// File("sound/SummerTown.wav"));
+		InputStream in = new FileInputStream(new File(
+				"sound/SimCityMusicTheme.wav"));
+
 		audioStream = new AudioStream(in);
 		AudioPlayer.player.start(audioStream);
 	}
-	
-	private void stopSonido(){
+
+	private void stopSonido() {
 		AudioPlayer.player.stop(audioStream);
 	}
 
@@ -59,20 +66,18 @@ public class VentanaInicial extends JFrame {
 		this.panelFondo = new JPanel();
 	}
 
-	private void setPanelFondo() throws SAXException, IOException, ParserConfigurationException, NoSeEncontroElFicheroException {
+	private void setPanelFondo() throws SAXException, IOException,
+			ParserConfigurationException, NoSeEncontroElFicheroException {
 
 		panelFondo.setLayout(new CardLayout());
 
 		VistaInicial vista1 = new VistaInicial(this);
-		VistaJugadorNuevoOExistente vista2 = new VistaJugadorNuevoOExistente(
-				this);
 		VistaJugadorNuevo vista3 = new VistaJugadorNuevo(this);
 		VistaJugadorExistente vista4 = new VistaJugadorExistente(this);
 		VistaPuntajes vista5 = new VistaPuntajes(this);
 
 		/* El panel del fondo es uno solo y se va intercambiando su contenido */
 		panelFondo.add(vista1, "vistaInicial");
-		panelFondo.add(vista2, "vistaJugNuevoOExist");
 		panelFondo.add(vista3, "vistaJugNuevo");
 		panelFondo.add(vista4, "vistaJugExistente");
 		panelFondo.add(vista5, "vistaPuntajes");
@@ -80,18 +85,10 @@ public class VentanaInicial extends JFrame {
 		add(panelFondo);
 
 		mostrarVistaInicial();
-		// mostrarVistaJugadorNuevoOExistente();
-		// mostrarVistaJugadorNuevo();
-		// mostrarVistaJugadorExistente();
 	}
 
 	public void mostrarVistaInicial() {
 		((CardLayout) panelFondo.getLayout()).show(panelFondo, "vistaInicial");
-	}
-
-	public void mostrarVistaJugadorNuevoOExistente() {
-		((CardLayout) panelFondo.getLayout()).show(panelFondo,
-				"vistaJugNuevoOExist");
 	}
 
 	public void mostrarVistaJugadorNuevo() {
@@ -102,10 +99,9 @@ public class VentanaInicial extends JFrame {
 		((CardLayout) panelFondo.getLayout()).show(panelFondo,
 				"vistaJugExistente");
 	}
-	
-	public void mostrarVistaPuntajes(){
-		((CardLayout) panelFondo.getLayout()).show(panelFondo,
-				"vistaPuntajes");
+
+	public void mostrarVistaPuntajes() {
+		((CardLayout) panelFondo.getLayout()).show(panelFondo, "vistaPuntajes");
 	}
 
 	private void acomodar() {

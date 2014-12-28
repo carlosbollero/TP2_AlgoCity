@@ -8,8 +8,9 @@ import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.conexiones.Tuberia;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.mapas.Coordenada;
-import algo3.algocity.model.mapas.MapaConexiones;
+import algo3.algocity.model.mapas.Mapa;
 
 public class MapaConexionesTest {
 
@@ -17,59 +18,63 @@ public class MapaConexionesTest {
 	int ancho = 10;
 
 	@Test
-	public void testSePuedeAgregarUnConectorAlMapa() {
-		MapaConexiones mc = new MapaConexiones(alto, ancho);
+	public void testSePuedeAgregarUnConectorAlMapa()
+			throws CoordenadaInvalidaException {
+		Mapa m = new Mapa();
 		Conector c = new LineaTension(new Coordenada(1, 1));
 
-		assertTrue(mc.agregar(c));
+		assertTrue(m.agregar(c));
 	}
 
 	@Test
-	public void testSePuedeAgregarMasDeUnConectorAlMapa() {
-		MapaConexiones mc = new MapaConexiones(alto, ancho);
+	public void testSePuedeAgregarMasDeUnConectorAlMapa()
+			throws CoordenadaInvalidaException {
+		Mapa m = new Mapa();
 		Conector c1 = new Tuberia(new Coordenada(1, 1));
 		Conector c2 = new Tuberia(new Coordenada(2, 1));
 		Conector c3 = new Tuberia(new Coordenada(3, 1));
 
-		assertTrue(mc.agregar(c1));
-		assertTrue(mc.agregar(c2));
-		assertTrue(mc.agregar(c3));
+		assertTrue(m.agregar(c1));
+		assertTrue(m.agregar(c2));
+		assertTrue(m.agregar(c3));
 	}
 
 	@Test
-	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada() {
-		MapaConexiones mc = new MapaConexiones(alto, ancho);
+	public void testNoSePuedeAgregarDosConectoresDeIgualCoordenada()
+			throws CoordenadaInvalidaException {
+		Mapa m = new Mapa();
 		Conector c1 = new Ruta(new Coordenada(1, 1));
 		Conector c2 = new Ruta(new Coordenada(1, 1));
 
-		assertTrue(mc.agregar(c1));
-		assertTrue(mc.contiene(c1));
-		assertFalse(mc.agregar(c2));
-		assertFalse(mc.contiene(c2));
+		assertTrue(m.agregar(c1));
+		assertTrue(m.contiene(c1));
+		assertFalse(m.agregar(c2));
+		assertFalse(m.contiene(c2));
 	}
 
 	@Test
-	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas() {
-		MapaConexiones mc = new MapaConexiones(alto, ancho);
+	public void testSePuedeConsultarSiDosCoordenadasEstanConectadas()
+			throws CoordenadaInvalidaException {
+		Mapa m = new Mapa();
 		Conector c1 = new Ruta(new Coordenada(1, 1));
 		Conector c2 = new Ruta(new Coordenada(2, 2));
 
-		mc.agregar(c1);
-		mc.agregar(c2);
+		m.agregar(c1);
+		m.agregar(c2);
 
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c2)));
+		assertFalse(m.rutas().hayConexion(c1.coordenada(), c2.coordenada()));
 
 		Conector c3 = new Ruta(new Coordenada(3, 3));
 		Conector c4 = new Ruta(new Coordenada(3, 4));
 
-		mc.agregar(c3);
-		mc.agregar(c4);
+		m.agregar(c3);
+		m.agregar(c4);
 
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c3)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c1), mc.coordenadas(c4)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c2), mc.coordenadas(c3)));
-		assertFalse(mc.hayConexion(mc.coordenadas(c2), mc.coordenadas(c4)));
-		assertTrue(mc.hayConexion(mc.coordenadas(c3), mc.coordenadas(c4)));
+		assertFalse(m.rutas().hayConexion(c1.coordenada(), c3.coordenada()));
+		assertFalse(m.rutas().hayConexion(c1.coordenada(), c4.coordenada()));
+		assertFalse(m.rutas().hayConexion(c2.coordenada(), c3.coordenada()));
+		assertFalse(m.rutas().hayConexion(c2.coordenada(), c4.coordenada()));
+		assertTrue(m.rutas().hayConexion(c3.coordenada(), c4.coordenada()));
 
 	}
 
