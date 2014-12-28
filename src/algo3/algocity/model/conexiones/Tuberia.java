@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -33,7 +34,7 @@ public class Tuberia implements Conector {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			CoordenadaInvalidaException {
-		costo = 5;
+		costo = Constantes.COSTO_TUBERIA;
 		this.coordenada = coordenada;
 		mapa.validarCoordenadas(coordenada);
 		esConstruibleEn(mapa.superficie(coordenada));

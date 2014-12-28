@@ -25,7 +25,7 @@ public class Poblacion implements Observer {
 	// Mapa mapa;
 
 	public Poblacion() {
-		cantidad = 0;
+		cantidad = Constantes.POBLACION_INICIAL;
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;

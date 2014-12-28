@@ -10,10 +10,8 @@
 package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Observable;
 
 import org.jgrapht.alg.ConnectivityInspector;
@@ -21,19 +19,9 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.CentralEolica;
-import algo3.algocity.model.construcciones.CentralMinera;
-import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
 
 public abstract class MapaConexiones extends Observable {
 
@@ -149,19 +137,6 @@ public abstract class MapaConexiones extends Observable {
 			nodo.appendChild(conector);
 		}
 		return red;
-	}
-
-	/* Para probar */
-	private static void imprimirMapaConexiones(MapaConexiones mapaConexiones) {
-		System.out.println("imprimiendo mapa conexiones");
-		for (Map.Entry e : mapaConexiones.mapaConectores.entrySet()) {
-			Coordenada clave = (Coordenada) e.getKey();
-			Conector valor = (Conector) e.getValue();
-
-			System.out.println(String.valueOf(clave.getX()));
-			System.out.println(String.valueOf(clave.getY()));
-			System.out.println(valor.getClass());
-		}
 	}
 
 }

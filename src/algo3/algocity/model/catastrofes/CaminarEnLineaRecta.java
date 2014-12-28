@@ -48,9 +48,7 @@ public class CaminarEnLineaRecta implements Movimiento {
 	    }
 	return caminoRecorrido; 
 	}
-		
-		
-	}
+}
 	
 	
 	

@@ -83,10 +83,10 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		}
 		return superficie.esTierra();
 	}
-	
+
 	@Override
 	public boolean agregarseA(Mapa mapa) {
-		if(mapa.ciudad().agregar(this)){
+		if (mapa.ciudad().agregar(this)) {
 			addObserver(mapa.sistemaElectrico());
 			return true;
 		}
@@ -131,7 +131,5 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 			}
 		}
 	}
-
-
 
 }

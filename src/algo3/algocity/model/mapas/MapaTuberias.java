@@ -27,11 +27,11 @@ public class MapaTuberias extends MapaConexiones {
 			return false;
 		}
 		//AGREGADo
-		mapaConectores.put(tuberia.coordenada(),tuberia);
+		//mapaConectores.put(tuberia.coordenada(),tuberia);
 		grafo.addVertex(tuberia);
 		actualizarGrafo(tuberia);
 		setChanged();
-		notifyObservers();
+		notifyObservers(tuberia.coordenada());
 		return true;
 	}
 
@@ -83,6 +83,7 @@ public class MapaTuberias extends MapaConexiones {
 		}
 		return red;
 	}
+
 	
 	public static MapaTuberias fromElement(Node tuberias, Mapa mapa, Dinero d) throws NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		MapaTuberias mapaTuberias = new MapaTuberias(mapa);
@@ -109,14 +110,14 @@ public class MapaTuberias extends MapaConexiones {
 										Integer.valueOf(arrayPunto[1]));
 							} else if (hijoDeNodo.getNodeName().equals(
 									"Tuberia")) {
-								Tuberia tb = new Tuberia(mapa,d,puntoAAgregar);
+								Tuberia tb = new Tuberia(mapa, d, puntoAAgregar);
 								tb.fromElement(hijoDeNodo);
 								mapaTuberias.agregar(tb);
-							} 
+							}
 						}
 					}
 				}
-			} 
+			}
 		}
 		return mapaTuberias;
 	}

@@ -6,30 +6,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Ocupable;
-import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.CentralEolica;
-import algo3.algocity.model.construcciones.CentralMinera;
-import algo3.algocity.model.construcciones.CentralNuclear;
 import algo3.algocity.model.construcciones.EstacionDeBomberos;
-import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.Unidad;
-import algo3.algocity.model.construcciones.UnidadComercial;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
-import algo3.algocity.model.construcciones.UnidadIndustrial;
-import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -39,14 +23,9 @@ import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
-import algo3.algocity.model.fabricas.FabricaCentralEolica;
 import algo3.algocity.model.fabricas.FabricaConectores;
 import algo3.algocity.model.fabricas.FabricaEnergetica;
 import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
-import algo3.algocity.model.fabricas.FabricaRuta;
-import algo3.algocity.model.fabricas.FabricaTuberias;
-import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
-import algo3.algocity.model.fabricas.FabricaUnidadResidencial;
 import algo3.algocity.model.fabricas.FabricaUnidades;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
@@ -96,7 +75,6 @@ public class PersistenciaTest {
 		}
 
 	}
-	
 	
 	
 	@Test

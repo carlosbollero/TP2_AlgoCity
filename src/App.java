@@ -21,11 +21,7 @@ public class App {
 
 	public static void main(String arg[]) throws LineUnavailableException,
 			IOException, UnsupportedAudioFileException, SAXException,
-			ParserConfigurationException, NoSeEncontroElFicheroException,
-			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
-			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
-			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			ParserConfigurationException, NoSeEncontroElFicheroException{
 		VentanaInicial ventanaInicio = new VentanaInicial();
 	}
 

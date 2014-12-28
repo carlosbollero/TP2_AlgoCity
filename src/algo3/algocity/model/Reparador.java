@@ -18,8 +18,6 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;
 import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.EstacionDeBomberos;
-import algo3.algocity.model.construcciones.PozoDeAgua;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
@@ -46,28 +44,27 @@ public class Reparador implements Observer {
 		actualizarObjetivos();
 		for (Daniable v : objetivos) {
 			v.repararse();
-			// v.aceptar(this);
 		}
 	}
-
+	
+	
 	public void actualizarObjetivos() {
-		objetivos.addAll(mapa.rutas().unidadesDaniables());
+		objetivos = new ArrayList<Daniable>(mapa.rutas().unidadesDaniables());
 		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
 		objetivos.addAll(mapa.ciudad().unidadesDaniables());
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println(o.getClass());
 		actuar();
 	}
 
+	
 	public ArrayList<Daniable> objetivos() {
-		
-		//HashSet<Daniable> setObjetivos = new HashSet<Daniable>(this.objetivos);
-		
-		//return setObjetivos;
 		return this.objetivos;
 	}
+	
 	
 //	public HashSet<Daniable> objetivos() {
 //		
@@ -123,7 +120,7 @@ public class Reparador implements Observer {
 						}
 					} else if (hijoDeObjetivo.getNodeName().equals(
 							"UnidadComercial")) {
-						UnidadComercial uc = new UnidadComercial();
+						Daniable uc = new UnidadComercial();
 						uc.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(uc);
 					} else if (hijoDeObjetivo.getNodeName().equals(

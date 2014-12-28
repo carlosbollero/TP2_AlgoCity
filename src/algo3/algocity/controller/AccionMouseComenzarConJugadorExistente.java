@@ -18,8 +18,8 @@ import algo3.algocity.model.excepciones.NoHayConexionConRutas;
 import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
-import algo3.algocity.view.Ventana;
 import algo3.algocity.view.VentanaInicial;
+import algo3.algocity.view.VentanaJuego;
 
 public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 
@@ -34,29 +34,22 @@ public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
 		Juego juegoARecuperar = new Juego();
 		try {
-			try {
-				juegoARecuperar = juegoARecuperar.recuperar(listaUsuarios
-						.getSelectedValue().toString());
-			} catch (NoSeCumplenLosRequisitosException
-					| FondosInsuficientesException
-					| SuperficieInvalidaParaConstruir
-					| CoordenadaInvalidaException
-					| CapacidadElectricaInsuficienteException
-					| NoHayConexionConTuberias | NoHayConexionConRutas
-					| NoHayConexionConRedElectrica e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			juegoARecuperar = juegoARecuperar.recuperar(listaUsuarios
+					.getSelectedValue().toString());
 			juegoARecuperar.actualizar();
 			this.ventanaPortadora.cerrar();
-			Ventana ventanaJuego = new Ventana(juegoARecuperar);
-		} catch (SAXException | IOException | ParserConfigurationException e) {
+			VentanaJuego ventanaJuego = new VentanaJuego(juegoARecuperar);
+		} catch (SAXException | IOException | ParserConfigurationException
+				| NoSeCumplenLosRequisitosException
+				| FondosInsuficientesException
+				| SuperficieInvalidaParaConstruir | CoordenadaInvalidaException
+				| CapacidadElectricaInsuficienteException
+				| NoHayConexionConTuberias | NoHayConexionConRutas
+				| NoHayConexionConRedElectrica e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

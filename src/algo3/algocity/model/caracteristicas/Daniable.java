@@ -25,8 +25,7 @@ public interface Daniable extends Visitable {
 	public Element getElement(Document doc);
 
 	public void fromElement(Node child);
-	
-	
+
 //	public abstract boolean estaContenidoEn(Mapa mapa);
 //
 //	public abstract boolean agregarseA(Mapa mapa);

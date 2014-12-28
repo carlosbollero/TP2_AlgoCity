@@ -36,47 +36,48 @@ public class RegistroUsuarios {
 	private ArrayList<String> nombresUsuarios;
 	private HashMap<String, Integer> listaPuntajes;
 
+	
+	
 	public RegistroUsuarios() throws SAXException, IOException,
-			ParserConfigurationException, NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
-			CoordenadaInvalidaException,
-			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-
+		ParserConfigurationException{
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
-
 		iniciar();
 	}
+	
+	
+	
+	
 
 	private void iniciar() throws SAXException, IOException,
-			ParserConfigurationException, NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
-			CoordenadaInvalidaException,
-			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-		try {
-			leerUsuarios();
-		} catch (NoSeEncontroElFicheroException e) {
-			crearDirectorio();
-			iniciar();
-		}
+	ParserConfigurationException {
+	try {
+	leerUsuarios();
+	} catch (NoSeEncontroElFicheroException e) {
+	crearDirectorio();
+	iniciar();
+	}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException,
-			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
-			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
-			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
-
+			IOException, ParserConfigurationException{
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
 				.parse(new File("./saved/" + nombreUsuario + ".xml"));
 		Element element = doc.getDocumentElement();
-		Juego juego = Juego.fromElement(element);
-
+		Juego juego = null;
+		try {
+			juego = Juego.fromElement(element);
+		} catch (NoSeCumplenLosRequisitosException
+				| FondosInsuficientesException
+				| SuperficieInvalidaParaConstruir | CoordenadaInvalidaException
+				| CapacidadElectricaInsuficienteException
+				| NoHayConexionConTuberias | NoHayConexionConRutas
+				| NoHayConexionConRedElectrica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		juego.usuario().puntaje(juego.poblacion().getCantidad());
 		usuarios.add(juego.usuario());
 		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
@@ -84,11 +85,7 @@ public class RegistroUsuarios {
 	}
 
 	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException,
-			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
-			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
-			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
-			NoHayConexionConRutas, NoHayConexionConRedElectrica {
+			SAXException, IOException, ParserConfigurationException{
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 
@@ -129,7 +126,7 @@ public class RegistroUsuarios {
 
 	public ArrayList<String> listaPuntajesString() {
 		ArrayList<String> arrADevolver = new ArrayList<String>();
-		for (Map.Entry entry : listaPuntajes.entrySet()) {
+		for (Map.Entry<String, Integer> entry : listaPuntajes.entrySet()) {
 			arrADevolver.add(entry.getKey() + ": "
 					+ String.valueOf(entry.getValue()));
 		}

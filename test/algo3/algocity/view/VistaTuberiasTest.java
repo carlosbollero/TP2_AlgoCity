@@ -17,7 +17,7 @@ public class VistaTuberiasTest {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException {
 		Juego j = new Juego();
-		Ventana v = new Ventana(j);
+		VentanaJuego v = new VentanaJuego(j);
 		j.mapa().agregar(
 				new FabricaTuberias().construir(j.mapa(), j.dinero(),
 						new Coordenada(1, 1)));

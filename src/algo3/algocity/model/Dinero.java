@@ -21,13 +21,13 @@ public class Dinero extends Observable implements Observer {
 	public Dinero() {
 		turno = new Turno();
 		poblacion = new Poblacion();		
-		cantidad = 20000;
+		cantidad = Constantes.DINERO_INICIAL;
 	}
 
 	public Dinero(Poblacion p, Turno t) {
 		poblacion = p;
 		turno = t;
-		cantidad = 20000;
+		cantidad = Constantes.DINERO_INICIAL;
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class Dinero extends Observable implements Observer {
 	}
 	
 	private void cobrarImpuestos(){
-		if (turno.getTurno() % 30 == 0) {
-			cantidad += poblacion.getCantidad() * 10;
+		if (turno.getTurno() % Constantes.CANT_TURNOS_IMPUESTOS == 0) {
+			cantidad += poblacion.getCantidad() * Constantes.IMPUESTO_POR_HABITANTE;
 		}
 	}
 
@@ -70,6 +70,7 @@ public class Dinero extends Observable implements Observer {
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
+
 
 	public Element getElement(Document doc) {
 
@@ -106,5 +107,6 @@ public class Dinero extends Observable implements Observer {
 		//dinero.cobrarImpuestos();
 		return dinero;
 	}
+
 
 }
