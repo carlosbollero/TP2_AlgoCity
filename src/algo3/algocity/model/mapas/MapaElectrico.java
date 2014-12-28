@@ -106,6 +106,7 @@ public class MapaElectrico extends MapaConexiones {
 										puntoAAgregar);
 								lt.fromElement(hijoDeNodo);
 								mapaElectrico.agregar(lt);
+								d.add(lt.costo());
 							}
 						}
 					}

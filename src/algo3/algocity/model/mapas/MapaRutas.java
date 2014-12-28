@@ -125,6 +125,7 @@ public class MapaRutas extends MapaConexiones {
 								Ruta rt = new Ruta(mapa, d, puntoAAgregar);
 								rt.fromElement(hijoDeNodo);
 								mapaRutas.agregar(rt);
+								d.add(rt.costo());
 							}
 						}
 					}

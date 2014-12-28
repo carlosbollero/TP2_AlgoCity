@@ -112,6 +112,7 @@ public class MapaTuberias extends MapaConexiones {
 								Tuberia tb = new Tuberia(mapa, d, puntoAAgregar);
 								tb.fromElement(hijoDeNodo);
 								mapaTuberias.agregar(tb);
+								d.add(tb.costo());
 							}
 						}
 					}

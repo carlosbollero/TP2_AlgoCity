@@ -53,6 +53,10 @@ public class Ruta implements Conector, Daniable, Visitable {
 		 * else { mapa.agregar(this); }
 		 */
 	}
+	
+	public int costo() {
+		return this.costo;
+	}
 
 	public boolean estado() {
 		return estado;
@@ -201,5 +205,4 @@ public class Ruta implements Conector, Daniable, Visitable {
 		}
 		return false;
 	}
-
 }

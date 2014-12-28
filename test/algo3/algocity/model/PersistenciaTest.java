@@ -29,6 +29,7 @@ import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
 import algo3.algocity.model.fabricas.FabricaUnidades;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.view.VentanaJuego;
 
 public class PersistenciaTest {
 
@@ -130,6 +131,15 @@ public class PersistenciaTest {
 		assertTrue(((EstacionDeBomberos) urRecuperada).equals(eb));
 	}
 	
+//	@Test
+//	public void testPruebaSiInstanciaDeJuegoPasadaAVentanaJuegoEsValida() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
+//		
+//		Juego juegoLeido = new Juego();
+//		juegoLeido = juegoLeido.recuperar("Jose");
+//		juegoLeido.getClass();
+//		VentanaJuego vj = new VentanaJuego(juegoLeido);
+//		
+//	}
 	
 //	@Test
 //	public void testRecuperarUnaInstanciaDeJuegoPreviamenteCreadaCompleta() throws SAXException, IOException, ParserConfigurationException, NoSeCumplenLosRequisitosException, FondosInsuficientesException, SuperficieInvalidaParaConstruir, CoordenadaInvalidaException, CapacidadElectricaInsuficienteException, NoHayConexionConTuberias, NoHayConexionConRutas, NoHayConexionConRedElectrica{
