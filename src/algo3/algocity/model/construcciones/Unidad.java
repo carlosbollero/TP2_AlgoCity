@@ -42,6 +42,8 @@ public abstract class Unidad extends Observable implements Agregable {
 		}
 		return superficie.esTierra();
 	}
+	
+	public abstract boolean equals(Unidad u);
 
 	// public abstract double getSalud();
 

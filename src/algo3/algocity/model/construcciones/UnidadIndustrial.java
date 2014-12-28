@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
@@ -46,8 +47,8 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 			NoHayConexionConRedElectrica, NoHayConexionConRutas,
 			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 
-		super(10, 5);
-		this.capacidad = 25;
+		super(Constantes.COSTO_U_INDUSTRIAL, Constantes.CONSUMO_U_INDUSTRIAL);
+		capacidad = Constantes.EMPLEO_U_INDUSTRIAL;
 		coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
@@ -184,7 +185,7 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ui) {
+	public boolean equals(Unidad ui) {
 		if (ui == this) {
 			return true;
 		} else if (ui.coordenada().getX() == this.coordenada().getX()
@@ -194,5 +195,6 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		}
 		return false;
 	}
+
 
 }

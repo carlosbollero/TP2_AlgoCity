@@ -21,7 +21,7 @@ public class VistaPanelDer extends JPanel {
 		setLayout(new CardLayout());
 		subterraneo = new VistaMapaSubterraneo(juego.mapa());
 		add(subterraneo, "subterraneo");
-		mapa = new VistaMapa(juego.mapa(), juego);
+		mapa = new VistaMapa(juego.mapa(), juego, contenedor);
 		add(mapa, "superficie");
 		((CardLayout) getLayout()).show(this, "superficie");
 	}

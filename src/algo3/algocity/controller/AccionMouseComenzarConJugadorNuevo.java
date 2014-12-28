@@ -2,8 +2,12 @@ package algo3.algocity.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.Juego;
@@ -31,7 +35,12 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		RegistroUsuarios ru = new RegistroUsuarios();
+		RegistroUsuarios ru = null;
+		try {
+			ru = new RegistroUsuarios();
+		} catch (SAXException | IOException | ParserConfigurationException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			if (ru.existeNombreUsuario(panelIngreso.getText())) {
 				panelInforme.setText("Jugador ya existente. Ingrese otro");

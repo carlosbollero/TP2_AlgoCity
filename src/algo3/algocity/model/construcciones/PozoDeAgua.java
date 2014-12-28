@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -30,7 +31,7 @@ public class PozoDeAgua extends Unidad {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException,
 			SuperficieInvalidaParaConstruir {
-		super(250, 0);
+		super(Constantes.COSTO_POZOAGUA, 0);
 		coordenada = coord;
 
 		mapa.validarCoordenadas(coord);
@@ -117,7 +118,7 @@ public class PozoDeAgua extends Unidad {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable pa) {
+	public boolean equals(Unidad pa) {
 		if (pa == this) {
 			return true;
 		} else if (pa.coordenada().getX() == this.coordenada().getX()

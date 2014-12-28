@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -42,7 +43,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException {
 		porcentajeDanios = 0;
-		costo = 10;
+		costo = Constantes.COSTO_RUTA;
 		this.coordenadas = coordenada;
 		mapa.validarCoordenadas(coordenada);
 		esConstruibleEn(mapa.superficie(coordenada));

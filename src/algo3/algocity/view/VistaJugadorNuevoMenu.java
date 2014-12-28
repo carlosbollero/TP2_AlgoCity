@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import algo3.algocity.controller.AccionMouseComenzarConJugadorNuevo;
-import algo3.algocity.controller.AccionMouseVolverMenuJugadorNuevoOExistente;
+import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 
 public class VistaJugadorNuevoMenu extends JPanel {
 
@@ -86,7 +86,7 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bVolver
-				.addActionListener(new AccionMouseVolverMenuJugadorNuevoOExistente(
+				.addActionListener(new AccionMouseVolverMenuInicioJuego(
 						this.ventanaPortadora));
 
 		add(Box.createRigidArea(new Dimension(0, 250)));

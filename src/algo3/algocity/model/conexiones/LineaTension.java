@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -41,6 +42,7 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	public LineaTension(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, CoordenadaInvalidaException {
+		costo = Constantes.COSTO_LINEATENSION;
 		porcentajeDanios = 0;
 		this.coordenada = coordenada;
 

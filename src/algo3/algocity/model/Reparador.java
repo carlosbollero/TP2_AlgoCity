@@ -11,7 +11,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.caracteristicas.Daniable;
-import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
 import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.CentralEolica;
@@ -50,13 +49,14 @@ public class Reparador implements Observer {
 	}
 
 	public void actualizarObjetivos() {
-		objetivos.addAll(mapa.rutas().unidadesDaniables());
+		objetivos = new ArrayList<Daniable>(mapa.rutas().unidadesDaniables());
 		objetivos.addAll(mapa.redElectrica().unidadesDaniables());
 		objetivos.addAll(mapa.ciudad().unidadesDaniables());
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println(o.getClass());
 		actuar();
 		
 	}
@@ -129,16 +129,6 @@ public class Reparador implements Observer {
 						CentralNuclear cn = new CentralNuclear();
 						cn.fromElement(hijoDeObjetivo);
 						reparador.objetivos.add(cn);
-					} else if (hijoDeObjetivo.getNodeName().equals(
-							"EstacionDeBomberos")) {
-						EstacionDeBomberos eb = new EstacionDeBomberos();
-						eb.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(eb);
-					} else if (hijoDeObjetivo.getNodeName().equals(
-							"PozoDeAgua")) {
-						PozoDeAgua pa = new PozoDeAgua();
-						pa.fromElement(hijoDeObjetivo);
-						reparador.objetivos.add(pa);
 					} else if (hijoDeObjetivo.getNodeName()
 							.equals("Ruta")) {
 						Ruta rt = new Ruta();
@@ -154,6 +144,7 @@ public class Reparador implements Observer {
 			}
 			reparador.mapa = mapa;
 		}
+		reparador.actualizarObjetivos();
 		return reparador;
 	}
 

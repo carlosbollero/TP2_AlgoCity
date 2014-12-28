@@ -2,7 +2,6 @@ package algo3.algocity.view;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,33 +9,28 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import algo3.algocity.model.Juego;
-import algo3.algocity.model.fabricas.FabricaConectores;
-import algo3.algocity.model.fabricas.FabricaEnergetica;
-import algo3.algocity.model.fabricas.FabricaUnidades;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.view.botonespanelopciones.Boton;
 
 public class VistaMapa extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 5750354545703155652L;
 
-//	FabricaEnergetica energetica;
-//	FabricaUnidades unidades;
-//	FabricaConectores conectores;
-	Mapa mapa;
-	HashMap<Coordenada, JPanel> territorio;
-	JPanel[][] tabla;
 	Juego juego;
+	Mapa mapa;
+	Ventana ventana;
+	JPanel[][] tabla;
 
-	public VistaMapa(Mapa mapa, Juego juego) {
+	public VistaMapa(Mapa mapa, Juego juego, Ventana ventana) {
+		this.ventana = ventana;
 		setBorder(BorderFactory.createTitledBorder("Mapa superficial"));
 		setPreferredSize(new Dimension(600, 600));
 		this.juego = juego;
 		this.mapa = mapa;
-
-//		mapa.addObserver(this);
 		mapa.ciudad().addObserver(this);
-		territorio = new HashMap<Coordenada, JPanel>();
+		mapa.redElectrica().addObserver(this);
+		mapa.rutas().addObserver(this);
 		tabla = new JPanel[mapa.tamanio()][mapa.tamanio()];
 		setLayout(new GridLayout(mapa.tamanio(), mapa.tamanio()));
 		rellenar();
@@ -49,6 +43,10 @@ public class VistaMapa extends JPanel implements Observer {
 				VistaTerreno superficie = new VistaTerreno(mapa, coord, this,
 						juego);
 				tabla[i][j] = superficie;
+				for (Boton boton : ventana.getVistaPanelIzq()
+						.getVistaPanelOpciones().getBotones()) {
+					boton.getAccion().addObserver(superficie.getControlador());
+				}
 				add(tabla[i][j]);
 			}
 		}
@@ -57,6 +55,7 @@ public class VistaMapa extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// rellenar();
+		System.out.println("agregado");
 		actualizar((Coordenada) arg);
 	}
 
@@ -64,78 +63,15 @@ public class VistaMapa extends JPanel implements Observer {
 		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
 				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(mapa, coord)
 				: new VistaTerreno(mapa, coord, this, juego);
-		repintar();
-	}
-
-	private void repintar() {
-		removeAll();
-		for (int i = 0; i < tabla.length; i++) {
-			for (int j = 0; j < tabla.length; j++) {
-				add(tabla[i][j]);
-			}
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	
-
-	public void aniadirConector(FabricaConectores conector) {
-		conectores = conector;
-	}
-
-	public boolean hayConector() {
-		return (conectores != null);
-	}
-
-	public FabricaConectores devolverConector() {
-		return conectores;
-	}
-
-	public void aniadirEnergetica(FabricaEnergetica energetica) {
-		this.energetica = energetica;
-	}
-
-	public boolean hayEnergetica() {
-		return (energetica != null);
-	}
-
-	public FabricaEnergetica devolverEnergetica() {
-		return energetica;
-	}
-
-	public void aniadirUnidades(FabricaUnidades unidades) {
-		this.unidades = unidades;
-	}
-
-	public boolean hayUnidades() {
-		return (unidades != null);
-	}
-
-	public FabricaUnidades devolverUnidades() {
-		return unidades;
-	}
-
-	public void resetearFabricas() {
-		this.energetica = null;
-		this.unidades = null;
-		this.conectores = null;
-	}
-
-	public void construir(Coordenada coordenada) {
-		// TODO Auto-generated method stub
 		
-	}*/
+		repintar(coord);
+	}
+
+	private void repintar(Coordenada coord) {
+		int i = (coord.getX())* mapa.tamanio() + coord.getY();
+		remove(i);
+		add(tabla[coord.getX()][coord.getY()], i);
+		revalidate();
+	}
 
 }

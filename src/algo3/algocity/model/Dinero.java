@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.mapas.Mapa;
 
 public class Dinero extends Observable implements Observer {
 
@@ -20,13 +21,13 @@ public class Dinero extends Observable implements Observer {
 	public Dinero() {
 		turno = new Turno();
 		poblacion = new Poblacion();		
-		cantidad = 20000;
+		cantidad = Constantes.DINERO_INICIAL;
 	}
 
 	public Dinero(Poblacion p, Turno t) {
 		poblacion = p;
 		turno = t;
-		cantidad = 20000;
+		cantidad = Constantes.DINERO_INICIAL;
 	}
 
 	@Override
@@ -39,8 +40,8 @@ public class Dinero extends Observable implements Observer {
 	}
 	
 	private void cobrarImpuestos(){
-		if (turno.getTurno() % 30 == 0) {
-			cantidad += poblacion.getCantidad() * 10;
+		if (turno.getTurno() % Constantes.CANT_TURNOS_IMPUESTOS == 0) {
+			cantidad += poblacion.getCantidad() * Constantes.IMPUESTO_POR_HABITANTE;
 		}
 	}
 
@@ -57,11 +58,16 @@ public class Dinero extends Observable implements Observer {
 		notifyObservers();
 		return true;
 	}
+	
+	public void add(int cantidad){
+		this.cantidad += cantidad;
+	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**
 	 * ********************************************************************/
+
 
 	public Element getElement(Document doc) {
 
@@ -80,10 +86,8 @@ public class Dinero extends Observable implements Observer {
 		return dinero;
 	}
 
-	public static Dinero fromElement(Node hijoDeJuego) {
-
-		Dinero dinero = new Dinero();
-
+	public static Dinero fromElement(Node hijoDeJuego,Mapa mapa, Turno t, Poblacion p) {
+		Dinero dinero = new Dinero(p,t);
 		NodeList childs = hijoDeJuego.getChildNodes();
 
 		for (int i = 0; i < childs.getLength(); i++) {
@@ -92,12 +96,14 @@ public class Dinero extends Observable implements Observer {
 			if (child.getNodeName().equals("Turnos")) {
 				dinero.turno = Turno.fromElement(child);
 			} else if (child.getNodeName().equals("Poblacion")) {
-				dinero.poblacion = Poblacion.fromElement(child);
+				dinero.poblacion = Poblacion.fromElement(child,mapa);
 			} else if (child.getNodeName().equals("Cantidad")) {
 				dinero.cantidad = Integer.valueOf(child.getTextContent());
 			}
 		}
+		//dinero.cobrarImpuestos();
 		return dinero;
 	}
+
 
 }

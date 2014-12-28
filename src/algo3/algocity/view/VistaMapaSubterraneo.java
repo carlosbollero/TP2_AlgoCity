@@ -16,12 +16,15 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 	private static final long serialVersionUID = 7101557286652466974L;
 
 	Mapa mapa;
+	JPanel[][] tabla;
 
-	public VistaMapaSubterraneo(Mapa mapa) {
+	public VistaMapaSubterraneo(Mapa m) {
 		setBorder(BorderFactory.createTitledBorder("Mapa subterraneo"));
-		this.mapa = mapa;
+		mapa = m;
+		mapa.tuberias().addObserver(this);
 		setPreferredSize(new Dimension(600, 600));
 		setLayout(new GridLayout(mapa.tamanio(), mapa.tamanio()));
+		tabla = new JPanel[mapa.tamanio()][mapa.tamanio()];
 		rellenar();
 	}
 
@@ -29,6 +32,7 @@ public class VistaMapaSubterraneo extends JPanel implements Observer {
 		for (int i = 0; i < mapa.tamanio(); i++) {
 			for (int j = 0; j < mapa.tamanio(); j++) {
 				VistaTerrenoSub sub = new VistaTerrenoSub(mapa.tuberias() ,new Coordenada(i, j));
+				tabla[i][j] = sub;
 				add(sub);
 			}
 		}

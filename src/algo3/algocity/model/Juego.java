@@ -1,8 +1,10 @@
 package algo3.algocity.model;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,12 +25,20 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
+import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
+import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
+import algo3.algocity.model.excepciones.FondosInsuficientesException;
+import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
+import algo3.algocity.model.excepciones.NoHayConexionConRutas;
+import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
+import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Mapa;
 
 public class Juego {
 
-	//int anchoMapaJuego = 100;
-	//int altoMapaJuego = 100;
+	// int anchoMapaJuego = 100;
+	// int altoMapaJuego = 100;
 
 	private Mapa mapa;
 	private Turno turnos;
@@ -49,6 +59,7 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		poblacion.actualizar(mapa);
+
 	}
 
 	/* Usado para persistencia */
@@ -73,6 +84,7 @@ public class Juego {
 		}
 
 	}
+
 	public void iniciar() {
 		generarMapas();
 		// iniciarTurnos();
@@ -110,10 +122,11 @@ public class Juego {
 	public Dinero dinero() {
 		return dinero;
 	}
-	
-	public Reparador reparador(){
+
+	public Reparador reparador() {
 		return this.mapa.reparador();
 	}
+
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**
@@ -137,11 +150,11 @@ public class Juego {
 					new PrintStream(this.usuario.ruta())));
 
 			// TODO
-			// falta cerrar el document
+			// falta cerrar el documento
 
 			// doc.close();
-			// InputStream in = new FileInputStream(this.usuario.ruta());
-			// in.close();
+			InputStream in = new FileInputStream(this.usuario.ruta());
+			in.close();
 
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -156,8 +169,14 @@ public class Juego {
 		}
 	}
 
+	// Al recuperar una instancia de juego, esta debe ser valida
+	// y cumplir con todos sus requisitos
 	public Juego recuperar(String nombreUsuario) throws SAXException,
-			IOException, ParserConfigurationException {
+			IOException, ParserConfigurationException,
+			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
+			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
@@ -170,14 +189,6 @@ public class Juego {
 	private Element getElement(Document doc) {
 		Element juego = doc.createElement("Juego");
 
-//		Element ancho = doc.createElement("anchoMapaJuego");
-//		ancho.setTextContent(String.valueOf(this.anchoMapaJuego));
-//		juego.appendChild(ancho);
-//
-//		Element alto = doc.createElement("altoMapaJuego");
-//		alto.setTextContent(String.valueOf(this.altoMapaJuego));
-//		juego.appendChild(alto);
-
 		Element usuario = this.usuario.getElement(doc);
 		juego.appendChild(usuario);
 
@@ -186,7 +197,7 @@ public class Juego {
 
 		Element poblacion = this.poblacion.getElement(doc);
 		juego.appendChild(poblacion);
-		
+
 		Element dinero = this.dinero.getElement(doc);
 		juego.appendChild(dinero);
 
@@ -196,7 +207,14 @@ public class Juego {
 		return juego;
 	}
 
-	private static Juego fromElement(Element element) {
+	// La visibilidad no es private, pues RegistroUsuarios debe tener acceso a
+	// ella
+	static Juego fromElement(Element element)
+			throws NoSeCumplenLosRequisitosException,
+			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
+			CoordenadaInvalidaException,
+			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
+			NoHayConexionConRutas, NoHayConexionConRedElectrica {
 		Juego juego = new Juego();
 
 		NodeList hijosDeJuego = element.getChildNodes();
@@ -208,19 +226,21 @@ public class Juego {
 			} else if (hijoDeJuego.getNodeName().equals("Turnos")) {
 				Turno turnos = Turno.fromElement(hijoDeJuego);
 				juego.turnos = turnos;
-			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
-				Dinero dinero = Dinero.fromElement(hijoDeJuego);
-				juego.dinero = dinero;
 			} else if (hijoDeJuego.getNodeName().equals("Poblacion")) {
-				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego);
+				Poblacion poblacion = Poblacion.fromElement(hijoDeJuego,
+						juego.mapa);
 				juego.poblacion = poblacion;
+			} else if (hijoDeJuego.getNodeName().equals("Dinero")) {
+				Dinero dinero = Dinero.fromElement(hijoDeJuego, juego.mapa,
+						juego.turnos, juego.poblacion);
+				juego.dinero = dinero;
 			} else if (hijoDeJuego.getNodeName().equals("Mapa")) {
-				Mapa mapa = Mapa.fromElement(hijoDeJuego);
+				Mapa mapa = Mapa.fromElement(hijoDeJuego, juego.mapa,
+						juego.dinero, juego.turnos, juego.poblacion);
 				juego.mapa = mapa;
 			}
 		}
 		juego.poblacion.actualizar(juego.mapa());
 		return juego;
 	}
-
 }

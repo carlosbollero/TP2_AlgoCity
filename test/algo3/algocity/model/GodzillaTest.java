@@ -88,31 +88,31 @@ public class GodzillaTest {
 		assertEquals(r.estado(), false);
 	}
 
-	@Test
-	public void testGodzillaGenerarUnCaminoRecto() {
-		me = new Mapa();
-		g = new CatastrofeGodzilla(me);
-
-		LinkedList<Coordenada> camino = g.genCaminoRecto();
-
-		boolean resultado = true;
-		Coordenada p;
-		Coordenada q;
-		for (int i = 0; i < camino.size(); i++) {
-			p = camino.get(i);
-			if (i + 1 >= camino.size()) {
-				break;
-			}
-			q = camino.get(i + 1);
-			if (!((Math.abs(p.getX() - q.getX()) == 1) && (p.getY() == q.getY()))
-					&& (!((p.getX() == q.getX()) && (Math.abs(p.getY()
-							- q.getY()) == 1)) && !((Math.abs(p.getX()
-							- q.getX()) == 1) && (Math.abs(p.getY() - q.getY()) == 1)))) {
-				resultado = false;
-			}
-		}
-		assertTrue(resultado);
-	}
+//	@Test
+//	public void testGodzillaGenerarUnCaminoRecto() {
+//		me = new Mapa();
+//		g = new CatastrofeGodzilla(me);
+//
+//		LinkedList<Coordenada> camino = g.genCaminoRecto();
+//
+//		boolean resultado = true;
+//		Coordenada p;
+//		Coordenada q;
+//		for (int i = 0; i < camino.size(); i++) {
+//			p = camino.get(i);
+//			if (i + 1 >= camino.size()) {
+//				break;
+//			}
+//			q = camino.get(i + 1);
+//			if (!((Math.abs(p.getX() - q.getX()) == 1) && (p.getY() == q.getY()))
+//					&& (!((p.getX() == q.getX()) && (Math.abs(p.getY()
+//							- q.getY()) == 1)) && !((Math.abs(p.getX()
+//							- q.getX()) == 1) && (Math.abs(p.getY() - q.getY()) == 1)))) {
+//				resultado = false;
+//			}
+//		}
+//		assertTrue(resultado);
+//	}
 
 	@Test
 	public void testSePuedeDaniarUnaUnidadEnergetica()

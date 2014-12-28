@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Ocupable;
@@ -60,7 +61,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		super(5, 1);
-		this.capacidad = 100;
+		capacidad = Constantes.CAPACIDAD_U_RESIDENCIAL;
 		coordenada = coord;
 
 		mapa.validarCoordenadas(coord);
@@ -94,7 +95,9 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 
 	@Override
 	public void repararse() {
+		System.out.println(getSalud());
 		this.porcentajeDanios -= this.porcentajeReparacion();
+		System.out.println(getSalud());
 		if (this.getDanios() < 0) {
 			this.porcentajeDanios = 0;
 		}
@@ -193,7 +196,7 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable ur) {
+	public boolean equals(Unidad ur) {
 		if (ur == this) {
 			return true;
 		} else if (ur.coordenada().getX() == this.coordenada().getX()

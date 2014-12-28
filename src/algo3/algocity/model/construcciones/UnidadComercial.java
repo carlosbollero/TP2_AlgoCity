@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitable;
@@ -40,7 +41,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 			CapacidadElectricaInsuficienteException, NoHayConexionConTuberias,
 			NoHayConexionConRutas, NoHayConexionConRedElectrica,
 			CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
-		super(5, 2);
+		super(Constantes.COSTO_U_COMERCIAL, Constantes.CONSUMO_U_COMERCIAL);
 		this.coordenada = coord;
 
 		mapa.validarCoordenadas(coord);
@@ -165,7 +166,7 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable uc) {
+	public boolean equals(Unidad uc) {
 		if (uc == this) {
 			return true;
 		} else if (uc.coordenada().getX() == this.coordenada().getX()

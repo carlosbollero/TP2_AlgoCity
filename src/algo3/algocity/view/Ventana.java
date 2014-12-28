@@ -24,8 +24,8 @@ public class Ventana extends JFrame {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
 		this.mapa = juego.mapa();
-		setPanelDer();
 		setPanelIzq();
+		setPanelDer();
 		setPanelSup();
 		acomodar();
 	}
@@ -35,15 +35,15 @@ public class Ventana extends JFrame {
 		setJMenuBar(panelSup);
 	}
 
-	private void setPanelDer() {
-		panelDer = new VistaPanelDer(juego, this);
-		add(panelDer, BorderLayout.CENTER);
-
-	}
-
 	private void setPanelIzq() {
 		panelIzq = new VistaPanelIzq(juego, this);
 		add(panelIzq, BorderLayout.WEST);
+	}
+	
+	private void setPanelDer() {
+		panelDer = new VistaPanelDer(juego, this);
+		add(panelDer, BorderLayout.CENTER);
+		
 	}
 
 	private void acomodar() {

@@ -5,8 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
@@ -21,7 +21,7 @@ public class EstacionDeBomberos extends Unidad {
 	private Conector conexion;
 
 	public EstacionDeBomberos() {
-		super(1500, 0);
+		super(Constantes.COSTO_E_BOMBEROS, 0);
 	}
 
 	public EstacionDeBomberos(Mapa mapa, Dinero dinero, Coordenada coord)
@@ -29,7 +29,7 @@ public class EstacionDeBomberos extends Unidad {
 			FondosInsuficientesException, CoordenadaInvalidaException,
 			SuperficieInvalidaParaConstruir {
 
-		super(1500, 0);
+		super(Constantes.COSTO_E_BOMBEROS, 0);
 		coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
@@ -137,7 +137,7 @@ public class EstacionDeBomberos extends Unidad {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable eb) {
+	public boolean equals(Unidad eb) {
 		if (eb == this) {
 			return true;
 		} else if (eb.coordenada().getX() == this.coordenada().getX()

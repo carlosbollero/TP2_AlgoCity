@@ -8,11 +8,11 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import algo3.algocity.controller.ControladorMouse;
+import algo3.algocity.controller.ControladorMouseVistaMapa;
 import algo3.algocity.model.Juego;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.mapas.MapaEdilicio;
+import algo3.algocity.view.botonespanelopciones.Boton;
 
 public class VistaTerreno extends JPanel implements Observer {
 
@@ -21,27 +21,28 @@ public class VistaTerreno extends JPanel implements Observer {
 	Coordenada coordenada;
 	Mapa mapa;
 	Image terreno;
-	Image unidad;
-	MapaEdilicio ciudad;
+	ControladorMouseVistaMapa controlador;
 
-		public VistaTerreno(Mapa mapa, Coordenada coord, VistaMapa vMapa, Juego juego) {
+	public VistaTerreno(Mapa mapa, Coordenada coord, VistaMapa vMapa,
+			Juego juego) {
 		this.mapa = mapa;
-		ciudad = mapa.ciudad();
 		coordenada = coord;
-//		mapa.addObserver(this);
-//		ciudad.addObserver(this);
-		addMouseListener(new ControladorMouse(mapa, coord, vMapa, juego));
-		unidad = null;
+		controlador = new ControladorMouseVistaMapa(juego, coord);
+		addMouseListener(controlador);
 		setImagen();
 	}
 
-	public void setImagen(){
+	public ControladorMouseVistaMapa getControlador() {
+		return controlador;
+	}
+
+	public void setImagen() {
 		terreno = (mapa.superficie(coordenada).esAgua()) ? new ImageIcon(
 				"img/water.png").getImage() : new ImageIcon("img/dirt.png")
 				.getImage();
 	}
 
-	public Coordenada coordenada(){
+	public Coordenada coordenada() {
 		return coordenada;
 	}
 
@@ -53,7 +54,6 @@ public class VistaTerreno extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-//		setImagen();
 		repaint();
 
 	}

@@ -3,6 +3,7 @@ package algo3.algocity.model.construcciones;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -14,6 +15,11 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralNuclear extends UnidadEnergetica {
+	
+	public CentralNuclear() {
+
+		super(10000, 1000, 25);
+	}
 
 	public CentralNuclear(Coordenada coord) {
 		super(10000, 1000, 25);
@@ -24,7 +30,7 @@ public class CentralNuclear extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
-		super(10000, 1000, 25);
+		super(Constantes.COSTO_C_NUCLEAR, Constantes.CAPACIDAD_C_NUCLEAR, Constantes.RADIO_C_NUCLEAR);
 		this.coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
@@ -93,7 +99,7 @@ public class CentralNuclear extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable cn) {
+	public boolean equals(Unidad cn) {
 		if (cn == this) {
 			return true;
 		} else if (cn.coordenada().getX() == this.coordenada().getX()

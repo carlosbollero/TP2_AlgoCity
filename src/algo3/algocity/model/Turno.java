@@ -24,8 +24,8 @@ public class Turno extends Observable{
 	};
 
 	public Turno() {
-		numero = 1;
-		delay = 5000;
+		numero = Constantes.TURNO_INICIAL;
+		delay = Constantes.TIEMPO_POR_TURNO;
 		timer = new Timer();
 		timer.schedule(tarea, delay, delay);		
 	}

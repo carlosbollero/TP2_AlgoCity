@@ -1,25 +1,13 @@
 package algo3.algocity.controller.accionboton;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import algo3.algocity.model.fabricas.FabricaUnidadIndustrial;
-import algo3.algocity.view.VistaMapa;
 
-public class AccionBotonIndustrial implements ActionListener {
-
-	FabricaUnidadIndustrial fabrica; 
-	VistaMapa vMapa; 
-	
-	public AccionBotonIndustrial (VistaMapa vMapa){
-		this.vMapa = vMapa; 
-		
-		
-	}
+public class AccionBotonIndustrial extends AccionBoton {
 	
 	public void actionPerformed (ActionEvent e){
-		fabrica = new FabricaUnidadIndustrial(); 
-		vMapa.aniadirUnidades (fabrica); 
-		
+		setChanged();
+		notifyObservers(new FabricaUnidadIndustrial());
 	}
 }

@@ -3,6 +3,7 @@ package algo3.algocity.model.construcciones;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.Constantes;
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
@@ -14,6 +15,10 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
 public class CentralMinera extends UnidadEnergetica {
+	public CentralMinera() {
+
+		super(3000, 400, 10);
+	}
 
 	public CentralMinera(Coordenada coord) {
 		super(3000, 400, 10);
@@ -24,7 +29,8 @@ public class CentralMinera extends UnidadEnergetica {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
-		super(3000, 400, 10);
+		super(Constantes.COSTO_C_MINERA, Constantes.CAPACIDAD_C_MINERA,
+				Constantes.RADIO_C_MINERA);
 		this.coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
@@ -45,15 +51,15 @@ public class CentralMinera extends UnidadEnergetica {
 		return (this.ESTADOINICIAL * 10) / 100;
 	}
 
-//	@Override
-//	public boolean agregarseA(Mapa mapa) {
-//		return mapa.ciudad().agregar(this);
-//	}
-//
-//	@Override
-//	public boolean estaContenidoEn(Mapa mapa) {
-//		return mapa.ciudad().contiene(this);
-//	}
+	// @Override
+	// public boolean agregarseA(Mapa mapa) {
+	// return mapa.ciudad().agregar(this);
+	// }
+	//
+	// @Override
+	// public boolean estaContenidoEn(Mapa mapa) {
+	// return mapa.ciudad().contiene(this);
+	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
@@ -93,7 +99,7 @@ public class CentralMinera extends UnidadEnergetica {
 	}
 
 	/* No evalua los invariantes de la clase */
-	public boolean equals(Daniable cm) {
+	public boolean equals(Unidad cm) {
 		if (cm == this) {
 			return true;
 		} else if (cm.coordenada().getX() == this.coordenada().getX()

@@ -1,25 +1,14 @@
 package algo3.algocity.controller.accionboton;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import algo3.algocity.model.fabricas.FabricaLineaTension;
-import algo3.algocity.view.VistaMapa;
 
-public class AccionBotonLineaTension implements ActionListener {
+public class AccionBotonLineaTension extends AccionBoton {
 
-	FabricaLineaTension fabrica; 
-	VistaMapa vMapa; 
-	
-	public AccionBotonLineaTension (VistaMapa vMapa){
-		this.vMapa = vMapa; 
-		
-		
-	}
 	
 	public void actionPerformed (ActionEvent e){
-		fabrica = new FabricaLineaTension(); 
-		vMapa.aniadirConector (fabrica); 
-		
+		setChanged();
+		notifyObservers(new FabricaLineaTension());
 	}
 }

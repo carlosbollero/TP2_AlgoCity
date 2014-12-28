@@ -15,7 +15,8 @@ public class AccionMouseContinuarPartida implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		this.ventanaPortadora.mostrarVistaJugadorNuevoOExistente();
+		this.ventanaPortadora.mostrarVistaJugadorExistente();
+		//this.ventanaPortadora.mostrarVistaJugadorNuevoOExistente();
 
 	}
 

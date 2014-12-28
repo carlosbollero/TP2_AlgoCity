@@ -9,11 +9,8 @@
 
 package algo3.algocity.model.mapas;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Observable;
 
 import org.jgrapht.alg.ConnectivityInspector;
@@ -21,19 +18,8 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
-import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
-import algo3.algocity.model.conexiones.Tuberia;
-import algo3.algocity.model.construcciones.CentralEolica;
-import algo3.algocity.model.construcciones.CentralMinera;
-import algo3.algocity.model.construcciones.CentralNuclear;
-import algo3.algocity.model.construcciones.PozoDeAgua;
-import algo3.algocity.model.construcciones.UnidadEnergetica;
 
 public abstract class MapaConexiones extends Observable {
 
@@ -119,13 +105,6 @@ public abstract class MapaConexiones extends Observable {
 	/**********************************************************************/
 	@SuppressWarnings("rawtypes")
 	public Element getElement(Document doc, Element red) {
-		Element alto = doc.createElement("alto");
-		red.appendChild(alto);
-		alto.setTextContent(String.valueOf(this.tamanio));
-
-		Element ancho = doc.createElement("ancho");
-		red.appendChild(ancho);
-		ancho.setTextContent(String.valueOf(this.tamanio));
 
 		Element mapa = doc.createElement("mapa");
 		red.appendChild(mapa);
@@ -146,140 +125,7 @@ public abstract class MapaConexiones extends Observable {
 			Element conector = valor.getElement(doc);
 			nodo.appendChild(conector);
 		}
-
-		/* Serializacion de posiciones relevantes */
-		Element posicionesRelevantes = doc
-				.createElement("posicionesRelevantes");
-		red.appendChild(posicionesRelevantes);
-		Iterator<Coordenada> it = this.posicionesRelevantes.iterator();
-		/*
-		 * falta probar esta parte.. solo se estan agregando las coordenadas
-		 * como posiciones relevantes
-		 */
-		while (it.hasNext()) {
-			Coordenada p = it.next();
-			Element punto = doc.createElement("Unidad");
-			posicionesRelevantes.appendChild(punto);
-			punto.appendChild(p.getElement(doc));
-		}
-		// TODO
-		// El grafo no es necesario serializarlo?
 		return red;
-	}
-
-	public static MapaConexiones fromElement(Node tuberias) {
-		MapaConexiones mapaConexiones = new MapaConexiones();
-		NodeList hijosDeRed = tuberias.getChildNodes();
-
-		for (int i = 0; i < hijosDeRed.getLength(); i++) {
-			Node hijoDeRed = hijosDeRed.item(i);
-			if (hijoDeRed.getNodeName().equals("alto")) {
-				mapaConexiones.alto = Integer.valueOf(hijoDeRed
-						.getTextContent());
-			} else if (hijoDeRed.getNodeName().equals("ancho")) {
-				mapaConexiones.ancho = Integer.valueOf(hijoDeRed
-						.getTextContent());
-			} else if (hijoDeRed.getNodeName().equals("mapa")) {
-				NodeList hijosDeMapa = hijoDeRed.getChildNodes();
-				for (int j = 0; j < hijosDeMapa.getLength(); j++) {
-					Node hijoDeMapa = hijosDeMapa.item(j);
-					if (hijoDeMapa.getNodeName().equals("Nodo")) {
-						NodeList hijosDeNodo = hijoDeMapa.getChildNodes();
-						String stringPunto = "";
-						Coordenada puntoAAgregar = new Coordenada();
-						for (int k = 0; k < hijosDeNodo.getLength(); k++) {
-							Node hijoDeNodo = hijosDeNodo.item(k);
-							if (hijoDeNodo.getNodeName().equals("Coordenada")) {
-								stringPunto = hijoDeNodo.getTextContent();
-								String[] arrayPunto = stringPunto.split(",");
-								puntoAAgregar = new Coordenada(
-										Integer.valueOf(arrayPunto[0]),
-										Integer.valueOf(arrayPunto[1]));
-							} else if (hijoDeNodo.getNodeName().equals(
-									"Tuberia")) {
-
-								Tuberia tb = new Tuberia();
-								tb.fromElement(hijoDeNodo);
-								tb.setCoordenadas(puntoAAgregar);
-								// Tuberia tb = Tuberia.fromElement(hijoDeNodo);
-								// tb.setCoordenadas(puntoAAgregar);
-								mapaConexiones.agregar(tb);
-
-							} else if (hijoDeNodo.getNodeName().equals("Ruta")) {
-
-								Ruta rt = new Ruta();
-								rt.fromElement(hijoDeNodo);
-								rt.setCoordenadas(puntoAAgregar);
-								// Ruta rt = Ruta.fromElement(hijoDeNodo);
-								// rt.setCoordenadas(puntoAAgregar);
-								mapaConexiones.agregar(rt);
-							} else if (hijoDeNodo.getNodeName().equals(
-									"LineaTension")) {
-								LineaTension lt = new LineaTension();
-								lt.fromElement(hijoDeNodo);
-								lt.setCoordenadas(puntoAAgregar);
-
-								// LineaTension lt = LineaTension
-								// .fromElement(hijoDeNodo);
-								// lt.setCoordenadas(puntoAAgregar);
-								mapaConexiones.agregar(lt);
-							}
-						}
-					}
-				}
-			} else if (hijoDeRed.getNodeName().equals("posicionesRelevantes")) {
-				NodeList hijosDePosicionesRelevantes = hijoDeRed
-						.getChildNodes();
-				// String stringPunto = "";
-				// Coordenada puntoAAgregar = new Coordenada();
-				for (int k = 0; k < hijosDePosicionesRelevantes.getLength(); k++) {
-					Node hijoDePosicionRelevante = hijosDePosicionesRelevantes
-							.item(k);
-					if (hijoDePosicionRelevante.getNodeName().equals("Unidad")) {
-						NodeList hijosDeUnidad = hijoDePosicionRelevante
-								.getChildNodes();
-						for (int l = 0; l < hijosDeUnidad.getLength(); l++) {
-							Node hijoDeUnidad = hijosDeUnidad.item(l);
-							if (hijoDeUnidad.getNodeName().equals(
-									"CentralMinera")) {
-								CentralMinera cm = new CentralMinera();
-								cm.fromElement(hijoDeUnidad);
-
-								// CentralMinera cm = CentralMinera
-								// .fromElement(hijoDeUnidad);
-								mapaConexiones.posicionesRelevantes.add(cm);
-							} else if (hijoDeUnidad.getNodeName().equals(
-									"CentralNuclear")) {
-								CentralNuclear cn = new CentralNuclear();
-								cn.fromElement(hijoDeUnidad);
-
-								// CentralNuclear cn = CentralNuclear
-								// .fromElement(hijoDeUnidad);
-								mapaConexiones.posicionesRelevantes.add(cn);
-							} else if (hijoDeUnidad.getNodeName().equals(
-									"CentralEolica")) {
-								UnidadEnergetica ce = new CentralEolica();
-								ce.fromElement(hijoDeUnidad);
-
-								// CentralEolica ce = CentralEolica
-								// .fromElement(hijoDeUnidad);
-								mapaConexiones.posicionesRelevantes.add(ce);
-							} else if (hijoDeUnidad.getNodeName().equals(
-									"PozoDeAgua")) {
-								PozoDeAgua pa = new PozoDeAgua();
-								pa.fromElement(hijoDeUnidad);
-
-								// PozoDeAgua pa = PozoDeAgua
-								// .fromElement(hijoDeUnidad);
-								mapaConexiones.posicionesRelevantes.add(pa);
-							}
-						}
-					}
-				}
-			}
-		}
-		// imprimirMapaConexiones(mapaConexiones);
-		return mapaConexiones;
 	}
 
 	/* Para probar */
@@ -295,11 +141,12 @@ public abstract class MapaConexiones extends Observable {
 		}
 	}
 
-	public ArrayList<Daniable> unidadesDaniables() {
-		for (Daniable d : grafo.vertexSet()) {
 
-		}
-		return null;
-	}
+//	public ArrayList<Daniable> unidadesDaniables() {
+//		for (Daniable d : grafo.vertexSet()) {
+//
+//		}
+//		return null;
+//	}
 
 }
