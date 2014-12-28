@@ -95,12 +95,7 @@ public class Dinero extends Observable implements Observer {
 
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
-
-			if (child.getNodeName().equals("Turnos")) {
-				dinero.turno = Turno.fromElement(child);
-			} else if (child.getNodeName().equals("Poblacion")) {
-				dinero.poblacion = Poblacion.fromElement(child,mapa);
-			} else if (child.getNodeName().equals("Cantidad")) {
+			if (child.getNodeName().equals("Cantidad")) {
 				dinero.cantidad = Integer.valueOf(child.getTextContent());
 			}
 		}
