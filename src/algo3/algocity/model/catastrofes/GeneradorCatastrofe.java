@@ -16,6 +16,7 @@ public class GeneradorCatastrofe extends Observable implements Observer {
 	}
 
 	public void initRandomCatastrofe() {
+		System.out.println("iniciando random catastrofe--dentro del emtodo");
 		Random aleatorio = new Random();
 		if (aleatorio.nextInt(100) <= 10) {
 			catastrofe = (aleatorio.nextInt(2) == 0) ? new CatastrofeGodzilla(
@@ -26,6 +27,7 @@ public class GeneradorCatastrofe extends Observable implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("iniciando random catastrofe");
 		initRandomCatastrofe();
 	}
 

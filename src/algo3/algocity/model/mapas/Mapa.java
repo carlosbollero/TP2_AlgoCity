@@ -39,6 +39,7 @@ public class Mapa extends Observable {
 	SistemaElectrico sistemaElectrico;
 
 	Reparador reparador;
+	Turno turnos; //agregado para reparador
 
 	public Mapa() {
 		tamanio = Constantes.TAMANIO_MAPA;
@@ -50,6 +51,7 @@ public class Mapa extends Observable {
 
 		sistemaElectrico = new SistemaElectrico();
 		reparador = null;
+		turnos = null;
 	}
 
 	public int tamanio() {
@@ -174,10 +176,15 @@ public class Mapa extends Observable {
 		}
 		return rutas.hayConexion(coordenadas);
 	}
+	
+	public void setTurno(Turno t) {
+		this.turnos = t;
+	}
 
 	public void agregarReparador() {
 		if (this.reparador == null) {
 			this.reparador = new Reparador(this);
+			this.turnos.addObserver(this.reparador);
 		}
 	}
 
@@ -335,5 +342,4 @@ public class Mapa extends Observable {
 		// mapa.territorio.imprimirTerritorio();
 		return mapa;
 	}
-
 }
