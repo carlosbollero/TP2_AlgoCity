@@ -56,6 +56,7 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		mapa.setTurno(turnos);
+		mapa.addObserver(poblacion);
 		poblacion.actualizar(mapa);
 	}
 	
@@ -72,6 +73,7 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		mapa.setTurno(turnos);
+		mapa.addObserver(poblacion);
 	}
 
 	/* Usado para persistencia */
@@ -87,12 +89,9 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-//		mapa.setTurno(turnos);
+		mapa.addObserver(poblacion);
 		mapa.agregarReparador();
 		mapa.setObervadoDeReparador(turnos);
-		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
-
-		// poblacion.actualizar(mapa);
 	}
 
 	private void crearDirectorioGuardados() {

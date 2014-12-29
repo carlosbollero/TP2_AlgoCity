@@ -4,17 +4,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Observable;
 import java.util.Observer;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacion;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionCreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class Poblacion implements Observer {
 	int cantidad;
@@ -23,8 +22,7 @@ public class Poblacion implements Observer {
 	int indiceCrecimiento;
 	int tasa;
 	EstadoPoblacion estadoActual;
-
-	// Mapa mapa;
+	Mapa mapa;
 
 	public Poblacion() {
 		cantidad = Constantes.POBLACION_INICIAL;
@@ -32,7 +30,7 @@ public class Poblacion implements Observer {
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
 		tasa = 20;
-		estadoActual = new EstadoPoblacionCreciendo();
+		estadoActual = new EstadoPoblacionEstable();
 	}
 
 	public Poblacion(Mapa mapa) {
@@ -41,7 +39,7 @@ public class Poblacion implements Observer {
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
 		tasa = 20;
-		estadoActual = new EstadoPoblacionCreciendo();
+		estadoActual = new EstadoPoblacionEstable();
 		// this.mapa = mapa;
 	}
 
@@ -57,6 +55,10 @@ public class Poblacion implements Observer {
 		return capacidadEmpleo;
 	}
 
+	public void setEstadoPoblacion(EstadoPoblacion e) {
+		estadoActual = e;
+	}
+
 	public void aumentar() {
 		cantidad += tasa;
 	}
@@ -64,32 +66,41 @@ public class Poblacion implements Observer {
 	public void aumentar(int cantidad) {
 		this.cantidad += cantidad;
 	}
-	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		try {
 			Method update = getClass().getMethod("update", arg0.getClass(),
 					Object.class);
 			update.invoke(this, arg0, arg1);
-		} catch (NoSuchMethodException e) {
-			System.out.println(e);
-		} catch (SecurityException e) {
-			System.out.println(e);
-		} catch (IllegalAccessException e) {
-			System.out.println(e);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-		} catch (InvocationTargetException e) {
-			System.out.println(e);
+		} catch (NoSuchMethodException | SecurityException
+				| IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void update(Turno arg0, Object arg1) {
+		if (!(mapa == null)) {
+			actualizar(mapa);
+		}
 		estadoActual.operar(this);
+		// System.out.println("UPDATE TURNO");
+	}
+
+	public void update(Mapa arg0, Object arg1) {
+		System.out.println("UPDATE MAPA");
+		this.mapa = arg0;
+		actualizar(arg0);
+	}
+
+	public void update(MapaEdilicio arg0, Object arg1) {
 	}
 
 	public void disminuir() {
 		cantidad -= tasa;
+		if (cantidad < 0)
+			cantidad = 0;
 	}
 
 	public void disminuir(int cantidad) {
@@ -104,8 +115,7 @@ public class Poblacion implements Observer {
 	// public void setMapa(Mapa mapa) {
 	// this.mapa = mapa;
 	// }
-
-	private void actualizarIndice() {
+	public void actualizarIndice() {
 		if (indiceCrecimiento > 0) {
 			estadoActual = new EstadoPoblacionCreciendo();
 		} else if (indiceCrecimiento < 0) {
@@ -124,48 +134,39 @@ public class Poblacion implements Observer {
 	}
 
 	public void actualizar(Mapa mapa) {
-		actualizarCapacidadHabitacional(mapa);
-		actualizarCapacidadEmpleo(mapa);
-		
-		//prueba
-		//tasa = ( (capacidadHabitacional/capacidadEmpleo) * 10);
+		this.actualizarCapacidadHabitacional(mapa);
+		this.actualizarCapacidadEmpleo(mapa);
+		setIndice(capacidadHabitacional - capacidadEmpleo);
 	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**********************************************************************/
-
 	public Element getElement(Document doc) {
 		Element poblacion = doc.createElement("Poblacion");
-
 		Element cantidad = doc.createElement("Cantidad");
 		poblacion.appendChild(cantidad);
 		cantidad.setTextContent(String.valueOf(this.cantidad));
-
 		Element capacidadHabitacional = doc
 				.createElement("CapacidadHabitacional");
 		poblacion.appendChild(capacidadHabitacional);
 		capacidadHabitacional.setTextContent(String
 				.valueOf(this.capacidadHabitacional));
-
 		Element capacidadEmpleo = doc.createElement("CapacidadEmpleo");
 		poblacion.appendChild(capacidadEmpleo);
 		capacidadEmpleo.setTextContent(String.valueOf(this.capacidadEmpleo));
-
 		Element indiceCrecimiento = doc.createElement("IndiceCrecimiento");
 		poblacion.appendChild(indiceCrecimiento);
 		indiceCrecimiento
 				.setTextContent(String.valueOf(this.indiceCrecimiento));
-
 		Element tasa = doc.createElement("Tasa");
 		poblacion.appendChild(tasa);
 		tasa.setTextContent(String.valueOf(this.tasa));
-
 		return poblacion;
 	}
 
-	public static Poblacion fromElement(Node hijoDeJuego,Mapa mapa) {
-		//Poblacion poblacion = new Poblacion();
+	public static Poblacion fromElement(Node hijoDeJuego, Mapa mapa) {
+		// Poblacion poblacion = new Poblacion();
 		Poblacion poblacion = new Poblacion(mapa);
 		NodeList childs = hijoDeJuego.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
@@ -201,5 +202,4 @@ public class Poblacion implements Observer {
 		}
 		return false;
 	}
-
 }
