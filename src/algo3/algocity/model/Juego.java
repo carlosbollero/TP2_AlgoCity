@@ -63,8 +63,8 @@ public class Juego {
 		crearDirectorioGuardados();
 		mapa = new Mapa();
 		usuario = new Usuario();
-//		poblacion = new Poblacion();
-		poblacion = new Poblacion(mapa);
+		poblacion = new Poblacion();
+		//poblacion = new Poblacion(mapa);
 		turnos = new Turno();
 		dinero = new Dinero(poblacion, turnos);
 		genCatastrofe = new GeneradorCatastrofe(mapa);
@@ -72,6 +72,8 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
+		
+		//poblacion.actualizar(mapa);
 	}
 
 	private void crearDirectorioGuardados() {
