@@ -46,6 +46,8 @@ public class Turno extends Observable{
 	
 	public void detener(){
 		this.timer.cancel();
+		setChanged();//agregado
+		notifyObservers();
 	}
 
 	/**********************************************************************/

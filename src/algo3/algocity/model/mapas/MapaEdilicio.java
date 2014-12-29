@@ -85,6 +85,10 @@ public class MapaEdilicio extends Observable {
 	// }
 	// return false;
 	// }
+	
+	public Mapa mapaSuperior(){
+		return this.mapaSuperior;
+	}
 
 	public boolean agregar(PozoDeAgua p) {
 		mapa.put(p.coordenada(), p);

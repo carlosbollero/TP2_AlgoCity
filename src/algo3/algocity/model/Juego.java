@@ -55,8 +55,12 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-		mapa.setTurno(turnos);
-		poblacion.actualizar(mapa);
+//<<<<<<< HEAD
+//		mapa.setTurno(turnos);
+//		poblacion.actualizar(mapa);
+//=======
+		mapa.addObserver(poblacion);
+		//poblacion.actualizar(mapa);
 	}
 	
 	public Juego(Usuario usuario) {
@@ -90,7 +94,10 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-		mapa.setTurno(turnos);
+//<<<<<<< HEAD
+//		mapa.setTurno(turnos);
+//=======
+		mapa.addObserver(poblacion);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 
 		// poblacion.actualizar(mapa);
