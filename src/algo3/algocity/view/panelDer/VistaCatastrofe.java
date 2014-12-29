@@ -16,7 +16,7 @@ import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
 
 public class VistaCatastrofe implements Observer {
 
-	AudioStream audioStream;
+
 	GeneradorCatastrofe genCatastrofe;
 	VistaPanelDer contenedor;
 	ControladorMensajes controladorMsj;
@@ -46,11 +46,6 @@ public class VistaCatastrofe implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		ruido();
-
-		String mensaje = (arg1.getClass().equals(CatastrofeTerremoto.class)) ? "terremoto!!!!"
-				: "godzilla!!!!";
-		// contenedor.getVentana().getControladorMensajes()
-		// .recibirYNotificar(mensaje);
 	}
 	
 	public void setControladorMsj(ControladorMensajes controladorMsj) {

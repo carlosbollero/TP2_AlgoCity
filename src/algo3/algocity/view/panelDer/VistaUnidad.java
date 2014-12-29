@@ -23,8 +23,6 @@ public class VistaUnidad extends VistaPosicion {
 
 	private static final long serialVersionUID = -1933418471723107152L;
 
-//	Unidad unidad;
-
 	public VistaUnidad(Juego juego, Coordenada coord) {
 		super(juego, coord);
 		controlador = new ControladorMouseMapaSup(juego, coord, this);
