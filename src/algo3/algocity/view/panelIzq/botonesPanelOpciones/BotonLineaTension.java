@@ -9,7 +9,7 @@ public class BotonLineaTension extends Boton {
 	
 	public BotonLineaTension() {
 		super("img/b_linea_tension.png");
-		etiqueta = "Linea de Tensión \n $" + Constantes.COSTO_LINEATENSION;
+		etiqueta = "Linea de Tensión $ " + Constantes.COSTO_LINEATENSION;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonLineaTension();
 		addActionListener(accion);;

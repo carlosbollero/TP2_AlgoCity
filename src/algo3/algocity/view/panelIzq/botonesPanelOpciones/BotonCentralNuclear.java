@@ -9,7 +9,7 @@ public class BotonCentralNuclear extends Boton {
 	
 	public BotonCentralNuclear() {
 		super("img/b_central_nuclear.png");
-		etiqueta = "Central Nuclear \n $" + Constantes.COSTO_C_NUCLEAR;
+		etiqueta = "Central Nuclear $ " + Constantes.COSTO_C_NUCLEAR;
 		setToolTipText(etiqueta);
 		accion = new AccionBotonCentralNuclear();
 		addActionListener(accion);

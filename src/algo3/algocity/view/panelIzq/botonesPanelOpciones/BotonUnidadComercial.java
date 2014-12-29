@@ -1,6 +1,7 @@
 package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonComercial;
+import algo3.algocity.model.Constantes;
 
 public class BotonUnidadComercial extends Boton {
 
@@ -8,7 +9,8 @@ public class BotonUnidadComercial extends Boton {
 	
 	public BotonUnidadComercial() {
 		super("img//b_comercial.png");
-		setToolTipText("Unidad Comercial");
+		etiqueta = "Unidad Comercial $ " + Constantes.CONSUMO_U_COMERCIAL;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonComercial();
 		addActionListener(accion);
 	}

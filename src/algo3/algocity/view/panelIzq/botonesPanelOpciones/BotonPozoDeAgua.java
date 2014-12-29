@@ -1,6 +1,7 @@
 package algo3.algocity.view.panelIzq.botonesPanelOpciones;
 
 import algo3.algocity.controller.accionBoton.AccionBotonPozoAgua;
+import algo3.algocity.model.Constantes;
 
 public class BotonPozoDeAgua extends Boton {
 
@@ -8,7 +9,8 @@ public class BotonPozoDeAgua extends Boton {
 
 	public BotonPozoDeAgua() {
 		super("img/b_pozo_de_agua.png");
-		setToolTipText("Pozo de Agua");
+		etiqueta = "Pozo de Agua $ " +  Constantes.COSTO_POZOAGUA;
+		setToolTipText(etiqueta);
 		accion = new AccionBotonPozoAgua();
 		addActionListener(accion);
 	}
