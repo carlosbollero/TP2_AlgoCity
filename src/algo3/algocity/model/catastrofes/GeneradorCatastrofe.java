@@ -6,7 +6,7 @@ import java.util.Random;
 
 import algo3.algocity.model.mapas.Mapa;
 
-public class GeneradorCatastrofe implements Observer {
+public class GeneradorCatastrofe extends Observable implements Observer {
 
 	Catastrofe catastrofe;
 	Mapa mapa;

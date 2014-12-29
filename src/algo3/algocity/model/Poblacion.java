@@ -1,5 +1,7 @@
 package algo3.algocity.model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -48,11 +50,11 @@ public class Poblacion implements Observer {
 	}
 
 	public int getCapacidadHabitacional() {
-		return this.capacidadHabitacional;
+		return capacidadHabitacional;
 	}
 
 	public int getCapacidadEmpleo() {
-		return this.capacidadEmpleo;
+		return capacidadEmpleo;
 	}
 
 	public void aumentar() {
@@ -62,9 +64,27 @@ public class Poblacion implements Observer {
 	public void aumentar(int cantidad) {
 		this.cantidad += cantidad;
 	}
-
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		try {
+			Method update = getClass().getMethod("update", arg0.getClass(),
+					Object.class);
+			update.invoke(this, arg0, arg1);
+		} catch (NoSuchMethodException e) {
+			System.out.println(e);
+		} catch (SecurityException e) {
+			System.out.println(e);
+		} catch (IllegalAccessException e) {
+			System.out.println(e);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+		} catch (InvocationTargetException e) {
+			System.out.println(e);
+		}
+	}
+
+	public void update(Turno arg0, Object arg1) {
 		estadoActual.operar(this);
 	}
 
@@ -96,16 +116,16 @@ public class Poblacion implements Observer {
 	}
 
 	private void actualizarCapacidadHabitacional(Mapa mapa) {
-		this.capacidadHabitacional = mapa.capacidadDePoblacion();
+		capacidadHabitacional = mapa.capacidadDePoblacion();
 	}
 
 	private void actualizarCapacidadEmpleo(Mapa mapa) {
-		this.capacidadEmpleo = mapa.capacidadDeEmpleo();
+		capacidadEmpleo = mapa.capacidadDeEmpleo();
 	}
 
 	public void actualizar(Mapa mapa) {
-		this.actualizarCapacidadHabitacional(mapa);
-		this.actualizarCapacidadEmpleo(mapa);
+		actualizarCapacidadHabitacional(mapa);
+		actualizarCapacidadEmpleo(mapa);
 	}
 
 	/**********************************************************************/

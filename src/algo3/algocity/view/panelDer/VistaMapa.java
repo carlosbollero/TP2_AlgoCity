@@ -20,6 +20,7 @@ public class VistaMapa extends JPanel implements Observer {
 	Juego juego;
 	Mapa mapa;
 	VistaPanelDer contenedor;
+	VistaCatastrofe vistaCatastrofe;
 	VistaPosicion[][] tabla;
 
 	public VistaMapa(Juego juego, VistaPanelDer contenedor) {

@@ -37,7 +37,7 @@ public class Mapa extends Observable {
 	MapaRutas rutas;
 	MapaElectrico redElectrica;
 	SistemaElectrico sistemaElectrico;
-	//Dinero dinero;
+
 	Reparador reparador;
 
 	public Mapa() {
@@ -47,7 +47,7 @@ public class Mapa extends Observable {
 		tuberias = new MapaTuberias(this);
 		rutas = new MapaRutas(this);
 		redElectrica = new MapaElectrico(this);
-		//dinero = new Dinero();
+
 		sistemaElectrico = new SistemaElectrico();
 		reparador = null;
 	}
@@ -277,9 +277,10 @@ public class Mapa extends Observable {
 		Element ciudad = doc.createElement("ciudad");
 		mapa.appendChild(ciudad);
 		ciudad = this.ciudad.getElement(doc, ciudad);
-
+		
 //		p.actualizar(this);
 //		Element dinero = this.dinero.getElement(doc,p,t);
+
 //		mapa.appendChild(dinero);
 
 		if (this.reparador == null) {

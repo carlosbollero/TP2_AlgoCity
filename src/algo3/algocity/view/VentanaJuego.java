@@ -29,7 +29,7 @@ public class VentanaJuego extends JFrame {
 	public VentanaJuego(Juego juego) {
 		super("Algoritmos 3 | AlgoCity");
 		this.juego = juego;
-		this.mapa = juego.mapa();
+		mapa = juego.mapa();
 		controladorMsj = new ControladorMensajes();
 		setPanelIzq();
 		setPanelDer();
