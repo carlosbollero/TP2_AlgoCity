@@ -78,7 +78,7 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
 			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esTierra()) {
+		if (superficie.esAgua()) {
 			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esTierra();
@@ -86,6 +86,8 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {
+		System.out.println("en UnidadEnergetica agregandose en :");
+		System.out.println(coordenada().getX() + "," + coordenada().getY());
 		if (mapa.ciudad().agregar(this)) {
 			addObserver(mapa.sistemaElectrico());
 			return true;

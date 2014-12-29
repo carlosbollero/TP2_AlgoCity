@@ -39,7 +39,7 @@ public class Mapa extends Observable {
 	SistemaElectrico sistemaElectrico;
 
 	Reparador reparador;
-	Turno turnos; //agregado para reparador
+	Turno turnos; // agregado para reparador
 
 	public Mapa() {
 		tamanio = Constantes.TAMANIO_MAPA;
@@ -58,6 +58,7 @@ public class Mapa extends Observable {
 	}
 
 	public boolean agregar(Agregable unidad) {
+
 		if (contiene(unidad)) {
 			return false;
 		}
@@ -140,11 +141,11 @@ public class Mapa extends Observable {
 		}
 		return rutas.hayConexion(coordenadas);
 	}
-	
-	public void setObervadoDeReparador(Turno t){
+
+	public void setObervadoDeReparador(Turno t) {
 		t.addObserver(reparador);
 	}
-	
+
 	public void setTurno(Turno t) {
 		this.turnos = t;
 	}
@@ -152,8 +153,8 @@ public class Mapa extends Observable {
 	public void agregarReparador() {
 		if (this.reparador == null) {
 			this.reparador = new Reparador(this);
-			if(this.turnos == null){
-				this.turnos = new Turno(); //esto es solo para los tests
+			if (this.turnos == null) {
+				this.turnos = new Turno(); // esto es solo para los tests
 				this.turnos.addObserver(this.reparador);
 			}
 		}
@@ -224,8 +225,9 @@ public class Mapa extends Observable {
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
 	/**
-	 * @param t 
-	 * @param p ********************************************************************/
+	 * @param t
+	 * @param p
+	 ********************************************************************/
 	public Element getElement(Document doc, Poblacion p, Turno t) {
 		Element mapa = doc.createElement("Mapa");
 
@@ -255,17 +257,17 @@ public class Mapa extends Observable {
 		Element ciudad = doc.createElement("ciudad");
 		mapa.appendChild(ciudad);
 		ciudad = this.ciudad.getElement(doc, ciudad);
-		
-//		p.actualizar(this);
-//		Element dinero = this.dinero.getElement(doc,p,t);
 
-//		mapa.appendChild(dinero);
+		// p.actualizar(this);
+		// Element dinero = this.dinero.getElement(doc,p,t);
+
+		// mapa.appendChild(dinero);
 
 		if (this.reparador == null) {
 			Element reparador = doc.createElement("reparador");
 			mapa.appendChild(reparador);
 		} else {
-			//agregado, pruebaa
+			// agregado, pruebaa
 			this.reparador.actualizarObjetivos();
 			Element reparador = this.reparador.getElement(doc);
 			mapa.appendChild(reparador);
@@ -300,11 +302,11 @@ public class Mapa extends Observable {
 				mapa.ciudad = MapaEdilicio.fromElement(child, mapa, d);
 			} else if (child.getNodeName().equals("sistemaElectrico")) {
 				mapa.sistemaElectrico = SistemaElectrico.fromElement(child);
-//			} else if (child.getNodeName().equals("Dinero")) {
-//				Dinero dinero = Dinero.fromElement(child, mapa, turnos,
-//						poblacion);
-//				mapa.dinero = dinero;
-//				mapa.dinero = d;
+				// } else if (child.getNodeName().equals("Dinero")) {
+				// Dinero dinero = Dinero.fromElement(child, mapa, turnos,
+				// poblacion);
+				// mapa.dinero = dinero;
+				// mapa.dinero = d;
 			} else if (child.getNodeName().equals("reparador")) {
 				Reparador reparador = Reparador.fromElement(child, mapa);
 				mapa.reparador = reparador;

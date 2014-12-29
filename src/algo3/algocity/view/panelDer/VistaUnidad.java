@@ -23,15 +23,14 @@ public class VistaUnidad extends VistaPosicion {
 
 	private static final long serialVersionUID = -1933418471723107152L;
 
-	// Unidad unidad;
-
 	public VistaUnidad(Juego juego, Coordenada coord) {
 		super(juego, coord);
-		controlador = new ControladorMouseMapaSup(juego, coord, this);
+		controlador = new ControladorMouseMapaSup(juego, coordenada, this);
 		addMouseListener(controlador);
 		setImagen();
-		revalidate();
-		repaint();
+		System.out.println("vistaUnidad" + coord.getX() + coord.getY());
+//		revalidate();
+//		repaint();
 	}
 
 	public void setImagen() {
@@ -40,7 +39,7 @@ public class VistaUnidad extends VistaPosicion {
 
 	public void setImagen(Unidad unidad) {
 		try {
-			System.out.println("try");
+			
 			Method method = getClass()
 					.getMethod("setImagen", unidad.getClass());
 			method.invoke(this, unidad);

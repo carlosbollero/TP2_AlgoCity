@@ -33,11 +33,9 @@ public abstract class Unidad extends Observable implements Agregable {
 		return coordenada;
 	}
 
-	// public abstract boolean esConstruibleEn(Superficie superficie) throws
-	// SuperficieInvalidaParaConstruir;
 	public boolean esConstruibleEn(Superficie superficie)
 			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esTierra()) {
+		if (superficie.esAgua()) {
 			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esTierra();

@@ -22,6 +22,7 @@ public class StateConstruirCentralMinera implements StateConstruir {
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException, SuperficieInvalidaParaConstruir,
 			NoHayConexionConTuberias, CoordenadaInvalidaException {
+		System.out.println("state " + c.getX() + c.getY());
 		j.mapa().agregar(fabrica.construir(j.mapa(), j.dinero(), c));
 
 	}

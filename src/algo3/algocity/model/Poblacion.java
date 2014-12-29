@@ -20,6 +20,7 @@ import algo3.algocity.model.estadosPoblacion.EstadoPoblacionCreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionDecreciendo;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionEstable;
 import algo3.algocity.model.mapas.Mapa;
+import algo3.algocity.model.mapas.MapaEdilicio;
 
 public class Poblacion implements Observer {
 	int cantidad;
@@ -73,20 +74,18 @@ public class Poblacion implements Observer {
 	public void aumentar(int cantidad) {
 		this.cantidad += cantidad;
 	}
-	
 
-//	@Override
-//	public void update(Observable arg0, Object arg1) {
-//		estadoActual.operar(this);
-//		
-//	}
-	
+
 	@Override
-	public void update(Observable arg0, Object arg1){
-		try{
-			Method update = getClass().getMethod("update", arg0.getClass(),Object.class);
-			update.invoke(this,arg0,arg1);
-		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e){
+	public void update(Observable arg0, Object arg1) {
+
+		try {
+			Method update = getClass().getMethod("update", arg0.getClass(),
+					Object.class);
+			update.invoke(this, arg0, arg1);
+		} catch (NoSuchMethodException | SecurityException
+				| IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -112,6 +111,10 @@ public class Poblacion implements Observer {
 //			//setIndice(((capacidadHabitacional/capacidadEmpleo) * 10));
 //			setIndice(-1);
 //		}
+	}
+	
+	public void update(MapaEdilicio arg0, Object arg1){
+		
 	}
 
 	public void disminuir() {
@@ -154,6 +157,7 @@ public class Poblacion implements Observer {
 		this.actualizarCapacidadHabitacional(mapa);
 		this.actualizarCapacidadEmpleo(mapa);
 		setIndice(capacidadHabitacional - capacidadEmpleo);
+
 	}
 
 	/**********************************************************************/
@@ -189,8 +193,8 @@ public class Poblacion implements Observer {
 		return poblacion;
 	}
 
-	public static Poblacion fromElement(Node hijoDeJuego,Mapa mapa) {
-		//Poblacion poblacion = new Poblacion();
+	public static Poblacion fromElement(Node hijoDeJuego, Mapa mapa) {
+		// Poblacion poblacion = new Poblacion();
 		Poblacion poblacion = new Poblacion(mapa);
 		NodeList childs = hijoDeJuego.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {

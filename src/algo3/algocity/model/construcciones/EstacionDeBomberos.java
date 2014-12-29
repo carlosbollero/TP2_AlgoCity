@@ -14,7 +14,6 @@ import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.model.terreno.Superficie;
 
 public class EstacionDeBomberos extends Unidad {
 
@@ -41,28 +40,12 @@ public class EstacionDeBomberos extends Unidad {
 		this.coordenada = coord;
 	}
 
-	// public void actuar(ArrayList<Visitable> objetivos) {
-	// for (Visitable v : objetivos) {
-	// v.aceptar(this);
-	// }
-	// }
-
-	// TODO Revisar si sirve el metodo
 	public void conectarTuberia(Conector unaTuberia) {
 		conexion = unaTuberia;
 	}
 
 	public Conector getConexion() {
 		return conexion;
-	}
-
-	@Override
-	public boolean esConstruibleEn(Superficie superficie)
-			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esTierra()) {
-			throw new SuperficieInvalidaParaConstruir();
-		}
-		return (superficie.esTierra());
 	}
 
 	@Override
@@ -75,20 +58,6 @@ public class EstacionDeBomberos extends Unidad {
 	public boolean estaContenidoEn(Mapa mapa) {
 		return mapa.ciudad().contiene(this);
 	}
-
-	// @Override
-	// public void aplicarDanio(double i) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-
-	// @Override
-	// public double getSalud() {
-	// // TODO revisar de hacerlo de otra forma
-	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-	// // entiendan este mensaje nose si es lo mejor
-	// return 100;
-	// }
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/

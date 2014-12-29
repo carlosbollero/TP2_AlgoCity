@@ -41,25 +41,11 @@ public class PozoDeAgua extends Unidad {
 	@Override
 	public boolean esConstruibleEn(Superficie superficie)
 			throws SuperficieInvalidaParaConstruir {
-		if (!superficie.esAgua()) {
+		if (superficie.esTierra()) {
 			throw new SuperficieInvalidaParaConstruir();
 		}
 		return superficie.esAgua();
 	}
-
-	// @Override
-	// public void aplicarDanio(double i) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-
-	// @Override
-	// public double getSalud() {
-	// // TODO revisar de hacerlo de otra forma
-	// // por ahora pasan los tests, pero que PozoDeAgua y EstacionDeBomberos
-	// // entiendan este mensaje nose si es lo mejor
-	// return 100;
-	// }
 
 	@Override
 	public boolean agregarseA(Mapa mapa) {

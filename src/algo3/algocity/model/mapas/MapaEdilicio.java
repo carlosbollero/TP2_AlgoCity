@@ -114,8 +114,11 @@ public class MapaEdilicio extends Observable {
 	}
 
 	public boolean agregar(UnidadEnergetica u) {
+		System.out.print(u.getClass().getSimpleName() + " " + u.coordenada().getX() + "," + u.coordenada().getY());
 		mapa.put(u.coordenada(), u);
 		setChanged();
+		System.out.println("MapaEdilicio: agregado " + u.getClass().getSimpleName());
+		System.out.println("en " + u.coordenada().getX() + "," + u.coordenada().getY());
 		notifyObservers(u);
 		return unidadesEnergeticas.add(u);
 	}

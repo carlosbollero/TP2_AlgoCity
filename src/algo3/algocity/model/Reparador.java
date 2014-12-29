@@ -39,10 +39,8 @@ public class Reparador implements Observer {
 	}
 
 	public void actuar() {
-		System.out.println("reparador actuando..;.");
 		actualizarObjetivos();
 		for (Daniable v : objetivos) {
-			System.out.println("raparando unidad");
 			v.repararse();
 		}
 	}
@@ -56,7 +54,6 @@ public class Reparador implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(o.getClass());
 		actuar();
 	}
 

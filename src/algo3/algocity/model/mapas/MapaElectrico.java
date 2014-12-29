@@ -74,12 +74,18 @@ public class MapaElectrico extends MapaConexiones {
 	 * @throws CoordenadaInvalidaException
 	 * @throws FondosInsuficientesException
 	 * @throws NoSeCumplenLosRequisitosException
+<<<<<<< Updated upstream
 	 * @throws SuperficieInvalidaParaConstruir 
+=======
+	 * @throws SuperficieInvalidaParaConstruir
+>>>>>>> Stashed changes
 	 ********************************************************************/
 
 	public static MapaElectrico fromElement(Node tuberias, Mapa mapa, Dinero d)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
+
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		MapaElectrico mapaElectrico = new MapaElectrico(mapa);
 		NodeList hijosDeRed = tuberias.getChildNodes();
 

@@ -41,19 +41,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		this.capacidad = 100;
 	}
 
-	// public UnidadResidencial(Mapa mapa, int x, int y)
-	// throws NoSeCumplenLosRequisitosException {
-	// this.costo = 5;
-	// this.consumo = 1;
-	// this.capacidad = 100;
-	// coordenadas = new Coordenada(x, y);
-	//
-	// if (!esConstruibleEn(mapa.superficie(coordenadas))
-	// || !hayConexionesEn(mapa)) {
-	// throw new NoSeCumplenLosRequisitosException();
-	// }
-	// }
-
 	public UnidadResidencial(Mapa mapa, Dinero dinero, Coordenada coord)
 			throws NoSeCumplenLosRequisitosException,
 			FondosInsuficientesException,

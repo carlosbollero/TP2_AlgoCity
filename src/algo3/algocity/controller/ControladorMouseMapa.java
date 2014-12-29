@@ -56,20 +56,15 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+
 		try {
 			Method update = getClass().getMethod("update", Observable.class,
 					arg1.getClass());
 			update.invoke(this, arg0, arg1);
-		} catch (NoSuchMethodException e) {
-			System.out.println(e);
-		} catch (SecurityException e) {
-			System.out.println(e);
-		} catch (IllegalAccessException e) {
-			System.out.println(e);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-		} catch (InvocationTargetException e) {
-			System.out.println(e);
+		} catch (NoSuchMethodException | SecurityException
+				| IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -119,10 +114,10 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("siente el click");
 		try {
 			if (estadoActual != null) {
-				System.out.println("no null");
+				System.out.print("controladormouse ");
+				System.out.println(coordenada.getX() + "," + coordenada.getY());
 				estadoActual.construir(juego, coordenada);
 			}
 		} catch (NoSeCumplenLosRequisitosException
@@ -134,7 +129,7 @@ public abstract class ControladorMouseMapa extends MouseAdapter implements
 			System.out.println(e1);
 			controlador.recibirYNotificar(e1.getClass().getSimpleName());
 		}
-		super.mouseClicked(e);
+		// super.mouseClicked(e);
 	}
 
 	public void setControladorMensajes(ControladorMensajes c) {

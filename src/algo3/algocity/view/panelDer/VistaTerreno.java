@@ -17,6 +17,7 @@ public class VistaTerreno extends VistaPosicion {
 		controlador = new ControladorMouseMapaSup(juego, coord, this);
 		addMouseListener(controlador);
 		setImagen();
+		System.out.println("VistaPosicion " + coordenada.getX() + coordenada.getY());
 	}
 	
 	public void setImagen() {

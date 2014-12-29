@@ -49,11 +49,11 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return false;
 	}
-	
-	public ArrayList<Daniable> unidadesDaniables(){
+
+	public ArrayList<Daniable> unidadesDaniables() {
 		ArrayList<Daniable> lista = new ArrayList<Daniable>();
 		Iterator<Ruta> it = listado.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			lista.add(it.next());
 		}
 		return lista;
@@ -74,12 +74,18 @@ public class MapaRutas extends MapaConexiones {
 	 * @throws CoordenadaInvalidaException
 	 * @throws FondosInsuficientesException
 	 * @throws NoSeCumplenLosRequisitosException
+<<<<<<< Updated upstream
 	 * @throws SuperficieInvalidaParaConstruir 
+=======
+	 * @throws SuperficieInvalidaParaConstruir
+>>>>>>> Stashed changes
 	 ********************************************************************/
 
 	public static MapaRutas fromElement(Node tuberias, Mapa mapa, Dinero d)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
+
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		MapaRutas mapaRutas = new MapaRutas(mapa);
 		NodeList hijosDeRed = tuberias.getChildNodes();
 

@@ -29,7 +29,6 @@ import algo3.algocity.model.fabricas.FabricaEstacionDeBomberos;
 import algo3.algocity.model.fabricas.FabricaUnidades;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
-import algo3.algocity.view.VentanaJuego;
 
 public class PersistenciaTest {
 

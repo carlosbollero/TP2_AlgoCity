@@ -34,9 +34,11 @@ public class CentralEolica extends UnidadEnergetica {
 		this.coordenada = coord;
 		mapa.validarCoordenadas(coord);
 		esConstruibleEn(mapa.superficie(coordenada));
-		hayConexionesEn(mapa);
-		mapa.sistemaElectrico().aumentarCapacidad(capacidad);
-		dinero.cobrar(costo);
+		if(hayConexionesEn(mapa)){
+			mapa.sistemaElectrico().aumentarCapacidad(capacidad);
+			dinero.cobrar(costo);
+			
+		}
 	}
 
 	protected double porcentajeReparacion() {
