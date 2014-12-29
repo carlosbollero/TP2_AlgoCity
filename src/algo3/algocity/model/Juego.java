@@ -55,7 +55,8 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-		poblacion.actualizar(mapa);
+		mapa.addObserver(poblacion);
+		//poblacion.actualizar(mapa);
 	}
 
 	/* Usado para persistencia */
@@ -70,6 +71,7 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
+		mapa.addObserver(poblacion);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 	}
 

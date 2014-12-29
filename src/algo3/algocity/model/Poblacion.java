@@ -1,5 +1,7 @@
 package algo3.algocity.model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -7,6 +9,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+
+
+
+
 
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacion;
 import algo3.algocity.model.estadosPoblacion.EstadoPoblacionCreciendo;
@@ -22,7 +29,7 @@ public class Poblacion implements Observer {
 	int tasa;
 	EstadoPoblacion estadoActual;
 
-	// Mapa mapa;
+	Mapa mapa;
 
 	public Poblacion() {
 		cantidad = Constantes.POBLACION_INICIAL;
@@ -30,7 +37,7 @@ public class Poblacion implements Observer {
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
 		tasa = 20;
-		estadoActual = new EstadoPoblacionCreciendo();
+		estadoActual = new EstadoPoblacionEstable();
 	}
 
 	public Poblacion(Mapa mapa) {
@@ -53,6 +60,10 @@ public class Poblacion implements Observer {
 	public int getCapacidadEmpleo() {
 		return this.capacidadEmpleo;
 	}
+	
+	public void setEstadoPoblacion(EstadoPoblacion e){
+		estadoActual = e;
+	}
 
 	public void aumentar() {
 		cantidad += tasa;
@@ -62,13 +73,48 @@ public class Poblacion implements Observer {
 		this.cantidad += cantidad;
 	}
 
+//	@Override
+//	public void update(Observable arg0, Object arg1) {
+//		estadoActual.operar(this);
+//		
+//	}
+	
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable arg0, Object arg1){
+		try{
+			Method update = getClass().getMethod("update", arg0.getClass(),Object.class);
+			update.invoke(this,arg0,arg1);
+		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void update(Turno arg0, Object arg1){
+		if(!(mapa == null)){
+			actualizar(mapa);
+		}
 		estadoActual.operar(this);
+		//System.out.println("UPDATE TURNO");
+	}
+	
+	public void update(Mapa arg0, Object arg1){
+		System.out.println("UPDATE MAPA");
+		this.mapa = arg0;
+		actualizar(arg0);		
+//		if(capacidadHabitacional == capacidadEmpleo ){
+//			setIndice(0);
+//		}else if(capacidadHabitacional < capacidadEmpleo){
+//			//setIndice(((capacidadHabitacional/capacidadEmpleo) * 10));
+//			setIndice(1);
+//		}else if(capacidadHabitacional > capacidadEmpleo){
+//			//setIndice(((capacidadHabitacional/capacidadEmpleo) * 10));
+//			setIndice(-1);
+//		}
 	}
 
 	public void disminuir() {
 		cantidad -= tasa;
+		if(cantidad < 0) cantidad = 0;
 	}
 
 	public void disminuir(int cantidad) {
@@ -84,7 +130,7 @@ public class Poblacion implements Observer {
 	// this.mapa = mapa;
 	// }
 
-	private void actualizarIndice() {
+	public void actualizarIndice() {
 		if (indiceCrecimiento > 0) {
 			estadoActual = new EstadoPoblacionCreciendo();
 		} else if (indiceCrecimiento < 0) {
@@ -105,6 +151,7 @@ public class Poblacion implements Observer {
 	public void actualizar(Mapa mapa) {
 		this.actualizarCapacidadHabitacional(mapa);
 		this.actualizarCapacidadEmpleo(mapa);
+		setIndice(capacidadHabitacional - capacidadEmpleo);
 	}
 
 	/**********************************************************************/

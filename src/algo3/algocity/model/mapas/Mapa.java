@@ -60,6 +60,8 @@ public class Mapa extends Observable {
 		if (contiene(unidad)) {
 			return false;
 		}
+		setChanged();
+		notifyObservers();
 		return unidad.agregarseA(this);
 	}
 

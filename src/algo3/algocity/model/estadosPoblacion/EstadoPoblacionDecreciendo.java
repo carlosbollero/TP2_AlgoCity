@@ -6,8 +6,10 @@ public class EstadoPoblacionDecreciendo implements EstadoPoblacion {
 
 	@Override
 	public void operar(Poblacion unaPoblacion) {
+		//unaPoblacion.actualizarIndice();
+		
 		unaPoblacion.disminuir();
-
+		//unaPoblacion.setEstadoPoblacion(this);
 	}
 
 }
