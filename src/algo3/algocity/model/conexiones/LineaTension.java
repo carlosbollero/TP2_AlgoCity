@@ -13,18 +13,19 @@ import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class LineaTension extends Conector implements  Daniable, Visitable {
+public class LineaTension extends Conector implements Daniable, Visitable {
 
 	final boolean intacto = true;
 	final boolean destruido = false;
 	final double ESTADOINICIAL = 100;
 	int costo;
 	boolean estado; // true para intacto
-					double porcentajeDanios;
+	double porcentajeDanios;
 	int danios; // no usado?
 	Coordenada coordenada;
 
@@ -39,14 +40,16 @@ public class LineaTension extends Conector implements  Daniable, Visitable {
 
 	public LineaTension(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		costo = Constantes.COSTO_LINEATENSION;
 		porcentajeDanios = 0;
 		this.coordenada = coordenada;
 
 		mapa.validarCoordenadas(coordenada);
-		esConstruibleEn(mapa.superficie(coordenada));
-		dinero.cobrar(costo);
+		if (esConstruibleEn(mapa.superficie(coordenada))) {
+			dinero.cobrar(costo);
+		}
 	}
 
 	public int costo() {
@@ -71,10 +74,6 @@ public class LineaTension extends Conector implements  Daniable, Visitable {
 	@Override
 	public void repararse() {
 		porcentajeDanios = 0;
-		// this.porcentajeDanios -= this.porcentajeReparacion();
-		// if (this.getDanios() < 0) {
-		// this.porcentajeDanios = 0;
-		// }
 	}
 
 	public double getDanios() {
@@ -104,7 +103,11 @@ public class LineaTension extends Conector implements  Daniable, Visitable {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (superficie.esAgua()) {
+			throw new SuperficieInvalidaParaConstruir();
+		}
 		return superficie.esTierra();
 	}
 

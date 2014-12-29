@@ -10,6 +10,5 @@ public class AccionBotonResidencia extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaUnidadResidencial());
-		controladorMsj.recibirYNotificar("$" + Constantes.CAPACIDAD_U_RESIDENCIAL);
 	}
 }

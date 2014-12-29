@@ -14,9 +14,12 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.mapas.Coordenada;
 
 public class VistaConector extends VistaPosicion {
+	
+	Conector conector;
 
-public VistaConector(Juego j, Coordenada c) {
+public VistaConector(Juego j, Coordenada c, Conector conector) {
 	super(j, c);
+	this.conector = conector;
 	controlador = new ControladorMouseMapaSup(juego, c, this);
 	addMouseListener(controlador);
 	setImagen();
@@ -28,7 +31,7 @@ public VistaConector(Juego j, Coordenada c) {
 
 	@Override
 	public void setImagen() {
-		setImagen(juego.mapa().rutas().getConectorEn(coordenada));
+		setImagen(conector);
 	}
 	
 	public void setImagen(Conector conector) {

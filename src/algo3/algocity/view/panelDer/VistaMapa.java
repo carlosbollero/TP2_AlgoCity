@@ -87,7 +87,7 @@ public class VistaMapa extends JPanel implements Observer {
 		tabla[coord.getX()][coord.getY()] = (mapa.rutas()
 				.tieneCoordenadaOcupada(coord) || mapa.redElectrica()
 				.tieneCoordenadaOcupada(coord)) ? new VistaConector(juego,
-				coord) : new VistaTerreno(juego, coord);
+				coord, conector) : new VistaTerreno(juego, coord);
 	}
 
 	private void setPosicion(Coordenada coord) {

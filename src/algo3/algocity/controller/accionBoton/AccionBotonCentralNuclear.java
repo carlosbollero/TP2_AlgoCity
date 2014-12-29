@@ -10,7 +10,6 @@ public class AccionBotonCentralNuclear extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaCentralNuclear());
-		controladorMsj.recibirYNotificar("$" + Constantes.CAPACIDAD_C_NUCLEAR);
 	}
 
 }

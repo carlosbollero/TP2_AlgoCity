@@ -11,6 +11,5 @@ public class AccionBotonRuta extends AccionBoton{
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaRuta());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_RUTA);
 	}
 }

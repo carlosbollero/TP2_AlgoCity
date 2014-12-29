@@ -10,6 +10,5 @@ public class AccionBotonTuberia extends AccionBoton{
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaTuberias());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_TUBERIA);
 	}
 }

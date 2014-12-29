@@ -27,8 +27,6 @@ public class MapaRutas extends MapaConexiones {
 		if (contiene(ruta) || tieneCoordenadaOcupada(ruta.coordenada())) {
 			return false;
 		}
-		// AGREGAODO
-		// mapaConectores.put(ruta.coordenada(),ruta);
 		listado.add(ruta);
 		grafo.addVertex(ruta);
 		actualizarGrafo(ruta);
@@ -50,16 +48,6 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return false;
 	}
-
-	// @Override
-	// protected void actualizarGrafo(Conector elemento) {
-	// for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-	// if (hayDistanciaMinima(elemento.coordenada(), entry.getKey())) {
-	// grafo.addEdge(elemento, entry.getValue());
-	// }
-	// }
-	// }
-
 	
 	public ArrayList<Daniable> unidadesDaniables(){
 		ArrayList<Daniable> lista = new ArrayList<Daniable>();
@@ -69,15 +57,6 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return lista;
 	}
-	
-	//TODO, revisar, pareciera que no se agregan las rutas al grafo
-//	public ArrayList<Daniable> unidadesDaniables() {
-//		ArrayList<Daniable> lista = new ArrayList<Daniable>();
-//		for (Conector c : grafo.vertexSet()) {
-//			lista.add((Daniable) c);
-//		}
-//		return lista;
-//	}
 
 	public Conector getConectorEn(Coordenada coord) {
 		for (Conector c : grafo.vertexSet()) {

@@ -11,6 +11,5 @@ public class AccionBotonLineaTension extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaLineaTension());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_LINEATENSION);
 	}
 }

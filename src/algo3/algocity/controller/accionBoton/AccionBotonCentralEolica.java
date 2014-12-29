@@ -10,6 +10,5 @@ public class AccionBotonCentralEolica extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaCentralEolica());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_C_EOLICA);
 	}
 }

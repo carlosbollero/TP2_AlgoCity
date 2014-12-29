@@ -26,8 +26,6 @@ public class MapaElectrico extends MapaConexiones {
 		if (contiene(linea) || tieneCoordenadaOcupada(linea.coordenada())) {
 			return false;
 		}
-		// AGREGADO
-		// mapaConectores.put(linea.coordenada(),linea);
 		listado.add(linea);
 		grafo.addVertex(linea);
 		actualizarGrafo(linea);

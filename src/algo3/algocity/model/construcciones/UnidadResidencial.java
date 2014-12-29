@@ -118,15 +118,6 @@ public class UnidadResidencial extends Unidad implements Ocupable, Daniable,
 		return (mapa.hayConexionCompleta(coordenada));
 	}
 
-	// @Override
-	// public boolean esConstruibleEn(Superficie superficie)
-	// throws SuperficieInvalidaParaConstruir {
-	// if (!superficie.esTierra()) {
-	// throw new SuperficieInvalidaParaConstruir();
-	// }
-	// return superficie.esTierra();
-	// }
-
 	@Override
 	public boolean agregarseA(Mapa mapa) {
 		return mapa.ciudad().agregar(this);
