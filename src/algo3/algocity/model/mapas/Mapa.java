@@ -97,43 +97,6 @@ public class Mapa extends Observable {
 		return territorio.posicionConTierra();
 	}
 
-	// public boolean agregarACiudad(Unidad unidad) {
-	// return ciudad.agregar(unidad);
-	// }
-	//
-	// public boolean agregarARedElectrica(LineaTension linea) {
-	// return redElectrica.agregar(linea);
-	// }
-	//
-	// public boolean agregarARutas(Ruta ruta) {
-	// return rutas.agregar(ruta);
-	// }
-	//
-	// public boolean agregarATuberias(Tuberia tuberia) {
-	// return tuberias.agregar(tuberia);
-	// }
-
-	// public boolean agregarUnidadDaniable(Daniable unidad) {
-	// return ciudad.agregarUnidadDaniable(unidad);
-	// }
-
-	// public boolean contiene(LineaTension lt) {
-	// return redElectrica.contiene(lt);
-	// }
-	//
-	// public boolean contiene(Ruta rt) {
-	// return rutas.contiene(rt);
-	// }
-	//
-	// public boolean contiene(Tuberia tb) {
-	// return tuberias.contiene(tb);
-	// }
-
-	// public ArrayList<Daniable> getDaniablesAlrededorDe(Coordenada epicentro,
-	// int radio) {
-	// return ciudad.getUnidadesAlrededorDe(epicentro, radio);
-	// }
-
 	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
 			LinkedList<Coordenada> listaCamino) {
 		return ciudad.getDaniablesEnElCaminoDe(listaCamino);
@@ -176,6 +139,10 @@ public class Mapa extends Observable {
 		return rutas.hayConexion(coordenadas);
 	}
 	
+	public void setObervadoDeReparador(Turno t){
+		t.addObserver(reparador);
+	}
+	
 	public void setTurno(Turno t) {
 		this.turnos = t;
 	}
@@ -187,7 +154,6 @@ public class Mapa extends Observable {
 				this.turnos = new Turno(); //esto es solo para los tests
 				this.turnos.addObserver(this.reparador);
 			}
-			
 		}
 	}
 

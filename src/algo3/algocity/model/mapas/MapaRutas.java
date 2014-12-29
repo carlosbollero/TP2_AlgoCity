@@ -79,10 +79,9 @@ public class MapaRutas extends MapaConexiones {
 //		return lista;
 //	}
 
-	public Conector getConectorEn(int x, int y) {
-		Coordenada coordEvaluar = new Coordenada(x, y);
+	public Conector getConectorEn(Coordenada coord) {
 		for (Conector c : grafo.vertexSet()) {
-			if (c.coordenada().equals(coordEvaluar)) {
+			if (c.coordenada().equals(coord)) {
 				return c;
 			}
 		}

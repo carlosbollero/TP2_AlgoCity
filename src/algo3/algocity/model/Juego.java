@@ -55,7 +55,9 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-		mapa.setTurno(turnos);
+//		mapa.setTurno(turnos);
+		mapa.agregarReparador();
+		mapa.setObervadoDeReparador(turnos);
 		poblacion.actualizar(mapa);
 	}
 	
@@ -72,6 +74,7 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		mapa.setTurno(turnos);
+
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 
 		// poblacion.actualizar(mapa);
@@ -90,7 +93,9 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-		mapa.setTurno(turnos);
+//		mapa.setTurno(turnos);
+		mapa.agregarReparador();
+		mapa.setObervadoDeReparador(turnos);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 
 		// poblacion.actualizar(mapa);

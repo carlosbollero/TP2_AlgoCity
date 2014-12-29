@@ -11,7 +11,6 @@ package algo3.algocity.model.mapas;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Observable;
 
 import org.jgrapht.alg.ConnectivityInspector;
@@ -20,6 +19,7 @@ import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 
@@ -87,6 +87,10 @@ public abstract class MapaConexiones extends Observable {
 	public boolean hayConexion(Coordenada unPunto, Coordenada otroPunto) {
 		this.camino = new ConnectivityInspector<Conector, DefaultEdge>(grafo);
 		return (camino.pathExists(getConector(unPunto), getConector(otroPunto)));
+	}
+	
+	public Conector get(Coordenada coord){
+		return getConector(coord);
 	}
 
 	private Conector getConector(Coordenada coord) {
