@@ -37,7 +37,7 @@ public class Mapa extends Observable {
 	MapaRutas rutas;
 	MapaElectrico redElectrica;
 	SistemaElectrico sistemaElectrico;
-	Dinero dinero;
+	//Dinero dinero;
 	Reparador reparador;
 
 	public Mapa() {
@@ -47,7 +47,7 @@ public class Mapa extends Observable {
 		tuberias = new MapaTuberias(this);
 		rutas = new MapaRutas(this);
 		redElectrica = new MapaElectrico(this);
-		dinero = new Dinero();
+		//dinero = new Dinero();
 		sistemaElectrico = new SistemaElectrico();
 		reparador = null;
 	}
@@ -278,9 +278,9 @@ public class Mapa extends Observable {
 		mapa.appendChild(ciudad);
 		ciudad = this.ciudad.getElement(doc, ciudad);
 
-		p.actualizar(this);
-		Element dinero = this.dinero.getElement(doc,p,t);
-		mapa.appendChild(dinero);
+//		p.actualizar(this);
+//		Element dinero = this.dinero.getElement(doc,p,t);
+//		mapa.appendChild(dinero);
 
 		if (this.reparador == null) {
 			Element reparador = doc.createElement("reparador");
@@ -321,11 +321,11 @@ public class Mapa extends Observable {
 				mapa.ciudad = MapaEdilicio.fromElement(child, mapa, d);
 			} else if (child.getNodeName().equals("sistemaElectrico")) {
 				mapa.sistemaElectrico = SistemaElectrico.fromElement(child);
-			} else if (child.getNodeName().equals("Dinero")) {
+//			} else if (child.getNodeName().equals("Dinero")) {
 //				Dinero dinero = Dinero.fromElement(child, mapa, turnos,
 //						poblacion);
 //				mapa.dinero = dinero;
-				mapa.dinero = d;
+//				mapa.dinero = d;
 			} else if (child.getNodeName().equals("reparador")) {
 				Reparador reparador = Reparador.fromElement(child, mapa);
 				mapa.reparador = reparador;
