@@ -18,11 +18,8 @@ public class GeneradorCatastrofe extends Observable implements Observer {
 	public void initRandomCatastrofe() {
 		Random aleatorio = new Random();
 		System.out.println("inicia random catastrofe");
-<<<<<<< Updated upstream
-		if (aleatorio.nextInt(100) <= 25) {
-=======
+
 		if (aleatorio.nextInt(100) <= 8) {
->>>>>>> Stashed changes
 			catastrofe = (aleatorio.nextInt(2) == 0) ? new CatastrofeGodzilla(
 					mapa) : new CatastrofeTerremoto(mapa);
 			System.out.println(catastrofe.getClass().getSimpleName());
