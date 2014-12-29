@@ -17,6 +17,7 @@ public class VistaPanelDer extends JPanel {
 	VentanaJuego contenedor;
 	VistaMapa mapa;
 	VistaMapaSubterraneo subterraneo;
+	VistaCatastrofe vistaCatastrofe;
 
 	public VistaPanelDer(Juego juego, VentanaJuego ventana) {
 		contenedor = ventana;
@@ -28,6 +29,7 @@ public class VistaPanelDer extends JPanel {
 		((CardLayout) getLayout()).show(this, "superficie");
 		ventana.getControladorMensajes().addObserver(
 				ventana.getPanelIzq().getPanelInfo().getTextoMensajes());
+		vistaCatastrofe = new VistaCatastrofe(juego, this);
 	}
 
 	public VistaMapa getVistaMapa() {

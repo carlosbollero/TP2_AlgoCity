@@ -48,6 +48,7 @@ public class CatastrofeTerremoto implements Catastrofe {
 	public void actuar() {
 		System.out.println("terremoto actuando....");
 		System.out.println("epicentro: "+epicentro.getX()+","+epicentro.getY());
+
 		for (Daniable u : mapa.unidadesDaniables()) {
 			int distancia = epicentro.distancia(u.coordenada());
 			System.out.println("evaluando radio...");
@@ -59,5 +60,6 @@ public class CatastrofeTerremoto implements Catastrofe {
 			}
 		}
 		System.out.println("terremoto saliendo del for....");
+		System.out.println("termino");
 	}
 }

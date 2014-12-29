@@ -58,6 +58,23 @@ public class Juego {
 		mapa.setTurno(turnos);
 		poblacion.actualizar(mapa);
 	}
+	
+	public Juego(Usuario usuario) {
+		crearDirectorioGuardados();
+		mapa = new Mapa();
+		this.usuario = usuario;
+		poblacion = new Poblacion();
+		// poblacion = new Poblacion(mapa);
+		turnos = new Turno();
+		dinero = new Dinero(poblacion, turnos);
+		genCatastrofe = new GeneradorCatastrofe(mapa);
+		turnos.addObserver(genCatastrofe);
+		turnos.addObserver(poblacion);
+		turnos.addObserver(dinero);
+		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
+
+		// poblacion.actualizar(mapa);
+	}
 
 	/* Usado para persistencia */
 	public Juego() {
@@ -65,7 +82,7 @@ public class Juego {
 		mapa = new Mapa();
 		usuario = new Usuario();
 		poblacion = new Poblacion();
-		//poblacion = new Poblacion(mapa);
+		// poblacion = new Poblacion(mapa);
 		turnos = new Turno();
 		dinero = new Dinero(poblacion, turnos);
 		genCatastrofe = new GeneradorCatastrofe(mapa);
@@ -74,8 +91,8 @@ public class Juego {
 		turnos.addObserver(dinero);
 		mapa.setTurno(turnos);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
-		
-		//poblacion.actualizar(mapa);
+
+		// poblacion.actualizar(mapa);
 	}
 
 	private void crearDirectorioGuardados() {
@@ -126,6 +143,10 @@ public class Juego {
 
 	public Reparador reparador() {
 		return this.mapa.reparador();
+	}
+
+	public GeneradorCatastrofe genCatastrofe() {
+		return genCatastrofe;
 	}
 
 	/**********************************************************************/
@@ -196,20 +217,21 @@ public class Juego {
 		Element turnos = this.turnos.getElement(doc);
 		juego.appendChild(turnos);
 
-		//Element poblacion = this.poblacion.getElement(doc);
-		//juego.appendChild(poblacion);
+		// Element poblacion = this.poblacion.getElement(doc);
+		// juego.appendChild(poblacion);
 
-//		Element dinero = this.dinero.getElement(doc);
-//		juego.appendChild(dinero);
+		// Element dinero = this.dinero.getElement(doc);
+		// juego.appendChild(dinero);
 
-		Element mapa = this.mapa.getElement(doc,this.poblacion,this.turnos);
+		Element mapa = this.mapa.getElement(doc, this.poblacion, this.turnos);
 		juego.appendChild(mapa);
-		
+
 		this.poblacion.actualizar(this.mapa);
 		Element poblacion = this.poblacion.getElement(doc);
 		juego.appendChild(poblacion);
-		
-		Element dinero = this.dinero.getElement(doc,this.poblacion,this.turnos);
+
+		Element dinero = this.dinero.getElement(doc, this.poblacion,
+				this.turnos);
 		juego.appendChild(dinero);
 
 		return juego;

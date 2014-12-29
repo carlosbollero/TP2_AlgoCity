@@ -114,6 +114,7 @@ public class RegistroUsuarios {
 				nombresUsuarios.add(arrayUser[0]);
 			}
 			leerUsuario(arrayUser[0]);
+
 		}
 	}
 

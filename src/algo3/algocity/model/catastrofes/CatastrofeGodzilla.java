@@ -43,7 +43,7 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 	// Comienzo aleatorio de Godzilla , que puede ser tanto el linea recta como
 	// en zigzag
 	public void comenzar() {
-
+		System.out.println("inicio");
 		this.aleatorio = new Random();
 		Coordenada puntoInicio;
 		Coordenada puntoFinal;
@@ -59,6 +59,7 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 		} else {
 			caminarEnZigZag(puntoInicio, puntoFinal);
 		}
+		System.out.println("termino");
 	}
 
 	// 50/50 chances, esta para dejar el codigo mas limpio en comenzar.
