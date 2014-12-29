@@ -13,6 +13,7 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class MapaRutas extends MapaConexiones {
 
@@ -73,11 +74,12 @@ public class MapaRutas extends MapaConexiones {
 	 * @throws CoordenadaInvalidaException
 	 * @throws FondosInsuficientesException
 	 * @throws NoSeCumplenLosRequisitosException
+	 * @throws SuperficieInvalidaParaConstruir 
 	 ********************************************************************/
 
 	public static MapaRutas fromElement(Node tuberias, Mapa mapa, Dinero d)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		MapaRutas mapaRutas = new MapaRutas(mapa);
 		NodeList hijosDeRed = tuberias.getChildNodes();
 

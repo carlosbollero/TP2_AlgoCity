@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import algo3.algocity.model.Dinero;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
@@ -12,6 +13,7 @@ import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class MapaElectrico extends MapaConexiones {
 
@@ -72,11 +74,12 @@ public class MapaElectrico extends MapaConexiones {
 	 * @throws CoordenadaInvalidaException
 	 * @throws FondosInsuficientesException
 	 * @throws NoSeCumplenLosRequisitosException
+	 * @throws SuperficieInvalidaParaConstruir 
 	 ********************************************************************/
 
 	public static MapaElectrico fromElement(Node tuberias, Mapa mapa, Dinero d)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		MapaElectrico mapaElectrico = new MapaElectrico(mapa);
 		NodeList hijosDeRed = tuberias.getChildNodes();
 
