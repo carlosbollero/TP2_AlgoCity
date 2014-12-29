@@ -13,6 +13,7 @@ import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -41,19 +42,18 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	public Ruta(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		porcentajeDanios = 0;
 		costo = Constantes.COSTO_RUTA;
 		this.coordenadas = coordenada;
-		
+
 		mapa.validarCoordenadas(coordenada);
-		esConstruibleEn(mapa.superficie(coordenada));
-		dinero.cobrar(costo);
-		/*
-		 * else { mapa.agregar(this); }
-		 */
+		if (esConstruibleEn(mapa.superficie(coordenada))) {
+			dinero.cobrar(costo);
+		}
 	}
-	
+
 	public int costo() {
 		return this.costo;
 	}
@@ -111,7 +111,11 @@ public class Ruta implements Conector, Daniable, Visitable {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (superficie.esAgua()) {
+			throw new SuperficieInvalidaParaConstruir();
+		}
 		return superficie.esTierra();
 	}
 

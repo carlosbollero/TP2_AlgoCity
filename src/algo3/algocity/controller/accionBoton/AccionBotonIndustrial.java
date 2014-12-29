@@ -10,6 +10,5 @@ public class AccionBotonIndustrial extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaUnidadIndustrial());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_U_INDUSTRIAL);
 	}
 }

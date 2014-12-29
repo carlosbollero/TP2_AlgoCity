@@ -17,6 +17,7 @@ import algo3.algocity.model.construcciones.UnidadResidencial;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 
@@ -100,7 +101,8 @@ public class CatastrofeTerremotoTest {
 	@Test
 	public void testTerremotoAplicaDanioAConectoresDaniablesAlrededor()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		Dinero d = new Dinero();
 		m = new Mapa();
 		m.setTerritorioTierraParaTest();

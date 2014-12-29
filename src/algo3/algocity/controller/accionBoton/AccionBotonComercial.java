@@ -11,6 +11,5 @@ public class AccionBotonComercial extends AccionBoton {
 	public void actionPerformed (ActionEvent e){
 		setChanged();
 		notifyObservers(new FabricaUnidadComercial());
-		controladorMsj.recibirYNotificar("$" + Constantes.COSTO_U_COMERCIAL);
 	}
 }

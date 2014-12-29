@@ -11,7 +11,6 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import algo3.algocity.controller.ControladorMensajes;
 import algo3.algocity.model.Juego;
-import algo3.algocity.model.catastrofes.CatastrofeTerremoto;
 import algo3.algocity.model.catastrofes.GeneradorCatastrofe;
 
 public class VistaCatastrofe implements Observer {
@@ -26,8 +25,6 @@ public class VistaCatastrofe implements Observer {
 		setControladorMsj(contenedor.getControladorMensajes());
 		genCatastrofe.addObserver(this);
 		this.contenedor = contenedor;
-		
-		
 	}
 
 	private void ruido() {

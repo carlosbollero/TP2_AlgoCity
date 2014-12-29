@@ -11,7 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import algo3.algocity.model.Juego;
-import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.conexiones.Conector;
 import algo3.algocity.model.construcciones.EstacionDeBomberos;
 import algo3.algocity.model.construcciones.Unidad;
@@ -70,7 +69,6 @@ public class VistaMapa extends JPanel implements Observer {
 			
 			Method local = getClass().getMethod("setPosicion", a.getClass(), arg.getClass());
 			local.invoke(a, coord);
-//			setPosicion((metodo.invoke(o, coord)), coord);
 		} catch (NoSuchMethodException | SecurityException
 				| IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {

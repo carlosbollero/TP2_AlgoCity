@@ -13,6 +13,7 @@ import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 public class MapaRutas extends MapaConexiones {
 
@@ -27,8 +28,6 @@ public class MapaRutas extends MapaConexiones {
 		if (contiene(ruta) || tieneCoordenadaOcupada(ruta.coordenada())) {
 			return false;
 		}
-		// AGREGAODO
-		// mapaConectores.put(ruta.coordenada(),ruta);
 		listado.add(ruta);
 		grafo.addVertex(ruta);
 		actualizarGrafo(ruta);
@@ -50,16 +49,6 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return false;
 	}
-
-	// @Override
-	// protected void actualizarGrafo(Conector elemento) {
-	// for (Entry<Coordenada, Conector> entry : mapaConectores.entrySet()) {
-	// if (hayDistanciaMinima(elemento.coordenada(), entry.getKey())) {
-	// grafo.addEdge(elemento, entry.getValue());
-	// }
-	// }
-	// }
-
 	
 	public ArrayList<Daniable> unidadesDaniables(){
 		ArrayList<Daniable> lista = new ArrayList<Daniable>();
@@ -69,15 +58,7 @@ public class MapaRutas extends MapaConexiones {
 		}
 		return lista;
 	}
-	
-	//TODO, revisar, pareciera que no se agregan las rutas al grafo
-//	public ArrayList<Daniable> unidadesDaniables() {
-//		ArrayList<Daniable> lista = new ArrayList<Daniable>();
-//		for (Conector c : grafo.vertexSet()) {
-//			lista.add((Daniable) c);
-//		}
-//		return lista;
-//	}
+
 
 	public Conector getConectorEn(Coordenada coord) {
 		for (Conector c : grafo.vertexSet()) {
@@ -94,11 +75,12 @@ public class MapaRutas extends MapaConexiones {
 	 * @throws CoordenadaInvalidaException
 	 * @throws FondosInsuficientesException
 	 * @throws NoSeCumplenLosRequisitosException
+	 * @throws SuperficieInvalidaParaConstruir 
 	 ********************************************************************/
 
 	public static MapaRutas fromElement(Node tuberias, Mapa mapa, Dinero d)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException, SuperficieInvalidaParaConstruir {
 		MapaRutas mapaRutas = new MapaRutas(mapa);
 		NodeList hijosDeRed = tuberias.getChildNodes();
 

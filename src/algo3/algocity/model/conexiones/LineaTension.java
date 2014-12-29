@@ -13,6 +13,7 @@ import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.FondosInsuficientesException;
 import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
+import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
@@ -41,14 +42,16 @@ public class LineaTension implements Conector, Daniable, Visitable {
 
 	public LineaTension(Mapa mapa, Dinero dinero, Coordenada coordenada)
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 		costo = Constantes.COSTO_LINEATENSION;
 		porcentajeDanios = 0;
 		this.coordenada = coordenada;
 
 		mapa.validarCoordenadas(coordenada);
-		esConstruibleEn(mapa.superficie(coordenada));
-		dinero.cobrar(costo);
+		if (esConstruibleEn(mapa.superficie(coordenada))) {
+			dinero.cobrar(costo);
+		}
 	}
 
 	public int costo() {
@@ -106,7 +109,11 @@ public class LineaTension implements Conector, Daniable, Visitable {
 	}
 
 	@Override
-	public boolean esConstruibleEn(Superficie superficie) {
+	public boolean esConstruibleEn(Superficie superficie)
+			throws SuperficieInvalidaParaConstruir {
+		if (superficie.esAgua()) {
+			throw new SuperficieInvalidaParaConstruir();
+		}
 		return superficie.esTierra();
 	}
 

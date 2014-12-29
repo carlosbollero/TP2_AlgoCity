@@ -55,9 +55,7 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
-//		mapa.setTurno(turnos);
-		mapa.agregarReparador();
-		mapa.setObervadoDeReparador(turnos);
+		mapa.setTurno(turnos);
 		poblacion.actualizar(mapa);
 	}
 	
@@ -74,10 +72,6 @@ public class Juego {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
 		mapa.setTurno(turnos);
-
-		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
-
-		// poblacion.actualizar(mapa);
 	}
 
 	/* Usado para persistencia */
@@ -179,10 +173,6 @@ public class Juego {
 			transformer.transform(new DOMSource(doc), new StreamResult(
 					new PrintStream(this.usuario.ruta())));
 
-			// TODO
-			// falta cerrar el documento
-
-			// doc.close();
 			InputStream in = new FileInputStream(this.usuario.ruta());
 			in.close();
 
@@ -224,12 +214,6 @@ public class Juego {
 
 		Element turnos = this.turnos.getElement(doc);
 		juego.appendChild(turnos);
-
-		// Element poblacion = this.poblacion.getElement(doc);
-		// juego.appendChild(poblacion);
-
-		// Element dinero = this.dinero.getElement(doc);
-		// juego.appendChild(dinero);
 
 		Element mapa = this.mapa.getElement(doc, this.poblacion, this.turnos);
 		juego.appendChild(mapa);

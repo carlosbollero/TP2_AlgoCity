@@ -44,8 +44,8 @@ public class IntegracionTest {
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();
 		map.setTerritorioAguaParaTest();
-		map.agregar(new FabricaPozoAgua().construir(map, d, new Coordenada(
-				1, 1)));
+		map.agregar(new FabricaPozoAgua().construir(map, d,
+				new Coordenada(1, 1)));
 		map.agregar(new FabricaTuberias().construir(map, d,
 				new Coordenada(1, 1)));
 		map.agregar(new FabricaTuberias().construir(map, d,
@@ -70,7 +70,8 @@ public class IntegracionTest {
 	@Test
 	public void testSePuedeLlenarTodoElMapaDeUnidadesYGodzillaDestrulleAlgunasDeEllas()
 			throws NoSeCumplenLosRequisitosException,
-			FondosInsuficientesException, CoordenadaInvalidaException {
+			FondosInsuficientesException, CoordenadaInvalidaException,
+			SuperficieInvalidaParaConstruir {
 
 		Mapa map = new Mapa();
 		Dinero d = new Dinero();

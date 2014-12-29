@@ -37,15 +37,10 @@ public class Tuberia implements Conector {
 		costo = Constantes.COSTO_TUBERIA;
 		this.coordenada = coordenada;
 		mapa.validarCoordenadas(coordenada);
-		esConstruibleEn(mapa.superficie(coordenada));
-		// if (!esConstruibleEn(mapa.superficie(coordenadas))) {
-		// throw new NoSeCumplenLosRequisitosException();
-		// }
-		dinero.cobrar(costo);
-		/*
-		 * else { mapa.agregar(this); }
-		 */
-	}
+		if(esConstruibleEn(mapa.superficie(coordenada))){
+			dinero.cobrar(costo);
+		}
+	}			
 	
 	public int costo() {
 		return this.costo;

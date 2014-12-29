@@ -11,7 +11,6 @@ public class AccionBotonBomberos extends AccionBoton {
 		public void actionPerformed(ActionEvent e) {
 			setChanged();
 			notifyObservers(new FabricaEstacionDeBomberos());
-			controladorMsj.recibirYNotificar("$" + Constantes.COSTO_E_BOMBEROS);
 		}
 
 

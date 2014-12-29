@@ -74,19 +74,6 @@ public class MapaEdilicio extends Observable {
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
-	// public boolean agregar(Unidad elemento) {
-	// int x = elemento.coordenada().getX();
-	// int y = elemento.coordenada().getY();
-	// if (!.validarCoordenadas(x, y) || this.contiene(elemento)) {
-	// return false;
-	// }
-	// if (!this.mapa.containsKey(elemento.coordenada())) {
-	// this.mapa.put(elemento.coordenada(), elemento);
-	// return true;
-	// }
-	// return false;
-	// }
-
 	public boolean agregar(PozoDeAgua p) {
 		mapa.put(p.coordenada(), p);
 		setChanged();
