@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,10 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.xml.sax.SAXException;
+
 import algo3.algocity.controller.AccionMouseComenzarConJugadorExistente;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.model.RegistroUsuarios;
+import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaJugadorExistenteMenu extends JPanel {
@@ -34,7 +38,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	JLabel etiquetaMensaje;
 
 	public VistaJugadorExistenteMenu(VentanaInicial ventana)
-			throws SAXException, IOException, ParserConfigurationException {
+			throws SAXException, IOException, ParserConfigurationException{
 		this.ventanaPortadora = ventana;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		// setMinimumSize(new Dimension(25, 50));
@@ -44,7 +48,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	}
 
 	private void setContenido() throws SAXException, IOException,
-			ParserConfigurationException {
+			ParserConfigurationException{
 		/* Configura la etiqueta Elija un Usuario */
 		this.etiquetaMensaje = new JLabel("Elija un Usuario", JLabel.CENTER);
 		this.etiquetaMensaje.setPreferredSize(new Dimension(200, 25));
@@ -61,6 +65,8 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		RegistroUsuarios ru;
 		ArrayList<String> nombres;
 		ru = new RegistroUsuarios();
+		ru.leerUsuarios();
+		
 		nombres = ru.nombresUsuarios();
 		String[] datos = new String[nombres.size()];
 		Iterator<String> it = nombres.iterator();

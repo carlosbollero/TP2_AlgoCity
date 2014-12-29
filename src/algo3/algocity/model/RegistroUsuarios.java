@@ -41,16 +41,27 @@ public class RegistroUsuarios {
 		usuarios = new ArrayList<Usuario>();
 		nombresUsuarios = new ArrayList<String>();
 		listaPuntajes = new HashMap<String, Integer>();
-		iniciar();
+		leerNombresUsuarios();
 	}
 
-	private void iniciar() throws SAXException, IOException,
-			ParserConfigurationException {
+	private void leerNombresUsuarios() {
+		String sDirectorio = "saved";
+		File fDirectorio = new File(sDirectorio);
 		try {
-			leerUsuarios();
+			if(!fDirectorio.exists()){
+				throw new NoSeEncontroElFicheroException();
+			}
 		} catch (NoSeEncontroElFicheroException e) {
 			crearDirectorio();
-			iniciar();
+			leerNombresUsuarios();
+		}
+		
+		File[] ficheros = fDirectorio.listFiles();
+		for (int i = 0; i < ficheros.length; i++) {
+			String nombreUser = ficheros[i].getName();
+			String[] arrayUser = nombreUser.split("\\.");
+
+			nombresUsuarios.add(arrayUser[0]);
 		}
 	}
 
@@ -80,13 +91,17 @@ public class RegistroUsuarios {
 		juego.persistir();
 	}
 
-	public void leerUsuarios() throws NoSeEncontroElFicheroException,
-			SAXException, IOException, ParserConfigurationException {
+	public void leerUsuarios() throws 	SAXException, IOException, ParserConfigurationException {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 
-		if (!fDirectorio.exists()) {
-			throw new NoSeEncontroElFicheroException();
+		try {
+			if(!fDirectorio.exists()){
+				throw new NoSeEncontroElFicheroException();
+			}
+		} catch (NoSeEncontroElFicheroException e) {
+			crearDirectorio();
+			leerUsuarios();
 		}
 
 		File[] ficheros = fDirectorio.listFiles();
@@ -95,7 +110,9 @@ public class RegistroUsuarios {
 			String nombreUser = ficheros[i].getName();
 			String[] arrayUser = nombreUser.split("\\.");
 
-			nombresUsuarios.add(arrayUser[0]);
+			if(!nombresUsuarios.contains(arrayUser[0])){
+				nombresUsuarios.add(arrayUser[0]);
+			}
 			leerUsuario(arrayUser[0]);
 		}
 	}

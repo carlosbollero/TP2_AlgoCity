@@ -41,15 +41,23 @@ public class CatastrofeTerremoto implements Catastrofe {
 
 	@Override
 	public void iniciar() {
+		System.out.println("iniciando terremoto");
 		actuar();
 	}
 
 	public void actuar() {
+		System.out.println("terremoto actuando....");
+		System.out.println("epicentro: "+epicentro.getX()+","+epicentro.getY());
 		for (Daniable u : mapa.unidadesDaniables()) {
 			int distancia = epicentro.distancia(u.coordenada());
+			System.out.println("evaluando radio...");
 			if (distancia <= radio) {
+				System.out.println("dentro dele radio del terremoto...");
 				u.aplicarDanio(100 - (distancia * 1.5));
+				System.out.println("terremoto aplico danio"+(100 - (distancia * 1.5))+"a"+u.getClass()+"en"+u.coordenada().getX()+","+u.coordenada().getY());
+				System.out.println("salud unidad: "+u.getSalud());
 			}
 		}
+		System.out.println("terremoto saliendo del for....");
 	}
 }

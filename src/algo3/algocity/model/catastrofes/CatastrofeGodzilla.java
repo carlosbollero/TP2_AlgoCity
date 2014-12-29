@@ -32,11 +32,11 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 	public CatastrofeGodzilla(Mapa mapa) {
 		tamanio = mapa.tamanio();
 		this.caminoGodzilla = new LinkedList<Coordenada>();
-
 	}
 
 	@Override
 	public void iniciar() {
+		System.out.println("iniciando godzillaa");
 		comenzar();
 	}
 
@@ -79,7 +79,9 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 	}
 
 	public void actuar(ArrayList<Daniable> objetivos) {
+		System.out.println("godzilla actuando...");
 		for (Daniable u : objetivos) {
+			System.out.println("daniable aceptando a godzilla");
 			u.aceptar(this);
 		}
 	}

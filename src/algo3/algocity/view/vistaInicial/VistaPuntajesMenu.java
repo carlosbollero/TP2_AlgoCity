@@ -47,6 +47,7 @@ public class VistaPuntajesMenu extends JPanel {
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		// Obtengo los usuarios existentes
 		RegistroUsuarios ru = new RegistroUsuarios();
+		ru.leerUsuarios();
 		ArrayList<String> puntajes = ru.listaPuntajesString();
 		String[] datos = new String[puntajes.size()];
 		Iterator<String> it = puntajes.iterator();
