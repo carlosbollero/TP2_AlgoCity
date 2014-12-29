@@ -69,11 +69,15 @@ public class Dinero extends Observable implements Observer {
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**********************************************************************/
+	/**
+	 * @param t 
+	 * @param p ********************************************************************/
 
 
-	public Element getElement(Document doc) {
-
+	public Element getElement(Document doc, Poblacion p, Turno t) {
+		this.turno = t;
+		this.poblacion = p;
+		
 		Element dinero = doc.createElement("Dinero");
 
 		Element turno = this.turno.getElement(doc);

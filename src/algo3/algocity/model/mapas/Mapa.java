@@ -245,8 +245,10 @@ public class Mapa extends Observable {
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/
-	/**********************************************************************/
-	public Element getElement(Document doc) {
+	/**
+	 * @param t 
+	 * @param p ********************************************************************/
+	public Element getElement(Document doc, Poblacion p, Turno t) {
 		Element mapa = doc.createElement("Mapa");
 
 		Element tamanio = doc.createElement("tamanio");
@@ -276,7 +278,8 @@ public class Mapa extends Observable {
 		mapa.appendChild(ciudad);
 		ciudad = this.ciudad.getElement(doc, ciudad);
 
-		Element dinero = this.dinero.getElement(doc);
+		p.actualizar(this);
+		Element dinero = this.dinero.getElement(doc,p,t);
 		mapa.appendChild(dinero);
 
 		if (this.reparador == null) {

@@ -197,15 +197,18 @@ public class Juego {
 		//Element poblacion = this.poblacion.getElement(doc);
 		//juego.appendChild(poblacion);
 
-		Element dinero = this.dinero.getElement(doc);
-		juego.appendChild(dinero);
+//		Element dinero = this.dinero.getElement(doc);
+//		juego.appendChild(dinero);
 
-		Element mapa = this.mapa.getElement(doc);
+		Element mapa = this.mapa.getElement(doc,this.poblacion,this.turnos);
 		juego.appendChild(mapa);
 		
 		this.poblacion.actualizar(this.mapa);
 		Element poblacion = this.poblacion.getElement(doc);
 		juego.appendChild(poblacion);
+		
+		Element dinero = this.dinero.getElement(doc,this.poblacion,this.turnos);
+		juego.appendChild(dinero);
 
 		return juego;
 	}
