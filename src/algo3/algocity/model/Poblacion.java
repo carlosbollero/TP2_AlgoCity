@@ -38,7 +38,8 @@ public class Poblacion implements Observer {
 		capacidadHabitacional = 0;
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
-		estadoActual = null;
+		tasa = 20;
+		estadoActual = new EstadoPoblacionCreciendo();
 		// this.mapa = mapa;
 	}
 
@@ -141,8 +142,8 @@ public class Poblacion implements Observer {
 	}
 
 	public static Poblacion fromElement(Node hijoDeJuego,Mapa mapa) {
-		Poblacion poblacion = new Poblacion();
-		//Poblacion poblacion = new Poblacion(mapa);
+		//Poblacion poblacion = new Poblacion();
+		Poblacion poblacion = new Poblacion(mapa);
 		NodeList childs = hijoDeJuego.getChildNodes();
 		for (int i = 0; i < childs.getLength(); i++) {
 			Node child = childs.item(i);
