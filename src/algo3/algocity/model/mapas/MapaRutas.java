@@ -33,7 +33,7 @@ public class MapaRutas extends MapaConexiones {
 		grafo.addVertex(ruta);
 		actualizarGrafo(ruta);
 		setChanged();
-		notifyObservers(ruta.coordenada());
+		notifyObservers(ruta);
 		return true;
 	}
 

@@ -74,67 +74,48 @@ public class MapaEdilicio extends Observable {
 		unidadesDaniables = new ArrayList<Daniable>();
 	}
 
-	// public boolean agregar(Unidad elemento) {
-	// int x = elemento.coordenada().getX();
-	// int y = elemento.coordenada().getY();
-	// if (!.validarCoordenadas(x, y) || this.contiene(elemento)) {
-	// return false;
-	// }
-	// if (!this.mapa.containsKey(elemento.coordenada())) {
-	// this.mapa.put(elemento.coordenada(), elemento);
-	// return true;
-	// }
-	// return false;
-	// }
-
 	public boolean agregar(PozoDeAgua p) {
 		mapa.put(p.coordenada(), p);
 		setChanged();
-		notifyObservers(p.coordenada());
+		notifyObservers(p);
 		return pozosDeAgua.add(p);
 	}
 
 	public boolean agregar(EstacionDeBomberos e) {
 		mapa.put(e.coordenada(), e);
 		setChanged();
-		notifyObservers(e.coordenada());
+//		aca hay cambio
+		notifyObservers(e);
 		return estacionesBomberos.add(e);
 	}
 
 	public boolean agregar(UnidadResidencial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers(u.coordenada());
+		notifyObservers(u);
 		return unidadesResidenciales.add(u);
 	}
 
 	public boolean agregar(UnidadIndustrial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers(u.coordenada());
+		notifyObservers(u);
 		return unidadesIndustriales.add(u);
 	}
 
 	public boolean agregar(UnidadComercial u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers(u.coordenada());
+		notifyObservers(u);
 		return unidadesComerciales.add(u);
 	}
 
 	public boolean agregar(UnidadEnergetica u) {
 		mapa.put(u.coordenada(), u);
 		setChanged();
-		notifyObservers(u.coordenada());
+		notifyObservers(u);
 		return unidadesEnergeticas.add(u);
 	}
-
-	// public boolean agregarUnidadDaniable(Daniable unidad) {
-	// if (unidadesDaniables == null) {
-	// unidadesDaniables = new ArrayList<Daniable>();
-	// }
-	// return unidadesDaniables.add(unidad);
-	// }
 
 	public ArrayList<UnidadEnergetica> getUnidadesEnergeticas() {
 		return unidadesEnergeticas;
@@ -209,22 +190,6 @@ public class MapaEdilicio extends Observable {
 		}
 	}
 
-	// public ArrayList<Daniable> getUnidadesAlrededorDe(Coordenada epicentro,
-	// int radio) {
-	// ArrayList<Daniable> unidadesADevolver = new ArrayList<Daniable>();
-	// Coordenada inic = calcularCoordenadaDeInicio(epicentro, radio);
-	// Coordenada fin = calcularCoordenadaDeFin(epicentro, radio);
-	//
-	// for (int x = (int) inic.getX(); x < (int) fin.getX(); x++) {
-	// for (int y = (int) inic.getY(); y < (int) fin.getY(); y++) {
-	// if (validarCoordenadas(x, y) && existeDaniable(x, y)) {
-	// unidadesADevolver.add((Daniable) this.getDaniableEn(x, y));
-	// }
-	// }
-	// }
-	// return unidadesADevolver;
-	// }
-
 	public ArrayList<Daniable> getDaniablesEnElCaminoDe(
 			LinkedList<Coordenada> listaCamino) {
 		ArrayList<Daniable> listaDaniablesEnElCamino = new ArrayList<Daniable>();
@@ -261,40 +226,6 @@ public class MapaEdilicio extends Observable {
 		return null;
 
 	}
-
-	// private Coordenada calcularCoordenadaDeInicio(Coordenada epicentro,
-	// int radio) {
-	// int xi;
-	// int yi;
-	// if (epicentro.getX() - radio < 0) {
-	// xi = 0;
-	// } else {
-	// xi = (int) epicentro.getX() - radio;
-	// }
-	// if (epicentro.getY() - radio < 0) {
-	// yi = 0;
-	// } else {
-	// yi = (int) epicentro.getY() - radio;
-	// }
-	// return new Coordenada(xi, yi);
-	// }
-	//
-	// private Coordenada calcularCoordenadaDeFin(Coordenada epicentro, int
-	// radio) {
-	// int xf;
-	// int yf;
-	// if (epicentro.getX() - radio < 0) {
-	// xf = radio;
-	// } else {
-	// xf = (int) epicentro.getX() + radio;
-	// }
-	// if (epicentro.getY() - radio < 0) {
-	// yf = radio;
-	// } else {
-	// yf = (int) epicentro.getY() + radio;
-	// }
-	// return new Coordenada(xf, yf);
-	// }
 
 	public int capacidadDePoblacion() {
 		int capacidad = 0;

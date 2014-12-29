@@ -7,7 +7,6 @@ import java.util.Random;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.caracteristicas.Visitante;
 import algo3.algocity.model.conexiones.LineaTension;
-import algo3.algocity.model.conexiones.Ruta;
 import algo3.algocity.model.construcciones.UnidadComercial;
 import algo3.algocity.model.construcciones.UnidadEnergetica;
 import algo3.algocity.model.construcciones.UnidadIndustrial;
@@ -129,7 +128,7 @@ public class CatastrofeGodzilla implements Catastrofe, Visitante {
 	}
 
 	@Override
-	public void visitar(Ruta unaRuta) {
+	public void visitar(Daniable unaRuta) {
 		unaRuta.aplicarDanioGodzilla();
 	}
 

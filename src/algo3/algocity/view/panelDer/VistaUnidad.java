@@ -23,7 +23,7 @@ public class VistaUnidad extends VistaPosicion {
 
 	private static final long serialVersionUID = -1933418471723107152L;
 
-//	Unidad unidad;
+	// Unidad unidad;
 
 	public VistaUnidad(Juego juego, Coordenada coord) {
 		super(juego, coord);
@@ -34,9 +34,9 @@ public class VistaUnidad extends VistaPosicion {
 		repaint();
 	}
 
-	 public void setImagen(){
-		 setImagen(juego.mapa().ciudad().getUnidadEn(coordenada));
-	 }
+	public void setImagen() {
+		setImagen(juego.mapa().ciudad().getUnidadEn(coordenada));
+	}
 
 	public void setImagen(Unidad unidad) {
 		try {
@@ -57,37 +57,30 @@ public class VistaUnidad extends VistaPosicion {
 
 	public void setImagen(CentralMinera central) {
 		imagen = new ImageIcon("img/central_minera.png").getImage();
-		System.out.println("cm");
 	}
 
 	public void setImagen(CentralNuclear central) {
 		imagen = new ImageIcon("img/central_nuclear.png").getImage();
-		System.out.println("cn");
 	}
 
 	public void setImagen(UnidadComercial unidad) {
 		imagen = new ImageIcon("img/comercial.png").getImage();
-		System.out.println("uc");
 	}
 
 	public void setImagen(UnidadIndustrial unidad) {
 		imagen = new ImageIcon("img/industrial.png").getImage();
-		System.out.println("ui");
 	}
 
 	public void setImagen(UnidadResidencial unidad) {
 		imagen = new ImageIcon("img/residencial.png").getImage();
-		System.out.println("ur");
 	}
 
 	public void setImagen(EstacionDeBomberos unidad) {
 		imagen = new ImageIcon("img/bomberos.png").getImage();
-		System.out.println("eb");
 	}
 
 	public void setImagen(PozoDeAgua unidad) {
 		imagen = new ImageIcon("img/pozo_de_agua.png").getImage();
-		System.out.println("pa");
 	}
 
 	@Override

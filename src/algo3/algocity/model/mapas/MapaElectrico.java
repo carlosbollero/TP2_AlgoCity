@@ -32,7 +32,7 @@ public class MapaElectrico extends MapaConexiones {
 		grafo.addVertex(linea);
 		actualizarGrafo(linea);
 		setChanged();
-		notifyObservers(linea.coordenada());
+		notifyObservers(linea);
 		return true;
 	}
 

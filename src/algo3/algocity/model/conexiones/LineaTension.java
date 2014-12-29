@@ -17,16 +17,14 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class LineaTension implements Conector, Daniable, Visitable {
+public class LineaTension extends Conector implements  Daniable, Visitable {
 
 	final boolean intacto = true;
 	final boolean destruido = false;
 	final double ESTADOINICIAL = 100;
-
-	boolean estado; // true para intacto
-					// false para destruido
 	int costo;
-	double porcentajeDanios;
+	boolean estado; // true para intacto
+					double porcentajeDanios;
 	int danios; // no usado?
 	Coordenada coordenada;
 

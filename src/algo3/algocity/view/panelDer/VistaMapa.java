@@ -60,17 +60,10 @@ public class VistaMapa extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		Coordenada coord = (Coordenada) arg;
-
 		try {
-			Method externo;
-			externo = o.getClass().getMethod("get", coord.getClass());
-			Object a = externo.invoke(o, coord);
-			
-			
-			Method local = getClass().getMethod("setPosicion", a.getClass(), arg.getClass());
-			local.invoke(a, coord);
-//			setPosicion((metodo.invoke(o, coord)), coord);
+			Method local = getClass().getMethod("setPosicion",
+					arg.getClass().getSuperclass());
+			local.invoke(this, arg);
 		} catch (NoSuchMethodException | SecurityException
 				| IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
@@ -78,36 +71,29 @@ public class VistaMapa extends JPanel implements Observer {
 			e.printStackTrace();
 		}
 
-		setPosicion(coord);
-		repintar(coord);
+		repintar(((Agregable) arg).coordenada());
 		System.out.println("agregado");
 	}
-	
-	public void setPosicion(EstacionDeBomberos unidad, Coordenada coord) {
+
+	public void setPosicion(Unidad unidad) {
+		Coordenada coord = unidad.coordenada();
 		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
 				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(juego, coord)
 				: new VistaTerreno(juego, coord);
 	}
 
-	public void setPosicion(Unidad unidad, Coordenada coord) {
-		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
-				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(juego, coord)
-				: new VistaTerreno(juego, coord);
+	public void setPosicion(Conector conector) {
+		Coordenada coord = conector.coordenada();
+		tabla[coord.getX()][coord.getY()] = (mapa.rutas()
+				.tieneCoordenadaOcupada(coord) || mapa.redElectrica()
+				.tieneCoordenadaOcupada(coord)) ? new VistaConector(juego,
+				coord) : new VistaTerreno(juego, coord);
 	}
-	
-	public void setPosicion(Conector conector, Coordenada coord){
-		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
-				.tieneCoordenadaOcupada(coord)) ? new VistaConector(juego, coord)
-				: new VistaTerreno(juego, coord);
-	}
-	
 
 	private void setPosicion(Coordenada coord) {
 		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
 				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(juego, coord)
 				: new VistaTerreno(juego, coord);
-		System.out.println(tabla[coord.getX()][coord.getY()].getClass()
-				.getSimpleName());
 	}
 
 	private void repintar(Coordenada coord) {
@@ -115,7 +101,6 @@ public class VistaMapa extends JPanel implements Observer {
 		remove(i);
 		add(tabla[coord.getX()][coord.getY()], i);
 		revalidate();
-		// repaint();
 	}
 
 }

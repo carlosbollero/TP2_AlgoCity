@@ -8,7 +8,8 @@ import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.terreno.Superficie;
 
-public interface Conector extends Agregable {
+
+public abstract class Conector implements Agregable {
 
 	public abstract Coordenada coordenada();
 	

@@ -7,6 +7,8 @@ import algo3.algocity.model.mapas.Coordenada;
 
 public interface Daniable extends Visitable {
 
+	
+
 	public void repararse();
 
 	public void aplicarDanio(double unDanio);
@@ -21,6 +23,8 @@ public interface Daniable extends Visitable {
 	
 	/*Persistencia*/
 	public Element getElement(Document doc);
+
+	public abstract int costo();
 
 	public void fromElement(Node child);
 

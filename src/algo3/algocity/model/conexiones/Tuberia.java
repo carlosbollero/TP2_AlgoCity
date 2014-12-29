@@ -15,7 +15,7 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class Tuberia implements Conector {
+public class Tuberia extends Conector  {
 
 	int costo;
 	int danios;

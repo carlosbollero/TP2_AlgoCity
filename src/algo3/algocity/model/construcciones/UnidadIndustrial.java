@@ -195,4 +195,12 @@ public class UnidadIndustrial extends Unidad implements Ocupable, Daniable,
 		}
 		return false;
 	}
+
+	public Coordenada coordenada() {
+		return null;
+	}
+
+	public int costo() {
+		return 0;
+	}
 }

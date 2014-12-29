@@ -145,7 +145,7 @@ public class Reparador implements Observer {
 							reparador.objetivos.add(cn);
 						}
 					} else if (hijoDeObjetivo.getNodeName().equals("Ruta")) {
-						Ruta rt = new Ruta();
+						Daniable rt = new Ruta();
 						rt.fromElement(hijoDeObjetivo);
 						if(!reparador.objetivos.contains(rt)){
 							reparador.objetivos.add(rt);

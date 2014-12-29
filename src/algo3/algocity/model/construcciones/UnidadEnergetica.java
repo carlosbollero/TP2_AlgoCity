@@ -132,4 +132,8 @@ public abstract class UnidadEnergetica extends Unidad implements Daniable,
 		}
 	}
 
+	public Coordenada coordenada() {
+		return null;
+	}
+
 }

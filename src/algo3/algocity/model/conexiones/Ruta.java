@@ -17,14 +17,13 @@ import algo3.algocity.model.mapas.Coordenada;
 import algo3.algocity.model.mapas.Mapa;
 import algo3.algocity.model.terreno.Superficie;
 
-public class Ruta implements Conector, Daniable, Visitable {
+public class Ruta extends Conector implements Daniable, Visitable {
 
 	final boolean intacto = true;
 	final boolean destruido = false;
 	final double ESTADOINICIAL = 100;
-
-	boolean estado;
 	int costo;
+	boolean estado;
 	double porcentajeDanios;
 	Coordenada coordenadas;
 
@@ -54,6 +53,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 		 */
 	}
 	
+	@Override
 	public int costo() {
 		return this.costo;
 	}
@@ -73,6 +73,7 @@ public class Ruta implements Conector, Daniable, Visitable {
 
 	}
 
+	@Override
 	public Coordenada coordenada() {
 		return coordenadas;
 	}

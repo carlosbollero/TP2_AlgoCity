@@ -38,7 +38,7 @@ public abstract class VistaPosicion extends JPanel implements Observer  {
 	@Override
 	public void paintComponent(Graphics g) {
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
-//		super.paintComponents(g);
+		super.paintComponents(g);
 	}
 	
 	public abstract void update(Observable arg0, Object arg1);

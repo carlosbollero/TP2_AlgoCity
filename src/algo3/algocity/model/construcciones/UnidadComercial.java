@@ -177,4 +177,12 @@ public class UnidadComercial extends Unidad implements Daniable, Visitable {
 		return false;
 	}
 
+	public Coordenada coordenada() {
+		return null;
+	}
+
+	public int costo() {
+		return 0;
+	}
+
 }
