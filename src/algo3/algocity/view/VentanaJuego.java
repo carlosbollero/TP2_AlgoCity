@@ -79,8 +79,8 @@ public class VentanaJuego extends JFrame {
 		return controladorMsj;
 	}
 
-//	public static void main(String[] args) {
-//		new VentanaJuego(new Juego());
-//	}
+	public static void main(String[] args) {
+		new VentanaJuego(new Juego());
+	}
 
 }
