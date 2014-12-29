@@ -15,6 +15,7 @@ public class Boton extends JButton {
 
 	public Boton(String imagen) {
 		super(new ImageIcon(imagen));
+		
 	}
 	
 	public AccionBoton getAccion(){
