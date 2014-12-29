@@ -39,7 +39,7 @@ public class Poblacion implements Observer {
 		capacidadEmpleo = 0;
 		indiceCrecimiento = 0;
 		tasa = 20;
-		estadoActual = null;
+		estadoActual = new EstadoPoblacionCreciendo();
 		// this.mapa = mapa;
 	}
 
