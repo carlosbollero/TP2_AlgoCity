@@ -6,15 +6,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.xml.sax.SAXException;
+
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import algo3.algocity.model.Juego;
+import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.view.vistaInicial.VistaInicial;
 import algo3.algocity.view.vistaInicial.VistaJugadorExistente;
@@ -62,10 +66,13 @@ public class VentanaInicial extends JFrame {
 	private void setPanelFondo() throws SAXException, IOException,
 			ParserConfigurationException, NoSeEncontroElFicheroException {
 		panelFondo.setLayout(new CardLayout());
+		
+		RegistroUsuarios ru = new RegistroUsuarios();
+		
 		VistaInicial vista1 = new VistaInicial(this);
-		VistaJugadorNuevo vista3 = new VistaJugadorNuevo(this);
-		VistaJugadorExistente vista4 = new VistaJugadorExistente(this);
-		VistaPuntajes vista5 = new VistaPuntajes(this);
+		VistaJugadorNuevo vista3 = new VistaJugadorNuevo(this,ru);
+		VistaJugadorExistente vista4 = new VistaJugadorExistente(this,ru);
+		VistaPuntajes vista5 = new VistaPuntajes(this,ru);
 		/* El panel del fondo es uno solo y se va intercambiando su contenido */
 		panelFondo.add(vista1, "vistaInicial");
 		panelFondo.add(vista3, "vistaJugNuevo");

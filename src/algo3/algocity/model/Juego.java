@@ -71,6 +71,7 @@ public class Juego {
 		turnos.addObserver(genCatastrofe);
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
+		mapa.setTurno(turnos);
 		// this(new Usuario(), new Mapa(), new Turno(), new Poblacion());
 
 		// poblacion.actualizar(mapa);
@@ -111,6 +112,8 @@ public class Juego {
 	public void actualizar() {
 		turnos.addObserver(poblacion);
 		turnos.addObserver(dinero);
+		turnos.addObserver(dinero);
+		mapa.setTurno(turnos);
 	}
 
 	private void iniciarTurnos() {
@@ -193,7 +196,7 @@ public class Juego {
 
 	// Al recuperar una instancia de juego, esta debe ser valida
 	// y cumplir con todos sus requisitos
-	public Juego recuperar(String nombreUsuario) throws SAXException,
+	public static Juego recuperar(String nombreUsuario) throws SAXException,
 			IOException, ParserConfigurationException,
 			NoSeCumplenLosRequisitosException, FondosInsuficientesException,
 			SuperficieInvalidaParaConstruir, CoordenadaInvalidaException,

@@ -26,22 +26,24 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 	VentanaInicial ventanaPortadora;
 	JTextField panelIngreso;
 	JTextField panelInforme;
+	RegistroUsuarios ru;
 
 	public AccionMouseComenzarConJugadorNuevo(VentanaInicial ventanaPortadora,
-			JTextField panelIngreso, JTextField panelInforme) {
+			JTextField panelIngreso, JTextField panelInforme, RegistroUsuarios ru) {
 		this.ventanaPortadora = ventanaPortadora;
 		this.panelIngreso = panelIngreso;
 		this.panelInforme = panelInforme;
+		this.ru = ru;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		RegistroUsuarios ru = null;
-		try {
-			ru = new RegistroUsuarios();
-		} catch (SAXException | IOException | ParserConfigurationException e1) {
-			e1.printStackTrace();
-		}
+//		RegistroUsuarios ru = null;
+//		try {
+//			ru = new RegistroUsuarios();
+//		} catch (SAXException | IOException | ParserConfigurationException e1) {
+//			e1.printStackTrace();
+//		}
 		try {
 			if (ru.existeNombreUsuario(panelIngreso.getText())) {
 				panelInforme.setText("Jugador ya existente. Ingrese otro");
@@ -52,7 +54,7 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 				panelIngreso.setText("");
 			} else {
 				panelInforme.setText("");
-				ru.crearUsuario(panelIngreso.getText());
+				//ru.crearUsuario(panelIngreso.getText());
 				Usuario usuario = new Usuario(panelIngreso.getText());
 				ru.addUsuario(usuario);
 //				Mapa mapa = new Mapa();
@@ -61,6 +63,7 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 //				Poblacion poblacion = new Poblacion(mapa);
 //				Dinero dinero = new Dinero();
 				this.ventanaPortadora.cerrar();
+						
 				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario));
 //				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario,
 //						mapa, turno, poblacion, dinero));

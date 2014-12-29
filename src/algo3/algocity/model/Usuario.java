@@ -21,6 +21,7 @@ public class Usuario{
 	public Usuario() {
 		this.ruta = "";
 		this.nombre = "";
+		this.puntaje = 0;
 	}
 
 	public void nombre(String nuevoNombre) {

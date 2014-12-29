@@ -12,6 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
@@ -48,55 +50,58 @@ public class RegistroUsuarios {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
 		try {
-			if(!fDirectorio.exists()){
+			if (!fDirectorio.exists()) {
 				throw new NoSeEncontroElFicheroException();
 			}
 		} catch (NoSeEncontroElFicheroException e) {
 			crearDirectorio();
 			leerNombresUsuarios();
 		}
-		
+
 		File[] ficheros = fDirectorio.listFiles();
 		for (int i = 0; i < ficheros.length; i++) {
 			String nombreUser = ficheros[i].getName();
 			String[] arrayUser = nombreUser.split("\\.");
-
 			nombresUsuarios.add(arrayUser[0]);
 		}
 	}
 
 	public void leerUsuario(String nombreUsuario) throws SAXException,
 			IOException, ParserConfigurationException {
+
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder()
 				.parse(new File("./saved/" + nombreUsuario + ".xml"));
 		Element element = doc.getDocumentElement();
-		Juego juego = null;
-		try {
-			juego = Juego.fromElement(element);
-		} catch (NoSeCumplenLosRequisitosException
-				| FondosInsuficientesException
-				| SuperficieInvalidaParaConstruir | CoordenadaInvalidaException
-				| CapacidadElectricaInsuficienteException
-				| NoHayConexionConTuberias | NoHayConexionConRutas
-				| NoHayConexionConRedElectrica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		Usuario userALeer = null;
+		int puntajeALeer = 0;
+
+		NodeList hijosElement = element.getChildNodes();
+		for (int i = 0; i < hijosElement.getLength(); i++) {
+			Node hijoDeElement = hijosElement.item(i);
+			if (hijoDeElement.getNodeName().equals("Usuario")) {
+				userALeer = Usuario.fromElement(hijoDeElement);
+			} else if (hijoDeElement.getNodeName().equals("Poblacion")) {
+				NodeList childs = hijoDeElement.getChildNodes();
+				for (int j = 0; j < childs.getLength(); j++) {
+					Node child = childs.item(j);
+					if (child.getNodeName().equals("Cantidad")) {
+						puntajeALeer = Integer.valueOf(child.getTextContent());
+					}
+				}
+			}
 		}
-		juego.usuario().puntaje(juego.poblacion().getCantidad());
-		usuarios.add(juego.usuario());
-		listaPuntajes.put(juego.usuario().nombre(), juego.poblacion()
-				.getCantidad());
-		//agregado para que se actualicen los puntajes en el xml
-		juego.persistir();
+		usuarios.add(userALeer);
+		listaPuntajes.put(userALeer.nombre(), puntajeALeer);
 	}
 
-	public void leerUsuarios() throws 	SAXException, IOException, ParserConfigurationException {
+	public void leerUsuarios() throws SAXException, IOException,
+			ParserConfigurationException {
 		String sDirectorio = "saved";
 		File fDirectorio = new File(sDirectorio);
-
 		try {
-			if(!fDirectorio.exists()){
+			if (!fDirectorio.exists()) {
 				throw new NoSeEncontroElFicheroException();
 			}
 		} catch (NoSeEncontroElFicheroException e) {
@@ -106,15 +111,12 @@ public class RegistroUsuarios {
 
 		File[] ficheros = fDirectorio.listFiles();
 		for (int i = 0; i < ficheros.length; i++) {
-
 			String nombreUser = ficheros[i].getName();
 			String[] arrayUser = nombreUser.split("\\.");
-
-			if(!nombresUsuarios.contains(arrayUser[0])){
+			if (!nombresUsuarios.contains(arrayUser[0])) {
 				nombresUsuarios.add(arrayUser[0]);
 			}
 			leerUsuario(arrayUser[0]);
-
 		}
 	}
 
@@ -123,7 +125,6 @@ public class RegistroUsuarios {
 		if (!guardados.exists()) {
 			guardados.mkdir();
 		}
-
 	}
 
 	public ArrayList<Usuario> usuarios() {

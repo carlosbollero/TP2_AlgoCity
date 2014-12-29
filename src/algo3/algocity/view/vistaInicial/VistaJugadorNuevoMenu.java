@@ -6,6 +6,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -13,8 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import algo3.algocity.controller.AccionMouseComenzarConJugadorNuevo;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
+import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaJugadorNuevoMenu extends JPanel {
@@ -27,16 +30,16 @@ public class VistaJugadorNuevoMenu extends JPanel {
 	JButton bComenzar;
 	JButton bVolver;
 
-	public VistaJugadorNuevoMenu(VentanaInicial ventana) {
+	public VistaJugadorNuevoMenu(VentanaInicial ventana, RegistroUsuarios ru) {
 		this.ventanaPortadora = ventana;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-		setContenido();
+		setContenido(ru);
 	}
 
-	private void setContenido() {
+	private void setContenido(RegistroUsuarios ru) {
 		/* Ajusto el panel del nombre */
 		this.panelNombre = new JPanel();
 		this.panelNombre.setPreferredSize(new Dimension(400, 28));
@@ -69,7 +72,7 @@ public class VistaJugadorNuevoMenu extends JPanel {
 		this.bComenzar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.bComenzar
 				.addActionListener(new AccionMouseComenzarConJugadorNuevo(
-						this.ventanaPortadora, areaNombre, this.panelInforme));
+						this.ventanaPortadora, areaNombre, this.panelInforme,ru));
 		this.bVolver = new JButton("Volver");
 		this.bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.bVolver.setAlignmentY(Component.CENTER_ALIGNMENT);

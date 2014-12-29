@@ -126,6 +126,9 @@ public class Poblacion implements Observer {
 	public void actualizar(Mapa mapa) {
 		actualizarCapacidadHabitacional(mapa);
 		actualizarCapacidadEmpleo(mapa);
+		
+		//prueba
+		//tasa = ( (capacidadHabitacional/capacidadEmpleo) * 10);
 	}
 
 	/**********************************************************************/

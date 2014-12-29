@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaJugadorNuevo extends JPanel {
@@ -15,14 +16,14 @@ public class VistaJugadorNuevo extends JPanel {
 	
 	JPanel panelCentral;
 
-	public VistaJugadorNuevo(VentanaInicial ventana) {
+	public VistaJugadorNuevo(VentanaInicial ventana, RegistroUsuarios ru) {
 		this.ventanaPortadora = ventana;
 
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(new BorderLayout());
 		
 		initPaneles();
-		setPaneles();
+		setPaneles(ru);
 	}
 	
 	private void initPaneles(){
@@ -30,9 +31,9 @@ public class VistaJugadorNuevo extends JPanel {
 		
 	}
 	
-	private void setPaneles(){
+	private void setPaneles(RegistroUsuarios ru){
 		
-		VistaJugadorNuevoMenu vistaMenu = new VistaJugadorNuevoMenu(this.ventanaPortadora);
+		VistaJugadorNuevoMenu vistaMenu = new VistaJugadorNuevoMenu(this.ventanaPortadora,ru);
 		panelCentral.add(vistaMenu);
 
 		this.panelCentral.setPreferredSize(new Dimension(150,150));
