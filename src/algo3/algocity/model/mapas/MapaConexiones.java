@@ -9,7 +9,6 @@
 
 package algo3.algocity.model.mapas;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Observable;
 
@@ -19,8 +18,6 @@ import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import algo3.algocity.model.caracteristicas.Agregable;
-import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.conexiones.Conector;
 
 public abstract class MapaConexiones extends Observable {
@@ -105,15 +102,7 @@ public abstract class MapaConexiones extends Observable {
 	public boolean sePuedeConstruir(Conector conector) {
 		return tieneCoordenadaOcupada(conector.coordenada());
 	}
-	
-	
-//TODO
-	public ArrayList<Daniable> unidadesDaniables() {
-		for (Conector d : grafo.vertexSet()) {
 
-		}
-		return null;
-	}
 
 	/**********************************************************************/
 	/**************************** Persistencia ****************************/

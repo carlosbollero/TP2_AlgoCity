@@ -16,17 +16,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import algo3.algocity.model.excepciones.CapacidadElectricaInsuficienteException;
-import algo3.algocity.model.excepciones.CoordenadaInvalidaException;
 import algo3.algocity.model.excepciones.ElUsuarioYaExisteException;
-import algo3.algocity.model.excepciones.FondosInsuficientesException;
-import algo3.algocity.model.excepciones.NoHayConexionConRedElectrica;
-import algo3.algocity.model.excepciones.NoHayConexionConRutas;
-import algo3.algocity.model.excepciones.NoHayConexionConTuberias;
-import algo3.algocity.model.excepciones.NoSeCumplenLosRequisitosException;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.model.excepciones.NombreDeUsuarioYaExisteException;
-import algo3.algocity.model.excepciones.SuperficieInvalidaParaConstruir;
 
 /**
  * Clase controladora del login y registro de usuarios

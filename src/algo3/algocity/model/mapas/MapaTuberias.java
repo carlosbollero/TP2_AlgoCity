@@ -1,7 +1,5 @@
 package algo3.algocity.model.mapas;
 
-import java.util.Map;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

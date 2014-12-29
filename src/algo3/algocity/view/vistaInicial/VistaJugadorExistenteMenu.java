@@ -26,7 +26,6 @@ import org.xml.sax.SAXException;
 import algo3.algocity.controller.AccionMouseComenzarConJugadorExistente;
 import algo3.algocity.controller.AccionMouseVolverMenuInicioJuego;
 import algo3.algocity.model.RegistroUsuarios;
-import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaJugadorExistenteMenu extends JPanel {

@@ -87,9 +87,6 @@
   </target>
   <!-- End of 'Resolve dependencies -->
 
-
-
-
 	<target name="compilar.paquete" depends="test">
 	<javac srcdir="src" destdir="${build}/classes" debug="no"></javac>
 	</target>

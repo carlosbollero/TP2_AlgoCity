@@ -1,22 +1,13 @@
-#Errores
-
-- En el test de RegistroUsuarios, depende de que se haya creado previamente un archivo.
-  O que se haya corrido previamente otro test. Hay que modificarlo.  [PENDIENTE]
-- Conexion con tuberías y con red eléctrica se evaluar de la misma manera.
-  También se mide el radio. [CARLOS]
-- En la ventana de inicio, el panel para elegir entre la lista de usuarios,
-  depende de que la carpeta /saved/ esté creada y no vacía. [SOLUCIONADO]
-
-#Faltantes
-- Interacción botones--crear unidad--agregar a mapa. [PENDIENTE]
-- Arreglar MapasIntegralTest. [SOLUCIONADO]
-- Poder mostrar tuberías en la vista subterranea. [SOLUCIONADO]
-
-
 TP2_AlgoCity
 ============
 
 *TP java* - Algoritmos y Programación III - **FIUBA**
+
+Alumnos:
+	*Botalla, Tomas
+	*Olivera, Rodrigo
+	*Bollero, Carlos
+
 
 # Requisitos
 
@@ -37,8 +28,4 @@ Supuestos:
   actualizar la poblacion turno a turno.
 - La catastrofe va a producir que la CAPACIDAD_TOTAL (segun el porcetaje de daño que tenga cada unidad)
   disminuya y actualizar el indice.
-
-
-Consultas:
-==========
 

@@ -72,13 +72,11 @@ public class VistaMapa extends JPanel implements Observer {
 		} catch (NoSuchMethodException | SecurityException
 				| IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			System.out.println("aca");
 			e.printStackTrace();
 		}
 
 		setPosicion(coord);
 		repintar(coord);
-		System.out.println("agregado");
 	}
 	
 	public void setPosicion(EstacionDeBomberos unidad, Coordenada coord) {
@@ -104,8 +102,6 @@ public class VistaMapa extends JPanel implements Observer {
 		tabla[coord.getX()][coord.getY()] = (mapa.ciudad()
 				.tieneCoordenadaOcupada(coord)) ? new VistaUnidad(juego, coord)
 				: new VistaTerreno(juego, coord);
-		System.out.println(tabla[coord.getX()][coord.getY()].getClass()
-				.getSimpleName());
 	}
 
 	private void repintar(Coordenada coord) {

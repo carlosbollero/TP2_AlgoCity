@@ -13,7 +13,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import algo3.algocity.model.Dinero;
-import algo3.algocity.model.caracteristicas.Agregable;
 import algo3.algocity.model.caracteristicas.Daniable;
 import algo3.algocity.model.construcciones.CentralEolica;
 import algo3.algocity.model.construcciones.CentralMinera;

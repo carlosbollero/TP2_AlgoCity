@@ -6,7 +6,6 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.view.VentanaInicial;
 
 public class VistaInicial extends JPanel {

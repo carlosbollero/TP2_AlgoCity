@@ -2,7 +2,6 @@ package algo3.algocity.controller.accionBoton;
 
 import java.awt.event.ActionEvent;
 
-import algo3.algocity.model.Constantes;
 import algo3.algocity.model.fabricas.FabricaUnidadComercial;
 
 public class AccionBotonComercial extends AccionBoton {
