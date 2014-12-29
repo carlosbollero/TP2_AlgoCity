@@ -50,8 +50,12 @@ public class PersistenciaTest {
 		Turno turno1 = new Turno();
 		Turno turno2 = new Turno();
 
-		Poblacion p1 = new Poblacion();
-		Poblacion p2 = new Poblacion();
+//		Poblacion p1 = new Poblacion();
+//		Poblacion p2 = new Poblacion();
+		
+		Poblacion p1 = new Poblacion(mapa1);
+		Poblacion p2 = new Poblacion(mapa2);
+		
 
 		Dinero dinero1 = new Dinero();
 		Dinero dinero2 = new Dinero();

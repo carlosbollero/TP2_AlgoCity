@@ -56,7 +56,8 @@ public class AccionMouseComenzarConJugadorNuevo implements ActionListener {
 				ru.addUsuario(usuario);
 				Mapa mapa = new Mapa();
 				Turno turno = new Turno();
-				Poblacion poblacion = new Poblacion();
+				//Poblacion poblacion = new Poblacion();
+				Poblacion poblacion = new Poblacion(mapa);
 				Dinero dinero = new Dinero();
 				this.ventanaPortadora.cerrar();
 				VentanaJuego ventanaJuego = new VentanaJuego(new Juego(usuario,

@@ -63,7 +63,8 @@ public class Juego {
 		crearDirectorioGuardados();
 		mapa = new Mapa();
 		usuario = new Usuario();
-		poblacion = new Poblacion();
+//		poblacion = new Poblacion();
+		poblacion = new Poblacion(mapa);
 		turnos = new Turno();
 		dinero = new Dinero(poblacion, turnos);
 		genCatastrofe = new GeneradorCatastrofe(mapa);
@@ -191,14 +192,18 @@ public class Juego {
 		Element turnos = this.turnos.getElement(doc);
 		juego.appendChild(turnos);
 
-		Element poblacion = this.poblacion.getElement(doc);
-		juego.appendChild(poblacion);
+		//Element poblacion = this.poblacion.getElement(doc);
+		//juego.appendChild(poblacion);
 
 		Element dinero = this.dinero.getElement(doc);
 		juego.appendChild(dinero);
 
 		Element mapa = this.mapa.getElement(doc);
 		juego.appendChild(mapa);
+		
+		this.poblacion.actualizar(this.mapa);
+		Element poblacion = this.poblacion.getElement(doc);
+		juego.appendChild(poblacion);
 
 		return juego;
 	}
