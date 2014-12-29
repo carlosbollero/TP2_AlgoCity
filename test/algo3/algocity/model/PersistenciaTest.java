@@ -112,8 +112,8 @@ public class PersistenciaTest {
 		assertNotNull(fichero);
 
 		/* Recupero una instancia de juego leyendo el fichero */
-		Juego juegoRecuperado = new Juego();
-		juegoRecuperado = juegoRecuperado.recuperar("testUser1");
+		//Juego juegoRecuperado = new Juego();
+		Juego juegoRecuperado = Juego.recuperar("testUser1");
 		juegoRecuperado.turno().detener();
 
 		if (fichero.delete()) {

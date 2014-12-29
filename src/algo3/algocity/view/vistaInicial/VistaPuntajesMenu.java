@@ -29,7 +29,7 @@ public class VistaPuntajesMenu extends JPanel {
 	Image imagenFondo;
 	JButton bVolver;
 
-	public VistaPuntajesMenu(VentanaInicial ventana)
+	public VistaPuntajesMenu(VentanaInicial ventana, RegistroUsuarios ru)
 			throws NoSeEncontroElFicheroException, SAXException, IOException,
 			ParserConfigurationException {
 		super();
@@ -38,15 +38,14 @@ public class VistaPuntajesMenu extends JPanel {
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-		setContenido();
+		setContenido(ru);
 	}
 
-	private void setContenido() throws NoSeEncontroElFicheroException,
+	private void setContenido(RegistroUsuarios ru) throws NoSeEncontroElFicheroException,
 			SAXException, IOException, ParserConfigurationException {
 		bVolver = new JButton("Volver");
 		add(Box.createRigidArea(new Dimension(0, 250)));
 		// Obtengo los usuarios existentes
-		RegistroUsuarios ru = new RegistroUsuarios();
 		ru.leerUsuarios();
 		ArrayList<String> puntajes = ru.listaPuntajesString();
 		String[] datos = new String[puntajes.size()];

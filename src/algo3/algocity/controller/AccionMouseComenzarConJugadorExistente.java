@@ -34,9 +34,8 @@ public class AccionMouseComenzarConJugadorExistente implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Juego juegoARecuperar = new Juego();
 		try {
-			juegoARecuperar = juegoARecuperar.recuperar(listaUsuarios
+			Juego juegoARecuperar = Juego.recuperar(listaUsuarios
 					.getSelectedValue().toString());
 			juegoARecuperar.actualizar();
 			this.ventanaPortadora.cerrar();

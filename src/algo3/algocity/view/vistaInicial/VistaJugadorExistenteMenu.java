@@ -37,17 +37,17 @@ public class VistaJugadorExistenteMenu extends JPanel {
 	JButton bVolver;
 	JLabel etiquetaMensaje;
 
-	public VistaJugadorExistenteMenu(VentanaInicial ventana)
+	public VistaJugadorExistenteMenu(VentanaInicial ventana, RegistroUsuarios ru)
 			throws SAXException, IOException, ParserConfigurationException{
 		this.ventanaPortadora = ventana;
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		// setMinimumSize(new Dimension(25, 50));
 		// setMaximumSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-		setContenido();
+		setContenido(ru);
 	}
 
-	private void setContenido() throws SAXException, IOException,
+	private void setContenido(RegistroUsuarios ru) throws SAXException, IOException,
 			ParserConfigurationException{
 		/* Configura la etiqueta Elija un Usuario */
 		this.etiquetaMensaje = new JLabel("Elija un Usuario", JLabel.CENTER);
@@ -62,9 +62,7 @@ public class VistaJugadorExistenteMenu extends JPanel {
 		// this.etiquetaMensaje.setBackground(null);
 		/* Configura el panel de usuarios existentes */
 		// Obtengo los usuarios existentes
-		RegistroUsuarios ru;
 		ArrayList<String> nombres;
-		ru = new RegistroUsuarios();
 		ru.leerUsuarios();
 		
 		nombres = ru.nombresUsuarios();

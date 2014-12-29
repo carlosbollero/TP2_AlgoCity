@@ -48,7 +48,6 @@ public class Mapa extends Observable {
 		tuberias = new MapaTuberias(this);
 		rutas = new MapaRutas(this);
 		redElectrica = new MapaElectrico(this);
-
 		sistemaElectrico = new SistemaElectrico();
 		reparador = null;
 		turnos = null;
@@ -184,7 +183,11 @@ public class Mapa extends Observable {
 	public void agregarReparador() {
 		if (this.reparador == null) {
 			this.reparador = new Reparador(this);
-			this.turnos.addObserver(this.reparador);
+			if(this.turnos == null){
+				this.turnos = new Turno(); //esto es solo para los tests
+				this.turnos.addObserver(this.reparador);
+			}
+			
 		}
 	}
 

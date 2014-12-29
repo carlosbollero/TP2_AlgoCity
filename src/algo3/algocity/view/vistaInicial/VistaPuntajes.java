@@ -3,9 +3,13 @@ package algo3.algocity.view.vistaInicial;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
+
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.xml.sax.SAXException;
+
+import algo3.algocity.model.RegistroUsuarios;
 import algo3.algocity.model.excepciones.NoSeEncontroElFicheroException;
 import algo3.algocity.view.VentanaInicial;
 
@@ -14,24 +18,24 @@ public class VistaPuntajes extends JPanel {
 	VentanaInicial ventanaPortadora;
 	JPanel panelCentral;
 
-	public VistaPuntajes(VentanaInicial ventana) throws SAXException,
+	public VistaPuntajes(VentanaInicial ventana, RegistroUsuarios ru) throws SAXException,
 			IOException, ParserConfigurationException,
 			NoSeEncontroElFicheroException {
 		this.ventanaPortadora = ventana;
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(new BorderLayout());
 		initPaneles();
-		setPaneles();
+		setPaneles(ru);
 	}
 
 	private void initPaneles() {
 		this.panelCentral = new JPanel();
 	}
 
-	private void setPaneles() throws SAXException, IOException,
+	private void setPaneles(RegistroUsuarios ru) throws SAXException, IOException,
 			ParserConfigurationException, NoSeEncontroElFicheroException {
 		VistaPuntajesMenu vistaMenu = new VistaPuntajesMenu(
-				this.ventanaPortadora);
+				this.ventanaPortadora,ru);
 		panelCentral.add(vistaMenu);
 		this.panelCentral.setPreferredSize(new Dimension(150, 150));
 		add(this.panelCentral);
