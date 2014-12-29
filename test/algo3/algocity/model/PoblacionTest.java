@@ -66,30 +66,6 @@ public class PoblacionTest {
 		assertEquals(p.getCantidad(), 50);
 	}
 
-	@Test
-	public void testLaPoblacionReaccionaAlPasoDeUnTurno() {
-		Poblacion p = new Poblacion();
-		
-		Turno t = new Turno();
-		t.addObserver(p);
-		int referencia = p.getCantidad();
-
-		assertTrue(referencia == 0);
-
-//		seteo el indice para que aumente la poblacion
-		p.setIndice(1); 	//positivo crece
-							//negativo decrece
-		try {
-			Thread.sleep(t.getDelay()+2);
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-						
-		assertTrue(p.getCantidad() > referencia);
-		
-	}
 	
 	@Test
 	public void testLaPoblacionPuedeTenerEstadoCreciendo(){
@@ -108,22 +84,6 @@ public class PoblacionTest {
 		assertTrue(p.getCantidad() > referencia);
 	}
 	
-	@Test
-	public void testLaPoblacionPuedeTenerEstadoDecreciendo(){
-		Poblacion p = new Poblacion();
-		Turno t = new Turno();
-		
-		t.addObserver(p);
-		int referencia = p.getCantidad();
-		
-		assertTrue(referencia == 0);
-		
-		p.setIndice(-1);
-		t.avanzar();
-		
-		System.out.println(p.getCantidad());
-		assertTrue(p.getCantidad() < referencia);
-	}
 	
 	@Test
 	public void testLaPoblacionPuedeTenerEstadoEstable(){

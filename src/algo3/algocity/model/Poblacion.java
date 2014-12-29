@@ -85,11 +85,9 @@ public class Poblacion implements Observer {
 			actualizar(mapa);
 		}
 		estadoActual.operar(this);
-		// System.out.println("UPDATE TURNO");
 	}
 
 	public void update(Mapa arg0, Object arg1) {
-		System.out.println("UPDATE MAPA");
 		this.mapa = arg0;
 		actualizar(arg0);
 	}
@@ -105,6 +103,7 @@ public class Poblacion implements Observer {
 
 	public void disminuir(int cantidad) {
 		this.cantidad -= cantidad;
+		if (this.cantidad <= 0){ this.cantidad = 0;}
 	}
 
 	public void setIndice(int indice) {
@@ -112,9 +111,6 @@ public class Poblacion implements Observer {
 		actualizarIndice();
 	}
 
-	// public void setMapa(Mapa mapa) {
-	// this.mapa = mapa;
-	// }
 	public void actualizarIndice() {
 		if (indiceCrecimiento > 0) {
 			estadoActual = new EstadoPoblacionCreciendo();
